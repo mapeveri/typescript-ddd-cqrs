@@ -1,0 +1,12 @@
+services:
+  Countries.CountryRepository:
+    class: '../../persistence/typeOrm/repositories/typeOrmCountryRepository'
+  Countries.FindCountriesQueryHandler:
+    class: '../../../application/country/query/findAll/findCountriesQueryHandler'
+    arguments: ['@Countries.CountryRepository']
+  Countries.FindCountryQueryHandler:
+    class: '../../../application/country/query/find/findCountryQueryHandler'
+    arguments: ['@Countries.CountryRepository']
+  Countries.CreateCountryCommandHandler:
+    class: '../../../application/country/command/create/createCountryCommandHandler'
+    arguments: ['@Countries.CountryRepository']

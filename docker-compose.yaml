@@ -1,0 +1,36 @@
+version: '3'
+services:
+    app:
+      image: languages
+      container_name: languages-container
+      build:
+        context: .
+      restart: on-failure
+      env_file:
+        - .env
+      volumes:
+        - ./:/var/www/html/languages
+      ports:
+        - "4000:${SERVER_PORT}"
+      depends_on:
+        - db
+        - mongodb
+
+    db:
+      image: postgres
+      environment:
+          POSTGRES_DB: ${POSTGRES_DATABASE}
+          POSTGRES_USER: ${POSTGRES_USER}
+          POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+          PGDATA: /var/lib/postgresql/data/pgdata
+      volumes:
+        - ./docker/data/pgdata:/var/lib/postgresql/data/pgdata
+      ports:
+        - "5435:5432"
+
+    mongodb:
+      image: mongo:6-jammy
+      ports:
+        - '27017:27017'
+      volumes:
+        - ./docker/data/mongodata:/data/db

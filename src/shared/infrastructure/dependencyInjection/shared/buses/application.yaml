@@ -1,0 +1,7 @@
+services:
+  Shared.QueryBus:
+    class: '../../../buses/memoryQueryBus'
+  Shared.CommandBus:
+    class: '../../../buses/memoryCommandBus'
+  Shared.EventBus:
+    class: '../../../buses/memoryEventBus'

@@ -1,0 +1,3 @@
+services:
+  Terms.TermRepository:
+    class: '../../persistence/typeOrm/repositories/typeOrmTermRepository'

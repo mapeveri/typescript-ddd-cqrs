@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@src/*": ["src/*"],
+      "@test/*": ["test/*"]
+    },
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "target": "es2022",
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "sourceMap": false,
+    "rootDir": ".",
+    "strict": true,
+    "noEmit": false,
+    "resolveJsonModule": true,
+    "noUnusedLocals": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
+    "allowJs": true,
+    "outDir": "./dist",
+    "typeRoots": ["src/shared/infrastructure/types", "./node_modules/@types"]
+  },
+  "include": [
+    "src/**/**.ts",
+    "test/**/**.ts",
+  ],
+  "exclude": ["node_modules"],
+  "types": [
+    "node",
+    "reflect-metadata",
+    "typeorm"
+  ]
+}

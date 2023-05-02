@@ -1,0 +1,4 @@
+services:
+  Shared.Logger:
+    class: '../../logger'
+    arguments: []
