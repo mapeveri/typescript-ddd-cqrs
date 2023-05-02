@@ -11,10 +11,10 @@ export default new EntitySchema<Word>({
       type: 'uuid',
       primary: true,
     },
-    language_id: {
+    languageId: {
       type: String,
     },
-    country_id: {
+    countryId: {
       type: String,
     },
     terms: {

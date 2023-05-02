@@ -5,6 +5,8 @@ import CreateCountryCommand from '../../../languages/application/country/command
 import LoginUserCommand from '../../../languages/application/auth/command/loginUser/loginUserCommand';
 import CreateUserCommand from '../../../languages/application/user/command/create/createUserCommand';
 import UpdateUserCommand from '../../../languages/application/user/command/update/updateUserCommand';
+import CreateWordCommand from '../../../languages/application/word/command/create/createWordCommand';
+import CreateTermCommand from '../../../languages/application/term/command/create/createTermCommand';
 
 export function registerCommands(container: ContainerBuilder) {
   const commandBus: MemoryCommandBus = container.get('Shared.CommandBus');
@@ -16,4 +18,8 @@ export function registerCommands(container: ContainerBuilder) {
   commandBus.register(CreateUserCommand.prototype, container.get('Users.CreateUserCommandHandler'));
 
   commandBus.register(UpdateUserCommand.prototype, container.get('Users.UpdateUserCommandHandler'));
+
+  commandBus.register(CreateWordCommand.prototype, container.get('Words.CreateWordCommandHandler'));
+
+  commandBus.register(CreateTermCommand.prototype, container.get('Terms.CreateTermCommandHandler'));
 }

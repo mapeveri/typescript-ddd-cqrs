@@ -1,7 +1,9 @@
-import TermInterface from './termInterface';
+import Term from './term';
 
 interface TermRepository {
-  search(text: string): Promise<TermInterface[] | null>;
+  search(text: string): Promise<Term[] | null>;
+
+  save(term: Term): Promise<void>;
 }
 
 export default TermRepository;
