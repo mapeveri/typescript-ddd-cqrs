@@ -1,14 +1,14 @@
-import TermInterface from '../term/termInterface';
+import Term from '../term/term';
 import User from '../user/user';
 
 export default class Expression {
   id: string;
   language_id: string;
   country_id: string;
-  terms: Array<TermInterface>;
+  terms: Array<Term>;
   user: User;
 
-  constructor(id: string, language_id: string, country_id: string, terms: Array<TermInterface>, user: User) {
+  constructor(id: string, language_id: string, country_id: string, terms: Array<Term>, user: User) {
     this.id = id;
     this.language_id = language_id;
     this.country_id = country_id;
@@ -16,13 +16,7 @@ export default class Expression {
     this.user = user;
   }
 
-  static create(
-    id: string,
-    language_id: string,
-    country_id: string,
-    terms: Array<TermInterface>,
-    user: User
-  ): Expression {
+  static create(id: string, language_id: string, country_id: string, terms: Array<Term>, user: User): Expression {
     return new this(id, language_id, country_id, terms, user);
   }
 

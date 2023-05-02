@@ -5,6 +5,7 @@ import { SocialLogin } from '@src/languages/domain/user/auth';
 import { EventBus } from '@src/shared/domain/buses/eventBus/eventBus';
 import { UserAuthenticatedEventMother } from '@test/languages/domain/user/domainEvents/userAuthenticatedEventMother';
 import LoginException from '@src/languages/domain/user/exceptions/loginException';
+import { eventBusMock } from '@test/shared/domain/buses/eventBus/eventBusMock';
 
 describe('LoginUserCommandHandler.test handle', () => {
   let socialLogin: SocialLogin;
@@ -16,10 +17,7 @@ describe('LoginUserCommandHandler.test handle', () => {
       login: jest.fn(),
     } as SocialLogin;
 
-    eventBus = {
-      register: jest.fn(),
-      publish: jest.fn(),
-    } as EventBus;
+    eventBus = eventBusMock;
 
     loginUserCommandHandler = new LoginUserCommandHandler(socialLogin, eventBus);
   });

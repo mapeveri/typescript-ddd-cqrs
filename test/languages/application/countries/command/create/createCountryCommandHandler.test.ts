@@ -1,9 +1,9 @@
 import { beforeEach, describe, it } from '@jest/globals';
 import CreateCountryCommandHandler from '@src/languages/application/country/command/create/createCountryCommandHandler';
 import Country from '@src/languages/domain/country/country';
-import { CountryRepositoryMock } from '@test/languages/domain/countries/countryRepositoryMock';
-import CountryMother from '@test/languages/domain/countries/countryMother';
-import CreateCountryCommandMother from './createCountryCommandMother';
+import { CountryRepositoryMock } from '@test/languages/domain/country/countryRepositoryMock';
+import CountryMother from '@test/languages/domain/country/countryMother';
+import { CreateCountryCommandMother } from './createCountryCommandMother';
 
 describe('CreateCountryCommandHandler handle', () => {
   let countryRepository: CountryRepositoryMock;
@@ -15,7 +15,7 @@ describe('CreateCountryCommandHandler handle', () => {
   });
 
   it('should create and save a country', async () => {
-    const command = CreateCountryCommandMother.create({
+    const command = CreateCountryCommandMother.random({
       id: 'de56e9bd-596e-4aba-9dda-cd7ac8fb3fa0',
       name: 'Test Country',
       iso: 'TC',

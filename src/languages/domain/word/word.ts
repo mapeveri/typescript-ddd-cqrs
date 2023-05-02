@@ -1,30 +1,42 @@
-import TermInterface from '../term/termInterface';
+import { AggregateRoot } from '../../../shared/domain/aggregate/aggregateRoot';
 import User from '../user/user';
+import WordCreatedEvent from './domainEvents/wordCreatedEvent';
 
-export default class Word {
+export interface WordTerm {
+  title: string;
+  description: string;
+  example: string;
+  taggedWords: Array<string>;
+}
+
+export default class Word extends AggregateRoot {
   id: string;
-  language_id: string;
-  country_id: string;
-  terms: Array<TermInterface>;
+  languageId: string;
+  countryId: string;
+  terms: WordTerm[];
   user: User;
 
-  constructor(id: string, language_id: string, country_id: string, terms: Array<TermInterface>, user: User) {
+  constructor(id: string, languageId: string, countryId: string, terms: WordTerm[], user: User) {
+    super();
+
     this.id = id;
-    this.language_id = language_id;
-    this.country_id = country_id;
+    this.languageId = languageId;
+    this.countryId = countryId;
     this.terms = terms;
     this.user = user;
   }
 
-  static create(id: string, language_id: string, country_id: string, terms: Array<TermInterface>, user: User): Word {
-    return new this(id, language_id, country_id, terms, user);
+  static create(id: string, languageId: string, countryId: string, terms: WordTerm[], user: User): Word {
+    const word = new this(id, languageId, countryId, terms, user);
+    word.record(new WordCreatedEvent(id, languageId, countryId, user.id, terms));
+    return word;
   }
 
   toObject(): object {
     return {
       id: this.id,
-      language_id: this.language_id,
-      country_id: this.country_id,
+      languageId: this.languageId,
+      countryId: this.countryId,
       terms: this.terms,
       user: this.user.toObject(),
     };
