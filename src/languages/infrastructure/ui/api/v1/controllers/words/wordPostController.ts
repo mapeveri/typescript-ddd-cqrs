@@ -1,11 +1,11 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status';
 import { Controller } from '../../controller';
 import BodyError from '../../../../../../../shared/domain/exceptions/bodyError';
 import CreateWordCommand from '../../../../../../../languages/application/word/command/create/createWordCommand';
 
 export class WordPostController implements Controller {
-  async run(req: Request, res: Response): Promise<any> {
+  async run(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const body = req.body;
       if (
@@ -24,7 +24,7 @@ export class WordPostController implements Controller {
       );
       res.status(httpStatus.CREATED).send({});
     } catch (e) {
-      res.status(httpStatus.BAD_REQUEST).send(e);
+      next(e);
     }
   }
 }

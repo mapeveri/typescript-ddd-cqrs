@@ -1,7 +1,7 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 
-export default function verifyToken(req: Request, res: Response, next: any) {
+export default function verifyToken(req: Request, res: Response, next: NextFunction) {
   const token: any = req.headers['authorization'];
 
   if (!token) {

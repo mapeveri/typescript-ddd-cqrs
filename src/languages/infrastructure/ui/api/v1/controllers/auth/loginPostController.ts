@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import httpStatus from 'http-status';
 import { v5 as uuidv5 } from 'uuid';
@@ -7,7 +7,7 @@ import BodyError from '../../../../../../../shared/domain/exceptions/bodyError';
 import LoginUserCommand from '../../../../../../application/auth/command/loginUser/loginUserCommand';
 
 export class LoginPostController implements Controller {
-  async run(req: Request, res: Response): Promise<any> {
+  async run(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const body = req.body;
       if (!('name' in body) || !('email' in body) || !('token' in body) || !('provider' in body)) {
@@ -28,9 +28,7 @@ export class LoginPostController implements Controller {
         token,
       });
     } catch (e) {
-      console.error(e);
-
-      res.status(httpStatus.UNAUTHORIZED).send({ message: 'Error during login', status: 'error' });
+      next(e);
     }
   }
 }

@@ -34,7 +34,6 @@ app.use(helmet());
 app.use(cors(corsOptions));
 app.use(methodOverride('X-HTTP-Method-Override'));
 app.use(new NodeInjectionMiddleware(options).middleware());
-app.use(errorHandler);
 
 AppDataSource.initialize().then(async () => {
   registerQueries(container);
@@ -44,6 +43,8 @@ AppDataSource.initialize().then(async () => {
   const apiRouter: Router = express.Router();
   registerRoutes(apiRouter);
   app.use('/api/v1/', apiRouter);
+
+  app.use(errorHandler);
 });
 
 export default app;

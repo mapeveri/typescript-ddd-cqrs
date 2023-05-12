@@ -1,7 +1,7 @@
-export default class UserDoesNotExistsException extends Error {
-  public status = 401;
+import DomainException from '../../../../shared/domain/exceptions/domainException';
 
-  constructor(public message: string = 'User doesn not exists.') {
-    super();
+export default class UserDoesNotExistsException extends DomainException {
+  constructor(public message: string = 'User doesn not exists') {
+    super(message, 401);
   }
 }
