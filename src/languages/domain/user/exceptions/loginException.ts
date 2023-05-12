@@ -1,7 +1,7 @@
-export default class LoginException extends Error {
-  public status = 401;
+import DomainException from '../../../../shared/domain/exceptions/domainException';
 
-  constructor(public message: string = 'Invalid login.') {
-    super();
+export default class LoginException extends DomainException {
+  constructor(public message: string = 'Invalid login') {
+    super(message, 401);
   }
 }

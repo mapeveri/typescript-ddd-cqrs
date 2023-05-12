@@ -1,3 +1,4 @@
+import UserDoesNotExistsException from '../../../../domain/user/exceptions/userDoesNotExistsException';
 import { CommandHandler } from '../../../../../shared/domain/buses/commandBus/commandHandler';
 import UserRepository from '../../../../domain/user/userRepository';
 import UpdateUserCommand from './updateUserCommand';
@@ -8,7 +9,7 @@ export default class UpdateUserCommandHandler implements CommandHandler {
   async handle(command: UpdateUserCommand): Promise<void> {
     const user = await this.userRepository.findById(command.id);
     if (null === user) {
-      return;
+      throw new UserDoesNotExistsException();
     }
 
     user.update(command.name, command.photo);
