@@ -1,8 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status';
 import { Controller } from '../../controller';
-import BodyError from '../../../../../../../shared/domain/exceptions/bodyError';
 import CreateWordCommand from '../../../../../../../languages/application/word/command/create/createWordCommand';
+import InvalidParameters from '../../../../../../../shared/infrastructure/api/apiErrorResponses/InvalidParameters';
+import ApiExceptionSerializer from '../../../../../../../shared/infrastructure/api/serializers/apiExceptionSerializer';
 
 export class WordPostController implements Controller {
   async run(req: Request, res: Response, next: NextFunction): Promise<any> {
@@ -15,7 +16,8 @@ export class WordPostController implements Controller {
         !('user_id' in body) ||
         !('terms' in body)
       ) {
-        throw new BodyError('Invalid parameters');
+        const error = new InvalidParameters();
+        res.status(error.status).json(ApiExceptionSerializer.serialize(error));
       }
 
       const commandBus = req.container.get('Shared.CommandBus');

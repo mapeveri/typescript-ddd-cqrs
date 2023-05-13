@@ -3,15 +3,17 @@ import jwt from 'jsonwebtoken';
 import httpStatus from 'http-status';
 import { v5 as uuidv5 } from 'uuid';
 import { Controller } from '../../controller';
-import BodyError from '../../../../../../../shared/domain/exceptions/bodyError';
 import LoginUserCommand from '../../../../../../application/auth/command/loginUser/loginUserCommand';
+import InvalidParameters from '../../../../../../../shared/infrastructure/api/apiErrorResponses/InvalidParameters';
+import ApiExceptionSerializer from '../../../../../../../shared/infrastructure/api/serializers/apiExceptionSerializer';
 
 export class LoginPostController implements Controller {
   async run(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const body = req.body;
       if (!('name' in body) || !('email' in body) || !('token' in body) || !('provider' in body)) {
-        throw new BodyError('Invalid parameters');
+        const error = new InvalidParameters();
+        res.status(error.status).json(ApiExceptionSerializer.serialize(error));
       }
 
       const id = uuidv5(body['email'], uuidv5.DNS);
