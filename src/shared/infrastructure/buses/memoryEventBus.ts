@@ -10,11 +10,11 @@ export default class MemoryEventBus implements EventBus {
   }
 
   async publish(events: DomainEvent[]): Promise<void> {
-    events.forEach(async (event: DomainEvent) => {
+    for (const event of events) {
       const handlers = MemoryEventBus.handlers[event.constructor.name];
-      handlers.forEach(async (handler: EventHandler) => {
-        await handler.handle(event);
-      });
-    });
+      if (handlers) {
+        await Promise.all(handlers.map(handler => handler.handle(event)));
+      }
+    }
   }
 }

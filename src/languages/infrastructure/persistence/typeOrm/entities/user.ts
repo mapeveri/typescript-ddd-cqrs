@@ -4,6 +4,7 @@ import Word from '../../../../domain/word/word';
 import Expression from '../../../../domain/expression/expression';
 import { ValueObjectTransformer } from '../../../../../shared/infrastructure/persistence/typeOrm/transformers/valueObjectTransformer';
 import Email from '../../../../../shared/domain/valueObjects/email';
+import UserId from '../../../../domain/user/valueObjects/userId';
 
 export default new EntitySchema<User>({
   name: User.name,
@@ -13,6 +14,7 @@ export default new EntitySchema<User>({
     id: {
       type: 'uuid',
       primary: true,
+      transformer: ValueObjectTransformer(UserId),
     },
     name: {
       type: String,
@@ -32,10 +34,12 @@ export default new EntitySchema<User>({
     words: {
       type: 'one-to-many',
       target: () => Word,
+      inverseSide: 'user',
     },
     expressions: {
       type: 'one-to-many',
       target: () => Expression,
+      inverseSide: 'user',
     },
   },
 });

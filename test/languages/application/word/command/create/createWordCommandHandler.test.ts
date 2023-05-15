@@ -9,6 +9,7 @@ import WordMother from '@test/languages/domain/word/wordMother';
 import Word from '@src/languages/domain/word/word';
 import { WordCreatedEventMother } from '@test/languages/domain/word/domainEvents/wordCreatedEventMother';
 import { UserMother } from '@test/languages/domain/user/userMother';
+import { UserIdMother } from '@test/languages/domain/user/valueObjects/userIdMother';
 
 describe('CreateWordCommandHandler handle', () => {
   let eventBus: EventBus;
@@ -27,7 +28,7 @@ describe('CreateWordCommandHandler handle', () => {
 
   it('should create and save a country', async () => {
     const command = CreateWordCommandMother.random();
-    const user = UserMother.random({ id: command.userId });
+    const user = UserMother.random({ id: UserIdMother.random(command.userId) });
     const word: Word = WordMother.createFromCreateWordCommand(command, user);
     const wordCreatedEvent = WordCreatedEventMother.createFromCreateWordCommand(command);
     const expectedwordCreatedEvent = { ...wordCreatedEvent, eventId: expect.any(String) };

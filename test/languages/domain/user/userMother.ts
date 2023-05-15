@@ -1,8 +1,10 @@
 import User from '@src/languages/domain/user/user';
+import UserId from '@src/languages/domain/user/valueObjects/userId';
 import faker from 'faker';
+import { UserIdMother } from './valueObjects/userIdMother';
 
 interface UserMotherProps {
-  id?: string;
+  id?: UserId;
   name?: string;
   provider?: string;
   email?: string;
@@ -14,7 +16,7 @@ export class UserMother {
     const { id, name, provider, email, photos } = props ?? {};
 
     return new User(
-      id ?? faker.datatype.uuid(),
+      id ?? UserIdMother.random(),
       name ?? faker.name.findName(),
       provider ?? faker.random.word(),
       email ?? faker.internet.email(),

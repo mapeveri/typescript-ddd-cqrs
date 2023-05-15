@@ -1,7 +1,8 @@
 import User from './user';
+import UserId from './valueObjects/userId';
 
 interface UserRepository {
-  findById(id: string): Promise<User | null>;
+  findById(id: UserId): Promise<User | null>;
 
   save(user: User): Promise<void>;
 }

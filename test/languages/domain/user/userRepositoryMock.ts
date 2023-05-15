@@ -1,6 +1,7 @@
 import { expect, jest } from '@jest/globals';
 import User from '@src/languages/domain/user/user';
 import UserRepository from '@src/languages/domain/user/userRepository';
+import UserId from '@src/languages/domain/user/valueObjects/userId';
 
 export class UserRepositoryMock implements UserRepository {
   private mockSave = jest.fn();
@@ -11,13 +12,13 @@ export class UserRepositoryMock implements UserRepository {
     this.users.push(user);
   }
 
-  async findById(id: string): Promise<User | null> {
-    const user = this.users.filter((user) => user.id === id)[0];
+  async findById(id: UserId): Promise<User | null> {
+    const user = this.users.filter((user) => user.id.equals(id))[0];
     this.mockFindById(user.id);
     return Promise.resolve(user);
   }
 
-  assertFindById(id: string): void {
+  assertFindById(id: UserId): void {
     expect(this.mockFindById).toHaveBeenCalledWith(id);
   }
 

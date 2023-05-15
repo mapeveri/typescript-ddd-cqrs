@@ -5,7 +5,7 @@ import { Controller } from '../../controller';
 import LoginUserCommand from '../../../../../../application/auth/command/loginUser/loginUserCommand';
 import InvalidParameters from '../../../../../../../shared/infrastructure/api/apiErrorResponses/InvalidParameters';
 import ApiExceptionSerializer from '../../../../../../../shared/infrastructure/api/serializers/apiExceptionSerializer';
-import Uuid from '../../../../../../../shared/domain/uuid';
+import { Uuid } from '../../../../../../../shared/domain/valueObjects/uuid';
 
 export class LoginPostController implements Controller {
   async run(req: Request, res: Response, next: NextFunction): Promise<any> {
@@ -16,7 +16,7 @@ export class LoginPostController implements Controller {
         res.status(error.status).json(ApiExceptionSerializer.serialize(error));
       }
 
-      const id = Uuid.generateFromString(body['email']);
+      const id = Uuid.generateFromString(body['email']).toString();
       const commandBus = req.container.get('Shared.CommandBus');
 
       await commandBus.dispatch(

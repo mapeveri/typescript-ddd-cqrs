@@ -2,10 +2,10 @@ import Email from '../../../shared/domain/valueObjects/email';
 import { AggregateRoot } from '../../../shared/domain/aggregate/aggregateRoot';
 import Expression from '../expression/expression';
 import Word from '../word/word';
-import Uuid from '../../../shared/domain/uuid';
+import UserId from './valueObjects/userId';
 
 export default class User extends AggregateRoot {
-  id: string;
+  id: UserId;
   name: string;
   provider: string;
   email: Email;
@@ -14,7 +14,7 @@ export default class User extends AggregateRoot {
   expressions: Expression[];
 
   constructor(
-    id: string,
+    id: UserId,
     name: string,
     provider: string,
     email: Email,
@@ -33,7 +33,7 @@ export default class User extends AggregateRoot {
     this.expressions = expressions;
   }
 
-  static create(id: string, name: string, provider: string, email: Email, photo: string): User {
+  static create(id: UserId, name: string, provider: string, email: Email, photo: string): User {
     return new this(id, name, provider, email, photo, [], []);
   }
 
@@ -44,7 +44,7 @@ export default class User extends AggregateRoot {
 
   toObject(): object {
     return {
-      id: this.id,
+      id: this.id.toString(),
       name: this.name,
       provider: this.provider,
       email: this.email.toString(),
@@ -52,14 +52,5 @@ export default class User extends AggregateRoot {
       expressions: this.expressions,
       words: this.words,
     };
-  }
-
-  static validateId(id: string, email: string): boolean {
-    const userEmailId = Uuid.generateFromString(email);
-    if (userEmailId !== id) {
-      return false;
-    }
-
-    return true;
   }
 }

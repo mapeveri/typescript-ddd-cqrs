@@ -3,6 +3,7 @@ import User from '../../../../domain/user/user';
 import UserEntity from '../entities/user';
 import UserRepository from '../../../../domain/user/userRepository';
 import AppDataSource from './../../../../../shared/infrastructure/persistence/typeOrm/dataSource';
+import UserId from '../../../../domain/user/valueObjects/userId';
 
 export default class TypeOrmUserRepository implements UserRepository {
   private repository: Repository<User>;
@@ -11,8 +12,8 @@ export default class TypeOrmUserRepository implements UserRepository {
     this.repository = AppDataSource.manager.getRepository(UserEntity);
   }
 
-  async findById(id: string): Promise<User | null> {
-    return await this.repository.findOneBy({ id });
+  async findById(id: UserId): Promise<User | null> {
+    return await this.repository.findOne({ where: { id: id.toString() } });
   }
 
   async save(user: User): Promise<void> {
