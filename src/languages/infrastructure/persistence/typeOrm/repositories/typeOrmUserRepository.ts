@@ -11,12 +11,8 @@ export default class TypeOrmUserRepository implements UserRepository {
     this.repository = AppDataSource.manager.getRepository(UserEntity);
   }
 
-  async findByEmail(email: string): Promise<User | null> {
-    return await this.repository.findOneBy({ email: email });
-  }
-
   async findById(id: string): Promise<User | null> {
-    return await this.repository.findOneBy({ id: id });
+    return await this.repository.findOneBy({ id });
   }
 
   async save(user: User): Promise<void> {

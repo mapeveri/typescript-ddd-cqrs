@@ -4,21 +4,11 @@ import UserRepository from '@src/languages/domain/user/userRepository';
 
 export class UserRepositoryMock implements UserRepository {
   private mockSave = jest.fn();
-  private mockFindByEmail = jest.fn();
   private mockFindById = jest.fn();
   private users: User[] = [];
 
   addUser(user: User): void {
     this.users.push(user);
-  }
-
-  findByEmail(email: string): Promise<User | null> {
-    this.assertFindByEmail(email);
-    return Promise.resolve(null);
-  }
-
-  assertFindByEmail(email: string) {
-    expect(this.mockFindByEmail).toHaveBeenCalledWith(email);
   }
 
   async findById(id: string): Promise<User | null> {

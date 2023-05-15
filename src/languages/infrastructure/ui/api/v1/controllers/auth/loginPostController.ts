@@ -1,11 +1,11 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import httpStatus from 'http-status';
-import { v5 as uuidv5 } from 'uuid';
 import { Controller } from '../../controller';
 import LoginUserCommand from '../../../../../../application/auth/command/loginUser/loginUserCommand';
 import InvalidParameters from '../../../../../../../shared/infrastructure/api/apiErrorResponses/InvalidParameters';
 import ApiExceptionSerializer from '../../../../../../../shared/infrastructure/api/serializers/apiExceptionSerializer';
+import Uuid from '../../../../../../../shared/domain/uuid';
 
 export class LoginPostController implements Controller {
   async run(req: Request, res: Response, next: NextFunction): Promise<any> {
@@ -16,7 +16,7 @@ export class LoginPostController implements Controller {
         res.status(error.status).json(ApiExceptionSerializer.serialize(error));
       }
 
-      const id = uuidv5(body['email'], uuidv5.DNS);
+      const id = Uuid.generateFromString(body['email']);
       const commandBus = req.container.get('Shared.CommandBus');
 
       await commandBus.dispatch(
