@@ -3,6 +3,7 @@ import Word from '../../../../domain/word/word';
 import WordEntity from '../entities/word';
 import AppDataSource from './../../../../../shared/infrastructure/persistence/typeOrm/dataSource';
 import WordRepository from './../../../../../languages/domain/word/wordRepository';
+import WordId from './../../../../../languages/domain/word/valueObjects/wordId';
 
 export default class TypeOrmWordRepository implements WordRepository {
   private repository: Repository<Word>;
@@ -11,8 +12,8 @@ export default class TypeOrmWordRepository implements WordRepository {
     this.repository = AppDataSource.manager.getRepository(WordEntity);
   }
 
-  async findById(id: string): Promise<Word | null> {
-    return await this.repository.findOne({ where: { id: id } });
+  async findById(id: WordId): Promise<Word | null> {
+    return await this.repository.findOne({ where: { id: id } as any });
   }
 
   async save(word: Word): Promise<any> {

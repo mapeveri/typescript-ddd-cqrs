@@ -1,4 +1,5 @@
 import { expect, jest } from '@jest/globals';
+import WordId from '@src/languages/domain/word/valueObjects/wordId';
 import Word from '@src/languages/domain/word/word';
 import WordRepository from '@src/languages/domain/word/wordRepository';
 
@@ -6,12 +7,12 @@ export class WordRepositoryMock implements WordRepository {
   private mockSave = jest.fn();
   private mockFindById = jest.fn();
 
-  findById(id: string): Promise<Word | null> {
+  findById(id: WordId): Promise<Word | null> {
     this.assertFindById(id);
     return Promise.resolve(null);
   }
 
-  assertFindById(id: string) {
+  assertFindById(id: WordId) {
     expect(this.mockFindById).toHaveBeenCalledWith(id);
   }
 

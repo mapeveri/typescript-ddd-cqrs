@@ -1,6 +1,8 @@
 import { AggregateRoot } from '../../../shared/domain/aggregate/aggregateRoot';
+import CountryId from '../country/valueObjects/countryId';
 import UserId from '../user/valueObjects/userId';
 import WordCreatedEvent from './domainEvents/wordCreatedEvent';
+import WordId from './valueObjects/wordId';
 
 export interface WordTerm {
   title: string;
@@ -10,13 +12,13 @@ export interface WordTerm {
 }
 
 export default class Word extends AggregateRoot {
-  id: string;
+  id: WordId;
   languageId: string;
-  countryId: string;
+  countryId: CountryId;
   terms: WordTerm[];
   userId: UserId;
 
-  constructor(id: string, languageId: string, countryId: string, terms: WordTerm[], userId: UserId) {
+  constructor(id: WordId, languageId: string, countryId: CountryId, terms: WordTerm[], userId: UserId) {
     super();
 
     this.id = id;
@@ -26,17 +28,17 @@ export default class Word extends AggregateRoot {
     this.userId = userId;
   }
 
-  static create(id: string, languageId: string, countryId: string, terms: WordTerm[], userId: UserId): Word {
+  static create(id: WordId, languageId: string, countryId: CountryId, terms: WordTerm[], userId: UserId): Word {
     const word = new this(id, languageId, countryId, terms, userId);
-    word.record(new WordCreatedEvent(id, languageId, countryId, userId.toString(), terms));
+    word.record(new WordCreatedEvent(id.toString(), languageId, countryId.toString(), userId.toString(), terms));
     return word;
   }
 
   toObject(): object {
     return {
-      id: this.id,
+      id: this.id.toString(),
       languageId: this.languageId,
-      countryId: this.countryId,
+      countryId: this.countryId.toString(),
       terms: this.terms,
       user: this.userId.toString(),
     };

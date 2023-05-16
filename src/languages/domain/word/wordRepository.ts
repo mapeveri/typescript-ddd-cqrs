@@ -1,7 +1,8 @@
+import WordId from './valueObjects/wordId';
 import Word from './word';
 
 interface WordRepository {
-  findById(id: string): Promise<Word | null>;
+  findById(id: WordId): Promise<Word | null>;
 
   save(word: Word): Promise<void>;
 }
