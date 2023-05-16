@@ -3,4 +3,4 @@ services:
     class: '../../persistence/typeOrm/repositories/typeOrmWordRepository'
   Words.CreateWordCommandHandler:
     class: '../../../application/word/command/create/createWordCommandHandler'
-    arguments: ['@Words.WordRepository', '@Users.UserRepository', '@Shared.EventBus']
+    arguments: ['@Words.WordRepository', '@Shared.EventBus']

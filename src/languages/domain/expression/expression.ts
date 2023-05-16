@@ -1,32 +1,32 @@
 import Term from '../term/term';
-import User from '../user/user';
+import UserId from '../user/valueObjects/userId';
 
 export default class Expression {
   id: string;
-  language_id: string;
-  country_id: string;
+  languageId: string;
+  countryId: string;
   terms: Array<Term>;
-  user: User;
+  userId: UserId;
 
-  constructor(id: string, language_id: string, country_id: string, terms: Array<Term>, user: User) {
+  constructor(id: string, languageId: string, countryId: string, terms: Array<Term>, userId: UserId) {
     this.id = id;
-    this.language_id = language_id;
-    this.country_id = country_id;
+    this.languageId = languageId;
+    this.countryId = countryId;
     this.terms = terms;
-    this.user = user;
+    this.userId = userId;
   }
 
-  static create(id: string, language_id: string, country_id: string, terms: Array<Term>, user: User): Expression {
-    return new this(id, language_id, country_id, terms, user);
+  static create(id: string, languageId: string, countryId: string, terms: Array<Term>, userId: UserId): Expression {
+    return new this(id, languageId, countryId, terms, userId);
   }
 
   toObject(): object {
     return {
       id: this.id,
-      language_id: this.language_id,
-      country_id: this.country_id,
+      language_id: this.languageId,
+      country_id: this.countryId,
       terms: this.terms,
-      user: this.user.toObject(),
+      user: this.userId.toString(),
     };
   }
 }

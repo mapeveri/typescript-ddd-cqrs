@@ -12,7 +12,7 @@ export default class TypeOrmWordRepository implements WordRepository {
   }
 
   async findById(id: string): Promise<Word | null> {
-    return await this.repository.findOneBy({ id: id });
+    return await this.repository.findOne({ where: { id: id } });
   }
 
   async save(word: Word): Promise<any> {

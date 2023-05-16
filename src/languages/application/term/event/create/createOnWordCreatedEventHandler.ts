@@ -6,7 +6,7 @@ import { WORD } from '../../../../../languages/domain/term/term';
 import { WordTerm } from '../../../../../languages/domain/word/word';
 import { Uuid } from '../../../../../shared/domain/valueObjects/uuid';
 
-export default class CreateOrUpdateUserOnAuthenticationEventHandler implements EventHandler {
+export default class CreateOnWordCreatedEventHandler implements EventHandler {
   constructor(private commandBus: CommandBus) {}
 
   async handle(event: WordCreatedEvent): Promise<void> {

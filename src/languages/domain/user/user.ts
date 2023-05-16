@@ -1,7 +1,5 @@
 import Email from '../../../shared/domain/valueObjects/email';
 import { AggregateRoot } from '../../../shared/domain/aggregate/aggregateRoot';
-import Expression from '../expression/expression';
-import Word from '../word/word';
 import UserId from './valueObjects/userId';
 
 export default class User extends AggregateRoot {
@@ -10,18 +8,8 @@ export default class User extends AggregateRoot {
   provider: string;
   email: Email;
   photo: string;
-  words: Word[];
-  expressions: Expression[];
 
-  constructor(
-    id: UserId,
-    name: string,
-    provider: string,
-    email: Email,
-    photo: string,
-    words: Word[],
-    expressions: Expression[]
-  ) {
+  constructor(id: UserId, name: string, provider: string, email: Email, photo: string) {
     super();
 
     this.id = id;
@@ -29,12 +17,10 @@ export default class User extends AggregateRoot {
     this.provider = provider;
     this.email = email;
     this.photo = photo;
-    this.words = words;
-    this.expressions = expressions;
   }
 
   static create(id: UserId, name: string, provider: string, email: Email, photo: string): User {
-    return new this(id, name, provider, email, photo, [], []);
+    return new this(id, name, provider, email, photo);
   }
 
   update(name: string, photo: string): void {
@@ -49,8 +35,6 @@ export default class User extends AggregateRoot {
       provider: this.provider,
       email: this.email.toString(),
       photo: this.photo,
-      expressions: this.expressions,
-      words: this.words,
     };
   }
 }

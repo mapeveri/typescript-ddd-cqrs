@@ -13,7 +13,7 @@ export default class TypeOrmUserRepository implements UserRepository {
   }
 
   async findById(id: UserId): Promise<User | null> {
-    return await this.repository.findOne({ where: { id: id.toString() } });
+    return await this.repository.findOne({ where: { id: id as any } });
   }
 
   async save(user: User): Promise<void> {

@@ -1,6 +1,7 @@
 import { EntitySchema } from 'typeorm';
 import Word from '../../../../domain/word/word';
-import User from '../../../../domain/user/user';
+import { ValueObjectTransformer } from '../../../../../shared/infrastructure/persistence/typeOrm/transformers/valueObjectTransformer';
+import UserId from '../../../../domain/user/valueObjects/userId';
 
 export default new EntitySchema<Word>({
   name: Word.name,
@@ -21,11 +22,9 @@ export default new EntitySchema<Word>({
       type: 'simple-array',
       default: [],
     },
-  },
-  relations: {
-    user: {
-      type: 'many-to-one',
-      target: () => User,
+    userId: {
+      type: String,
+      transformer: ValueObjectTransformer(UserId),
     },
   },
 });

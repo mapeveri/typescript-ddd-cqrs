@@ -1,6 +1,7 @@
 import { EntitySchema } from 'typeorm';
 import Expression from '../../../../domain/expression/expression';
-import User from '../../../../domain/user/user';
+import { ValueObjectTransformer } from '../../../../../shared/infrastructure/persistence/typeOrm/transformers/valueObjectTransformer';
+import UserId from '../../../../domain/user/valueObjects/userId';
 
 export default new EntitySchema<Expression>({
   name: Expression.name,
@@ -11,21 +12,19 @@ export default new EntitySchema<Expression>({
       type: 'uuid',
       primary: true,
     },
-    language_id: {
+    languageId: {
       type: String,
     },
-    country_id: {
+    countryId: {
       type: String,
     },
     terms: {
       type: 'simple-array',
       default: [],
     },
-  },
-  relations: {
-    user: {
-      type: 'many-to-one',
-      target: () => User,
+    userId: {
+      type: String,
+      transformer: ValueObjectTransformer(UserId),
     },
   },
 });

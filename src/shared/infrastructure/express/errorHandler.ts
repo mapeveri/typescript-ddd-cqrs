@@ -12,7 +12,7 @@ function errorHandler(err: Error, req: Request, res: Response, next: NextFunctio
   }
 
   console.error(err.stack);
-  res.status(500).json({ status: 500, error: 'Internal Server Error', code: '' });
+  res.status(500).json({ status: 500, error: 'Internal Server Error', code: 'generic_error' });
 }
 
 export default errorHandler;
