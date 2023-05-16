@@ -1,6 +1,7 @@
 import { expect, jest } from '@jest/globals';
 import Country from '@src/languages/domain/country/country';
 import CountryRepository from '@src/languages/domain/country/countryRepository';
+import CountryId from '@src/languages/domain/country/valueObjects/countryId';
 
 export class CountryRepositoryMock implements CountryRepository {
   private mockSave = jest.fn();
@@ -17,8 +18,8 @@ export class CountryRepositoryMock implements CountryRepository {
     expect(this.mockFindAll).toHaveBeenCalled();
   }
 
-  findById(id: string): Promise<Country | null> {
-    const country: Country | null = this.countries.filter((country) => country.id === id)[0] ?? null;
+  findById(id: CountryId): Promise<Country | null> {
+    const country: Country | null = this.countries.filter((country) => country.id.equals(id))[0] ?? null;
     return Promise.resolve(country);
   }
 

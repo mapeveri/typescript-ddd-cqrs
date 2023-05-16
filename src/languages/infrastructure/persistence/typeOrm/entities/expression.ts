@@ -9,7 +9,7 @@ export default new EntitySchema<Expression>({
   target: Expression,
   columns: {
     id: {
-      type: 'uuid',
+      type: String,
       primary: true,
     },
     languageId: {

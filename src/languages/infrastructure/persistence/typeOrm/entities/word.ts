@@ -9,7 +9,7 @@ export default new EntitySchema<Word>({
   target: Word,
   columns: {
     id: {
-      type: 'uuid',
+      type: String,
       primary: true,
     },
     languageId: {

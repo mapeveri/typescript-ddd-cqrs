@@ -21,8 +21,6 @@ export class UserMother {
       provider ?? faker.random.word(),
       email ?? faker.internet.email(),
       photos ?? faker.image.imageUrl(),
-      [],
-      []
     );
   }
 }

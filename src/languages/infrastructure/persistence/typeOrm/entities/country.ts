@@ -1,5 +1,7 @@
 import { EntitySchema } from 'typeorm';
 import Country from '../../../../domain/country/country';
+import { ValueObjectTransformer } from '../../../../../shared/infrastructure/persistence/typeOrm/transformers/valueObjectTransformer';
+import CountryId from '../../../../domain/country/valueObjects/countryId';
 
 export default new EntitySchema<Country>({
   name: Country.name,
@@ -7,8 +9,9 @@ export default new EntitySchema<Country>({
   target: Country,
   columns: {
     id: {
-      type: 'uuid',
+      type: String,
       primary: true,
+      transformer: ValueObjectTransformer(CountryId),
     },
     name: {
       type: String,

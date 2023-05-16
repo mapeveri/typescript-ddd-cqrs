@@ -10,7 +10,7 @@ export class CountryGetController implements Controller {
       const query = req.container.get('Shared.QueryBus');
       const data = await query.ask(new FindCountryQuery(id));
 
-      res.status(httpStatus.OK).send(data.content);
+      res.status(httpStatus.OK).send(data.content || {});
     } catch(e) {
       next(e);
     }
