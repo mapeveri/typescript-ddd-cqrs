@@ -3,8 +3,8 @@ import { CommandBus } from '../../../../../shared/domain/buses/commandBus/comman
 import { EventHandler } from '../../../../../shared/domain/buses/eventBus/eventHandler';
 import CreateTermCommand from '../../command/create/createTermCommand';
 import { WORD } from '../../../../../languages/domain/term/term';
-import { WordTerm } from '../../../../../languages/domain/word/word';
 import { Uuid } from '../../../../../shared/domain/valueObjects/uuid';
+import { WordTerm } from '../../../../../languages/domain/word/valueObjects/term';
 
 export default class CreateOnWordCreatedEventHandler implements EventHandler {
   constructor(private commandBus: CommandBus) {}

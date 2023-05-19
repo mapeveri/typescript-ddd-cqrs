@@ -6,7 +6,7 @@ interface CreateWordCommandProps {
   languageId?: string;
   countryId?: string;
   userId?: string;
-  terms?: Array<{ [key: string]: string }>;
+  terms?: Array<{ [key: string]: any }>;
 }
 
 export class CreateWordCommandMother {

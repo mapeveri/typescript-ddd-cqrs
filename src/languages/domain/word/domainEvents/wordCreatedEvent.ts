@@ -1,5 +1,5 @@
 import { DomainEvent } from '../../../../shared/domain/buses/eventBus/domainEvent';
-import { WordTerm } from '../word';
+import { WordTerm } from '../valueObjects/term';
 
 export default class WordCreatedEvent extends DomainEvent {
   constructor(

@@ -21,7 +21,7 @@ export default new EntitySchema<Expression>({
       type: String,
     },
     terms: {
-      type: 'simple-array',
+      type: 'json',
       default: [],
     },
     userId: {

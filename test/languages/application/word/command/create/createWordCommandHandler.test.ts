@@ -23,7 +23,14 @@ describe('CreateWordCommandHandler handle', () => {
   });
 
   it('should create and save a country', async () => {
-    const command = CreateWordCommandMother.random();
+    const command = CreateWordCommandMother.random({
+      terms: [{
+        title: 'Title 1',
+        description: 'Description 1',
+        example: 'Example 1',
+        tagged_words: ['word1'],
+      }],
+    });
     const userId = UserIdMother.random(command.userId);
     const word: Word = WordMother.createFromCreateWordCommand(command, userId);
     const wordCreatedEvent = WordCreatedEventMother.createFromCreateWordCommand(command);
