@@ -1,18 +1,18 @@
 import faker from 'faker';
-import Term from '@src/languages/domain/word/valueObjects/term';
+import WordTerm from '@src/languages/domain/word/valueObjects/wordTerm';
 
-export interface TermMotherProps {
+export interface WordTermMotherProps {
   title?: string;
   description?: string;
   example?: string;
   taggedWords?: Array<string>;
 }
 
-export default class TermMother {
-  static random(props?: TermMotherProps): Term {
+export default class WordTermMother {
+  static random(props?: WordTermMotherProps): WordTerm {
     const { title, description, example, taggedWords } = props ?? {};
 
-    return new Term(
+    return new WordTerm(
       title ?? faker.random.word(),
       description ?? faker.random.word(),
       example ?? faker.random.word(),

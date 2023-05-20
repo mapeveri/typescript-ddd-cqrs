@@ -4,7 +4,7 @@ import { EventHandler } from '../../../../../shared/domain/buses/eventBus/eventH
 import CreateTermCommand from '../../command/create/createTermCommand';
 import { WORD } from '../../../../../languages/domain/term/term';
 import { Uuid } from '../../../../../shared/domain/valueObjects/uuid';
-import { WordTerm } from '../../../../../languages/domain/word/valueObjects/term';
+import { WordTermDTO } from '../../../../domain/word/valueObjects/wordTerm';
 
 export default class CreateOnWordCreatedEventHandler implements EventHandler {
   constructor(private commandBus: CommandBus) {}
@@ -12,7 +12,7 @@ export default class CreateOnWordCreatedEventHandler implements EventHandler {
   async handle(event: WordCreatedEvent): Promise<void> {
     const terms = event.terms;
 
-    terms.forEach(async (term: WordTerm) => {
+    terms.forEach(async (term: WordTermDTO) => {
       await this.commandBus.dispatch(
         new CreateTermCommand(
           Uuid.random().toString(),

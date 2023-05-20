@@ -4,8 +4,8 @@ import { ValueObjectTransformer } from '../../../../../shared/infrastructure/per
 import UserId from '../../../../domain/user/valueObjects/userId';
 import CountryId from '../../../../domain/country/valueObjects/countryId';
 import WordId from '../../../../domain/word/valueObjects/wordId';
-import TermCollectionTransformer from '../transformers/termCollectionTransformer';
-import TermCollection from '../../../../domain/word/valueObjects/termCollection';
+import WordTermCollectionTransformer from '../transformers/wordTermCollectionTransformer';
+import WordTermCollection from '../../../../domain/word/valueObjects/wordTermCollection';
 
 export default new EntitySchema<Word>({
   name: Word.name,
@@ -26,8 +26,8 @@ export default new EntitySchema<Word>({
     },
     terms: {
       type: 'json',
-      transformer: new TermCollectionTransformer(),
-      default: new TermCollection([]),
+      transformer: new WordTermCollectionTransformer(),
+      default: new WordTermCollection([]),
     },
     userId: {
       type: String,

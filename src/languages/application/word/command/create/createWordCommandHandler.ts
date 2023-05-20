@@ -6,7 +6,7 @@ import { EventBus } from '../../../../../shared/domain/buses/eventBus/eventBus';
 import UserId from '../../../../../languages/domain/user/valueObjects/userId';
 import CountryId from '../../../../../languages/domain/country/valueObjects/countryId';
 import WordId from '../../../../../languages/domain/word/valueObjects/wordId';
-import TermCollection from '../../../../../languages/domain/word/valueObjects/termCollection';
+import TermCollection from '../../../../domain/word/valueObjects/wordTermCollection';
 
 export default class CreateWordCommandHandler implements CommandHandler {
   constructor(private wordRepository: WordRepository, private eventBus: EventBus) {}

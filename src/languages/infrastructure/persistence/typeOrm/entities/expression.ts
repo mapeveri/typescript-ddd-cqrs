@@ -3,6 +3,8 @@ import Expression from '../../../../domain/expression/expression';
 import { ValueObjectTransformer } from '../../../../../shared/infrastructure/persistence/typeOrm/transformers/valueObjectTransformer';
 import UserId from '../../../../domain/user/valueObjects/userId';
 import ExpressionId from '../../../../domain/expression/valueObjects/expressionId';
+import ExpressionTermCollectionTransformer from '../transformers/expressionTermCollectionTransformer';
+import ExpressionTermCollection from '../../../../domain/expression/valueObjects/expressionTermCollection';
 
 export default new EntitySchema<Expression>({
   name: Expression.name,
@@ -22,7 +24,8 @@ export default new EntitySchema<Expression>({
     },
     terms: {
       type: 'json',
-      default: [],
+      transformer: new ExpressionTermCollectionTransformer(),
+      default: new ExpressionTermCollection([]),
     },
     userId: {
       type: String,

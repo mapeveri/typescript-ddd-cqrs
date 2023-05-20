@@ -1,0 +1,9 @@
+import WordTermCollection from '@src/languages/domain/word/valueObjects/wordTermCollection';
+import WordTerm from '@src/languages/domain/word/valueObjects/wordTerm';
+import WordTermMother from './wordTermMother';
+
+export default class TermCollectionMother {
+  static random(terms: Array<WordTerm>): WordTermCollection {
+    return new WordTermCollection(terms ?? [WordTermMother.random()]);
+  }
+}
