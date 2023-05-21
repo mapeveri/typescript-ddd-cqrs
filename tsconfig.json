@@ -19,6 +19,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "strictPropertyInitialization": false,
+    "skipLibCheck": true,
     "allowJs": true,
     "outDir": "./dist",
     "typeRoots": ["src/shared/infrastructure/types", "./node_modules/@types"]

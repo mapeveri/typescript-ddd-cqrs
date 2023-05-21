@@ -1,6 +1,3 @@
-import * as dotenv from 'dotenv';
-dotenv.config();
-
 import bodyParser from 'body-parser';
 import express, { Router } from 'express';
 import NodeInjectionMiddleware from 'node-dependency-injection-express-middleware';
@@ -27,7 +24,6 @@ const corsOptions: object = {
 };
 
 app.locals.container = container;
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet());
