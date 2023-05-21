@@ -26,12 +26,12 @@ After running docker-compose up the application will be available at https://loc
 
 To generate migrations run the next command:
 ```shell script
-  npm run typeorm migration:generate migrationName
+  docker-compose run app bash npm run typeorm migration:generate migrationName
 ```
 
 To execute migrations run the next command:
 ```shell script
-  npm run typeorm migration:run
+  docker-compose run app bash npm run typeorm migration:run
 ```
 
 ### Oauth2:
@@ -42,5 +42,6 @@ To get a token for testing you should go to https://developers.google.com/oauthp
 
 For production run the next command:
 ```shell script
-    npm run start
+    docker-compose run app bash npm run start
 ```
+You need to make sure that you configure the .env file correctly. TYPE_ORM_ENTITIES env variable must use the javascript path.
