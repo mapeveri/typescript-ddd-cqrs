@@ -1,8 +1,12 @@
 import { ContainerBuilder, YamlFileLoader } from 'node-dependency-injection';
 
-const container = new ContainerBuilder();
-const loader = new YamlFileLoader(container);
+async function getContainer(): Promise<ContainerBuilder> {
+  const container = new ContainerBuilder();
+  const loader = new YamlFileLoader(container);
 
-loader.load(`${__dirname}/application.yaml`);
+  await loader.load(`${__dirname}/application.yaml`);
 
-export default container;
+  return container;
+}
+
+export default getContainer;

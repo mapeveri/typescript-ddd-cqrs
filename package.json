@@ -52,7 +52,7 @@
     "jsonwebtoken": "^9.0.0",
     "method-override": "^3.0.0",
     "mongodb": "^5.3.0",
-    "node-dependency-injection": "^2.6.11",
+    "node-dependency-injection": "^3.0.5",
     "node-dependency-injection-express-middleware": "^1.2.2",
     "pg": "^8.10.0",
     "reflect-metadata": "^0.1.13",

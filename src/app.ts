@@ -5,7 +5,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import methodOverride from 'method-override';
 
-import container from './shared/infrastructure/dependencyInjection/container';
+import getContainer from './shared/infrastructure/dependencyInjection/container';
 import { registerRoutes } from './languages/infrastructure/ui/api/v1/router';
 import AppDataSource from './shared/infrastructure/persistence/typeOrm/dataSource';
 import { registerCommands } from './shared/infrastructure/buses/registerCommands';
@@ -13,25 +13,28 @@ import { registerQueries } from './shared/infrastructure/buses/registerQueries';
 import errorHandler from './shared/infrastructure/express/errorHandler';
 import { registerEvents } from './shared/infrastructure/buses/registerEvents';
 
-const app: express.Express = express();
-const options: object = {
-  serviceFilePath: `${__dirname}/shared/infrastructure/dependencyInjection/application.yaml`,
-};
+async function createApp(): Promise<express.Express> {
+  const app: express.Express = express();
+  const options: object = {
+    serviceFilePath: `${__dirname}/shared/infrastructure/dependencyInjection/application.yaml`,
+  };
 
-const corsOptions: object = {
-  origin: process.env.FRONTED_URL,
-  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
-};
+  const corsOptions: object = {
+    origin: process.env.FRONTED_URL,
+    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  };
 
-app.locals.container = container;
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(helmet());
-app.use(cors(corsOptions));
-app.use(methodOverride('X-HTTP-Method-Override'));
-app.use(new NodeInjectionMiddleware(options).middleware());
+  const container = await getContainer();
+  app.locals.container = container;
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(helmet());
+  app.use(cors(corsOptions));
+  app.use(methodOverride('X-HTTP-Method-Override'));
+  app.use(new NodeInjectionMiddleware(options).middleware());
 
-AppDataSource.initialize().then(async () => {
+  await AppDataSource.initialize();
+
   registerQueries(container);
   registerCommands(container);
   registerEvents(container);
@@ -41,6 +44,8 @@ AppDataSource.initialize().then(async () => {
   app.use('/api/v1/', apiRouter);
 
   app.use(errorHandler);
-});
 
-export default app;
+  return app;
+}
+
+export default createApp;
