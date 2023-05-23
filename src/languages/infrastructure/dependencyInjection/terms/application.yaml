@@ -1,9 +1,0 @@
-services:
-  Terms.TermRepository:
-    class: '../../persistence/mongo/repositories/mongoTermRepository'
-  Terms.CreateOnWordCreatedEventHandler:
-    class: '../../../application/term/event/create/createOnWordCreatedEventHandler'
-    arguments: ['@Shared.CommandBus']
-  Terms.CreateTermCommandHandler:
-    class: '../../../application/term/command/create/createTermCommandHandler'
-    arguments: ['@Terms.TermRepository']

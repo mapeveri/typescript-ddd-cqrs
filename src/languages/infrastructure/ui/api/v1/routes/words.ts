@@ -1,8 +1,9 @@
 import { Router } from 'express';
-import { WordPostController } from '../controllers/words/wordPostController';
+import { ContainerBuilder } from 'node-dependency-injection';
+import WordPostController from '../controllers/words/wordPostController';
 
-export const register = (router: Router) => {
-  const wordPostController: WordPostController = new WordPostController();
+export const registerLoginRequiredRoutes = (router: Router, container: ContainerBuilder) => {
+  const wordPostController: WordPostController = container.get(WordPostController);
 
   router.post('/words', wordPostController.run.bind(wordPostController));
 };

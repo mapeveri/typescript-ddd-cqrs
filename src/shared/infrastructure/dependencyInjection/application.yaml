@@ -1,7 +1,0 @@
-imports:
-  - { resource: ./shared/application.yaml }
-  - { resource: ./shared/buses/application.yaml }
-  - { resource: ./../../../languages/infrastructure/dependencyInjection/countries/application.yaml }
-  - { resource: ./../../../languages/infrastructure/dependencyInjection/users/application.yaml }
-  - { resource: ./../../../languages/infrastructure/dependencyInjection/words/application.yaml }
-  - { resource: ./../../../languages/infrastructure/dependencyInjection/terms/application.yaml }

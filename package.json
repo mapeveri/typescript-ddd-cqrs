@@ -53,7 +53,6 @@
     "method-override": "^3.0.0",
     "mongodb": "^5.3.0",
     "node-dependency-injection": "^3.0.5",
-    "node-dependency-injection-express-middleware": "^1.2.2",
     "pg": "^8.10.0",
     "reflect-metadata": "^0.1.13",
     "tslog": "^3.2.0",

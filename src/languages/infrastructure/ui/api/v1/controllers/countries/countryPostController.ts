@@ -4,8 +4,11 @@ import { Controller } from '../../controller';
 import CreateCountryCommand from '../../../../../../application/country/command/create/createCountryCommand';
 import InvalidParameters from '../../../../../../../shared/infrastructure/api/apiErrorResponses/InvalidParameters';
 import ApiExceptionSerializer from '../../../../../../../shared/infrastructure/api/serializers/apiExceptionSerializer';
+import { CommandBus } from '../../../../../../../shared/domain/buses/commandBus/commandBus';
 
-export class CountryPostController implements Controller {
+export default class CountryPostController implements Controller {
+  public constructor(private commandBus: CommandBus) {}
+
   async run(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const body = req.body;
@@ -14,8 +17,7 @@ export class CountryPostController implements Controller {
         res.status(error.status).json(ApiExceptionSerializer.serialize(error));
       }
 
-      const commandBus = req.container.get('Shared.CommandBus');
-      await commandBus.dispatch(new CreateCountryCommand(body['id'], body['name'], body['iso'], body['languages']));
+      await this.commandBus.dispatch(new CreateCountryCommand(body['id'], body['name'], body['iso'], body['languages']));
       res.status(httpStatus.CREATED).send({});
     } catch (e) {
       next(e);

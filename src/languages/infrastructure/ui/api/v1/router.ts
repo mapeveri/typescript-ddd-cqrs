@@ -1,19 +1,22 @@
 import { Router } from 'express';
 import glob from 'glob';
 import JwtAuth from './routes/middlewares/jwtAuth';
+import { ContainerBuilder } from 'node-dependency-injection';
 
-const routesWithoutLogin = ['/routes/auth'];
-
-function register(routePath: string, router: Router) {
+function registerModuleRoutes(routePath: string, router: Router, container: ContainerBuilder): void {
   const route = require(routePath);
 
-  if (!routesWithoutLogin.includes(routePath.split('v1')[1].split('.')[0])) {
-    router.use(JwtAuth);
+  if (typeof route.registerPublicRoutes === 'function') {
+    route.registerPublicRoutes(router, container);
   }
-  route.register(router, JwtAuth);
+
+  if (typeof route.registerLoginRequiredRoutes === 'function') {
+    router.use(JwtAuth);
+    route.registerLoginRequiredRoutes(router, container);
+  }
 }
 
-export function registerRoutes(router: Router) {
+export function registerRoutes(router: Router, container: ContainerBuilder): void {
   const routes = glob.sync(__dirname + '/routes/*.*');
-  routes.map((route) => register(route, router));
+  routes.map((route) => registerModuleRoutes(route, router, container));
 }

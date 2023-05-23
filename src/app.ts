@@ -1,6 +1,5 @@
 import bodyParser from 'body-parser';
 import express, { Router } from 'express';
-import NodeInjectionMiddleware from 'node-dependency-injection-express-middleware';
 import cors from 'cors';
 import helmet from 'helmet';
 import methodOverride from 'method-override';
@@ -12,11 +11,15 @@ import { registerCommands } from './shared/infrastructure/buses/registerCommands
 import { registerQueries } from './shared/infrastructure/buses/registerQueries';
 import errorHandler from './shared/infrastructure/express/errorHandler';
 import { registerEvents } from './shared/infrastructure/buses/registerEvents';
+import { ExpressApp } from './shared/infrastructure/express/expressApp';
 
-async function createApp(): Promise<express.Express> {
-  const app: express.Express = express();
-  const options: object = {
-    serviceFilePath: `${__dirname}/shared/infrastructure/dependencyInjection/application.yaml`,
+async function createApp(): Promise<ExpressApp> {
+  const app: ExpressApp = express() as ExpressApp;
+
+  app.locals.sourcePath = __dirname;
+  app.set('env', process.env.NODE_ENV);
+  app.isProduction = () => {
+    return app.get('env') === 'production';
   };
 
   const corsOptions: object = {
@@ -24,14 +27,13 @@ async function createApp(): Promise<express.Express> {
     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
   };
 
-  const container = await getContainer();
+  const container = await getContainer(app);
   app.locals.container = container;
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(helmet());
   app.use(cors(corsOptions));
   app.use(methodOverride('X-HTTP-Method-Override'));
-  app.use(new NodeInjectionMiddleware(options).middleware());
 
   await AppDataSource.initialize();
 
@@ -40,7 +42,7 @@ async function createApp(): Promise<express.Express> {
   registerEvents(container);
 
   const apiRouter: Router = express.Router();
-  registerRoutes(apiRouter);
+  registerRoutes(apiRouter, container);
   app.use('/api/v1/', apiRouter);
 
   app.use(errorHandler);

@@ -5,8 +5,11 @@ import { Controller } from '../../controller';
 import FindUserQuery from '../../../../../../application/user/query/find/findUserQuery';
 import UserJwtDecodedEmpty from '../../apiErrorResponses/userJwtDecodedEmpty';
 import ApiExceptionSerializer from '../../../../../../../shared/infrastructure/api/serializers/apiExceptionSerializer';
+import { QueryBus } from '../../../../../../../shared/domain/buses/queryBus/queryBus';
 
-export class MeGetController implements Controller {
+export default class MeGetController implements Controller {
+  public constructor(private queryBus: QueryBus) {}
+
   async run(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const token: string = req.headers['authorization'] ?? '';
@@ -16,8 +19,7 @@ export class MeGetController implements Controller {
         res.status(error.status).json(ApiExceptionSerializer.serialize(error));
       }
 
-      const query = req.container.get('Shared.QueryBus');
-      const data = await query.ask(new FindUserQuery(user['id']));
+      const data = await this.queryBus.ask(new FindUserQuery(user['id']));
 
       res.status(httpStatus.OK).send(data.content);
     } catch (e) {

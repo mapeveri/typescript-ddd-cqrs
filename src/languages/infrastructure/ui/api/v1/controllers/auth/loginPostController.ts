@@ -6,8 +6,11 @@ import LoginUserCommand from '../../../../../../application/auth/command/loginUs
 import InvalidParameters from '../../../../../../../shared/infrastructure/api/apiErrorResponses/InvalidParameters';
 import ApiExceptionSerializer from '../../../../../../../shared/infrastructure/api/serializers/apiExceptionSerializer';
 import { Uuid } from '../../../../../../../shared/domain/valueObjects/uuid';
+import { CommandBus } from '../../../../../../../shared/domain/buses/commandBus/commandBus';
 
-export class LoginPostController implements Controller {
+export default class LoginPostController implements Controller {
+  public constructor(private commandBus: CommandBus) {}
+  
   async run(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const body = req.body;
@@ -17,9 +20,7 @@ export class LoginPostController implements Controller {
       }
 
       const id = Uuid.generateFromString(body['email']).toString();
-      const commandBus = req.container.get('Shared.CommandBus');
-
-      await commandBus.dispatch(
+      await this.commandBus.dispatch(
         new LoginUserCommand(id, body['name'], body['email'], body['token'], body['provider'], body['photo'])
       );
 

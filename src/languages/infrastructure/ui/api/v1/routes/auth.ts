@@ -1,18 +1,15 @@
 import { Router } from 'express';
-import { LoginPostController } from '../controllers/auth/loginPostController';
-import { MeGetController } from '../controllers/auth/meGetController';
-import JwtAuth from './middlewares/jwtAuth';
+import { ContainerBuilder } from 'node-dependency-injection';
+import LoginPostController from '../controllers/auth/loginPostController';
+import MeGetController from '../controllers/auth/meGetController';
 
-function routesWithLoginRequired(router: Router) {
-  const meGetController: MeGetController = new MeGetController();
-
-  router.use(JwtAuth);
-  router.get('/auth/me', meGetController.run.bind(meGetController));
-}
-
-export const register = (router: Router) => {
-  const loginPostController: LoginPostController = new LoginPostController();
+export const registerPublicRoutes = (router: Router, container: ContainerBuilder) => {
+  const loginPostController: LoginPostController = container.get(LoginPostController);
   router.post('/auth/login', loginPostController.run.bind(loginPostController));
+};
 
-  routesWithLoginRequired(router);
+export const registerLoginRequiredRoutes = (router: Router, container: ContainerBuilder) => {
+  const meGetController: MeGetController = container.get(MeGetController);
+
+  router.get('/auth/me', meGetController.run.bind(meGetController));
 };

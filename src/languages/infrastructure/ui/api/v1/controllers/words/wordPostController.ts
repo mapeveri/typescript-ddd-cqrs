@@ -4,8 +4,11 @@ import { Controller } from '../../controller';
 import CreateWordCommand from '../../../../../../../languages/application/word/command/create/createWordCommand';
 import InvalidParameters from '../../../../../../../shared/infrastructure/api/apiErrorResponses/InvalidParameters';
 import ApiExceptionSerializer from '../../../../../../../shared/infrastructure/api/serializers/apiExceptionSerializer';
+import { CommandBus } from '../../../../../../../shared/domain/buses/commandBus/commandBus';
 
-export class WordPostController implements Controller {
+export default class WordPostController implements Controller {
+  public constructor(private commandBus: CommandBus) {}
+
   async run(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
       const body = req.body;
@@ -20,8 +23,7 @@ export class WordPostController implements Controller {
         res.status(error.status).json(ApiExceptionSerializer.serialize(error));
       }
 
-      const commandBus = req.container.get('Shared.CommandBus');
-      await commandBus.dispatch(
+      await this.commandBus.dispatch(
         new CreateWordCommand(body['id'], body['language_id'], body['country_id'], body['user_id'], body['terms'])
       );
       res.status(httpStatus.CREATED).send({});
