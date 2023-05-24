@@ -16,11 +16,11 @@ import { ExpressApp } from './shared/infrastructure/express/expressApp';
 async function createApp(): Promise<ExpressApp> {
   const app: ExpressApp = express() as ExpressApp;
 
-  app.locals.sourcePath = __dirname;
   app.set('env', process.env.NODE_ENV);
   app.isProduction = () => {
     return app.get('env') === 'production';
   };
+  app.locals.sourcePath = __dirname;
 
   const corsOptions: object = {
     origin: process.env.FRONTED_URL,

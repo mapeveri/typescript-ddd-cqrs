@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "description": "typescript-ddd-cqrs backend",
-  "main": "dist/app.js",
+  "main": "src/app.ts",
   "scripts": {
     "dev": "nodemon src/server.ts -r dotenv/config ./src/server.ts dotenv_config_path=.env dotenv_config_debug=true",
-    "start": "tsc && npm run build:di && node dist/src/server.js -r dotenv/config ./src/server.js dotenv_config_path=.env dotenv_config_debug=false",
-    "build:di": "copy 'src/**/*.{json,yaml,html,png}' dist/src",
+    "start": "node -r ts-node/register/transpile-only src/server.ts -r dotenv/config ./src/server.js dotenv_config_path=.env dotenv_config_debug=false",
     "format-code-check": "prettier --check ./src",
     "format-code": "prettier --write ./src",
     "linter": "eslint 'src/**/*.ts'",
@@ -42,7 +41,6 @@
   "dependencies": {
     "axios": "^0.24.0",
     "body-parser": "^1.19.1",
-    "copy": "^0.0.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.2",

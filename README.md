@@ -44,4 +44,3 @@ For production run the next command:
 ```shell script
     docker-compose run app bash npm run start
 ```
-You need to make sure that you configure the .env file correctly. TYPE_ORM_ENTITIES env variable must use the javascript path.
