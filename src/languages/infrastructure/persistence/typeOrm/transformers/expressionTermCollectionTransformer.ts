@@ -1,6 +1,6 @@
+import ExpressionTerm from '@src/languages/domain/expression/valueObjects/expressionTerm';
+import ExpressionTermCollection from '@src/languages/domain/expression/valueObjects/expressionTermCollection';
 import { ValueTransformer } from 'typeorm';
-import ExpressionTermCollection from '../../../../domain/expression/valueObjects/expressionTermCollection';
-import ExpressionTerm from '../../../../domain/expression/valueObjects/expressionTerm';
 
 export default class ExpressionTermCollectionTransformer implements ValueTransformer {
   to(value: ExpressionTermCollection): string {

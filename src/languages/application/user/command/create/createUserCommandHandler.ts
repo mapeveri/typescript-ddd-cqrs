@@ -1,9 +1,9 @@
-import Email from '../../../../../shared/domain/valueObjects/email';
-import { CommandHandler } from '../../../../../shared/domain/buses/commandBus/commandHandler';
-import User from '../../../../domain/user/user';
-import UserRepository from '../../../../domain/user/userRepository';
+import UserRepository from '@src/languages/domain/user/userRepository';
+import { CommandHandler } from '@src/shared/domain/buses/commandBus/commandHandler';
 import CreateUserCommand from './createUserCommand';
-import UserId from '../../../../domain/user/valueObjects/userId';
+import UserId from '@src/languages/domain/user/valueObjects/userId';
+import Email from '@src/shared/domain/valueObjects/email';
+import User from '@src/languages/domain/user/user';
 
 export default class CreateUserCommandHandler implements CommandHandler {
   constructor(private userRepository: UserRepository) {}

@@ -1,4 +1,4 @@
-import { Uuid } from '../../../../shared/domain/valueObjects/uuid';
+import { Uuid } from '@src/shared/domain/valueObjects/uuid';
 import InvalidUserIdException from '../exceptions/invalidUserIdException';
 
 export default class UserId extends Uuid {

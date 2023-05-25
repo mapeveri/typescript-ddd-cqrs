@@ -1,9 +1,9 @@
-import { SocialLogin } from '../../../../domain/user/auth';
-import LoginException from '../../../../domain/user/exceptions/loginException';
-import { CommandHandler } from '../../../../../shared/domain/buses/commandBus/commandHandler';
+import { CommandHandler } from '@src/shared/domain/buses/commandBus/commandHandler';
+import { EventBus } from '@src/shared/domain/buses/eventBus/eventBus';
 import LoginUserCommand from './loginUserCommand';
-import { EventBus } from '../../../../../shared/domain/buses/eventBus/eventBus';
-import UserAuthenticatedEvent from '../../../../domain/user/domainEvents/userAuthenticatedEvent';
+import { SocialLogin } from '@src/languages/domain/user/auth';
+import LoginException from '@src/languages/domain/user/exceptions/loginException';
+import UserAuthenticatedEvent from '@src/languages/domain/user/domainEvents/userAuthenticatedEvent';
 
 export default class LoginUserCommandHandler implements CommandHandler {
   constructor(private socialLogin: SocialLogin, private eventBus: EventBus) {}

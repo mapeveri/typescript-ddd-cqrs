@@ -1,8 +1,8 @@
-import CountryId from '../../../../domain/country/valueObjects/countryId';
-import { QueryHandler } from '../../../../../shared/domain/buses/queryBus/queryHandler';
-import QueryResponse from '../../../../../shared/domain/buses/queryBus/queryResponse';
-import CountryRepository from '../../../../domain/country/countryRepository';
+import CountryRepository from '@src/languages/domain/country/countryRepository';
+import { QueryHandler } from '@src/shared/domain/buses/queryBus/queryHandler';
 import FindCountryQuery from './findCountryQuery';
+import QueryResponse from '@src/shared/domain/buses/queryBus/queryResponse';
+import CountryId from '@src/languages/domain/country/valueObjects/countryId';
 
 export default class FindCountryQueryHandler implements QueryHandler {
   constructor(private countryRepository: CountryRepository) {}

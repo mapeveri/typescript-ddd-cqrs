@@ -1,7 +1,7 @@
-import { CommandHandler } from '../../../../../shared/domain/buses/commandBus/commandHandler';
+import TermRepository from '@src/languages/domain/term/termRepository';
+import { CommandHandler } from '@src/shared/domain/buses/commandBus/commandHandler';
 import CreateTermCommand from './createTermCommand';
-import TermRepository from '../../../../../languages/domain/term/termRepository';
-import Term from '../../../../../languages/domain/term/term';
+import Term from '@src/languages/domain/term/term';
 
 export default class CreateTermCommandHandler implements CommandHandler {
   constructor(private termRepository: TermRepository) {}

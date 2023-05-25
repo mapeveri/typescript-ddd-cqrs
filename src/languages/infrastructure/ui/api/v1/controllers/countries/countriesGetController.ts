@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status';
 import { Controller } from '../../controller';
-import FindCountriesQuery from '../../../../../../application/country/query/findAll/findCountriesQuery';
-import { QueryBus } from '../../../../../../../shared/domain/buses/queryBus/queryBus';
+import FindCountriesQuery from '@src/languages/application/country/query/findAll/findCountriesQuery';
+import { QueryBus } from '@src/shared/domain/buses/queryBus/queryBus';
 
 export default class CountriesGetController implements Controller {
   public constructor(private queryBus: QueryBus) {}

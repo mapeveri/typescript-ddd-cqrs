@@ -1,7 +1,7 @@
-import { Query } from '../../domain/buses/queryBus/query';
-import { QueryBus } from '../../domain/buses/queryBus/queryBus';
-import { QueryHandler } from '../../domain/buses/queryBus/queryHandler';
-import QueryResponse from '../../domain/buses/queryBus/queryResponse';
+import { Query } from '@src/shared/domain/buses/queryBus/query';
+import { QueryBus } from '@src/shared/domain/buses/queryBus/queryBus';
+import { QueryHandler } from '@src/shared/domain/buses/queryBus/queryHandler';
+import QueryResponse from '@src/shared/domain/buses/queryBus/queryResponse';
 
 export default class MemoryQueryBus implements QueryBus {
   private static handlers: { [key: string]: QueryHandler } = {};

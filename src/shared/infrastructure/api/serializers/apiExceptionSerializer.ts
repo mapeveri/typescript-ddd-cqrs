@@ -1,4 +1,4 @@
-import DomainException from '../../../domain/exceptions/domainException';
+import DomainException from '@src/shared/domain/exceptions/domainException';
 import ApiErrorResponseException from '../apiErrorResponses/apiResponseException';
 
 export default class ApiExceptionSerializer {

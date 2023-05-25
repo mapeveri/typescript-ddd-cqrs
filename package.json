@@ -5,8 +5,8 @@
   "description": "typescript-ddd-cqrs backend",
   "main": "src/app.ts",
   "scripts": {
-    "dev": "nodemon src/server.ts -r dotenv/config ./src/server.ts dotenv_config_path=.env dotenv_config_debug=true",
-    "start": "node -r ts-node/register/transpile-only src/server.ts -r dotenv/config ./src/server.js dotenv_config_path=.env dotenv_config_debug=false",
+    "dev": "nodemon -r tsconfig-paths/register src/server.ts -r dotenv/config ./src/server.ts dotenv_config_path=.env dotenv_config_debug=true",
+    "start": "node -r tsconfig-paths/register -r ts-node/register/transpile-only src/server.ts -r dotenv/config ./src/server.js dotenv_config_path=.env dotenv_config_debug=false",
     "format-code-check": "prettier --check ./src",
     "format-code": "prettier --write ./src",
     "linter": "eslint 'src/**/*.ts'",
@@ -36,6 +36,7 @@
     "prettier": "2.8.8",
     "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.0.4"
   },
   "dependencies": {

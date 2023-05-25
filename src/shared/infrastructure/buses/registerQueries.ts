@@ -1,12 +1,12 @@
 import { ContainerBuilder } from 'node-dependency-injection';
 
 import MemoryQueryBus from './memoryQueryBus';
-import FindCountryQueryHandler from '../../../languages/application/country/query/find/findCountryQueryHandler';
-import FindUserQueryHandler from '../../../languages/application/user/query/find/findUserQueryHandler';
-import FindCountriesQueryHandler from '../../../languages/application/country/query/findAll/findCountriesQueryHandler';
-import FindCountryQuery from '../../../languages/application/country/query/find/findCountryQuery';
-import FindCountriesQuery from '../../../languages/application/country/query/findAll/findCountriesQuery';
-import FindUserQuery from '../../../languages/application/user/query/find/findUserQuery';
+import FindCountryQueryHandler from '@src/languages/application/country/query/find/findCountryQueryHandler';
+import FindUserQueryHandler from '@src/languages/application/user/query/find/findUserQueryHandler';
+import FindCountriesQueryHandler from '@src/languages/application/country/query/findAll/findCountriesQueryHandler';
+import FindCountryQuery from '@src/languages/application/country/query/find/findCountryQuery';
+import FindCountriesQuery from '@src/languages/application/country/query/findAll/findCountriesQuery';
+import FindUserQuery from '@src/languages/application/user/query/find/findUserQuery';
 
 export function registerQueries(container: ContainerBuilder) {
   const queryBus: MemoryQueryBus = container.get(MemoryQueryBus);

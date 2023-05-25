@@ -1,6 +1,6 @@
-import Term from '../../../../domain/term/term';
-import TermRepository from '../../../../domain/term/termRepository';
-import MongoConnection from '../../../../../shared/infrastructure/persistence/mongo/mongoConnection';
+import Term from '@src/languages/domain/term/term';
+import TermRepository from '@src/languages/domain/term/termRepository';
+import MongoConnection from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
 
 export default class MongoTermRepository implements TermRepository {
   async search(text: string): Promise<Term[] | null> {

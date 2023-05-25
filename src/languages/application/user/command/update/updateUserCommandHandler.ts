@@ -1,8 +1,8 @@
-import UserDoesNotExistsException from '../../../../domain/user/exceptions/userDoesNotExistsException';
-import { CommandHandler } from '../../../../../shared/domain/buses/commandBus/commandHandler';
-import UserRepository from '../../../../domain/user/userRepository';
+import UserRepository from '@src/languages/domain/user/userRepository';
+import { CommandHandler } from '@src/shared/domain/buses/commandBus/commandHandler';
 import UpdateUserCommand from './updateUserCommand';
-import UserId from '../../../../domain/user/valueObjects/userId';
+import UserId from '@src/languages/domain/user/valueObjects/userId';
+import UserDoesNotExistsException from '@src/languages/domain/user/exceptions/userDoesNotExistsException';
 
 export default class UpdateUserCommandHandler implements CommandHandler {
   constructor(private userRepository: UserRepository) {}

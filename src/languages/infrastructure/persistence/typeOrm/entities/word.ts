@@ -1,11 +1,11 @@
 import { EntitySchema } from 'typeorm';
-import Word from '../../../../domain/word/word';
-import { ValueObjectTransformer } from '../../../../../shared/infrastructure/persistence/typeOrm/transformers/valueObjectTransformer';
-import UserId from '../../../../domain/user/valueObjects/userId';
-import CountryId from '../../../../domain/country/valueObjects/countryId';
-import WordId from '../../../../domain/word/valueObjects/wordId';
+import CountryId from '@src/languages/domain/country/valueObjects/countryId';
+import WordId from '@src/languages/domain/word/valueObjects/wordId';
+import Word from '@src/languages/domain/word/word';
+import { ValueObjectTransformer } from '@src/shared/infrastructure/persistence/typeOrm/transformers/valueObjectTransformer';
 import WordTermCollectionTransformer from '../transformers/wordTermCollectionTransformer';
-import WordTermCollection from '../../../../domain/word/valueObjects/wordTermCollection';
+import WordTermCollection from '@src/languages/domain/word/valueObjects/wordTermCollection';
+import UserId from '@src/languages/domain/user/valueObjects/userId';
 
 export default new EntitySchema<Word>({
   name: Word.name,

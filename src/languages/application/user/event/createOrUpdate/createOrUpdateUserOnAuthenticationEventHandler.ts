@@ -1,10 +1,10 @@
-import { CommandBus } from '../../../../../shared/domain/buses/commandBus/commandBus';
-import { EventHandler } from '../../../../../shared/domain/buses/eventBus/eventHandler';
-import UserAuthenticatedEvent from '../../../../domain/user/domainEvents/userAuthenticatedEvent';
-import UserRepository from '../../../../domain/user/userRepository';
+import UserAuthenticatedEvent from '@src/languages/domain/user/domainEvents/userAuthenticatedEvent';
+import UserRepository from '@src/languages/domain/user/userRepository';
+import UserId from '@src/languages/domain/user/valueObjects/userId';
+import { CommandBus } from '@src/shared/domain/buses/commandBus/commandBus';
+import { EventHandler } from '@src/shared/domain/buses/eventBus/eventHandler';
 import CreateUserCommand from '../../command/create/createUserCommand';
 import UpdateUserCommand from '../../command/update/updateUserCommand';
-import UserId from '../../../../domain/user/valueObjects/userId';
 
 export default class CreateOrUpdateUserOnAuthenticationEventHandler implements EventHandler {
   constructor(private userRepository: UserRepository, private commandBus: CommandBus) {}

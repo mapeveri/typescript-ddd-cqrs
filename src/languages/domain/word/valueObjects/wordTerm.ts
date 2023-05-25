@@ -1,4 +1,4 @@
-import CommonTerm from '../../../../shared/domain/valueObjects/commonTerm';
+import CommonTerm from '@src/shared/domain/valueObjects/commonTerm';
 
 export interface WordTermDTO {
   title: string;

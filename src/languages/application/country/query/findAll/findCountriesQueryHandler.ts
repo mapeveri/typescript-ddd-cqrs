@@ -1,6 +1,6 @@
-import Country from '../../../../domain/country/country';
-import QueryResponse from '../../../../../shared/domain/buses/queryBus/queryResponse';
-import CountryRepository from '../../../../domain/country/countryRepository';
+import Country from '@src/languages/domain/country/country';
+import CountryRepository from '@src/languages/domain/country/countryRepository';
+import QueryResponse from '@src/shared/domain/buses/queryBus/queryResponse';
 
 export default class FindCountriesQueryHandler {
   constructor(private countryRepository: CountryRepository) {}

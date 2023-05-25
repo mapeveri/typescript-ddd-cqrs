@@ -1,6 +1,6 @@
+import WordTerm from '@src/languages/domain/word/valueObjects/wordTerm';
+import WordTermCollection from '@src/languages/domain/word/valueObjects/wordTermCollection';
 import { ValueTransformer } from 'typeorm';
-import WordTermCollection from '../../../../domain/word/valueObjects/wordTermCollection';
-import WordTerm from '../../../../domain/word/valueObjects/wordTerm';
 
 export default class WordTermCollectionTransformer implements ValueTransformer {
   to(value: WordTermCollection): string {

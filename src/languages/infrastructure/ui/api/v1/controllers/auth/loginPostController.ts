@@ -1,12 +1,12 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import httpStatus from 'http-status';
+import LoginUserCommand from '@src/languages/application/auth/command/loginUser/loginUserCommand';
+import InvalidParameters from '@src/shared/infrastructure/api/apiErrorResponses/InvalidParameters';
+import ApiExceptionSerializer from '@src/shared/infrastructure/api/serializers/apiExceptionSerializer';
+import { Uuid } from '@src/shared/domain/valueObjects/uuid';
+import { CommandBus } from '@src/shared/domain/buses/commandBus/commandBus';
 import { Controller } from '../../controller';
-import LoginUserCommand from '../../../../../../application/auth/command/loginUser/loginUserCommand';
-import InvalidParameters from '../../../../../../../shared/infrastructure/api/apiErrorResponses/InvalidParameters';
-import ApiExceptionSerializer from '../../../../../../../shared/infrastructure/api/serializers/apiExceptionSerializer';
-import { Uuid } from '../../../../../../../shared/domain/valueObjects/uuid';
-import { CommandBus } from '../../../../../../../shared/domain/buses/commandBus/commandBus';
 
 export default class LoginPostController implements Controller {
   public constructor(private commandBus: CommandBus) {}

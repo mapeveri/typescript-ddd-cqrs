@@ -1,10 +1,10 @@
-import WordCreatedEvent from '../../../../../languages/domain/word/domainEvents/wordCreatedEvent';
-import { CommandBus } from '../../../../../shared/domain/buses/commandBus/commandBus';
-import { EventHandler } from '../../../../../shared/domain/buses/eventBus/eventHandler';
+import WordCreatedEvent from '@src/languages/domain/word/domainEvents/wordCreatedEvent';
+import { WordTermDTO } from '@src/languages/domain/word/valueObjects/wordTerm';
+import { CommandBus } from '@src/shared/domain/buses/commandBus/commandBus';
+import { EventHandler } from '@src/shared/domain/buses/eventBus/eventHandler';
 import CreateTermCommand from '../../command/create/createTermCommand';
-import { WORD } from '../../../../../languages/domain/term/term';
-import { Uuid } from '../../../../../shared/domain/valueObjects/uuid';
-import { WordTermDTO } from '../../../../domain/word/valueObjects/wordTerm';
+import { Uuid } from '@src/shared/domain/valueObjects/uuid';
+import { WORD } from '@src/languages/domain/term/term';
 
 export default class CreateOnWordCreatedEventHandler implements EventHandler {
   constructor(private commandBus: CommandBus) {}

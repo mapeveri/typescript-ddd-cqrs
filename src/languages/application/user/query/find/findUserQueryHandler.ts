@@ -1,8 +1,8 @@
-import UserId from '../../../../domain/user/valueObjects/userId';
-import { QueryHandler } from '../../../../../shared/domain/buses/queryBus/queryHandler';
-import QueryResponse from '../../../../../shared/domain/buses/queryBus/queryResponse';
-import UserRepository from '../../../../domain/user/userRepository';
+import UserRepository from '@src/languages/domain/user/userRepository';
+import { QueryHandler } from '@src/shared/domain/buses/queryBus/queryHandler';
 import FindUserQuery from './findUserQuery';
+import QueryResponse from '@src/shared/domain/buses/queryBus/queryResponse';
+import UserId from '@src/languages/domain/user/valueObjects/userId';
 
 export default class FindUserQueryHandler implements QueryHandler {
   constructor(private userRepository: UserRepository) {}

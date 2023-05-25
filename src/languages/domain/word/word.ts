@@ -1,4 +1,4 @@
-import { AggregateRoot } from '../../../shared/domain/aggregate/aggregateRoot';
+import { AggregateRoot } from '@src/shared/domain/aggregate/aggregateRoot';
 import CountryId from '../country/valueObjects/countryId';
 import UserId from '../user/valueObjects/userId';
 import WordCreatedEvent from './domainEvents/wordCreatedEvent';
@@ -24,7 +24,9 @@ export default class Word extends AggregateRoot {
 
   static create(id: WordId, languageId: string, countryId: CountryId, terms: WordTermCollection, userId: UserId): Word {
     const word = new this(id, languageId, countryId, terms, userId);
-    word.record(new WordCreatedEvent(id.toString(), languageId, countryId.toString(), userId.toString(), terms.toArray()));
+    word.record(
+      new WordCreatedEvent(id.toString(), languageId, countryId.toString(), userId.toString(), terms.toArray())
+    );
     return word;
   }
 

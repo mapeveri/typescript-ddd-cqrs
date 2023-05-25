@@ -1,8 +1,8 @@
-import CountryRepository from '../../../../domain/country/countryRepository';
-import Country, { Language } from '../../../../domain/country/country';
-import { CommandHandler } from '../../../../../shared/domain/buses/commandBus/commandHandler';
+import CountryRepository from '@src/languages/domain/country/countryRepository';
+import { CommandHandler } from '@src/shared/domain/buses/commandBus/commandHandler';
 import CreateCountryCommand from './createCountryCommand';
-import CountryId from '../../../../domain/country/valueObjects/countryId';
+import Country, { Language } from '@src/languages/domain/country/country';
+import CountryId from '@src/languages/domain/country/valueObjects/countryId';
 
 export default class CreateCountryCommandHandler implements CommandHandler {
   constructor(private countryRepository: CountryRepository) {}

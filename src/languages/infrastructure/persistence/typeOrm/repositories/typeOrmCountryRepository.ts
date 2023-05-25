@@ -1,9 +1,9 @@
 import { Repository } from 'typeorm';
-import Country from '../../../../domain/country/country';
 import CountryEntity from '../entities/country';
-import CountryRepository from '../../../../domain/country/countryRepository';
-import AppDataSource from './../../../../../shared/infrastructure/persistence/typeOrm/dataSource';
-import UserId from '../../../../domain/user/valueObjects/userId';
+import AppDataSource from '@src/shared/infrastructure/persistence/typeOrm/dataSource';
+import Country from '@src/languages/domain/country/country';
+import CountryRepository from '@src/languages/domain/country/countryRepository';
+import UserId from '@src/languages/domain/user/valueObjects/userId';
 
 export default class TypeOrmCountryRepository implements CountryRepository {
   private repository: Repository<Country>;

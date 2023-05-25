@@ -1,4 +1,4 @@
-import { Command } from '../../../../../shared/domain/buses/commandBus/command';
+import { Command } from '@src/shared/domain/buses/commandBus/command';
 
 export default class CreateUserCommand implements Command {
   constructor(

@@ -1,11 +1,11 @@
 import { NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status';
 import jwt, { JwtPayload } from 'jsonwebtoken';
+import FindUserQuery from '@src/languages/application/user/query/find/findUserQuery';
+import ApiExceptionSerializer from '@src/shared/infrastructure/api/serializers/apiExceptionSerializer';
+import { QueryBus } from '@src/shared/domain/buses/queryBus/queryBus';
 import { Controller } from '../../controller';
-import FindUserQuery from '../../../../../../application/user/query/find/findUserQuery';
 import UserJwtDecodedEmpty from '../../apiErrorResponses/userJwtDecodedEmpty';
-import ApiExceptionSerializer from '../../../../../../../shared/infrastructure/api/serializers/apiExceptionSerializer';
-import { QueryBus } from '../../../../../../../shared/domain/buses/queryBus/queryBus';
 
 export default class MeGetController implements Controller {
   public constructor(private queryBus: QueryBus) {}

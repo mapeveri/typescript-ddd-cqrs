@@ -1,6 +1,6 @@
-import { DomainEvent } from '../../domain/buses/eventBus/domainEvent';
-import { EventBus } from '../../domain/buses/eventBus/eventBus';
-import { EventHandler } from '../../domain/buses/eventBus/eventHandler';
+import { DomainEvent } from '@src/shared/domain/buses/eventBus/domainEvent';
+import { EventBus } from '@src/shared/domain/buses/eventBus/eventBus';
+import { EventHandler } from '@src/shared/domain/buses/eventBus/eventHandler';
 
 export default class MemoryEventBus implements EventBus {
   private static handlers: { [key: string]: EventHandler[] } = {};

@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status';
 import { Controller } from '../../controller';
-import CreateWordCommand from '../../../../../../../languages/application/word/command/create/createWordCommand';
-import InvalidParameters from '../../../../../../../shared/infrastructure/api/apiErrorResponses/InvalidParameters';
-import ApiExceptionSerializer from '../../../../../../../shared/infrastructure/api/serializers/apiExceptionSerializer';
-import { CommandBus } from '../../../../../../../shared/domain/buses/commandBus/commandBus';
+import CreateWordCommand from '@src/languages/application/word/command/create/createWordCommand';
+import InvalidParameters from '@src/shared/infrastructure/api/apiErrorResponses/InvalidParameters';
+import ApiExceptionSerializer from '@src/shared/infrastructure/api/serializers/apiExceptionSerializer';
+import { CommandBus } from '@src/shared/domain/buses/commandBus/commandBus';
 
 export default class WordPostController implements Controller {
   public constructor(private commandBus: CommandBus) {}

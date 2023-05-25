@@ -1,4 +1,4 @@
-import { DomainEvent } from '../../../../shared/domain/buses/eventBus/domainEvent';
+import { DomainEvent } from '@src/shared/domain/buses/eventBus/domainEvent';
 import { WordTermDTO } from '../valueObjects/wordTerm';
 
 export default class WordCreatedEvent extends DomainEvent {

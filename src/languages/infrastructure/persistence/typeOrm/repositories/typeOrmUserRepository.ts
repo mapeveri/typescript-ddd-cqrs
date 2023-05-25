@@ -1,9 +1,9 @@
 import { Repository } from 'typeorm';
-import User from '../../../../domain/user/user';
 import UserEntity from '../entities/user';
-import UserRepository from '../../../../domain/user/userRepository';
-import AppDataSource from './../../../../../shared/infrastructure/persistence/typeOrm/dataSource';
-import UserId from '../../../../domain/user/valueObjects/userId';
+import AppDataSource from '@src/shared/infrastructure/persistence/typeOrm/dataSource';
+import UserRepository from '@src/languages/domain/user/userRepository';
+import User from '@src/languages/domain/user/user';
+import UserId from '@src/languages/domain/user/valueObjects/userId';
 
 export default class TypeOrmUserRepository implements UserRepository {
   private repository: Repository<User>;

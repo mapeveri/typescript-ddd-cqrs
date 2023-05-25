@@ -1,4 +1,4 @@
-import ApiResponseException from '../../../../../../shared/infrastructure/api/apiErrorResponses/apiResponseException';
+import ApiResponseException from '@src/shared/infrastructure/api/apiErrorResponses/apiResponseException';
 
 export default class UserJwtDecodedEmpty extends ApiResponseException {
   constructor(

@@ -1,9 +1,9 @@
 import { Repository } from 'typeorm';
-import Word from '../../../../domain/word/word';
 import WordEntity from '../entities/word';
-import AppDataSource from './../../../../../shared/infrastructure/persistence/typeOrm/dataSource';
-import WordRepository from './../../../../../languages/domain/word/wordRepository';
-import WordId from './../../../../../languages/domain/word/valueObjects/wordId';
+import AppDataSource from '@src/shared/infrastructure/persistence/typeOrm/dataSource';
+import WordRepository from '@src/languages/domain/word/wordRepository';
+import Word from '@src/languages/domain/word/word';
+import WordId from '@src/languages/domain/word/valueObjects/wordId';
 
 export default class TypeOrmWordRepository implements WordRepository {
   private repository: Repository<Word>;

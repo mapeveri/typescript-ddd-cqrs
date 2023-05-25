@@ -1,5 +1,5 @@
+import { SocialLogin } from '@src/languages/domain/user/auth';
 import { OAuth2Client } from 'google-auth-library';
-import { SocialLogin } from '../../domain/user/auth';
 
 export default class Google implements SocialLogin {
   private client: OAuth2Client;

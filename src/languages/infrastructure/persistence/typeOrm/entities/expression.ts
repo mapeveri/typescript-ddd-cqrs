@@ -1,10 +1,10 @@
 import { EntitySchema } from 'typeorm';
-import Expression from '../../../../domain/expression/expression';
-import { ValueObjectTransformer } from '../../../../../shared/infrastructure/persistence/typeOrm/transformers/valueObjectTransformer';
-import UserId from '../../../../domain/user/valueObjects/userId';
-import ExpressionId from '../../../../domain/expression/valueObjects/expressionId';
+import Expression from '@src/languages/domain/expression/expression';
+import ExpressionId from '@src/languages/domain/expression/valueObjects/expressionId';
+import { ValueObjectTransformer } from '@src/shared/infrastructure/persistence/typeOrm/transformers/valueObjectTransformer';
 import ExpressionTermCollectionTransformer from '../transformers/expressionTermCollectionTransformer';
-import ExpressionTermCollection from '../../../../domain/expression/valueObjects/expressionTermCollection';
+import ExpressionTermCollection from '@src/languages/domain/expression/valueObjects/expressionTermCollection';
+import UserId from '@src/languages/domain/user/valueObjects/userId';
 
 export default new EntitySchema<Expression>({
   name: Expression.name,

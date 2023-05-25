@@ -1,4 +1,4 @@
-import DomainException from '../../domain/exceptions/domainException';
+import DomainException from '@src/shared/domain/exceptions/domainException';
 import { Request, Response, NextFunction } from 'express';
 import ApiExceptionSerializer from '../api/serializers/apiExceptionSerializer';
 

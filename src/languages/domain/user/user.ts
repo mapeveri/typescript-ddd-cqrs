@@ -1,6 +1,6 @@
-import Email from '../../../shared/domain/valueObjects/email';
-import { AggregateRoot } from '../../../shared/domain/aggregate/aggregateRoot';
+import { AggregateRoot } from '@src/shared/domain/aggregate/aggregateRoot';
 import UserId from './valueObjects/userId';
+import Email from '@src/shared/domain/valueObjects/email';
 
 export default class User extends AggregateRoot {
   id: UserId;

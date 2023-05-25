@@ -1,12 +1,12 @@
-import Word from '../../../../../languages/domain/word/word';
-import WordRepository from '../../../../../languages/domain/word/wordRepository';
-import { CommandHandler } from '../../../../../shared/domain/buses/commandBus/commandHandler';
+import WordRepository from '@src/languages/domain/word/wordRepository';
+import { CommandHandler } from '@src/shared/domain/buses/commandBus/commandHandler';
+import { EventBus } from '@src/shared/domain/buses/eventBus/eventBus';
 import CreateWordCommand from './createWordCommand';
-import { EventBus } from '../../../../../shared/domain/buses/eventBus/eventBus';
-import UserId from '../../../../../languages/domain/user/valueObjects/userId';
-import CountryId from '../../../../../languages/domain/country/valueObjects/countryId';
-import WordId from '../../../../../languages/domain/word/valueObjects/wordId';
-import TermCollection from '../../../../domain/word/valueObjects/wordTermCollection';
+import Word from '@src/languages/domain/word/word';
+import WordId from '@src/languages/domain/word/valueObjects/wordId';
+import CountryId from '@src/languages/domain/country/valueObjects/countryId';
+import UserId from '@src/languages/domain/user/valueObjects/userId';
+import WordTermCollection from '@src/languages/domain/word/valueObjects/wordTermCollection';
 
 export default class CreateWordCommandHandler implements CommandHandler {
   constructor(private wordRepository: WordRepository, private eventBus: EventBus) {}
@@ -16,7 +16,7 @@ export default class CreateWordCommandHandler implements CommandHandler {
       new WordId(command.id),
       command.languageId,
       new CountryId(command.countryId),
-      TermCollection.create(command.terms),
+      WordTermCollection.create(command.terms),
       new UserId(command.userId)
     );
 

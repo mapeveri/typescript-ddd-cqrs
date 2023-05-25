@@ -4,14 +4,14 @@ import cors from 'cors';
 import helmet from 'helmet';
 import methodOverride from 'method-override';
 
-import getContainer from './shared/infrastructure/dependencyInjection/container';
-import { registerRoutes } from './languages/infrastructure/ui/api/v1/router';
-import AppDataSource from './shared/infrastructure/persistence/typeOrm/dataSource';
-import { registerCommands } from './shared/infrastructure/buses/registerCommands';
-import { registerQueries } from './shared/infrastructure/buses/registerQueries';
-import errorHandler from './shared/infrastructure/express/errorHandler';
-import { registerEvents } from './shared/infrastructure/buses/registerEvents';
-import { ExpressApp } from './shared/infrastructure/express/expressApp';
+import getContainer from '@src/shared/infrastructure/dependencyInjection/container';
+import { registerRoutes } from '@src/languages/infrastructure/ui/api/v1/router';
+import AppDataSource from '@src/shared/infrastructure/persistence/typeOrm/dataSource';
+import { registerCommands } from '@src/shared/infrastructure/buses/registerCommands';
+import { registerQueries } from '@src/shared/infrastructure/buses/registerQueries';
+import errorHandler from '@src/shared/infrastructure/express/errorHandler';
+import { registerEvents } from '@src/shared/infrastructure/buses/registerEvents';
+import { ExpressApp } from '@src/shared/infrastructure/express/expressApp';
 
 async function createApp(): Promise<ExpressApp> {
   const app: ExpressApp = express() as ExpressApp;
