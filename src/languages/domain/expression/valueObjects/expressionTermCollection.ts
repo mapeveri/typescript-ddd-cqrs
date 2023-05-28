@@ -9,7 +9,7 @@ export default class ExpressionTermCollection {
 
   static create(primitiveTerms: Array<{ [key: string]: string }>): ExpressionTermCollection {
     const terms = primitiveTerms.map((term: { [key: string]: any }): ExpressionTerm => {
-      return new ExpressionTerm(term['title'], term['description'], term['example'], term['tagged_words']);
+      return new ExpressionTerm(term['expression'], term['description'], term['example'], term['hashtags']);
     });
 
     return new this(terms);

@@ -2,7 +2,7 @@ import WordTermCollection from '@src/languages/domain/word/valueObjects/wordTerm
 import WordTerm from '@src/languages/domain/word/valueObjects/wordTerm';
 import WordTermMother from './wordTermMother';
 
-export default class TermCollectionMother {
+export default class WordTermCollectionMother {
   static random(terms: Array<WordTerm>): WordTermCollection {
     return new WordTermCollection(terms ?? [WordTermMother.random()]);
   }

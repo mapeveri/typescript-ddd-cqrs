@@ -4,7 +4,7 @@ interface Term {
   description: string;
   example: string;
   type: string;
-  taggedWords: Array<string>;
+  hashtags: Array<string>;
   likes: Array<string>;
   disLikes: Array<string>;
   favourites: Array<string>;
