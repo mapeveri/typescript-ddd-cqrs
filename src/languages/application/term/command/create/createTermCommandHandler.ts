@@ -18,7 +18,7 @@ export default class CreateTermCommandHandler implements CommandHandler {
       description: command.description,
       example: command.example,
       type: command.type,
-      hashtags: command.taggedWords,
+      hashtags: command.hashtags,
       likes: [],
       disLikes: [],
       favourites: [],

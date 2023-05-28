@@ -6,7 +6,7 @@ export default class CreateTermCommand implements Command {
     public readonly title: string,
     public readonly description: string,
     public readonly example: string,
-    public readonly taggedWords: Array<string>,
+    public readonly hashtags: Array<string>,
     public readonly type: string
   ) {}
 }
