@@ -11,10 +11,10 @@ export default class WordMother {
   static createFromCreateWordCommand(command: CreateWordCommand, userId: UserId): Word {
     const terms = command.terms.map((term: { [key: string]: any }): WordTerm => {
       return WordTermMother.random({
-        title: term['title'],
+        title: term['word'],
         description: term['description'],
         example: term['example'],
-        taggedWords: term['tagged_words'],
+        taggedWords: term['hashtags'],
       } as WordTermMotherProps);
     });
 

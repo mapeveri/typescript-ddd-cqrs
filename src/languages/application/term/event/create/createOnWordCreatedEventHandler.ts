@@ -16,10 +16,10 @@ export default class CreateOnWordCreatedEventHandler implements EventHandler {
       await this.commandBus.dispatch(
         new CreateTermCommand(
           Uuid.random().toString(),
-          term['title'],
+          term['word'],
           term['description'],
           term['example'],
-          term['taggedWords'],
+          term['hashtags'],
           WORD
         )
       );
