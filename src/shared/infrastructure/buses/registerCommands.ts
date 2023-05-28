@@ -13,6 +13,8 @@ import CreateUserCommandHandler from '@src/languages/application/user/command/cr
 import UpdateUserCommandHandler from '@src/languages/application/user/command/update/updateUserCommandHandler';
 import CreateWordCommandHandler from '@src/languages/application/word/command/create/createWordCommandHandler';
 import CreateTermCommandHandler from '@src/languages/application/term/command/create/createTermCommandHandler';
+import CreateExpressionCommandHandler from '@src/languages/application/expression/command/create/createExpressionCommandHandler';
+import CreateExpressionCommand from '@src/languages/application/expression/command/create/createExpressionCommand';
 
 export function registerCommands(container: ContainerBuilder) {
   const commandBus: MemoryCommandBus = container.get(MemoryCommandBus);
@@ -22,5 +24,6 @@ export function registerCommands(container: ContainerBuilder) {
   commandBus.register(CreateUserCommand.prototype, container.get(CreateUserCommandHandler));
   commandBus.register(UpdateUserCommand.prototype, container.get(UpdateUserCommandHandler));
   commandBus.register(CreateWordCommand.prototype, container.get(CreateWordCommandHandler));
+  commandBus.register(CreateExpressionCommand.prototype, container.get(CreateExpressionCommandHandler));
   commandBus.register(CreateTermCommand.prototype, container.get(CreateTermCommandHandler));
 }
