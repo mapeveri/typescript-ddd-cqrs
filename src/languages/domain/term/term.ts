@@ -4,12 +4,13 @@ interface Term {
   description: string;
   example: string;
   type: string;
-  taggedWords: Array<string>;
+  hashtags: Array<string>;
   likes: Array<string>;
   disLikes: Array<string>;
   favourites: Array<string>;
 }
 
 export const WORD = 'word';
+export const EXPRESSION = 'expression';
 
 export default Term;

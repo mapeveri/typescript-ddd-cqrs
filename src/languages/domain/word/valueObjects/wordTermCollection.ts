@@ -9,7 +9,7 @@ export default class WordTermCollection {
 
   static create(primitiveTerms: Array<{ [key: string]: string }>): WordTermCollection {
     const terms = primitiveTerms.map((term: { [key: string]: any }): WordTerm => {
-      return new WordTerm(term['title'], term['description'], term['example'], term['tagged_words']);
+      return new WordTerm(term['word'], term['description'], term['example'], term['hashtags']);
     });
 
     return new this(terms);

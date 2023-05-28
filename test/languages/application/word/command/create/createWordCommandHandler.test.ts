@@ -22,13 +22,13 @@ describe('CreateWordCommandHandler handle', () => {
     createWordCommandHandler = new CreateWordCommandHandler(wordRepository, eventBus);
   });
 
-  it('should create and save a country', async () => {
+  it('should create and save a word', async () => {
     const command = CreateWordCommandMother.random({
       terms: [{
-        title: 'Title 1',
+        word: 'Title 1',
         description: 'Description 1',
         example: 'Example 1',
-        tagged_words: ['word1'],
+        hashtags: ['word1'],
       }],
     });
     const userId = UserIdMother.random(command.userId);

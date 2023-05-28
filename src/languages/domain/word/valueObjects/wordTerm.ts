@@ -1,19 +1,29 @@
-import CommonTerm from '@src/shared/domain/valueObjects/commonTerm';
-
 export interface WordTermDTO {
-  title: string;
+  word: string;
   description: string;
   example: string;
-  taggedWords: Array<string>;
+  hashtags: Array<string>;
 }
 
-export default class WordTerm extends CommonTerm {
+export default class WordTerm {
+  word: string;
+  description: string;
+  example: string;
+  hashtags: Array<string>;
+
+  constructor(word: string, description: string, example: string, hashtags: Array<string>) {
+    this.word = word;
+    this.description = description;
+    this.example = example;
+    this.hashtags = hashtags;
+  }
+
   toObject(): WordTermDTO {
     return {
-      title: this.title,
+      word: this.word,
       description: this.description,
       example: this.example,
-      taggedWords: this.taggedWords,
+      hashtags: this.hashtags,
     };
   }
 }

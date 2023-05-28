@@ -1,14 +1,26 @@
-import Term from '../term/term';
+import { AggregateRoot } from '@src/shared/domain/aggregate/aggregateRoot';
+import CountryId from '../country/valueObjects/countryId';
 import UserId from '../user/valueObjects/userId';
+import ExpressionId from './valueObjects/expressionId';
+import ExpressionTermCollection from './valueObjects/expressionTermCollection';
+import ExpressionCreatedEvent from './domainEvents/expressionCreatedEvent';
 
-export default class Expression {
-  id: string;
+export default class Expression extends AggregateRoot {
+  id: ExpressionId;
   languageId: string;
-  countryId: string;
-  terms: Array<Term>;
+  countryId: CountryId;
+  terms: ExpressionTermCollection;
   userId: UserId;
 
-  constructor(id: string, languageId: string, countryId: string, terms: Array<Term>, userId: UserId) {
+  constructor(
+    id: ExpressionId,
+    languageId: string,
+    countryId: CountryId,
+    terms: ExpressionTermCollection,
+    userId: UserId
+  ) {
+    super();
+
     this.id = id;
     this.languageId = languageId;
     this.countryId = countryId;
@@ -16,8 +28,19 @@ export default class Expression {
     this.userId = userId;
   }
 
-  static create(id: string, languageId: string, countryId: string, terms: Array<Term>, userId: UserId): Expression {
-    return new this(id, languageId, countryId, terms, userId);
+  static create(
+    id: ExpressionId,
+    languageId: string,
+    countryId: CountryId,
+    terms: ExpressionTermCollection,
+    userId: UserId
+  ): Expression {
+    const expression = new this(id, languageId, countryId, terms, userId);
+    expression.record(
+      new ExpressionCreatedEvent(id.toString(), languageId, countryId.toString(), userId.toString(), terms.toArray())
+    );
+
+    return expression;
   }
 
   toObject(): object {
