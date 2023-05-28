@@ -11,5 +11,6 @@ interface Term {
 }
 
 export const WORD = 'word';
+export const EXPRESSION = 'expression';
 
 export default Term;
