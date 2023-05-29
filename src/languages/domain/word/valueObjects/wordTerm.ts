@@ -18,6 +18,10 @@ export default class WordTerm {
     this.hashtags = hashtags;
   }
 
+  static createFromDTO(wordTerm: WordTermDTO): WordTerm {
+    return new WordTerm(wordTerm.word, wordTerm.description, wordTerm.example, wordTerm.hashtags);
+  }
+
   toObject(): WordTermDTO {
     return {
       word: this.word,

@@ -7,12 +7,12 @@ export default class WordTermCollection {
     this.terms = terms;
   }
 
-  static create(primitiveTerms: Array<{ [key: string]: string }>): WordTermCollection {
-    const terms = primitiveTerms.map((term: { [key: string]: any }): WordTerm => {
-      return new WordTerm(term['word'], term['description'], term['example'], term['hashtags']);
+  static create(primitiveTerms: Array<WordTermDTO>): WordTermCollection {
+    const wordTerms = primitiveTerms.map((wordTerm: WordTermDTO): WordTerm => {
+      return WordTerm.createFromDTO(wordTerm);
     });
 
-    return new this(terms);
+    return new this(wordTerms);
   }
 
   toArray(): Array<WordTermDTO> {

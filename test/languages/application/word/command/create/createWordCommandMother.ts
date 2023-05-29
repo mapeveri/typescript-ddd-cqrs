@@ -1,4 +1,5 @@
 import CreateWordCommand from '@src/languages/application/word/command/create/createWordCommand';
+import { WordTermDTO } from '@src/languages/domain/word/valueObjects/wordTerm';
 import faker from 'faker';
 
 interface CreateWordCommandProps {
@@ -6,7 +7,7 @@ interface CreateWordCommandProps {
   languageId?: string;
   countryId?: string;
   userId?: string;
-  terms?: Array<{ [key: string]: any }>;
+  terms?: Array<WordTermDTO>;
 }
 
 export class CreateWordCommandMother {
@@ -18,7 +19,14 @@ export class CreateWordCommandMother {
       languageId ?? faker.datatype.uuid(),
       countryId ?? faker.datatype.uuid(),
       userId ?? faker.datatype.uuid(),
-      terms ?? [{ key: faker.random.word() }]
+      terms ?? [
+        {
+          word: faker.random.word(),
+          example: faker.random.word(),
+          description: faker.random.word(),
+          hashtags: ['test'],
+        },
+      ]
     );
   }
 }
