@@ -1,4 +1,5 @@
 import CreateExpressionCommand from '@src/languages/application/expression/command/create/createExpressionCommand';
+import { ExpressionTermDTO } from '@src/languages/domain/expression/valueObjects/expressionTerm';
 import faker from 'faker';
 
 interface CreateExpressionCommandProps {
@@ -6,7 +7,7 @@ interface CreateExpressionCommandProps {
   languageId?: string;
   countryId?: string;
   userId?: string;
-  terms?: Array<{ [key: string]: any }>;
+  terms?: Array<ExpressionTermDTO>;
 }
 
 export class CreateExpressionCommandMother {
@@ -18,7 +19,14 @@ export class CreateExpressionCommandMother {
       languageId ?? faker.datatype.uuid(),
       countryId ?? faker.datatype.uuid(),
       userId ?? faker.datatype.uuid(),
-      terms ?? [{ key: faker.random.word() }]
+      terms ?? [
+        {
+          expression: faker.random.word(),
+          example: faker.random.word(),
+          description: faker.random.word(),
+          hashtags: ['test'],
+        },
+      ]
     );
   }
 }

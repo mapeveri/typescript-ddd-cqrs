@@ -18,6 +18,10 @@ export default class ExpressionTerm {
     this.hashtags = hashtags;
   }
 
+  static createFromDTO(wordTerm: ExpressionTermDTO): ExpressionTerm {
+    return new ExpressionTerm(wordTerm.expression, wordTerm.description, wordTerm.example, wordTerm.hashtags);
+  }
+
   toObject(): ExpressionTermDTO {
     return {
       expression: this.expression,
