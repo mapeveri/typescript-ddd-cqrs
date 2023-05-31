@@ -1,3 +1,4 @@
+import { expect } from '@jest/globals';
 import CreateWordCommand from '@src/languages/application/word/command/create/createWordCommand';
 import WordCreatedEvent from '@src/languages/domain/word/domainEvents/wordCreatedEvent';
 import { WordTermDTO } from '@src/languages/domain/word/valueObjects/wordTerm';
@@ -12,6 +13,8 @@ export class WordCreatedEventMother {
         hashtags: term['hashtags'],
       };
     });
-    return new WordCreatedEvent(command.id, command.languageId, command.countryId, command.userId, terms);
+
+    const eventId = expect.any(String) as unknown as string;
+    return new WordCreatedEvent(command.id, command.languageId, command.countryId, command.userId, terms, eventId);
   }
 }

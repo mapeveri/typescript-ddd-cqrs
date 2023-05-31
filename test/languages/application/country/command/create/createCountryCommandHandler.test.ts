@@ -15,19 +15,11 @@ describe('CreateCountryCommandHandler handle', () => {
   });
 
   it('should create and save a country', async () => {
-    const command = CreateCountryCommandMother.random({
-      id: 'de56e9bd-596e-4aba-9dda-cd7ac8fb3fa0',
-      name: 'Test Country',
-      iso: 'TC',
-      languages: [
-        { name: 'English', language_id: 'en' },
-        { name: 'Spanish', language_id: 'es' },
-      ],
-    });
+    const command = CreateCountryCommandMother.random();
     const country: Country = CountryMother.createFromCreateCountryCommand(command);
 
     await createCountryCommandHandler.handle(command);
 
-    countryRepository.assertSaveHasBeenCalledWith(country);
+    countryRepository.expectSaveCalledWith(country);
   });
 });

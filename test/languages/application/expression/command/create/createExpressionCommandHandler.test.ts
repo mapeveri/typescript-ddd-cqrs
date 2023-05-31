@@ -1,6 +1,5 @@
-import { beforeEach, describe, expect, it } from '@jest/globals';
-import { eventBusMock } from '@test/shared/domain/buses/eventBus/eventBusMock';
-import { EventBus } from '@src/shared/domain/buses/eventBus/eventBus';
+import { beforeEach, describe, it } from '@jest/globals';
+import { EventBusMock } from '@test/shared/domain/buses/eventBus/eventBusMock';
 import { UserIdMother } from '@test/languages/domain/user/valueObjects/userIdMother';
 import CreateExpressionCommandHandler from '@src/languages/application/expression/command/create/createExpressionCommandHandler';
 import { CreateExpressionCommandMother } from './createExpressionCommandMother';
@@ -10,37 +9,27 @@ import Expression from '@src/languages/domain/expression/expression';
 import { ExpressionCreatedEventMother } from '@test/languages/domain/expression/domainEvents/expressionCreatedEventMother';
 
 describe('CreateExpressionCommandHandler handle', () => {
-  let eventBus: EventBus;
+  let eventBus: EventBusMock;
   let expressionRepository: ExpressionRepositoryMock;
   let createWordCommandHandler: CreateExpressionCommandHandler;
 
   beforeEach(() => {
-    eventBus = eventBusMock;
+    eventBus = new EventBusMock();
 
     expressionRepository = new ExpressionRepositoryMock();
 
     createWordCommandHandler = new CreateExpressionCommandHandler(expressionRepository, eventBus);
   });
 
-  it('should create and save a expression', async () => {
-    const command = CreateExpressionCommandMother.random({
-      terms: [
-        {
-          expression: 'Title 1',
-          description: 'Description 1',
-          example: 'Example 1',
-          hashtags: ['#madridExpression'],
-        },
-      ],
-    });
+  it('should create and save an expression', async () => {
+    const command = CreateExpressionCommandMother.random();
     const userId = UserIdMother.random(command.userId);
     const expression: Expression = ExpressionMother.createFromCreateExpressionCommand(command, userId);
     const expressionCreatedEvent = ExpressionCreatedEventMother.createFromCreateExpressionCommand(command);
-    const expectedExpressionCreatedEvent = { ...expressionCreatedEvent, eventId: expect.any(String) };
 
     await createWordCommandHandler.handle(command);
 
-    expressionRepository.assertSaveHasBeenCalledWith(expression);
-    expect(eventBus.publish).toHaveBeenCalledWith([expectedExpressionCreatedEvent]);
+    expressionRepository.expectSaveCalledWith(expression);
+    eventBus.expectPublishCalledWith([expressionCreatedEvent]);
   });
 });

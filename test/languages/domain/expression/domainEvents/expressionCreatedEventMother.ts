@@ -1,3 +1,4 @@
+import { expect } from '@jest/globals';
 import CreateExpressionCommand from '@src/languages/application/expression/command/create/createExpressionCommand';
 import ExpressionCreatedEvent from '@src/languages/domain/expression/domainEvents/expressionCreatedEvent';
 import { ExpressionTermDTO } from '@src/languages/domain/expression/valueObjects/expressionTerm';
@@ -12,6 +13,15 @@ export class ExpressionCreatedEventMother {
         hashtags: term['hashtags'],
       };
     });
-    return new ExpressionCreatedEvent(command.id, command.languageId, command.countryId, command.userId, terms);
+
+    const eventId = expect.any(String) as unknown as string;
+    return new ExpressionCreatedEvent(
+      command.id,
+      command.languageId,
+      command.countryId,
+      command.userId,
+      terms,
+      eventId
+    );
   }
 }

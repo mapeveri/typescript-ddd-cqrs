@@ -1,3 +1,4 @@
+import { expect } from '@jest/globals';
 import LoginUserCommand from '@src/languages/application/auth/command/loginUser/loginUserCommand';
 import UserAuthenticatedEvent from '@src/languages/domain/user/domainEvents/userAuthenticatedEvent';
 import faker from 'faker';
@@ -22,17 +23,18 @@ export class UserAuthenticatedEventMother {
       photo = faker.image.imageUrl(),
     } = props ?? {};
 
-    return new UserAuthenticatedEvent(id, name, email, token, provider, photo);
+    const eventId = expect.any(String) as unknown as string;
+    return new UserAuthenticatedEvent(id, name, email, token, provider, photo, eventId);
   }
 
   static createFromLoginUserCommand(command: LoginUserCommand): UserAuthenticatedEvent {
-    return new UserAuthenticatedEvent(
-      command.id,
-      command.name,
-      command.email,
-      command.token,
-      command.provider,
-      command.photo
-    );
+    return this.random({
+      id: command.id,
+      name: command.name,
+      email: command.email,
+      token: command.token,
+      provider: command.provider,
+      photo: command.photo,
+    });
   }
 }

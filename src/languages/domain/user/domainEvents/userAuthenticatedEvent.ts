@@ -7,9 +7,10 @@ export default class UserAuthenticatedEvent extends DomainEvent {
     public readonly email: string,
     public readonly token: string,
     public readonly provider: string,
-    public readonly photo: string
+    public readonly photo: string,
+    public readonly eventId: string = ''
   ) {
-    super(id);
+    super(id, eventId);
   }
 
   public static fromPrimitives(payload: { [key: string]: any }): DomainEvent {
@@ -19,7 +20,8 @@ export default class UserAuthenticatedEvent extends DomainEvent {
       payload['email'],
       payload['token'],
       payload['provider'],
-      payload['photo']
+      payload['photo'],
+      payload['eventId']
     );
   }
 

@@ -4,34 +4,17 @@ import CountryRepository from '@src/languages/domain/country/countryRepository';
 import CountryId from '@src/languages/domain/country/valueObjects/countryId';
 
 export class CountryRepositoryMock implements CountryRepository {
-  private mockSave = jest.fn();
-  private mockFindAll = jest.fn();
-  private mockFindById = jest.fn();
-  private countries: Country[] = [];
+  findById: jest.MockedFunction<(id: CountryId) => Promise<Country | null>>;
+  findAll: jest.MockedFunction<() => Promise<Country[]>>;
+  save: jest.MockedFunction<(term: Country) => Promise<void>>;
 
-  findAll(): Promise<Country[]> {
-    this.assertFindAll();
-    return Promise.resolve(this.countries);
+  constructor() {
+    this.findById = jest.fn();
+    this.findAll = jest.fn();
+    this.save = jest.fn();
   }
 
-  assertFindAll() {
-    expect(this.mockFindAll).toHaveBeenCalled();
-  }
-
-  findById(id: CountryId): Promise<Country | null> {
-    const country: Country | null = this.countries.filter((country) => country.id.equals(id))[0] ?? null;
-    return Promise.resolve(country);
-  }
-
-  assertFindById(id: string) {
-    expect(this.mockFindById).toHaveBeenCalledWith(id);
-  }
-
-  async save(country: Country): Promise<any> {
-    this.mockSave(country);
-  }
-
-  assertSaveHasBeenCalledWith(country: Country): void {
-    expect(this.mockSave).toHaveBeenCalledWith(country);
+  expectSaveCalledWith(country: Country): void {
+    expect(this.save).toHaveBeenCalledWith(country);
   }
 }

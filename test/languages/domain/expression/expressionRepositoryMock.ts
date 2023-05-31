@@ -4,23 +4,15 @@ import ExpressionRepository from '@src/languages/domain/expression/expressionRep
 import ExpressionId from '@src/languages/domain/expression/valueObjects/expressionId';
 
 export class ExpressionRepositoryMock implements ExpressionRepository {
-  private mockSave = jest.fn();
-  private mockFindById = jest.fn();
+  findById: jest.MockedFunction<(id: ExpressionId) => Promise<Expression | null>>;
+  save: jest.MockedFunction<(term: Expression) => Promise<void>>;
 
-  findById(id: ExpressionId): Promise<Expression | null> {
-    this.assertFindById(id);
-    return Promise.resolve(null);
+  constructor() {
+    this.findById = jest.fn();
+    this.save = jest.fn();
   }
 
-  assertFindById(id: ExpressionId) {
-    expect(this.mockFindById).toHaveBeenCalledWith(id);
-  }
-
-  async save(expression: Expression): Promise<any> {
-    this.mockSave(expression);
-  }
-
-  assertSaveHasBeenCalledWith(expression: Expression): void {
-    expect(this.mockSave).toHaveBeenCalledWith(expression);
+  expectSaveCalledWith(expression: Expression): void {
+    expect(this.save).toHaveBeenCalledWith(expression);
   }
 }

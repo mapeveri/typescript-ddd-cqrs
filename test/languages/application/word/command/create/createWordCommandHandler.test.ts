@@ -1,8 +1,7 @@
-import { beforeEach, describe, expect, it } from '@jest/globals';
+import { beforeEach, describe, it } from '@jest/globals';
 import CreateWordCommandHandler from '@src/languages/application/word/command/create/createWordCommandHandler';
-import { eventBusMock } from '@test/shared/domain/buses/eventBus/eventBusMock';
+import { EventBusMock } from '@test/shared/domain/buses/eventBus/eventBusMock';
 import { WordRepositoryMock } from '@test/languages/domain/word/wordRepositoryMock';
-import { EventBus } from '@src/shared/domain/buses/eventBus/eventBus';
 import { CreateWordCommandMother } from './createWordCommandMother';
 import WordMother from '@test/languages/domain/word/wordMother';
 import Word from '@src/languages/domain/word/word';
@@ -10,35 +9,26 @@ import { WordCreatedEventMother } from '@test/languages/domain/word/domainEvents
 import { UserIdMother } from '@test/languages/domain/user/valueObjects/userIdMother';
 
 describe('CreateWordCommandHandler handle', () => {
-  let eventBus: EventBus;
+  let eventBus: EventBusMock;
   let wordRepository: WordRepositoryMock;
   let createWordCommandHandler: CreateWordCommandHandler;
 
   beforeEach(() => {
-    eventBus = eventBusMock;
-
+    eventBus = new EventBusMock();
     wordRepository = new WordRepositoryMock();
 
     createWordCommandHandler = new CreateWordCommandHandler(wordRepository, eventBus);
   });
 
   it('should create and save a word', async () => {
-    const command = CreateWordCommandMother.random({
-      terms: [{
-        word: 'Title 1',
-        description: 'Description 1',
-        example: 'Example 1',
-        hashtags: ['word1'],
-      }],
-    });
+    const command = CreateWordCommandMother.random();
     const userId = UserIdMother.random(command.userId);
     const word: Word = WordMother.createFromCreateWordCommand(command, userId);
     const wordCreatedEvent = WordCreatedEventMother.createFromCreateWordCommand(command);
-    const expectedwordCreatedEvent = { ...wordCreatedEvent, eventId: expect.any(String) };
 
     await createWordCommandHandler.handle(command);
 
-    wordRepository.assertSaveHasBeenCalledWith(word);
-    expect(eventBus.publish).toHaveBeenCalledWith([expectedwordCreatedEvent]);
+    wordRepository.expectSaveCalledWith(word);
+    eventBus.expectPublishCalledWith([wordCreatedEvent]);
   });
 });
