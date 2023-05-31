@@ -1,7 +1,7 @@
 import { CommandHandler } from '@src/shared/domain/buses/commandBus/commandHandler';
 import { EventBus } from '@src/shared/domain/buses/eventBus/eventBus';
 import LoginUserCommand from './loginUserCommand';
-import { SocialLogin } from '@src/languages/domain/user/auth';
+import { SocialLogin } from '@src/languages/domain/auth/socialLogin';
 import LoginException from '@src/languages/domain/user/exceptions/loginException';
 import UserAuthenticatedEvent from '@src/languages/domain/user/domainEvents/userAuthenticatedEvent';
 

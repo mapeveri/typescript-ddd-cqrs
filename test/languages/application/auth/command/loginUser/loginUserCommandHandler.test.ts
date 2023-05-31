@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, jest } from '@jest/globals';
 import LoginUserCommandHandler from '@src/languages/application/auth/command/loginUser/loginUserCommandHandler';
 import { LoginUserCommandMother } from './loginUserCommandMother';
-import { SocialLogin } from '@src/languages/domain/user/auth';
+import { SocialLogin } from '@src/languages/domain/auth/socialLogin';
 import { EventBus } from '@src/shared/domain/buses/eventBus/eventBus';
 import { UserAuthenticatedEventMother } from '@test/languages/domain/user/domainEvents/userAuthenticatedEventMother';
 import LoginException from '@src/languages/domain/user/exceptions/loginException';
@@ -25,7 +25,7 @@ describe('LoginUserCommandHandler.test handle', () => {
   it('should login faild and not publish an event', async () => {
     const command = LoginUserCommandMother.random();
     const spy = jest.spyOn(socialLogin, 'login');
-    spy.mockReturnValue(Promise.resolve(false));
+    spy.mockReturnValueOnce(Promise.resolve(false));
 
     await expect(loginUserCommandHandler.handle(command)).rejects.toThrowError(LoginException);
 
