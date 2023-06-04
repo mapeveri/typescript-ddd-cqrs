@@ -14,7 +14,7 @@ Configuration for development.
 ```
 4. Run migrations:
 ```shell script
-    docker-compose run app bash npm run typeorm migration:run
+    docker-compose run app npm run typeorm migration:run
 ```
 5. Create user via google.
 
@@ -26,12 +26,12 @@ After running docker-compose up the application will be available at https://loc
 
 To generate migrations run the next command:
 ```shell script
-  docker-compose run app bash npm run typeorm migration:generate migrationName
+  docker-compose run app npm run typeorm migration:generate migrationName
 ```
 
 To execute migrations run the next command:
 ```shell script
-  docker-compose run app bash npm run typeorm migration:run
+  docker-compose run app npm run typeorm migration:run
 ```
 
 ### Oauth2:
@@ -42,5 +42,5 @@ To get a token for testing you should go to https://developers.google.com/oauthp
 
 For production run the next command:
 ```shell script
-    docker-compose run app bash npm run start
+    docker-compose run app npm run start
 ```
