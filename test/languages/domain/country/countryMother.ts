@@ -1,14 +1,17 @@
 import CreateCountryCommand from '@src/languages/application/country/command/create/createCountryCommand';
-import Country, { Language } from '@src/languages/domain/country/country';
+import Country from '@src/languages/domain/country/country';
 import { CountryIdMother } from './valueObjects/countryIdMother';
 import faker from 'faker';
 import CountryId from '@src/languages/domain/country/valueObjects/countryId';
+import LanguageCollectionMother from './valueObjects/languageCollectionMother';
+import Language, { LanguageDTO } from '@src/languages/domain/country/valueObjects/language';
+import LanguageMother from './valueObjects/languageMother';
 
 interface CountryMotherProps {
   id?: CountryId;
   name?: string;
   iso?: string;
-  languages?: Language[];
+  languages?: Array<Language>;
 }
 
 export default class CountryMother {
@@ -19,14 +22,19 @@ export default class CountryMother {
       id ?? CountryId.random(),
       name ?? faker.name.findName(),
       iso ?? faker.random.word(),
-      languages ?? ([{ name: 'default_language', languageId: 'default_language_id' }] as Language[])
+      LanguageCollectionMother.random(languages ?? [LanguageMother.random()])
     );
   }
 
   static createFromCreateCountryCommand(command: CreateCountryCommand): Country {
-    const languages = command.languages.map((language: { [key: string]: string }): Language => {
-      return { name: language['name'], languageId: language['language_id'] };
+    const languages = command.languages.map((language: LanguageDTO): Language => {
+      return LanguageMother.random({ name: language['name'], languageId: language['languageId'] });
     });
-    return new Country(CountryIdMother.random(command.id), command.name, command.iso, languages);
+    return this.random({
+      id: CountryIdMother.random(command.id),
+      name: command.name,
+      iso: command.iso,
+      languages: languages,
+    });
   }
 }
