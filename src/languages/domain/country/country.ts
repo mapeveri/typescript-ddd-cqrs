@@ -1,24 +1,20 @@
 import CountryId from './valueObjects/countryId';
-
-export interface Language {
-  name: string;
-  languageId: string;
-}
+import LanguageCollection from './valueObjects/languageCollection';
 
 export default class Country {
   id: CountryId;
   name: string;
   iso: string;
-  languages: Array<Language>;
+  languages: LanguageCollection;
 
-  constructor(id: CountryId, name: string, iso: string, languages: Array<Language>) {
+  constructor(id: CountryId, name: string, iso: string, languages: LanguageCollection) {
     this.id = id;
     this.name = name;
     this.iso = iso;
     this.languages = languages;
   }
 
-  static create(id: CountryId, name: string, iso: string, languages: Array<Language> = []): Country {
+  static create(id: CountryId, name: string, iso: string, languages: LanguageCollection): Country {
     return new this(id, name, iso, languages);
   }
 
@@ -27,9 +23,7 @@ export default class Country {
       id: this.id.toString(),
       name: this.name,
       iso: this.iso,
-      languages: this.languages.map((country) => {
-        return { name: country.name, language_id: country.languageId };
-      }),
+      languages: this.languages.toArray(),
     };
   }
 }
