@@ -15,15 +15,23 @@ import CreateWordCommandHandler from '@src/languages/application/word/command/cr
 import CreateTermCommandHandler from '@src/languages/application/term/command/create/createTermCommandHandler';
 import CreateExpressionCommandHandler from '@src/languages/application/expression/command/create/createExpressionCommandHandler';
 import CreateExpressionCommand from '@src/languages/application/expression/command/create/createExpressionCommand';
+import TransactionalHandlerDecoratorFactory from '../persistence/transactionalHandlerDecoratorFactory';
 
 export function registerCommands(container: ContainerBuilder) {
   const commandBus: MemoryCommandBus = container.get(MemoryCommandBus);
 
-  commandBus.register(CreateCountryCommand.prototype, container.get(CreateCountryCommandHandler));
-  commandBus.register(LoginUserCommand.prototype, container.get(LoginUserCommandHandler));
-  commandBus.register(CreateUserCommand.prototype, container.get(CreateUserCommandHandler));
-  commandBus.register(UpdateUserCommand.prototype, container.get(UpdateUserCommandHandler));
-  commandBus.register(CreateWordCommand.prototype, container.get(CreateWordCommandHandler));
-  commandBus.register(CreateExpressionCommand.prototype, container.get(CreateExpressionCommandHandler));
-  commandBus.register(CreateTermCommand.prototype, container.get(CreateTermCommandHandler));
+  const commandHandlerMappings = [
+    { command: CreateCountryCommand, handler: container.get(CreateCountryCommandHandler), database: 'postgres' },
+    { command: LoginUserCommand, handler: container.get(LoginUserCommandHandler), database: 'postgres' },
+    { command: CreateUserCommand, handler: container.get(CreateUserCommandHandler), database: 'postgres' },
+    { command: UpdateUserCommand, handler: container.get(UpdateUserCommandHandler), database: 'postgres' },
+    { command: CreateWordCommand, handler: container.get(CreateWordCommandHandler), database: 'postgres' },
+    { command: CreateExpressionCommand, handler: container.get(CreateExpressionCommandHandler), database: 'postgres' },
+    { command: CreateTermCommand, handler: container.get(CreateTermCommandHandler), database: 'mongo' },
+  ];
+
+  commandHandlerMappings.forEach(({ command, handler, database }) => {
+    const decoratedHandler = new TransactionalHandlerDecoratorFactory(handler).get(database);
+    commandBus.register(command.prototype, decoratedHandler);
+  });
 }

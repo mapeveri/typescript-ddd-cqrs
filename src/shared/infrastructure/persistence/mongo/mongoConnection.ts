@@ -2,16 +2,16 @@ import { MongoClient, Db } from 'mongodb';
 
 export default class MongoConnection {
   private static instance: MongoConnection;
-  private client: MongoClient;
+  public client: MongoClient;
   public db: Db;
 
   private constructor() {}
 
   public static async getInstance(): Promise<MongoConnection> {
     if (!MongoConnection.instance) {
-      const repository = new MongoConnection();
-      await repository.connect();
-      MongoConnection.instance = repository;
+      const connection = new MongoConnection();
+      await connection.connect();
+      MongoConnection.instance = connection;
     }
     return MongoConnection.instance;
   }
