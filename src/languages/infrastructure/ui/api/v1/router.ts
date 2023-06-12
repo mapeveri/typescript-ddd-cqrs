@@ -16,7 +16,10 @@ function registerModuleRoutes(routePath: string, router: Router, container: Cont
   }
 }
 
-export function registerRoutes(router: Router, container: ContainerBuilder): void {
+export function configureApiRouter(container: ContainerBuilder): Router {
+  const router: Router = Router();
   const routes = glob.sync(__dirname + '/routes/*.*');
   routes.map((route) => registerModuleRoutes(route, router, container));
+
+  return router;
 }

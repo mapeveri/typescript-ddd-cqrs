@@ -7,7 +7,7 @@ import CreateOnWordCreatedEventHandler from '@src/languages/application/term/eve
 import ExpressionCreatedEvent from '@src/languages/domain/expression/domainEvents/expressionCreatedEvent';
 import CreateOnExpressionCreatedEventHandler from '@src/languages/application/term/event/create/createOnExpressionCreatedEventHandler';
 
-export function registerEvents(container: ContainerBuilder) {
+export function configureEventBus(container: ContainerBuilder) {
   const eventBus: MemoryEventBus = container.get(MemoryEventBus);
 
   eventBus.register(UserAuthenticatedEvent.prototype, [container.get(CreateOrUpdateUserOnAuthenticationEventHandler)]);

@@ -10,7 +10,7 @@ import FindUserQuery from '@src/languages/application/user/query/find/findUserQu
 import SearchTermQuery from '@src/languages/application/term/query/search/searchTermQuery';
 import SearchTermQueryHandler from '@src/languages/application/term/query/search/searchTermQueryHandler';
 
-export function registerQueries(container: ContainerBuilder) {
+export function configureQueryBus(container: ContainerBuilder) {
   const queryBus: MemoryQueryBus = container.get(MemoryQueryBus);
 
   queryBus.register(FindCountryQuery.prototype, container.get(FindCountryQueryHandler));

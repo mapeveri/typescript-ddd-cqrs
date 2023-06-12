@@ -1,7 +1,7 @@
 import { ContainerBuilder, YamlFileLoader } from 'node-dependency-injection';
 import { ExpressApp } from '../express/expressApp';
 
-async function getContainer(app: ExpressApp): Promise<ContainerBuilder> {
+async function configureContainer(app: ExpressApp): Promise<ContainerBuilder> {
   const serviceFilePath = `${app.locals.sourcePath}/shared/infrastructure/dependencyInjection`;
   const container = new ContainerBuilder(false, app.locals.sourcePath);
 
@@ -15,4 +15,4 @@ async function getContainer(app: ExpressApp): Promise<ContainerBuilder> {
   return container;
 }
 
-export default getContainer;
+export default configureContainer;

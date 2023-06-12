@@ -17,7 +17,7 @@ import CreateExpressionCommandHandler from '@src/languages/application/expressio
 import CreateExpressionCommand from '@src/languages/application/expression/command/create/createExpressionCommand';
 import TransactionalHandlerDecoratorFactory from '../persistence/transactionalHandlerDecoratorFactory';
 
-export function registerCommands(container: ContainerBuilder) {
+export function configureCommandBus(container: ContainerBuilder) {
   const commandBus: MemoryCommandBus = container.get(MemoryCommandBus);
 
   const commandHandlerMappings = [
