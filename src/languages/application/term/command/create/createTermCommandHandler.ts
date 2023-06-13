@@ -12,16 +12,16 @@ export default class CreateTermCommandHandler implements CommandHandler {
   }
 
   private getTerm(command: CreateTermCommand): Term {
-    return {
-      id: command.id,
-      title: command.title,
-      description: command.description,
-      example: command.example,
-      type: command.type,
-      hashtags: command.hashtags,
-      likes: [],
-      disLikes: [],
-      favourites: [],
-    } as Term;
+    return Term.create(
+      command.id,
+      command.title,
+      command.description,
+      command.example,
+      command.type,
+      command.hashtags,
+      [],
+      [],
+      []
+    );
   }
 }

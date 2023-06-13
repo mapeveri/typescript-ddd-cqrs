@@ -20,17 +20,17 @@ export default class MongoTermRepository implements TermRepository {
     const result = await this.collection.find(searchQuery).project({ _id: 0 }).toArray();
 
     const terms: Term[] = result.map((doc: Document) => {
-      return {
-        id: doc.id,
-        title: doc.title,
-        description: doc.description,
-        example: doc.example,
-        type: doc.type,
-        hashtags: doc.hashtags,
-        likes: doc.likes,
-        disLikes: doc.disLikes,
-        favourites: doc.favourites,
-      } as Term;
+      return Term.create(
+        doc.id,
+        doc.title,
+        doc.description,
+        doc.example,
+        doc.type,
+        doc.hashtags,
+        doc.likes,
+        doc.disLikes,
+        doc.favourites,
+      );
     });
 
     return terms;
