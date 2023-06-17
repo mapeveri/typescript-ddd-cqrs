@@ -5,7 +5,7 @@ import ExpressionId from '@src/languages/domain/expression/valueObjects/expressi
 
 export class ExpressionRepositoryMock implements ExpressionRepository {
   findById: jest.MockedFunction<(id: ExpressionId) => Promise<Expression | null>>;
-  save: jest.MockedFunction<(term: Expression) => Promise<void>>;
+  save: jest.MockedFunction<(expression: Expression) => Promise<void>>;
 
   constructor() {
     this.findById = jest.fn();

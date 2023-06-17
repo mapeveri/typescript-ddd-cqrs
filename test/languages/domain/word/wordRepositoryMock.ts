@@ -5,7 +5,7 @@ import WordRepository from '@src/languages/domain/word/wordRepository';
 
 export class WordRepositoryMock implements WordRepository {
   findById: jest.MockedFunction<(id: WordId) => Promise<Word | null>>;
-  save: jest.MockedFunction<(term: Word) => Promise<void>>;
+  save: jest.MockedFunction<(word: Word) => Promise<void>>;
 
   constructor() {
     this.findById = jest.fn();
