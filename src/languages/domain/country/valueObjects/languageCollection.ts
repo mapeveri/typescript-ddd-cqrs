@@ -9,7 +9,7 @@ export default class LanguageCollection {
 
   static create(primitiveLanguages: Array<LanguageDTO>): LanguageCollection {
     const terms = primitiveLanguages.map((language: LanguageDTO): Language => {
-      return Language.createFromDTO(language);
+      return Language.fromDto(language);
     });
 
     return new this(terms);

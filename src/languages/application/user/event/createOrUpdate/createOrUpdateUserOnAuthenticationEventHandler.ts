@@ -11,7 +11,7 @@ export default class CreateOrUpdateUserOnAuthenticationEventHandler implements E
 
   async handle(event: UserAuthenticatedEvent): Promise<void> {
     const userId = new UserId(event.id);
-    userId.ensureIsValid(event.id, event.email);
+    userId.validateValue(event.id, event.email);
 
     const user = await this.userRepository.findById(userId);
     if (null === user) {

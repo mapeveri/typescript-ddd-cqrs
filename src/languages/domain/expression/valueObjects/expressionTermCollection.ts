@@ -9,7 +9,7 @@ export default class ExpressionTermCollection {
 
   static create(primitiveTerms: Array<ExpressionTermDTO>): ExpressionTermCollection {
     const terms = primitiveTerms.map((expressionTerm: ExpressionTermDTO): ExpressionTerm => {
-      return ExpressionTerm.createFromDTO(expressionTerm);
+      return ExpressionTerm.fromDto(expressionTerm);
     });
 
     return new this(terms);

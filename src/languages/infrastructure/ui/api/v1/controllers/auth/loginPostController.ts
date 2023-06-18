@@ -19,7 +19,7 @@ export default class LoginPostController implements Controller {
         res.status(error.status).json(ApiExceptionSerializer.serialize(error));
       }
 
-      const id = Uuid.generateFromString(body['email']).toString();
+      const id = Uuid.fromString(body['email']).toString();
       await this.commandBus.dispatch(
         new LoginUserCommand(id, body['name'], body['email'], body['token'], body['provider'], body['photo'])
       );

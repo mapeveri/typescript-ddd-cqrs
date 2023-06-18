@@ -12,7 +12,7 @@ export default class Language {
     this.languageId = languageId;
   }
 
-  static createFromDTO(language: LanguageDTO): Language {
+  static fromDto(language: LanguageDTO): Language {
     return new Language(language.name, language.languageId);
   }
 
