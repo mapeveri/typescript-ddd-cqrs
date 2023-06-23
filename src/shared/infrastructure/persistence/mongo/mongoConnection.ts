@@ -18,7 +18,7 @@ export default class MongoConnection {
 
   async connect(): Promise<void> {
     this.client = await MongoClient.connect(process.env.MONGO_DB_URL || '');
-    this.db = this.client.db(process.env.MONGO_DB_DATABSE);
+    this.db = this.client.db(process.env.MONGO_DB_DATABASE);
   }
 
   async disconnect(): Promise<void> {
