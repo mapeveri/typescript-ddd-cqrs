@@ -1,5 +1,5 @@
 import CreateExpressionCommand from '@src/languages/application/expression/command/create/createExpressionCommand';
-import { ExpressionTermDTO } from '@src/languages/domain/expression/valueObjects/expressionTerm';
+import { ExpressionTermPrimitives } from '@src/languages/domain/expression/valueObjects/expressionTerm';
 import faker from 'faker';
 
 interface CreateExpressionCommandProps {
@@ -7,7 +7,7 @@ interface CreateExpressionCommandProps {
   languageId?: string;
   countryId?: string;
   userId?: string;
-  terms?: Array<ExpressionTermDTO>;
+  terms?: Array<ExpressionTermPrimitives>;
 }
 
 export class CreateExpressionCommandMother {

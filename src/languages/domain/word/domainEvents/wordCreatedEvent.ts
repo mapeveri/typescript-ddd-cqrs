@@ -1,5 +1,5 @@
 import { DomainEvent } from '@src/shared/domain/buses/eventBus/domainEvent';
-import { WordTermDTO } from '../valueObjects/wordTerm';
+import { WordTermPrimitives } from '../valueObjects/wordTerm';
 
 export default class WordCreatedEvent extends DomainEvent {
   constructor(
@@ -7,7 +7,7 @@ export default class WordCreatedEvent extends DomainEvent {
     public readonly languageId: string,
     public readonly countryId: string,
     public readonly userId: string,
-    public readonly terms: Array<WordTermDTO>,
+    public readonly terms: Array<WordTermPrimitives>,
     public readonly eventId: string = ''
   ) {
     super(id, eventId);

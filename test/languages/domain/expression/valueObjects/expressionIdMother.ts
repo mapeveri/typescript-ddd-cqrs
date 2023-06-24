@@ -3,6 +3,6 @@ import faker from 'faker';
 
 export class ExpressionIdMother {
   static random(id?: string): ExpressionId {
-    return new ExpressionId(id ?? faker.datatype.uuid());
+    return ExpressionId.of(id ?? faker.datatype.uuid());
   }
 }

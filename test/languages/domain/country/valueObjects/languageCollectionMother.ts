@@ -4,6 +4,6 @@ import LanguageMother from './languageMother';
 
 export default class LanguageCollectionMother {
   static random(languages: Array<Language>): LanguageCollection {
-    return new LanguageCollection(languages ?? [LanguageMother.random()]);
+    return LanguageCollection.of(languages ?? [LanguageMother.random()]);
   }
 }

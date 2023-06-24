@@ -24,7 +24,7 @@ export default new EntitySchema<Country>({
     languages: {
       type: 'json',
       transformer: new LanguageCollectionTransformer(),
-      default: new LanguageCollection([]),
+      default: LanguageCollection.fromPrimitives([]),
     },
   },
 });

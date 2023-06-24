@@ -5,7 +5,7 @@ import Email from '@src/shared/domain/valueObjects/email';
 describe('Email.test check', () => {
   it('should check a valid email and set the value', async () => {
     const validEmail = 'test@test.com';
-    const email = new Email(validEmail);
+    const email = Email.of(validEmail);
 
     expect(email.toString()).toEqual(validEmail);
   });
@@ -14,7 +14,7 @@ describe('Email.test check', () => {
     const invalidEmail = 'test';
 
     expect(() => {
-      new Email(invalidEmail);
+      Email.of(invalidEmail);
     }).toThrow(InvalidEmailException);
   });
 });

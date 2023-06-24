@@ -8,10 +8,19 @@ export abstract class ValueObject<T extends Primitives> {
 
   constructor(value: T) {
     this.value = value;
-    this.validateValueIsDefined(value);
   }
 
-  private validateValueIsDefined(value: T): void {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  static fromPrimitives(value: string): any {
+    throw Error('Not implemented');
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  static of(value: string): any {
+    throw Error('Not implemented');
+  }
+
+  validateValueIsDefined(value: T): void {
     if (value === null || value === undefined) {
       throw new InvalidArgumentException();
     }

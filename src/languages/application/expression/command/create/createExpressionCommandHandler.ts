@@ -13,11 +13,11 @@ export default class CreateExpressionCommandHandler implements CommandHandler {
 
   async handle(command: CreateExpressionCommand): Promise<void> {
     const expression = Expression.create(
-      new ExpressionId(command.id),
+      ExpressionId.of(command.id),
       command.languageId,
-      new CountryId(command.countryId),
-      ExpressionTermCollection.create(command.terms),
-      new UserId(command.userId)
+      CountryId.of(command.countryId),
+      ExpressionTermCollection.of(command.terms),
+      UserId.of(command.userId)
     );
 
     await this.expressionRepository.save(expression);

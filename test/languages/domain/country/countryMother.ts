@@ -4,7 +4,7 @@ import { CountryIdMother } from './valueObjects/countryIdMother';
 import faker from 'faker';
 import CountryId from '@src/languages/domain/country/valueObjects/countryId';
 import LanguageCollectionMother from './valueObjects/languageCollectionMother';
-import Language, { LanguageDTO } from '@src/languages/domain/country/valueObjects/language';
+import Language, { LanguagePrimitives } from '@src/languages/domain/country/valueObjects/language';
 import LanguageMother from './valueObjects/languageMother';
 
 interface CountryMotherProps {
@@ -27,7 +27,7 @@ export default class CountryMother {
   }
 
   static createFromCreateCountryCommand(command: CreateCountryCommand): Country {
-    const languages = command.languages.map((language: LanguageDTO): Language => {
+    const languages = command.languages.map((language: LanguagePrimitives): Language => {
       return LanguageMother.random({ name: language['name'], languageId: language['languageId'] });
     });
     return this.random({

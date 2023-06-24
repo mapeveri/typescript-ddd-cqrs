@@ -5,7 +5,7 @@ import CreateWordCommand from '@src/languages/application/word/command/create/cr
 import InvalidParameters from '@src/shared/infrastructure/api/apiErrorResponses/InvalidParameters';
 import ApiExceptionSerializer from '@src/shared/infrastructure/api/serializers/apiExceptionSerializer';
 import { CommandBus } from '@src/shared/domain/buses/commandBus/commandBus';
-import { WordTermDTO } from '@src/languages/domain/word/valueObjects/wordTerm';
+import { WordTermPrimitives } from '@src/languages/domain/word/valueObjects/wordTerm';
 
 export default class WordPostController implements Controller {
   public constructor(private commandBus: CommandBus) {}
@@ -24,7 +24,7 @@ export default class WordPostController implements Controller {
         res.status(error.status).json(ApiExceptionSerializer.serialize(error));
       }
 
-      const wordTerms: Array<WordTermDTO> = this.transformWordTerms(body['terms']);
+      const wordTerms: Array<WordTermPrimitives> = this.transformWordTerms(body['terms']);
       await this.commandBus.dispatch(
         new CreateWordCommand(body['id'], body['language_id'], body['country_id'], body['user_id'], wordTerms)
       );
@@ -34,7 +34,7 @@ export default class WordPostController implements Controller {
     }
   }
 
-  private transformWordTerms(wordTerms: Array<Record<string, any>>): Array<WordTermDTO> {
+  private transformWordTerms(wordTerms: Array<Record<string, any>>): Array<WordTermPrimitives> {
     return wordTerms.map((wordTerm: Record<string, any>) => {
       return {
         word: wordTerm.word,

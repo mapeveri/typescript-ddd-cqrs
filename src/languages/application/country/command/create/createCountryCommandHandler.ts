@@ -9,9 +9,9 @@ export default class CreateCountryCommandHandler implements CommandHandler {
   constructor(private countryRepository: CountryRepository) {}
 
   async handle(command: CreateCountryCommand): Promise<void> {
-    const languages = LanguageCollection.create(command.languages);
+    const languages = LanguageCollection.of(command.languages);
 
-    const country = Country.create(new CountryId(command.id), command.name, command.iso, languages);
+    const country = Country.create(CountryId.of(command.id), command.name, command.iso, languages);
 
     await this.countryRepository.save(country);
   }

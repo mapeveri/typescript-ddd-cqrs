@@ -12,11 +12,11 @@ export default class WordTermMother {
   static random(props?: WordTermMotherProps): WordTerm {
     const { title, description, example, taggedWords } = props ?? {};
 
-    return new WordTerm(
-      title ?? faker.random.word(),
-      description ?? faker.random.word(),
-      example ?? faker.random.word(),
-      taggedWords ?? ['test']
-    );
+    return WordTerm.of({
+      word: title ?? faker.random.word(),
+      description: description ?? faker.random.word(),
+      example: example ?? faker.random.word(),
+      hashtags: taggedWords ?? ['test'],
+    });
   }
 }

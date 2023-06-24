@@ -27,7 +27,7 @@ export default new EntitySchema<Word>({
     terms: {
       type: 'json',
       transformer: new WordTermCollectionTransformer(),
-      default: new WordTermCollection([]),
+      default: WordTermCollection.fromPrimitives([]),
     },
     userId: {
       type: String,

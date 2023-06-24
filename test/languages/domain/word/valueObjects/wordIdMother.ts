@@ -3,6 +3,6 @@ import faker from 'faker';
 
 export class WordIdMother {
   static random(id?: string): WordId {
-    return new WordId(id ?? faker.datatype.uuid());
+    return WordId.of(id ?? faker.datatype.uuid());
   }
 }

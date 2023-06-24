@@ -3,6 +3,6 @@ import faker from 'faker';
 
 export class CountryIdMother {
   static random(id?: string): CountryId {
-    return new CountryId(id ?? faker.datatype.uuid());
+    return CountryId.of(id ?? faker.datatype.uuid());
   }
 }

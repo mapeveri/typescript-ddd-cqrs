@@ -1,4 +1,4 @@
-import ExpressionTerm from '@src/languages/domain/expression/valueObjects/expressionTerm';
+import ExpressionTerm, { ExpressionTermPrimitives } from '@src/languages/domain/expression/valueObjects/expressionTerm';
 import ExpressionTermCollection from '@src/languages/domain/expression/valueObjects/expressionTermCollection';
 import { ValueTransformer } from 'typeorm';
 
@@ -10,8 +10,15 @@ export default class ExpressionTermCollectionTransformer implements ValueTransfo
   from(value: string): ExpressionTermCollection {
     const parsedValue = JSON.parse(value);
     const terms = parsedValue.terms.map((term: any) => {
-      return new ExpressionTerm(term.title, term.description, term.example, term.taggedWords);
+      const expressionTerm: ExpressionTermPrimitives = {
+        expression: term.title,
+        description: term.description,
+        example: term.example,
+        hashtags: term.taggedWords,
+      };
+
+      return ExpressionTerm.fromPrimitives(expressionTerm);
     });
-    return new ExpressionTermCollection(terms);
+    return ExpressionTermCollection.fromPrimitives(terms);
   }
 }

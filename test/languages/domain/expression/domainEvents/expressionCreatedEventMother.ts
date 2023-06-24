@@ -1,11 +1,11 @@
 import { expect } from '@jest/globals';
 import CreateExpressionCommand from '@src/languages/application/expression/command/create/createExpressionCommand';
 import ExpressionCreatedEvent from '@src/languages/domain/expression/domainEvents/expressionCreatedEvent';
-import { ExpressionTermDTO } from '@src/languages/domain/expression/valueObjects/expressionTerm';
+import { ExpressionTermPrimitives } from '@src/languages/domain/expression/valueObjects/expressionTerm';
 
 export class ExpressionCreatedEventMother {
   static createFromCreateExpressionCommand(command: CreateExpressionCommand): ExpressionCreatedEvent {
-    const terms = command.terms.map((term: { [key: string]: any }): ExpressionTermDTO => {
+    const terms = command.terms.map((term: { [key: string]: any }): ExpressionTermPrimitives => {
       return {
         expression: term['expression'],
         description: term['description'],

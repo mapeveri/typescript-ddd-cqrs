@@ -9,7 +9,7 @@ export default class FindUserQueryHandler implements QueryHandler {
   constructor(private userRepository: UserRepository) {}
 
   async handle(query: FindUserQuery): Promise<QueryResponse> {
-    const user = await this.userRepository.findById(new UserId(query.id));
+    const user = await this.userRepository.findById(UserId.of(query.id));
     return FindUserResponse.fromUser(user);
   }
 }

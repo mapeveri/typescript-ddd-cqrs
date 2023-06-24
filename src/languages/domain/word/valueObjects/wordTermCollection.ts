@@ -1,21 +1,29 @@
-import WordTerm, { WordTermDTO } from './wordTerm';
+import WordTerm, { WordTermPrimitives } from './wordTerm';
 
 export default class WordTermCollection {
   terms: Array<WordTerm>;
 
-  constructor(terms: Array<WordTerm>) {
+  private constructor(terms: Array<WordTerm>) {
     this.terms = terms;
   }
 
-  static create(primitiveTerms: Array<WordTermDTO>): WordTermCollection {
-    const wordTerms = primitiveTerms.map((wordTerm: WordTermDTO): WordTerm => {
-      return WordTerm.fromDto(wordTerm);
+  static of(primitiveTerms: Array<WordTermPrimitives>): WordTermCollection {
+    const wordTerms = primitiveTerms.map((wordTerm: WordTermPrimitives): WordTerm => {
+      return WordTerm.of(wordTerm);
     });
 
     return new this(wordTerms);
   }
 
-  toArray(): Array<WordTermDTO> {
+  static fromPrimitives(primitiveTerms: Array<WordTermPrimitives>): WordTermCollection {
+    const wordTerms = primitiveTerms.map((wordTerm: WordTermPrimitives): WordTerm => {
+      return WordTerm.fromPrimitives(wordTerm);
+    });
+    
+    return new this(wordTerms);
+  }
+
+  toArray(): Array<WordTermPrimitives> {
     return this.terms.map((term: WordTerm) => term.toObject());
   }
 }

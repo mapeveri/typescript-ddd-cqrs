@@ -12,11 +12,11 @@ export default class ExpressionTermMother {
   static random(props?: ExpressionTermMotherProps): ExpressionTerm {
     const { expression, description, example, hashtags } = props ?? {};
 
-    return new ExpressionTerm(
-      expression ?? faker.random.word(),
-      description ?? faker.random.word(),
-      example ?? faker.random.word(),
-      hashtags ?? ['test']
-    );
+    return ExpressionTerm.of({
+      expression: expression ?? faker.random.word(),
+      description: description ?? faker.random.word(),
+      example: example ?? faker.random.word(),
+      hashtags: hashtags ?? ['test'],
+    });
   }
 }

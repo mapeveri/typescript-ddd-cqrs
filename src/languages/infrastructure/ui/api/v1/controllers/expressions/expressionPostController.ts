@@ -5,7 +5,7 @@ import InvalidParameters from '@src/shared/infrastructure/api/apiErrorResponses/
 import ApiExceptionSerializer from '@src/shared/infrastructure/api/serializers/apiExceptionSerializer';
 import { CommandBus } from '@src/shared/domain/buses/commandBus/commandBus';
 import CreateExpressionCommand from '@src/languages/application/expression/command/create/createExpressionCommand';
-import { ExpressionTermDTO } from '@src/languages/domain/expression/valueObjects/expressionTerm';
+import { ExpressionTermPrimitives } from '@src/languages/domain/expression/valueObjects/expressionTerm';
 
 export default class ExpressionPostController implements Controller {
   public constructor(private commandBus: CommandBus) {}
@@ -24,7 +24,7 @@ export default class ExpressionPostController implements Controller {
         res.status(error.status).json(ApiExceptionSerializer.serialize(error));
       }
 
-      const expressionTerms: Array<ExpressionTermDTO> = this.transformExpressionTerms(body['terms']);
+      const expressionTerms: Array<ExpressionTermPrimitives> = this.transformExpressionTerms(body['terms']);
       await this.commandBus.dispatch(
         new CreateExpressionCommand(
           body['id'],
@@ -40,7 +40,7 @@ export default class ExpressionPostController implements Controller {
     }
   }
 
-  private transformExpressionTerms(expressionTerms: Array<Record<string, any>>): Array<ExpressionTermDTO> {
+  private transformExpressionTerms(expressionTerms: Array<Record<string, any>>): Array<ExpressionTermPrimitives> {
     return expressionTerms.map((expressionTerm: Record<string, any>) => {
       return {
         expression: expressionTerm.expression,

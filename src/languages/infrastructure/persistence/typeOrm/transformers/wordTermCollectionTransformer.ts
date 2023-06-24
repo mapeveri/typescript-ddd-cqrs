@@ -1,4 +1,4 @@
-import WordTerm from '@src/languages/domain/word/valueObjects/wordTerm';
+import WordTerm, { WordTermPrimitives } from '@src/languages/domain/word/valueObjects/wordTerm';
 import WordTermCollection from '@src/languages/domain/word/valueObjects/wordTermCollection';
 import { ValueTransformer } from 'typeorm';
 
@@ -10,8 +10,15 @@ export default class WordTermCollectionTransformer implements ValueTransformer {
   from(value: string): WordTermCollection {
     const parsedValue = JSON.parse(value);
     const terms = parsedValue.terms.map((term: any) => {
-      return new WordTerm(term.title, term.description, term.example, term.taggedWords);
+      const wordTerm: WordTermPrimitives = {
+        word: term.title,
+        description: term.description,
+        example: term.example,
+        hashtags: term.taggedWords,
+      };
+
+      return WordTerm.fromPrimitives(wordTerm);
     });
-    return new WordTermCollection(terms);
+    return WordTermCollection.fromPrimitives(terms);
   }
 }

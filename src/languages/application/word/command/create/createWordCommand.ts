@@ -1,4 +1,4 @@
-import { WordTermDTO } from '@src/languages/domain/word/valueObjects/wordTerm';
+import { WordTermPrimitives } from '@src/languages/domain/word/valueObjects/wordTerm';
 import { Command } from '@src/shared/domain/buses/commandBus/command';
 
 export default class CreateWordCommand implements Command {
@@ -7,6 +7,6 @@ export default class CreateWordCommand implements Command {
     public readonly languageId: string,
     public readonly countryId: string,
     public readonly userId: string,
-    public readonly terms: Array<WordTermDTO>
+    public readonly terms: Array<WordTermPrimitives>
   ) {}
 }

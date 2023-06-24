@@ -10,10 +10,10 @@ export default class CreateUserCommandHandler implements CommandHandler {
 
   async handle(command: CreateUserCommand): Promise<void> {
     const user = User.create(
-      new UserId(command.id),
+      UserId.of(command.id),
       command.name,
       command.provider,
-      new Email(command.email),
+      Email.of(command.email),
       command.photo
     );
 

@@ -9,7 +9,7 @@ export default class FindCountryQueryHandler implements QueryHandler {
   constructor(private countryRepository: CountryRepository) {}
 
   async handle(query: FindCountryQuery): Promise<QueryResponse> {
-    const country = await this.countryRepository.findById(new CountryId(query.id));
+    const country = await this.countryRepository.findById(CountryId.of(query.id));
     return FindCountryResponse.fromCountry(country);
   }
 }

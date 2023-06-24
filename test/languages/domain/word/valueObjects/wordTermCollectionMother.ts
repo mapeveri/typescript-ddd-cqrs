@@ -4,6 +4,6 @@ import WordTermMother from './wordTermMother';
 
 export default class WordTermCollectionMother {
   static random(terms: Array<WordTerm>): WordTermCollection {
-    return new WordTermCollection(terms ?? [WordTermMother.random()]);
+    return WordTermCollection.of(terms ?? [WordTermMother.random()]);
   }
 }

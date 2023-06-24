@@ -25,7 +25,7 @@ export default new EntitySchema<Expression>({
     terms: {
       type: 'json',
       transformer: new ExpressionTermCollectionTransformer(),
-      default: new ExpressionTermCollection([]),
+      default: ExpressionTermCollection.fromPrimitives([]),
     },
     userId: {
       type: String,

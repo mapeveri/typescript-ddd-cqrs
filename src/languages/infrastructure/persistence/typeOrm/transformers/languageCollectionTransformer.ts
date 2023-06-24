@@ -1,4 +1,4 @@
-import Language from '@src/languages/domain/country/valueObjects/language';
+import Language, { LanguagePrimitives } from '@src/languages/domain/country/valueObjects/language';
 import LanguageCollection from '@src/languages/domain/country/valueObjects/languageCollection';
 import { ValueTransformer } from 'typeorm';
 
@@ -10,8 +10,13 @@ export default class LanguageCollectionTransformer implements ValueTransformer {
   from(value: string): LanguageCollection {
     const parsedValue = JSON.parse(value);
     const languages = parsedValue.languages.map((language: any) => {
-      return new Language(language.name, language.languageId);
+      const languageDto: LanguagePrimitives = {
+        name: language.name,
+        languageId: language.languageId,
+      };
+
+      return Language.fromPrimitives(languageDto);
     });
-    return new LanguageCollection(languages);
+    return LanguageCollection.fromPrimitives(languages);
   }
 }

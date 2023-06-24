@@ -5,7 +5,7 @@ import CreateCountryCommand from '@src/languages/application/country/command/cre
 import InvalidParameters from '@src/shared/infrastructure/api/apiErrorResponses/InvalidParameters';
 import ApiExceptionSerializer from '@src/shared/infrastructure/api/serializers/apiExceptionSerializer';
 import { CommandBus } from '@src/shared/domain/buses/commandBus/commandBus';
-import { LanguageDTO } from '@src/languages/domain/country/valueObjects/language';
+import { LanguagePrimitives } from '@src/languages/domain/country/valueObjects/language';
 
 export default class CountryPostController implements Controller {
   public constructor(private commandBus: CommandBus) {}
@@ -18,7 +18,7 @@ export default class CountryPostController implements Controller {
         res.status(error.status).json(ApiExceptionSerializer.serialize(error));
       }
 
-      const languages: Array<LanguageDTO> = this.transformLanguages(body['languages']);
+      const languages: Array<LanguagePrimitives> = this.transformLanguages(body['languages']);
 
       await this.commandBus.dispatch(new CreateCountryCommand(body['id'], body['name'], body['iso'], languages));
       res.status(httpStatus.CREATED).send({});
@@ -27,7 +27,7 @@ export default class CountryPostController implements Controller {
     }
   }
 
-  private transformLanguages(languages: Array<Record<string, any>>): Array<LanguageDTO> {
+  private transformLanguages(languages: Array<Record<string, any>>): Array<LanguagePrimitives> {
     return languages.map((language: Record<string, any>) => {
       return {
         languageId: language['language_id'],

@@ -1,12 +1,12 @@
 import CreateCountryCommand from '@src/languages/application/country/command/create/createCountryCommand';
-import { LanguageDTO } from '@src/languages/domain/country/valueObjects/language';
+import { LanguagePrimitives } from '@src/languages/domain/country/valueObjects/language';
 import faker from 'faker';
 
 interface CreateCountryCommandProps {
   id?: string;
   name?: string;
   iso?: string;
-  languages?: Array<LanguageDTO>;
+  languages?: Array<LanguagePrimitives>;
 }
 
 export class CreateCountryCommandMother {

@@ -1,22 +1,26 @@
-export interface LanguageDTO {
+export type LanguagePrimitives = {
   name: string;
   languageId: string;
-}
+};
 
 export default class Language {
   name: string;
   languageId: string;
 
-  constructor(name: string, languageId: string) {
+  private constructor(name: string, languageId: string) {
     this.name = name;
     this.languageId = languageId;
   }
 
-  static fromDto(language: LanguageDTO): Language {
+  static of(language: LanguagePrimitives): Language {
     return new Language(language.name, language.languageId);
   }
 
-  toObject(): LanguageDTO {
+  static fromPrimitives(language: LanguagePrimitives): Language {
+    return new Language(language.name, language.languageId);
+  }
+
+  toObject(): LanguagePrimitives {
     return {
       name: this.name,
       languageId: this.languageId,

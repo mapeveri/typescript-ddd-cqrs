@@ -4,7 +4,7 @@ import CreateTermCommand from '../../command/create/createTermCommand';
 import { Uuid } from '@src/shared/domain/valueObjects/uuid';
 import { EXPRESSION } from '@src/languages/domain/term/term';
 import ExpressionCreatedEvent from '@src/languages/domain/expression/domainEvents/expressionCreatedEvent';
-import { ExpressionTermDTO } from '@src/languages/domain/expression/valueObjects/expressionTerm';
+import { ExpressionTermPrimitives } from '@src/languages/domain/expression/valueObjects/expressionTerm';
 
 export default class CreateOnExpressionCreatedEventHandler implements EventHandler {
   constructor(private commandBus: CommandBus) {}
@@ -12,7 +12,7 @@ export default class CreateOnExpressionCreatedEventHandler implements EventHandl
   async handle(event: ExpressionCreatedEvent): Promise<void> {
     const terms = event.terms;
 
-    terms.forEach(async (term: ExpressionTermDTO) => {
+    terms.forEach(async (term: ExpressionTermPrimitives) => {
       await this.commandBus.dispatch(
         new CreateTermCommand(
           Uuid.random().toString(),

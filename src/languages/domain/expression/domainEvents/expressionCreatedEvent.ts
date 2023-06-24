@@ -1,5 +1,5 @@
 import { DomainEvent } from '@src/shared/domain/buses/eventBus/domainEvent';
-import { ExpressionTermDTO } from '../valueObjects/expressionTerm';
+import { ExpressionTermPrimitives } from '../valueObjects/expressionTerm';
 
 export default class ExpressionCreatedEvent extends DomainEvent {
   constructor(
@@ -7,7 +7,7 @@ export default class ExpressionCreatedEvent extends DomainEvent {
     public readonly languageId: string,
     public readonly countryId: string,
     public readonly userId: string,
-    public readonly terms: Array<ExpressionTermDTO>,
+    public readonly terms: Array<ExpressionTermPrimitives>,
     public readonly eventId: string = ''
   ) {
     super(id, eventId);

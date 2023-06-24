@@ -1,5 +1,5 @@
 import CreateWordCommand from '@src/languages/application/word/command/create/createWordCommand';
-import { WordTermDTO } from '@src/languages/domain/word/valueObjects/wordTerm';
+import { WordTermPrimitives } from '@src/languages/domain/word/valueObjects/wordTerm';
 import faker from 'faker';
 
 interface CreateWordCommandProps {
@@ -7,7 +7,7 @@ interface CreateWordCommandProps {
   languageId?: string;
   countryId?: string;
   userId?: string;
-  terms?: Array<WordTermDTO>;
+  terms?: Array<WordTermPrimitives>;
 }
 
 export class CreateWordCommandMother {

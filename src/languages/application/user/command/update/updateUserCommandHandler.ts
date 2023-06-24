@@ -8,7 +8,7 @@ export default class UpdateUserCommandHandler implements CommandHandler {
   constructor(private userRepository: UserRepository) {}
 
   async handle(command: UpdateUserCommand): Promise<void> {
-    const user = await this.userRepository.findById(new UserId(command.id));
+    const user = await this.userRepository.findById(UserId.of(command.id));
     if (null === user) {
       throw new UserDoesNotExistsException();
     }

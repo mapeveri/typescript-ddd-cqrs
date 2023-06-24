@@ -4,6 +4,6 @@ import ExpressionTermMother from './expressionTermMother';
 
 export default class ExpressionTermCollectionMother {
   static random(terms: Array<ExpressionTerm>): ExpressionTermCollection {
-    return new ExpressionTermCollection(terms ?? [ExpressionTermMother.random()]);
+    return ExpressionTermCollection.of(terms ?? [ExpressionTermMother.random()]);
   }
 }

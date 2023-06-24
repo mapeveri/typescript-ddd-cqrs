@@ -13,11 +13,11 @@ export default class CreateWordCommandHandler implements CommandHandler {
 
   async handle(command: CreateWordCommand): Promise<void> {
     const word = Word.create(
-      new WordId(command.id),
+      WordId.of(command.id),
       command.languageId,
-      new CountryId(command.countryId),
-      WordTermCollection.create(command.terms),
-      new UserId(command.userId)
+      CountryId.of(command.countryId),
+      WordTermCollection.of(command.terms),
+      UserId.of(command.userId)
     );
 
     await this.wordRepository.save(word);

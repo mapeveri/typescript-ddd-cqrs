@@ -1,21 +1,29 @@
-import ExpressionTerm, { ExpressionTermDTO } from './expressionTerm';
+import ExpressionTerm, { ExpressionTermPrimitives } from './expressionTerm';
 
 export default class ExpressionTermCollection {
   terms: Array<ExpressionTerm>;
 
-  constructor(terms: Array<ExpressionTerm>) {
+  private constructor(terms: Array<ExpressionTerm>) {
     this.terms = terms;
   }
 
-  static create(primitiveTerms: Array<ExpressionTermDTO>): ExpressionTermCollection {
-    const terms = primitiveTerms.map((expressionTerm: ExpressionTermDTO): ExpressionTerm => {
-      return ExpressionTerm.fromDto(expressionTerm);
+  static of(primitiveTerms: Array<ExpressionTermPrimitives>): ExpressionTermCollection {
+    const terms = primitiveTerms.map((expressionTerm: ExpressionTermPrimitives): ExpressionTerm => {
+      return ExpressionTerm.of(expressionTerm);
     });
 
     return new this(terms);
   }
 
-  toArray(): Array<ExpressionTermDTO> {
+  static fromPrimitives(primitiveTerms: Array<ExpressionTermPrimitives>): ExpressionTermCollection {
+    const terms = primitiveTerms.map((expressionTerm: ExpressionTermPrimitives): ExpressionTerm => {
+      return ExpressionTerm.fromPrimitives(expressionTerm);
+    });
+    
+    return new this(terms);
+  }
+
+  toArray(): Array<ExpressionTermPrimitives> {
     return this.terms.map((term: ExpressionTerm) => term.toObject());
   }
 }

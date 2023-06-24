@@ -3,9 +3,19 @@ import InvalidArgumentException from '../exceptions/invalidArgumentException';
 import { ValueObject } from './valueObject';
 
 export class Uuid extends ValueObject<string> {
-  constructor(value: string) {
+  protected constructor(value: string) {
     super(value);
-    this.validateUuid(value);
+  }
+
+  static fromPrimitives(value: string): Uuid {
+    return new this(value);
+  }
+
+  static of(value: string): Uuid {
+    const instance = new this(value);
+    instance.validateValueIsDefined(value);
+    instance.validateUuid(value);
+    return instance;
   }
 
   static random(): Uuid {

@@ -10,6 +10,6 @@ export default class LanguageMother {
   static random(props?: LanguageMotherProps): Language {
     const { name, languageId } = props ?? {};
 
-    return new Language(name ?? faker.random.word(), languageId ?? faker.random.word());
+    return Language.of({ name: name ?? faker.random.word(), languageId: languageId ?? faker.random.word() });
   }
 }
