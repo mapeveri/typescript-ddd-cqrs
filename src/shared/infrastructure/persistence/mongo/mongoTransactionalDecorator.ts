@@ -11,7 +11,7 @@ export default class MongoTransactionalDecorator {
     session.startTransaction();
 
     try {
-      this.handler.handle(command);
+      await this.handler.handle(command);
       session.commitTransaction();
     } catch (e) {
       if (session.transaction.isActive) {

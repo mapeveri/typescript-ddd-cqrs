@@ -11,7 +11,7 @@ export default class TypeOrmTransactionalDecorator {
 
     try {
       await queryRunner.startTransaction();
-      this.handler.handle(command);
+      await this.handler.handle(command);
       await queryRunner.commitTransaction();
     } catch (e) {
       await queryRunner.rollbackTransaction();
