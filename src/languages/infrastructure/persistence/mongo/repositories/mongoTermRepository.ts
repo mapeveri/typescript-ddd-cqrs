@@ -1,16 +1,13 @@
 import Term from '@src/languages/domain/term/term';
 import TermRepository from '@src/languages/domain/term/termRepository';
-import MongoConnection from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
-import { Collection, Document } from 'mongodb';
+import MongoRepository from '@src/shared/infrastructure/persistence/mongo/mongoRepository';
+import { Document } from 'mongodb';
 
-export default class MongoTermRepository implements TermRepository {
-  private collection: Collection<any>;
-
+export default class MongoTermRepository extends MongoRepository<Term> implements TermRepository {
   constructor() {
-    MongoConnection.getInstance().then((mongo: MongoConnection) => {
-      this.collection = mongo.db.collection('terms');
-    });
+    super('terms');
   }
+
   async search(term: string): Promise<Term[] | null> {
     const regexTerm = new RegExp(term, 'i');
     const searchQuery = {
@@ -29,14 +26,10 @@ export default class MongoTermRepository implements TermRepository {
         doc.hashtags,
         doc.likes,
         doc.disLikes,
-        doc.favourites,
+        doc.favourites
       );
     });
 
     return terms;
-  }
-
-  async save(term: Term): Promise<void> {
-    await this.collection.updateOne({ id: term.id }, { $set: term }, { upsert: true });
   }
 }

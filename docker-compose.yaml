@@ -13,10 +13,8 @@ services:
     ports:
       - "4000:${SERVER_PORT}"
     depends_on:
-      db:
-        condition: service_healthy
-      mongodb:
-        condition: service_healthy
+      - db
+      - mongodb
 
   db:
     image: postgres
@@ -29,20 +27,20 @@ services:
       - ./docker/data/pgdata:/var/lib/postgresql/data/pgdata
     ports:
       - "5435:5432"
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-
-  mongodb:
-    image: mongo:6-jammy
+      
+  mongo1:
+    image: mongo:6
     ports:
       - '27017:27017'
     volumes:
       - ./docker/data/mongodata:/data/db
-    healthcheck:
-      test: ["CMD-SHELL", "echo 'db.runCommand(\"ping\").ok' | mongosh mongodb:27017/test --quiet"] 
-      interval: 10s
-      timeout: 5s
-      retries: 3
+    command: "--bind_ip_all --replSet rs0"
+
+  mongodb:
+    image: mongo:6
+    restart: "no"
+    volumes:
+      - ./docker/scripts/mongo/mongo-init.sh:/scripts/mongo-init.sh
+    depends_on:
+      - mongo1
+    command: bash /scripts/mongo-init.sh
