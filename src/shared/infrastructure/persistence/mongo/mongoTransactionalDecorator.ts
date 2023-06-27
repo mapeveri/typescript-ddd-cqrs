@@ -7,12 +7,12 @@ export default class MongoTransactionalDecorator {
 
   async handle(command: Command): Promise<void> {
     const connection = await MongoConnection.getInstance();
-    const session = connection.client.startSession();
+    const session = connection.startSession();
     session.startTransaction();
 
     try {
       await this.handler.handle(command);
-      session.commitTransaction();
+      await session.commitTransaction();
     } catch (e) {
       if (session.transaction.isActive) {
         await session.abortTransaction();
