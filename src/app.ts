@@ -6,7 +6,7 @@ import methodOverride from 'method-override';
 
 import configureContainer from '@src/shared/infrastructure/dependencyInjection/container';
 import { configureApiRouter } from '@src/languages/infrastructure/ui/api/v1/router';
-import AppDataSource from '@src/shared/infrastructure/persistence/typeOrm/dataSource';
+import { configureDatabase } from '@src/shared/infrastructure/persistence/typeOrm/dataSource';
 import { configureCommandBus } from '@src/shared/infrastructure/buses/configureCommandBus';
 import { configureQueryBus } from '@src/shared/infrastructure/buses/configureQueryBus';
 import { configureEventBus } from '@src/shared/infrastructure/buses/configureEventBus';
@@ -35,7 +35,7 @@ async function createApp(): Promise<ExpressApp> {
   app.use(cors(corsOptions));
   app.use(methodOverride('X-HTTP-Method-Override'));
 
-  await AppDataSource.initialize();
+  await configureDatabase();
 
   configureQueryBus(container);
   configureCommandBus(container);

@@ -1,12 +1,15 @@
 import { Command } from '@src/shared/domain/buses/commandBus/command';
 import { CommandHandler } from '@src/shared/domain/buses/commandBus/commandHandler';
-import AppDataSource from '@src/shared/infrastructure/persistence/typeOrm/dataSource';
+import {
+  queryRunner as queryRunnerPromise,
+  releaseQueryRunner,
+} from '@src/shared/infrastructure/persistence/typeOrm/dataSource';
 
 export default class TypeOrmTransactionalDecorator {
   constructor(readonly handler: CommandHandler) {}
 
   async handle(command: Command): Promise<void> {
-    const queryRunner = AppDataSource.createQueryRunner();
+    const queryRunner = await queryRunnerPromise;
     await queryRunner.connect();
 
     try {
@@ -17,7 +20,7 @@ export default class TypeOrmTransactionalDecorator {
       await queryRunner.rollbackTransaction();
       throw e;
     } finally {
-      await queryRunner.release();
+      await releaseQueryRunner();
     }
   }
 }

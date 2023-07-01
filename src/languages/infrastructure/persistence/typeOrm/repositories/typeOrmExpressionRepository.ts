@@ -1,22 +1,18 @@
-import { Repository } from 'typeorm';
-import ExpressionEntity from '../entities/expression';
-import AppDataSource from '@src/shared/infrastructure/persistence/typeOrm/dataSource';
 import ExpressionRepository from '@src/languages/domain/expression/expressionRepository';
 import ExpressionId from '@src/languages/domain/expression/valueObjects/expressionId';
 import Expression from '@src/languages/domain/expression/expression';
+import TypeOrmRepository from '@src/shared/infrastructure/persistence/typeOrm/typeOrmRepository';
 
-export default class TypeOrmExpressionRepository implements ExpressionRepository {
-  private repository: Repository<Expression>;
-
+export default class TypeOrmExpressionRepository extends TypeOrmRepository implements ExpressionRepository {
   constructor() {
-    this.repository = AppDataSource.manager.getRepository(ExpressionEntity);
+    super();
   }
 
   async findById(id: ExpressionId): Promise<Expression | null> {
-    return await this.repository.findOne({ where: { id: id } as any });
+    return await this.em.findOne(Expression, { where: { id: id } } as any);
   }
 
   async save(expression: Expression): Promise<any> {
-    return await this.repository.save(expression);
+    return await this.em.save(expression);
   }
 }

@@ -1,22 +1,18 @@
-import { Repository } from 'typeorm';
-import UserEntity from '../entities/user';
-import AppDataSource from '@src/shared/infrastructure/persistence/typeOrm/dataSource';
 import UserRepository from '@src/languages/domain/user/userRepository';
 import User from '@src/languages/domain/user/user';
 import UserId from '@src/languages/domain/user/valueObjects/userId';
+import TypeOrmRepository from '@src/shared/infrastructure/persistence/typeOrm/typeOrmRepository';
 
-export default class TypeOrmUserRepository implements UserRepository {
-  private repository: Repository<User>;
-
+export default class TypeOrmUserRepository extends TypeOrmRepository implements UserRepository {
   constructor() {
-    this.repository = AppDataSource.manager.getRepository(UserEntity);
+    super();
   }
 
   async findById(id: UserId): Promise<User | null> {
-    return await this.repository.findOne({ where: { id: id as any } });
+    return await this.em.findOne(User, { where: { id: id } } as any);
   }
 
   async save(user: User): Promise<void> {
-    await this.repository.save(user);
+    await this.em.save(user);
   }
 }

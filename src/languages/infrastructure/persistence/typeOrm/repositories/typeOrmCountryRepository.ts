@@ -1,26 +1,22 @@
-import { Repository } from 'typeorm';
-import CountryEntity from '../entities/country';
-import AppDataSource from '@src/shared/infrastructure/persistence/typeOrm/dataSource';
 import Country from '@src/languages/domain/country/country';
 import CountryRepository from '@src/languages/domain/country/countryRepository';
-import UserId from '@src/languages/domain/user/valueObjects/userId';
+import CountryId from '@src/languages/domain/country/valueObjects/countryId';
+import TypeOrmRepository from '@src/shared/infrastructure/persistence/typeOrm/typeOrmRepository';
 
-export default class TypeOrmCountryRepository implements CountryRepository {
-  private repository: Repository<Country>;
-
+export default class TypeOrmCountryRepository extends TypeOrmRepository implements CountryRepository {
   constructor() {
-    this.repository = AppDataSource.manager.getRepository(CountryEntity);
+    super();
   }
 
   async findAll(): Promise<Country[]> {
-    return await this.repository.find();
+    return await this.em.find(Country);
   }
 
-  async findById(id: UserId): Promise<Country | null> {
-    return await this.repository.findOne({ where: { id: id as any } });
+  async findById(id: CountryId): Promise<Country | null> {
+    return await this.em.findOne(Country, { where: { id: id } as any });
   }
 
   async save(country: Country): Promise<any> {
-    return await this.repository.save(country);
+    return await this.em.save(country);
   }
 }
