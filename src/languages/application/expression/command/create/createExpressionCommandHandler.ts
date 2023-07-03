@@ -22,6 +22,6 @@ export default class CreateExpressionCommandHandler implements CommandHandler {
 
     await this.expressionRepository.save(expression);
 
-    this.eventBus.publish(expression.pullDomainEvents());
+    await this.eventBus.publish(expression.pullDomainEvents());
   }
 }

@@ -22,6 +22,6 @@ export default class CreateWordCommandHandler implements CommandHandler {
 
     await this.wordRepository.save(word);
 
-    this.eventBus.publish(word.pullDomainEvents());
+    await this.eventBus.publish(word.pullDomainEvents());
   }
 }
