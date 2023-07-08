@@ -2,9 +2,9 @@ import { DataSource, EntityManager, QueryRunner } from 'typeorm';
 
 export class DataSourceHandler {
   private static instance: DataSourceHandler;
-  private dataSource: DataSource | null;
-  private queryRunner: QueryRunner | null;
-  private entityManager: EntityManager | null;
+  private dataSourceValue: DataSource | null;
+  private queryRunnerValue: QueryRunner | null;
+  private entityManagerValue: EntityManager | null;
 
   private constructor() {}
 
@@ -24,55 +24,54 @@ export class DataSourceHandler {
       entities: [`${__dirname}../../../../../languages/infrastructure/persistence/typeOrm/entities/*.ts`],
       subscribers: [],
       migrations: [`${__dirname}../../../../../../migrations/**/*{.ts,.js}`],
+      poolSize: 10,
     });
 
-    this.dataSource = await dataSource.initialize();
-
-    this.createQueryRunner();
-  }
-
-  entityManagerValue(): EntityManager {
-    if (!this.entityManager) {
-      throw Error('Entity manager empty...');
-    }
-
-    return this.entityManager;
-  }
-
-  queryRunnerValue(): QueryRunner {
-    if (!this.queryRunner) {
-      throw Error('QueryRunner empty...');
-    }
-
-    return this.queryRunner;
+    this.dataSourceValue = await dataSource.initialize();
   }
 
   async releaseQueryRunner(): Promise<void> {
-    if (!this.queryRunner) {
+    if (!this.queryRunnerValue) {
       return;
     }
 
-    if (this.queryRunner.isTransactionActive) {
+    if (this.queryRunnerValue.isTransactionActive) {
       throw Error('Cannot release queryRunner during an active transaction');
     }
 
-    await this.queryRunner.release();
-    this.queryRunner = null;
-    this.entityManager = null;
+    await this.queryRunnerValue.release();
+    this.queryRunnerValue = null;
+    this.entityManagerValue = null;
 
     this.createQueryRunner();
   }
 
+  get entityManager(): EntityManager {
+    if (!this.entityManagerValue) {
+      throw Error('Entity manager empty...');
+    }
+
+    return this.entityManagerValue;
+  }
+
+  get queryRunner(): QueryRunner {
+    if (!this.queryRunnerValue) {
+      throw Error('QueryRunner empty...');
+    }
+
+    return this.queryRunnerValue;
+  }
+
   private createQueryRunner(): void {
-    if (!this.dataSource || !this.dataSource.isInitialized) {
+    if (!this.dataSourceValue || !this.dataSourceValue.isInitialized) {
       throw Error('DataSource not initialized...');
     }
 
-    if (this.queryRunner) {
+    if (this.queryRunnerValue) {
       return;
     }
 
-    this.queryRunner = this.dataSource.createQueryRunner();
-    this.entityManager = this.queryRunner.manager;
+    this.queryRunnerValue = this.dataSourceValue.createQueryRunner();
+    this.entityManagerValue = this.queryRunnerValue.manager;
   }
 }

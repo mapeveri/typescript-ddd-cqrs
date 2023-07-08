@@ -7,7 +7,7 @@ export default class TypeOrmTransactionalDecorator {
 
   async handle(command: Command): Promise<void> {
     const dataSourceHandler = DataSourceHandler.getInstance();
-    const queryRunner = dataSourceHandler.queryRunnerValue();
+    const queryRunner = dataSourceHandler.queryRunner;
     await queryRunner.connect();
 
     try {

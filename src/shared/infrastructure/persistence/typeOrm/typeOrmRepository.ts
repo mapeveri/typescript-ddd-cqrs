@@ -3,6 +3,6 @@ import { DataSourceHandler } from './dataSource';
 
 export default abstract class TypeOrmRepository {
   get em(): EntityManager {
-    return DataSourceHandler.getInstance().entityManagerValue();
+    return DataSourceHandler.getInstance().entityManager;
   }
 }
