@@ -6,7 +6,7 @@ import methodOverride from 'method-override';
 
 import configureContainer from '@src/shared/infrastructure/dependencyInjection/container';
 import { configureApiRouter } from '@src/languages/infrastructure/ui/api/v1/router';
-import { DataSourceHandler } from '@src/shared/infrastructure/persistence/typeOrm/dataSource';
+import { DataSourceHandler } from '@src/shared/infrastructure/persistence/typeOrm/dataSourceHandler';
 import { configureCommandBus } from '@src/shared/infrastructure/buses/configureCommandBus';
 import { configureQueryBus } from '@src/shared/infrastructure/buses/configureQueryBus';
 import { configureEventBus } from '@src/shared/infrastructure/buses/configureEventBus';
