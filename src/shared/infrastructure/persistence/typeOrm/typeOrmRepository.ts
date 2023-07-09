@@ -1,5 +1,5 @@
 import { EntityManager } from 'typeorm';
-import { DataSourceHandler } from './dataSource';
+import { DataSourceHandler } from './dataSourceHandler';
 
 export default abstract class TypeOrmRepository {
   get em(): EntityManager {
