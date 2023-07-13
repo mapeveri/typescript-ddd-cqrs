@@ -16,7 +16,7 @@ Configuration for development.
 ```shell script
     docker-compose run app npm run typeorm migration:run
 ```
-5. Create user via google.
+5. Create user with google (check oauth2 section). It's to get a token from google and it allow you to use the endpoint /api/v1/auth/login
 
 ### Running
 
