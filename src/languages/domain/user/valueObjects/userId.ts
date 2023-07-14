@@ -6,9 +6,8 @@ export default class UserId extends Uuid {
     return super.of(value) as UserId;
   }
 
-  static fromEmailWithValidation(value: string, email: string): UserId {
-    const id = Uuid.of(value);
-    const instance = new UserId(id.value);
+  static fromIdWithEmailVerification(emailUuid5: string, email: string): UserId {
+    const instance = this.of(emailUuid5);
     instance.validateEmail(email);
     return instance;
   }
