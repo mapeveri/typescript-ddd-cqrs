@@ -1,6 +1,6 @@
 import { DomainEvent } from '@src/shared/domain/buses/eventBus/domainEvent';
 
-export default class UserAuthenticatedEvent extends DomainEvent {
+export default class AuthSessionCreatedEvent extends DomainEvent {
   constructor(
     public readonly id: string,
     public readonly name: string,
@@ -26,10 +26,10 @@ export default class UserAuthenticatedEvent extends DomainEvent {
   }
 
   public static eventTypeName(): string {
-    return 'user.authenticated';
+    return 'auth_session.created';
   }
 
   public static aggregateTypeName(): string {
-    return 'user';
+    return 'auth_session';
   }
 }

@@ -1,4 +1,5 @@
 import { DataSource, EntityManager } from 'typeorm';
+import dataSource from './dataSource';
 
 export class DataSourceHandler {
   private static instance: DataSourceHandler;
@@ -15,17 +16,6 @@ export class DataSourceHandler {
   }
 
   async initialize(): Promise<void> {
-    const dataSource = new DataSource({
-      type: 'postgres',
-      url: process.env.POSTGRESQL_DB_URL,
-      synchronize: false,
-      logging: true,
-      entities: [`${__dirname}../../../../../languages/infrastructure/persistence/typeOrm/entities/*.ts`],
-      subscribers: [],
-      migrations: [`${__dirname}../../../../../../migrations/**/*{.ts,.js}`],
-      poolSize: 10,
-    });
-
     this.dataSourceValue = await dataSource.initialize();
   }
 

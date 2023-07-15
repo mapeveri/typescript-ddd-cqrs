@@ -1,9 +1,10 @@
 import { expect } from '@jest/globals';
 import LoginUserCommand from '@src/languages/application/auth/command/loginUser/loginUserCommand';
-import UserAuthenticatedEvent from '@src/languages/domain/user/domainEvents/userAuthenticatedEvent';
+import AuthSessionCreatedEvent from '@src/languages/domain/auth/domainEvents/authSessionCreatedEvent';
+
 import faker from 'faker';
 
-interface UserAuthenticatedEventProps {
+interface AuthSessionCreatedEventProps {
   id?: string;
   name?: string;
   email?: string;
@@ -12,8 +13,8 @@ interface UserAuthenticatedEventProps {
   photo?: string;
 }
 
-export class UserAuthenticatedEventMother {
-  static random(props?: UserAuthenticatedEventProps): UserAuthenticatedEvent {
+export class AuthSessionCreatedEventMother {
+  static random(props?: AuthSessionCreatedEventProps): AuthSessionCreatedEvent {
     const {
       id = faker.datatype.uuid(),
       name = faker.name.findName(),
@@ -24,10 +25,10 @@ export class UserAuthenticatedEventMother {
     } = props ?? {};
 
     const eventId = expect.any(String) as unknown as string;
-    return new UserAuthenticatedEvent(id, name, email, token, provider, photo, eventId);
+    return new AuthSessionCreatedEvent(id, name, email, token, provider, photo, eventId);
   }
 
-  static createFromLoginUserCommand(command: LoginUserCommand): UserAuthenticatedEvent {
+  static createFromLoginUserCommand(command: LoginUserCommand): AuthSessionCreatedEvent {
     return this.random({
       id: command.id,
       name: command.name,
