@@ -43,7 +43,7 @@ export default class Expression extends AggregateRoot {
     return expression;
   }
 
-  toObject(): object {
+  toPrimitives(): object {
     return {
       id: this.id,
       language_id: this.languageId,

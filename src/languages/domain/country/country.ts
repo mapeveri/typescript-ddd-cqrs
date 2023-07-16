@@ -18,7 +18,7 @@ export default class Country {
     return new this(id, name, iso, languages);
   }
 
-  toObject(): object {
+  toPrimitives(): object {
     return {
       id: this.id.toString(),
       name: this.name,

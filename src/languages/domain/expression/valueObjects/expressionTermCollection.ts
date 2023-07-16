@@ -24,6 +24,6 @@ export default class ExpressionTermCollection {
   }
 
   toArray(): Array<ExpressionTermPrimitives> {
-    return this.terms.map((term: ExpressionTerm) => term.toObject());
+    return this.terms.map((term: ExpressionTerm) => term.toPrimitives());
   }
 }

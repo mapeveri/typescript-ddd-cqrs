@@ -26,7 +26,7 @@ export default class ExpressionTerm {
     return new ExpressionTerm(wordTerm.expression, wordTerm.description, wordTerm.example, wordTerm.hashtags);
   }
 
-  toObject(): ExpressionTermPrimitives {
+  toPrimitives(): ExpressionTermPrimitives {
     return {
       expression: this.expression,
       description: this.description,

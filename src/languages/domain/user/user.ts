@@ -28,7 +28,7 @@ export default class User extends AggregateRoot {
     this.photo = photo;
   }
 
-  toObject(): object {
+  toPrimitives(): object {
     return {
       id: this.id.toString(),
       name: this.name,

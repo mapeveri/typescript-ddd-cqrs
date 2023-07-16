@@ -28,7 +28,7 @@ export default class Term {
     return new this(id, title, description, example, type, hashtags, likes, disLikes, favourites);
   }
 
-  toObject(): object {
+  toPrimitives(): object {
     return {
       id: this.id,
       title: this.title,

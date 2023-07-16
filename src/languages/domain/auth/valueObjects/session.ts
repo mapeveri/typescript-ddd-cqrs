@@ -29,7 +29,7 @@ export default class Session {
     return new Session(session.name, session.email, session.provider, session.token, session.photo);
   }
 
-  toObject(): SessionPrimitives {
+  toPrimitives(): SessionPrimitives {
     return {
       name: this.name,
       email: this.email,

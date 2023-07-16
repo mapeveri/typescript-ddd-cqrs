@@ -7,6 +7,6 @@ export default class FindUserResponse extends QueryResponse {
   }
 
   static fromUser(user: User | null): FindUserResponse {
-    return new FindUserResponse(user?.toObject());
+    return new FindUserResponse(user?.toPrimitives());
   }
 }

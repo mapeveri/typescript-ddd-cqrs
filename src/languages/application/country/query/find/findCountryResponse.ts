@@ -7,6 +7,6 @@ export default class FindCountryResponse extends QueryResponse {
   }
 
   static fromCountry(country: Country | null): FindCountryResponse {
-    return new FindCountryResponse(country?.toObject());
+    return new FindCountryResponse(country?.toPrimitives());
   }
 }

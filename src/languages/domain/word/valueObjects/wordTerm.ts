@@ -26,7 +26,7 @@ export default class WordTerm {
     return new WordTerm(wordTerm.word, wordTerm.description, wordTerm.example, wordTerm.hashtags);
   }
 
-  toObject(): WordTermPrimitives {
+  toPrimitives(): WordTermPrimitives {
     return {
       word: this.word,
       description: this.description,

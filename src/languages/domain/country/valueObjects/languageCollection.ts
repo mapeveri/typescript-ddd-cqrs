@@ -24,6 +24,6 @@ export default class LanguageCollection {
   }
 
   toArray(): Array<LanguagePrimitives> {
-    return this.languages.map((language: Language) => language.toObject());
+    return this.languages.map((language: Language) => language.toPrimitives());
   }
 }

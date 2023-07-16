@@ -24,6 +24,6 @@ export default class WordTermCollection {
   }
 
   toArray(): Array<WordTermPrimitives> {
-    return this.terms.map((term: WordTerm) => term.toObject());
+    return this.terms.map((term: WordTerm) => term.toPrimitives());
   }
 }

@@ -30,7 +30,7 @@ export default class Word extends AggregateRoot {
     return word;
   }
 
-  toObject(): object {
+  toPrimitives(): object {
     return {
       id: this.id.toString(),
       languageId: this.languageId,

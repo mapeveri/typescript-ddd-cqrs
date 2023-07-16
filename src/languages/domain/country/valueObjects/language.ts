@@ -20,7 +20,7 @@ export default class Language {
     return new Language(language.name, language.languageId);
   }
 
-  toObject(): LanguagePrimitives {
+  toPrimitives(): LanguagePrimitives {
     return {
       name: this.name,
       languageId: this.languageId,

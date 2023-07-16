@@ -7,6 +7,6 @@ export default class SearchTermResponse extends QueryResponse {
   }
 
   static fromTerms(terms: Term[] | null): SearchTermResponse {
-    return new SearchTermResponse(terms?.map((term: Term) => term?.toObject()));
+    return new SearchTermResponse(terms?.map((term: Term) => term?.toPrimitives()));
   }
 }
