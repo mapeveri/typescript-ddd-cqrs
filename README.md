@@ -1,5 +1,7 @@
 # Typescript-ddd-cqrs backend
 
+Api Rest with Express + Hexagonal Architecture + DDD & CQRS.
+
 ## Development
 
 Configuration for development.
@@ -16,7 +18,7 @@ Configuration for development.
 ```shell script
     docker-compose run app npm run typeorm migration:run
 ```
-5. Create user with google (check oauth2 section). It's to get a token from google and it allow you to use the endpoint /api/v1/auth/login
+5. Create user with google (check oauth2 section). It's to get a token from google and it allow you to use the endpoint /api/v1/auth/login to log in in the application.
 
 ### Running
 
