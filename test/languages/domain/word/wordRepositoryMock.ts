@@ -15,4 +15,8 @@ export class WordRepositoryMock implements WordRepository {
   expectSaveCalledWith(word: Word): void {
     expect(this.save).toHaveBeenCalledWith(word);
   }
+
+  expectSaveNotCalled(): void {
+    expect(this.save).not.toHaveBeenCalled();
+  }
 }

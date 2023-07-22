@@ -17,4 +17,8 @@ export class CountryRepositoryMock implements CountryRepository {
   expectSaveCalledWith(country: Country): void {
     expect(this.save).toHaveBeenCalledWith(country);
   }
+
+  expectSaveNotCalled(): void {
+    expect(this.save).not.toHaveBeenCalled();
+  }
 }

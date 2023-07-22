@@ -6,8 +6,33 @@ import ExpressionTerm from '@src/languages/domain/expression/valueObjects/expres
 import ExpressionTermMother, { ExpressionTermMotherProps } from './valueObjects/expressionTermMother';
 import { ExpressionIdMother } from './valueObjects/expressionIdMother';
 import ExpressionTermCollectionMother from './valueObjects/expressionTermCollectionMother';
+import faker from 'faker';
+import ExpressionId from '@src/languages/domain/expression/valueObjects/expressionId';
+import CountryId from '@src/languages/domain/country/valueObjects/countryId';
+import ExpressionTermCollection from '@src/languages/domain/expression/valueObjects/expressionTermCollection';
+import { UserIdMother } from '../user/valueObjects/userIdMother';
+
+interface ExpressionMotherProps {
+  id?: ExpressionId;
+  languageId?: string;
+  countryId?: CountryId;
+  terms: ExpressionTermCollection;
+  userId: UserId;
+}
 
 export default class ExpressionMother {
+  static random(props?: ExpressionMotherProps): Expression {
+    const { id, languageId, countryId, terms, userId } = props ?? {};
+
+    return new Expression(
+      id ?? ExpressionIdMother.random(),
+      languageId ?? faker.datatype.uuid(),
+      countryId ?? CountryIdMother.random(),
+      terms ?? ExpressionTermCollectionMother.random([]),
+      userId ?? UserIdMother.random()
+    );
+  }
+
   static createFromCreateExpressionCommand(command: CreateExpressionCommand, userId: UserId): Expression {
     const terms = command.terms.map((term: { [key: string]: any }): ExpressionTerm => {
       return ExpressionTermMother.random({

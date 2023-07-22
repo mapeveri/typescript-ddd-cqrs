@@ -15,4 +15,8 @@ export class ExpressionRepositoryMock implements ExpressionRepository {
   expectSaveCalledWith(expression: Expression): void {
     expect(this.save).toHaveBeenCalledWith(expression);
   }
+
+  expectSaveNotCalled(): void {
+    expect(this.save).not.toHaveBeenCalled();
+  }
 }
