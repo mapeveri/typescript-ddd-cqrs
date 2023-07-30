@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { ContainerBuilder } from 'node-dependency-injection';
 import SearchTermsGetController from '../controllers/terms/searchTermsGetController';
+import { INestApplicationContext } from '@nestjs/common';
 
-export const registerLoginRequiredRoutes = (router: Router, container: ContainerBuilder) => {
-  const searchTermsGetController: SearchTermsGetController = container.get(SearchTermsGetController);
+export const registerLoginRequiredRoutes = (router: Router, app: INestApplicationContext) => {
+  const searchTermsGetController: SearchTermsGetController = app.get(SearchTermsGetController);
 
   router.get('/search/:term', searchTermsGetController.run.bind(searchTermsGetController));
 };

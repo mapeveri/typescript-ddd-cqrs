@@ -1,7 +1,9 @@
+import { Injectable } from '@nestjs/common';
 import { DomainEvent } from '@src/shared/domain/buses/eventBus/domainEvent';
 import { EventBus } from '@src/shared/domain/buses/eventBus/eventBus';
 import { EventHandler } from '@src/shared/domain/buses/eventBus/eventHandler';
 
+@Injectable()
 export default class MemoryEventBus implements EventBus {
   private static handlers: { [key: string]: EventHandler[] } = {};
 

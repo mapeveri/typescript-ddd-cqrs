@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { ContainerBuilder } from 'node-dependency-injection';
 import ExpressionPostController from '../controllers/expressions/expressionPostController';
+import { INestApplicationContext } from '@nestjs/common';
 
-export const registerLoginRequiredRoutes = (router: Router, container: ContainerBuilder) => {
-  const expressionPostController: ExpressionPostController = container.get(ExpressionPostController);
+export const registerLoginRequiredRoutes = (router: Router, app: INestApplicationContext) => {
+  const expressionPostController: ExpressionPostController = app.get(ExpressionPostController);
 
   router.post('/expressions', expressionPostController.run.bind(expressionPostController));
 };

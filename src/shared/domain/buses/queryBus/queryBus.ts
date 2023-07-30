@@ -6,3 +6,5 @@ export interface QueryBus {
   ask(query: Query): Promise<QueryResponse>;
   register(query: Query, handler: QueryHandler): void;
 }
+
+export const QUERY_BUS = Symbol('QueryBus');

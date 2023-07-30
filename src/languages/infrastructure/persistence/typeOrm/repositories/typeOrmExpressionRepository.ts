@@ -2,7 +2,9 @@ import ExpressionRepository from '@src/languages/domain/expression/expressionRep
 import ExpressionId from '@src/languages/domain/expression/valueObjects/expressionId';
 import Expression from '@src/languages/domain/expression/expression';
 import TypeOrmRepository from '@src/shared/infrastructure/persistence/typeOrm/typeOrmRepository';
+import { Injectable } from '@nestjs/common';
 
+@Injectable()
 export default class TypeOrmExpressionRepository extends TypeOrmRepository implements ExpressionRepository {
   constructor() {
     super();

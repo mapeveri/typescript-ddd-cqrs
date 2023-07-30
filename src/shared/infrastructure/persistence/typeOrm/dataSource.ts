@@ -5,7 +5,7 @@ export default new DataSource({
   url: process.env.POSTGRESQL_DB_URL,
   synchronize: false,
   logging: true,
-  entities: [`${__dirname}../../../../../languages/infrastructure/persistence/typeOrm/entities/*.ts`],
+  entities: [`${__dirname}../../../../../languages/infrastructure/persistence/typeOrm/entities/*{.ts,.js}`],
   subscribers: [],
   migrations: [`${__dirname}../../../../../../migrations/**/*{.ts,.js}`],
   poolSize: 10,

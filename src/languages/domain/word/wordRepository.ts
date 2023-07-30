@@ -8,3 +8,5 @@ interface WordRepository {
 }
 
 export default WordRepository;
+
+export const WORD_REPOSITORY = Symbol('WordRepository');

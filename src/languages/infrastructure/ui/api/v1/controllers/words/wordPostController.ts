@@ -4,11 +4,12 @@ import { Controller } from '../../controller';
 import CreateWordCommand from '@src/languages/application/word/command/create/createWordCommand';
 import InvalidParameters from '@src/shared/infrastructure/api/apiErrorResponses/InvalidParameters';
 import ApiExceptionSerializer from '@src/shared/infrastructure/api/serializers/apiExceptionSerializer';
-import { CommandBus } from '@src/shared/domain/buses/commandBus/commandBus';
+import { COMMAND_BUS, CommandBus } from '@src/shared/domain/buses/commandBus/commandBus';
 import { WordTermPrimitives } from '@src/languages/domain/word/valueObjects/wordTerm';
+import { Inject } from '@nestjs/common';
 
 export default class WordPostController implements Controller {
-  public constructor(private commandBus: CommandBus) {}
+  public constructor(@Inject(COMMAND_BUS) private commandBus: CommandBus) {}
 
   async run(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {

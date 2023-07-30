@@ -5,3 +5,5 @@ interface LoggerInterface {
 }
 
 export default LoggerInterface;
+
+export const LOGGER_INTERFACE = Symbol('LoggerInterface');

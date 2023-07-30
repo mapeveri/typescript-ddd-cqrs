@@ -8,3 +8,5 @@ interface ExpressionRepository {
 }
 
 export default ExpressionRepository;
+
+export const EXPRESSION_REPOSITORY = Symbol('ExpressionRepository');

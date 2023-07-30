@@ -1,7 +1,9 @@
+import { Injectable } from '@nestjs/common';
 import { Command } from '@src/shared/domain/buses/commandBus/command';
 import { CommandBus } from '@src/shared/domain/buses/commandBus/commandBus';
 import { CommandHandler } from '@src/shared/domain/buses/commandBus/commandHandler';
 
+@Injectable()
 export default class MemoryCommandBus implements CommandBus {
   public static readonly handlers: { [key: string]: CommandHandler } = {};
 

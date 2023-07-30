@@ -2,7 +2,9 @@ import UserRepository from '@src/languages/domain/user/userRepository';
 import User from '@src/languages/domain/user/user';
 import UserId from '@src/languages/domain/user/valueObjects/userId';
 import TypeOrmRepository from '@src/shared/infrastructure/persistence/typeOrm/typeOrmRepository';
+import { Injectable } from '@nestjs/common';
 
+@Injectable()
 export default class TypeOrmUserRepository extends TypeOrmRepository implements UserRepository {
   constructor() {
     super();

@@ -1,9 +1,7 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './languages/infrastructure/ui/api/v1/controllers/app.controller';
+import { LanguageModule } from './languages/infrastructure/nestjs/language.module';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [],
+  imports: [LanguageModule],
 })
 export class AppModule {}

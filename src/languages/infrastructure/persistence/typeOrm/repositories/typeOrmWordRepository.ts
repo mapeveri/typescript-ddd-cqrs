@@ -2,7 +2,9 @@ import WordRepository from '@src/languages/domain/word/wordRepository';
 import Word from '@src/languages/domain/word/word';
 import WordId from '@src/languages/domain/word/valueObjects/wordId';
 import TypeOrmRepository from '@src/shared/infrastructure/persistence/typeOrm/typeOrmRepository';
+import { Injectable } from '@nestjs/common';
 
+@Injectable()
 export default class TypeOrmWordRepository extends TypeOrmRepository implements WordRepository {
   constructor() {
     super();

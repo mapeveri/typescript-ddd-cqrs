@@ -1,6 +1,6 @@
-import WordRepository from '@src/languages/domain/word/wordRepository';
+import WordRepository, { WORD_REPOSITORY } from '@src/languages/domain/word/wordRepository';
 import { CommandHandler } from '@src/shared/domain/buses/commandBus/commandHandler';
-import { EventBus } from '@src/shared/domain/buses/eventBus/eventBus';
+import { EVENT_BUS, EventBus } from '@src/shared/domain/buses/eventBus/eventBus';
 import CreateWordCommand from './createWordCommand';
 import Word from '@src/languages/domain/word/word';
 import WordId from '@src/languages/domain/word/valueObjects/wordId';
@@ -8,9 +8,13 @@ import CountryId from '@src/languages/domain/country/valueObjects/countryId';
 import UserId from '@src/languages/domain/user/valueObjects/userId';
 import WordTermCollection from '@src/languages/domain/word/valueObjects/wordTermCollection';
 import WordAlreadyExistsException from '@src/languages/domain/word/exceptions/WordAlreadyExistsException';
+import { Inject } from '@nestjs/common';
 
 export default class CreateWordCommandHandler implements CommandHandler {
-  constructor(private wordRepository: WordRepository, private eventBus: EventBus) {}
+  constructor(
+    @Inject(WORD_REPOSITORY) private wordRepository: WordRepository,
+    @Inject(EVENT_BUS) private eventBus: EventBus
+  ) {}
 
   async handle(command: CreateWordCommand): Promise<void> {
     const wordId = WordId.of(command.id);

@@ -4,11 +4,12 @@ import { Controller } from '../../controller';
 import CreateCountryCommand from '@src/languages/application/country/command/create/createCountryCommand';
 import InvalidParameters from '@src/shared/infrastructure/api/apiErrorResponses/InvalidParameters';
 import ApiExceptionSerializer from '@src/shared/infrastructure/api/serializers/apiExceptionSerializer';
-import { CommandBus } from '@src/shared/domain/buses/commandBus/commandBus';
+import { COMMAND_BUS, CommandBus } from '@src/shared/domain/buses/commandBus/commandBus';
 import { LanguagePrimitives } from '@src/languages/domain/country/valueObjects/language';
+import { Inject } from '@nestjs/common';
 
 export default class CountryPostController implements Controller {
-  public constructor(private commandBus: CommandBus) {}
+  public constructor(@Inject(COMMAND_BUS) private commandBus: CommandBus) {}
 
   async run(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
