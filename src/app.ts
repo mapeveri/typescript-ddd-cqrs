@@ -4,7 +4,6 @@ import cors from 'cors';
 import helmet from 'helmet';
 import methodOverride from 'method-override';
 
-import configureContainer from '@src/shared/infrastructure/dependencyInjection/container';
 import { configureApiRouter } from '@src/languages/infrastructure/ui/api/v1/router';
 import { DataSourceHandler } from '@src/shared/infrastructure/persistence/typeOrm/dataSourceHandler';
 import { configureCommandBus } from '@src/shared/infrastructure/buses/configureCommandBus';
@@ -27,8 +26,6 @@ async function createApp(): Promise<ExpressApp> {
     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
   };
 
-  const container = await configureContainer(app);
-  app.locals.container = container;
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(helmet());
@@ -37,11 +34,11 @@ async function createApp(): Promise<ExpressApp> {
 
   await DataSourceHandler.getInstance().initialize();
 
-  configureQueryBus(container);
-  configureCommandBus(container);
-  configureEventBus(container);
+  await configureQueryBus();
+  await configureCommandBus();
+  await configureEventBus();
 
-  const apiRouter: Router = configureApiRouter(container);
+  const apiRouter: Router = await configureApiRouter();
   app.use('/api/v1/', apiRouter);
 
   app.use(errorHandler);

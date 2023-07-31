@@ -1,8 +1,10 @@
+import { Injectable } from '@nestjs/common';
 import Term from '@src/languages/domain/term/term';
 import TermRepository from '@src/languages/domain/term/termRepository';
 import MongoRepository from '@src/shared/infrastructure/persistence/mongo/mongoRepository';
 import { Document } from 'mongodb';
 
+@Injectable()
 export default class MongoTermRepository extends MongoRepository<Term> implements TermRepository {
   constructor() {
     super('terms');

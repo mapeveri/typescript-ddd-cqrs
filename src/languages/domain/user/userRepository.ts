@@ -8,3 +8,5 @@ interface UserRepository {
 }
 
 export default UserRepository;
+
+export const USER_REPOSITORY = Symbol('UserRepository');

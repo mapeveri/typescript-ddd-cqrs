@@ -1,12 +1,13 @@
 import WordCreatedEvent from '@src/languages/domain/word/domainEvents/wordCreatedEvent';
-import { CommandBus } from '@src/shared/domain/buses/commandBus/commandBus';
+import { COMMAND_BUS, CommandBus } from '@src/shared/domain/buses/commandBus/commandBus';
 import { EventHandler } from '@src/shared/domain/buses/eventBus/eventHandler';
 import CreateTermCommand from '../../command/create/createTermCommand';
 import { Uuid } from '@src/shared/domain/valueObjects/uuid';
 import { WORD } from '@src/languages/domain/term/term';
+import { Inject } from '@nestjs/common';
 
 export default class CreateOnWordCreatedEventHandler implements EventHandler {
-  constructor(private commandBus: CommandBus) {}
+  constructor(@Inject(COMMAND_BUS) private commandBus: CommandBus) {}
 
   async handle(event: WordCreatedEvent): Promise<void> {
     const terms = event.terms;

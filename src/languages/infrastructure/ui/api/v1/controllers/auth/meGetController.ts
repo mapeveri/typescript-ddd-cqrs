@@ -3,12 +3,13 @@ import httpStatus from 'http-status';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import FindUserQuery from '@src/languages/application/user/query/find/findUserQuery';
 import ApiExceptionSerializer from '@src/shared/infrastructure/api/serializers/apiExceptionSerializer';
-import { QueryBus } from '@src/shared/domain/buses/queryBus/queryBus';
+import { QUERY_BUS, QueryBus } from '@src/shared/domain/buses/queryBus/queryBus';
 import { Controller } from '../../controller';
 import UserJwtDecodedEmpty from '../../apiErrorResponses/userJwtDecodedEmpty';
+import { Inject } from '@nestjs/common';
 
 export default class MeGetController implements Controller {
-  public constructor(private queryBus: QueryBus) {}
+  public constructor(@Inject(QUERY_BUS) private queryBus: QueryBus) {}
 
   async run(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {

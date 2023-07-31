@@ -1,6 +1,3 @@
-import { ContainerBuilder } from 'node-dependency-injection';
-
-import MemoryCommandBus from './memoryCommandBus';
 import CreateCountryCommand from '@src/languages/application/country/command/create/createCountryCommand';
 import LoginUserCommand from '@src/languages/application/auth/command/loginUser/loginUserCommand';
 import CreateUserCommand from '@src/languages/application/user/command/create/createUserCommand';
@@ -16,18 +13,23 @@ import CreateTermCommandHandler from '@src/languages/application/term/command/cr
 import CreateExpressionCommandHandler from '@src/languages/application/expression/command/create/createExpressionCommandHandler';
 import CreateExpressionCommand from '@src/languages/application/expression/command/create/createExpressionCommand';
 import TransactionalHandlerDecoratorFactory from '../persistence/transactionalHandlerDecoratorFactory';
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from '@src/app.module';
+import { COMMAND_BUS } from '@src/shared/domain/buses/commandBus/commandBus';
 
-export function configureCommandBus(container: ContainerBuilder) {
-  const commandBus: MemoryCommandBus = container.get(MemoryCommandBus);
+export async function configureCommandBus() {
+  const app = await NestFactory.createApplicationContext(AppModule);
+
+  const commandBus = app.get(COMMAND_BUS);
 
   const commandHandlerMappings = [
-    { command: CreateCountryCommand, handler: container.get(CreateCountryCommandHandler), database: 'postgres' },
-    { command: LoginUserCommand, handler: container.get(LoginUserCommandHandler), database: 'postgres' },
-    { command: CreateUserCommand, handler: container.get(CreateUserCommandHandler), database: 'postgres' },
-    { command: UpdateUserCommand, handler: container.get(UpdateUserCommandHandler), database: 'postgres' },
-    { command: CreateWordCommand, handler: container.get(CreateWordCommandHandler), database: 'postgres' },
-    { command: CreateExpressionCommand, handler: container.get(CreateExpressionCommandHandler), database: 'postgres' },
-    { command: CreateTermCommand, handler: container.get(CreateTermCommandHandler), database: 'mongo' },
+    { command: CreateCountryCommand, handler: app.get(CreateCountryCommandHandler), database: 'postgres' },
+    { command: LoginUserCommand, handler: app.get(LoginUserCommandHandler), database: 'postgres' },
+    { command: CreateUserCommand, handler: app.get(CreateUserCommandHandler), database: 'postgres' },
+    { command: UpdateUserCommand, handler: app.get(UpdateUserCommandHandler), database: 'postgres' },
+    { command: CreateWordCommand, handler: app.get(CreateWordCommandHandler), database: 'postgres' },
+    { command: CreateExpressionCommand, handler: app.get(CreateExpressionCommandHandler), database: 'postgres' },
+    { command: CreateTermCommand, handler: app.get(CreateTermCommandHandler), database: 'mongo' },
   ];
 
   commandHandlerMappings.forEach(({ command, handler, database }) => {

@@ -1,11 +1,12 @@
 import { NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status';
 import { Controller } from '../../controller';
-import { QueryBus } from '@src/shared/domain/buses/queryBus/queryBus';
+import { QUERY_BUS, QueryBus } from '@src/shared/domain/buses/queryBus/queryBus';
 import SearchTermQuery from '@src/languages/application/term/query/search/searchTermQuery';
+import { Inject } from '@nestjs/common';
 
 export default class SearchTermsGetController implements Controller {
-  public constructor(private queryBus: QueryBus) {}
+  public constructor(@Inject(QUERY_BUS) private queryBus: QueryBus) {}
 
   async run(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {

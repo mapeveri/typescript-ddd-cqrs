@@ -1,6 +1,8 @@
 import { Logger as TsLog } from 'tslog';
 import LoggerInterface from '../domain/loggerInterface';
+import { Injectable } from '@nestjs/common';
 
+@Injectable()
 export default class Logger implements LoggerInterface {
   private logger: TsLog;
 

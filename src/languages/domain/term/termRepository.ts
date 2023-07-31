@@ -7,3 +7,5 @@ interface TermRepository {
 }
 
 export default TermRepository;
+
+export const TERM_REPOSITORY = Symbol('TermRepository');

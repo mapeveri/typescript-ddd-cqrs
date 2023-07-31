@@ -1,18 +1,19 @@
 import { CommandHandler } from '@src/shared/domain/buses/commandBus/commandHandler';
-import { EventBus } from '@src/shared/domain/buses/eventBus/eventBus';
+import { EVENT_BUS, EventBus } from '@src/shared/domain/buses/eventBus/eventBus';
 import LoginUserCommand from './loginUserCommand';
-import { SocialLogin } from '@src/languages/domain/auth/socialLogin';
+import { SOCIAL_LOGIN, SocialLogin } from '@src/languages/domain/auth/socialLogin';
 import LoginException from '@src/languages/domain/user/exceptions/loginException';
 import AuthSession from '@src/languages/domain/auth/authSession';
 import Session from '@src/languages/domain/auth/valueObjects/session';
 import AuthSessionId from '@src/languages/domain/auth/valueObjects/authSessionId';
-import { AuthSessionRepository } from '@src/languages/domain/auth/authSessionRepository';
+import { AUTH_SESSION_REPOSITORY, AuthSessionRepository } from '@src/languages/domain/auth/authSessionRepository';
+import { Inject } from '@nestjs/common';
 
 export default class LoginUserCommandHandler implements CommandHandler {
   constructor(
-    private authSessionRepository: AuthSessionRepository,
-    private socialLogin: SocialLogin,
-    private eventBus: EventBus
+    @Inject(AUTH_SESSION_REPOSITORY) private authSessionRepository: AuthSessionRepository,
+    @Inject(SOCIAL_LOGIN) private socialLogin: SocialLogin,
+    @Inject(EVENT_BUS) private eventBus: EventBus
   ) {}
 
   async handle(command: LoginUserCommand): Promise<void> {

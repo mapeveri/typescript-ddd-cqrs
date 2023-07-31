@@ -10,3 +10,5 @@ interface CountryRepository {
 }
 
 export default CountryRepository;
+
+export const COUNTRY_REPOSITORY = Symbol('CountryRepository');

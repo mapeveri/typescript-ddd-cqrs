@@ -44,5 +44,5 @@ To get a token for testing you should go to https://developers.google.com/oauthp
 
 For production run the next command:
 ```shell script
-    docker-compose run app npm run start
+    docker-compose run app npm run start:prod
 ```
