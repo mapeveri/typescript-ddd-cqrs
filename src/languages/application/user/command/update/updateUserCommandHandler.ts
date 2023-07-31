@@ -3,7 +3,7 @@ import { CommandHandler } from '@src/shared/domain/buses/commandBus/commandHandl
 import UpdateUserCommand from './updateUserCommand';
 import UserId from '@src/languages/domain/user/valueObjects/userId';
 import UserDoesNotExistsException from '@src/languages/domain/user/exceptions/userDoesNotExistsException';
-import { Inject } from '@nestjs/common';
+import { Inject } from '@src/shared/domain/injector/inject.decorator';
 
 export default class UpdateUserCommandHandler implements CommandHandler {
   constructor(@Inject(USER_REPOSITORY) private userRepository: UserRepository) {}

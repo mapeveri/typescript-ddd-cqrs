@@ -4,7 +4,7 @@ import { EventHandler } from '@src/shared/domain/buses/eventBus/eventHandler';
 import CreateTermCommand from '../../command/create/createTermCommand';
 import { Uuid } from '@src/shared/domain/valueObjects/uuid';
 import { WORD } from '@src/languages/domain/term/term';
-import { Inject } from '@nestjs/common';
+import { Inject } from '@src/shared/domain/injector/inject.decorator';
 
 export default class CreateOnWordCreatedEventHandler implements EventHandler {
   constructor(@Inject(COMMAND_BUS) private commandBus: CommandBus) {}

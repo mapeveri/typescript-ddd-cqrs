@@ -7,7 +7,7 @@ import AuthSession from '@src/languages/domain/auth/authSession';
 import Session from '@src/languages/domain/auth/valueObjects/session';
 import AuthSessionId from '@src/languages/domain/auth/valueObjects/authSessionId';
 import { AUTH_SESSION_REPOSITORY, AuthSessionRepository } from '@src/languages/domain/auth/authSessionRepository';
-import { Inject } from '@nestjs/common';
+import { Inject } from '@src/shared/domain/injector/inject.decorator';
 
 export default class LoginUserCommandHandler implements CommandHandler {
   constructor(

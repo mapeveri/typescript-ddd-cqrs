@@ -3,7 +3,7 @@ import httpStatus from 'http-status';
 import { Controller } from '../../controller';
 import FindCountriesQuery from '@src/languages/application/country/query/findAll/findCountriesQuery';
 import { QUERY_BUS, QueryBus } from '@src/shared/domain/buses/queryBus/queryBus';
-import { Inject } from '@nestjs/common';
+import { Inject } from '@src/shared/domain/injector/inject.decorator';
 
 export default class CountriesGetController implements Controller {
   public constructor(@Inject(QUERY_BUS) private queryBus: QueryBus) {}
