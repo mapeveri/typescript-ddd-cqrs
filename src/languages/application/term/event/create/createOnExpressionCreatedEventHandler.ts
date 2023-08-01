@@ -5,7 +5,7 @@ import { Uuid } from '@src/shared/domain/valueObjects/uuid';
 import { EXPRESSION } from '@src/languages/domain/term/term';
 import ExpressionCreatedEvent from '@src/languages/domain/expression/domainEvents/expressionCreatedEvent';
 import { ExpressionTermPrimitives } from '@src/languages/domain/expression/valueObjects/expressionTerm';
-import { Inject } from '@nestjs/common';
+import { Inject } from '@src/shared/domain/injector/inject.decorator';
 
 export default class CreateOnExpressionCreatedEventHandler implements EventHandler {
   constructor(@Inject(COMMAND_BUS) private commandBus: CommandBus) {}

@@ -6,7 +6,7 @@ import ApiExceptionSerializer from '@src/shared/infrastructure/api/serializers/a
 import { QUERY_BUS, QueryBus } from '@src/shared/domain/buses/queryBus/queryBus';
 import { Controller } from '../../controller';
 import UserJwtDecodedEmpty from '../../apiErrorResponses/userJwtDecodedEmpty';
-import { Inject } from '@nestjs/common';
+import { Inject } from '@src/shared/domain/injector/inject.decorator';
 
 export default class MeGetController implements Controller {
   public constructor(@Inject(QUERY_BUS) private queryBus: QueryBus) {}

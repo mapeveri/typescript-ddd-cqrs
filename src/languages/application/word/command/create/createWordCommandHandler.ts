@@ -8,7 +8,7 @@ import CountryId from '@src/languages/domain/country/valueObjects/countryId';
 import UserId from '@src/languages/domain/user/valueObjects/userId';
 import WordTermCollection from '@src/languages/domain/word/valueObjects/wordTermCollection';
 import WordAlreadyExistsException from '@src/languages/domain/word/exceptions/WordAlreadyExistsException';
-import { Inject } from '@nestjs/common';
+import { Inject } from '@src/shared/domain/injector/inject.decorator';
 
 export default class CreateWordCommandHandler implements CommandHandler {
   constructor(

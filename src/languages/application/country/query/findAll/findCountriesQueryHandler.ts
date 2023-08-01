@@ -1,7 +1,7 @@
 import CountryRepository, { COUNTRY_REPOSITORY } from '@src/languages/domain/country/countryRepository';
 import QueryResponse from '@src/shared/domain/buses/queryBus/queryResponse';
 import FindCountriesResponse from './findCountriesResponse';
-import { Inject } from '@nestjs/common';
+import { Inject } from '@src/shared/domain/injector/inject.decorator';
 
 export default class FindCountriesQueryHandler {
   constructor(@Inject(COUNTRY_REPOSITORY) private countryRepository: CountryRepository) {}

@@ -7,7 +7,7 @@ import ApiExceptionSerializer from '@src/shared/infrastructure/api/serializers/a
 import { Uuid } from '@src/shared/domain/valueObjects/uuid';
 import { COMMAND_BUS, CommandBus } from '@src/shared/domain/buses/commandBus/commandBus';
 import { Controller } from '../../controller';
-import { Inject } from '@nestjs/common';
+import { Inject } from '@src/shared/domain/injector/inject.decorator';
 
 export default class LoginPostController implements Controller {
   public constructor(@Inject(COMMAND_BUS) private commandBus: CommandBus) {}

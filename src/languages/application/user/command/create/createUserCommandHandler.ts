@@ -4,7 +4,7 @@ import CreateUserCommand from './createUserCommand';
 import UserId from '@src/languages/domain/user/valueObjects/userId';
 import Email from '@src/shared/domain/valueObjects/email';
 import User from '@src/languages/domain/user/user';
-import { Inject } from '@nestjs/common';
+import { Inject } from '@src/shared/domain/injector/inject.decorator';
 
 export default class CreateUserCommandHandler implements CommandHandler {
   constructor(@Inject(USER_REPOSITORY) private userRepository: UserRepository) {}

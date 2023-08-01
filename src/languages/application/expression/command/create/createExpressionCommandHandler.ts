@@ -8,7 +8,7 @@ import CountryId from '@src/languages/domain/country/valueObjects/countryId';
 import ExpressionTermCollection from '@src/languages/domain/expression/valueObjects/expressionTermCollection';
 import UserId from '@src/languages/domain/user/valueObjects/userId';
 import ExpressionAlreadyExistsException from '@src/languages/domain/expression/exceptions/ExpressionAlreadyExistsException';
-import { Inject } from '@nestjs/common';
+import { Inject } from '@src/shared/domain/injector/inject.decorator';
 
 export default class CreateExpressionCommandHandler implements CommandHandler {
   constructor(

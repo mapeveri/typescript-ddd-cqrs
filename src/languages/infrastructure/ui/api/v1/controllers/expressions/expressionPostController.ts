@@ -6,7 +6,7 @@ import ApiExceptionSerializer from '@src/shared/infrastructure/api/serializers/a
 import { COMMAND_BUS, CommandBus } from '@src/shared/domain/buses/commandBus/commandBus';
 import CreateExpressionCommand from '@src/languages/application/expression/command/create/createExpressionCommand';
 import { ExpressionTermPrimitives } from '@src/languages/domain/expression/valueObjects/expressionTerm';
-import { Inject } from '@nestjs/common';
+import { Inject } from '@src/shared/domain/injector/inject.decorator';
 
 export default class ExpressionPostController implements Controller {
   public constructor(@Inject(COMMAND_BUS) private commandBus: CommandBus) {}

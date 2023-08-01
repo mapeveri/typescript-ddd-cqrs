@@ -5,7 +5,7 @@ import Country from '@src/languages/domain/country/country';
 import CountryId from '@src/languages/domain/country/valueObjects/countryId';
 import LanguageCollection from '@src/languages/domain/country/valueObjects/languageCollection';
 import CountryAlreadyExistsException from '@src/languages/domain/country/exceptions/CountryAlreadyExistsException';
-import { Inject } from '@nestjs/common';
+import { Inject } from '@src/shared/domain/injector/inject.decorator';
 
 export default class CreateCountryCommandHandler implements CommandHandler {
   constructor(@Inject(COUNTRY_REPOSITORY) private countryRepository: CountryRepository) {}
