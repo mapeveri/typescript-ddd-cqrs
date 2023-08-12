@@ -13,6 +13,11 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
   app.useGlobalPipes(new ValidationPipe());
   app.setGlobalPrefix('api/v1');
+  app.enableCors({
+    origin: process.env.FRONTED_URL,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+  });
 
   await DataSourceHandler.getInstance().initialize();
 
@@ -23,7 +28,7 @@ async function bootstrap() {
   const logger = app.get(LOGGER_INTERFACE);
 
   await app.init();
-  
+
   app.listen(port, () => {
     logger.info(`App is running at http://localhost:${port} in ${process.env.NODE_ENV} mode`);
     console.log('Press CTRL-C to stop\n');
