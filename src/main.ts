@@ -5,11 +5,13 @@ import { DataSourceHandler } from './shared/infrastructure/persistence/typeOrm/d
 import { configureQueryBus } from './shared/infrastructure/buses/configureQueryBus';
 import { configureCommandBus } from './shared/infrastructure/buses/configureCommandBus';
 import { configureEventBus } from './shared/infrastructure/buses/configureEventBus';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const port = process.env.SERVER_PORT || 4000;
 
   const app = await NestFactory.create(AppModule, { cors: true });
+  app.useGlobalPipes(new ValidationPipe());
   app.setGlobalPrefix('api/v1');
 
   await DataSourceHandler.getInstance().initialize();
