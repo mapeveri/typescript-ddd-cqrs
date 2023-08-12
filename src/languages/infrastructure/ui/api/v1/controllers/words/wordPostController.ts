@@ -1,37 +1,23 @@
-import { NextFunction, Request, Response } from 'express';
-import httpStatus from 'http-status';
 import CreateWordCommand from '@src/languages/application/word/command/create/createWordCommand';
-import InvalidParameters from '@src/shared/infrastructure/api/apiErrorResponses/InvalidParameters';
-import ApiExceptionSerializer from '@src/shared/infrastructure/api/serializers/apiExceptionSerializer';
 import { COMMAND_BUS, CommandBus } from '@src/shared/domain/buses/commandBus/commandBus';
 import { WordTermPrimitives } from '@src/languages/domain/word/valueObjects/wordTerm';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
+import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import WordPostDto from './wordPostDto';
 
+@Controller()
 export default class WordPostController {
   public constructor(@Inject(COMMAND_BUS) private commandBus: CommandBus) {}
 
-  async run(req: Request, res: Response, next: NextFunction): Promise<any> {
-    try {
-      const body = req.body;
-      if (
-        !('id' in body) ||
-        !('language_id' in body) ||
-        !('country_id' in body) ||
-        !('user_id' in body) ||
-        !('terms' in body)
-      ) {
-        const error = new InvalidParameters();
-        res.status(error.status).json(ApiExceptionSerializer.serialize(error));
-      }
+  @Post('words')
+  @HttpCode(HttpStatus.CREATED)
+  async run(@Body() payload: WordPostDto): Promise<any> {
+    const wordTerms: Array<WordTermPrimitives> = this.transformWordTerms(payload.terms);
+    await this.commandBus.dispatch(
+      new CreateWordCommand(payload.id, payload.language_id, payload.country_id, payload.user_id, wordTerms)
+    );
 
-      const wordTerms: Array<WordTermPrimitives> = this.transformWordTerms(body['terms']);
-      await this.commandBus.dispatch(
-        new CreateWordCommand(body['id'], body['language_id'], body['country_id'], body['user_id'], wordTerms)
-      );
-      res.status(httpStatus.CREATED).send({});
-    } catch (e) {
-      next(e);
-    }
+    return;
   }
 
   private transformWordTerms(wordTerms: Array<Record<string, any>>): Array<WordTermPrimitives> {
