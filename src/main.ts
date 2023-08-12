@@ -6,11 +6,13 @@ import { configureQueryBus } from './shared/infrastructure/buses/configureQueryB
 import { configureCommandBus } from './shared/infrastructure/buses/configureCommandBus';
 import { configureEventBus } from './shared/infrastructure/buses/configureEventBus';
 import { ValidationPipe } from '@nestjs/common';
+import helmet from 'helmet';
 
 async function bootstrap() {
   const port = process.env.SERVER_PORT || 4000;
 
   const app = await NestFactory.create(AppModule, { cors: true });
+  app.use(helmet());
   app.useGlobalPipes(new ValidationPipe());
   app.setGlobalPrefix('api/v1');
   app.enableCors({
