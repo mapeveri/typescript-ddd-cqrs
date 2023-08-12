@@ -11,7 +11,7 @@ import helmet from 'helmet';
 async function bootstrap() {
   const port = process.env.SERVER_PORT || 4000;
 
-  const app = await NestFactory.create(AppModule, { cors: true });
+  const app = await NestFactory.create(AppModule);
   app.use(helmet());
   app.useGlobalPipes(new ValidationPipe());
   app.setGlobalPrefix('api/v1');
