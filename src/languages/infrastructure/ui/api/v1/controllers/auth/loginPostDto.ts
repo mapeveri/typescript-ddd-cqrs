@@ -23,7 +23,6 @@ export default class LoginPostDto {
   provider: string;
 
   @ApiProperty()
-  @IsNotEmpty()
   @IsString()
   photo: string;
 }
