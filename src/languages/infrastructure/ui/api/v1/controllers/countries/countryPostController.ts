@@ -2,8 +2,9 @@ import CreateCountryCommand from '@src/languages/application/country/command/cre
 import { COMMAND_BUS, CommandBus } from '@src/shared/domain/buses/commandBus/commandBus';
 import { LanguagePrimitives } from '@src/languages/domain/country/valueObjects/language';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Post, UseGuards } from '@nestjs/common';
 import CountryPostDto from './countryPostDto';
+import { JwtAuthGuard } from '@src/shared/infrastructure/nestjs/guards/JwtAuthGuard';
 
 @Controller()
 export default class CountryPostController {
@@ -11,6 +12,7 @@ export default class CountryPostController {
 
   @Post('countries')
   @HttpCode(HttpStatus.CREATED)
+  @UseGuards(JwtAuthGuard)
   async run(@Body() payload: CountryPostDto): Promise<any> {
     const languages: Array<LanguagePrimitives> = this.transformLanguages(payload.languages);
     await this.commandBus.dispatch(new CreateCountryCommand(payload.id, payload.name, payload.iso, languages));

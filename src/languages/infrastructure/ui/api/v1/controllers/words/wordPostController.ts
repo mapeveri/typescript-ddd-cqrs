@@ -2,8 +2,9 @@ import CreateWordCommand from '@src/languages/application/word/command/create/cr
 import { COMMAND_BUS, CommandBus } from '@src/shared/domain/buses/commandBus/commandBus';
 import { WordTermPrimitives } from '@src/languages/domain/word/valueObjects/wordTerm';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Post, UseGuards } from '@nestjs/common';
 import WordPostDto from './wordPostDto';
+import { JwtAuthGuard } from '@src/shared/infrastructure/nestjs/guards/JwtAuthGuard';
 
 @Controller()
 export default class WordPostController {
@@ -11,6 +12,7 @@ export default class WordPostController {
 
   @Post('words')
   @HttpCode(HttpStatus.CREATED)
+  @UseGuards(JwtAuthGuard)
   async run(@Body() payload: WordPostDto): Promise<any> {
     const wordTerms: Array<WordTermPrimitives> = this.transformWordTerms(payload.terms);
     await this.commandBus.dispatch(

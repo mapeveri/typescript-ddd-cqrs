@@ -2,8 +2,9 @@ import { COMMAND_BUS, CommandBus } from '@src/shared/domain/buses/commandBus/com
 import CreateExpressionCommand from '@src/languages/application/expression/command/create/createExpressionCommand';
 import { ExpressionTermPrimitives } from '@src/languages/domain/expression/valueObjects/expressionTerm';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Post, UseGuards } from '@nestjs/common';
 import ExpressionPostDto from './expressionPostDto';
+import { JwtAuthGuard } from '@src/shared/infrastructure/nestjs/guards/JwtAuthGuard';
 
 @Controller()
 export default class ExpressionPostController {
@@ -11,6 +12,7 @@ export default class ExpressionPostController {
 
   @Post('expressions')
   @HttpCode(HttpStatus.CREATED)
+  @UseGuards(JwtAuthGuard)
   async run(@Body() payload: ExpressionPostDto): Promise<any> {
     const expressionTerms: Array<ExpressionTermPrimitives> = this.transformExpressionTerms(payload.terms);
     await this.commandBus.dispatch(
