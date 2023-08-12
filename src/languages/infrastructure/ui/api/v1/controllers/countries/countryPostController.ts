@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status';
-import { Controller } from '../../controller';
 import CreateCountryCommand from '@src/languages/application/country/command/create/createCountryCommand';
 import InvalidParameters from '@src/shared/infrastructure/api/apiErrorResponses/InvalidParameters';
 import ApiExceptionSerializer from '@src/shared/infrastructure/api/serializers/apiExceptionSerializer';
@@ -8,7 +7,7 @@ import { COMMAND_BUS, CommandBus } from '@src/shared/domain/buses/commandBus/com
 import { LanguagePrimitives } from '@src/languages/domain/country/valueObjects/language';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 
-export default class CountryPostController implements Controller {
+export default class CountryPostController {
   public constructor(@Inject(COMMAND_BUS) private commandBus: CommandBus) {}
 
   async run(req: Request, res: Response, next: NextFunction): Promise<any> {

@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status';
-import { Controller } from '../../controller';
 import CreateWordCommand from '@src/languages/application/word/command/create/createWordCommand';
 import InvalidParameters from '@src/shared/infrastructure/api/apiErrorResponses/InvalidParameters';
 import ApiExceptionSerializer from '@src/shared/infrastructure/api/serializers/apiExceptionSerializer';
@@ -8,7 +7,7 @@ import { COMMAND_BUS, CommandBus } from '@src/shared/domain/buses/commandBus/com
 import { WordTermPrimitives } from '@src/languages/domain/word/valueObjects/wordTerm';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 
-export default class WordPostController implements Controller {
+export default class WordPostController {
   public constructor(@Inject(COMMAND_BUS) private commandBus: CommandBus) {}
 
   async run(req: Request, res: Response, next: NextFunction): Promise<any> {

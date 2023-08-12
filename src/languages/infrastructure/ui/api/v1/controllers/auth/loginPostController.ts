@@ -1,38 +1,28 @@
-import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import httpStatus from 'http-status';
 import LoginUserCommand from '@src/languages/application/auth/command/loginUser/loginUserCommand';
-import InvalidParameters from '@src/shared/infrastructure/api/apiErrorResponses/InvalidParameters';
-import ApiExceptionSerializer from '@src/shared/infrastructure/api/serializers/apiExceptionSerializer';
 import { Uuid } from '@src/shared/domain/valueObjects/uuid';
 import { COMMAND_BUS, CommandBus } from '@src/shared/domain/buses/commandBus/commandBus';
-import { Controller } from '../../controller';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
+import { Body, Controller, Post } from '@nestjs/common';
+import LoginPostDto from './loginPostDto';
 
-export default class LoginPostController implements Controller {
+@Controller()
+export default class LoginPostController {
   public constructor(@Inject(COMMAND_BUS) private commandBus: CommandBus) {}
 
-  async run(req: Request, res: Response, next: NextFunction): Promise<any> {
-    try {
-      const body = req.body;
-      if (!('name' in body) || !('email' in body) || !('token' in body) || !('provider' in body)) {
-        const error = new InvalidParameters();
-        res.status(error.status).json(ApiExceptionSerializer.serialize(error));
-      }
+  @Post('auth/login')
+  async run(@Body() payload: LoginPostDto): Promise<any> {
+    const id = Uuid.fromString(payload.email).toString();
+    await this.commandBus.dispatch(
+      new LoginUserCommand(id, payload.name, payload.email, payload.token, payload.provider, payload.photo)
+    );
 
-      const id = Uuid.fromString(body['email']).toString();
-      await this.commandBus.dispatch(
-        new LoginUserCommand(id, body['name'], body['email'], body['token'], body['provider'], body['photo'])
-      );
+    const user = { id: id, name: payload.name, email: payload.email };
+    const token: string = jwt.sign(user, process.env.JWT_SECRET || '');
 
-      const user = { id: id, name: body['name'], email: body['email'] };
-      const token: string = jwt.sign(user, process.env.JWT_SECRET || '');
-      res.status(httpStatus.OK).send({
-        user,
-        token,
-      });
-    } catch (e) {
-      next(e);
-    }
+    return {
+      user,
+      token,
+    };
   }
 }

@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status';
-import { Controller } from '../../controller';
 import InvalidParameters from '@src/shared/infrastructure/api/apiErrorResponses/InvalidParameters';
 import ApiExceptionSerializer from '@src/shared/infrastructure/api/serializers/apiExceptionSerializer';
 import { COMMAND_BUS, CommandBus } from '@src/shared/domain/buses/commandBus/commandBus';
@@ -8,7 +7,7 @@ import CreateExpressionCommand from '@src/languages/application/expression/comma
 import { ExpressionTermPrimitives } from '@src/languages/domain/expression/valueObjects/expressionTerm';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 
-export default class ExpressionPostController implements Controller {
+export default class ExpressionPostController {
   public constructor(@Inject(COMMAND_BUS) private commandBus: CommandBus) {}
 
   async run(req: Request, res: Response, next: NextFunction): Promise<any> {

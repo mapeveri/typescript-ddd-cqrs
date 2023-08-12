@@ -1,30 +1,25 @@
-import { NextFunction, Request, Response } from 'express';
-import httpStatus from 'http-status';
+import { Request } from 'express';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import FindUserQuery from '@src/languages/application/user/query/find/findUserQuery';
-import ApiExceptionSerializer from '@src/shared/infrastructure/api/serializers/apiExceptionSerializer';
 import { QUERY_BUS, QueryBus } from '@src/shared/domain/buses/queryBus/queryBus';
-import { Controller } from '../../controller';
 import UserJwtDecodedEmpty from '../../apiErrorResponses/userJwtDecodedEmpty';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
+import { Controller, Get, Req } from '@nestjs/common';
 
-export default class MeGetController implements Controller {
+@Controller()
+export default class MeGetController {
   public constructor(@Inject(QUERY_BUS) private queryBus: QueryBus) {}
 
-  async run(req: Request, res: Response, next: NextFunction): Promise<any> {
-    try {
-      const token: string = req.headers['authorization'] ?? '';
-      const user = jwt.decode(token) as JwtPayload;
-      if (null === user) {
-        const error = new UserJwtDecodedEmpty();
-        res.status(error.status).json(ApiExceptionSerializer.serialize(error));
-      }
-
-      const data = await this.queryBus.ask(new FindUserQuery(user['id']));
-
-      res.status(httpStatus.OK).send(data.content);
-    } catch (e) {
-      next(e);
+  @Get('auth/me')
+  async run(@Req() request: Request): Promise<any> {
+    const token: string = request.headers['authorization'] ?? '';
+    const user = jwt.decode(token) as JwtPayload;
+    if (null === user) {
+      throw new UserJwtDecodedEmpty();
     }
+
+    const data = await this.queryBus.ask(new FindUserQuery(user['id']));
+
+    return data.content;
   }
 }
