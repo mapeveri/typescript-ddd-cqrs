@@ -5,6 +5,6 @@ declare namespace Express {
 
   export interface Request {
     container: Container;
-    userId?: string;
+    user?: { id: string, name: string, email: string };
   }
 }

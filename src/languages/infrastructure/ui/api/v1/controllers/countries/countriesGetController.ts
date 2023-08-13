@@ -1,20 +1,17 @@
-import { NextFunction, Request, Response } from 'express';
-import httpStatus from 'http-status';
-import { Controller } from '../../controller';
 import FindCountriesQuery from '@src/languages/application/country/query/findAll/findCountriesQuery';
 import { QUERY_BUS, QueryBus } from '@src/shared/domain/buses/queryBus/queryBus';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
+import { Controller, Get, UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from '@src/shared/infrastructure/nestjs/guards/JwtAuthGuard';
 
-export default class CountriesGetController implements Controller {
+@Controller()
+export default class CountriesGetController {
   public constructor(@Inject(QUERY_BUS) private queryBus: QueryBus) {}
 
-  async run(req: Request, res: Response, next: NextFunction): Promise<any> {
-    try {
-      const data = await this.queryBus.ask(new FindCountriesQuery());
-
-      res.status(httpStatus.OK).send(data.content);
-    } catch (e) {
-      next(e);
-    }
+  @Get('countries')
+  @UseGuards(JwtAuthGuard)
+  async run(): Promise<any> {
+    const data = await this.queryBus.ask(new FindCountriesQuery());
+    return data.content;
   }
 }
