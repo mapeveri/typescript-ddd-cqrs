@@ -15,17 +15,13 @@ export class ErrorFilter implements ExceptionFilter {
     }
 
     if (exception instanceof HttpException) {
-      response.status(exception.getStatus()).json({
-        status: exception.getStatus(),
-        error: exception.message,
-        code: exception.cause,
-      });
+      response.status(exception.getStatus()).json(exception.getResponse());
       return;
     }
 
     response.status(500).json({
-      status: 500,
-      error: 'Internal Server Error',
+      statusCode: 500,
+      message: 'Internal Server Error',
       code: 'generic_error',
     });
   }
