@@ -1,13 +1,16 @@
+import { AggregateRoot } from '@src/shared/domain/aggregate/aggregateRoot';
 import CountryId from './valueObjects/countryId';
 import LanguageCollection from './valueObjects/languageCollection';
 
-export default class Country {
+export default class Country extends AggregateRoot {
   id: CountryId;
   name: string;
   iso: string;
   languages: LanguageCollection;
 
   constructor(id: CountryId, name: string, iso: string, languages: LanguageCollection) {
+    super();
+  
     this.id = id;
     this.name = name;
     this.iso = iso;
