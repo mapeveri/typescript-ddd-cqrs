@@ -1,11 +1,7 @@
 import WordTerm, { WordTermPrimitives } from './wordTerm';
 
 export default class WordTermCollection {
-  terms: Array<WordTerm>;
-
-  private constructor(terms: Array<WordTerm>) {
-    this.terms = terms;
-  }
+  private constructor(private readonly terms: Array<WordTerm>) {}
 
   static of(primitiveTerms: Array<WordTermPrimitives>): WordTermCollection {
     const wordTerms = primitiveTerms.map((wordTerm: WordTermPrimitives): WordTerm => {
@@ -19,7 +15,7 @@ export default class WordTermCollection {
     const wordTerms = primitiveTerms.map((wordTerm: WordTermPrimitives): WordTerm => {
       return WordTerm.fromPrimitives(wordTerm);
     });
-    
+
     return new this(wordTerms);
   }
 

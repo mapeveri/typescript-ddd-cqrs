@@ -1,14 +1,11 @@
 import Language, { LanguagePrimitives } from './language';
 
 export default class LanguageCollection {
-  languages: Array<Language>;
-
-  private constructor(languages: Array<Language>) {
-    this.languages = languages;
+  private constructor(private readonly languages: Array<Language>) {
   }
 
-  static of(primitiveLanguages: Array<LanguagePrimitives>): LanguageCollection {
-    const terms = primitiveLanguages.map((language: LanguagePrimitives): Language => {
+  static of(primitivesLanguages: Array<LanguagePrimitives>): LanguageCollection {
+    const terms = primitivesLanguages.map((language: LanguagePrimitives): Language => {
       return Language.of(language);
     });
 

@@ -1,10 +1,7 @@
 import ExpressionTerm, { ExpressionTermPrimitives } from './expressionTerm';
 
 export default class ExpressionTermCollection {
-  terms: Array<ExpressionTerm>;
-
-  private constructor(terms: Array<ExpressionTerm>) {
-    this.terms = terms;
+  private constructor(private readonly terms: Array<ExpressionTerm>) {
   }
 
   static of(primitiveTerms: Array<ExpressionTermPrimitives>): ExpressionTermCollection {

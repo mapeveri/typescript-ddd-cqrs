@@ -47,7 +47,9 @@ export default class WordMother {
       WordIdMother.random(command.id),
       command.languageId,
       CountryIdMother.random(command.countryId),
-      WordTermCollectionMother.random(terms ?? [WordTermMother.random()]),
+      WordTermCollectionMother.random(
+        terms?.map((term) => term.toPrimitives()) ?? [WordTermMother.random().toPrimitives()]
+      ),
       userId
     );
   }

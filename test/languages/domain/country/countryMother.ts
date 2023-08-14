@@ -22,7 +22,9 @@ export default class CountryMother {
       id ?? CountryId.random(),
       name ?? faker.name.findName(),
       iso ?? faker.random.word(),
-      LanguageCollectionMother.random(languages ?? [LanguageMother.random()])
+      LanguageCollectionMother.random(
+        languages?.map((language) => language.toPrimitives()) ?? [LanguageMother.random().toPrimitives()]
+      )
     );
   }
 

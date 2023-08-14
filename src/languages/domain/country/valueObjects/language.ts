@@ -4,13 +4,7 @@ export type LanguagePrimitives = {
 };
 
 export default class Language {
-  name: string;
-  languageId: string;
-
-  private constructor(name: string, languageId: string) {
-    this.name = name;
-    this.languageId = languageId;
-  }
+  private constructor(private readonly name: string, private readonly languageId: string) {}
 
   static of(language: LanguagePrimitives): Language {
     return new Language(language.name, language.languageId);

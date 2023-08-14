@@ -7,19 +7,13 @@ export type SessionPrimitives = {
 };
 
 export default class Session {
-  name: string;
-  email: string;
-  provider: string;
-  token: string;
-  photo: string;
-
-  private constructor(name: string, email: string, provider: string, token: string, photo: string) {
-    this.name = name;
-    this.email = email;
-    this.provider = provider;
-    this.token = token;
-    this.photo = photo;
-  }
+  private constructor(
+    private readonly name: string,
+    private readonly email: string,
+    private readonly provider: string,
+    private readonly token: string,
+    private readonly photo: string
+  ) {}
 
   static of(session: SessionPrimitives): Session {
     return new Session(session.name, session.email, session.provider, session.token, session.photo);

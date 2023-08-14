@@ -17,14 +17,16 @@ export default class AuthSession extends AggregateRoot {
 
   static create(id: AuthSessionId, session: Session): AuthSession {
     const authSession = new this(id, session, new Date());
+    const sessionPrimitives = session.toPrimitives();
+
     authSession.record(
       new AuthSessionCreatedEvent(
         id.toString(),
-        session.name,
-        session.email,
-        session.token,
-        session.provider,
-        session.photo
+        sessionPrimitives.name,
+        sessionPrimitives.email,
+        sessionPrimitives.token,
+        sessionPrimitives.provider,
+        sessionPrimitives.photo
       )
     );
 

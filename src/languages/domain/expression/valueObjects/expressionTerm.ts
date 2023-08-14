@@ -6,17 +6,12 @@ export type ExpressionTermPrimitives = {
 };
 
 export default class ExpressionTerm {
-  expression: string;
-  description: string;
-  example: string;
-  hashtags: Array<string>;
-
-  private constructor(expression: string, description: string, example: string, hashtags: Array<string>) {
-    this.expression = expression;
-    this.description = description;
-    this.example = example;
-    this.hashtags = hashtags;
-  }
+  private constructor(
+    private readonly expression: string,
+    private readonly description: string,
+    private readonly example: string,
+    private readonly hashtags: Array<string>
+  ) {}
 
   static of(wordTerm: ExpressionTermPrimitives): ExpressionTerm {
     return new ExpressionTerm(wordTerm.expression, wordTerm.description, wordTerm.example, wordTerm.hashtags);

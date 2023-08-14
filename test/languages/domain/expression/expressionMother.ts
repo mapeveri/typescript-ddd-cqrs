@@ -47,7 +47,9 @@ export default class ExpressionMother {
       ExpressionIdMother.random(command.id),
       command.languageId,
       CountryIdMother.random(command.countryId),
-      ExpressionTermCollectionMother.random(terms ?? [ExpressionTermMother.random()]),
+      ExpressionTermCollectionMother.random(
+        terms?.map((term) => term.toPrimitives()) ?? [ExpressionTermMother.random().toPrimitives()]
+      ),
       userId
     );
   }
