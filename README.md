@@ -1,6 +1,6 @@
 # Typescript-ddd-cqrs backend
 
-Api Rest with Express + Hexagonal Architecture + DDD & CQRS.
+Api Rest with Nest + Hexagonal Architecture + DDD & CQRS.
 
 ## Development
 
