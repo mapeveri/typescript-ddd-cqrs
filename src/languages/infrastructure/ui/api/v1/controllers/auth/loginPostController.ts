@@ -17,11 +17,11 @@ export default class LoginPostController {
       new LoginUserCommand(id, payload.name, payload.email, payload.token, payload.provider, payload.photo)
     );
 
-    const userPayload = { id: id, name: payload.name, email: payload.email };
-    const token: string = this.jwtService.sign(userPayload);
+    const user = { id: id, name: payload.name, email: payload.email };
+    const token: string = this.jwtService.sign(user);
 
     return {
-      userPayload,
+      user,
       token,
     };
   }
