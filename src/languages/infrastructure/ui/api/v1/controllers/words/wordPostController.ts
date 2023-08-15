@@ -14,22 +14,11 @@ export default class WordPostController {
   @HttpCode(HttpStatus.CREATED)
   @UseGuards(JwtAuthGuard)
   async run(@Body() payload: WordPostDto): Promise<any> {
-    const wordTerms: Array<WordTermPrimitives> = this.transformWordTerms(payload.terms);
+    const wordTerms: Array<WordTermPrimitives> = payload.terms;
     await this.commandBus.dispatch(
-      new CreateWordCommand(payload.id, payload.language_id, payload.country_id, payload.user_id, wordTerms)
+      new CreateWordCommand(payload.id, payload.languageId, payload.countryId, payload.userId, wordTerms)
     );
 
     return;
-  }
-
-  private transformWordTerms(wordTerms: Array<Record<string, any>>): Array<WordTermPrimitives> {
-    return wordTerms.map((wordTerm: Record<string, any>) => {
-      return {
-        word: wordTerm.word,
-        description: wordTerm.description,
-        example: wordTerm.example,
-        hashtags: wordTerm.hashtags,
-      };
-    });
   }
 }
