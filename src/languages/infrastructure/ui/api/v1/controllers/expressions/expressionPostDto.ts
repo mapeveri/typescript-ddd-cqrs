@@ -32,17 +32,17 @@ export default class ExpressionPostDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  language_id: string;
+  languageId: string;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  country_id: string;
+  countryId: string;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  user_id: string;
+  userId: string;
 
   @ApiProperty({ type: [ExpressionDto] })
   @Type(() => ExpressionDto)

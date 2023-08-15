@@ -14,22 +14,11 @@ export default class ExpressionPostController {
   @HttpCode(HttpStatus.CREATED)
   @UseGuards(JwtAuthGuard)
   async run(@Body() payload: ExpressionPostDto): Promise<any> {
-    const expressionTerms: Array<ExpressionTermPrimitives> = this.transformExpressionTerms(payload.terms);
+    const expressionTerms: Array<ExpressionTermPrimitives> = payload.terms;
     await this.commandBus.dispatch(
-      new CreateExpressionCommand(payload.id, payload.language_id, payload.country_id, payload.user_id, expressionTerms)
+      new CreateExpressionCommand(payload.id, payload.languageId, payload.countryId, payload.userId, expressionTerms)
     );
 
     return;
-  }
-
-  private transformExpressionTerms(expressionTerms: Array<Record<string, any>>): Array<ExpressionTermPrimitives> {
-    return expressionTerms.map((expressionTerm: Record<string, any>) => {
-      return {
-        expression: expressionTerm.expression,
-        description: expressionTerm.description,
-        example: expressionTerm.example,
-        hashtags: expressionTerm.hashtags,
-      };
-    });
   }
 }
