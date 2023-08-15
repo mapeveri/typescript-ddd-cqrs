@@ -6,7 +6,7 @@ class LanguageDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  language_id: string;
+  languageId: string;
 
   @ApiProperty()
   @IsNotEmpty()

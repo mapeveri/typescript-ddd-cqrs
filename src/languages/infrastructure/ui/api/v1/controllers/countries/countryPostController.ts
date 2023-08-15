@@ -14,17 +14,8 @@ export default class CountryPostController {
   @HttpCode(HttpStatus.CREATED)
   @UseGuards(JwtAuthGuard)
   async run(@Body() payload: CountryPostDto): Promise<any> {
-    const languages: Array<LanguagePrimitives> = this.transformLanguages(payload.languages);
+    const languages: Array<LanguagePrimitives> = payload.languages;
     await this.commandBus.dispatch(new CreateCountryCommand(payload.id, payload.name, payload.iso, languages));
     return;
-  }
-
-  private transformLanguages(languages: Array<Record<string, any>>): Array<LanguagePrimitives> {
-    return languages.map((language: Record<string, any>) => {
-      return {
-        languageId: language['language_id'],
-        name: language['name'],
-      };
-    });
   }
 }
