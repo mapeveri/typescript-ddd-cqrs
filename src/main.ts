@@ -7,6 +7,7 @@ import { configureCommandBus } from './shared/infrastructure/buses/configureComm
 import { configureEventBus } from './shared/infrastructure/buses/configureEventBus';
 import { ValidationPipe } from '@nestjs/common';
 import helmet from 'helmet';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const port = process.env.SERVER_PORT || 4000;
@@ -20,6 +21,15 @@ async function bootstrap() {
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
+
+  const config = new DocumentBuilder()
+    .setTitle('Languages')
+    .setDescription('The languages API')
+    .setVersion('1.0')
+    .addTag('languages')
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
 
   await DataSourceHandler.getInstance().initialize();
 
