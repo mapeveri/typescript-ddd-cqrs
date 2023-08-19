@@ -6,8 +6,9 @@ import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import LoginPostDto from './loginPostDto';
 import LoginPostResponseDto from './loginPostResponseDto';
-import { ApiOkResponse } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Auth')
 @Controller()
 export default class LoginPostController {
   public constructor(@Inject(COMMAND_BUS) private commandBus: CommandBus, private jwtService: JwtService) {}

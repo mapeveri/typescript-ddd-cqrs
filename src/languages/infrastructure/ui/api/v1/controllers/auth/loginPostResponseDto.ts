@@ -9,12 +9,12 @@ class UserResponseDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsEmail()
+  @IsString()
   name: string;
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsString()
+  @IsEmail()
   email: string;
 }
 

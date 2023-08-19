@@ -5,7 +5,9 @@ import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { Body, Controller, HttpCode, HttpStatus, Post, UseGuards } from '@nestjs/common';
 import ExpressionPostDto from './expressionPostDto';
 import { JwtAuthGuard } from '@src/shared/infrastructure/nestjs/guards/JwtAuthGuard';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Expressions')
 @Controller()
 export default class ExpressionPostController {
   public constructor(@Inject(COMMAND_BUS) private commandBus: CommandBus) {}

@@ -3,7 +3,9 @@ import SearchTermQuery from '@src/languages/application/term/query/search/search
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { Controller, Get, Param, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '@src/shared/infrastructure/nestjs/guards/JwtAuthGuard';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Terms')
 @Controller()
 export default class SearchTermsGetController {
   public constructor(@Inject(QUERY_BUS) private queryBus: QueryBus) {}

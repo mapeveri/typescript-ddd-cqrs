@@ -5,8 +5,9 @@ import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { Controller, Get, HttpCode, Req, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '@src/shared/infrastructure/nestjs/guards/JwtAuthGuard';
 import MeGetResponseDto from './meGetResponseDto';
-import { ApiOkResponse } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Auth')
 @Controller()
 export default class MeGetController {
   public constructor(@Inject(QUERY_BUS) private queryBus: QueryBus) {}
