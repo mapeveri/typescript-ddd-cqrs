@@ -5,7 +5,13 @@ import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { Body, Controller, HttpCode, HttpStatus, Post, UseGuards } from '@nestjs/common';
 import WordPostDto from './wordPostDto';
 import { JwtAuthGuard } from '@src/shared/infrastructure/nestjs/guards/JwtAuthGuard';
-import { ApiCreatedResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiCreatedResponse,
+  ApiBadRequestResponse,
+  ApiInternalServerErrorResponse,
+  ApiTags,
+  ApiUnauthorizedResponse,
+} from '@nestjs/swagger';
 
 @ApiTags('Words')
 @Controller()
@@ -14,10 +20,10 @@ export default class WordPostController {
 
   @Post('words')
   @HttpCode(HttpStatus.CREATED)
-  @ApiCreatedResponse({ description: 'The record has been successfully created.'})
-  @ApiResponse({ status: 400, description: 'Bad Request.' })
-  @ApiResponse({ status: 401, description: 'Unauthorized.' })
-  @ApiResponse({ status: 500, description: 'Internal Server Error.' })
+  @ApiCreatedResponse({ description: 'The record has been successfully created.' })
+  @ApiBadRequestResponse({ description: 'Bad Request.' })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized.' })
+  @ApiInternalServerErrorResponse({ description: 'Internal Server Error.' })
   @UseGuards(JwtAuthGuard)
   async run(@Body() payload: WordPostDto): Promise<any> {
     const wordTerms: Array<WordTermPrimitives> = payload.terms;
