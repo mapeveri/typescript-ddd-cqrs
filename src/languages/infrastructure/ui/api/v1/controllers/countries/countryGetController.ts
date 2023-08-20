@@ -4,7 +4,7 @@ import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { Controller, Get, HttpCode, Param, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '@src/shared/infrastructure/nestjs/guards/JwtAuthGuard';
 import CountryGetResponseDto from './countryGetResponse';
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Countries')
 @Controller()
@@ -14,6 +14,9 @@ export default class CountryGetController {
   @Get('countries/:id')
   @HttpCode(200)
   @ApiOkResponse({ type: CountryGetResponseDto })
+  @ApiResponse({ status: 400, description: 'Bad Request.'})
+  @ApiResponse({ status: 401, description: 'Unauthorized.'})
+  @ApiResponse({ status: 500, description: 'Internal Server Error.'})
   @UseGuards(JwtAuthGuard)
   async run(@Param('id') id: string): Promise<CountryGetResponseDto> {
     const data = await this.queryBus.ask(new FindCountryQuery(id));

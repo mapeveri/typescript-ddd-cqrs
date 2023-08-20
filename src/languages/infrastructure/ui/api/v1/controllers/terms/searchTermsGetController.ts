@@ -3,7 +3,7 @@ import SearchTermQuery from '@src/languages/application/term/query/search/search
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { Controller, Get, Param, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '@src/shared/infrastructure/nestjs/guards/JwtAuthGuard';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Terms')
 @Controller()
@@ -11,6 +11,9 @@ export default class SearchTermsGetController {
   public constructor(@Inject(QUERY_BUS) private queryBus: QueryBus) {}
 
   @Get('search/:term')
+  @ApiResponse({ status: 400, description: 'Bad Request.'})
+  @ApiResponse({ status: 401, description: 'Unauthorized.'})
+  @ApiResponse({ status: 500, description: 'Internal Server Error.'})
   @UseGuards(JwtAuthGuard)
   async run(@Param('term') term: string): Promise<any> {
     return await this.queryBus.ask(new SearchTermQuery(term));

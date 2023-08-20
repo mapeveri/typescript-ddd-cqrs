@@ -6,7 +6,7 @@ import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import LoginPostDto from './loginPostDto';
 import LoginPostResponseDto from './loginPostResponseDto';
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Auth')
 @Controller()
@@ -16,6 +16,8 @@ export default class LoginPostController {
   @Post('auth/login')
   @HttpCode(200)
   @ApiOkResponse({ type: LoginPostResponseDto })
+  @ApiResponse({ status: 400, description: 'Bad Request.'})
+  @ApiResponse({ status: 500, description: 'Internal Server Error.'})
   async run(@Body() payload: LoginPostDto): Promise<LoginPostResponseDto> {
     const id = Uuid.fromString(payload.email).toString();
     await this.commandBus.dispatch(

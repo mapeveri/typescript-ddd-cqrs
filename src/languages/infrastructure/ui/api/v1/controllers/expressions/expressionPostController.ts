@@ -5,7 +5,7 @@ import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { Body, Controller, HttpCode, HttpStatus, Post, UseGuards } from '@nestjs/common';
 import ExpressionPostDto from './expressionPostDto';
 import { JwtAuthGuard } from '@src/shared/infrastructure/nestjs/guards/JwtAuthGuard';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Expressions')
 @Controller()
@@ -14,6 +14,10 @@ export default class ExpressionPostController {
 
   @Post('expressions')
   @HttpCode(HttpStatus.CREATED)
+  @ApiCreatedResponse({ description: 'The record has been successfully created.'})
+  @ApiResponse({ status: 400, description: 'Bad Request.'})
+  @ApiResponse({ status: 401, description: 'Unauthorized.'})
+  @ApiResponse({ status: 500, description: 'Internal Server Error.'})
   @UseGuards(JwtAuthGuard)
   async run(@Body() payload: ExpressionPostDto): Promise<any> {
     const expressionTerms: Array<ExpressionTermPrimitives> = payload.terms;

@@ -5,7 +5,7 @@ import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { Controller, Get, HttpCode, Req, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '@src/shared/infrastructure/nestjs/guards/JwtAuthGuard';
 import MeGetResponseDto from './meGetResponseDto';
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Auth')
 @Controller()
@@ -15,6 +15,9 @@ export default class MeGetController {
   @Get('auth/me')
   @HttpCode(200)
   @ApiOkResponse({ type: MeGetResponseDto })
+  @ApiResponse({ status: 400, description: 'Bad Request.'})
+  @ApiResponse({ status: 401, description: 'Unauthorized.'})
+  @ApiResponse({ status: 500, description: 'Internal Server Error.'})
   @UseGuards(JwtAuthGuard)
   async run(@Req() request: Request): Promise<MeGetResponseDto> {
     const userId = request.user?.id;

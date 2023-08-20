@@ -5,7 +5,7 @@ import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { Body, Controller, HttpCode, HttpStatus, Post, UseGuards } from '@nestjs/common';
 import CountryPostDto from './countryPostDto';
 import { JwtAuthGuard } from '@src/shared/infrastructure/nestjs/guards/JwtAuthGuard';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Countries')
 @Controller()
@@ -14,6 +14,10 @@ export default class CountryPostController {
 
   @Post('countries')
   @HttpCode(HttpStatus.CREATED)
+  @ApiCreatedResponse({ description: 'The record has been successfully created.'})
+  @ApiResponse({ status: 400, description: 'Bad Request.'})
+  @ApiResponse({ status: 401, description: 'Unauthorized.'})
+  @ApiResponse({ status: 500, description: 'Internal Server Error.'})
   @UseGuards(JwtAuthGuard)
   async run(@Body() payload: CountryPostDto): Promise<any> {
     const languages: Array<LanguagePrimitives> = payload.languages;
