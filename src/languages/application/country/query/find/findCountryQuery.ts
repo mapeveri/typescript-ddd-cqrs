@@ -1,5 +1,3 @@
-import { Query } from '@src/shared/domain/buses/queryBus/query';
-
-export default class FindCountryQuery implements Query {
+export default class FindCountryQuery {
   constructor(public readonly id: string) {}
 }

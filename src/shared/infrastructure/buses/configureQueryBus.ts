@@ -1,7 +1,3 @@
-import FindCountryQueryHandler from '@src/languages/application/country/query/find/findCountryQueryHandler';
-import FindCountriesQueryHandler from '@src/languages/application/country/query/findAll/findCountriesQueryHandler';
-import FindCountryQuery from '@src/languages/application/country/query/find/findCountryQuery';
-import FindCountriesQuery from '@src/languages/application/country/query/findAll/findCountriesQuery';
 import SearchTermQuery from '@src/languages/application/term/query/search/searchTermQuery';
 import SearchTermQueryHandler from '@src/languages/application/term/query/search/searchTermQueryHandler';
 import { NestFactory } from '@nestjs/core';
@@ -13,7 +9,5 @@ export async function configureQueryBus() {
 
   const queryBus = app.get(QUERY_BUS);
 
-  queryBus.register(FindCountryQuery.prototype, app.get(FindCountryQueryHandler));
-  queryBus.register(FindCountriesQuery.prototype, app.get(FindCountriesQueryHandler));
   queryBus.register(SearchTermQuery.prototype, app.get(SearchTermQueryHandler));
 }

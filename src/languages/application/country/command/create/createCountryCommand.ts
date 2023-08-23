@@ -1,7 +1,6 @@
 import { LanguagePrimitives } from '@src/languages/domain/country/valueObjects/language';
-import { Command } from '@src/shared/domain/buses/commandBus/command';
 
-export default class CreateCountryCommand implements Command {
+export default class CreateCountryCommand {
   constructor(
     public readonly id: string,
     public readonly name: string,
