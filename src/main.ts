@@ -2,7 +2,6 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { LOGGER_INTERFACE } from './shared/domain/loggerInterface';
 import { DataSourceHandler } from './shared/infrastructure/persistence/typeOrm/dataSourceHandler';
-import { configureQueryBus } from './shared/infrastructure/buses/configureQueryBus';
 import { configureCommandBus } from './shared/infrastructure/buses/configureCommandBus';
 import { configureEventBus } from './shared/infrastructure/buses/configureEventBus';
 import { ValidationPipe } from '@nestjs/common';
@@ -33,7 +32,6 @@ async function bootstrap() {
 
   await DataSourceHandler.getInstance().initialize();
 
-  await configureQueryBus();
   await configureCommandBus();
   await configureEventBus();
 
