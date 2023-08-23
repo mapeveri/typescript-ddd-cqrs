@@ -27,7 +27,7 @@ describe('CreateExpressionCommandHandler handle', () => {
     const command = CreateExpressionCommandMother.random({ id: expression.id.value });
     expressionRepository.findById.mockResolvedValueOnce(expression);
 
-    await expect(createWordCommandHandler.handle(command)).rejects.toThrowError(ExpressionAlreadyExistsException);
+    await expect(createWordCommandHandler.execute(command)).rejects.toThrowError(ExpressionAlreadyExistsException);
 
     expressionRepository.expectSaveNotCalled();
   });
@@ -38,7 +38,7 @@ describe('CreateExpressionCommandHandler handle', () => {
     const expression: Expression = ExpressionMother.createFromCreateExpressionCommand(command, userId);
     const expressionCreatedEvent = ExpressionCreatedEventMother.createFromCreateExpressionCommand(command);
 
-    await createWordCommandHandler.handle(command);
+    await createWordCommandHandler.execute(command);
 
     expressionRepository.expectSaveCalledWith(expression);
     eventBus.expectPublishCalledWith([expressionCreatedEvent]);

@@ -1,5 +1,4 @@
 import ExpressionRepository, { EXPRESSION_REPOSITORY } from '@src/languages/domain/expression/expressionRepository';
-import { CommandHandler } from '@src/shared/domain/buses/commandBus/commandHandler';
 import { EVENT_BUS, EventBus } from '@src/shared/domain/buses/eventBus/eventBus';
 import CreateExpressionCommand from './createExpressionCommand';
 import ExpressionId from '@src/languages/domain/expression/valueObjects/expressionId';
@@ -9,14 +8,16 @@ import ExpressionTermCollection from '@src/languages/domain/expression/valueObje
 import UserId from '@src/languages/domain/user/valueObjects/userId';
 import ExpressionAlreadyExistsException from '@src/languages/domain/expression/exceptions/ExpressionAlreadyExistsException';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
-export default class CreateExpressionCommandHandler implements CommandHandler {
+@CommandHandler(CreateExpressionCommand)
+export default class CreateExpressionCommandHandler implements ICommandHandler<CreateExpressionCommand> {
   constructor(
     @Inject(EXPRESSION_REPOSITORY) private expressionRepository: ExpressionRepository,
     @Inject(EVENT_BUS) private eventBus: EventBus
   ) {}
 
-  async handle(command: CreateExpressionCommand): Promise<void> {
+  async execute(command: CreateExpressionCommand): Promise<void> {
     const expressionId = ExpressionId.of(command.id);
     await this.checkExpressionDoesNotExists(expressionId);
 
