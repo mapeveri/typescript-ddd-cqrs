@@ -20,7 +20,7 @@ describe('SearchTermQueryHandler handle', () => {
     const term: Term = TermMother.random({ title: termToSearch });
     termRepository.search.mockReturnValueOnce(Promise.resolve([term]));
 
-    const foundTerms = await searchTermQueryHandler.handle(query);
+    const foundTerms = await searchTermQueryHandler.execute(query);
 
     termRepository.expectSearchCalledWith(termToSearch);
     expect(foundTerms.content).toEqual([term]);
