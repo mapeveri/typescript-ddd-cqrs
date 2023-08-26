@@ -11,7 +11,7 @@ import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(CreateWordCommand)
-export default class CreateWordCommandHandler implements ICommandHandler {
+export default class CreateWordCommandHandler implements ICommandHandler<CreateWordCommand> {
   constructor(
     @Inject(WORD_REPOSITORY) private wordRepository: WordRepository,
     @Inject(EVENT_BUS) private eventBus: EventBus
@@ -31,7 +31,7 @@ export default class CreateWordCommandHandler implements ICommandHandler {
 
     await this.wordRepository.save(word);
 
-    await this.eventBus.publish(word.pullDomainEvents());
+    void this.eventBus.publish(word.pullDomainEvents());
   }
 
   private async checkWordDoesNotExists(wordId: WordId): Promise<void> {

@@ -3,13 +3,14 @@ import { COMMAND_BUS } from '@src/shared/domain/buses/commandBus/commandBus';
 import { LOGGER_INTERFACE } from '@src/shared/domain/loggerInterface';
 import MemoryCommandBus from '../buses/memoryCommandBus';
 import { EVENT_BUS } from '@src/shared/domain/buses/eventBus/eventBus';
-import MemoryEventBus from '../buses/memoryEventBus';
 import Logger from '../logger';
 import { JwtAuthGuard } from './guards/JwtAuthGuard';
 import { JwtStrategy } from './strategies/JwtStrategy';
 import { JwtModule } from '@nestjs/jwt';
 import { APP_FILTER } from '@nestjs/core';
 import { ErrorFilter } from './filters/ErrorFilter';
+import { CqrsModule } from '@nestjs/cqrs';
+import NestEventBus from './buses/nestEventBus';
 
 @Global()
 @Module({
@@ -18,6 +19,7 @@ import { ErrorFilter } from './filters/ErrorFilter';
       secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '2h' },
     }),
+    CqrsModule,
   ],
   providers: [
     JwtAuthGuard,
@@ -36,9 +38,9 @@ import { ErrorFilter } from './filters/ErrorFilter';
     },
     {
       provide: EVENT_BUS,
-      useClass: MemoryEventBus,
+      useClass: NestEventBus,
     },
   ],
-  exports: [JwtAuthGuard, JwtModule, JwtStrategy, LOGGER_INTERFACE, COMMAND_BUS, EVENT_BUS],
+  exports: [JwtAuthGuard, JwtModule, CqrsModule, JwtStrategy, LOGGER_INTERFACE, COMMAND_BUS, EVENT_BUS],
 })
 export class SharedModule {}

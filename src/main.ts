@@ -3,7 +3,6 @@ import { AppModule } from './app.module';
 import { LOGGER_INTERFACE } from './shared/domain/loggerInterface';
 import { DataSourceHandler } from './shared/infrastructure/persistence/typeOrm/dataSourceHandler';
 import { configureCommandBus } from './shared/infrastructure/buses/configureCommandBus';
-import { configureEventBus } from './shared/infrastructure/buses/configureEventBus';
 import { ValidationPipe } from '@nestjs/common';
 import helmet from 'helmet';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
@@ -33,7 +32,6 @@ async function bootstrap() {
   await DataSourceHandler.getInstance().initialize();
 
   await configureCommandBus();
-  await configureEventBus();
 
   const logger = app.get(LOGGER_INTERFACE);
 

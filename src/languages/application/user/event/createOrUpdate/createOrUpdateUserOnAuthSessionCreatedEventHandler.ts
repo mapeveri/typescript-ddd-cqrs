@@ -1,13 +1,14 @@
 import UserRepository, { USER_REPOSITORY } from '@src/languages/domain/user/userRepository';
 import UserId from '@src/languages/domain/user/valueObjects/userId';
 import { COMMAND_BUS, CommandBus } from '@src/shared/domain/buses/commandBus/commandBus';
-import { EventHandler } from '@src/shared/domain/buses/eventBus/eventHandler';
 import CreateUserCommand from '../../command/create/createUserCommand';
 import UpdateUserCommand from '../../command/update/updateUserCommand';
 import AuthSessionCreatedEvent from '@src/languages/domain/auth/domainEvents/authSessionCreatedEvent';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
+import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
-export default class CreateOrUpdateUserOnAuthSessionCreatedEventHandler implements EventHandler {
+@EventsHandler(AuthSessionCreatedEvent)
+export default class CreateOrUpdateUserOnAuthSessionCreatedEventHandler implements IEventHandler<AuthSessionCreatedEvent> {
   constructor(
     @Inject(USER_REPOSITORY) private userRepository: UserRepository,
     @Inject(COMMAND_BUS) private commandBus: CommandBus

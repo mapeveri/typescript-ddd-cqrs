@@ -3,10 +3,9 @@ import { controllers } from './controllers';
 import { commands, events, queries } from './cqrs';
 import { services } from './services';
 import { repositories } from './repositories';
-import { CqrsModule } from '@nestjs/cqrs';
 
 @Module({
-  imports: [CqrsModule],
+  imports: [],
   controllers,
   providers: [...services, ...commands, ...queries, ...events, ...repositories],
 })

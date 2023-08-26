@@ -31,7 +31,7 @@ export default class CreateExpressionCommandHandler implements ICommandHandler<C
 
     await this.expressionRepository.save(expression);
 
-    await this.eventBus.publish(expression.pullDomainEvents());
+    void this.eventBus.publish(expression.pullDomainEvents());
   }
 
   private async checkExpressionDoesNotExists(expressionId: ExpressionId): Promise<void> {

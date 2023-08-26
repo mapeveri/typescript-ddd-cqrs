@@ -6,7 +6,7 @@ import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(SearchTermQuery)
-export default class SearchTermQueryHandler implements IQueryHandler {
+export default class SearchTermQueryHandler implements IQueryHandler<SearchTermQuery> {
   constructor(@Inject(TERM_REPOSITORY) private termRepository: TermRepository) {}
 
   async execute(query: SearchTermQuery): Promise<QueryResponse> {

@@ -34,6 +34,6 @@ export default class LoginUserCommandHandler implements ICommandHandler<LoginUse
     const authSession = AuthSession.create(authSessionId, session);
     await this.authSessionRepository.save(authSession);
 
-    await this.eventBus.publish(authSession.pullDomainEvents());
+    void this.eventBus.publish(authSession.pullDomainEvents());
   }
 }
