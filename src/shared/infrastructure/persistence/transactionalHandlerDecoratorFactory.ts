@@ -1,15 +1,18 @@
-import { CommandHandler } from '@src/shared/domain/buses/commandBus/commandHandler';
+import { CommandBus } from '@nestjs/cqrs';
+import Projection from '@src/shared/domain/projection/projection';
 import MongoTransactionalDecorator from './mongo/mongoTransactionalDecorator';
 import TypeOrmTransactionalDecorator from './typeOrm/typeOrmTransactionalDecorator';
+import { Command } from '@src/shared/domain/buses/commandBus/command';
 
 export default class TransactionalHandlerDecoratorFactory {
-  constructor(readonly handler: CommandHandler) {}
+  constructor(readonly commandBus: CommandBus) {}
 
-  get(database: string): MongoTransactionalDecorator | TypeOrmTransactionalDecorator {
-    if (database === 'mongo') {
-      return new MongoTransactionalDecorator(this.handler);
+  async execute(command: Command | Projection): Promise<void> {
+    if (command instanceof Projection) {
+      new MongoTransactionalDecorator(this.commandBus).execute(command);
+      return;
     }
 
-    return new TypeOrmTransactionalDecorator(this.handler);
+    new TypeOrmTransactionalDecorator(this.commandBus).execute(command);
   }
 }

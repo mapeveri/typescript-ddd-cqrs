@@ -1,7 +1,8 @@
 import { Global, Module } from '@nestjs/common';
 import { COMMAND_BUS } from '@src/shared/domain/buses/commandBus/commandBus';
 import { LOGGER_INTERFACE } from '@src/shared/domain/loggerInterface';
-import MemoryCommandBus from '../buses/memoryCommandBus';
+import NestCommandBus from './buses/nestCommandBus';
+import NestEventBus from './buses/nestEventBus';
 import { EVENT_BUS } from '@src/shared/domain/buses/eventBus/eventBus';
 import Logger from '../logger';
 import { JwtAuthGuard } from './guards/JwtAuthGuard';
@@ -10,7 +11,6 @@ import { JwtModule } from '@nestjs/jwt';
 import { APP_FILTER } from '@nestjs/core';
 import { ErrorFilter } from './filters/ErrorFilter';
 import { CqrsModule } from '@nestjs/cqrs';
-import NestEventBus from './buses/nestEventBus';
 
 @Global()
 @Module({
@@ -34,7 +34,7 @@ import NestEventBus from './buses/nestEventBus';
     },
     {
       provide: COMMAND_BUS,
-      useClass: MemoryCommandBus,
+      useClass: NestCommandBus,
     },
     {
       provide: EVENT_BUS,
