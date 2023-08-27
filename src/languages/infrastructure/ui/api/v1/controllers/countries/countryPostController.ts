@@ -27,6 +27,5 @@ export default class CountryPostController {
   async run(@Body() payload: CountryPostDto): Promise<any> {
     const languages: Array<LanguagePrimitives> = payload.languages;
     await this.commandBus.dispatch(new CreateCountryCommand(payload.id, payload.name, payload.iso, languages));
-    return;
   }
 }

@@ -29,7 +29,5 @@ export default class WordPostController {
     await this.commandBus.dispatch(
       new CreateWordCommand(payload.id, payload.languageId, payload.countryId, payload.userId, wordTerms)
     );
-
-    return;
   }
 }
