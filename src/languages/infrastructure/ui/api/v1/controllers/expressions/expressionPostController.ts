@@ -1,6 +1,6 @@
 import CreateExpressionCommand from '@src/languages/application/expression/command/create/createExpressionCommand';
 import { ExpressionTermPrimitives } from '@src/languages/domain/expression/valueObjects/expressionTerm';
-import { Body, Controller, HttpCode, HttpStatus, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Inject, Post, UseGuards } from '@nestjs/common';
 import ExpressionPostDto from './expressionPostDto';
 import { JwtAuthGuard } from '@src/shared/infrastructure/nestjs/guards/JwtAuthGuard';
 import {
@@ -10,12 +10,12 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
-import { CommandBus } from '@nestjs/cqrs';
+import { COMMAND_BUS, CommandBus } from '@src/shared/domain/buses/commandBus/commandBus';
 
 @ApiTags('Expressions')
 @Controller()
 export default class ExpressionPostController {
-  public constructor(private commandBus: CommandBus) {}
+  public constructor(@Inject(COMMAND_BUS) private commandBus: CommandBus) {}
 
   @Post('expressions')
   @HttpCode(HttpStatus.CREATED)
@@ -26,7 +26,7 @@ export default class ExpressionPostController {
   @UseGuards(JwtAuthGuard)
   async run(@Body() payload: ExpressionPostDto): Promise<any> {
     const expressionTerms: Array<ExpressionTermPrimitives> = payload.terms;
-    await this.commandBus.execute(
+    await this.commandBus.dispatch(
       new CreateExpressionCommand(payload.id, payload.languageId, payload.countryId, payload.userId, expressionTerms)
     );
 
