@@ -9,10 +9,10 @@ export default class TransactionalHandlerDecoratorFactory {
 
   async execute(command: Command | Projection): Promise<void> {
     if (command instanceof Projection) {
-      new MongoTransactionalDecorator(this.commandBus).execute(command);
+      await new MongoTransactionalDecorator(this.commandBus).execute(command);
       return;
     }
 
-    new TypeOrmTransactionalDecorator(this.commandBus).execute(command);
+    await new TypeOrmTransactionalDecorator(this.commandBus).execute(command);
   }
 }
