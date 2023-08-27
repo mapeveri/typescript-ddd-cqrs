@@ -1,6 +1,6 @@
 import { Request } from 'express';
 import FindUserQuery from '@src/languages/application/user/query/find/findUserQuery';
-import { Controller, Get, HttpCode, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, HttpCode, Inject, Req, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '@src/shared/infrastructure/nestjs/guards/JwtAuthGuard';
 import MeGetResponseDto from './meGetResponseDto';
 import {
@@ -10,12 +10,12 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
-import { QueryBus } from '@nestjs/cqrs';
+import { QUERY_BUS, QueryBus } from '@src/shared/domain/buses/queryBus/queryBus';
 
 @ApiTags('Auth')
 @Controller()
 export default class MeGetController {
-  public constructor(private queryBus: QueryBus) {}
+  public constructor(@Inject(QUERY_BUS) private queryBus: QueryBus) {}
 
   @Get('auth/me')
   @HttpCode(200)
@@ -30,7 +30,7 @@ export default class MeGetController {
       throw new Error('Invalid user');
     }
 
-    const data = await this.queryBus.execute(new FindUserQuery(userId));
+    const data = await this.queryBus.ask(new FindUserQuery(userId));
 
     return data.content;
   }

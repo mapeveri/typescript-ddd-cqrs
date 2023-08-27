@@ -11,6 +11,8 @@ import { JwtModule } from '@nestjs/jwt';
 import { APP_FILTER } from '@nestjs/core';
 import { ErrorFilter } from './filters/ErrorFilter';
 import { CqrsModule } from '@nestjs/cqrs';
+import { QUERY_BUS } from '@src/shared/domain/buses/queryBus/queryBus';
+import NestQueryBusBus from './buses/nestQueryBus';
 
 @Global()
 @Module({
@@ -40,7 +42,11 @@ import { CqrsModule } from '@nestjs/cqrs';
       provide: EVENT_BUS,
       useClass: NestEventBus,
     },
+    {
+      provide: QUERY_BUS,
+      useClass: NestQueryBusBus,
+    },
   ],
-  exports: [JwtAuthGuard, JwtModule, CqrsModule, JwtStrategy, LOGGER_INTERFACE, COMMAND_BUS, EVENT_BUS],
+  exports: [JwtAuthGuard, JwtModule, CqrsModule, JwtStrategy, LOGGER_INTERFACE, QUERY_BUS, COMMAND_BUS, EVENT_BUS],
 })
 export class SharedModule {}
