@@ -26,7 +26,7 @@ describe('CreateWordCommandHandler handle', () => {
     const command = CreateWordCommandMother.random({ id: word.id.value });
     wordRepository.findById.mockResolvedValueOnce(word);
 
-    await expect(createWordCommandHandler.handle(command)).rejects.toThrowError(WordAlreadyExistsException);
+    await expect(createWordCommandHandler.execute(command)).rejects.toThrowError(WordAlreadyExistsException);
 
     wordRepository.expectSaveNotCalled();
   });
@@ -38,7 +38,7 @@ describe('CreateWordCommandHandler handle', () => {
     const wordCreatedEvent = WordCreatedEventMother.createFromCreateWordCommand(command);
     wordRepository.findById.mockResolvedValueOnce(null);
 
-    await createWordCommandHandler.handle(command);
+    await createWordCommandHandler.execute(command);
 
     wordRepository.expectSaveCalledWith(word);
     eventBus.expectPublishCalledWith([wordCreatedEvent]);

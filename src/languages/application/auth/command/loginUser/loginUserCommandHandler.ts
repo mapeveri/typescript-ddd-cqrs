@@ -1,4 +1,3 @@
-import { CommandHandler } from '@src/shared/domain/buses/commandBus/commandHandler';
 import { EVENT_BUS, EventBus } from '@src/shared/domain/buses/eventBus/eventBus';
 import LoginUserCommand from './loginUserCommand';
 import { SOCIAL_LOGIN, SocialLogin } from '@src/languages/domain/auth/socialLogin';
@@ -8,15 +7,17 @@ import Session from '@src/languages/domain/auth/valueObjects/session';
 import AuthSessionId from '@src/languages/domain/auth/valueObjects/authSessionId';
 import { AUTH_SESSION_REPOSITORY, AuthSessionRepository } from '@src/languages/domain/auth/authSessionRepository';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
-export default class LoginUserCommandHandler implements CommandHandler {
+@CommandHandler(LoginUserCommand)
+export default class LoginUserCommandHandler implements ICommandHandler<LoginUserCommand> {
   constructor(
     @Inject(AUTH_SESSION_REPOSITORY) private authSessionRepository: AuthSessionRepository,
     @Inject(SOCIAL_LOGIN) private socialLogin: SocialLogin,
     @Inject(EVENT_BUS) private eventBus: EventBus
   ) {}
 
-  async handle(command: LoginUserCommand): Promise<void> {
+  async execute(command: LoginUserCommand): Promise<void> {
     const isValid: boolean = await this.socialLogin.login(command.token);
     if (!isValid) {
       throw new LoginException();
@@ -33,6 +34,6 @@ export default class LoginUserCommandHandler implements CommandHandler {
     const authSession = AuthSession.create(authSessionId, session);
     await this.authSessionRepository.save(authSession);
 
-    await this.eventBus.publish(authSession.pullDomainEvents());
+    void this.eventBus.publish(authSession.pullDomainEvents());
   }
 }

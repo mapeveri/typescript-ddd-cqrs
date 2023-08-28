@@ -1,8 +1,6 @@
 import CreateWordCommand from '@src/languages/application/word/command/create/createWordCommand';
-import { COMMAND_BUS, CommandBus } from '@src/shared/domain/buses/commandBus/commandBus';
 import { WordTermPrimitives } from '@src/languages/domain/word/valueObjects/wordTerm';
-import { Inject } from '@src/shared/domain/injector/inject.decorator';
-import { Body, Controller, HttpCode, HttpStatus, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Inject, Post, UseGuards } from '@nestjs/common';
 import WordPostDto from './wordPostDto';
 import { JwtAuthGuard } from '@src/shared/infrastructure/nestjs/guards/JwtAuthGuard';
 import {
@@ -12,6 +10,7 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
+import { COMMAND_BUS, CommandBus } from '@src/shared/domain/buses/commandBus/commandBus';
 
 @ApiTags('Words')
 @Controller()
@@ -30,7 +29,5 @@ export default class WordPostController {
     await this.commandBus.dispatch(
       new CreateWordCommand(payload.id, payload.languageId, payload.countryId, payload.userId, wordTerms)
     );
-
-    return;
   }
 }

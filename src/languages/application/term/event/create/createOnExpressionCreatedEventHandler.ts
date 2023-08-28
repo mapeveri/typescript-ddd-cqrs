@@ -1,13 +1,14 @@
 import { COMMAND_BUS, CommandBus } from '@src/shared/domain/buses/commandBus/commandBus';
-import { EventHandler } from '@src/shared/domain/buses/eventBus/eventHandler';
 import CreateTermCommand from '../../command/create/createTermCommand';
 import { Uuid } from '@src/shared/domain/valueObjects/uuid';
 import { EXPRESSION } from '@src/languages/domain/term/term';
 import ExpressionCreatedEvent from '@src/languages/domain/expression/domainEvents/expressionCreatedEvent';
 import { ExpressionTermPrimitives } from '@src/languages/domain/expression/valueObjects/expressionTerm';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
+import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
-export default class CreateOnExpressionCreatedEventHandler implements EventHandler {
+@EventsHandler(ExpressionCreatedEvent)
+export default class CreateOnExpressionCreatedEventHandler implements IEventHandler<ExpressionCreatedEvent> {
   constructor(@Inject(COMMAND_BUS) private commandBus: CommandBus) {}
 
   async handle(event: ExpressionCreatedEvent): Promise<void> {

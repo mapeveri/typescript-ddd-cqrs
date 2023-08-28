@@ -1,12 +1,11 @@
 import LoginUserCommand from '@src/languages/application/auth/command/loginUser/loginUserCommand';
 import { Uuid } from '@src/shared/domain/valueObjects/uuid';
-import { COMMAND_BUS, CommandBus } from '@src/shared/domain/buses/commandBus/commandBus';
-import { Inject } from '@src/shared/domain/injector/inject.decorator';
-import { Body, Controller, HttpCode, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, Inject, Post } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import LoginPostDto from './loginPostDto';
 import LoginPostResponseDto from './loginPostResponseDto';
 import { ApiBadRequestResponse, ApiInternalServerErrorResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { COMMAND_BUS, CommandBus } from '@src/shared/domain/buses/commandBus/commandBus';
 
 @ApiTags('Auth')
 @Controller()

@@ -1,5 +1,4 @@
 import WordRepository, { WORD_REPOSITORY } from '@src/languages/domain/word/wordRepository';
-import { CommandHandler } from '@src/shared/domain/buses/commandBus/commandHandler';
 import { EVENT_BUS, EventBus } from '@src/shared/domain/buses/eventBus/eventBus';
 import CreateWordCommand from './createWordCommand';
 import Word from '@src/languages/domain/word/word';
@@ -9,14 +8,16 @@ import UserId from '@src/languages/domain/user/valueObjects/userId';
 import WordTermCollection from '@src/languages/domain/word/valueObjects/wordTermCollection';
 import WordAlreadyExistsException from '@src/languages/domain/word/exceptions/WordAlreadyExistsException';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
-export default class CreateWordCommandHandler implements CommandHandler {
+@CommandHandler(CreateWordCommand)
+export default class CreateWordCommandHandler implements ICommandHandler<CreateWordCommand> {
   constructor(
     @Inject(WORD_REPOSITORY) private wordRepository: WordRepository,
     @Inject(EVENT_BUS) private eventBus: EventBus
   ) {}
 
-  async handle(command: CreateWordCommand): Promise<void> {
+  async execute(command: CreateWordCommand): Promise<void> {
     const wordId = WordId.of(command.id);
     await this.checkWordDoesNotExists(wordId);
 
@@ -30,7 +31,7 @@ export default class CreateWordCommandHandler implements CommandHandler {
 
     await this.wordRepository.save(word);
 
-    await this.eventBus.publish(word.pullDomainEvents());
+    void this.eventBus.publish(word.pullDomainEvents());
   }
 
   private async checkWordDoesNotExists(wordId: WordId): Promise<void> {

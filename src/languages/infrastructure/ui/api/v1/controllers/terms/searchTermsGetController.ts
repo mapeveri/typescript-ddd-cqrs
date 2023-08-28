@@ -1,7 +1,5 @@
-import { QUERY_BUS, QueryBus } from '@src/shared/domain/buses/queryBus/queryBus';
 import SearchTermQuery from '@src/languages/application/term/query/search/searchTermQuery';
-import { Inject } from '@src/shared/domain/injector/inject.decorator';
-import { Controller, Get, HttpCode, Param, UseGuards } from '@nestjs/common';
+import { Controller, Get, HttpCode, Inject, Param, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '@src/shared/infrastructure/nestjs/guards/JwtAuthGuard';
 import {
   ApiBadRequestResponse,
@@ -11,6 +9,7 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { SearchTermsGetResponse } from './searchTermsGetResponse';
+import { QUERY_BUS, QueryBus } from '@src/shared/domain/buses/queryBus/queryBus';
 
 @ApiTags('Terms')
 @Controller()

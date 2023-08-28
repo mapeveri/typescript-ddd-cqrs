@@ -30,7 +30,7 @@ describe('LoginUserCommandHandler.test handle', () => {
     const command = LoginUserCommandMother.random();
     socialLogin.login.mockResolvedValueOnce(false);
 
-    await expect(loginUserCommandHandler.handle(command)).rejects.toThrowError(LoginException);
+    await expect(loginUserCommandHandler.execute(command)).rejects.toThrowError(LoginException);
 
     socialLogin.expectLoginCalledWith(command.token);
     repository.expectSaveNotCalledWith();
@@ -51,7 +51,7 @@ describe('LoginUserCommandHandler.test handle', () => {
     const userAuthenticatedEvent = AuthSessionCreatedEventMother.createFromLoginUserCommand(command);
     socialLogin.login.mockResolvedValueOnce(true);
 
-    await loginUserCommandHandler.handle(command);
+    await loginUserCommandHandler.execute(command);
 
     socialLogin.expectLoginCalledWith(command.token);
     repository.expectSaveCalledWith(authSession);

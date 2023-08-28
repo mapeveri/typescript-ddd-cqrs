@@ -1,7 +1,5 @@
 import FindCountriesQuery from '@src/languages/application/country/query/findAll/findCountriesQuery';
-import { QUERY_BUS, QueryBus } from '@src/shared/domain/buses/queryBus/queryBus';
-import { Inject } from '@src/shared/domain/injector/inject.decorator';
-import { Controller, Get, HttpCode, UseGuards } from '@nestjs/common';
+import { Controller, Get, HttpCode, Inject, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '@src/shared/infrastructure/nestjs/guards/JwtAuthGuard';
 import CountryGetResponseDto from './countryGetResponse';
 import {
@@ -11,6 +9,7 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
+import { QUERY_BUS, QueryBus } from '@src/shared/domain/buses/queryBus/queryBus';
 
 @ApiTags('Countries')
 @Controller()

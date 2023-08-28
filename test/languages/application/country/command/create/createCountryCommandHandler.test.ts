@@ -20,7 +20,7 @@ describe('CreateCountryCommandHandler handle', () => {
     const command = CreateCountryCommandMother.random({id: country.id.value});
     countryRepository.findById.mockResolvedValueOnce(country);
 
-    await expect(createCountryCommandHandler.handle(command)).rejects.toThrowError(CountryAlreadyExistsException);
+    await expect(createCountryCommandHandler.execute(command)).rejects.toThrowError(CountryAlreadyExistsException);
 
     countryRepository.expectSaveNotCalled();
   });
@@ -29,7 +29,7 @@ describe('CreateCountryCommandHandler handle', () => {
     const command = CreateCountryCommandMother.random();
     const country: Country = CountryMother.createFromCreateCountryCommand(command);
 
-    await createCountryCommandHandler.handle(command);
+    await createCountryCommandHandler.execute(command);
 
     countryRepository.expectSaveCalledWith(country);
   });
