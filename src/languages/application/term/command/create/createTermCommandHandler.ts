@@ -2,7 +2,7 @@ import TermRepository, { TERM_REPOSITORY } from '@src/languages/domain/term/term
 import CreateTermCommand from './createTermCommand';
 import Term from '@src/languages/domain/term/term';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
+import { CommandHandler, ICommandHandler } from '@src/shared/domain/buses/commandBus/commandHandler';
 
 @CommandHandler(CreateTermCommand)
 export default class CreateTermCommandHandler implements ICommandHandler<CreateTermCommand> {
