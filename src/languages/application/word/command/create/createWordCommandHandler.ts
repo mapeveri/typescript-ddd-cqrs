@@ -8,7 +8,7 @@ import UserId from '@src/languages/domain/user/valueObjects/userId';
 import WordTermCollection from '@src/languages/domain/word/valueObjects/wordTermCollection';
 import WordAlreadyExistsException from '@src/languages/domain/word/exceptions/WordAlreadyExistsException';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
+import { CommandHandler, ICommandHandler } from '@src/shared/domain/buses/commandBus/commandHandler';
 
 @CommandHandler(CreateWordCommand)
 export default class CreateWordCommandHandler implements ICommandHandler<CreateWordCommand> {

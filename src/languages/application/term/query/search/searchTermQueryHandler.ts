@@ -3,7 +3,7 @@ import SearchTermQuery from './searchTermQuery';
 import TermRepository, { TERM_REPOSITORY } from '@src/languages/domain/term/termRepository';
 import SearchTermResponse from './searchTermResponse';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
-import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
+import { IQueryHandler, QueryHandler } from '@src/shared/domain/buses/queryBus/queryHandler';
 
 @QueryHandler(SearchTermQuery)
 export default class SearchTermQueryHandler implements IQueryHandler<SearchTermQuery> {

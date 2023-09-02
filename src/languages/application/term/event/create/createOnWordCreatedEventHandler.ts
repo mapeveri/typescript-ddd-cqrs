@@ -4,7 +4,7 @@ import CreateTermCommand from '../../command/create/createTermCommand';
 import { Uuid } from '@src/shared/domain/valueObjects/uuid';
 import { WORD } from '@src/languages/domain/term/term';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
-import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
+import { EventsHandler, IEventHandler } from '@src/shared/domain/buses/eventBus/eventsHandler';
 
 @EventsHandler(WordCreatedEvent)
 export default class CreateOnWordCreatedEventHandler implements IEventHandler<WordCreatedEvent> {

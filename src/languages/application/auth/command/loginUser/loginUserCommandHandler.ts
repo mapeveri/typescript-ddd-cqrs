@@ -7,7 +7,7 @@ import Session from '@src/languages/domain/auth/valueObjects/session';
 import AuthSessionId from '@src/languages/domain/auth/valueObjects/authSessionId';
 import { AUTH_SESSION_REPOSITORY, AuthSessionRepository } from '@src/languages/domain/auth/authSessionRepository';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
+import { CommandHandler, ICommandHandler } from '@src/shared/domain/buses/commandBus/commandHandler';
 
 @CommandHandler(LoginUserCommand)
 export default class LoginUserCommandHandler implements ICommandHandler<LoginUserCommand> {

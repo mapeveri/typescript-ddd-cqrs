@@ -4,7 +4,7 @@ import QueryResponse from '@src/shared/domain/buses/queryBus/queryResponse';
 import UserId from '@src/languages/domain/user/valueObjects/userId';
 import FindUserResponse from './findUserResponse';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
-import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
+import { IQueryHandler, QueryHandler } from '@src/shared/domain/buses/queryBus/queryHandler';
 
 @QueryHandler(FindUserQuery)
 export default class FindUserQueryHandler implements IQueryHandler<FindUserQuery> {
