@@ -5,7 +5,7 @@ import CreateUserCommand from '../../command/create/createUserCommand';
 import UpdateUserCommand from '../../command/update/updateUserCommand';
 import AuthSessionCreatedEvent from '@src/languages/domain/auth/domainEvents/authSessionCreatedEvent';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
-import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
+import { EventsHandler, IEventHandler } from '@src/shared/domain/buses/eventBus/eventsHandler';
 
 @EventsHandler(AuthSessionCreatedEvent)
 export default class CreateOrUpdateUserOnAuthSessionCreatedEventHandler implements IEventHandler<AuthSessionCreatedEvent> {
