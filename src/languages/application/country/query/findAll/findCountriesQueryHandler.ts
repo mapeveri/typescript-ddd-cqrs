@@ -2,7 +2,7 @@ import CountryRepository, { COUNTRY_REPOSITORY } from '@src/languages/domain/cou
 import QueryResponse from '@src/shared/domain/buses/queryBus/queryResponse';
 import FindCountriesResponse from './findCountriesResponse';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
-import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
+import { IQueryHandler, QueryHandler } from '@src/shared/domain/buses/queryBus/queryHandler';
 import FindCountriesQuery from './findCountriesQuery';
 
 @QueryHandler(FindCountriesQuery)
