@@ -1,11 +1,11 @@
 import { COMMAND_BUS, CommandBus } from '@src/shared/domain/buses/commandBus/commandBus';
 import CreateTermCommand from '../../command/create/createTermCommand';
 import { Uuid } from '@src/shared/domain/valueObjects/uuid';
-import { EXPRESSION } from '@src/languages/domain/term/term';
 import ExpressionCreatedEvent from '@src/languages/domain/expression/domainEvents/expressionCreatedEvent';
 import { ExpressionTermPrimitives } from '@src/languages/domain/expression/valueObjects/expressionTerm';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { EventsHandler, IEventHandler } from '@src/shared/domain/buses/eventBus/eventsHandler';
+import { TermTypeEnum } from '@src/languages/domain/term/valueObjects/termType';
 
 @EventsHandler(ExpressionCreatedEvent)
 export default class CreateOnExpressionCreatedEventHandler implements IEventHandler<ExpressionCreatedEvent> {
@@ -22,7 +22,7 @@ export default class CreateOnExpressionCreatedEventHandler implements IEventHand
           term['description'],
           term['example'],
           term['hashtags'],
-          EXPRESSION
+          TermTypeEnum.EXPRESSION
         )
       );
     });

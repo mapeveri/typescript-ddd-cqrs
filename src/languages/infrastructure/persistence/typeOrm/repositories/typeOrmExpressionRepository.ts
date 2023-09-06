@@ -14,6 +14,10 @@ export default class TypeOrmExpressionRepository extends TypeOrmRepository imple
     return await this.em.findOne(Expression, { where: { id: id } } as any);
   }
 
+  async delete(expression: Expression): Promise<void> {
+    await this.em.remove(expression);
+  }
+
   async save(expression: Expression): Promise<any> {
     return await this.em.save(expression);
   }

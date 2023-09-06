@@ -1,5 +1,4 @@
-export const WORD = 'word';
-export const EXPRESSION = 'expression';
+import TermType from './valueObjects/termType';
 
 export default class Term {
   constructor(
@@ -7,7 +6,7 @@ export default class Term {
     readonly title: string,
     readonly description: string,
     readonly example: string,
-    readonly type: string,
+    readonly type: TermType,
     readonly hashtags: Array<string>,
     readonly likes: Array<string>,
     readonly disLikes: Array<string>,
@@ -19,7 +18,7 @@ export default class Term {
     title: string,
     description: string,
     example: string,
-    type: string,
+    type: TermType,
     hashtags: Array<string>,
     likes: Array<string>,
     disLikes: Array<string>,
@@ -34,7 +33,7 @@ export default class Term {
       title: this.title,
       description: this.description,
       example: this.example,
-      type: this.type,
+      type: this.type.type,
       hashtags: this.hashtags,
       likes: this.likes,
       disLikes: this.disLikes,

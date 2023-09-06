@@ -4,6 +4,8 @@ import ExpressionId from './valueObjects/expressionId';
 interface ExpressionRepository {
   findById(id: ExpressionId): Promise<Expression | null>;
 
+  delete(expression: Expression): Promise<void>;
+
   save(expression: Expression): Promise<void>;
 }
 
