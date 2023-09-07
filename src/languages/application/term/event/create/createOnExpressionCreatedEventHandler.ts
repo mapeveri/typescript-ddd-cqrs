@@ -1,6 +1,5 @@
 import { COMMAND_BUS, CommandBus } from '@src/shared/domain/buses/commandBus/commandBus';
 import CreateTermCommand from '../../command/create/createTermCommand';
-import { Uuid } from '@src/shared/domain/valueObjects/uuid';
 import ExpressionCreatedEvent from '@src/languages/domain/expression/domainEvents/expressionCreatedEvent';
 import { ExpressionTermPrimitives } from '@src/languages/domain/expression/valueObjects/expressionTerm';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
@@ -17,7 +16,7 @@ export default class CreateOnExpressionCreatedEventHandler implements IEventHand
     terms.forEach(async (term: ExpressionTermPrimitives) => {
       await this.commandBus.dispatch(
         new CreateTermCommand(
-          Uuid.random().toString(),
+          event.aggregateId,
           term['expression'],
           term['description'],
           term['example'],

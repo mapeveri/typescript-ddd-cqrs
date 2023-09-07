@@ -4,22 +4,23 @@ export enum TermTypeEnum {
 }
 
 export default class TermType {
-  readonly type: TermTypeEnum;
+  readonly type: string;
 
-  constructor(type: TermTypeEnum) {
-    if (!(type in TermTypeEnum)) {
+  constructor(type: string) {
+    const entry = Object.entries(TermTypeEnum).find(([, item]) => item === type);
+    if (!entry) {
       throw new Error('Tipo no válido');
     }
 
-    this.type = type;
+    this.type = entry[0];
   }
 
   static of(type: string): TermType {
-    return new this(type as TermTypeEnum);
+    return new this(type);
   }
 
   static fromPrimitives(type: string): TermType {
-    return new this(type as TermTypeEnum);
+    return new this(type);
   }
 
   isExpression(): boolean {

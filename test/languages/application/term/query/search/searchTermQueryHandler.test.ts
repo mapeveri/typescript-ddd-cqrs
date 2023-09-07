@@ -23,6 +23,6 @@ describe('SearchTermQueryHandler handle', () => {
     const foundTerms = await searchTermQueryHandler.execute(query);
 
     termRepository.expectSearchCalledWith(termToSearch);
-    expect(foundTerms.content).toEqual([term]);
+    expect(foundTerms.content).toEqual([term.toPrimitives()]);
   });
 });

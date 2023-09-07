@@ -6,6 +6,8 @@ import { CommandHandler, ICommandHandler } from '@src/shared/domain/buses/comman
 import ExpressionRepository, { EXPRESSION_REPOSITORY } from '@src/languages/domain/expression/expressionRepository';
 import WordRepository, { WORD_REPOSITORY } from '@src/languages/domain/word/wordRepository';
 import TermType from '@src/languages/domain/term/valueObjects/termType';
+import ExpressionId from '@src/languages/domain/expression/valueObjects/expressionId';
+import WordId from '@src/languages/domain/word/valueObjects/wordId';
 
 @CommandHandler(CreateTermCommand)
 export default class CreateTermCommandHandler implements ICommandHandler<CreateTermCommand> {
@@ -21,9 +23,13 @@ export default class CreateTermCommandHandler implements ICommandHandler<CreateT
       await this.termRepository.save(term);
     } catch (e) {
       if (term.type.isExpression()) {
-        await this.expressionRepository.delete(term);
+        const expression = await this.expressionRepository.findById(ExpressionId.of(term.id));
+        if (!expression) return;
+        await this.expressionRepository.delete(expression);
       } else if (term.type.isWord()) {
-        await this.wordRepository.delete(term);
+        const word = await this.wordRepository.findById(WordId.of(term.id));
+        if (!word) return;
+        await this.wordRepository.delete(word);
       }
 
       throw e;

@@ -1,6 +1,6 @@
 import Term from '@src/languages/domain/term/term';
-import { EXPRESSION } from '@src/languages/domain/term/term';
 import faker from 'faker';
+import TermTypeMother from './valueObjects/termTypeMother';
 
 export class TermMother {
   static random(props?: Partial<Term>): Term {
@@ -11,7 +11,7 @@ export class TermMother {
       title ?? faker.random.word(),
       description ?? faker.random.word(),
       example ?? faker.random.word(),
-      type ?? EXPRESSION,
+      type ?? TermTypeMother.random(),
       hashtags ?? [],
       likes ?? [],
       disLikes ?? [],
