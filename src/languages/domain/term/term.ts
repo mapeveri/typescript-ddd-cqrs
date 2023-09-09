@@ -1,6 +1,8 @@
+import { AggregateRoot } from '@src/shared/domain/aggregate/aggregateRoot';
 import TermType from './valueObjects/termType';
+import TermCreatedFailedEvent from './domainEvents/TermCreatedFailedEvent';
 
-export default class Term {
+export default class Term extends AggregateRoot {
   constructor(
     readonly id: string,
     readonly title: string,
@@ -11,7 +13,9 @@ export default class Term {
     readonly likes: Array<string>,
     readonly disLikes: Array<string>,
     readonly favourites: Array<string>
-  ) {}
+  ) {
+    super();
+  }
 
   static create(
     id: string,
@@ -25,6 +29,10 @@ export default class Term {
     favourites: Array<string>
   ): Term {
     return new this(id, title, description, example, type, hashtags, likes, disLikes, favourites);
+  }
+
+  termFailed() {
+    this.record(new TermCreatedFailedEvent(this.id, this.type.type));
   }
 
   toPrimitives(): object {

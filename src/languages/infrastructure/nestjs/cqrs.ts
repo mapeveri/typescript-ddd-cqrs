@@ -3,6 +3,8 @@ import CreateCountryCommandHandler from '@src/languages/application/country/comm
 import FindCountryQueryHandler from '@src/languages/application/country/query/find/findCountryQueryHandler';
 import FindCountriesQueryHandler from '@src/languages/application/country/query/findAll/findCountriesQueryHandler';
 import CreateExpressionCommandHandler from '@src/languages/application/expression/command/create/createExpressionCommandHandler';
+import DeleteExpressionCommandHandler from '@src/languages/application/expression/command/delete/deleteExpressionCommandHandler';
+import DeleteExpressionOnTermCreatedFailedEvent from '@src/languages/application/expression/event/delete/deleteExpressionOnTermCreatedFailedEventHandler';
 import CreateTermCommandHandler from '@src/languages/application/term/command/create/createTermCommandHandler';
 import CreateOnExpressionCreatedEventHandler from '@src/languages/application/term/event/create/createOnExpressionCreatedEventHandler';
 import CreateOnWordCreatedEventHandler from '@src/languages/application/term/event/create/createOnWordCreatedEventHandler';
@@ -12,6 +14,8 @@ import UpdateUserCommandHandler from '@src/languages/application/user/command/up
 import CreateOrUpdateUserOnAuthSessionCreatedEventHandler from '@src/languages/application/user/event/createOrUpdate/createOrUpdateUserOnAuthSessionCreatedEventHandler';
 import FindUserQueryHandler from '@src/languages/application/user/query/find/findUserQueryHandler';
 import CreateWordCommandHandler from '@src/languages/application/word/command/create/createWordCommandHandler';
+import DeleteWordCommandHandler from '@src/languages/application/word/command/delete/deleteWordCommandHandler';
+import DeleteWordOnTermCreatedFailedEvent from '@src/languages/application/word/event/delete/deleteWordOnTermCreatedFailedEventHandler';
 
 export const commands = [
   LoginUserCommandHandler,
@@ -21,6 +25,8 @@ export const commands = [
   CreateUserCommandHandler,
   UpdateUserCommandHandler,
   CreateWordCommandHandler,
+  DeleteExpressionCommandHandler,
+  DeleteWordCommandHandler,
 ];
 
 export const queries = [
@@ -34,4 +40,6 @@ export const events = [
   CreateOnWordCreatedEventHandler,
   CreateOrUpdateUserOnAuthSessionCreatedEventHandler,
   CreateOnExpressionCreatedEventHandler,
+  DeleteExpressionOnTermCreatedFailedEvent,
+  DeleteWordOnTermCreatedFailedEvent,
 ];
