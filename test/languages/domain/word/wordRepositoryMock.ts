@@ -21,4 +21,12 @@ export class WordRepositoryMock implements WordRepository {
   expectSaveNotCalled(): void {
     expect(this.save).not.toHaveBeenCalled();
   }
+
+  expectDeleteCalledWith(word: Word): void {
+    expect(this.delete).toHaveBeenCalledWith(word);
+  }
+
+  expectDeleteNotCalled(): void {
+    expect(this.delete).not.toHaveBeenCalled();
+  }
 }

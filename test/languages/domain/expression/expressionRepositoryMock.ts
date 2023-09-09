@@ -21,4 +21,12 @@ export class ExpressionRepositoryMock implements ExpressionRepository {
   expectSaveNotCalled(): void {
     expect(this.save).not.toHaveBeenCalled();
   }
+
+  expectDeleteCalledWith(expression: Expression): void {
+    expect(this.delete).toHaveBeenCalledWith(expression);
+  }
+
+  expectDeleteNotCalled(): void {
+    expect(this.delete).not.toHaveBeenCalled();
+  }
 }
