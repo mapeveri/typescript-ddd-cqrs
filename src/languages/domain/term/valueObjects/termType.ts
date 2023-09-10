@@ -4,7 +4,7 @@ export enum TermTypeEnum {
 }
 
 export default class TermType {
-  readonly type: string;
+  readonly value: string;
 
   constructor(type: string) {
     const entry = Object.entries(TermTypeEnum).find(([, item]) => item === type);
@@ -12,7 +12,7 @@ export default class TermType {
       throw new Error('Tipo no válido');
     }
 
-    this.type = entry[0];
+    this.value = entry[1];
   }
 
   static of(type: string): TermType {
@@ -24,10 +24,10 @@ export default class TermType {
   }
 
   isExpression(): boolean {
-    return this.type === TermTypeEnum.EXPRESSION;
+    return this.value === TermTypeEnum.EXPRESSION;
   }
 
   isWord(): boolean {
-    return this.type === TermTypeEnum.WORD;
+    return this.value === TermTypeEnum.WORD;
   }
 }

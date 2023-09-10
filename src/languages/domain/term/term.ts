@@ -32,7 +32,7 @@ export default class Term extends AggregateRoot {
   }
 
   termFailed() {
-    this.record(new TermCreatedFailedEvent(this.id, this.type.type));
+    this.record(new TermCreatedFailedEvent(this.id, this.type.value));
   }
 
   toPrimitives(): object {
@@ -41,7 +41,7 @@ export default class Term extends AggregateRoot {
       title: this.title,
       description: this.description,
       example: this.example,
-      type: this.type.type,
+      type: this.type.value,
       hashtags: this.hashtags,
       likes: this.likes,
       disLikes: this.disLikes,
