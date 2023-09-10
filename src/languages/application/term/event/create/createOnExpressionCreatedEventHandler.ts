@@ -1,7 +1,6 @@
 import { COMMAND_BUS, CommandBus } from '@src/shared/domain/buses/commandBus/commandBus';
 import CreateTermCommand from '../../command/create/createTermCommand';
 import ExpressionCreatedEvent from '@src/languages/domain/expression/domainEvents/expressionCreatedEvent';
-import { ExpressionTermPrimitives } from '@src/languages/domain/expression/valueObjects/expressionTerm';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { EventsHandler, IEventHandler } from '@src/shared/domain/buses/eventBus/eventsHandler';
 import { TermTypeEnum } from '@src/languages/domain/term/valueObjects/termType';
@@ -13,7 +12,7 @@ export default class CreateOnExpressionCreatedEventHandler implements IEventHand
   async handle(event: ExpressionCreatedEvent): Promise<void> {
     const terms = event.terms;
 
-    terms.forEach(async (term: ExpressionTermPrimitives) => {
+    for (const term of terms) {
       await this.commandBus.dispatch(
         new CreateTermCommand(
           event.aggregateId,
@@ -24,6 +23,6 @@ export default class CreateOnExpressionCreatedEventHandler implements IEventHand
           TermTypeEnum.EXPRESSION
         )
       );
-    });
+    }
   }
 }
