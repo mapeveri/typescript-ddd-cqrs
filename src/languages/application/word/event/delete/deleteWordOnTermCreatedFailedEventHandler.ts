@@ -6,7 +6,7 @@ import TermCreatedFailedEvent from '@src/languages/domain/term/domainEvents/Term
 import DeleteWordCommand from '../../command/delete/deleteWordCommand';
 
 @EventsHandler(TermCreatedFailedEvent)
-export default class DeleteWordOnTermCreatedFailedEvent implements IEventHandler<TermCreatedFailedEvent> {
+export default class DeleteWordOnTermCreatedFailedEventHandler implements IEventHandler<TermCreatedFailedEvent> {
   constructor(@Inject(COMMAND_BUS) private commandBus: CommandBus) {}
 
   async handle(event: TermCreatedFailedEvent): Promise<void> {

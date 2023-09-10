@@ -17,6 +17,7 @@ export default class MongoTransactionalDecorator {
       if (session.transaction.isActive) {
         await session.abortTransaction();
       }
+      await session.endSession();
       throw e;
     } finally {
       await session.endSession();

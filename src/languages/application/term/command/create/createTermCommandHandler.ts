@@ -19,7 +19,7 @@ export default class CreateTermCommandHandler implements ICommandHandler<CreateT
       await this.termRepository.save(term);
     } catch (e) {
       term.termFailed();
-      await this.eventBus.publish(term.pullDomainEvents());
+      void this.eventBus.publish(term.pullDomainEvents());
       throw e;
     }
   }
