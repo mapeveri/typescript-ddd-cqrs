@@ -14,7 +14,8 @@ module.exports = {
   ],
   rules: {
     'no-undef': ['error', { 'typeof': true }],
-    'no-unused-vars': ['error', {'args': 'none'}],
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': 'error',
     'no-use-before-define': 'error',
   
     'quotes': [2, 'single', { 'avoidEscape': true }],
