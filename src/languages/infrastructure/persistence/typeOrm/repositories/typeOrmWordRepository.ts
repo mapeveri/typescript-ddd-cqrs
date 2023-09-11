@@ -14,6 +14,10 @@ export default class TypeOrmWordRepository extends TypeOrmRepository implements 
     return await this.em.findOne(Word, { where: { id: id } } as any);
   }
 
+  async delete(word: Word): Promise<void> {
+    await this.em.remove(word);
+  }
+
   async save(word: Word): Promise<any> {
     return await this.em.save(word);
   }
