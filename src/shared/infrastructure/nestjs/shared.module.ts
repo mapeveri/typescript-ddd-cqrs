@@ -10,10 +10,12 @@ import { JwtStrategy } from './strategies/JwtStrategy';
 import { JwtModule } from '@nestjs/jwt';
 import { APP_FILTER } from '@nestjs/core';
 import { ErrorFilter } from './filters/ErrorFilter';
-import { CqrsModule, UnhandledExceptionBus } from '@nestjs/cqrs';
+import { CqrsModule } from '@nestjs/cqrs';
 import { QUERY_BUS } from '@src/shared/domain/buses/queryBus/queryBus';
 import NestQueryBusBus from './buses/nestQueryBus';
-import { Subject, takeUntil } from 'rxjs';
+import { SseService } from '../sse/sse.service';
+import { SseController } from '../sse/sse.controller';
+import { UnhandledExceptionsBusHandler } from './buses/errors/unhandledExceptionsBusHandler';
 
 @Global()
 @Module({
@@ -24,7 +26,10 @@ import { Subject, takeUntil } from 'rxjs';
     }),
     CqrsModule,
   ],
+  controllers: [SseController],
   providers: [
+    SseService,
+    UnhandledExceptionsBusHandler,
     JwtAuthGuard,
     JwtStrategy,
     {
@@ -50,18 +55,4 @@ import { Subject, takeUntil } from 'rxjs';
   ],
   exports: [JwtAuthGuard, JwtModule, CqrsModule, JwtStrategy, LOGGER_INTERFACE, QUERY_BUS, COMMAND_BUS, EVENT_BUS],
 })
-export class SharedModule {
-  private destroy$ = new Subject<void>();
-
-  constructor(private unhandledExceptionsBus: UnhandledExceptionBus) {
-    this.unhandledExceptionsBus.pipe(takeUntil(this.destroy$)).subscribe((exceptionInfo) => {
-      console.log(exceptionInfo.exception);
-      console.log(exceptionInfo.cause);
-    });
-  }
-
-  onModuleDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-}
+export class SharedModule {}
