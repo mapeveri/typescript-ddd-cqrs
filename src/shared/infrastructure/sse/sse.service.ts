@@ -5,7 +5,7 @@ import { Observable, Subject } from 'rxjs';
 export class SseService {
   private eventSubjects = new Map<string, Subject<MessageEvent>>();
 
-  join(room: string) {
+  join(room: string): void {
     if (!this.eventSubjects.has(room)) {
       this.eventSubjects.set(room, new Subject<MessageEvent>());
     }
@@ -16,7 +16,10 @@ export class SseService {
       data: JSON.stringify(eventData),
     });
 
-    this.eventSubjects.get(room)?.next(event);
+    const eventSubjects = this.eventSubjects.get(room);
+    if (eventSubjects) {
+      eventSubjects.next(event);
+    }
   }
 
   getEventStream(room: string): Observable<MessageEvent> {
