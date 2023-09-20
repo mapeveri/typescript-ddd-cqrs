@@ -3,16 +3,29 @@ import { Observable, Subject } from 'rxjs';
 
 @Injectable()
 export class SseService {
-  private eventSubject = new Subject<MessageEvent>();
+  private eventSubjects = new Map<string, Subject<MessageEvent>>();
 
-  sendEventToClients(eventData: any, eventType?: string) {
-    const event = new MessageEvent(eventType || 'message', {
-      data: JSON.stringify(eventData),
-    });
-    this.eventSubject.next(event);
+  join(room: string) {
+    if (!this.eventSubjects.has(room)) {
+      this.eventSubjects.set(room, new Subject<MessageEvent>());
+    }
   }
 
-  getEventStream(): Observable<MessageEvent> {
-    return this.eventSubject.asObservable();
+  sendEventToClients(eventData: any, eventType: string, room: string) {
+    const event = new MessageEvent(eventType, {
+      data: JSON.stringify(eventData),
+    });
+
+    this.eventSubjects.get(room)?.next(event);
+  }
+
+  getEventStream(room: string): Observable<MessageEvent> {
+    const eventSubject = this.eventSubjects.get(room);
+
+    if (eventSubject) {
+      return eventSubject.asObservable();
+    }
+
+    return new Observable<MessageEvent>();
   }
 }
