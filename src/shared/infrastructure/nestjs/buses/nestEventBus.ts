@@ -9,6 +9,6 @@ export default class NestEventBus implements IEventBus {
   constructor(private eventBus: EventBus) {}
 
   publish(events: DomainEvent[]): void {
-    void backOff(() => this.eventBus.publishAll(events));
+    void backOff(() => this.eventBus.publishAll(events), {numOfAttempts: 3});
   }
 }
