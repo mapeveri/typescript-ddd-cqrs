@@ -4,7 +4,7 @@ import ExpressionMother from '@test/languages/domain/expression/expressionMother
 import DeleteExpressionCommandHandler from '@src/languages/application/expression/command/delete/deleteExpressionCommandHandler';
 import { DeleteExpressionCommandMother } from './deleteExpressionCommandMother';
 
-describe('DeleteExpressionCommandHandler handle', () => {
+describe('DeleteExpressionCommandHandler', () => {
   let expressionRepository: ExpressionRepositoryMock;
   let deleteExpressionCommandHandler: DeleteExpressionCommandHandler;
 
@@ -14,23 +14,25 @@ describe('DeleteExpressionCommandHandler handle', () => {
     deleteExpressionCommandHandler = new DeleteExpressionCommandHandler(expressionRepository);
   });
 
-  it('should do nothing when expression id does not exists', async () => {
-    const expression = ExpressionMother.random();
-    const command = DeleteExpressionCommandMother.random(expression.id.value);
-    expressionRepository.findById.mockResolvedValueOnce(null);
+  describe('execute', () => {
+    it('should do nothing when expression id does not exists', async () => {
+      const expression = ExpressionMother.random();
+      const command = DeleteExpressionCommandMother.random(expression.id.value);
+      expressionRepository.findById.mockResolvedValueOnce(null);
 
-    await deleteExpressionCommandHandler.execute(command);
+      await deleteExpressionCommandHandler.execute(command);
 
-    expressionRepository.expectDeleteNotCalled();
-  });
+      expressionRepository.expectDeleteNotCalled();
+    });
 
-  it('should delete an expression', async () => {
-    const expression = ExpressionMother.random();
-    const command = DeleteExpressionCommandMother.random(expression.id.value);
-    expressionRepository.findById.mockResolvedValueOnce(expression);
+    it('should delete an expression', async () => {
+      const expression = ExpressionMother.random();
+      const command = DeleteExpressionCommandMother.random(expression.id.value);
+      expressionRepository.findById.mockResolvedValueOnce(expression);
 
-    await deleteExpressionCommandHandler.execute(command);
+      await deleteExpressionCommandHandler.execute(command);
 
-    expressionRepository.expectDeleteCalledWith(expression);
+      expressionRepository.expectDeleteCalledWith(expression);
+    });
   });
 });

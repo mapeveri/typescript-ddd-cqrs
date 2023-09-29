@@ -4,7 +4,7 @@ import { WordRepositoryMock } from '@test/languages/domain/word/wordRepositoryMo
 import WordMother from '@test/languages/domain/word/wordMother';
 import { DeleteWordCommandMother } from './deleteWordCommandMother';
 
-describe('DeleteWordCommandHandler handle', () => {
+describe('DeleteWordCommandHandler', () => {
   let wordRepository: WordRepositoryMock;
   let deleteWordCommandHandler: DeleteWordCommandHandler;
 
@@ -14,23 +14,25 @@ describe('DeleteWordCommandHandler handle', () => {
     deleteWordCommandHandler = new DeleteWordCommandHandler(wordRepository);
   });
 
-  it('should do nothing when word id does not exists', async () => {
-    const word = WordMother.random();
-    const command = DeleteWordCommandMother.random(word.id.value);
-    wordRepository.findById.mockResolvedValueOnce(null);
+  describe('execute', () => {
+    it('should do nothing when word id does not exists', async () => {
+      const word = WordMother.random();
+      const command = DeleteWordCommandMother.random(word.id.value);
+      wordRepository.findById.mockResolvedValueOnce(null);
 
-    await deleteWordCommandHandler.execute(command);
+      await deleteWordCommandHandler.execute(command);
 
-    wordRepository.expectDeleteNotCalled();
-  });
+      wordRepository.expectDeleteNotCalled();
+    });
 
-  it('should delete a word', async () => {
-    const word = WordMother.random();
-    const command = DeleteWordCommandMother.random(word.id.value);
-    wordRepository.findById.mockResolvedValueOnce(word);
+    it('should delete a word', async () => {
+      const word = WordMother.random();
+      const command = DeleteWordCommandMother.random(word.id.value);
+      wordRepository.findById.mockResolvedValueOnce(word);
 
-    await deleteWordCommandHandler.execute(command);
+      await deleteWordCommandHandler.execute(command);
 
-    wordRepository.expectDeleteCalledWith(word);
+      wordRepository.expectDeleteCalledWith(word);
+    });
   });
 });
