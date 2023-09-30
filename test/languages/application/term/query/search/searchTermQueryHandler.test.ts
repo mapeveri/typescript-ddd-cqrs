@@ -5,7 +5,7 @@ import { TermMother } from '@test/languages/domain/term/termMother';
 import Term from '@src/languages/domain/term/term';
 import { TermRepositoryMock } from '@test/languages/domain/term/termRepositoryMock';
 
-describe('SearchTermQueryHandler handle', () => {
+describe('SearchTermQueryHandler', () => {
   let termRepository: TermRepositoryMock;
   let searchTermQueryHandler: SearchTermQueryHandler;
 
@@ -14,15 +14,17 @@ describe('SearchTermQueryHandler handle', () => {
     searchTermQueryHandler = new SearchTermQueryHandler(termRepository);
   });
 
-  it('should search terms based on a term search', async () => {
-    const termToSearch = 'Hello world';
-    const query = SearchTermQueryMother.random(termToSearch);
-    const term: Term = TermMother.random({ title: termToSearch });
-    termRepository.search.mockReturnValueOnce(Promise.resolve([term]));
+  describe('execute', () => {
+    it('should search terms based on a term search', async () => {
+      const termToSearch = 'Hello world';
+      const query = SearchTermQueryMother.random(termToSearch);
+      const term: Term = TermMother.random({ title: termToSearch });
+      termRepository.search.mockReturnValueOnce(Promise.resolve([term]));
 
-    const foundTerms = await searchTermQueryHandler.execute(query);
+      const foundTerms = await searchTermQueryHandler.execute(query);
 
-    termRepository.expectSearchCalledWith(termToSearch);
-    expect(foundTerms.content).toEqual([term.toPrimitives()]);
+      termRepository.expectSearchCalledWith(termToSearch);
+      expect(foundTerms.content).toEqual([term.toPrimitives()]);
+    });
   });
 });

@@ -9,7 +9,7 @@ import { WordCreatedEventMother } from '@test/languages/domain/word/domainEvents
 import { UserIdMother } from '@test/languages/domain/user/valueObjects/userIdMother';
 import WordAlreadyExistsException from '@src/languages/domain/word/exceptions/WordAlreadyExistsException';
 
-describe('CreateWordCommandHandler handle', () => {
+describe('CreateWordCommandHandler', () => {
   let eventBus: EventBusMock;
   let wordRepository: WordRepositoryMock;
   let createWordCommandHandler: CreateWordCommandHandler;
@@ -21,26 +21,28 @@ describe('CreateWordCommandHandler handle', () => {
     createWordCommandHandler = new CreateWordCommandHandler(wordRepository, eventBus);
   });
 
-  it('should raise an exception when word id already exists', async () => {
-    const word = WordMother.random();
-    const command = CreateWordCommandMother.random({ id: word.id.value });
-    wordRepository.findById.mockResolvedValueOnce(word);
+  describe('execute', () => {
+    it('should raise an exception when word id already exists', async () => {
+      const word = WordMother.random();
+      const command = CreateWordCommandMother.random({ id: word.id.value });
+      wordRepository.findById.mockResolvedValueOnce(word);
 
-    await expect(createWordCommandHandler.execute(command)).rejects.toThrowError(WordAlreadyExistsException);
+      await expect(createWordCommandHandler.execute(command)).rejects.toThrowError(WordAlreadyExistsException);
 
-    wordRepository.expectSaveNotCalled();
-  });
+      wordRepository.expectSaveNotCalled();
+    });
 
-  it('should create and save a word', async () => {
-    const command = CreateWordCommandMother.random();
-    const userId = UserIdMother.random(command.userId);
-    const word: Word = WordMother.createFromCreateWordCommand(command, userId);
-    const wordCreatedEvent = WordCreatedEventMother.createFromCreateWordCommand(command);
-    wordRepository.findById.mockResolvedValueOnce(null);
+    it('should create and save a word', async () => {
+      const command = CreateWordCommandMother.random();
+      const userId = UserIdMother.random(command.userId);
+      const word: Word = WordMother.createFromCreateWordCommand(command, userId);
+      const wordCreatedEvent = WordCreatedEventMother.createFromCreateWordCommand(command);
+      wordRepository.findById.mockResolvedValueOnce(null);
 
-    await createWordCommandHandler.execute(command);
+      await createWordCommandHandler.execute(command);
 
-    wordRepository.expectSaveCalledWith(word);
-    eventBus.expectPublishCalledWith([wordCreatedEvent]);
+      wordRepository.expectSaveCalledWith(word);
+      eventBus.expectPublishCalledWith([wordCreatedEvent]);
+    });
   });
 });

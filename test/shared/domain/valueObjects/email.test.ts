@@ -2,7 +2,7 @@ import { describe, expect, it } from '@jest/globals';
 import InvalidEmailException from '@src/shared/domain/exceptions/invalidEmailException';
 import Email from '@src/shared/domain/valueObjects/email';
 
-describe('Email.test check', () => {
+describe('Email', () => {
   it('should check a valid email and set the value', async () => {
     const validEmail = 'test@test.com';
     const email = Email.of(validEmail);

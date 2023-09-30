@@ -10,7 +10,7 @@ import { AuthSessionMother } from '@test/languages/domain/auth/authSessionMother
 import { AuthSessionIdMother } from '@test/languages/domain/auth/valueObjects/authSessionIdMother';
 import { SessionMother } from '@test/languages/domain/auth/valueObjects/sessionMother';
 
-describe('LoginUserCommandHandler.test handle', () => {
+describe('LoginUserCommandHandler', () => {
   let repository: AuthSessionRepositoryMock;
   let socialLogin: SocialLoginMock;
   let eventBus: EventBusMock;
@@ -26,35 +26,37 @@ describe('LoginUserCommandHandler.test handle', () => {
     jest.useFakeTimers();
   });
 
-  it('should fail login and not save auth session nor publish an event', async () => {
-    const command = LoginUserCommandMother.random();
-    socialLogin.login.mockResolvedValueOnce(false);
+  describe('execute', () => {
+    it('should fail login and not save auth session nor publish an event', async () => {
+      const command = LoginUserCommandMother.random();
+      socialLogin.login.mockResolvedValueOnce(false);
 
-    await expect(loginUserCommandHandler.execute(command)).rejects.toThrowError(LoginException);
+      await expect(loginUserCommandHandler.execute(command)).rejects.toThrowError(LoginException);
 
-    socialLogin.expectLoginCalledWith(command.token);
-    repository.expectSaveNotCalledWith();
-    eventBus.expectPublishNotCalled();
-  });
-
-  it('should login, save auth session and publish an event', async () => {
-    const command = LoginUserCommandMother.random();
-    const authSession = AuthSessionMother.random({
-      id: AuthSessionIdMother.random(command.id),
-      session: SessionMother.random({
-        provider: command.provider,
-        token: command.token,
-        email: command.email,
-        name: command.name,
-      }),
+      socialLogin.expectLoginCalledWith(command.token);
+      repository.expectSaveNotCalledWith();
+      eventBus.expectPublishNotCalled();
     });
-    const userAuthenticatedEvent = AuthSessionCreatedEventMother.createFromLoginUserCommand(command);
-    socialLogin.login.mockResolvedValueOnce(true);
 
-    await loginUserCommandHandler.execute(command);
+    it('should login, save auth session and publish an event', async () => {
+      const command = LoginUserCommandMother.random();
+      const authSession = AuthSessionMother.random({
+        id: AuthSessionIdMother.random(command.id),
+        session: SessionMother.random({
+          provider: command.provider,
+          token: command.token,
+          email: command.email,
+          name: command.name,
+        }),
+      });
+      const userAuthenticatedEvent = AuthSessionCreatedEventMother.createFromLoginUserCommand(command);
+      socialLogin.login.mockResolvedValueOnce(true);
 
-    socialLogin.expectLoginCalledWith(command.token);
-    repository.expectSaveCalledWith(authSession);
-    eventBus.expectPublishCalledWith([userAuthenticatedEvent]);
+      await loginUserCommandHandler.execute(command);
+
+      socialLogin.expectLoginCalledWith(command.token);
+      repository.expectSaveCalledWith(authSession);
+      eventBus.expectPublishCalledWith([userAuthenticatedEvent]);
+    });
   });
 });

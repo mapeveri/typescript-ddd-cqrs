@@ -6,7 +6,7 @@ import CountryMother from '@test/languages/domain/country/countryMother';
 import { CreateCountryCommandMother } from './createCountryCommandMother';
 import CountryAlreadyExistsException from '@src/languages/domain/country/exceptions/CountryAlreadyExistsException';
 
-describe('CreateCountryCommandHandler handle', () => {
+describe('CreateCountryCommandHandler', () => {
   let countryRepository: CountryRepositoryMock;
   let createCountryCommandHandler: CreateCountryCommandHandler;
 
@@ -15,22 +15,24 @@ describe('CreateCountryCommandHandler handle', () => {
     createCountryCommandHandler = new CreateCountryCommandHandler(countryRepository);
   });
 
-  it('should raise an exception when country id already exists', async () => {
-    const country = CountryMother.random();
-    const command = CreateCountryCommandMother.random({id: country.id.value});
-    countryRepository.findById.mockResolvedValueOnce(country);
+  describe('execute', () => {
+    it('should raise an exception when country id already exists', async () => {
+      const country = CountryMother.random();
+      const command = CreateCountryCommandMother.random({id: country.id.value});
+      countryRepository.findById.mockResolvedValueOnce(country);
 
-    await expect(createCountryCommandHandler.execute(command)).rejects.toThrowError(CountryAlreadyExistsException);
+      await expect(createCountryCommandHandler.execute(command)).rejects.toThrowError(CountryAlreadyExistsException);
 
-    countryRepository.expectSaveNotCalled();
-  });
+      countryRepository.expectSaveNotCalled();
+    });
 
-  it('should create and save a country', async () => {
-    const command = CreateCountryCommandMother.random();
-    const country: Country = CountryMother.createFromCreateCountryCommand(command);
+    it('should create and save a country', async () => {
+      const command = CreateCountryCommandMother.random();
+      const country: Country = CountryMother.createFromCreateCountryCommand(command);
 
-    await createCountryCommandHandler.execute(command);
+      await createCountryCommandHandler.execute(command);
 
-    countryRepository.expectSaveCalledWith(country);
+      countryRepository.expectSaveCalledWith(country);
+    });
   });
 });

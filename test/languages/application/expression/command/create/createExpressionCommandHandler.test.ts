@@ -9,7 +9,7 @@ import Expression from '@src/languages/domain/expression/expression';
 import { ExpressionCreatedEventMother } from '@test/languages/domain/expression/domainEvents/expressionCreatedEventMother';
 import ExpressionAlreadyExistsException from '@src/languages/domain/expression/exceptions/ExpressionAlreadyExistsException';
 
-describe('CreateExpressionCommandHandler handle', () => {
+describe('CreateExpressionCommandHandler', () => {
   let eventBus: EventBusMock;
   let expressionRepository: ExpressionRepositoryMock;
   let createWordCommandHandler: CreateExpressionCommandHandler;
@@ -22,25 +22,27 @@ describe('CreateExpressionCommandHandler handle', () => {
     createWordCommandHandler = new CreateExpressionCommandHandler(expressionRepository, eventBus);
   });
 
-  it('should raise an exception when expression id already exists', async () => {
-    const expression = ExpressionMother.random();
-    const command = CreateExpressionCommandMother.random({ id: expression.id.value });
-    expressionRepository.findById.mockResolvedValueOnce(expression);
+  describe('execute', () => {
+    it('should raise an exception when expression id already exists', async () => {
+      const expression = ExpressionMother.random();
+      const command = CreateExpressionCommandMother.random({ id: expression.id.value });
+      expressionRepository.findById.mockResolvedValueOnce(expression);
 
-    await expect(createWordCommandHandler.execute(command)).rejects.toThrowError(ExpressionAlreadyExistsException);
+      await expect(createWordCommandHandler.execute(command)).rejects.toThrowError(ExpressionAlreadyExistsException);
 
-    expressionRepository.expectSaveNotCalled();
-  });
+      expressionRepository.expectSaveNotCalled();
+    });
 
-  it('should create and save an expression', async () => {
-    const command = CreateExpressionCommandMother.random();
-    const userId = UserIdMother.random(command.userId);
-    const expression: Expression = ExpressionMother.createFromCreateExpressionCommand(command, userId);
-    const expressionCreatedEvent = ExpressionCreatedEventMother.createFromCreateExpressionCommand(command);
+    it('should create and save an expression', async () => {
+      const command = CreateExpressionCommandMother.random();
+      const userId = UserIdMother.random(command.userId);
+      const expression: Expression = ExpressionMother.createFromCreateExpressionCommand(command, userId);
+      const expressionCreatedEvent = ExpressionCreatedEventMother.createFromCreateExpressionCommand(command);
 
-    await createWordCommandHandler.execute(command);
+      await createWordCommandHandler.execute(command);
 
-    expressionRepository.expectSaveCalledWith(expression);
-    eventBus.expectPublishCalledWith([expressionCreatedEvent]);
+      expressionRepository.expectSaveCalledWith(expression);
+      eventBus.expectPublishCalledWith([expressionCreatedEvent]);
+    });
   });
 });
