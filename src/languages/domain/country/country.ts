@@ -10,7 +10,7 @@ export default class Country extends AggregateRoot {
 
   constructor(id: CountryId, name: string, iso: string, languages: LanguageCollection) {
     super();
-  
+
     this.id = id;
     this.name = name;
     this.iso = iso;

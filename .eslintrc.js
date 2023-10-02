@@ -7,7 +7,7 @@ module.exports = {
   env: {
     node: true,
   },
-  plugins: ['@typescript-eslint'],
+  plugins: ['@typescript-eslint', 'prettier'],
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
@@ -20,7 +20,7 @@ module.exports = {
   
     'quotes': [2, 'single', { 'avoidEscape': true }],
     'semi': ['error', 'always'],
-    'indent': ['error', 2],
+    'indent': 'off',
     'linebreak-style': ['error', 'unix'],
     'no-extra-semi': 'error',
   
