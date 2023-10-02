@@ -1,8 +1,7 @@
 import ExpressionTerm, { ExpressionTermPrimitives } from './expressionTerm';
 
 export default class ExpressionTermCollection {
-  private constructor(private readonly terms: Array<ExpressionTerm>) {
-  }
+  private constructor(private readonly terms: Array<ExpressionTerm>) {}
 
   static of(primitiveTerms: Array<ExpressionTermPrimitives>): ExpressionTermCollection {
     const terms = primitiveTerms.map((expressionTerm: ExpressionTermPrimitives): ExpressionTerm => {
@@ -16,7 +15,7 @@ export default class ExpressionTermCollection {
     const terms = primitiveTerms.map((expressionTerm: ExpressionTermPrimitives): ExpressionTerm => {
       return ExpressionTerm.fromPrimitives(expressionTerm);
     });
-    
+
     return new this(terms);
   }
 

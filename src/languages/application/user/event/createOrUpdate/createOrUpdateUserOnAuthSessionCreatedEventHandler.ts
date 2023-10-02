@@ -8,7 +8,9 @@ import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { EventsHandler, IEventHandler } from '@src/shared/domain/buses/eventBus/eventsHandler';
 
 @EventsHandler(AuthSessionCreatedEvent)
-export default class CreateOrUpdateUserOnAuthSessionCreatedEventHandler implements IEventHandler<AuthSessionCreatedEvent> {
+export default class CreateOrUpdateUserOnAuthSessionCreatedEventHandler
+  implements IEventHandler<AuthSessionCreatedEvent>
+{
   constructor(
     @Inject(USER_REPOSITORY) private userRepository: UserRepository,
     @Inject(COMMAND_BUS) private commandBus: CommandBus

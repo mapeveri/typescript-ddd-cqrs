@@ -30,5 +30,4 @@ export default class MongoConnection {
     this.client = await MongoClient.connect(process.env.MONGO_DB_URL || '');
     this.db = this.client.db(process.env.MONGO_DB_DATABASE);
   }
-
 }
