@@ -18,9 +18,9 @@ jobs:
           node-version: '16.x'
       - name: Install Dependencies
         run: npm ci
-      - name: Run linter
-        run: npm run linter
-      - name: Run format-code
-        run: npm run format-code
+      - name: Run linter check
+        run: npm run linter-check
+      - name: Run format-code check
+        run: npm run format-code-check
       - name: Run tests
         run: npm run test
