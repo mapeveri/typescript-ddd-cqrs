@@ -8,6 +8,7 @@ module.exports = {
     node: true,
   },
   plugins: ['@typescript-eslint', 'prettier'],
+  ignorePatterns: ['migrations/'],
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
