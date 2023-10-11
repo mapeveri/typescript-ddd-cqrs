@@ -27,7 +27,7 @@ describe('LoginUserCommandHandler', () => {
   });
 
   describe('execute', () => {
-    it('should fail login and not save auth session nor publish an event', async () => {
+    it('should login failed and not save auth session nor publish an event', async () => {
       const command = LoginUserCommandMother.random();
       socialLogin.login.mockResolvedValueOnce(false);
 
