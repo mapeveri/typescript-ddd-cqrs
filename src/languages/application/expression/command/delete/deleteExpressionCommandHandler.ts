@@ -11,6 +11,6 @@ export default class DeleteExpressionCommandHandler implements ICommandHandler<D
   async execute(command: DeleteExpressionCommand): Promise<void> {
     const expression = await this.expressionRepository.findById(ExpressionId.of(command.id));
     if (!expression) return;
-    await this.expressionRepository.delete(expression);
+    await this.expressionRepository.remove(expression);
   }
 }

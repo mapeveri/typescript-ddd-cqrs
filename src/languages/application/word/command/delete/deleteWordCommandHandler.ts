@@ -11,6 +11,6 @@ export default class DeleteWordCommandHandler implements ICommandHandler<DeleteW
   async execute(command: DeleteWordCommand): Promise<void> {
     const word = await this.wordRepository.findById(ExpressionId.of(command.id));
     if (!word) return;
-    await this.wordRepository.delete(word);
+    await this.wordRepository.remove(word);
   }
 }

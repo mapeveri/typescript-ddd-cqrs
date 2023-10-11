@@ -22,7 +22,7 @@ describe('DeleteWordCommandHandler', () => {
 
       await deleteWordCommandHandler.execute(command);
 
-      wordRepository.expectDeleteNotCalled();
+      wordRepository.expectRemoveNotCalled();
     });
 
     it('should remove a word', async () => {
@@ -32,7 +32,7 @@ describe('DeleteWordCommandHandler', () => {
 
       await deleteWordCommandHandler.execute(command);
 
-      wordRepository.expectDeleteCalledWith(word);
+      wordRepository.expectRemoveCalledWith(word);
     });
   });
 });

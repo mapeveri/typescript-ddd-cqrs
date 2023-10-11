@@ -6,12 +6,12 @@ import WordRepository from '@src/languages/domain/word/wordRepository';
 export class WordRepositoryMock implements WordRepository {
   findById: jest.MockedFunction<(id: WordId) => Promise<Word | null>>;
   save: jest.MockedFunction<(word: Word) => Promise<void>>;
-  delete: jest.MockedFunction<(word: Word) => Promise<void>>;
+  remove: jest.MockedFunction<(word: Word) => Promise<void>>;
 
   constructor() {
     this.findById = jest.fn();
     this.save = jest.fn();
-    this.delete = jest.fn();
+    this.remove = jest.fn();
   }
 
   expectSaveCalledWith(word: Word): void {
@@ -22,11 +22,11 @@ export class WordRepositoryMock implements WordRepository {
     expect(this.save).not.toHaveBeenCalled();
   }
 
-  expectDeleteCalledWith(word: Word): void {
-    expect(this.delete).toHaveBeenCalledWith(word);
+  expectRemoveCalledWith(word: Word): void {
+    expect(this.remove).toHaveBeenCalledWith(word);
   }
 
-  expectDeleteNotCalled(): void {
-    expect(this.delete).not.toHaveBeenCalled();
+  expectRemoveNotCalled(): void {
+    expect(this.remove).not.toHaveBeenCalled();
   }
 }

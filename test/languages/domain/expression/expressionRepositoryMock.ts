@@ -6,12 +6,12 @@ import ExpressionId from '@src/languages/domain/expression/valueObjects/expressi
 export class ExpressionRepositoryMock implements ExpressionRepository {
   findById: jest.MockedFunction<(id: ExpressionId) => Promise<Expression | null>>;
   save: jest.MockedFunction<(expression: Expression) => Promise<void>>;
-  delete: jest.MockedFunction<(expression: Expression) => Promise<void>>;
+  remove: jest.MockedFunction<(expression: Expression) => Promise<void>>;
 
   constructor() {
     this.findById = jest.fn();
     this.save = jest.fn();
-    this.delete = jest.fn();
+    this.remove = jest.fn();
   }
 
   expectSaveCalledWith(expression: Expression): void {
@@ -22,11 +22,11 @@ export class ExpressionRepositoryMock implements ExpressionRepository {
     expect(this.save).not.toHaveBeenCalled();
   }
 
-  expectDeleteCalledWith(expression: Expression): void {
-    expect(this.delete).toHaveBeenCalledWith(expression);
+  expectRemoveCalledWith(expression: Expression): void {
+    expect(this.remove).toHaveBeenCalledWith(expression);
   }
 
-  expectDeleteNotCalled(): void {
-    expect(this.delete).not.toHaveBeenCalled();
+  expectRemoveNotCalled(): void {
+    expect(this.remove).not.toHaveBeenCalled();
   }
 }

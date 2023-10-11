@@ -22,7 +22,7 @@ describe('DeleteExpressionCommandHandler', () => {
 
       await deleteExpressionCommandHandler.execute(command);
 
-      expressionRepository.expectDeleteNotCalled();
+      expressionRepository.expectRemoveNotCalled();
     });
 
     it('should remove an expression', async () => {
@@ -32,7 +32,7 @@ describe('DeleteExpressionCommandHandler', () => {
 
       await deleteExpressionCommandHandler.execute(command);
 
-      expressionRepository.expectDeleteCalledWith(expression);
+      expressionRepository.expectRemoveCalledWith(expression);
     });
   });
 });
