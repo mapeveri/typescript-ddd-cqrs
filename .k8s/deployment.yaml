@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: languages
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: languages
+  template:
+    metadata:
+      labels:
+        app: languages
+    spec:
+      containers:
+      - name: languages
+        image: localhost:5000/languages:latest
+        ports:
+        - containerPort: 4000
+      imagePullSecrets:
+      - name: test-registry
