@@ -8,7 +8,7 @@ Getting started
 
 2. Create a docker registry:
 
-  kubectl create secret docker-registry nombre-del-secreto --docker-server=localhost:5000 --docker-username=tu-usuario --docker-password=tu-contraseña --docker-email=tu-email
+    kubectl create secret docker-registry nombre-del-secreto --docker-server=localhost:5000 --docker-username=tu-usuario --docker-password=tu-contraseña --docker-email=tu-email
 
   Example:
 
@@ -16,22 +16,28 @@ Getting started
 
 3. Execute:
 
-  kubectl apply -f .k8s/deployment.yaml
-  kubectl apply -f .k8s/services.yaml
+    kubectl apply -f .k8s/deployment.yaml
+    kubectl apply -f .k8s/services.yaml
 
 
-Extra commands
---------------
+Commands
+--------
 
-kubectl get deployment
-kubectl get service
+Kubectl utilities:
 
-kubectl describe pod languages
+    kubectl get deployment
+    kubectl get service
 
-docker login localhost:5000
+    kubectl describe pod languages
 
-docker tag languages:latest localhost:5000/languages:latest
+Docker push imagen:
 
-docker push localhost:5000/languages:latest
+    docker login localhost:5000
 
-curl http://localhost:5000/v2/languages/tags/list
+    docker tag languages:latest localhost:5000/languages:latest
+
+    docker push localhost:5000/languages:latest
+
+Check if image is pushed:
+
+    curl http://localhost:5000/v2/languages/tags/list
