@@ -16,8 +16,10 @@ Getting started
 
 3. Execute:
 
+    kubectl apply -f .k8s/docker-registry-deployment.yaml
+    kubectl apply -f .k8s/docker-registry-service.yaml
     kubectl apply -f .k8s/deployment.yaml
-    kubectl apply -f .k8s/services.yaml
+    kubectl apply -f .k8s/service.yaml
 
 
 Commands
@@ -25,10 +27,14 @@ Commands
 
 Kubectl utilities:
 
-    kubectl get deployment
-    kubectl get service
+    kubectl get deployment # Status deployment
+    kubectl get service # Status service
 
-    kubectl describe pod languages
+    kubectl describe pod languages # Pod data
+
+    kubectl get secret test-registry -o yaml # To check if exists the registry
+
+    kubectl get nodes -o wide # To get the internal IP
 
 Docker push imagen:
 
