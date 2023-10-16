@@ -6,21 +6,18 @@ Getting started
 
 1. Install minikube and kubectl
 
-2. Create a docker registry:
+2. Execute:
 
-    kubectl create secret docker-registry nombre-del-secreto --docker-server=localhost:5000 --docker-username=tu-usuario --docker-password=tu-contraseña --docker-email=tu-email
-
-  Example:
-
-    kubectl create secret docker-registry test-registry --docker-server=localhost:5000 --docker-username=mapeveri --docker-password=martin --docker-email=martinpeveri@gmail.com
-
-3. Execute:
-
-    kubectl apply -f .k8s/docker-registry-deployment.yaml
-    kubectl apply -f .k8s/docker-registry-service.yaml
     kubectl apply -f .k8s/deployment.yaml
     kubectl apply -f .k8s/service.yaml
 
+3. Docker push imagen:
+
+    docker login 
+
+    docker tag languages:latest mapeveri/languages:latest
+
+    docker push languages:latest
 
 Commands
 --------
@@ -30,20 +27,10 @@ Kubectl utilities:
     kubectl get deployment # Status deployment
     kubectl get service # Status service
 
-    kubectl describe pod languages # Pod data
+    kubectl get pods -n default # Get pods from default namespace
 
-    kubectl get secret test-registry -o yaml # To check if exists the registry
+    kubectl describe pod languages # Pod data
 
     kubectl get nodes -o wide # To get the internal IP
 
-Docker push imagen:
-
-    docker login localhost:5000
-
-    docker tag languages:latest localhost:5000/languages:latest
-
-    docker push localhost:5000/languages:latest
-
-Check if image is pushed:
-
-    curl http://localhost:5000/v2/languages/tags/list
+    kubectl rollout restart deployment/languages # Rollout pods
