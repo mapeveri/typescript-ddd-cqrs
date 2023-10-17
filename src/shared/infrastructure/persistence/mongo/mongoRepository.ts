@@ -5,7 +5,11 @@ interface Identifiable {
   id: string;
 }
 
-export default abstract class MongoRepository<T extends Identifiable> {
+interface AggregateIdentifiable {
+  aggregateId: string;
+}
+
+export default abstract class MongoRepository<T extends Identifiable | AggregateIdentifiable> {
   protected collection: Collection<any>;
   private mongo: MongoConnection;
 
@@ -19,7 +23,8 @@ export default abstract class MongoRepository<T extends Identifiable> {
       throw new Error('La sesión no está disponible');
     }
 
-    await this.collection.updateOne({ id: entity.id }, { $set: entity }, { upsert: true, session: session });
+    const id = 'id' in entity ? entity.id : entity.aggregateId;
+    await this.collection.updateOne({ id: id }, { $set: entity }, { upsert: true, session: session });
   }
 
   private async initialize(collectionName: string): Promise<void> {

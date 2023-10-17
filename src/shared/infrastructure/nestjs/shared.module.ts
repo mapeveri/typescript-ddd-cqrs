@@ -16,6 +16,9 @@ import NestQueryBusBus from './buses/nestQueryBus';
 import { SseService } from '../sse/sse.service';
 import { SseController } from '../sse/sse.controller';
 import { UnhandledExceptionsBusHandler } from './buses/errors/unhandledExceptionsBusHandler';
+import { EVENT_STORE_REPOSITORY } from '@src/shared/domain/eventStore/eventStoreRepository';
+import MongoEventStoreRepository from '../persistence/mongo/repositories/mongoEventStoreRepository';
+import { PersistEventsHandler } from './buses/events/persistEventsHandler';
 
 @Global()
 @Module({
@@ -52,6 +55,11 @@ import { UnhandledExceptionsBusHandler } from './buses/errors/unhandledException
       provide: QUERY_BUS,
       useClass: NestQueryBusBus,
     },
+    {
+      provide: EVENT_STORE_REPOSITORY,
+      useClass: MongoEventStoreRepository,
+    },
+    PersistEventsHandler,
   ],
   exports: [JwtAuthGuard, JwtModule, CqrsModule, JwtStrategy, LOGGER_INTERFACE, QUERY_BUS, COMMAND_BUS, EVENT_BUS],
 })
