@@ -4,7 +4,7 @@ import MongoConnection from '@src/shared/infrastructure/persistence/mongo/mongoC
 
 type Callback = (...args: any[]) => Promise<void>;
 
-export async function mongoTransactionalOperation(handle: Callback, ...args: any[]) {
+export async function mongoTransactionalOperation(handle: Callback, ...args: any[]): Promise<void> {
   const connection = await MongoConnection.getInstance();
   const session = connection.startSession();
   session.startTransaction();

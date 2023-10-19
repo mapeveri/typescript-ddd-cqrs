@@ -15,7 +15,7 @@ export class PersistEventsHandler {
     @Inject(EVENT_STORE_REPOSITORY) private eventStoreRepository: EventStoreRepository
   ) {
     this.eventBus.pipe(takeUntil(this.destroy$)).subscribe((event) => {
-      void mongoTransactionalOperation(async (event: DomainEvent) => {
+      mongoTransactionalOperation(async (event: DomainEvent) => {
         void this.eventStoreRepository.save(event);
       }, event as DomainEvent);
     });

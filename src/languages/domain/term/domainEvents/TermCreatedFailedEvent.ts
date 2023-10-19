@@ -1,7 +1,7 @@
 import { DomainEvent } from '@src/shared/domain/buses/eventBus/domainEvent';
 
 export default class TermCreatedFailedEvent extends DomainEvent {
-  constructor(public readonly id: string, public readonly type: string, public readonly eventId: string = '') {
+  constructor(public readonly id: string, public readonly type: string, eventId = '') {
     super(id, eventId);
   }
 

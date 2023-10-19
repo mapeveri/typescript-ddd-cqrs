@@ -7,7 +7,10 @@ export abstract class DomainEvent {
 
   constructor(aggregateId: string, eventId: string | null = null, occurredOn: string | null = null) {
     this.aggregateId = aggregateId;
-    this.eventId = eventId ?? uuidv4();
+    this.eventId =
+      eventId === null || eventId === undefined || (typeof eventId === 'string' && eventId.trim() === '')
+        ? uuidv4()
+        : eventId;
     this.occurredOn = occurredOn ?? new Date().toISOString().replace('T', ' ').split('.')[0];
   }
 

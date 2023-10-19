@@ -8,7 +8,7 @@ export default class WordCreatedEvent extends DomainEvent {
     public readonly countryId: string,
     public readonly userId: string,
     public readonly terms: Array<WordTermPrimitives>,
-    public readonly eventId: string = ''
+    eventId = ''
   ) {
     super(id, eventId);
   }
