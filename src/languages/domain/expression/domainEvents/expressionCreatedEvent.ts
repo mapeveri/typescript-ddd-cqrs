@@ -8,7 +8,7 @@ export default class ExpressionCreatedEvent extends DomainEvent {
     public readonly countryId: string,
     public readonly userId: string,
     public readonly terms: Array<ExpressionTermPrimitives>,
-    public readonly eventId: string = ''
+    eventId = ''
   ) {
     super(id, eventId);
   }
