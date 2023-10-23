@@ -1,0 +1,85 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yaml
+    kompose.version: 1.31.2 (a92241f79)
+  creationTimestamp: null
+  labels:
+    io.kompose.network/typescript-ddd-cqrs-default: "true"
+    io.kompose.service: app
+  name: app
+spec:
+  containers:
+    - env:
+        - name: FRONTED_URL
+          valueFrom:
+            configMapKeyRef:
+              key: FRONTED_URL
+              name: home-martin-Desarrollo-github-typescript-ddd-cqrs--env
+        - name: GOOGLE_CLIENT_ID
+          valueFrom:
+            configMapKeyRef:
+              key: GOOGLE_CLIENT_ID
+              name: home-martin-Desarrollo-github-typescript-ddd-cqrs--env
+        - name: JWT_SECRET
+          valueFrom:
+            configMapKeyRef:
+              key: JWT_SECRET
+              name: home-martin-Desarrollo-github-typescript-ddd-cqrs--env
+        - name: MONGO_DB_DATABASE
+          valueFrom:
+            configMapKeyRef:
+              key: MONGO_DB_DATABASE
+              name: home-martin-Desarrollo-github-typescript-ddd-cqrs--env
+        - name: MONGO_DB_URL
+          valueFrom:
+            configMapKeyRef:
+              key: MONGO_DB_URL
+              name: home-martin-Desarrollo-github-typescript-ddd-cqrs--env
+        - name: NODE_ENV
+          valueFrom:
+            configMapKeyRef:
+              key: NODE_ENV
+              name: home-martin-Desarrollo-github-typescript-ddd-cqrs--env
+        - name: POSTGRESQL_DB_URL
+          valueFrom:
+            configMapKeyRef:
+              key: POSTGRESQL_DB_URL
+              name: home-martin-Desarrollo-github-typescript-ddd-cqrs--env
+        - name: POSTGRES_DATABASE
+          valueFrom:
+            configMapKeyRef:
+              key: POSTGRES_DATABASE
+              name: home-martin-Desarrollo-github-typescript-ddd-cqrs--env
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: POSTGRES_PASSWORD
+              name: home-martin-Desarrollo-github-typescript-ddd-cqrs--env
+        - name: POSTGRES_USER
+          valueFrom:
+            configMapKeyRef:
+              key: POSTGRES_USER
+              name: home-martin-Desarrollo-github-typescript-ddd-cqrs--env
+        - name: SERVER_PORT
+          valueFrom:
+            configMapKeyRef:
+              key: SERVER_PORT
+              name: home-martin-Desarrollo-github-typescript-ddd-cqrs--env
+      image: languages
+      name: languages-container
+      ports:
+        - containerPort: 4000
+          hostPort: 4000
+          protocol: TCP
+      resources: {}
+      volumeMounts:
+        - mountPath: /var/www/html/languages
+          name: app-claim0
+  restartPolicy: OnFailure
+  volumes:
+    - name: app-claim0
+      persistentVolumeClaim:
+        claimName: app-claim0
+status: {}
