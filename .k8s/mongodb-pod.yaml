@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yaml -o .k8s
+    kompose.version: 1.31.2 (a92241f79)
+  creationTimestamp: null
+  labels:
+    io.kompose.network/typescript-ddd-cqrs-default: "true"
+    io.kompose.service: mongodb
+  name: mongodb
+spec:
+  containers:
+    - args:
+        - bash
+        - /scripts/mongo-init.sh
+      image: mongo:6
+      name: mongodb
+      resources: {}
+      volumeMounts:
+        - mountPath: /scripts/mongo-init.sh
+          name: mongodb-claim0
+  restartPolicy: Never
+  volumes:
+    - name: mongodb-claim0
+      persistentVolumeClaim:
+        claimName: mongodb-claim0
+status: {}

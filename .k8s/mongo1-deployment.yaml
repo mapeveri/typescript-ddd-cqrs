@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yaml -o .k8s
+    kompose.version: 1.31.2 (a92241f79)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mongo1
+  name: mongo1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: mongo1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose.yaml -o .k8s
+        kompose.version: 1.31.2 (a92241f79)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/typescript-ddd-cqrs-default: "true"
+        io.kompose.service: mongo1
+    spec:
+      containers:
+        - args:
+            - --bind_ip_all
+            - --replSet
+            - rs0
+          image: mongo:6
+          name: mongo1
+          ports:
+            - containerPort: 27017
+              hostPort: 27017
+              protocol: TCP
+          resources: {}
+          volumeMounts:
+            - mountPath: /data/db
+              name: mongo1-claim0
+      restartPolicy: Always
+      volumes:
+        - name: mongo1-claim0
+          persistentVolumeClaim:
+            claimName: mongo1-claim0
+status: {}
