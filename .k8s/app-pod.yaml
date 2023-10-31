@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   annotations:
-    kompose.cmd: kompose convert -f docker-compose.yaml
+    kompose.cmd: kompose convert -f docker-compose.yaml -o .k8s
     kompose.version: 1.31.2 (a92241f79)
   creationTimestamp: null
   labels:
@@ -16,58 +16,58 @@ spec:
           valueFrom:
             configMapKeyRef:
               key: FRONTED_URL
-              name: home-martin-Desarrollo-github-typescript-ddd-cqrs--env
+              name: appenv
         - name: GOOGLE_CLIENT_ID
           valueFrom:
             configMapKeyRef:
               key: GOOGLE_CLIENT_ID
-              name: home-martin-Desarrollo-github-typescript-ddd-cqrs--env
+              name: appenv
         - name: JWT_SECRET
           valueFrom:
             configMapKeyRef:
               key: JWT_SECRET
-              name: home-martin-Desarrollo-github-typescript-ddd-cqrs--env
+              name: appenv
         - name: MONGO_DB_DATABASE
           valueFrom:
             configMapKeyRef:
               key: MONGO_DB_DATABASE
-              name: home-martin-Desarrollo-github-typescript-ddd-cqrs--env
+              name: appenv
         - name: MONGO_DB_URL
           valueFrom:
             configMapKeyRef:
               key: MONGO_DB_URL
-              name: home-martin-Desarrollo-github-typescript-ddd-cqrs--env
+              name: appenv
         - name: NODE_ENV
           valueFrom:
             configMapKeyRef:
               key: NODE_ENV
-              name: home-martin-Desarrollo-github-typescript-ddd-cqrs--env
+              name: appenv
         - name: POSTGRESQL_DB_URL
           valueFrom:
             configMapKeyRef:
               key: POSTGRESQL_DB_URL
-              name: home-martin-Desarrollo-github-typescript-ddd-cqrs--env
+              name: appenv
         - name: POSTGRES_DATABASE
           valueFrom:
             configMapKeyRef:
               key: POSTGRES_DATABASE
-              name: home-martin-Desarrollo-github-typescript-ddd-cqrs--env
+              name: appenv
         - name: POSTGRES_PASSWORD
           valueFrom:
             configMapKeyRef:
               key: POSTGRES_PASSWORD
-              name: home-martin-Desarrollo-github-typescript-ddd-cqrs--env
+              name: appenv
         - name: POSTGRES_USER
           valueFrom:
             configMapKeyRef:
               key: POSTGRES_USER
-              name: home-martin-Desarrollo-github-typescript-ddd-cqrs--env
+              name: appenv
         - name: SERVER_PORT
           valueFrom:
             configMapKeyRef:
               key: SERVER_PORT
-              name: home-martin-Desarrollo-github-typescript-ddd-cqrs--env
-      image: languages
+              name: appenv
+      image: mapeveri/languages:latest
       name: languages-container
       ports:
         - containerPort: 4000

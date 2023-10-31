@@ -8,8 +8,7 @@ Getting started
 
 2. Execute:
 
-    kubectl apply -f .k8s/deployment.yaml
-    kubectl apply -f .k8s/service.yaml
+    sh .k8s/apply.sh
 
 3. Docker push imagen:
 

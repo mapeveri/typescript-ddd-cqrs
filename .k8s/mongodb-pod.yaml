@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   annotations:
-    kompose.cmd: kompose convert -f docker-compose.yaml
+    kompose.cmd: kompose convert -f docker-compose.yaml -o .k8s
     kompose.version: 1.31.2 (a92241f79)
   creationTimestamp: null
   labels:
