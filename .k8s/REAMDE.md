@@ -6,17 +6,21 @@ Getting started
 
 1. Install minikube and kubectl
 
-2. Execute:
-
-    sh .k8s/apply.sh
-
-3. Docker push imagen:
+2. Docker push imagen:
 
     docker login 
 
     docker tag languages:latest mapeveri/languages:latest
 
     docker push languages:latest
+
+3. Execute:
+
+    sh .k8s/apply.sh
+
+4. Serve app:
+
+    minikube service app
 
 Commands
 --------
@@ -33,3 +37,5 @@ Kubectl utilities:
     kubectl get nodes -o wide # To get the internal IP
 
     kubectl rollout restart deployment/languages # Rollout pods
+
+    kubectl describe svc app
