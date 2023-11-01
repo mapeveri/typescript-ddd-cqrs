@@ -11,18 +11,30 @@ metadata:
   name: mongodb
 spec:
   containers:
-    - args:
-        - bash
-        - /scripts/mongo-init.sh
-      image: mongo:6
-      name: mongodb
-      resources: {}
-      volumeMounts:
-        - mountPath: /scripts/mongo-init.sh
-          name: mongodb-claim0
+  - name: mongodb
+    image: mongo:6
+    command:
+    - "/bin/bash"
+    - "-c"
+    - |
+      #!/bin/bash
+      echo "Mongo init"
+      sleep 10
+
+      mongosh --host mongo1:27017 <<EOF
+        cfg = {
+          "_id": "rs0",
+          "members": [
+            { "_id": 0, "host": "mongo1:27017" }
+          ]
+        };
+        rs.initiate(cfg);
+      EOF
+    resources: {}
   restartPolicy: Never
   volumes:
     - name: mongodb-claim0
       persistentVolumeClaim:
         claimName: mongodb-claim0
 status: {}
+
