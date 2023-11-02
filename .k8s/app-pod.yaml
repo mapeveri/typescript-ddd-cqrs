@@ -57,6 +57,11 @@ spec:
             configMapKeyRef:
               key: POSTGRES_PASSWORD
               name: appenv
+        - name: POSTGRES_HOST
+          valueFrom:
+            configMapKeyRef:
+              key: POSTGRES_HOST
+              name: appenv
         - name: POSTGRES_USER
           valueFrom:
             configMapKeyRef:
