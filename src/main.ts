@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { LOGGER_INTERFACE } from './shared/domain/loggerInterface';
+import LoggerInterface, { LOGGER_INTERFACE } from './shared/domain/loggerInterface';
 import { DataSourceHandler } from './shared/infrastructure/persistence/typeOrm/dataSourceHandler';
 import { ValidationPipe } from '@nestjs/common';
 import helmet from 'helmet';
@@ -30,12 +30,12 @@ async function bootstrap() {
 
   await DataSourceHandler.getInstance().initialize();
 
-  const logger = app.get(LOGGER_INTERFACE);
+  const logger: LoggerInterface = app.get(LOGGER_INTERFACE);
 
   await app.init();
 
   app.listen(port, () => {
-    logger.info(`App is running at http://localhost:${port} in ${process.env.NODE_ENV} mode`);
+    logger.log(`App is running at http://localhost:${port} in ${process.env.NODE_ENV} mode`);
     console.log('Press CTRL-C to stop\n');
   });
 }
