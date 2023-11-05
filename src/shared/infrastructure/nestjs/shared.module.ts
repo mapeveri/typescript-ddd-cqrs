@@ -4,7 +4,7 @@ import { LOGGER_INTERFACE } from '@src/shared/domain/loggerInterface';
 import NestCommandBus from './buses/nestCommandBus';
 import NestEventBus from './buses/nestEventBus';
 import { EVENT_BUS } from '@src/shared/domain/buses/eventBus/eventBus';
-import Logger from '../logger';
+import Logger from './logger/logger';
 import { JwtAuthGuard } from './guards/JwtAuthGuard';
 import { JwtStrategy } from './strategies/JwtStrategy';
 import { JwtModule } from '@nestjs/jwt';
