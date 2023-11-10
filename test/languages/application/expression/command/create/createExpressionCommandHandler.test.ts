@@ -16,7 +16,6 @@ describe('CreateExpressionCommandHandler', () => {
 
   beforeEach(() => {
     eventBus = new EventBusMock();
-
     expressionRepository = new ExpressionRepositoryMock();
 
     createWordCommandHandler = new CreateExpressionCommandHandler(expressionRepository, eventBus);
@@ -33,7 +32,7 @@ describe('CreateExpressionCommandHandler', () => {
       expressionRepository.expectSaveNotCalled();
     });
 
-    it('should create and save an expression', async () => {
+    it('should create an expression', async () => {
       const command = CreateExpressionCommandMother.random();
       const userId = UserIdMother.random(command.userId);
       const expression: Expression = ExpressionMother.createFromCreateExpressionCommand(command, userId);

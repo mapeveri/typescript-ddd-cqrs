@@ -26,7 +26,7 @@ describe('CreateCountryCommandHandler', () => {
       countryRepository.expectSaveNotCalled();
     });
 
-    it('should create and save a country', async () => {
+    it('should create a country', async () => {
       const command = CreateCountryCommandMother.random();
       const country: Country = CountryMother.createFromCreateCountryCommand(command);
 

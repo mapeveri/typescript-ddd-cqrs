@@ -32,7 +32,7 @@ describe('CreateWordCommandHandler', () => {
       wordRepository.expectSaveNotCalled();
     });
 
-    it('should create and save a word', async () => {
+    it('should create a word', async () => {
       const command = CreateWordCommandMother.random();
       const userId = UserIdMother.random(command.userId);
       const word: Word = WordMother.createFromCreateWordCommand(command, userId);
