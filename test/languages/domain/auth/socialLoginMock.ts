@@ -2,17 +2,28 @@ import { expect, jest } from '@jest/globals';
 import { SocialLogin } from '@src/languages/domain/auth/socialLogin';
 
 export class SocialLoginMock implements SocialLogin {
-  login: jest.MockedFunction<(token: string) => Promise<boolean>>;
+  private loginMock: jest.Mock;
+  private loginSuccess: boolean;
 
   constructor() {
-    this.login = jest.fn();
+    this.loginMock = jest.fn();
+  }
+
+  returnOnLogin(loginSuccess: boolean): void {
+    this.loginSuccess = loginSuccess;
+  }
+
+  async login(token: string): Promise<boolean> {
+    this.loginMock(token);
+
+    return Promise.resolve(this.loginSuccess);
   }
 
   expectLoginCalledWith(token: string): void {
-    expect(this.login).toHaveBeenCalledWith(token);
+    expect(this.loginMock).toHaveBeenCalledWith(token);
   }
 
   expectLoginNotCalled(): void {
-    expect(this.login).not.toHaveBeenCalled();
+    expect(this.loginMock).not.toHaveBeenCalled();
   }
 }

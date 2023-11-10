@@ -29,7 +29,7 @@ describe('LoginUserCommandHandler', () => {
   describe('execute', () => {
     it('should login failed and not save auth session nor publish an event', async () => {
       const command = LoginUserCommandMother.random();
-      socialLogin.login.mockResolvedValueOnce(false);
+      socialLogin.returnOnLogin(false);
 
       await expect(loginUserCommandHandler.execute(command)).rejects.toThrowError(LoginException);
 
@@ -50,7 +50,7 @@ describe('LoginUserCommandHandler', () => {
         }),
       });
       const userAuthenticatedEvent = AuthSessionCreatedEventMother.createFromLoginUserCommand(command);
-      socialLogin.login.mockResolvedValueOnce(true);
+      socialLogin.returnOnLogin(true);
 
       await loginUserCommandHandler.execute(command);
 

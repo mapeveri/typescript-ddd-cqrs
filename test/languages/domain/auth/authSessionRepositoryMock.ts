@@ -3,17 +3,21 @@ import AuthSession from '@src/languages/domain/auth/authSession';
 import { AuthSessionRepository } from '@src/languages/domain/auth/authSessionRepository';
 
 export class AuthSessionRepositoryMock implements AuthSessionRepository {
-  save: jest.MockedFunction<(authSession: AuthSession) => Promise<void>>;
+  private saveMock: jest.Mock;
 
   constructor() {
-    this.save = jest.fn();
+    this.saveMock = jest.fn();
+  }
+
+  async save(authSession: AuthSession): Promise<any> {
+    this.saveMock(authSession);
   }
 
   expectSaveNotCalledWith(): void {
-    expect(this.save).not.toHaveBeenCalled();
+    expect(this.saveMock).not.toHaveBeenCalled();
   }
 
   expectSaveCalledWith(authSession: AuthSession): void {
-    expect(this.save).toHaveBeenCalledWith(authSession);
+    expect(this.saveMock).toHaveBeenCalledWith(authSession);
   }
 }
