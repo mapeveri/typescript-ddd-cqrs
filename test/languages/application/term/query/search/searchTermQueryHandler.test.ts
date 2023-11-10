@@ -19,7 +19,7 @@ describe('SearchTermQueryHandler', () => {
       const termToSearch = 'Hello world';
       const query = SearchTermQueryMother.random(termToSearch);
       const term: Term = TermMother.random({ title: termToSearch });
-      termRepository.search.mockReturnValueOnce(Promise.resolve([term]));
+      termRepository.returnOnSearch([term]);
 
       const foundTerms = await searchTermQueryHandler.execute(query);
 
