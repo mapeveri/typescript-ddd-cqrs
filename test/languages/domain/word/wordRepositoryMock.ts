@@ -4,29 +4,47 @@ import Word from '@src/languages/domain/word/word';
 import WordRepository from '@src/languages/domain/word/wordRepository';
 
 export class WordRepositoryMock implements WordRepository {
-  findById: jest.MockedFunction<(id: WordId) => Promise<Word | null>>;
-  save: jest.MockedFunction<(word: Word) => Promise<void>>;
-  remove: jest.MockedFunction<(word: Word) => Promise<void>>;
+  private findByIdMock: jest.Mock;
+  private saveMock: jest.Mock;
+  private removeMock: jest.Mock;
+  private word: Word | null;
 
   constructor() {
-    this.findById = jest.fn();
-    this.save = jest.fn();
-    this.remove = jest.fn();
+    this.findByIdMock = jest.fn();
+    this.saveMock = jest.fn();
+    this.removeMock = jest.fn();
+  }
+
+  returnOnFindById(word?: Word | null) {
+    this.word = word ? word : null;
+  }
+
+  async findById(id: WordId): Promise<Word | null> {
+    this.findByIdMock(id);
+    return this.word;
+  }
+
+  async remove(word: Word): Promise<void> {
+    this.removeMock(word);
+  }
+
+  async save(word: Word): Promise<void> {
+    this.saveMock(word);
   }
 
   expectSaveCalledWith(word: Word): void {
-    expect(this.save).toHaveBeenCalledWith(word);
+    expect(this.saveMock).toHaveBeenCalledWith(word);
   }
 
   expectSaveNotCalled(): void {
-    expect(this.save).not.toHaveBeenCalled();
+    expect(this.saveMock).not.toHaveBeenCalled();
   }
 
   expectRemoveCalledWith(word: Word): void {
-    expect(this.remove).toHaveBeenCalledWith(word);
+    expect(this.removeMock).toHaveBeenCalledWith(word);
   }
 
   expectRemoveNotCalled(): void {
-    expect(this.remove).not.toHaveBeenCalled();
+    expect(this.removeMock).not.toHaveBeenCalled();
   }
 }

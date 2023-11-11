@@ -25,7 +25,7 @@ describe('CreateWordCommandHandler', () => {
     it('should raise an exception when word id already exists', async () => {
       const word = WordMother.random();
       const command = CreateWordCommandMother.random({ id: word.id.value });
-      wordRepository.findById.mockResolvedValueOnce(word);
+      wordRepository.returnOnFindById(word);
 
       await expect(createWordCommandHandler.execute(command)).rejects.toThrowError(WordAlreadyExistsException);
 
@@ -37,7 +37,7 @@ describe('CreateWordCommandHandler', () => {
       const userId = UserIdMother.random(command.userId);
       const word: Word = WordMother.createFromCreateWordCommand(command, userId);
       const wordCreatedEvent = WordCreatedEventMother.createFromCreateWordCommand(command);
-      wordRepository.findById.mockResolvedValueOnce(null);
+      wordRepository.returnOnFindById(null);
 
       await createWordCommandHandler.execute(command);
 

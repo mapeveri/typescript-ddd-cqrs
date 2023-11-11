@@ -18,7 +18,7 @@ describe('DeleteWordCommandHandler', () => {
     it('should not remove when word id does not exists', async () => {
       const word = WordMother.random();
       const command = DeleteWordCommandMother.random(word.id.value);
-      wordRepository.findById.mockResolvedValueOnce(null);
+      wordRepository.returnOnFindById(null);
 
       await deleteWordCommandHandler.execute(command);
 
@@ -28,7 +28,7 @@ describe('DeleteWordCommandHandler', () => {
     it('should remove a word', async () => {
       const word = WordMother.random();
       const command = DeleteWordCommandMother.random(word.id.value);
-      wordRepository.findById.mockResolvedValueOnce(word);
+      wordRepository.returnOnFindById(word);
 
       await deleteWordCommandHandler.execute(command);
 
