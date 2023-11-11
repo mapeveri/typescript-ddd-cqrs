@@ -4,29 +4,28 @@ import UserRepository from '@src/languages/domain/user/userRepository';
 import UserId from '@src/languages/domain/user/valueObjects/userId';
 
 export class UserRepositoryMock implements UserRepository {
-  private mockSave = jest.fn();
-  private mockFindById = jest.fn();
-  private users: User[] = [];
+  private saveMock = jest.fn();
+  private findByIdMock = jest.fn();
+  private user: User;
 
-  addUser(user: User): void {
-    this.users.push(user);
+  returnOnfindById(user: User): void {
+    this.user = user;
   }
 
   async findById(id: UserId): Promise<User | null> {
-    const user = this.users.filter((user) => user.id.equals(id))[0];
-    this.mockFindById(user.id);
-    return Promise.resolve(user);
+    this.findByIdMock(id);
+    return this.user;
   }
 
-  assertFindById(id: UserId): void {
-    expect(this.mockFindById).toHaveBeenCalledWith(id);
+  expectFindById(id: UserId): void {
+    expect(this.findByIdMock).toHaveBeenCalledWith(id);
   }
 
   async save(user: User): Promise<any> {
-    this.mockSave(user);
+    this.saveMock(user);
   }
 
-  assertSaveHasBeenCalledWith(user: User): void {
-    expect(this.mockSave).toHaveBeenCalledWith(user);
+  expectSaveHasBeenCalledWith(user: User): void {
+    expect(this.saveMock).toHaveBeenCalledWith(user);
   }
 }
