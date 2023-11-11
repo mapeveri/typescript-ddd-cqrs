@@ -18,7 +18,7 @@ describe('DeleteExpressionCommandHandler', () => {
     it('should not remove when expression id does not exists', async () => {
       const expression = ExpressionMother.random();
       const command = DeleteExpressionCommandMother.random(expression.id.value);
-      expressionRepository.findById.mockResolvedValueOnce(null);
+      expressionRepository.returnOnFindById(null);
 
       await deleteExpressionCommandHandler.execute(command);
 
@@ -28,7 +28,7 @@ describe('DeleteExpressionCommandHandler', () => {
     it('should remove an expression', async () => {
       const expression = ExpressionMother.random();
       const command = DeleteExpressionCommandMother.random(expression.id.value);
-      expressionRepository.findById.mockResolvedValueOnce(expression);
+      expressionRepository.returnOnFindById(expression);
 
       await deleteExpressionCommandHandler.execute(command);
 

@@ -25,7 +25,7 @@ describe('CreateExpressionCommandHandler', () => {
     it('should raise an exception when expression id already exists', async () => {
       const expression = ExpressionMother.random();
       const command = CreateExpressionCommandMother.random({ id: expression.id.value });
-      expressionRepository.findById.mockResolvedValueOnce(expression);
+      expressionRepository.returnOnFindById(expression);
 
       await expect(createWordCommandHandler.execute(command)).rejects.toThrowError(ExpressionAlreadyExistsException);
 
@@ -37,6 +37,7 @@ describe('CreateExpressionCommandHandler', () => {
       const userId = UserIdMother.random(command.userId);
       const expression: Expression = ExpressionMother.createFromCreateExpressionCommand(command, userId);
       const expressionCreatedEvent = ExpressionCreatedEventMother.createFromCreateExpressionCommand(command);
+      expressionRepository.returnOnFindById(null);
 
       await createWordCommandHandler.execute(command);
 

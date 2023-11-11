@@ -4,29 +4,47 @@ import ExpressionRepository from '@src/languages/domain/expression/expressionRep
 import ExpressionId from '@src/languages/domain/expression/valueObjects/expressionId';
 
 export class ExpressionRepositoryMock implements ExpressionRepository {
-  findById: jest.MockedFunction<(id: ExpressionId) => Promise<Expression | null>>;
-  save: jest.MockedFunction<(expression: Expression) => Promise<void>>;
-  remove: jest.MockedFunction<(expression: Expression) => Promise<void>>;
+  private findByIdMock: jest.Mock;
+  private saveMock: jest.Mock;
+  private removeMock: jest.Mock;
+  private expression: Expression | null;
 
   constructor() {
-    this.findById = jest.fn();
-    this.save = jest.fn();
-    this.remove = jest.fn();
+    this.findByIdMock = jest.fn();
+    this.saveMock = jest.fn();
+    this.removeMock = jest.fn();
+  }
+
+  returnOnFindById(expression?: Expression | null) {
+    this.expression = expression ? expression : null;
+  }
+
+  async findById(id: ExpressionId): Promise<Expression | null> {
+    this.findByIdMock(id);
+    return this.expression;
+  }
+
+  async remove(expression: Expression): Promise<void> {
+    this.removeMock(expression);
+  }
+
+  async save(expression: Expression): Promise<void> {
+    this.saveMock(expression);
   }
 
   expectSaveCalledWith(expression: Expression): void {
-    expect(this.save).toHaveBeenCalledWith(expression);
+    expect(this.saveMock).toHaveBeenCalledWith(expression);
   }
 
   expectSaveNotCalled(): void {
-    expect(this.save).not.toHaveBeenCalled();
+    expect(this.saveMock).not.toHaveBeenCalled();
   }
 
   expectRemoveCalledWith(expression: Expression): void {
-    expect(this.remove).toHaveBeenCalledWith(expression);
+    expect(this.removeMock).toHaveBeenCalledWith(expression);
   }
 
   expectRemoveNotCalled(): void {
-    expect(this.remove).not.toHaveBeenCalled();
+    expect(this.removeMock).not.toHaveBeenCalled();
   }
 }
