@@ -1,9 +1,9 @@
-import { SOCIAL_LOGIN } from '@src/languages/domain/auth/socialLogin';
-import GoogleSocialLogin from '../oauth/googleSocialLogin';
+import { SOCIAL_AUTHENTICATOR } from '@src/languages/domain/auth/socialAuthenticator';
+import GoogleSocialAuthenticator from '../oauth/googleSocialAuthenticator';
 
 export const services = [
   {
-    provide: SOCIAL_LOGIN,
-    useClass: GoogleSocialLogin,
+    provide: SOCIAL_AUTHENTICATOR,
+    useClass: GoogleSocialAuthenticator,
   },
 ];

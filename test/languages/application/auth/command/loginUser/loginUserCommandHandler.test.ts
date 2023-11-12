@@ -2,26 +2,26 @@ import { beforeEach, describe, expect, it, jest } from '@jest/globals';
 import LoginUserCommandHandler from '@src/languages/application/auth/command/loginUser/loginUserCommandHandler';
 import { LoginUserCommandMother } from './loginUserCommandMother';
 import LoginException from '@src/languages/domain/user/exceptions/loginException';
-import { SocialLoginMock } from '@test/languages/domain/auth/socialLoginMock';
 import { EventBusMock } from '@test/shared/domain/buses/eventBus/eventBusMock';
 import { AuthSessionCreatedEventMother } from '@test/languages/domain/auth/domainEvents/authSessionCreatedEventMother';
 import { AuthSessionRepositoryMock } from '@test/languages/domain/auth/authSessionRepositoryMock';
 import { AuthSessionMother } from '@test/languages/domain/auth/authSessionMother';
 import { AuthSessionIdMother } from '@test/languages/domain/auth/valueObjects/authSessionIdMother';
 import { SessionMother } from '@test/languages/domain/auth/valueObjects/sessionMother';
+import { SocialAuthenticatorMock } from '@test/languages/domain/auth/socialAuthenticatorMock';
 
 describe('LoginUserCommandHandler', () => {
   let repository: AuthSessionRepositoryMock;
-  let socialLogin: SocialLoginMock;
+  let socialAuthenticator: SocialAuthenticatorMock;
   let eventBus: EventBusMock;
   let loginUserCommandHandler: LoginUserCommandHandler;
 
   beforeEach(() => {
     repository = new AuthSessionRepositoryMock();
-    socialLogin = new SocialLoginMock();
+    socialAuthenticator = new SocialAuthenticatorMock();
     eventBus = new EventBusMock();
 
-    loginUserCommandHandler = new LoginUserCommandHandler(repository, socialLogin, eventBus);
+    loginUserCommandHandler = new LoginUserCommandHandler(repository, socialAuthenticator, eventBus);
 
     jest.useFakeTimers();
   });
@@ -29,11 +29,11 @@ describe('LoginUserCommandHandler', () => {
   describe('execute', () => {
     it('should login failed and not save auth session nor publish an event', async () => {
       const command = LoginUserCommandMother.random();
-      socialLogin.returnOnLogin(false);
+      socialAuthenticator.returnOnLogin(false);
 
       await expect(loginUserCommandHandler.execute(command)).rejects.toThrowError(LoginException);
 
-      socialLogin.expectLoginCalledWith(command.token);
+      socialAuthenticator.expectLoginCalledWith(command.token);
       repository.expectSaveNotCalledWith();
       eventBus.expectPublishNotCalled();
     });
@@ -50,11 +50,11 @@ describe('LoginUserCommandHandler', () => {
         }),
       });
       const userAuthenticatedEvent = AuthSessionCreatedEventMother.createFromLoginUserCommand(command);
-      socialLogin.returnOnLogin(true);
+      socialAuthenticator.returnOnLogin(true);
 
       await loginUserCommandHandler.execute(command);
 
-      socialLogin.expectLoginCalledWith(command.token);
+      socialAuthenticator.expectLoginCalledWith(command.token);
       repository.expectSaveCalledWith(authSession);
       eventBus.expectPublishCalledWith([userAuthenticatedEvent]);
     });

@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { SocialLogin } from '@src/languages/domain/auth/socialLogin';
+import { SocialAuthenticator } from '@src/languages/domain/auth/socialAuthenticator';
 import { OAuth2Client } from 'google-auth-library';
 
 @Injectable()
-export default class GoogleSocialLogin implements SocialLogin {
+export default class GoogleSocialAuthenticator implements SocialAuthenticator {
   private client: OAuth2Client;
 
   constructor() {
