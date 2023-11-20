@@ -13,8 +13,8 @@ import { CommandHandler, ICommandHandler } from '@src/shared/domain/buses/comman
 @CommandHandler(CreateExpressionCommand)
 export default class CreateExpressionCommandHandler implements ICommandHandler<CreateExpressionCommand> {
   constructor(
-    @Inject(EXPRESSION_REPOSITORY) private expressionRepository: ExpressionRepository,
-    @Inject(EVENT_BUS) private eventBus: EventBus
+    @Inject(EXPRESSION_REPOSITORY) private readonly expressionRepository: ExpressionRepository,
+    @Inject(EVENT_BUS) private readonly eventBus: EventBus
   ) {}
 
   async execute(command: CreateExpressionCommand): Promise<void> {

@@ -7,7 +7,7 @@ import { TermTypeEnum } from '@src/languages/domain/term/valueObjects/termType';
 
 @EventsHandler(ExpressionCreatedEvent)
 export default class CreateOnExpressionCreatedEventHandler implements IEventHandler<ExpressionCreatedEvent> {
-  constructor(@Inject(COMMAND_BUS) private commandBus: CommandBus) {}
+  constructor(@Inject(COMMAND_BUS) private readonly commandBus: CommandBus) {}
 
   async handle(event: ExpressionCreatedEvent): Promise<void> {
     const terms = event.terms;

@@ -12,9 +12,9 @@ import { SOCIAL_AUTHENTICATOR, SocialAuthenticator } from '@src/languages/domain
 @CommandHandler(LoginUserCommand)
 export default class LoginUserCommandHandler implements ICommandHandler<LoginUserCommand> {
   constructor(
-    @Inject(AUTH_SESSION_REPOSITORY) private authSessionRepository: AuthSessionRepository,
-    @Inject(SOCIAL_AUTHENTICATOR) private socialAuthenticator: SocialAuthenticator,
-    @Inject(EVENT_BUS) private eventBus: EventBus
+    @Inject(AUTH_SESSION_REPOSITORY) private readonly authSessionRepository: AuthSessionRepository,
+    @Inject(SOCIAL_AUTHENTICATOR) private readonly socialAuthenticator: SocialAuthenticator,
+    @Inject(EVENT_BUS) private readonly eventBus: EventBus
   ) {}
 
   async execute(command: LoginUserCommand): Promise<void> {

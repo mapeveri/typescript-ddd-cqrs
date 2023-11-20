@@ -8,7 +8,7 @@ import { IQueryHandler, QueryHandler } from '@src/shared/domain/buses/queryBus/q
 
 @QueryHandler(FindCountryQuery)
 export default class FindCountryQueryHandler implements IQueryHandler<FindCountryQuery> {
-  constructor(@Inject(COUNTRY_REPOSITORY) private countryRepository: CountryRepository) {}
+  constructor(@Inject(COUNTRY_REPOSITORY) private readonly countryRepository: CountryRepository) {}
 
   async execute(query: FindCountryQuery): Promise<QueryResponse> {
     const country = await this.countryRepository.findById(CountryId.of(query.id));

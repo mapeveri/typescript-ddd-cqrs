@@ -7,7 +7,7 @@ import DeleteWordCommand from '../../command/delete/deleteWordCommand';
 
 @EventsHandler(TermCreatedFailedEvent)
 export default class DeleteWordOnTermCreatedFailedEventHandler implements IEventHandler<TermCreatedFailedEvent> {
-  constructor(@Inject(COMMAND_BUS) private commandBus: CommandBus) {}
+  constructor(@Inject(COMMAND_BUS) private readonly commandBus: CommandBus) {}
 
   async handle(event: TermCreatedFailedEvent): Promise<void> {
     const termType = TermType.of(event.type);

@@ -7,7 +7,7 @@ import { CommandHandler, ICommandHandler } from '@src/shared/domain/buses/comman
 
 @CommandHandler(UpdateUserCommand)
 export default class UpdateUserCommandHandler implements ICommandHandler<UpdateUserCommand> {
-  constructor(@Inject(USER_REPOSITORY) private userRepository: UserRepository) {}
+  constructor(@Inject(USER_REPOSITORY) private readonly userRepository: UserRepository) {}
 
   async execute(command: UpdateUserCommand): Promise<void> {
     const user = await this.userRepository.findById(UserId.of(command.id));

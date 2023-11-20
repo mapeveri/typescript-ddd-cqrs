@@ -9,7 +9,7 @@ import { CommandHandler, ICommandHandler } from '@src/shared/domain/buses/comman
 
 @CommandHandler(CreateCountryCommand)
 export default class CreateCountryCommandHandler implements ICommandHandler<CreateCountryCommand> {
-  constructor(@Inject(COUNTRY_REPOSITORY) private countryRepository: CountryRepository) {}
+  constructor(@Inject(COUNTRY_REPOSITORY) private readonly countryRepository: CountryRepository) {}
 
   async execute(command: CreateCountryCommand): Promise<void> {
     const countryId = CountryId.of(command.id);

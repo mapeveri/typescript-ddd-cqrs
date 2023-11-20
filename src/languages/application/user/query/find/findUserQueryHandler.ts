@@ -8,7 +8,7 @@ import { IQueryHandler, QueryHandler } from '@src/shared/domain/buses/queryBus/q
 
 @QueryHandler(FindUserQuery)
 export default class FindUserQueryHandler implements IQueryHandler<FindUserQuery> {
-  constructor(@Inject(USER_REPOSITORY) private userRepository: UserRepository) {}
+  constructor(@Inject(USER_REPOSITORY) private readonly userRepository: UserRepository) {}
 
   async execute(query: FindUserQuery): Promise<QueryResponse> {
     const user = await this.userRepository.findById(UserId.of(query.id));

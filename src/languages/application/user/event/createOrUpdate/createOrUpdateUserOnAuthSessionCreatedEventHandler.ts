@@ -12,8 +12,8 @@ export default class CreateOrUpdateUserOnAuthSessionCreatedEventHandler
   implements IEventHandler<AuthSessionCreatedEvent>
 {
   constructor(
-    @Inject(USER_REPOSITORY) private userRepository: UserRepository,
-    @Inject(COMMAND_BUS) private commandBus: CommandBus
+    @Inject(USER_REPOSITORY) private readonly userRepository: UserRepository,
+    @Inject(COMMAND_BUS) private readonly commandBus: CommandBus
   ) {}
 
   async handle(event: AuthSessionCreatedEvent): Promise<void> {
