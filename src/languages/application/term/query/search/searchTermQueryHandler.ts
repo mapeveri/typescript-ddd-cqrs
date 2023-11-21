@@ -7,7 +7,7 @@ import { IQueryHandler, QueryHandler } from '@src/shared/domain/buses/queryBus/q
 
 @QueryHandler(SearchTermQuery)
 export default class SearchTermQueryHandler implements IQueryHandler<SearchTermQuery> {
-  constructor(@Inject(TERM_REPOSITORY) private termRepository: TermRepository) {}
+  constructor(@Inject(TERM_REPOSITORY) private readonly termRepository: TermRepository) {}
 
   async execute(query: SearchTermQuery): Promise<QueryResponse> {
     const terms = await this.termRepository.search(query.term);

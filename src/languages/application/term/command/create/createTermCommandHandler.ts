@@ -9,8 +9,8 @@ import { EVENT_BUS, EventBus } from '@src/shared/domain/buses/eventBus/eventBus'
 @CommandHandler(CreateTermCommand)
 export default class CreateTermCommandHandler implements ICommandHandler<CreateTermCommand> {
   constructor(
-    @Inject(TERM_REPOSITORY) private termRepository: TermRepository,
-    @Inject(EVENT_BUS) private eventBus: EventBus
+    @Inject(TERM_REPOSITORY) private readonly termRepository: TermRepository,
+    @Inject(EVENT_BUS) private readonly eventBus: EventBus
   ) {}
 
   async execute(command: CreateTermCommand): Promise<void> {

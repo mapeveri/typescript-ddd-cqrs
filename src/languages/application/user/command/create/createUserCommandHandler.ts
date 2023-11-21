@@ -8,7 +8,7 @@ import { CommandHandler, ICommandHandler } from '@src/shared/domain/buses/comman
 
 @CommandHandler(CreateUserCommand)
 export default class CreateUserCommandHandler implements ICommandHandler<CreateUserCommand> {
-  constructor(@Inject(USER_REPOSITORY) private userRepository: UserRepository) {}
+  constructor(@Inject(USER_REPOSITORY) private readonly userRepository: UserRepository) {}
 
   async execute(command: CreateUserCommand): Promise<void> {
     const user = User.create(

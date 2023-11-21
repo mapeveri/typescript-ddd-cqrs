@@ -7,7 +7,7 @@ import FindCountriesQuery from './findCountriesQuery';
 
 @QueryHandler(FindCountriesQuery)
 export default class FindCountriesQueryHandler implements IQueryHandler<FindCountriesQuery> {
-  constructor(@Inject(COUNTRY_REPOSITORY) private countryRepository: CountryRepository) {}
+  constructor(@Inject(COUNTRY_REPOSITORY) private readonly countryRepository: CountryRepository) {}
 
   async execute(): Promise<QueryResponse> {
     const countries = await this.countryRepository.findAll();

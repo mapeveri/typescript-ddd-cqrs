@@ -13,8 +13,8 @@ import { CommandHandler, ICommandHandler } from '@src/shared/domain/buses/comman
 @CommandHandler(CreateWordCommand)
 export default class CreateWordCommandHandler implements ICommandHandler<CreateWordCommand> {
   constructor(
-    @Inject(WORD_REPOSITORY) private wordRepository: WordRepository,
-    @Inject(EVENT_BUS) private eventBus: EventBus
+    @Inject(WORD_REPOSITORY) private readonly wordRepository: WordRepository,
+    @Inject(EVENT_BUS) private readonly eventBus: EventBus
   ) {}
 
   async execute(command: CreateWordCommand): Promise<void> {

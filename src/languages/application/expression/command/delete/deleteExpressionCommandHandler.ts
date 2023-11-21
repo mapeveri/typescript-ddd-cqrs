@@ -6,11 +6,12 @@ import DeleteExpressionCommand from './deleteExpressionCommand';
 
 @CommandHandler(DeleteExpressionCommand)
 export default class DeleteExpressionCommandHandler implements ICommandHandler<DeleteExpressionCommand> {
-  constructor(@Inject(EXPRESSION_REPOSITORY) private expressionRepository: ExpressionRepository) {}
+  constructor(@Inject(EXPRESSION_REPOSITORY) private readonly expressionRepository: ExpressionRepository) {}
 
   async execute(command: DeleteExpressionCommand): Promise<void> {
     const expression = await this.expressionRepository.findById(ExpressionId.of(command.id));
     if (!expression) return;
+
     await this.expressionRepository.remove(expression);
   }
 }

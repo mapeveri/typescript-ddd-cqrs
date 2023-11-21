@@ -6,11 +6,12 @@ import WordRepository, { WORD_REPOSITORY } from '@src/languages/domain/word/word
 
 @CommandHandler(DeleteWordCommand)
 export default class DeleteWordCommandHandler implements ICommandHandler<DeleteWordCommand> {
-  constructor(@Inject(WORD_REPOSITORY) private wordRepository: WordRepository) {}
+  constructor(@Inject(WORD_REPOSITORY) private readonly wordRepository: WordRepository) {}
 
   async execute(command: DeleteWordCommand): Promise<void> {
     const word = await this.wordRepository.findById(ExpressionId.of(command.id));
     if (!word) return;
+
     await this.wordRepository.remove(word);
   }
 }

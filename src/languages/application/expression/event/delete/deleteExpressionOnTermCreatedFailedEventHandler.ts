@@ -7,7 +7,7 @@ import DeleteExpressionCommand from '../../command/delete/deleteExpressionComman
 
 @EventsHandler(TermCreatedFailedEvent)
 export default class DeleteExpressionOnTermCreatedFailedEventHandler implements IEventHandler<TermCreatedFailedEvent> {
-  constructor(@Inject(COMMAND_BUS) private commandBus: CommandBus) {}
+  constructor(@Inject(COMMAND_BUS) private readonly commandBus: CommandBus) {}
 
   async handle(event: TermCreatedFailedEvent): Promise<void> {
     const termType = TermType.of(event.type);
