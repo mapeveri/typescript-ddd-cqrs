@@ -17,7 +17,8 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:mutant": "stryker run"
+    "test:all:mutant": "stryker run",
+    "test:mutant": "stryker run -m $(git --no-pager diff --name-only master --diff-filter=AM -- src/ | grep -v 'test.ts' | grep -v '/infrastructure/' | grep -v '/infra/' | tr '\\n' ',' | sed 's/\\(.*\\),/\\1 /')"
   },
   "author": "",
   "license": "ISC",
