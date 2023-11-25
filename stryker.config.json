@@ -10,8 +10,13 @@
   "testRunner": "jest",
   "testRunner_comment": "Take a look at (missing 'homepage' URL in package.json) for information about the jest plugin.",
   "mutate": [
-    "src/*/application/**/*.ts",
-    "test/*/application/**/*.test.ts"
+    "src/*/domain/**/*.ts",
+    "src/*/application/**/*.ts"
   ],
+  "mutator": {
+    "excludedMutations": [
+      "BlockStatement"
+    ]
+  },
   "coverageAnalysis": "perTest"
 }
