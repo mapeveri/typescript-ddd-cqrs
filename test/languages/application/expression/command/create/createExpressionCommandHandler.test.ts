@@ -42,7 +42,7 @@ describe('CreateExpressionCommandHandler', () => {
       await createWordCommandHandler.execute(command);
 
       expressionRepository.expectSaveCalledWith(expression);
-      eventBus.expectPublishCalledWith([expressionCreatedEvent]);
+      eventBus.shouldPublishWith([expressionCreatedEvent]);
     });
   });
 });

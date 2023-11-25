@@ -13,11 +13,11 @@ export class AuthSessionRepositoryMock implements AuthSessionRepository {
     this.saveMock(authSession);
   }
 
-  expectSaveNotCalledWith(): void {
+  shouldNotStore(): void {
     expect(this.saveMock).not.toHaveBeenCalled();
   }
 
-  expectSaveCalledWith(authSession: AuthSession): void {
+  shouldStoreWith(authSession: AuthSession): void {
     expect(this.saveMock).toHaveBeenCalledWith(authSession);
   }
 }

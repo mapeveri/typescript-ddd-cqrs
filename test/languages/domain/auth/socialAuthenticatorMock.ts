@@ -9,7 +9,7 @@ export class SocialAuthenticatorMock implements SocialAuthenticator {
     this.loginMock = jest.fn();
   }
 
-  returnOnLogin(loginSuccess: boolean): void {
+  returnOnAuthenticate(loginSuccess: boolean): void {
     this.loginSuccess = loginSuccess;
   }
 
@@ -19,11 +19,11 @@ export class SocialAuthenticatorMock implements SocialAuthenticator {
     return Promise.resolve(this.loginSuccess);
   }
 
-  expectLoginCalledWith(token: string): void {
+  shouldAuthenticateWith(token: string): void {
     expect(this.loginMock).toHaveBeenCalledWith(token);
   }
 
-  expectLoginNotCalled(): void {
+  shouldNotAuthenticate(): void {
     expect(this.loginMock).not.toHaveBeenCalled();
   }
 }

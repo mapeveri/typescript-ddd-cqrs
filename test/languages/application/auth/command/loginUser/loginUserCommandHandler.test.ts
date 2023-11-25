@@ -29,13 +29,13 @@ describe('LoginUserCommandHandler', () => {
   describe('execute', () => {
     it('should login failed and not save auth session nor publish an event', async () => {
       const command = LoginUserCommandMother.random();
-      socialAuthenticator.returnOnLogin(false);
+      socialAuthenticator.returnOnAuthenticate(false);
 
       await expect(loginUserCommandHandler.execute(command)).rejects.toThrowError(LoginException);
 
-      socialAuthenticator.expectLoginCalledWith(command.token);
-      repository.expectSaveNotCalledWith();
-      eventBus.expectPublishNotCalled();
+      socialAuthenticator.shouldAuthenticateWith(command.token);
+      repository.shouldNotStore();
+      eventBus.shouldNotPublish();
     });
 
     it('should login, save auth session and publish an event', async () => {
@@ -50,13 +50,13 @@ describe('LoginUserCommandHandler', () => {
         }),
       });
       const userAuthenticatedEvent = AuthSessionCreatedEventMother.createFromLoginUserCommand(command);
-      socialAuthenticator.returnOnLogin(true);
+      socialAuthenticator.returnOnAuthenticate(true);
 
       await loginUserCommandHandler.execute(command);
 
-      socialAuthenticator.expectLoginCalledWith(command.token);
-      repository.expectSaveCalledWith(authSession);
-      eventBus.expectPublishCalledWith([userAuthenticatedEvent]);
+      socialAuthenticator.shouldAuthenticateWith(command.token);
+      repository.shouldStoreWith(authSession);
+      eventBus.shouldPublishWith([userAuthenticatedEvent]);
     });
   });
 });
