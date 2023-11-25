@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from '@jest/globals';
+import { beforeEach, describe, expect, it, jest } from '@jest/globals';
 import { EventBusMock } from '@test/shared/domain/buses/eventBus/eventBusMock';
 import { UserIdMother } from '@test/languages/domain/user/valueObjects/userIdMother';
 import CreateExpressionCommandHandler from '@src/languages/application/expression/command/create/createExpressionCommandHandler';
@@ -19,6 +19,8 @@ describe('CreateExpressionCommandHandler', () => {
     expressionRepository = new ExpressionRepositoryMock();
 
     createWordCommandHandler = new CreateExpressionCommandHandler(expressionRepository, eventBus);
+
+    jest.useFakeTimers();
   });
 
   describe('execute', () => {
