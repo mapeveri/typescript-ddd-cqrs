@@ -19,7 +19,7 @@ export class SocialAuthenticatorMock implements SocialAuthenticator {
     return Promise.resolve(this.loginSuccess);
   }
 
-  shouldAuthenticateWith(token: string): void {
+  shouldAuthenticate(token: string): void {
     expect(this.loginMock).toHaveBeenCalledWith(token);
   }
 

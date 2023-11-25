@@ -25,11 +25,11 @@ describe('CreateWordCommandHandler', () => {
     it('should raise an exception when word id already exists', async () => {
       const word = WordMother.random();
       const command = CreateWordCommandMother.random({ id: word.id.value });
-      wordRepository.returnOnFindById(word);
+      wordRepository.add(word);
 
       await expect(createWordCommandHandler.execute(command)).rejects.toThrowError(WordAlreadyExistsException);
 
-      wordRepository.expectSaveNotCalled();
+      wordRepository.shouldNotStore();
     });
 
     it('should create a word', async () => {
@@ -37,12 +37,11 @@ describe('CreateWordCommandHandler', () => {
       const userId = UserIdMother.random(command.userId);
       const word: Word = WordMother.createFromCreateWordCommand(command, userId);
       const wordCreatedEvent = WordCreatedEventMother.createFromCreateWordCommand(command);
-      wordRepository.returnOnFindById(null);
 
       await createWordCommandHandler.execute(command);
 
-      wordRepository.expectSaveCalledWith(word);
-      eventBus.shouldPublishWith([wordCreatedEvent]);
+      wordRepository.shouldStore(word);
+      eventBus.shouldPublish([wordCreatedEvent]);
     });
   });
 });

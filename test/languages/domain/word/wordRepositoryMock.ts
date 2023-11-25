@@ -7,21 +7,22 @@ export class WordRepositoryMock implements WordRepository {
   private findByIdMock: jest.Mock;
   private saveMock: jest.Mock;
   private removeMock: jest.Mock;
-  private word: Word | null;
+  private words: Word[];
 
   constructor() {
     this.findByIdMock = jest.fn();
     this.saveMock = jest.fn();
     this.removeMock = jest.fn();
+    this.words = [];
   }
 
-  returnOnFindById(word?: Word | null) {
-    this.word = word ? word : null;
+  add(word: Word) {
+    this.words.push(word);
   }
 
   async findById(id: WordId): Promise<Word | null> {
     this.findByIdMock(id);
-    return this.word;
+    return this.words.length > 0 ? this.words[0] : null;
   }
 
   async remove(word: Word): Promise<void> {
@@ -32,19 +33,19 @@ export class WordRepositoryMock implements WordRepository {
     this.saveMock(word);
   }
 
-  expectSaveCalledWith(word: Word): void {
+  shouldStore(word: Word): void {
     expect(this.saveMock).toHaveBeenCalledWith(word);
   }
 
-  expectSaveNotCalled(): void {
+  shouldNotStore(): void {
     expect(this.saveMock).not.toHaveBeenCalled();
   }
 
-  expectRemoveCalledWith(word: Word): void {
+  shouldRemove(word: Word): void {
     expect(this.removeMock).toHaveBeenCalledWith(word);
   }
 
-  expectRemoveNotCalled(): void {
+  shouldNotRemove(): void {
     expect(this.removeMock).not.toHaveBeenCalled();
   }
 }

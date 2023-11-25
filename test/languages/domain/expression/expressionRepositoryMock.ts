@@ -7,21 +7,22 @@ export class ExpressionRepositoryMock implements ExpressionRepository {
   private findByIdMock: jest.Mock;
   private saveMock: jest.Mock;
   private removeMock: jest.Mock;
-  private expression: Expression | null;
+  private expressions: Expression[];
 
   constructor() {
     this.findByIdMock = jest.fn();
     this.saveMock = jest.fn();
     this.removeMock = jest.fn();
+    this.expressions = [];
   }
 
-  returnOnFindById(expression?: Expression | null) {
-    this.expression = expression ? expression : null;
+  add(expression: Expression) {
+    this.expressions.push(expression);
   }
 
   async findById(id: ExpressionId): Promise<Expression | null> {
     this.findByIdMock(id);
-    return this.expression;
+    return this.expressions.length > 0 ? this.expressions[0] : null;
   }
 
   async remove(expression: Expression): Promise<void> {
@@ -32,19 +33,19 @@ export class ExpressionRepositoryMock implements ExpressionRepository {
     this.saveMock(expression);
   }
 
-  expectSaveCalledWith(expression: Expression): void {
+  shouldStore(expression: Expression): void {
     expect(this.saveMock).toHaveBeenCalledWith(expression);
   }
 
-  expectSaveNotCalled(): void {
+  shouldNotStore(): void {
     expect(this.saveMock).not.toHaveBeenCalled();
   }
 
-  expectRemoveCalledWith(expression: Expression): void {
+  shouldRemove(expression: Expression): void {
     expect(this.removeMock).toHaveBeenCalledWith(expression);
   }
 
-  expectRemoveNotCalled(): void {
+  shouldNotRemove(): void {
     expect(this.removeMock).not.toHaveBeenCalled();
   }
 }

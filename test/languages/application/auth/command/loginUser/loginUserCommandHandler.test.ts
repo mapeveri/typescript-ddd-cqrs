@@ -33,7 +33,7 @@ describe('LoginUserCommandHandler', () => {
 
       await expect(loginUserCommandHandler.execute(command)).rejects.toThrowError(LoginException);
 
-      socialAuthenticator.shouldAuthenticateWith(command.token);
+      socialAuthenticator.shouldAuthenticate(command.token);
       repository.shouldNotStore();
       eventBus.shouldNotPublish();
     });
@@ -54,9 +54,9 @@ describe('LoginUserCommandHandler', () => {
 
       await loginUserCommandHandler.execute(command);
 
-      socialAuthenticator.shouldAuthenticateWith(command.token);
+      socialAuthenticator.shouldAuthenticate(command.token);
       repository.shouldStoreWith(authSession);
-      eventBus.shouldPublishWith([userAuthenticatedEvent]);
+      eventBus.shouldPublish([userAuthenticatedEvent]);
     });
   });
 });

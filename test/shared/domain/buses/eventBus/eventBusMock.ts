@@ -9,7 +9,7 @@ export class EventBusMock implements EventBus {
     this.publish = jest.fn();
   }
 
-  shouldPublishWith(domainEvents: DomainEvent[]): void {
+  shouldPublish(domainEvents: DomainEvent[]): void {
     expect(this.publish).toHaveBeenCalledWith(domainEvents);
   }
 
