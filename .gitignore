@@ -4,3 +4,8 @@
 .env.local
 .env.production
 /docker/data
+
+# stryker temp files
+.stryker-tmp
+/reports/
+stryker.log
