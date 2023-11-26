@@ -7,21 +7,17 @@ export class CountryRepositoryMock implements CountryRepository {
   private findByIdMock: jest.Mock;
   private findAllMock: jest.Mock;
   private saveMock: jest.Mock;
-  private countries: Country[] = []
-  private country: Country | null;
+  private countries: Country[];
 
   constructor() {
     this.findByIdMock = jest.fn();
     this.findAllMock = jest.fn();
     this.saveMock = jest.fn();
+    this.countries = [];
   }
 
-  returnOnFindById(country?: Country | null) {
-    this.country = country ? country : null;
-  }
-
-  returnOnFindAll(countries: Country[]) {
-    this.countries = countries;
+  add(country: Country) {
+    return this.countries.push(country);
   }
 
   async findAll(): Promise<Country[]> {
@@ -31,18 +27,18 @@ export class CountryRepositoryMock implements CountryRepository {
 
   async findById(id: CountryId): Promise<Country | null> {
     this.findByIdMock(id);
-    return this.country;
+    return this.countries.length > 0 ? this.countries[0] : null;
   }
 
   async save(country: Country): Promise<any> {
     this.saveMock(country);
   }
 
-  expectSaveCalledWith(country: Country): void {
+  shouldStore(country: Country): void {
     expect(this.saveMock).toHaveBeenCalledWith(country);
   }
 
-  expectSaveNotCalled(): void {
+  shouldNotStore(): void {
     expect(this.saveMock).not.toHaveBeenCalled();
   }
 }

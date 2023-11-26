@@ -5,15 +5,16 @@ import TermRepository from '@src/languages/domain/term/termRepository';
 export class TermRepositoryMock implements TermRepository {
   private searchMock: jest.Mock;
   private saveMock: jest.Mock;
-  private terms: Term[] = [];
+  private terms: Term[];
 
   constructor() {
     this.searchMock = jest.fn();
     this.saveMock = jest.fn();
+    this.terms = [];
   }
 
-  returnOnSearch(terms: Term[]) {
-    this.terms = terms;
+  add(term: Term) {
+    this.terms.push(term);
   }
 
   async search(term: string): Promise<Term[] | null> {
@@ -25,7 +26,7 @@ export class TermRepositoryMock implements TermRepository {
     this.saveMock(term);
   }
 
-  expectSearchCalledWith(termToSearch: string): void {
+  shouldSearch(termToSearch: string): void {
     expect(this.searchMock).toHaveBeenCalledWith(termToSearch);
   }
 }

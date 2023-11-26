@@ -19,21 +19,20 @@ describe('CreateCountryCommandHandler', () => {
     it('should raise an exception when country id already exists', async () => {
       const country = CountryMother.random();
       const command = CreateCountryCommandMother.random({id: country.id.value});
-      countryRepository.returnOnFindById(country);
+      countryRepository.add(country);
 
       await expect(createCountryCommandHandler.execute(command)).rejects.toThrowError(CountryAlreadyExistsException);
 
-      countryRepository.expectSaveNotCalled();
+      countryRepository.shouldNotStore();
     });
 
     it('should create a country', async () => {
       const command = CreateCountryCommandMother.random();
       const country: Country = CountryMother.createFromCreateCountryCommand(command);
-      countryRepository.returnOnFindById(null);
 
       await createCountryCommandHandler.execute(command);
 
-      countryRepository.expectSaveCalledWith(country);
+      countryRepository.shouldStore(country);
     });
   });
 });

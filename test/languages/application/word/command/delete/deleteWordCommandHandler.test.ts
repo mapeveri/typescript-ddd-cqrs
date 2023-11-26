@@ -18,21 +18,20 @@ describe('DeleteWordCommandHandler', () => {
     it('should not remove when word id does not exists', async () => {
       const word = WordMother.random();
       const command = DeleteWordCommandMother.random(word.id.value);
-      wordRepository.returnOnFindById(null);
 
       await deleteWordCommandHandler.execute(command);
 
-      wordRepository.expectRemoveNotCalled();
+      wordRepository.shouldNotRemove();
     });
 
     it('should remove a word', async () => {
       const word = WordMother.random();
       const command = DeleteWordCommandMother.random(word.id.value);
-      wordRepository.returnOnFindById(word);
+      wordRepository.add(word);
 
       await deleteWordCommandHandler.execute(command);
 
-      wordRepository.expectRemoveCalledWith(word);
+      wordRepository.shouldRemove(word);
     });
   });
 });

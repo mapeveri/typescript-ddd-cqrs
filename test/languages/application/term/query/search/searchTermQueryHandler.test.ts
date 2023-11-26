@@ -19,11 +19,11 @@ describe('SearchTermQueryHandler', () => {
       const termToSearch = 'Hello world';
       const query = SearchTermQueryMother.random(termToSearch);
       const term: Term = TermMother.random({ title: termToSearch });
-      termRepository.returnOnSearch([term]);
+      termRepository.add(term);
 
       const foundTerms = await searchTermQueryHandler.execute(query);
 
-      termRepository.expectSearchCalledWith(termToSearch);
+      termRepository.shouldSearch(termToSearch);
       expect(foundTerms.content).toEqual([term.toPrimitives()]);
     });
   });
