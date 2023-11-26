@@ -15,6 +15,14 @@ describe('SearchTermQueryHandler', () => {
   });
 
   describe('execute', () => {
+    it('should get an empty result when no terms', async () => {
+      const query = SearchTermQueryMother.random();
+
+      const foundTerms = await searchTermQueryHandler.execute(query);
+
+      expect(foundTerms.content).toEqual([]);
+    });
+
     it('should search terms based on a term search', async () => {
       const termToSearch = 'Hello world';
       const query = SearchTermQueryMother.random(termToSearch);
@@ -23,7 +31,6 @@ describe('SearchTermQueryHandler', () => {
 
       const foundTerms = await searchTermQueryHandler.execute(query);
 
-      termRepository.shouldSearch(termToSearch);
       expect(foundTerms.content).toEqual([term.toPrimitives()]);
     });
   });

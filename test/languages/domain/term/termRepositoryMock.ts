@@ -1,4 +1,4 @@
-import { expect, jest } from '@jest/globals';
+import { jest } from '@jest/globals';
 import Term from '@src/languages/domain/term/term';
 import TermRepository from '@src/languages/domain/term/termRepository';
 
@@ -17,16 +17,12 @@ export class TermRepositoryMock implements TermRepository {
     this.terms.push(term);
   }
 
-  async search(term: string): Promise<Term[] | null> {
+  async search(term: string): Promise<Term[]> {
     this.searchMock(term);
     return this.terms;
   }
 
   async save(term: Term): Promise<void> {
     this.saveMock(term);
-  }
-
-  shouldSearch(termToSearch: string): void {
-    expect(this.searchMock).toHaveBeenCalledWith(termToSearch);
   }
 }

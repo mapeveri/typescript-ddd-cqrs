@@ -1,7 +1,7 @@
 import Term from './term';
 
 interface TermRepository {
-  search(term: string): Promise<Term[] | null>;
+  search(term: string): Promise<Term[]>;
 
   save(term: Term): Promise<void>;
 }

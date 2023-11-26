@@ -10,7 +10,7 @@ export default class MongoTermRepository extends MongoRepository<Term> implement
     super('terms');
   }
 
-  async search(term: string): Promise<Term[] | null> {
+  async search(term: string): Promise<Term[]> {
     const regexTerm = new RegExp(term, 'i');
     const searchQuery = {
       $or: [{ title: regexTerm }, { description: regexTerm }, { example: regexTerm }],
