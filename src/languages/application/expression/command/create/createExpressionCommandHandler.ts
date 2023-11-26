@@ -37,7 +37,7 @@ export default class CreateExpressionCommandHandler implements ICommandHandler<C
   private async checkExpressionDoesNotExists(expressionId: ExpressionId): Promise<void> {
     const expression = await this.expressionRepository.findById(expressionId);
     if (expression) {
-      throw new ExpressionAlreadyExistsException(`Expression with id ${expressionId.toString()} already exists`);
+      throw new ExpressionAlreadyExistsException(expressionId.toString());
     }
   }
 }

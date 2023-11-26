@@ -37,7 +37,7 @@ export default class CreateWordCommandHandler implements ICommandHandler<CreateW
   private async checkWordDoesNotExists(wordId: WordId): Promise<void> {
     const word = await this.wordRepository.findById(wordId);
     if (word) {
-      throw new WordAlreadyExistsException(`Word with id ${wordId.toString()} already exists`);
+      throw new WordAlreadyExistsException(wordId.toString());
     }
   }
 }
