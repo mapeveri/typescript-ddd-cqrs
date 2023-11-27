@@ -6,9 +6,11 @@ import ExpressionPostController from '../ui/api/v1/controllers/expressions/expre
 import CountriesGetController from '../ui/api/v1/controllers/countries/countriesGetController';
 import CountryGetController from '../ui/api/v1/controllers/countries/countryGetController';
 import CountryPostController from '../ui/api/v1/controllers/countries/countryPostController';
+import RefreshTokenPostController from '../ui/api/v1/controllers/auth/refreshTokenPostController';
 
 export const controllers = [
   LoginPostController,
+  RefreshTokenPostController,
   MeGetController,
   SearchTermsGetController,
   WordPostController,
