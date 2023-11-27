@@ -12,7 +12,7 @@ export default class UpdateUserCommandHandler implements ICommandHandler<UpdateU
   async execute(command: UpdateUserCommand): Promise<void> {
     const user = await this.userRepository.findById(UserId.of(command.id));
     if (null === user) {
-      throw new UserDoesNotExistsException();
+      throw new UserDoesNotExistsException(command.id);
     }
 
     user.update(command.name, command.photo);

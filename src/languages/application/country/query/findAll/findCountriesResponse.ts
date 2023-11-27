@@ -7,6 +7,6 @@ export default class FindCountriesResponse extends QueryResponse {
   }
 
   static fromCountries(countries: Country[]): FindCountriesResponse {
-    return new FindCountriesResponse(countries?.map((country: Country) => country?.toPrimitives()));
+    return new FindCountriesResponse(countries.map((country: Country) => country.toPrimitives()));
   }
 }

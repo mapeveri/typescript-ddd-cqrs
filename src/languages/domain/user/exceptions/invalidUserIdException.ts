@@ -1,7 +1,7 @@
 import DomainException from '@src/shared/domain/exceptions/domainException';
 
 export default class InvalidUserIdException extends DomainException {
-  constructor(public message: string = 'Invalid user id', public code: string = 'invalid_user_id') {
-    super(message, 400, code);
+  constructor(userId: string) {
+    super(`Invalid user id ${userId}`, 400, 'invalid_user_id');
   }
 }

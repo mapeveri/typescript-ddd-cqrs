@@ -19,7 +19,7 @@ export default class CountryMother {
     const { id, name, iso, languages } = props ?? {};
 
     return new Country(
-      id ?? CountryId.random(),
+      id ?? CountryIdMother.random(),
       name ?? faker.name.findName(),
       iso ?? faker.random.word(),
       LanguageCollectionMother.random(

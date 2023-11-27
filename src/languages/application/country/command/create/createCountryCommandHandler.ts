@@ -25,7 +25,7 @@ export default class CreateCountryCommandHandler implements ICommandHandler<Crea
   private async checkCountryDoesNotExists(countryId: CountryId): Promise<void> {
     const country = await this.countryRepository.findById(countryId);
     if (country) {
-      throw new CountryAlreadyExistsException(`Country with id ${countryId.toString()} already exists`);
+      throw new CountryAlreadyExistsException(countryId.toString());
     }
   }
 }

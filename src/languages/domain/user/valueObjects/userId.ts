@@ -15,7 +15,7 @@ export default class UserId extends Uuid {
   private validateEmail(email: string): void {
     const userEmailId = Uuid.fromString(email).toString();
     if (userEmailId !== this.value) {
-      throw new InvalidUserIdException();
+      throw new InvalidUserIdException(userEmailId);
     }
   }
 }
