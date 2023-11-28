@@ -25,7 +25,7 @@ export default class LoginPostController {
 
     const user = { id: id, name: payload.name, email: payload.email };
     const token: string = this.jwtService.sign(user);
-    const refreshToken: string = this.jwtService.sign(payload, { expiresIn: '30d' });
+    const refreshToken: string = this.jwtService.sign(user, { expiresIn: '30d' });
 
     return {
       user,

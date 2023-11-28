@@ -23,10 +23,8 @@ export default class RefreshTokenPostController {
       throw new Error('Token revoked');
     }
 
-    await this.queryBus.ask(new FindUserQuery(decodedRefreshToken.sub));
-    const user = await this.queryBus.ask(decodedRefreshToken.sub);
-
-    const refreshToken = this.jwtService.sign(user);
+    const user = await this.queryBus.ask(new FindUserQuery(decodedRefreshToken.id));
+    const refreshToken = this.jwtService.sign(user.content);
 
     return {
       refreshToken,
