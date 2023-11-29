@@ -27,4 +27,9 @@ export default class LoginPostResponseDto {
   @IsNotEmpty()
   @IsString()
   token: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  refreshToken: string;
 }
