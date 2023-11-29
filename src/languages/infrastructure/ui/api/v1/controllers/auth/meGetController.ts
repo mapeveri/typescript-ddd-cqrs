@@ -1,6 +1,6 @@
 import { Request } from 'express';
 import FindUserQuery from '@src/languages/application/user/query/find/findUserQuery';
-import { Controller, Get, HttpCode, Inject, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, HttpCode, HttpException, HttpStatus, Inject, Req, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '@src/shared/infrastructure/nestjs/guards/JwtAuthGuard';
 import MeGetResponseDto from './meGetResponseDto';
 import {
@@ -27,7 +27,7 @@ export default class MeGetController {
   async run(@Req() request: Request): Promise<MeGetResponseDto> {
     const userId = request.user?.id;
     if (!userId) {
-      throw new Error('Invalid user');
+      throw new HttpException('Invalid user', HttpStatus.FORBIDDEN);
     }
 
     const data = await this.queryBus.ask(new FindUserQuery(userId));

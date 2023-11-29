@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, Inject, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpException, HttpStatus, Inject, Post } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import LoginPostResponseDto from './loginPostResponseDto';
 import { ApiBadRequestResponse, ApiInternalServerErrorResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
@@ -20,7 +20,7 @@ export default class RefreshTokenPostController {
   async run(@Body() payload: RefreshTokenPostDto): Promise<RefreshTokenPostResponseDto> {
     const decodedRefreshToken = this.jwtService.verify(payload.refreshToken);
     if (decodedRefreshToken.revoked) {
-      throw new Error('Token revoked');
+      throw new HttpException('Token revocado', HttpStatus.FORBIDDEN);
     }
 
     const user = await this.queryBus.ask(new FindUserQuery(decodedRefreshToken.id));
