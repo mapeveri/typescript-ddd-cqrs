@@ -20,7 +20,7 @@ export default class LoginPostController {
   async run(@Body() payload: LoginPostDto): Promise<LoginPostResponseDto> {
     const id = Uuid.fromString(payload.email).toString();
     await this.commandBus.dispatch(
-      new LoginUserCommand(id, payload.name, payload.email, payload.token, payload.provider, payload.photo)
+      new LoginUserCommand(id, payload.name, payload.email, payload.token, payload.provider, payload.photo),
     );
 
     const user = { id: id, name: payload.name, email: payload.email };

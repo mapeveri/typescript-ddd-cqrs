@@ -28,7 +28,7 @@ export default class MongoTermRepository extends MongoRepository<Term> implement
         doc.hashtags,
         doc.likes,
         doc.disLikes,
-        doc.favourites
+        doc.favourites,
       );
     });
 

@@ -12,7 +12,7 @@ export default class Session {
     private readonly email: string,
     private readonly provider: string,
     private readonly token: string,
-    private readonly photo: string
+    private readonly photo: string,
   ) {}
 
   static of(session: SessionPrimitives): Session {

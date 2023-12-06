@@ -17,7 +17,7 @@ export default class Expression extends AggregateRoot {
     languageId: string,
     countryId: CountryId,
     terms: ExpressionTermCollection,
-    userId: UserId
+    userId: UserId,
   ) {
     super();
 
@@ -33,11 +33,11 @@ export default class Expression extends AggregateRoot {
     languageId: string,
     countryId: CountryId,
     terms: ExpressionTermCollection,
-    userId: UserId
+    userId: UserId,
   ): Expression {
     const expression = new this(id, languageId, countryId, terms, userId);
     expression.record(
-      new ExpressionCreatedEvent(id.toString(), languageId, countryId.toString(), userId.toString(), terms.toArray())
+      new ExpressionCreatedEvent(id.toString(), languageId, countryId.toString(), userId.toString(), terms.toArray()),
     );
 
     return expression;

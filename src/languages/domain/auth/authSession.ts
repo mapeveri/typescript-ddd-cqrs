@@ -26,8 +26,8 @@ export default class AuthSession extends AggregateRoot {
         sessionPrimitives.email,
         sessionPrimitives.token,
         sessionPrimitives.provider,
-        sessionPrimitives.photo
-      )
+        sessionPrimitives.photo,
+      ),
     );
 
     return authSession;

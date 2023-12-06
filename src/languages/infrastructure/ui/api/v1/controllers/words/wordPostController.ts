@@ -27,7 +27,7 @@ export default class WordPostController {
   async run(@Body() payload: WordPostDto): Promise<any> {
     const wordTerms: Array<WordTermPrimitives> = payload.terms;
     await this.commandBus.dispatch(
-      new CreateWordCommand(payload.id, payload.languageId, payload.countryId, payload.userId, wordTerms)
+      new CreateWordCommand(payload.id, payload.languageId, payload.countryId, payload.userId, wordTerms),
     );
   }
 }

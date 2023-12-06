@@ -14,19 +14,19 @@ import { CommandHandler, ICommandHandler } from '@src/shared/domain/buses/comman
 export default class CreateExpressionCommandHandler implements ICommandHandler<CreateExpressionCommand> {
   constructor(
     @Inject(EXPRESSION_REPOSITORY) private readonly expressionRepository: ExpressionRepository,
-    @Inject(EVENT_BUS) private readonly eventBus: EventBus
+    @Inject(EVENT_BUS) private readonly eventBus: EventBus,
   ) {}
 
   async execute(command: CreateExpressionCommand): Promise<void> {
     const expressionId = ExpressionId.of(command.id);
-    await this.checkExpressionDoesNotExists(expressionId);
+    await this.guardExpressionDoesNotExists(expressionId);
 
     const expression = Expression.create(
       expressionId,
       command.languageId,
       CountryId.of(command.countryId),
       ExpressionTermCollection.of(command.terms),
-      UserId.of(command.userId)
+      UserId.of(command.userId),
     );
 
     await this.expressionRepository.save(expression);
@@ -34,7 +34,7 @@ export default class CreateExpressionCommandHandler implements ICommandHandler<C
     void this.eventBus.publish(expression.pullDomainEvents());
   }
 
-  private async checkExpressionDoesNotExists(expressionId: ExpressionId): Promise<void> {
+  private async guardExpressionDoesNotExists(expressionId: ExpressionId): Promise<void> {
     const expression = await this.expressionRepository.findById(expressionId);
     if (expression) {
       throw new ExpressionAlreadyExistsException(expressionId.toString());

@@ -14,15 +14,26 @@ export default class LoginUserCommandHandler implements ICommandHandler<LoginUse
   constructor(
     @Inject(AUTH_SESSION_REPOSITORY) private readonly authSessionRepository: AuthSessionRepository,
     @Inject(SOCIAL_AUTHENTICATOR) private readonly socialAuthenticator: SocialAuthenticator,
-    @Inject(EVENT_BUS) private readonly eventBus: EventBus
+    @Inject(EVENT_BUS) private readonly eventBus: EventBus,
   ) {}
 
   async execute(command: LoginUserCommand): Promise<void> {
+    await this.guardIsValidLogin(command);
+
+    const authSession = this.getAuthSession(command);
+    await this.authSessionRepository.save(authSession);
+
+    void this.eventBus.publish(authSession.pullDomainEvents());
+  }
+
+  private async guardIsValidLogin(command: LoginUserCommand) {
     const isValid: boolean = await this.socialAuthenticator.login(command.token);
     if (!isValid) {
       throw new LoginException();
     }
+  }
 
+  private getAuthSession(command: LoginUserCommand) {
     const authSessionId = AuthSessionId.of(command.id);
     const session = Session.of({
       name: command.name,
@@ -31,9 +42,7 @@ export default class LoginUserCommandHandler implements ICommandHandler<LoginUse
       token: command.token,
       photo: command.photo,
     });
-    const authSession = AuthSession.create(authSessionId, session);
-    await this.authSessionRepository.save(authSession);
 
-    void this.eventBus.publish(authSession.pullDomainEvents());
+    return AuthSession.create(authSessionId, session);
   }
 }

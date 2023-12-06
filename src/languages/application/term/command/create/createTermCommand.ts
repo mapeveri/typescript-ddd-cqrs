@@ -8,7 +8,7 @@ export default class CreateTermCommand extends Projection implements Command {
     public readonly description: string,
     public readonly example: string,
     public readonly hashtags: Array<string>,
-    public readonly type: string
+    public readonly type: string,
   ) {
     super();
   }

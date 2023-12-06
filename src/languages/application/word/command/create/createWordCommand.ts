@@ -7,6 +7,6 @@ export default class CreateWordCommand implements Command {
     public readonly languageId: string,
     public readonly countryId: string,
     public readonly userId: string,
-    public readonly terms: Array<WordTermPrimitives>
+    public readonly terms: Array<WordTermPrimitives>,
   ) {}
 }

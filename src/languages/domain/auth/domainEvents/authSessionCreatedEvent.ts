@@ -8,7 +8,7 @@ export default class AuthSessionCreatedEvent extends DomainEvent {
     public readonly token: string,
     public readonly provider: string,
     public readonly photo: string,
-    eventId = ''
+    eventId = '',
   ) {
     super(id, eventId);
   }
@@ -21,7 +21,7 @@ export default class AuthSessionCreatedEvent extends DomainEvent {
       payload['token'],
       payload['provider'],
       payload['photo'],
-      payload['eventId']
+      payload['eventId'],
     );
   }
 

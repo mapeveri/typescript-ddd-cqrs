@@ -13,7 +13,7 @@ export default class CreateOrUpdateUserOnAuthSessionCreatedEventHandler
 {
   constructor(
     @Inject(USER_REPOSITORY) private readonly userRepository: UserRepository,
-    @Inject(COMMAND_BUS) private readonly commandBus: CommandBus
+    @Inject(COMMAND_BUS) private readonly commandBus: CommandBus,
   ) {}
 
   async handle(event: AuthSessionCreatedEvent): Promise<void> {
@@ -21,7 +21,7 @@ export default class CreateOrUpdateUserOnAuthSessionCreatedEventHandler
     const user = await this.userRepository.findById(userId);
     if (null === user) {
       await this.commandBus.dispatch(
-        new CreateUserCommand(userId.toString(), event.name, event.email, event.token, event.provider, event.photo)
+        new CreateUserCommand(userId.toString(), event.name, event.email, event.token, event.provider, event.photo),
       );
       return;
     }

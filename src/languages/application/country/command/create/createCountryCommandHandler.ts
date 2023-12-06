@@ -13,7 +13,7 @@ export default class CreateCountryCommandHandler implements ICommandHandler<Crea
 
   async execute(command: CreateCountryCommand): Promise<void> {
     const countryId = CountryId.of(command.id);
-    await this.checkCountryDoesNotExists(countryId);
+    await this.guardCountryDoesNotExists(countryId);
 
     const languages = LanguageCollection.of(command.languages);
 
@@ -22,7 +22,7 @@ export default class CreateCountryCommandHandler implements ICommandHandler<Crea
     await this.countryRepository.save(country);
   }
 
-  private async checkCountryDoesNotExists(countryId: CountryId): Promise<void> {
+  private async guardCountryDoesNotExists(countryId: CountryId): Promise<void> {
     const country = await this.countryRepository.findById(countryId);
     if (country) {
       throw new CountryAlreadyExistsException(countryId.toString());

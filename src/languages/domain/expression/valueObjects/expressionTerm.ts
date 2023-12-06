@@ -10,7 +10,7 @@ export default class ExpressionTerm {
     private readonly expression: string,
     private readonly description: string,
     private readonly example: string,
-    private readonly hashtags: Array<string>
+    private readonly hashtags: Array<string>,
   ) {}
 
   static of(wordTerm: ExpressionTermPrimitives): ExpressionTerm {

@@ -24,7 +24,7 @@ export default class MongoEventStoreRepository implements EventStoreRepository {
           occurredOn: entity.occurredOn,
         },
       },
-      { upsert: true }
+      { upsert: true },
     );
   }
 

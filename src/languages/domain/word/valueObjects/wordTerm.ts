@@ -10,7 +10,7 @@ export default class WordTerm {
     private readonly word: string,
     private readonly description: string,
     private readonly example: string,
-    private readonly hashtags: Array<string>
+    private readonly hashtags: Array<string>,
   ) {}
 
   static of(wordTerm: WordTermPrimitives): WordTerm {

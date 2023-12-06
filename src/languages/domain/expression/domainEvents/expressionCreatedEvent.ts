@@ -8,7 +8,7 @@ export default class ExpressionCreatedEvent extends DomainEvent {
     public readonly countryId: string,
     public readonly userId: string,
     public readonly terms: Array<ExpressionTermPrimitives>,
-    eventId = ''
+    eventId = '',
   ) {
     super(id, eventId);
   }
@@ -20,7 +20,7 @@ export default class ExpressionCreatedEvent extends DomainEvent {
       payload['countryId'],
       payload['userId'],
       payload['terms'],
-      payload['eventId']
+      payload['eventId'],
     );
   }
 

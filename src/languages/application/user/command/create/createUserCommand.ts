@@ -7,6 +7,6 @@ export default class CreateUserCommand implements Command {
     public readonly email: string,
     public readonly token: string,
     public readonly provider: string,
-    public readonly photo: string
+    public readonly photo: string,
   ) {}
 }

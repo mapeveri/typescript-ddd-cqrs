@@ -16,7 +16,7 @@ export default class CreateUserCommandHandler implements ICommandHandler<CreateU
       command.name,
       command.provider,
       Email.of(command.email),
-      command.photo
+      command.photo,
     );
 
     await this.userRepository.save(user);

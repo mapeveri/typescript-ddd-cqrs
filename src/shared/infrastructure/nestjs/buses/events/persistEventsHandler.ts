@@ -12,7 +12,7 @@ export class PersistEventsHandler {
 
   constructor(
     private eventBus: EventBus,
-    @Inject(EVENT_STORE_REPOSITORY) private eventStoreRepository: EventStoreRepository
+    @Inject(EVENT_STORE_REPOSITORY) private eventStoreRepository: EventStoreRepository,
   ) {
     this.eventBus.pipe(takeUntil(this.destroy$)).subscribe((event) => {
       mongoTransactionalOperation(async (event: DomainEvent) => {

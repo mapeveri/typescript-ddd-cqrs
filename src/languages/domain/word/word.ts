@@ -25,7 +25,7 @@ export default class Word extends AggregateRoot {
   static create(id: WordId, languageId: string, countryId: CountryId, terms: WordTermCollection, userId: UserId): Word {
     const word = new this(id, languageId, countryId, terms, userId);
     word.record(
-      new WordCreatedEvent(id.toString(), languageId, countryId.toString(), userId.toString(), terms.toArray())
+      new WordCreatedEvent(id.toString(), languageId, countryId.toString(), userId.toString(), terms.toArray()),
     );
     return word;
   }

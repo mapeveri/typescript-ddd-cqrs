@@ -10,9 +10,7 @@ export default class CreateOnWordCreatedEventHandler implements IEventHandler<Wo
   constructor(@Inject(COMMAND_BUS) private readonly commandBus: CommandBus) {}
 
   async handle(event: WordCreatedEvent): Promise<void> {
-    const terms = event.terms;
-
-    for (const term of terms) {
+    for (const term of event.terms) {
       await this.commandBus.dispatch(
         new CreateTermCommand(
           event.aggregateId,
@@ -20,8 +18,8 @@ export default class CreateOnWordCreatedEventHandler implements IEventHandler<Wo
           term['description'],
           term['example'],
           term['hashtags'],
-          TermTypeEnum.WORD
-        )
+          TermTypeEnum.WORD,
+        ),
       );
     }
   }

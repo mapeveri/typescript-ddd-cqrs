@@ -10,12 +10,18 @@ export default class UpdateUserCommandHandler implements ICommandHandler<UpdateU
   constructor(@Inject(USER_REPOSITORY) private readonly userRepository: UserRepository) {}
 
   async execute(command: UpdateUserCommand): Promise<void> {
+    const user = await this.getUser(command);
+
+    user.update(command.name, command.photo);
+    await this.userRepository.save(user);
+  }
+
+  private async getUser(command: UpdateUserCommand) {
     const user = await this.userRepository.findById(UserId.of(command.id));
     if (null === user) {
       throw new UserDoesNotExistsException(command.id);
     }
 
-    user.update(command.name, command.photo);
-    await this.userRepository.save(user);
+    return user;
   }
 }

@@ -27,7 +27,7 @@ export default class ExpressionPostController {
   async run(@Body() payload: ExpressionPostDto): Promise<any> {
     const expressionTerms: Array<ExpressionTermPrimitives> = payload.terms;
     await this.commandBus.dispatch(
-      new CreateExpressionCommand(payload.id, payload.languageId, payload.countryId, payload.userId, expressionTerms)
+      new CreateExpressionCommand(payload.id, payload.languageId, payload.countryId, payload.userId, expressionTerms),
     );
   }
 }

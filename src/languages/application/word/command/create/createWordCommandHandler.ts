@@ -14,19 +14,19 @@ import { CommandHandler, ICommandHandler } from '@src/shared/domain/buses/comman
 export default class CreateWordCommandHandler implements ICommandHandler<CreateWordCommand> {
   constructor(
     @Inject(WORD_REPOSITORY) private readonly wordRepository: WordRepository,
-    @Inject(EVENT_BUS) private readonly eventBus: EventBus
+    @Inject(EVENT_BUS) private readonly eventBus: EventBus,
   ) {}
 
   async execute(command: CreateWordCommand): Promise<void> {
     const wordId = WordId.of(command.id);
-    await this.checkWordDoesNotExists(wordId);
+    await this.guardWordDoesNotExists(wordId);
 
     const word = Word.create(
       wordId,
       command.languageId,
       CountryId.of(command.countryId),
       WordTermCollection.of(command.terms),
-      UserId.of(command.userId)
+      UserId.of(command.userId),
     );
 
     await this.wordRepository.save(word);
@@ -34,7 +34,7 @@ export default class CreateWordCommandHandler implements ICommandHandler<CreateW
     void this.eventBus.publish(word.pullDomainEvents());
   }
 
-  private async checkWordDoesNotExists(wordId: WordId): Promise<void> {
+  private async guardWordDoesNotExists(wordId: WordId): Promise<void> {
     const word = await this.wordRepository.findById(wordId);
     if (word) {
       throw new WordAlreadyExistsException(wordId.toString());

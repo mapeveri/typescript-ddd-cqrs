@@ -12,7 +12,7 @@ export default class Term extends AggregateRoot {
     readonly hashtags: Array<string>,
     readonly likes: Array<string>,
     readonly disLikes: Array<string>,
-    readonly favourites: Array<string>
+    readonly favourites: Array<string>,
   ) {
     super();
   }
@@ -26,7 +26,7 @@ export default class Term extends AggregateRoot {
     hashtags: Array<string>,
     likes: Array<string>,
     disLikes: Array<string>,
-    favourites: Array<string>
+    favourites: Array<string>,
   ): Term {
     return new this(id, title, description, example, type, hashtags, likes, disLikes, favourites);
   }

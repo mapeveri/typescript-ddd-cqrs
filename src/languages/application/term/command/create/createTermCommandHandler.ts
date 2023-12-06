@@ -10,7 +10,7 @@ import { EVENT_BUS, EventBus } from '@src/shared/domain/buses/eventBus/eventBus'
 export default class CreateTermCommandHandler implements ICommandHandler<CreateTermCommand> {
   constructor(
     @Inject(TERM_REPOSITORY) private readonly termRepository: TermRepository,
-    @Inject(EVENT_BUS) private readonly eventBus: EventBus
+    @Inject(EVENT_BUS) private readonly eventBus: EventBus,
   ) {}
 
   async execute(command: CreateTermCommand): Promise<void> {
@@ -34,7 +34,7 @@ export default class CreateTermCommandHandler implements ICommandHandler<CreateT
       command.hashtags,
       [],
       [],
-      []
+      [],
     );
   }
 }

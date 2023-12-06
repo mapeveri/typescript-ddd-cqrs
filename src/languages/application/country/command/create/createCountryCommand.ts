@@ -6,6 +6,6 @@ export default class CreateCountryCommand implements Command {
     public readonly id: string,
     public readonly name: string,
     public readonly iso: string,
-    public readonly languages: Array<LanguagePrimitives>
+    public readonly languages: Array<LanguagePrimitives>,
   ) {}
 }

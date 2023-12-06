@@ -15,7 +15,7 @@ export default class Logger extends NestJsLogger implements LoggerInterface {
         winston.format.colorize(),
         winston.format.printf(({ timestamp, level, message }) => {
           return `${timestamp} [${level}] - ${message}`;
-        })
+        }),
       ),
       transports: [new winston.transports.Console()],
     });

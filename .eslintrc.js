@@ -9,22 +9,27 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', 'prettier'],
   ignorePatterns: ['migrations/'],
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-  ],
+  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'prettier'],
   rules: {
-    'no-undef': ['error', { 'typeof': true }],
+    'no-undef': ['error', { typeof: true }],
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': 'error',
     'no-use-before-define': 'error',
-  
-    'quotes': [2, 'single', { 'avoidEscape': true }],
-    'semi': ['error', 'always'],
-    'indent': 'off',
+
+    quotes: [2, 'single', { avoidEscape: true }],
+    semi: ['error', 'always'],
+    indent: 'off',
     'linebreak-style': ['error', 'unix'],
     'no-extra-semi': 'error',
-  
+    'max-len': ['error', { code: 120, ignorePattern: '^(import\\s.+from\\s.+;?)|(export\\s.+;?)$' }],
+    'padding-line-between-statements': [
+      'error',
+      { blankLine: 'always', prev: '*', next: 'function' },
+      { blankLine: 'always', prev: 'function', next: '*' },
+      { blankLine: 'always', prev: 'export', next: '*' },
+      { blankLine: 'always', prev: '*', next: 'export' },
+    ],
+
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-empty-function': 'off',
@@ -33,9 +38,9 @@ module.exports = {
       'error',
       'single',
       {
-        'allowTemplateLiterals': true
-      }
+        allowTemplateLiterals: true,
+      },
     ],
-    '@typescript-eslint/no-extra-semi': 'error'
-  }
+    '@typescript-eslint/no-extra-semi': 'error',
+  },
 };

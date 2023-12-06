@@ -12,7 +12,7 @@ export function EventsHandler(...events: (IEvent | (new (...args: any[]) => IEve
         async () => {
           return originalHandle.apply(this, args);
         },
-        { numOfAttempts: 3, delayFirstAttempt: false, startingDelay: 5000 }
+        { numOfAttempts: 3, delayFirstAttempt: false, startingDelay: 5000 },
       );
     };
 
