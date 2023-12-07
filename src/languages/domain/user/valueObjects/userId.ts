@@ -6,16 +6,16 @@ export default class UserId extends Uuid {
     return super.of(value) as UserId;
   }
 
-  static fromIdWithEmailVerification(emailUuid5: string, email: string): UserId {
-    const instance = this.of(emailUuid5);
-    instance.validateEmail(email);
+  static fromEmailWithValidation(value: string, email: string): UserId {
+    const instance = this.of(value);
+    instance.validate(email);
     return instance;
   }
 
-  private validateEmail(email: string): void {
-    const userEmailId = Uuid.fromString(email).toString();
-    if (userEmailId !== this.value) {
-      throw new InvalidUserIdException(userEmailId);
+  private validate(value: string): void {
+    const userId = Uuid.fromString(value).toString();
+    if (userId !== this.value) {
+      throw new InvalidUserIdException(userId);
     }
   }
 }

@@ -17,15 +17,23 @@ export default class CreateOrUpdateUserOnAuthSessionCreatedEventHandler
   ) {}
 
   async handle(event: AuthSessionCreatedEvent): Promise<void> {
-    const userId = UserId.fromIdWithEmailVerification(event.id, event.email);
+    const userId = UserId.fromEmailWithValidation(event.id, event.email);
     const user = await this.userRepository.findById(userId);
     if (null === user) {
-      await this.commandBus.dispatch(
-        new CreateUserCommand(userId.toString(), event.name, event.email, event.token, event.provider, event.photo),
-      );
+      await this.createUser(userId, event);
       return;
     }
 
+    await this.updateUser(userId, event);
+  }
+
+  private async createUser(userId: UserId, event: AuthSessionCreatedEvent): Promise<void> {
+    await this.commandBus.dispatch(
+      new CreateUserCommand(userId.toString(), event.name, event.email, event.token, event.provider, event.photo),
+    );
+  }
+
+  private async updateUser(userId: UserId, event: AuthSessionCreatedEvent): Promise<void> {
     await this.commandBus.dispatch(new UpdateUserCommand(userId.toString(), event.name, event.photo));
   }
 }
