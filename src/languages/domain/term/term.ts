@@ -1,8 +1,7 @@
-import { AggregateRoot } from '@src/shared/domain/aggregate/aggregateRoot';
 import TermType from './valueObjects/termType';
-import TermCreatedFailedEvent from './domainEvents/TermCreatedFailedEvent';
+import EntityProjection from '@src/shared/domain/projection/entityProjection';
 
-export default class Term extends AggregateRoot {
+export default class Term extends EntityProjection {
   constructor(
     readonly id: string,
     readonly title: string,
@@ -10,9 +9,7 @@ export default class Term extends AggregateRoot {
     readonly example: string,
     readonly type: TermType,
     readonly hashtags: Array<string>,
-    readonly likes: Array<string>,
-    readonly disLikes: Array<string>,
-    readonly favourites: Array<string>,
+    readonly totalLikes: number,
   ) {
     super();
   }
@@ -24,15 +21,9 @@ export default class Term extends AggregateRoot {
     example: string,
     type: TermType,
     hashtags: Array<string>,
-    likes: Array<string>,
-    disLikes: Array<string>,
-    favourites: Array<string>,
+    totalLikes: number,
   ): Term {
-    return new this(id, title, description, example, type, hashtags, likes, disLikes, favourites);
-  }
-
-  termFailed() {
-    this.record(new TermCreatedFailedEvent(this.id, this.type.value));
+    return new this(id, title, description, example, type, hashtags, totalLikes);
   }
 
   toPrimitives(): object {
@@ -43,9 +34,7 @@ export default class Term extends AggregateRoot {
       example: this.example,
       type: this.type.value,
       hashtags: this.hashtags,
-      likes: this.likes,
-      disLikes: this.disLikes,
-      favourites: this.favourites,
+      totalLikes: this.totalLikes,
     };
   }
 }

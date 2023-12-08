@@ -1,25 +1,26 @@
 import MongoConnection from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
 import { Collection } from 'mongodb';
+import EntityProjection from '@src/shared/domain/projection/entityProjection';
 
-interface Identifiable {
-  id: string;
-}
-
-export default abstract class MongoRepository<T extends Identifiable> {
+export default abstract class MongoRepository<T extends EntityProjection> {
   protected collection: Collection<any>;
   private mongo: MongoConnection;
 
-  constructor(collectionName: string) {
+  protected constructor(collectionName: string) {
     this.initialize(collectionName);
   }
 
   async save(entity: T): Promise<void> {
     const session = this.mongo.session;
     if (!session) {
-      throw new Error('La sesión no está disponible');
+      throw new Error('The session is not available');
     }
 
-    await this.collection.updateOne({ id: entity.id }, { $set: entity }, { upsert: true, session: session });
+    await this.collection.updateOne(
+      { id: entity.id },
+      { $set: entity.toPrimitives() },
+      { upsert: true, session: session },
+    );
   }
 
   private async initialize(collectionName: string): Promise<void> {

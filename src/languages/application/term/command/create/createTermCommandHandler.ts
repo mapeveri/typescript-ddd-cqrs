@@ -5,6 +5,7 @@ import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { CommandHandler, ICommandHandler } from '@src/shared/domain/buses/commandBus/commandHandler';
 import TermType from '@src/languages/domain/term/valueObjects/termType';
 import { EVENT_BUS, EventBus } from '@src/shared/domain/buses/eventBus/eventBus';
+import TermCreatedFailedEvent from '@src/languages/domain/term/domainEvents/TermCreatedFailedEvent';
 
 @CommandHandler(CreateTermCommand)
 export default class CreateTermCommandHandler implements ICommandHandler<CreateTermCommand> {
@@ -18,8 +19,7 @@ export default class CreateTermCommandHandler implements ICommandHandler<CreateT
     try {
       await this.termRepository.save(term);
     } catch (e) {
-      term.termFailed();
-      void this.eventBus.publish(term.pullDomainEvents());
+      void this.eventBus.publish([new TermCreatedFailedEvent(term.id, term.type.value)]);
       throw e;
     }
   }
@@ -32,9 +32,7 @@ export default class CreateTermCommandHandler implements ICommandHandler<CreateT
       command.example,
       TermType.of(command.type),
       command.hashtags,
-      [],
-      [],
-      [],
+      0,
     );
   }
 }
