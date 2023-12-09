@@ -1,21 +1,21 @@
 import TermRepository, { TERM_REPOSITORY } from '@src/languages/domain/term/termRepository';
-import CreateTermCommand from './createTermCommand';
+import CreateTermProjection from './createTermProjection';
 import Term from '@src/languages/domain/term/term';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
-import { CommandHandler, ICommandHandler } from '@src/shared/domain/buses/commandBus/commandHandler';
 import TermType from '@src/languages/domain/term/valueObjects/termType';
 import { EVENT_BUS, EventBus } from '@src/shared/domain/buses/eventBus/eventBus';
 import TermCreatedFailedEvent from '@src/languages/domain/term/domainEvents/TermCreatedFailedEvent';
+import { IProjectionHandler, ProjectionHandler } from '@src/shared/domain/buses/projectionBus/projectionHandler';
 
-@CommandHandler(CreateTermCommand)
-export default class CreateTermCommandHandler implements ICommandHandler<CreateTermCommand> {
+@ProjectionHandler(CreateTermProjection)
+export default class CreateTermProjectionHandler implements IProjectionHandler<CreateTermProjection> {
   constructor(
     @Inject(TERM_REPOSITORY) private readonly termRepository: TermRepository,
     @Inject(EVENT_BUS) private readonly eventBus: EventBus,
   ) {}
 
-  async execute(command: CreateTermCommand): Promise<void> {
-    const term = this.getTerm(command);
+  async execute(projection: CreateTermProjection): Promise<void> {
+    const term = this.getTerm(projection);
     try {
       await this.termRepository.save(term);
     } catch (e) {
@@ -24,7 +24,7 @@ export default class CreateTermCommandHandler implements ICommandHandler<CreateT
     }
   }
 
-  private getTerm(command: CreateTermCommand): Term {
+  private getTerm(command: CreateTermProjection): Term {
     return Term.create(
       command.id,
       command.title,

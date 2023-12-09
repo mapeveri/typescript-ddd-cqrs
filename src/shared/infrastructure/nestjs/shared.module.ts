@@ -19,6 +19,8 @@ import { UnhandledExceptionsBusHandler } from './buses/errors/unhandledException
 import { EVENT_STORE_REPOSITORY } from '@src/shared/domain/eventStore/eventStoreRepository';
 import MongoEventStoreRepository from '../persistence/mongo/repositories/mongoEventStoreRepository';
 import { PersistEventsHandler } from './buses/events/persistEventsHandler';
+import NestProjectionBus from '@src/shared/infrastructure/nestjs/buses/nestProjectionBus';
+import { PROJECTION_BUS } from '@src/shared/domain/buses/projectionBus/projectionBus';
 
 @Global()
 @Module({
@@ -56,11 +58,25 @@ import { PersistEventsHandler } from './buses/events/persistEventsHandler';
       useClass: NestQueryBusBus,
     },
     {
+      provide: PROJECTION_BUS,
+      useClass: NestProjectionBus,
+    },
+    {
       provide: EVENT_STORE_REPOSITORY,
       useClass: MongoEventStoreRepository,
     },
     PersistEventsHandler,
   ],
-  exports: [JwtAuthGuard, JwtModule, CqrsModule, JwtStrategy, LOGGER_INTERFACE, QUERY_BUS, COMMAND_BUS, EVENT_BUS],
+  exports: [
+    JwtAuthGuard,
+    JwtModule,
+    CqrsModule,
+    JwtStrategy,
+    LOGGER_INTERFACE,
+    QUERY_BUS,
+    COMMAND_BUS,
+    EVENT_BUS,
+    PROJECTION_BUS,
+  ],
 })
 export class SharedModule {}
