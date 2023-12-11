@@ -20,7 +20,7 @@ export default class MongoFindSuggestionsTermReadLayer implements FindSuggestion
     const user = await this.userFinder.find(userId);
     console.log(user);
 
-    const terms = await this.termRepository.search(user.);
+    const terms = await this.termRepository.search('test');
 
     return Promise.resolve(terms);
   }

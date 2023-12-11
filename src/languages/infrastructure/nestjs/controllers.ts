@@ -7,12 +7,14 @@ import CountriesGetController from '../ui/api/v1/controllers/countries/countries
 import CountryGetController from '../ui/api/v1/controllers/countries/countryGetController';
 import CountryPostController from '../ui/api/v1/controllers/countries/countryPostController';
 import RefreshTokenPostController from '../ui/api/v1/controllers/auth/refreshTokenPostController';
+import FindSuggestionsTermController from '@src/languages/infrastructure/ui/api/v1/controllers/terms/findSuggestionsTermController';
 
 export const controllers = [
   LoginPostController,
   RefreshTokenPostController,
   MeGetController,
   SearchTermsGetController,
+  FindSuggestionsTermController,
   WordPostController,
   ExpressionPostController,
   CountriesGetController,
