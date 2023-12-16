@@ -1,5 +1,5 @@
 import { Request } from 'express';
-import { Controller, Get, HttpCode, HttpException, HttpStatus, Inject, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, HttpCode, Inject, Req, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '@src/shared/infrastructure/nestjs/guards/JwtAuthGuard';
 import {
   ApiBadRequestResponse,
@@ -24,11 +24,8 @@ export default class FindSuggestionsTermController {
   @ApiUnauthorizedResponse({ description: 'Unauthorized.' })
   @ApiInternalServerErrorResponse({ description: 'Internal Server Error.' })
   @UseGuards(JwtAuthGuard)
-  async run(@Req() request: Request): Promise<any> {
-    const userId = request.user?.id;
-    if (!userId) {
-      throw new HttpException('Invalid user', HttpStatus.FORBIDDEN);
-    }
+  async run(@Req() req: Request): Promise<any> {
+    const userId = req.user['id'];
 
     return await this.queryBus.ask(new FindSuggestionsTermQuery(userId));
   }
