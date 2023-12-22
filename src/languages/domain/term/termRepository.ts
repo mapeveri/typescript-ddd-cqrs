@@ -1,7 +1,8 @@
 import Term from './term';
+import TermCriteria from '@src/languages/domain/term/termCriteria';
 
 interface TermRepository {
-  search(term: string): Promise<Term[]>;
+  search(criteria: TermCriteria): Promise<Term[]>;
 
   save(term: Term): Promise<void>;
 }

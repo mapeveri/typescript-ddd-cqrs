@@ -27,5 +27,8 @@ export default new EntitySchema<User>({
     photo: {
       type: String,
     },
+    interests: {
+      type: 'simple-array',
+    },
   },
 });

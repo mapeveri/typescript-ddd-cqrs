@@ -5,6 +5,7 @@ import UserRepository, { USER_REPOSITORY } from '@src/languages/domain/user/user
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import TermRepository, { TERM_REPOSITORY } from '@src/languages/domain/term/termRepository';
 import UserFinder from '@src/languages/domain/user/services/UserFinder';
+import TermCriteria from '@src/languages/domain/term/termCriteria';
 
 export default class MongoFindSuggestionsTermReadLayer implements FindSuggestionsTermReadLayer {
   private readonly userFinder: UserFinder;
@@ -18,9 +19,8 @@ export default class MongoFindSuggestionsTermReadLayer implements FindSuggestion
 
   async find(userId: UserId): Promise<Term[]> {
     const user = await this.userFinder.find(userId);
-    console.log(user);
 
-    const terms = await this.termRepository.search('test');
+    const terms = await this.termRepository.search(TermCriteria.from({ hashtags: user.interests }));
 
     return Promise.resolve(terms);
   }

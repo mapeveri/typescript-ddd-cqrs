@@ -9,11 +9,12 @@ interface UserMotherProps {
   provider?: string;
   email?: string;
   photos?: string;
+  interests?: string[];
 }
 
 export class UserMother {
   static random(props?: UserMotherProps): User {
-    const { id, name, provider, email, photos } = props ?? {};
+    const { id, name, provider, email, photos, interests } = props ?? {};
 
     return new User(
       id ?? UserIdMother.random(),
@@ -21,6 +22,7 @@ export class UserMother {
       provider ?? faker.random.word(),
       email ?? faker.internet.email(),
       photos ?? faker.image.imageUrl(),
+      interests ?? ['test'],
     );
   }
 }
