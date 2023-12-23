@@ -6,6 +6,7 @@ import CreateUserCommandHandler from '@src/languages/application/user/command/cr
 import UpdateUserCommandHandler from '@src/languages/application/user/command/update/updateUserCommandHandler';
 import CreateWordCommandHandler from '@src/languages/application/word/command/create/createWordCommandHandler';
 import DeleteWordCommandHandler from '@src/languages/application/word/command/delete/deleteWordCommandHandler';
+import UpdateUserInterestsCommandHandler from '@src/languages/application/user/command/update/updateUserInterestsCommandHandler';
 
 export const commands = [
   LoginUserCommandHandler,
@@ -13,6 +14,7 @@ export const commands = [
   CreateExpressionCommandHandler,
   CreateUserCommandHandler,
   UpdateUserCommandHandler,
+  UpdateUserInterestsCommandHandler,
   CreateWordCommandHandler,
   DeleteExpressionCommandHandler,
   DeleteWordCommandHandler,

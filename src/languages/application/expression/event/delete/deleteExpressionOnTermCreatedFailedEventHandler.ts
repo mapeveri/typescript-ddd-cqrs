@@ -2,7 +2,7 @@ import { COMMAND_BUS, CommandBus } from '@src/shared/domain/buses/commandBus/com
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { EventsHandler, IEventHandler } from '@src/shared/domain/buses/eventBus/eventsHandler';
 import TermType from '@src/languages/domain/term/valueObjects/termType';
-import TermCreatedFailedEvent from '@src/languages/domain/term/domainEvents/TermCreatedFailedEvent';
+import TermCreatedFailedEvent from '@src/languages/domain/term/domainEvents/termCreatedFailedEvent';
 import DeleteExpressionCommand from '../../command/delete/deleteExpressionCommand';
 
 @EventsHandler(TermCreatedFailedEvent)
