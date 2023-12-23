@@ -12,6 +12,7 @@ export default class MongoTermRepository extends MongoRepository<Term> implement
   }
 
   async search(criteria: TermCriteria): Promise<Term[]> {
+    let result = [];
     const searchQuery = {};
     const term = criteria.term;
     const hashtags = criteria.hashtags;
@@ -29,7 +30,13 @@ export default class MongoTermRepository extends MongoRepository<Term> implement
       });
     }
 
-    const result = await this.collection.find(searchQuery).project({ _id: 0 }).toArray();
+    const query = this.collection.find(searchQuery).project({ _id: 0 });
+
+    if (criteria.limit) {
+      query.limit(criteria.limit);
+    }
+
+    result = await query.toArray();
 
     return result.map((doc: Document) => {
       return Term.create(doc.id, doc.title, doc.description, doc.example, doc.type, doc.hashtags, doc.totalLikes);

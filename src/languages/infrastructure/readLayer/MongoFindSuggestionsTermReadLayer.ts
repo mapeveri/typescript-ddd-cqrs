@@ -20,7 +20,8 @@ export default class MongoFindSuggestionsTermReadLayer implements FindSuggestion
   async find(userId: UserId): Promise<Term[]> {
     const user = await this.userFinder.find(userId);
 
-    const terms = await this.termRepository.search(TermCriteria.from({ hashtags: user.interests }));
+    const criteria = TermCriteria.from({ hashtags: user.interests, limit: 5 });
+    const terms = await this.termRepository.search(criteria);
 
     return Promise.resolve(terms);
   }

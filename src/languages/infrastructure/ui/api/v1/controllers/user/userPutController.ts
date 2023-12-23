@@ -2,30 +2,30 @@ import { Body, Controller, HttpCode, HttpStatus, Inject, Put, Req, UseGuards } f
 import { JwtAuthGuard } from '@src/shared/infrastructure/nestjs/guards/JwtAuthGuard';
 import {
   ApiBadRequestResponse,
-  ApiCreatedResponse,
   ApiInternalServerErrorResponse,
+  ApiOkResponse,
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { COMMAND_BUS, CommandBus } from '@src/shared/domain/buses/commandBus/commandBus';
-import UserInterestsPutDto from '@src/languages/infrastructure/ui/api/v1/controllers/user/userInterestsPutDto';
-import UpdateUserInterestsCommand from '@src/languages/application/user/command/update/updateUserInterestsCommand';
+import UserPutDto from '@src/languages/infrastructure/ui/api/v1/controllers/user/userPutDto';
 import { Request } from 'express';
+import UpdateUserCommand from '@src/languages/application/user/command/update/updateUserCommand';
 
 @ApiTags('User')
 @Controller()
-export default class UserInterestsPutController {
+export default class UserPutController {
   public constructor(@Inject(COMMAND_BUS) private commandBus: CommandBus) {}
 
-  @Put('user/interests')
+  @Put('user')
   @HttpCode(HttpStatus.OK)
-  @ApiCreatedResponse({ description: 'The record has been successfully created.' })
+  @ApiOkResponse({ description: 'The record has been successfully updated.' })
   @ApiBadRequestResponse({ description: 'Bad Request.' })
   @ApiUnauthorizedResponse({ description: 'Unauthorized.' })
   @ApiInternalServerErrorResponse({ description: 'Internal Server Error.' })
   @UseGuards(JwtAuthGuard)
-  async run(@Req() req: Request, @Body() payload: UserInterestsPutDto): Promise<any> {
+  async run(@Req() req: Request, @Body() payload: UserPutDto): Promise<any> {
     const userId = req.user['id'];
-    await this.commandBus.dispatch(new UpdateUserInterestsCommand(userId, payload.interests));
+    await this.commandBus.dispatch(new UpdateUserCommand(userId, payload.name, payload.photo, payload.interests));
   }
 }

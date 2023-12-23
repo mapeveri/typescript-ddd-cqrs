@@ -1,7 +1,7 @@
 import { AggregateRoot } from '@src/shared/domain/aggregate/aggregateRoot';
 import UserId from './valueObjects/userId';
 import Email from '@src/shared/domain/valueObjects/email';
-import UserInterestsUpdatedEvent from '@src/languages/domain/user/domainEvents/userInterestsUpdatedEvent';
+import UserUpdatedEvent from '@src/languages/domain/user/domainEvents/userUpdatedEvent';
 
 export default class User extends AggregateRoot {
   id: UserId;
@@ -26,15 +26,12 @@ export default class User extends AggregateRoot {
     return new this(id, name, provider, email, photo, []);
   }
 
-  update(name: string, photo: string): void {
+  update(name: string, photo: string, interests: string[]): void {
     this.name = name;
     this.photo = photo;
-  }
-
-  updateInterests(interests: string[]): void {
     this.interests = interests;
 
-    this.record(new UserInterestsUpdatedEvent(this.id.value, this.interests));
+    this.record(new UserUpdatedEvent(this.id.value, this.name, this.photo, this.interests));
   }
 
   toPrimitives(): object {

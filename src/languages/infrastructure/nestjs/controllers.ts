@@ -8,7 +8,7 @@ import CountryGetController from '../ui/api/v1/controllers/countries/countryGetC
 import CountryPostController from '../ui/api/v1/controllers/countries/countryPostController';
 import RefreshTokenPostController from '../ui/api/v1/controllers/auth/refreshTokenPostController';
 import FindSuggestionsTermController from '@src/languages/infrastructure/ui/api/v1/controllers/terms/findSuggestionsTermController';
-import UserInterestsPutController from '@src/languages/infrastructure/ui/api/v1/controllers/user/userInterestsPutController';
+import UserPutController from '@src/languages/infrastructure/ui/api/v1/controllers/user/userPutController';
 
 export const controllers = [
   LoginPostController,
@@ -21,5 +21,5 @@ export const controllers = [
   CountriesGetController,
   CountryGetController,
   CountryPostController,
-  UserInterestsPutController,
+  UserPutController,
 ];
