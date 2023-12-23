@@ -1,6 +1,6 @@
 import FindCountryQuery from '@src/languages/application/country/query/find/findCountryQuery';
 import { Controller, Get, HttpCode, Inject, Param, UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from '@src/shared/infrastructure/nestjs/guards/JwtAuthGuard';
+import { JwtAuthGuard } from '@src/shared/infrastructure/nestjs/guards/jwtAuthGuard';
 import CountryGetResponseDto from './countryGetResponse';
 import {
   ApiBadRequestResponse,

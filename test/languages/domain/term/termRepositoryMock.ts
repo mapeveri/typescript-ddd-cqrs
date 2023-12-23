@@ -1,6 +1,7 @@
 import { jest } from '@jest/globals';
 import Term from '@src/languages/domain/term/term';
 import TermRepository from '@src/languages/domain/term/termRepository';
+import TermCriteria from '@src/languages/domain/term/termCriteria';
 
 export class TermRepositoryMock implements TermRepository {
   private searchMock: jest.Mock;
@@ -17,8 +18,8 @@ export class TermRepositoryMock implements TermRepository {
     this.terms.push(term);
   }
 
-  async search(term: string): Promise<Term[]> {
-    this.searchMock(term);
+  async search(criteria: TermCriteria): Promise<Term[]> {
+    this.searchMock(criteria);
     return this.terms;
   }
 

@@ -1,6 +1,6 @@
 import SearchTermQuery from '@src/languages/application/term/query/search/searchTermQuery';
 import { Controller, Get, HttpCode, Inject, Param, UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from '@src/shared/infrastructure/nestjs/guards/JwtAuthGuard';
+import { JwtAuthGuard } from '@src/shared/infrastructure/nestjs/guards/jwtAuthGuard';
 import {
   ApiBadRequestResponse,
   ApiInternalServerErrorResponse,

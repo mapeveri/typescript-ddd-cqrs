@@ -4,7 +4,7 @@ import Country from '@src/languages/domain/country/country';
 import { CountryRepositoryMock } from '@test/languages/domain/country/countryRepositoryMock';
 import CountryMother from '@test/languages/domain/country/countryMother';
 import { CreateCountryCommandMother } from './createCountryCommandMother';
-import CountryAlreadyExistsException from '@src/languages/domain/country/exceptions/CountryAlreadyExistsException';
+import CountryAlreadyExistsException from '@src/languages/domain/country/exceptions/countryAlreadyExistsException';
 
 describe('CreateCountryCommandHandler', () => {
   let countryRepository: CountryRepositoryMock;
@@ -18,7 +18,7 @@ describe('CreateCountryCommandHandler', () => {
   describe('execute', () => {
     it('should raise an exception when country id already exists', async () => {
       const country = CountryMother.random();
-      const command = CreateCountryCommandMother.random({id: country.id.value});
+      const command = CreateCountryCommandMother.random({ id: country.id.value });
       countryRepository.add(country);
 
       await expect(createCountryCommandHandler.execute(command)).rejects.toThrowError(CountryAlreadyExistsException);

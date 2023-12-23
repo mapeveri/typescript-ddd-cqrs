@@ -3,7 +3,7 @@ import CreateCountryCommand from './createCountryCommand';
 import Country from '@src/languages/domain/country/country';
 import CountryId from '@src/languages/domain/country/valueObjects/countryId';
 import LanguageCollection from '@src/languages/domain/country/valueObjects/languageCollection';
-import CountryAlreadyExistsException from '@src/languages/domain/country/exceptions/CountryAlreadyExistsException';
+import CountryAlreadyExistsException from '@src/languages/domain/country/exceptions/countryAlreadyExistsException';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { CommandHandler, ICommandHandler } from '@src/shared/domain/buses/commandBus/commandHandler';
 

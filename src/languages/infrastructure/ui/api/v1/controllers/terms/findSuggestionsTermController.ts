@@ -1,6 +1,6 @@
 import { Request } from 'express';
 import { Controller, Get, HttpCode, Inject, Req, UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from '@src/shared/infrastructure/nestjs/guards/JwtAuthGuard';
+import { JwtAuthGuard } from '@src/shared/infrastructure/nestjs/guards/jwtAuthGuard';
 import {
   ApiBadRequestResponse,
   ApiInternalServerErrorResponse,

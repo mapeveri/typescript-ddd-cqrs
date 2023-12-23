@@ -2,7 +2,7 @@ import CreateCountryCommand from '@src/languages/application/country/command/cre
 import { LanguagePrimitives } from '@src/languages/domain/country/valueObjects/language';
 import { Body, Controller, HttpCode, HttpStatus, Inject, Post, UseGuards } from '@nestjs/common';
 import CountryPostDto from './countryPostDto';
-import { JwtAuthGuard } from '@src/shared/infrastructure/nestjs/guards/JwtAuthGuard';
+import { JwtAuthGuard } from '@src/shared/infrastructure/nestjs/guards/jwtAuthGuard';
 import {
   ApiCreatedResponse,
   ApiBadRequestResponse,

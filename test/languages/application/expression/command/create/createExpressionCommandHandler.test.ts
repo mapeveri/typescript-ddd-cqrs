@@ -7,7 +7,7 @@ import { ExpressionRepositoryMock } from '@test/languages/domain/expression/expr
 import ExpressionMother from '@test/languages/domain/expression/expressionMother';
 import Expression from '@src/languages/domain/expression/expression';
 import { ExpressionCreatedEventMother } from '@test/languages/domain/expression/domainEvents/expressionCreatedEventMother';
-import ExpressionAlreadyExistsException from '@src/languages/domain/expression/exceptions/ExpressionAlreadyExistsException';
+import ExpressionAlreadyExistsException from '@src/languages/domain/expression/exceptions/expressionAlreadyExistsException';
 
 describe('CreateExpressionCommandHandler', () => {
   let eventBus: EventBusMock;

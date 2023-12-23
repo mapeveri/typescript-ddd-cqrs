@@ -4,7 +4,7 @@ import Term from '@src/languages/domain/term/term';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import TermType from '@src/languages/domain/term/valueObjects/termType';
 import { EVENT_BUS, EventBus } from '@src/shared/domain/buses/eventBus/eventBus';
-import TermCreatedFailedEvent from '@src/languages/domain/term/domainEvents/TermCreatedFailedEvent';
+import TermCreatedFailedEvent from '@src/languages/domain/term/domainEvents/termCreatedFailedEvent';
 import { IProjectionHandler, ProjectionHandler } from '@src/shared/domain/buses/projectionBus/projectionHandler';
 
 @ProjectionHandler(CreateTermProjection)

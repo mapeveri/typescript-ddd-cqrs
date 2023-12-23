@@ -2,7 +2,7 @@ import CreateExpressionCommand from '@src/languages/application/expression/comma
 import { ExpressionTermPrimitives } from '@src/languages/domain/expression/valueObjects/expressionTerm';
 import { Body, Controller, HttpCode, HttpStatus, Inject, Post, UseGuards } from '@nestjs/common';
 import ExpressionPostDto from './expressionPostDto';
-import { JwtAuthGuard } from '@src/shared/infrastructure/nestjs/guards/JwtAuthGuard';
+import { JwtAuthGuard } from '@src/shared/infrastructure/nestjs/guards/jwtAuthGuard';
 import {
   ApiBadRequestResponse,
   ApiCreatedResponse,
