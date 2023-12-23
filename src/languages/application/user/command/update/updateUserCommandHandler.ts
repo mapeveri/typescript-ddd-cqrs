@@ -3,7 +3,7 @@ import UpdateUserCommand from './updateUserCommand';
 import UserId from '@src/languages/domain/user/valueObjects/userId';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { CommandHandler, ICommandHandler } from '@src/shared/domain/buses/commandBus/commandHandler';
-import UserFinder from '@src/languages/domain/user/services/UserFinder';
+import UserFinder from '@src/languages/domain/user/services/userFinder';
 import { EVENT_BUS, EventBus } from '@src/shared/domain/buses/eventBus/eventBus';
 
 @CommandHandler(UpdateUserCommand)

@@ -2,7 +2,7 @@ import CreateWordCommand from '@src/languages/application/word/command/create/cr
 import { WordTermPrimitives } from '@src/languages/domain/word/valueObjects/wordTerm';
 import { Body, Controller, HttpCode, HttpStatus, Inject, Post, UseGuards } from '@nestjs/common';
 import WordPostDto from './wordPostDto';
-import { JwtAuthGuard } from '@src/shared/infrastructure/nestjs/guards/JwtAuthGuard';
+import { JwtAuthGuard } from '@src/shared/infrastructure/nestjs/guards/jwtAuthGuard';
 import {
   ApiCreatedResponse,
   ApiBadRequestResponse,

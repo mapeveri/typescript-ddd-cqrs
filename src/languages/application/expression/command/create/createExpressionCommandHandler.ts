@@ -6,7 +6,7 @@ import Expression from '@src/languages/domain/expression/expression';
 import CountryId from '@src/languages/domain/country/valueObjects/countryId';
 import ExpressionTermCollection from '@src/languages/domain/expression/valueObjects/expressionTermCollection';
 import UserId from '@src/languages/domain/user/valueObjects/userId';
-import ExpressionAlreadyExistsException from '@src/languages/domain/expression/exceptions/ExpressionAlreadyExistsException';
+import ExpressionAlreadyExistsException from '@src/languages/domain/expression/exceptions/expressionAlreadyExistsException';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { CommandHandler, ICommandHandler } from '@src/shared/domain/buses/commandBus/commandHandler';
 

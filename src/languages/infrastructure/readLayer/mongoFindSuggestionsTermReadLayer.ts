@@ -4,7 +4,7 @@ import Term from '@src/languages/domain/term/term';
 import UserRepository, { USER_REPOSITORY } from '@src/languages/domain/user/userRepository';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import TermRepository, { TERM_REPOSITORY } from '@src/languages/domain/term/termRepository';
-import UserFinder from '@src/languages/domain/user/services/UserFinder';
+import UserFinder from '@src/languages/domain/user/services/userFinder';
 import TermCriteria from '@src/languages/domain/term/termCriteria';
 
 export default class MongoFindSuggestionsTermReadLayer implements FindSuggestionsTermReadLayer {
