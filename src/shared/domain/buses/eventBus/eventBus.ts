@@ -5,3 +5,5 @@ export interface EventBus {
 }
 
 export const EVENT_BUS = Symbol('EventBus');
+
+export const ASYNC_EVENT_BUS = Symbol('AsyncEventBus');
