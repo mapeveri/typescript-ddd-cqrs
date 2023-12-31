@@ -24,6 +24,10 @@ export default class ExpressionCreatedEvent extends DomainEvent {
     );
   }
 
+  public classPathName(): string {
+    return __filename;
+  }
+
   public static eventTypeName(): string {
     return 'expression.created';
   }

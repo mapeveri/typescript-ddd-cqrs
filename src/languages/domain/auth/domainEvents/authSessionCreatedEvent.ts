@@ -29,6 +29,10 @@ export default class AuthSessionCreatedEvent extends DomainEvent {
     return 'auth_session.created';
   }
 
+  public classPathName(): string {
+    return __filename;
+  }
+
   public static aggregateTypeName(): string {
     return 'auth_session';
   }

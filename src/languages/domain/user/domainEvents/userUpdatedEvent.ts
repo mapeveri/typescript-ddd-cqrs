@@ -19,6 +19,10 @@ export default class UserUpdatedEvent extends DomainEvent {
     return 'user.updated';
   }
 
+  public classPathName(): string {
+    return __filename;
+  }
+
   public static aggregateTypeName(): string {
     return 'user';
   }

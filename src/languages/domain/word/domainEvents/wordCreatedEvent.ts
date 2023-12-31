@@ -24,6 +24,10 @@ export default class WordCreatedEvent extends DomainEvent {
     );
   }
 
+  public classPathName(): string {
+    return __filename;
+  }
+
   public static eventTypeName(): string {
     return 'word.created';
   }

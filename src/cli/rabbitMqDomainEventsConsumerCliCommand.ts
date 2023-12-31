@@ -1,6 +1,6 @@
 import { Command, CommandRunner } from 'nest-commander';
 import { Injectable } from '@nestjs/common';
-import { RabbitMqConsumer } from '@src/shared/infrastructure/bus/rabbitMq/rabbitMqConsumer';
+import { RabbitMqDomainEventsConsumer } from '@src/shared/infrastructure/bus/rabbitMq/rabbitMqDomainEventsConsumer';
 
 @Injectable()
 @Command({
@@ -8,11 +8,11 @@ import { RabbitMqConsumer } from '@src/shared/infrastructure/bus/rabbitMq/rabbit
   description: 'RabbitMQ domain events consumer',
 })
 export class RabbitMqDomainEventsConsumerCliCommand extends CommandRunner {
-  constructor(private readonly rabbitMQConsumer: RabbitMqConsumer) {
+  constructor(private readonly rabbitMQConsumer: RabbitMqDomainEventsConsumer) {
     super();
   }
 
   async run() {
-    await this.rabbitMQConsumer.execute();
+    await this.rabbitMQConsumer.consume();
   }
 }

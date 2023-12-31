@@ -7,7 +7,7 @@ import { EventBus as IEventBus } from '@src/shared/domain/buses/eventBus/eventBu
 export default class NestEventBus implements IEventBus {
   constructor(private eventBus: EventBus) {}
 
-  publish(events: DomainEvent[]): void {
+  async publish(events: DomainEvent[]): Promise<void> {
     void this.eventBus.publishAll(events);
   }
 }

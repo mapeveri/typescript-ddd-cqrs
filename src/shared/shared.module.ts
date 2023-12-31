@@ -19,8 +19,8 @@ import { PersistDomainEventsSuscriber } from '@src/shared/infrastructure/subscri
 import NestProjectionBus from '@src/shared/infrastructure/bus/nestProjectionBus';
 import { PROJECTION_BUS } from '@src/shared/domain/buses/projectionBus/projectionBus';
 import { RabbitMqEventBus } from '@src/shared/infrastructure/bus/rabbitMq/rabbitMqEventBus';
-import { ClientsModule, Transport } from '@nestjs/microservices';
-import { RabbitMqConsumer } from '@src/shared/infrastructure/bus/rabbitMq/rabbitMqConsumer';
+import { RabbitMqDomainEventsConsumer } from '@src/shared/infrastructure/bus/rabbitMq/rabbitMqDomainEventsConsumer';
+import RabbitMqHandler from '@src/shared/infrastructure/messenger/rabbitMq/rabbitMqHandler';
 
 @Global()
 @Module({
@@ -29,19 +29,6 @@ import { RabbitMqConsumer } from '@src/shared/infrastructure/bus/rabbitMq/rabbit
       secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '2h' },
     }),
-    ClientsModule.register([
-      {
-        name: 'RABBITMQ_CLIENT',
-        transport: Transport.RMQ,
-        options: {
-          urls: [process.env.RABBITMQ_HOST || ''],
-          queue: process.env.RABBITMQ_EVENTS_QUEUE,
-          queueOptions: {
-            durable: true,
-          },
-        },
-      },
-    ]),
     CqrsModule,
   ],
   providers: [
@@ -80,15 +67,16 @@ import { RabbitMqConsumer } from '@src/shared/infrastructure/bus/rabbitMq/rabbit
       useClass: MongoEventStoreRepository,
     },
     PersistDomainEventsSuscriber,
-    RabbitMqConsumer,
+    RabbitMqHandler,
+    RabbitMqDomainEventsConsumer,
   ],
   exports: [
     JwtAuthGuard,
     JwtModule,
-    ClientsModule,
     CqrsModule,
     JwtStrategy,
-    RabbitMqConsumer,
+    RabbitMqHandler,
+    RabbitMqDomainEventsConsumer,
     LOGGER_INTERFACE,
     QUERY_BUS,
     COMMAND_BUS,

@@ -23,6 +23,8 @@ export abstract class DomainEvent {
     throw new Error('Method not implemented.');
   }
 
+  public abstract classPathName(): string;
+
   public static aggregateTypeName(): string {
     throw new Error('Method not implemented.');
   }
