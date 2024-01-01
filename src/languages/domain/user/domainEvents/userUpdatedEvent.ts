@@ -19,6 +19,10 @@ export default class UserUpdatedEvent extends DomainEvent {
     return 'user.updated';
   }
 
+  public classPathName(): string {
+    return 'languages.domain.user.domainEvents.userUpdatedEvent';
+  }
+
   public static aggregateTypeName(): string {
     return 'user';
   }

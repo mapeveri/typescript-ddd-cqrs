@@ -1,5 +1,5 @@
 import WordRepository, { WORD_REPOSITORY } from '@src/languages/domain/word/wordRepository';
-import { EVENT_BUS, EventBus } from '@src/shared/domain/buses/eventBus/eventBus';
+import { ASYNC_EVENT_BUS, EventBus } from '@src/shared/domain/buses/eventBus/eventBus';
 import CreateWordCommand from './createWordCommand';
 import Word from '@src/languages/domain/word/word';
 import WordId from '@src/languages/domain/word/valueObjects/wordId';
@@ -14,7 +14,7 @@ import { CommandHandler, ICommandHandler } from '@src/shared/domain/buses/comman
 export default class CreateWordCommandHandler implements ICommandHandler<CreateWordCommand> {
   constructor(
     @Inject(WORD_REPOSITORY) private readonly wordRepository: WordRepository,
-    @Inject(EVENT_BUS) private readonly eventBus: EventBus,
+    @Inject(ASYNC_EVENT_BUS) private readonly eventBus: EventBus,
   ) {}
 
   async execute(command: CreateWordCommand): Promise<void> {

@@ -1,5 +1,5 @@
 import ExpressionRepository, { EXPRESSION_REPOSITORY } from '@src/languages/domain/expression/expressionRepository';
-import { EVENT_BUS, EventBus } from '@src/shared/domain/buses/eventBus/eventBus';
+import { ASYNC_EVENT_BUS, EventBus } from '@src/shared/domain/buses/eventBus/eventBus';
 import CreateExpressionCommand from './createExpressionCommand';
 import ExpressionId from '@src/languages/domain/expression/valueObjects/expressionId';
 import Expression from '@src/languages/domain/expression/expression';
@@ -14,7 +14,7 @@ import { CommandHandler, ICommandHandler } from '@src/shared/domain/buses/comman
 export default class CreateExpressionCommandHandler implements ICommandHandler<CreateExpressionCommand> {
   constructor(
     @Inject(EXPRESSION_REPOSITORY) private readonly expressionRepository: ExpressionRepository,
-    @Inject(EVENT_BUS) private readonly eventBus: EventBus,
+    @Inject(ASYNC_EVENT_BUS) private readonly eventBus: EventBus,
   ) {}
 
   async execute(command: CreateExpressionCommand): Promise<void> {

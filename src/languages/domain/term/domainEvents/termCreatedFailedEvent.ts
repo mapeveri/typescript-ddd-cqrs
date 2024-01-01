@@ -13,6 +13,10 @@ export default class TermCreatedFailedEvent extends DomainEvent {
     return 'term.created.failed';
   }
 
+  public classPathName(): string {
+    return 'languages.domain.term.domainEvents.termCreatedFailedEvent';
+  }
+
   public static aggregateTypeName(): string {
     return 'term';
   }

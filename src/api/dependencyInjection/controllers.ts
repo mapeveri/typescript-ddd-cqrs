@@ -10,6 +10,7 @@ import CountryGetController from '@src/api/v1/controllers/countries/countryGetCo
 import CountryPostController from '@src/api/v1/controllers/countries/countryPostController';
 import UserPutController from '@src/api/v1/controllers/user/userPutController';
 import { NotificationsSseController } from '@src/api/sse/notificationsSseController';
+import { DomainEventsConsumerController } from '@src/api/v1/controllers/domainEvents/domainEventsConsumerController';
 
 export const controllers = [
   NotificationsSseController,
@@ -24,4 +25,5 @@ export const controllers = [
   CountryGetController,
   CountryPostController,
   UserPutController,
+  DomainEventsConsumerController,
 ];
