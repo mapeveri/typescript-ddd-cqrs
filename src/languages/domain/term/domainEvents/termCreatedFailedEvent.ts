@@ -14,7 +14,7 @@ export default class TermCreatedFailedEvent extends DomainEvent {
   }
 
   public classPathName(): string {
-    return __filename;
+    return 'languages.domain.term.domainEvents.termCreatedFailedEvent';
   }
 
   public static aggregateTypeName(): string {

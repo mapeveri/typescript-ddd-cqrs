@@ -1,27 +1,19 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { DomainEvent } from '@src/shared/domain/buses/eventBus/domainEvent';
 import { EventBus as IEventBus } from '@src/shared/domain/buses/eventBus/eventBus';
-import RabbitMqHandler from '@src/shared/infrastructure/messenger/rabbitMq/rabbitMqHandler';
-import Environment from '@src/shared/infrastructure/utils/environment';
+import { ClientProxy } from '@nestjs/microservices';
 
 @Injectable()
 export class RabbitMqEventBus implements IEventBus {
-  constructor(private readonly rabbitMqHandler: RabbitMqHandler) {}
+  constructor(@Inject('RABBITMQ_CLIENT') private client: ClientProxy) {}
 
   async publish(events: DomainEvent[]): Promise<void> {
-    const rabbitMqUrl = Environment.getVariable('RABBITMQ_HOST');
-    const queueName = Environment.getVariable('RABBITMQ_EVENTS_QUEUE');
-
-    try {
-      await this.rabbitMqHandler.connect(rabbitMqUrl);
-
-      for (const event of events) {
-        await this.rabbitMqHandler.publishToQueue(queueName, { name: event.classPathName(), data: event });
-      }
-    } catch (error) {
-      console.error(`Error to publish domain events to RabbitMq ${error}`);
-    } finally {
-      await this.rabbitMqHandler.closeConnection();
+    for (const event of events) {
+      void this.client.emit('DomainEvents', {
+        name: event.domainEventName(),
+        classPath: event.classPathName(),
+        message: event,
+      });
     }
   }
 }

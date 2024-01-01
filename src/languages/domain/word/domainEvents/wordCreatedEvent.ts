@@ -25,7 +25,7 @@ export default class WordCreatedEvent extends DomainEvent {
   }
 
   public classPathName(): string {
-    return __filename;
+    return 'languages.domain.word.domainEvents.wordCreatedEvent';
   }
 
   public static eventTypeName(): string {

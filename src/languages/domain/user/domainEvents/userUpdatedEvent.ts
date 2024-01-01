@@ -20,7 +20,7 @@ export default class UserUpdatedEvent extends DomainEvent {
   }
 
   public classPathName(): string {
-    return __filename;
+    return 'languages.domain.user.domainEvents.userUpdatedEvent';
   }
 
   public static aggregateTypeName(): string {

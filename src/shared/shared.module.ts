@@ -19,8 +19,8 @@ import { PersistDomainEventsSuscriber } from '@src/shared/infrastructure/subscri
 import NestProjectionBus from '@src/shared/infrastructure/bus/nestProjectionBus';
 import { PROJECTION_BUS } from '@src/shared/domain/buses/projectionBus/projectionBus';
 import { RabbitMqEventBus } from '@src/shared/infrastructure/bus/rabbitMq/rabbitMqEventBus';
-import { RabbitMqDomainEventsConsumer } from '@src/shared/infrastructure/bus/rabbitMq/rabbitMqDomainEventsConsumer';
-import RabbitMqHandler from '@src/shared/infrastructure/messenger/rabbitMq/rabbitMqHandler';
+import { ClientsModule, Transport } from '@nestjs/microservices';
+import { rabbitMqConfig } from '@src/shared/infrastructure/messenger/rabbitMq/config';
 
 @Global()
 @Module({
@@ -29,6 +29,13 @@ import RabbitMqHandler from '@src/shared/infrastructure/messenger/rabbitMq/rabbi
       secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '2h' },
     }),
+    ClientsModule.register([
+      {
+        name: 'RABBITMQ_CLIENT',
+        transport: Transport.RMQ,
+        options: rabbitMqConfig,
+      },
+    ]),
     CqrsModule,
   ],
   providers: [
@@ -67,16 +74,13 @@ import RabbitMqHandler from '@src/shared/infrastructure/messenger/rabbitMq/rabbi
       useClass: MongoEventStoreRepository,
     },
     PersistDomainEventsSuscriber,
-    RabbitMqHandler,
-    RabbitMqDomainEventsConsumer,
   ],
   exports: [
     JwtAuthGuard,
     JwtModule,
     CqrsModule,
+    ClientsModule,
     JwtStrategy,
-    RabbitMqHandler,
-    RabbitMqDomainEventsConsumer,
     LOGGER_INTERFACE,
     QUERY_BUS,
     COMMAND_BUS,
