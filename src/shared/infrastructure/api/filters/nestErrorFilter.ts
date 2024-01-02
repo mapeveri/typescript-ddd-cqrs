@@ -1,10 +1,10 @@
 import { ArgumentsHost, Catch, ExceptionFilter, HttpException } from '@nestjs/common';
 import { Response } from 'express';
-import ApiExceptionSerializer from '@src/api/serializers/apiExceptionSerializer';
+import ApiExceptionSerializer from '@src/shared/infrastructure/api/serializers/apiExceptionSerializer';
 import DomainException from '@src/shared/domain/exceptions/domainException';
 
 @Catch(Error)
-export class ErrorFilter implements ExceptionFilter {
+export class NestErrorFilter implements ExceptionFilter {
   catch(exception: Error, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();

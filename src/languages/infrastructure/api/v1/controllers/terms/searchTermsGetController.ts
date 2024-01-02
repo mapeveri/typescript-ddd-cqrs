@@ -1,6 +1,6 @@
 import SearchTermQuery from '@src/languages/application/term/query/search/searchTermQuery';
 import { Controller, Get, HttpCode, Inject, Param, UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from '@src/api/guards/jwtAuthGuard';
+import { NestJwtAuthGuard } from '@src/shared/infrastructure/api/guards/nestJwtAuthGuard';
 import {
   ApiBadRequestResponse,
   ApiInternalServerErrorResponse,
@@ -22,7 +22,7 @@ export default class SearchTermsGetController {
   @ApiBadRequestResponse({ description: 'Bad Request.' })
   @ApiUnauthorizedResponse({ description: 'Unauthorized.' })
   @ApiInternalServerErrorResponse({ description: 'Internal Server Error.' })
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(NestJwtAuthGuard)
   async run(@Param('term') term: string): Promise<any> {
     return await this.queryBus.ask(new SearchTermQuery(term));
   }

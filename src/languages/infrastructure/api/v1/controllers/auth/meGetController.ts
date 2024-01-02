@@ -1,6 +1,8 @@
 import { Request } from 'express';
+import FindUserQuery from '@src/languages/application/user/query/find/findUserQuery';
 import { Controller, Get, HttpCode, Inject, Req, UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from '@src/api/guards/jwtAuthGuard';
+import { NestJwtAuthGuard } from '@src/shared/infrastructure/api/guards/nestJwtAuthGuard';
+import MeGetResponseDto from './meGetResponseDto';
 import {
   ApiBadRequestResponse,
   ApiInternalServerErrorResponse,
@@ -8,25 +10,24 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
-import { TermsResponse } from './termsResponse';
 import { QUERY_BUS, QueryBus } from '@src/shared/domain/buses/queryBus/queryBus';
-import FindSuggestionsTermQuery from '@src/languages/application/term/query/suggestion/findSuggestionsTermQuery';
 
-@ApiTags('Terms')
+@ApiTags('Auth')
 @Controller()
-export default class FindSuggestionsTermController {
+export default class MeGetController {
   public constructor(@Inject(QUERY_BUS) private queryBus: QueryBus) {}
 
-  @Get('user/suggestions')
+  @Get('auth/me')
   @HttpCode(200)
-  @ApiOkResponse({ type: TermsResponse })
+  @ApiOkResponse({ type: MeGetResponseDto })
   @ApiBadRequestResponse({ description: 'Bad Request.' })
   @ApiUnauthorizedResponse({ description: 'Unauthorized.' })
   @ApiInternalServerErrorResponse({ description: 'Internal Server Error.' })
-  @UseGuards(JwtAuthGuard)
-  async run(@Req() req: Request): Promise<any> {
+  @UseGuards(NestJwtAuthGuard)
+  async run(@Req() req: Request): Promise<MeGetResponseDto> {
     const userId = req.user['id'];
+    const data = await this.queryBus.ask(new FindUserQuery(userId));
 
-    return await this.queryBus.ask(new FindSuggestionsTermQuery(userId));
+    return data.content;
   }
 }
