@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { UnhandledExceptionBus } from '@nestjs/cqrs';
-import { SseService } from '@src/api/sse/sseService';
+import { SseService } from '@src/shared/infrastructure/api/sse/sseService';
 import { Subject, takeUntil } from 'rxjs';
 
 @Injectable()

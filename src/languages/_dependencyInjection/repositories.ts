@@ -1,13 +1,13 @@
 import { AUTH_SESSION_REPOSITORY } from '@src/languages/domain/auth/authSessionRepository';
-import TypeOrmAuthSessionRepository from '../../languages/infrastructure/persistence/typeOrm/repositories/typeOrmAuthSessionRepository';
+import TypeOrmAuthSessionRepository from '../infrastructure/persistence/typeOrm/repositories/typeOrmAuthSessionRepository';
 import { COUNTRY_REPOSITORY } from '@src/languages/domain/country/countryRepository';
-import TypeOrmCountryRepository from '../../languages/infrastructure/persistence/typeOrm/repositories/typeOrmCountryRepository';
+import TypeOrmCountryRepository from '../infrastructure/persistence/typeOrm/repositories/typeOrmCountryRepository';
 import { EXPRESSION_REPOSITORY } from '@src/languages/domain/expression/expressionRepository';
-import TypeOrmExpressionRepository from '../../languages/infrastructure/persistence/typeOrm/repositories/typeOrmExpressionRepository';
-import TypeOrmWordRepository from '../../languages/infrastructure/persistence/typeOrm/repositories/typeOrmWordRepository';
-import TypeOrmUserRepository from '../../languages/infrastructure/persistence/typeOrm/repositories/typeOrmUserRepository';
+import TypeOrmExpressionRepository from '../infrastructure/persistence/typeOrm/repositories/typeOrmExpressionRepository';
+import TypeOrmWordRepository from '../infrastructure/persistence/typeOrm/repositories/typeOrmWordRepository';
+import TypeOrmUserRepository from '../infrastructure/persistence/typeOrm/repositories/typeOrmUserRepository';
 import { TERM_REPOSITORY } from '@src/languages/domain/term/termRepository';
-import MongoTermRepository from '../../languages/infrastructure/persistence/mongo/repositories/mongoTermRepository';
+import MongoTermRepository from '../infrastructure/persistence/mongo/repositories/mongoTermRepository';
 import { USER_REPOSITORY } from '@src/languages/domain/user/userRepository';
 import { WORD_REPOSITORY } from '@src/languages/domain/word/wordRepository';
 

@@ -1,6 +1,6 @@
-import FindCountriesQuery from '@src/languages/application/country/query/findAll/findCountriesQuery';
-import { Controller, Get, HttpCode, Inject, UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from '@src/api/guards/jwtAuthGuard';
+import FindCountryQuery from '@src/languages/application/country/query/find/findCountryQuery';
+import { Controller, Get, HttpCode, Inject, Param, UseGuards } from '@nestjs/common';
+import { NestJwtAuthGuard } from '@src/shared/infrastructure/api/guards/nestJwtAuthGuard';
 import CountryGetResponseDto from './countryGetResponse';
 import {
   ApiBadRequestResponse,
@@ -13,18 +13,18 @@ import { QUERY_BUS, QueryBus } from '@src/shared/domain/buses/queryBus/queryBus'
 
 @ApiTags('Countries')
 @Controller()
-export default class CountriesGetController {
+export default class CountryGetController {
   public constructor(@Inject(QUERY_BUS) private queryBus: QueryBus) {}
 
-  @Get('countries')
+  @Get('countries/:id')
   @HttpCode(200)
-  @ApiOkResponse({ type: [CountryGetResponseDto] })
+  @ApiOkResponse({ type: CountryGetResponseDto })
   @ApiBadRequestResponse({ description: 'Bad Request.' })
   @ApiUnauthorizedResponse({ description: 'Unauthorized.' })
   @ApiInternalServerErrorResponse({ description: 'Internal Server Error.' })
-  @UseGuards(JwtAuthGuard)
-  async run(): Promise<CountryGetResponseDto[]> {
-    const data = await this.queryBus.ask(new FindCountriesQuery());
-    return data.content;
+  @UseGuards(NestJwtAuthGuard)
+  async run(@Param('id') id: string): Promise<CountryGetResponseDto> {
+    const data = await this.queryBus.ask(new FindCountryQuery(id));
+    return data.content || {};
   }
 }
