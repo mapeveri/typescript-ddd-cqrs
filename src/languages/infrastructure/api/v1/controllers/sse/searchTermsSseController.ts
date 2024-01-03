@@ -5,6 +5,8 @@ import SearchTermQuery from '@src/languages/application/term/query/search/search
 
 @Controller('sse')
 export class SearchTermsSseController {
+  private EVENT_NAME = 'terms';
+
   constructor(@Inject(QUERY_BUS) private queryBus: QueryBus) {}
 
   @Sse('terms/:userId/:term')
@@ -14,15 +16,15 @@ export class SearchTermsSseController {
 
       const intervalId = setInterval(async () => {
         const data = await this.queryBus.ask(new SearchTermQuery(term));
-        const event = new MessageEvent('terms', { data: JSON.stringify(data.content) });
+        const event = new MessageEvent(this.EVENT_NAME, { data: JSON.stringify(data.content) });
 
         observer.next(event);
       }, 5000);
 
       subscription.add(() => {
         clearInterval(intervalId);
+        subscription.unsubscribe();
       });
-      subscription.add(() => subscription.unsubscribe());
 
       return subscription;
     });
