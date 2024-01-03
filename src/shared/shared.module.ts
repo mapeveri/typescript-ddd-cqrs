@@ -11,7 +11,6 @@ import { PROJECTION_BUS } from '@src/shared/domain/buses/projectionBus/projectio
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { rabbitMqConfig } from '@src/shared/infrastructure/messenger/rabbitMq/config';
 import { consumers } from '@src/shared/_dependencyInjection/consumers';
-import { controllers } from '@src/shared/_dependencyInjection/controllers';
 import { services } from '@src/shared/_dependencyInjection/services';
 import Environment from '@src/shared/infrastructure/utils/environment';
 
@@ -31,7 +30,7 @@ import Environment from '@src/shared/infrastructure/utils/environment';
     ]),
     CqrsModule,
   ],
-  controllers: [...controllers, ...consumers],
+  controllers: [...consumers],
   providers: [...services],
   exports: [
     NestJwtAuthGuard,

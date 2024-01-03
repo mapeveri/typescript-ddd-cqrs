@@ -9,6 +9,7 @@ import CountriesGetController from '@src/languages/infrastructure/api/v1/control
 import CountryGetController from '@src/languages/infrastructure/api/v1/controllers/countries/countryGetController';
 import CountryPostController from '@src/languages/infrastructure/api/v1/controllers/countries/countryPostController';
 import UserPutController from '@src/languages/infrastructure/api/v1/controllers/user/userPutController';
+import { SearchTermsSseController } from '@src/languages/infrastructure/api/v1/controllers/sse/searchTermsSseController';
 
 export const controllers = [
   LoginPostController,
@@ -22,4 +23,5 @@ export const controllers = [
   CountryGetController,
   CountryPostController,
   UserPutController,
+  SearchTermsSseController,
 ];

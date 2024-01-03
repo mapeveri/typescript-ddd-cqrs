@@ -1,6 +1,4 @@
 import { SOCIAL_AUTHENTICATOR } from '@src/languages/domain/auth/socialAuthenticator';
-import { SseService } from '@src/shared/infrastructure/api/sse/sseService';
-import { UnhandledExceptionsBusService } from '@src/shared/infrastructure/api/sse/unhandledExceptionsBusService';
 import GoogleSocialAuthenticator from '@src/languages/infrastructure/oauth/googleSocialAuthenticator';
 import { NestJwtAuthGuard } from '@src/shared/infrastructure/api/guards/nestJwtAuthGuard';
 import { JwtStrategy } from '@src/shared/infrastructure/auth/strategies/jwtStrategy';
@@ -22,8 +20,6 @@ import MongoEventStoreRepository from '@src/shared/infrastructure/persistence/mo
 import { PersistDomainEventsSuscriber } from '@src/shared/infrastructure/subscribers/persistDomainEventsSuscriber';
 
 export const services = [
-  SseService,
-  UnhandledExceptionsBusService,
   NestJwtAuthGuard,
   JwtStrategy,
   {
