@@ -48,7 +48,7 @@ export const services = [
   },
   {
     provide: PROJECTION_BUS,
-    useClass: NestProjectionBus,
+    useExisting: NestProjectionBus,
   },
   {
     provide: EVENT_STORE_REPOSITORY,
