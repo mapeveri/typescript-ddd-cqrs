@@ -6,6 +6,7 @@ import { ProjectionBus } from '@src/shared/domain/buses/projectionBus/projection
 import { IProjectionHandler } from '@src/shared/domain/buses/projectionBus/projectionHandler';
 import ProjectionHandlerNotFoundError from '@src/shared/domain/buses/projectionBus/projectionHandlerNotFoundError';
 import { PROJECTION_HANDLER_METADATA, PROJECTION_METADATA } from '@src/shared/domain/buses/projectionBus/constants';
+import MongoTransactionalDecorator from '@src/shared/infrastructure/persistence/mongo/mongoTransactionalDecorator';
 
 type ProjectionHandlerType = Type<IProjectionHandler<Projection>>;
 
@@ -26,7 +27,8 @@ export default class NestProjectionBus extends ObservableBus<Projection> impleme
     }
 
     this.subject$.next(projection);
-    return handler.execute(projection);
+
+    await new MongoTransactionalDecorator().execute(handler, projection);
   }
 
   register(handlers: ProjectionHandlerType[]): void {

@@ -22,6 +22,7 @@ import { PersistDomainEventsSuscriber } from '@src/shared/infrastructure/subscri
 export const services = [
   NestJwtAuthGuard,
   JwtStrategy,
+  NestProjectionBus,
   {
     provide: APP_FILTER,
     useClass: NestErrorFilter,

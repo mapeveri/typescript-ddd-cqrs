@@ -1,6 +1,6 @@
-import { CommandBus } from '@nestjs/cqrs';
-import { Command } from '@src/shared/domain/buses/commandBus/command';
 import MongoConnection from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
+import { IProjectionHandler } from '@src/shared/domain/buses/projectionBus/projectionHandler';
+import { Projection } from '@src/shared/domain/buses/projectionBus/projection';
 
 type Callback = (...args: any[]) => Promise<void>;
 
@@ -24,11 +24,15 @@ export async function mongoTransactionalOperation(handle: Callback, ...args: any
 }
 
 export default class MongoTransactionalDecorator {
-  constructor(readonly commandBus: CommandBus) {}
+  constructor() {}
 
-  async execute(command: Command): Promise<void> {
-    await mongoTransactionalOperation(async (command: Command) => {
-      await this.commandBus.execute(command);
-    }, command);
+  async execute(handler: IProjectionHandler<Projection>, projection: Projection): Promise<void> {
+    await mongoTransactionalOperation(
+      async (handler: IProjectionHandler<Projection>, projection: Projection) => {
+        await handler.execute(projection);
+      },
+      handler,
+      projection,
+    );
   }
 }
