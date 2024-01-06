@@ -1,10 +1,18 @@
-import { CommandHandler as NestCommandHandler, ICommandHandler as NestICommandHandler, ICommand } from '@nestjs/cqrs';
+import 'reflect-metadata';
 
-export function ProjectionHandler(projection: ICommand | (new (...args: any[]) => ICommand)): ClassDecorator {
-  return NestCommandHandler(projection);
-}
+import { PROJECTION_HANDLER_METADATA, PROJECTION_METADATA } from './constants';
+import { Projection } from './projection';
+import { Uuid } from '@src/shared/domain/valueObjects/uuid';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface IProjectionHandler<TCommand extends ICommand = any, TResult = any> extends NestICommandHandler {
-  execute(projection: TCommand): Promise<TResult>;
+export const ProjectionHandler = (projection: Projection | (new (...args: never[]) => Projection)): ClassDecorator => {
+  return (target: object) => {
+    if (!Reflect.hasOwnMetadata(PROJECTION_METADATA, projection)) {
+      Reflect.defineMetadata(PROJECTION_METADATA, { id: Uuid.random().value }, projection);
+    }
+    Reflect.defineMetadata(PROJECTION_HANDLER_METADATA, projection, target);
+  };
+};
+
+export interface IProjectionHandler<TProjection extends Projection> {
+  execute(projection: TProjection): Promise<void>;
 }
