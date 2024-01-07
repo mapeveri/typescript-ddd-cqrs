@@ -1,9 +1,9 @@
-import QueryResponse from '@src/shared/domain/buses/queryBus/queryResponse';
+import QueryResponse from '@src/shared/domain/bus/queryBus/queryResponse';
 import SearchTermQuery from './searchTermQuery';
 import TermRepository, { TERM_REPOSITORY } from '@src/languages/domain/term/termRepository';
 import SearchTermResponse from './searchTermResponse';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
-import { IQueryHandler, QueryHandler } from '@src/shared/domain/buses/queryBus/queryHandler';
+import { IQueryHandler, QueryHandler } from '@src/shared/domain/bus/queryBus/queryHandler';
 import TermCriteria from '@src/languages/domain/term/termCriteria';
 
 @QueryHandler(SearchTermQuery)

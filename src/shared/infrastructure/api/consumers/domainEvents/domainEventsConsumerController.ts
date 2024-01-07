@@ -1,7 +1,7 @@
 import { Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
-import { EVENT_BUS, EventBus } from '@src/shared/domain/buses/eventBus/eventBus';
+import { EVENT_BUS, EventBus } from '@src/shared/domain/bus/eventBus/eventBus';
 
 @Controller()
 export class DomainEventsConsumerController {

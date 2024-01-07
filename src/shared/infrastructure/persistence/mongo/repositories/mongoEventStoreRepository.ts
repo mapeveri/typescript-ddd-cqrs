@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { DomainEvent } from '@src/shared/domain/buses/eventBus/domainEvent';
+import { DomainEvent } from '@src/shared/domain/bus/eventBus/domainEvent';
 import { EventStoreRepository } from '@src/shared/domain/eventStore/eventStoreRepository';
 import MongoConnection from '../mongoConnection';
 import { Collection } from 'mongodb';

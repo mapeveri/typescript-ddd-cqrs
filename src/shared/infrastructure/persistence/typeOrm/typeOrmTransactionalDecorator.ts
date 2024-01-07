@@ -1,5 +1,5 @@
 import { CommandBus } from '@nestjs/cqrs';
-import { Command } from '@src/shared/domain/buses/commandBus/command';
+import { Command } from '@src/shared/domain/bus/commandBus/command';
 import { DataSourceHandler } from '@src/shared/infrastructure/persistence/typeOrm/dataSourceHandler';
 
 export default class TypeOrmTransactionalDecorator {

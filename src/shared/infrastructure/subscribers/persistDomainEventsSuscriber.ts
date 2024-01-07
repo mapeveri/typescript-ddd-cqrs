@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EventBus } from '@nestjs/cqrs';
-import { DomainEvent } from '@src/shared/domain/buses/eventBus/domainEvent';
+import { DomainEvent } from '@src/shared/domain/bus/eventBus/domainEvent';
 import { EVENT_STORE_REPOSITORY, EventStoreRepository } from '@src/shared/domain/eventStore/eventStoreRepository';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { mongoTransactionalOperation } from '@src/shared/infrastructure/persistence/mongo/mongoTransactionalDecorator';

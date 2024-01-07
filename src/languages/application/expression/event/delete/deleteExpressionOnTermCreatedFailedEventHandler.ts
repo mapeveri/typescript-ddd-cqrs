@@ -1,6 +1,6 @@
-import { COMMAND_BUS, CommandBus } from '@src/shared/domain/buses/commandBus/commandBus';
+import { COMMAND_BUS, CommandBus } from '@src/shared/domain/bus/commandBus/commandBus';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
-import { EventsHandler, IEventHandler } from '@src/shared/domain/buses/eventBus/eventsHandler';
+import { EventsHandler, IEventHandler } from '@src/shared/domain/bus/eventBus/eventsHandler';
 import TermType from '@src/languages/domain/term/valueObjects/termType';
 import TermCreatedFailedEvent from '@src/languages/domain/term/domainEvents/termCreatedFailedEvent';
 import DeleteExpressionCommand from '../../command/delete/deleteExpressionCommand';

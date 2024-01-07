@@ -1,4 +1,4 @@
-import { DomainEvent } from '@src/shared/domain/buses/eventBus/domainEvent';
+import { DomainEvent } from '@src/shared/domain/bus/eventBus/domainEvent';
 
 export default class UserUpdatedEvent extends DomainEvent {
   constructor(

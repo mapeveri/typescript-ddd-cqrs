@@ -1,4 +1,4 @@
-import { DomainEvent } from '../buses/eventBus/domainEvent';
+import { DomainEvent } from '@src/shared/domain/bus/eventBus/domainEvent';
 
 export abstract class AggregateRoot {
   protected domainEvents: DomainEvent[];

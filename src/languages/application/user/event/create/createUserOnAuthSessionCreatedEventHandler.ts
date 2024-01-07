@@ -1,10 +1,10 @@
 import UserRepository, { USER_REPOSITORY } from '@src/languages/domain/user/userRepository';
 import UserId from '@src/languages/domain/user/valueObjects/userId';
-import { COMMAND_BUS, CommandBus } from '@src/shared/domain/buses/commandBus/commandBus';
+import { COMMAND_BUS, CommandBus } from '@src/shared/domain/bus/commandBus/commandBus';
 import CreateUserCommand from '../../command/create/createUserCommand';
 import AuthSessionCreatedEvent from '@src/languages/domain/auth/domainEvents/authSessionCreatedEvent';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
-import { EventsHandler, IEventHandler } from '@src/shared/domain/buses/eventBus/eventsHandler';
+import { EventsHandler, IEventHandler } from '@src/shared/domain/bus/eventBus/eventsHandler';
 
 @EventsHandler(AuthSessionCreatedEvent)
 export default class CreateUserOnAuthSessionCreatedEventHandler implements IEventHandler<AuthSessionCreatedEvent> {

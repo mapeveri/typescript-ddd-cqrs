@@ -2,9 +2,9 @@ import UserRepository, { USER_REPOSITORY } from '@src/languages/domain/user/user
 import UpdateUserCommand from './updateUserCommand';
 import UserId from '@src/languages/domain/user/valueObjects/userId';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
-import { CommandHandler, ICommandHandler } from '@src/shared/domain/buses/commandBus/commandHandler';
+import { CommandHandler, ICommandHandler } from '@src/shared/domain/bus/commandBus/commandHandler';
 import UserFinder from '@src/languages/domain/user/services/userFinder';
-import { EVENT_BUS, EventBus } from '@src/shared/domain/buses/eventBus/eventBus';
+import { EVENT_BUS, EventBus } from '@src/shared/domain/bus/eventBus/eventBus';
 
 @CommandHandler(UpdateUserCommand)
 export default class UpdateUserCommandHandler implements ICommandHandler<UpdateUserCommand> {

@@ -1,4 +1,4 @@
-import { Command } from '@src/shared/domain/buses/commandBus/command';
+import { Command } from '@src/shared/domain/bus/commandBus/command';
 
 export default class LoginUserCommand implements Command {
   constructor(

@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { DomainEvent } from '@src/shared/domain/buses/eventBus/domainEvent';
-import { EventBus as IEventBus } from '@src/shared/domain/buses/eventBus/eventBus';
+import { DomainEvent } from '@src/shared/domain/bus/eventBus/domainEvent';
+import { EventBus as IEventBus } from '@src/shared/domain/bus/eventBus/eventBus';
 import { ClientProxy } from '@nestjs/microservices';
 
 @Injectable()

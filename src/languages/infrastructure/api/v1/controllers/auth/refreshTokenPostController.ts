@@ -4,7 +4,7 @@ import LoginPostResponseDto from './loginPostResponseDto';
 import { ApiBadRequestResponse, ApiInternalServerErrorResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import RefreshTokenPostDto from './refreshTokenPostDto';
 import RefreshTokenPostResponseDto from './refreshTokenPostResponseDto';
-import { QUERY_BUS, QueryBus } from '@src/shared/domain/buses/queryBus/queryBus';
+import { QUERY_BUS, QueryBus } from '@src/shared/domain/bus/queryBus/queryBus';
 import FindUserQuery from '@src/languages/application/user/query/find/findUserQuery';
 
 @ApiTags('Auth')

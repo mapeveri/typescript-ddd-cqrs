@@ -9,7 +9,7 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
-import { QUERY_BUS, QueryBus } from '@src/shared/domain/buses/queryBus/queryBus';
+import { QUERY_BUS, QueryBus } from '@src/shared/domain/bus/queryBus/queryBus';
 
 @ApiTags('Countries')
 @Controller()

@@ -9,7 +9,7 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { TermsResponse } from './termsResponse';
-import { QUERY_BUS, QueryBus } from '@src/shared/domain/buses/queryBus/queryBus';
+import { QUERY_BUS, QueryBus } from '@src/shared/domain/bus/queryBus/queryBus';
 import FindSuggestionsTermQuery from '@src/languages/application/term/query/suggestion/findSuggestionsTermQuery';
 
 @ApiTags('Terms')

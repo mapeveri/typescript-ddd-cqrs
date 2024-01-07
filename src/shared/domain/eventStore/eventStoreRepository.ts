@@ -1,4 +1,4 @@
-import { DomainEvent } from '../buses/eventBus/domainEvent';
+import { DomainEvent } from '@src/shared/domain/bus/eventBus/domainEvent';
 
 export interface EventStoreRepository {
   save(domainEvent: DomainEvent): void;

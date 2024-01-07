@@ -1,4 +1,4 @@
-import { Projection } from '@src/shared/domain/buses/projectionBus/projection';
+import { Projection } from '@src/shared/domain/bus/projectionBus/projection';
 
 export default class CreateTermProjection implements Projection {
   constructor(

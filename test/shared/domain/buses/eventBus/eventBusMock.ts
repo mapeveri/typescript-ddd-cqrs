@@ -1,6 +1,6 @@
 import { expect, jest } from '@jest/globals';
-import { DomainEvent } from '@src/shared/domain/buses/eventBus/domainEvent';
-import { EventBus } from '@src/shared/domain/buses/eventBus/eventBus';
+import { DomainEvent } from '@src/shared/domain/bus/eventBus/domainEvent';
+import { EventBus } from '@src/shared/domain/bus/eventBus/eventBus';
 
 export class EventBusMock implements EventBus {
   publish: jest.MockedFunction<(events: DomainEvent[]) => Promise<void>>;

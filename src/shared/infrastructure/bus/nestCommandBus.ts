@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
-import { Command } from '@src/shared/domain/buses/commandBus/command';
-import { CommandBus as ICommandBus } from '@src/shared/domain/buses/commandBus/commandBus';
+import { Command } from '@src/shared/domain/bus/commandBus/command';
+import { CommandBus as ICommandBus } from '@src/shared/domain/bus/commandBus/commandBus';
 import TypeOrmTransactionalDecorator from '@src/shared/infrastructure/persistence/typeOrm/typeOrmTransactionalDecorator';
 
 @Injectable()

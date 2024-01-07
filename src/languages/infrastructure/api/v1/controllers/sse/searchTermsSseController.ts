@@ -1,6 +1,6 @@
 import { Controller, Inject, Param, Sse } from '@nestjs/common';
 import { Observable, Subscription } from 'rxjs';
-import { QUERY_BUS, QueryBus } from '@src/shared/domain/buses/queryBus/queryBus';
+import { QUERY_BUS, QueryBus } from '@src/shared/domain/bus/queryBus/queryBus';
 import SearchTermQuery from '@src/languages/application/term/query/search/searchTermQuery';
 
 @Controller('sse')

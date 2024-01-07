@@ -1,6 +1,6 @@
-import QueryResponse from '@src/shared/domain/buses/queryBus/queryResponse';
+import QueryResponse from '@src/shared/domain/bus/queryBus/queryResponse';
 import FindSuggestionsTermQueryResponse from '@src/languages/application/term/query/suggestion/findSuggestionsTermQueryResponse';
-import { IQueryHandler, QueryHandler } from '@src/shared/domain/buses/queryBus/queryHandler';
+import { IQueryHandler, QueryHandler } from '@src/shared/domain/bus/queryBus/queryHandler';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import FindSuggestionsTermQuery from '@src/languages/application/term/query/suggestion/findSuggestionsTermQuery';
 import FindSuggestionsTermReadLayer, {

@@ -1,5 +1,5 @@
 import Country from '@src/languages/domain/country/country';
-import QueryResponse from '@src/shared/domain/buses/queryBus/queryResponse';
+import QueryResponse from '@src/shared/domain/bus/queryBus/queryResponse';
 
 export default class FindCountryResponse extends QueryResponse {
   private constructor(country?: object) {

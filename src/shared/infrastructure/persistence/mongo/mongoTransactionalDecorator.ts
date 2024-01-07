@@ -1,6 +1,6 @@
 import MongoConnection from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
-import { IProjectionHandler } from '@src/shared/domain/buses/projectionBus/projectionHandler';
-import { Projection } from '@src/shared/domain/buses/projectionBus/projection';
+import { IProjectionHandler } from '@src/shared/domain/bus/projectionBus/projectionHandler';
+import { Projection } from '@src/shared/domain/bus/projectionBus/projection';
 
 type Callback = (...args: any[]) => Promise<void>;
 

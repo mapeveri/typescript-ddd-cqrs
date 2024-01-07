@@ -5,7 +5,7 @@ import { JwtService } from '@nestjs/jwt';
 import LoginPostDto from './loginPostDto';
 import LoginPostResponseDto from './loginPostResponseDto';
 import { ApiBadRequestResponse, ApiInternalServerErrorResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { COMMAND_BUS, CommandBus } from '@src/shared/domain/buses/commandBus/commandBus';
+import { COMMAND_BUS, CommandBus } from '@src/shared/domain/bus/commandBus/commandBus';
 
 @ApiTags('Auth')
 @Controller()

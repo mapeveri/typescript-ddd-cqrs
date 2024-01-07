@@ -1,7 +1,7 @@
 import ExpressionRepository, { EXPRESSION_REPOSITORY } from '@src/languages/domain/expression/expressionRepository';
 import ExpressionId from '@src/languages/domain/expression/valueObjects/expressionId';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
-import { CommandHandler, ICommandHandler } from '@src/shared/domain/buses/commandBus/commandHandler';
+import { CommandHandler, ICommandHandler } from '@src/shared/domain/bus/commandBus/commandHandler';
 import DeleteExpressionCommand from './deleteExpressionCommand';
 
 @CommandHandler(DeleteExpressionCommand)

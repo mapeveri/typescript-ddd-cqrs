@@ -1,5 +1,5 @@
 import ExpressionRepository, { EXPRESSION_REPOSITORY } from '@src/languages/domain/expression/expressionRepository';
-import { ASYNC_EVENT_BUS, EventBus } from '@src/shared/domain/buses/eventBus/eventBus';
+import { ASYNC_EVENT_BUS, EventBus } from '@src/shared/domain/bus/eventBus/eventBus';
 import CreateExpressionCommand from './createExpressionCommand';
 import ExpressionId from '@src/languages/domain/expression/valueObjects/expressionId';
 import Expression from '@src/languages/domain/expression/expression';
@@ -8,7 +8,7 @@ import ExpressionTermCollection from '@src/languages/domain/expression/valueObje
 import UserId from '@src/languages/domain/user/valueObjects/userId';
 import ExpressionAlreadyExistsException from '@src/languages/domain/expression/exceptions/expressionAlreadyExistsException';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
-import { CommandHandler, ICommandHandler } from '@src/shared/domain/buses/commandBus/commandHandler';
+import { CommandHandler, ICommandHandler } from '@src/shared/domain/bus/commandBus/commandHandler';
 
 @CommandHandler(CreateExpressionCommand)
 export default class CreateExpressionCommandHandler implements ICommandHandler<CreateExpressionCommand> {

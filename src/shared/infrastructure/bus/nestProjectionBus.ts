@@ -1,11 +1,11 @@
 import { Injectable, Type } from '@nestjs/common';
 import { ObservableBus } from '@nestjs/cqrs';
 import { ModuleRef } from '@nestjs/core';
-import { Projection } from '@src/shared/domain/buses/projectionBus/projection';
-import { ProjectionBus } from '@src/shared/domain/buses/projectionBus/projectionBus';
-import { IProjectionHandler } from '@src/shared/domain/buses/projectionBus/projectionHandler';
-import ProjectionHandlerNotFoundError from '@src/shared/domain/buses/projectionBus/projectionHandlerNotFoundError';
-import { PROJECTION_HANDLER_METADATA, PROJECTION_METADATA } from '@src/shared/domain/buses/projectionBus/constants';
+import { Projection } from '@src/shared/domain/bus/projectionBus/projection';
+import { ProjectionBus } from '@src/shared/domain/bus/projectionBus/projectionBus';
+import { IProjectionHandler } from '@src/shared/domain/bus/projectionBus/projectionHandler';
+import ProjectionHandlerNotFoundError from '@src/shared/domain/bus/projectionBus/projectionHandlerNotFoundError';
+import { PROJECTION_HANDLER_METADATA, PROJECTION_METADATA } from '@src/shared/domain/bus/projectionBus/constants';
 import MongoTransactionalDecorator from '@src/shared/infrastructure/persistence/mongo/mongoTransactionalDecorator';
 
 type ProjectionHandlerType = Type<IProjectionHandler<Projection>>;

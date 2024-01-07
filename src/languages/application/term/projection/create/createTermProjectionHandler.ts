@@ -3,9 +3,9 @@ import CreateTermProjection from './createTermProjection';
 import Term from '@src/languages/domain/term/term';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import TermType from '@src/languages/domain/term/valueObjects/termType';
-import { EVENT_BUS, EventBus } from '@src/shared/domain/buses/eventBus/eventBus';
+import { EVENT_BUS, EventBus } from '@src/shared/domain/bus/eventBus/eventBus';
 import TermCreatedFailedEvent from '@src/languages/domain/term/domainEvents/termCreatedFailedEvent';
-import { IProjectionHandler, ProjectionHandler } from '@src/shared/domain/buses/projectionBus/projectionHandler';
+import { IProjectionHandler, ProjectionHandler } from '@src/shared/domain/bus/projectionBus/projectionHandler';
 
 @ProjectionHandler(CreateTermProjection)
 export default class CreateTermProjectionHandler implements IProjectionHandler<CreateTermProjection> {

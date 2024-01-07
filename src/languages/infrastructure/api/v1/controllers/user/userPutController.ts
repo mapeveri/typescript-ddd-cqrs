@@ -7,7 +7,7 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
-import { COMMAND_BUS, CommandBus } from '@src/shared/domain/buses/commandBus/commandBus';
+import { COMMAND_BUS, CommandBus } from '@src/shared/domain/bus/commandBus/commandBus';
 import { Request } from 'express';
 import UpdateUserCommand from '@src/languages/application/user/command/update/updateUserCommand';
 import UserPutDto from '@src/languages/infrastructure/api/v1/controllers/user/userPutDto';

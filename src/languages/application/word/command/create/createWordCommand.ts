@@ -1,5 +1,5 @@
 import { WordTermPrimitives } from '@src/languages/domain/word/valueObjects/wordTerm';
-import { Command } from '@src/shared/domain/buses/commandBus/command';
+import { Command } from '@src/shared/domain/bus/commandBus/command';
 
 export default class CreateWordCommand implements Command {
   constructor(
