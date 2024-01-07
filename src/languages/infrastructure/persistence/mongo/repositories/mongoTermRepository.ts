@@ -32,8 +32,12 @@ export default class MongoTermRepository extends MongoRepository<Term> implement
 
     const query = this.collection.find(searchQuery).project({ _id: 0 });
 
-    if (criteria.limit) {
-      query.limit(criteria.limit);
+    if (criteria.size) {
+      query.limit(criteria.size);
+    }
+
+    if (criteria.page) {
+      query.skip(criteria.page);
     }
 
     result = await query.toArray();
