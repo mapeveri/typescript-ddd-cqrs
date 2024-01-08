@@ -30,16 +30,8 @@ export default class MongoTermRepository extends MongoRepository<Term> implement
       });
     }
 
-    const query = this.collection.find(searchQuery).project({ _id: 0 });
-
-    if (criteria.size) {
-      query.limit(criteria.size);
-    }
-
-    if (criteria.page) {
-      query.skip(criteria.page);
-    }
-
+    const skip = (criteria.page - 1) * criteria.size;
+    const query = this.collection.find(searchQuery).project({ _id: 0 }).skip(skip).limit(criteria.size);
     result = await query.toArray();
 
     return result.map((doc: Document) => {

@@ -1,12 +1,12 @@
 export default class TermCriteria {
   constructor(
+    public readonly size: number,
+    public readonly page: number,
     public readonly term?: string,
     public readonly hashtags?: string[],
-    public readonly size?: number,
-    public readonly page?: number,
   ) {}
 
-  static from(params: { term?: string; hashtags?: string[]; size?: number; page?: number }) {
-    return new TermCriteria(params.term, params.hashtags, params.size, params.page);
+  static from(params: { size: number; page: number; term?: string; hashtags?: string[] }) {
+    return new TermCriteria(params.size, params.page, params.term, params.hashtags);
   }
 }
