@@ -11,7 +11,9 @@ export default class SearchTermQueryHandler implements IQueryHandler<SearchTermQ
   constructor(@Inject(TERM_REPOSITORY) private readonly termRepository: TermRepository) {}
 
   async execute(query: SearchTermQuery): Promise<QueryResponse> {
-    const terms = await this.termRepository.search(TermCriteria.from({ term: query.term }));
+    const terms = await this.termRepository.search(
+      TermCriteria.from({ term: query.term, size: query.size, page: query.page }),
+    );
     return SearchTermResponse.fromTerms(terms);
   }
 }
