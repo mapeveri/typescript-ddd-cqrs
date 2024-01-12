@@ -4,6 +4,7 @@ import TermRepository from '@src/languages/domain/term/termRepository';
 import MongoRepository from '@src/shared/infrastructure/persistence/mongo/mongoRepository';
 import { Document } from 'mongodb';
 import TermCriteria from '@src/languages/domain/term/termCriteria';
+import { SortDirection } from 'typeorm';
 
 @Injectable()
 export default class MongoTermRepository extends MongoRepository<Term> implements TermRepository {
@@ -16,6 +17,7 @@ export default class MongoTermRepository extends MongoRepository<Term> implement
     const searchQuery = {};
     const term = criteria.term;
     const hashtags = criteria.hashtags;
+    const orderBy = criteria.orderBy;
 
     if (term) {
       const regexTerm = new RegExp(term, 'i');
@@ -30,8 +32,17 @@ export default class MongoTermRepository extends MongoRepository<Term> implement
       });
     }
 
+    const queryProject = this.collection.find(searchQuery).project({ _id: 0 });
+
+    if (orderBy) {
+      const sortOptions: [string, SortDirection][] = [];
+      sortOptions.push([orderBy.key, orderBy.order === 'asc' ? 1 : -1]);
+
+      queryProject.sort(sortOptions);
+    }
+
     const skip = (criteria.page - 1) * criteria.size;
-    const query = this.collection.find(searchQuery).project({ _id: 0 }).skip(skip).limit(criteria.size);
+    const query = queryProject.skip(skip).limit(criteria.size);
     result = await query.toArray();
 
     return result.map((doc: Document) => {
