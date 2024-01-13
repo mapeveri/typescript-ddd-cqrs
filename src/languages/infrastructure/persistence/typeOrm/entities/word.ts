@@ -6,6 +6,7 @@ import { ValueObjectTransformer } from '@src/shared/infrastructure/persistence/t
 import WordTermCollectionTransformer from '../transformers/wordTermCollectionTransformer';
 import WordTermCollection from '@src/languages/domain/word/valueObjects/wordTermCollection';
 import UserId from '@src/languages/domain/user/valueObjects/userId';
+import { dates } from '@src/languages/infrastructure/persistence/typeOrm/entities/common/dates';
 
 export default new EntitySchema<Word>({
   name: Word.name,
@@ -33,5 +34,6 @@ export default new EntitySchema<Word>({
       type: String,
       transformer: ValueObjectTransformer(UserId),
     },
+    ...dates,
   },
 });

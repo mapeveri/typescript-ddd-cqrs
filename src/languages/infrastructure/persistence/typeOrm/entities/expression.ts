@@ -5,6 +5,7 @@ import { ValueObjectTransformer } from '@src/shared/infrastructure/persistence/t
 import ExpressionTermCollectionTransformer from '../transformers/expressionTermCollectionTransformer';
 import ExpressionTermCollection from '@src/languages/domain/expression/valueObjects/expressionTermCollection';
 import UserId from '@src/languages/domain/user/valueObjects/userId';
+import { dates } from '@src/languages/infrastructure/persistence/typeOrm/entities/common/dates';
 
 export default new EntitySchema<Expression>({
   name: Expression.name,
@@ -31,5 +32,6 @@ export default new EntitySchema<Expression>({
       type: String,
       transformer: ValueObjectTransformer(UserId),
     },
+    ...dates,
   },
 });
