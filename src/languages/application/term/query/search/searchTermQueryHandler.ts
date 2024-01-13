@@ -11,9 +11,12 @@ export default class SearchTermQueryHandler implements IQueryHandler<SearchTermQ
   constructor(@Inject(TERM_REPOSITORY) private readonly termRepository: TermRepository) {}
 
   async execute(query: SearchTermQuery): Promise<QueryResponse> {
-    const terms = await this.termRepository.search(
-      TermCriteria.from({ term: query.term, size: query.size, page: query.page }),
-    );
+    const criteria = { term: query.term, size: query.size, page: query.page };
+    /* if (query.orderBy && query.orderType) {
+      criteria['order'] = { key: query.orderBy, order: query.orderType }
+    } */
+
+    const terms = await this.termRepository.search(TermCriteria.from(criteria));
     return SearchTermResponse.fromTerms(terms);
   }
 }

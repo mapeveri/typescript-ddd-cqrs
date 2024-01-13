@@ -37,7 +37,9 @@ export default class SearchTermsGetController {
     @Param('term') term: string,
     @Query('size', new DefaultValuePipe(10), ParseIntPipe) size: number,
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
+    @Query('orderBy') orderBy: string,
+    @Query('orderType') orderType: string,
   ): Promise<any> {
-    return await this.queryBus.ask(new SearchTermQuery(term, size, page));
+    return await this.queryBus.ask(new SearchTermQuery(term, size, page, orderBy, orderType));
   }
 }
