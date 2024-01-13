@@ -40,6 +40,7 @@ describe('SearchTermQueryHandler', () => {
           type: term.type.value,
           hashtags: term.hashtags,
           totalLikes: term.totalLikes,
+          createdAt: term.createdAt.toISOString(),
         },
       ]);
     });

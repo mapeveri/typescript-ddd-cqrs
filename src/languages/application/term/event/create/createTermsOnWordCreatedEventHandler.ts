@@ -19,6 +19,7 @@ export default class CreateTermsOnWordCreatedEventHandler implements IEventHandl
           term['example'],
           term['hashtags'],
           TermTypeEnum.WORD,
+          new Date(event.occurredOn),
         ),
       );
     }

@@ -4,7 +4,7 @@ import TermTypeMother from './valueObjects/termTypeMother';
 
 export class TermMother {
   static random(props?: Partial<Term>): Term {
-    const { id, title, description, example, type, hashtags, totalLikes } = props ?? {};
+    const { id, title, description, example, type, hashtags, totalLikes, createdAt } = props ?? {};
 
     return new Term(
       id ?? faker.datatype.uuid(),
@@ -14,6 +14,7 @@ export class TermMother {
       type ?? TermTypeMother.random(),
       hashtags ?? [],
       totalLikes ?? 0,
+      createdAt ?? faker.date.past(),
     );
   }
 }

@@ -46,7 +46,16 @@ export default class MongoTermRepository extends MongoRepository<Term> implement
     result = await query.toArray();
 
     return result.map((doc: Document) => {
-      return Term.create(doc.id, doc.title, doc.description, doc.example, doc.type, doc.hashtags, doc.totalLikes);
+      return Term.create(
+        doc.id,
+        doc.title,
+        doc.description,
+        doc.example,
+        doc.type,
+        doc.hashtags,
+        doc.totalLikes,
+        doc.createdAt,
+      );
     });
   }
 }

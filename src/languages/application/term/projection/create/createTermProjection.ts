@@ -8,5 +8,6 @@ export default class CreateTermProjection implements Projection {
     public readonly example: string,
     public readonly hashtags: Array<string>,
     public readonly type: string,
+    public readonly createdAt: Date,
   ) {}
 }

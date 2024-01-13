@@ -19,6 +19,7 @@ export default class CreateTermsOnExpressionCreatedEventHandler implements IEven
           term['example'],
           term['hashtags'],
           TermTypeEnum.EXPRESSION,
+          new Date(event.occurredOn),
         ),
       );
     }

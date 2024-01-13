@@ -33,6 +33,7 @@ export default class CreateTermProjectionHandler implements IProjectionHandler<C
       TermType.of(command.type),
       command.hashtags,
       0,
+      command.createdAt,
     );
   }
 }

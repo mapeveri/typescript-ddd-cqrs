@@ -10,6 +10,7 @@ export default class Term extends EntityProjection {
     readonly type: TermType,
     readonly hashtags: Array<string>,
     readonly totalLikes: number,
+    readonly createdAt: Date,
   ) {
     super();
   }
@@ -22,8 +23,9 @@ export default class Term extends EntityProjection {
     type: TermType,
     hashtags: Array<string>,
     totalLikes: number,
+    createdAt: Date,
   ): Term {
-    return new this(id, title, description, example, type, hashtags, totalLikes);
+    return new this(id, title, description, example, type, hashtags, totalLikes, createdAt);
   }
 
   toPrimitives(): object {
@@ -35,6 +37,7 @@ export default class Term extends EntityProjection {
       type: this.type.value,
       hashtags: this.hashtags,
       totalLikes: this.totalLikes,
+      createdAt: this.createdAt.toISOString(),
     };
   }
 }
