@@ -54,7 +54,7 @@ export default class MongoTermRepository extends MongoRepository<Term> implement
         doc.type,
         doc.hashtags,
         doc.totalLikes,
-        doc.createdAt,
+        new Date(doc.createdAt),
       );
     });
   }
