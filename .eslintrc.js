@@ -29,7 +29,13 @@ module.exports = {
       { blankLine: 'always', prev: 'export', next: '*' },
       { blankLine: 'always', prev: '*', next: 'export' },
     ],
-
+    '@typescript-eslint/no-inferrable-types': [
+      'error',
+      {
+        ignoreParameters: true,
+        ignoreProperties: true,
+      },
+    ],
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-empty-function': 'off',

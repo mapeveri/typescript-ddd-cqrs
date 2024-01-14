@@ -36,7 +36,7 @@ export default class MongoTermRepository extends MongoRepository<Term> implement
 
     if (orderBy) {
       const sortOptions: [string, SortDirection][] = [];
-      sortOptions.push([orderBy.key, orderBy.order === 'asc' ? 1 : -1]);
+      sortOptions.push([orderBy.key, orderBy.orderType === 'asc' ? 1 : -1]);
 
       queryProject.sort(sortOptions);
     }

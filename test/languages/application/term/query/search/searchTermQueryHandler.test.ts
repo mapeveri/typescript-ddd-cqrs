@@ -25,7 +25,13 @@ describe('SearchTermQueryHandler', () => {
 
     it('should search terms based on a term search', async () => {
       const termToSearch = 'Hello world';
-      const query = SearchTermQueryMother.random({ term: termToSearch });
+      const query = SearchTermQueryMother.random({
+        term: termToSearch,
+        page: 1,
+        size: 5,
+        orderBy: 'createdAt',
+        orderType: 'desc',
+      });
       const term: Term = TermMother.random({ title: termToSearch });
       termRepository.add(term);
 

@@ -14,7 +14,14 @@ async function bootstrap() {
   app.enableShutdownHooks();
 
   app.use(helmet());
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      transformOptions: {
+        enableImplicitConversion: true,
+      },
+    }),
+  );
   app.setGlobalPrefix('api/v1');
   app.enableCors({
     origin: process.env.FRONTED_URL,
