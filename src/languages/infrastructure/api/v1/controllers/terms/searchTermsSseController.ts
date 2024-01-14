@@ -2,7 +2,9 @@ import { Controller, DefaultValuePipe, Inject, Param, ParseIntPipe, Query, Sse }
 import { Observable, Subscription } from 'rxjs';
 import { QUERY_BUS, QueryBus } from '@src/shared/domain/bus/queryBus/queryBus';
 import SearchTermQuery from '@src/languages/application/term/query/search/searchTermQuery';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Terms')
 @Controller('sse')
 export class SearchTermsSseController {
   private EVENT_NAME = 'terms';

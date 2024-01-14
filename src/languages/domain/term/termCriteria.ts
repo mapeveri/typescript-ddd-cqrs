@@ -1,4 +1,6 @@
-type Order = { key: string; order: 'desc' | 'asc' };
+import { OrderBy } from '@src/shared/domain/criteria/orderBy';
+
+export type TermCriteriaParams = { size: number; page: number; term?: string; hashtags?: string[]; orderBy?: OrderBy };
 
 export default class TermCriteria {
   constructor(
@@ -6,10 +8,10 @@ export default class TermCriteria {
     public readonly page: number,
     public readonly term?: string,
     public readonly hashtags?: string[],
-    public readonly orderBy?: Order,
+    public readonly orderBy?: OrderBy,
   ) {}
 
-  static from(params: { size: number; page: number; term?: string; hashtags?: string[]; orderBy?: Order }) {
+  static from(params: TermCriteriaParams) {
     return new TermCriteria(params.size, params.page, params.term, params.hashtags, params.orderBy);
   }
 }

@@ -24,7 +24,7 @@ export default class MongoFindSuggestionsTermReadLayer implements FindSuggestion
       hashtags: user.interests,
       size: 5,
       page: 1,
-      orderBy: { key: 'createdAt', order: 'desc' },
+      orderBy: { key: 'createdAt', orderType: 'desc' },
     });
     const terms = await this.termRepository.search(criteria);
 
