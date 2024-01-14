@@ -1,8 +1,9 @@
-import { Controller, DefaultValuePipe, Inject, Param, ParseIntPipe, Query, Sse } from '@nestjs/common';
+import { Controller, Inject, Param, Query, Sse } from '@nestjs/common';
 import { Observable, Subscription } from 'rxjs';
 import { QUERY_BUS, QueryBus } from '@src/shared/domain/bus/queryBus/queryBus';
 import SearchTermQuery from '@src/languages/application/term/query/search/searchTermQuery';
 import { ApiTags } from '@nestjs/swagger';
+import { SearchTermsQueryParamsDto } from '@src/languages/infrastructure/api/v1/controllers/terms/searchTermsQueryParamsDto';
 
 @ApiTags('Terms')
 @Controller('sse')
@@ -15,14 +16,15 @@ export class SearchTermsSseController {
   async sse(
     @Param('userId') userId: string,
     @Param('term') term: string,
-    @Query('size', new DefaultValuePipe(10), ParseIntPipe) size: number,
-    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
+    @Query() queryParams: SearchTermsQueryParamsDto,
   ): Promise<Observable<MessageEvent>> {
     return new Observable<MessageEvent>((observer) => {
       const subscription = new Subscription();
 
       const intervalId = setInterval(async () => {
-        const data = await this.queryBus.ask(new SearchTermQuery(term, size, page));
+        const data = await this.queryBus.ask(
+          new SearchTermQuery(term, queryParams.size, queryParams.page, queryParams.orderBy, queryParams.orderType),
+        );
         const event = new MessageEvent(this.EVENT_NAME, { data: JSON.stringify(data.content) });
 
         observer.next(event);
