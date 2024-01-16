@@ -29,7 +29,18 @@ describe('FindSuggestionsTermQueryHandler', () => {
 
       const foundSuggestionsTerm = await findSuggestionsTermQueryHandler.execute(query);
 
-      expect(foundSuggestionsTerm.content).toEqual([term.toPrimitives()]);
+      expect(foundSuggestionsTerm.content).toEqual([
+        {
+          id: term.id,
+          title: term.title,
+          description: term.description,
+          example: term.example,
+          type: term.type.value,
+          hashtags: term.hashtags,
+          totalLikes: term.totalLikes,
+          createdAt: term.createdAt.toISOString(),
+        },
+      ]);
     });
   });
 });

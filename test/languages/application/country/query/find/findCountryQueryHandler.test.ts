@@ -32,7 +32,12 @@ describe('FindCountryQueryHandler', () => {
 
       const expected = await findCountryQueryHandler.execute(query);
 
-      expect(expected.content).toEqual(country.toPrimitives());
+      expect(expected.content).toEqual({
+        id: country.id.toString(),
+        name: country.name,
+        iso: country.iso,
+        languages: country.languages.toArray(),
+      });
     });
   });
 });
