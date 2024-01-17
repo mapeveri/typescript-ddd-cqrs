@@ -13,7 +13,13 @@ module.exports = {
   rules: {
     'no-undef': ['error', { typeof: true }],
     'no-unused-vars': 'off',
-    '@typescript-eslint/no-unused-vars': 'error',
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      {
+        varsIgnorePattern: '^_',
+        argsIgnorePattern: '^_',
+      },
+    ],
     'no-use-before-define': 'error',
 
     quotes: [2, 'single', { avoidEscape: true }],

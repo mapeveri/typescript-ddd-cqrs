@@ -11,4 +11,4 @@ async function bootstrap() {
   await rabbitMq.listen();
 }
 
-bootstrap();
+void bootstrap();
