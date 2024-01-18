@@ -18,7 +18,7 @@ Configuration for development.
 ```shell script
     docker-compose run app npm run typeorm migration:run
 ```
-5. Create user with google (check oauth2 section). It's to get a token from google and it allow you to use the endpoint /api/v1/auth/login to log in in the application.
+5. Create user with google (check oauth2 section). It's to get a token from google and it allow you to use the endpoint /api/v1/auth/login to log in to the application.
 
 ### Running
 
@@ -42,7 +42,7 @@ To get a token for testing you should go to https://developers.google.com/oauthp
 
 ### Consume async domain events:
 
-To consume the async domain events you need to run the next command:
+To consume async domain events you need to run the next command:
 
 ```
   make run-consume-events
