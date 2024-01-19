@@ -14,7 +14,7 @@ import FindSuggestionsTermQuery from '@src/languages/application/term/query/sugg
 
 @ApiTags('Terms')
 @Controller()
-export default class FindSuggestionsTermController {
+export default class FindSuggestionsTermGetController {
   public constructor(@Inject(QUERY_BUS) private queryBus: QueryBus) {}
 
   @Get('user/suggestions')

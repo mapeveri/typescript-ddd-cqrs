@@ -2,7 +2,7 @@ import LoginPostController from '@src/languages/infrastructure/api/v1/controller
 import RefreshTokenPostController from '@src/languages/infrastructure/api/v1/controllers/auth/refreshTokenPostController';
 import MeGetController from '@src/languages/infrastructure/api/v1/controllers/auth/meGetController';
 import SearchTermsGetController from '@src/languages/infrastructure/api/v1/controllers/terms/searchTermsGetController';
-import FindSuggestionsTermController from '@src/languages/infrastructure/api/v1/controllers/terms/findSuggestionsTermController';
+import FindSuggestionsTermGetController from '@src/languages/infrastructure/api/v1/controllers/terms/findSuggestionsTermGetController';
 import WordPostController from '@src/languages/infrastructure/api/v1/controllers/words/wordPostController';
 import ExpressionPostController from '@src/languages/infrastructure/api/v1/controllers/expressions/expressionPostController';
 import CountriesGetController from '@src/languages/infrastructure/api/v1/controllers/countries/countriesGetController';
@@ -16,7 +16,7 @@ export const controllers = [
   RefreshTokenPostController,
   MeGetController,
   SearchTermsGetController,
-  FindSuggestionsTermController,
+  FindSuggestionsTermGetController,
   WordPostController,
   ExpressionPostController,
   CountriesGetController,
