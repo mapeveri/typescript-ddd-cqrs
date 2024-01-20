@@ -9,7 +9,7 @@ export default class TermType {
   constructor(type: string) {
     const entry = Object.entries(TermTypeEnum).find(([, item]) => item === type);
     if (!entry) {
-      throw new Error('Tipo no válido');
+      throw new Error('Invalid type');
     }
 
     this.value = entry[1];
