@@ -6,7 +6,7 @@ import WordId from '@src/languages/domain/word/valueObjects/wordId';
 import CountryId from '@src/languages/domain/country/valueObjects/countryId';
 import UserId from '@src/languages/domain/user/valueObjects/userId';
 import WordTermCollection from '@src/languages/domain/word/valueObjects/wordTermCollection';
-import WordAlreadyExistsException from '@src/languages/domain/word/exceptions/WordAlreadyExistsException';
+import WordAlreadyExistsException from '@src/languages/domain/word/exceptions/wordAlreadyExistsException';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { CommandHandler, ICommandHandler } from '@src/shared/domain/bus/commandBus/commandHandler';
 

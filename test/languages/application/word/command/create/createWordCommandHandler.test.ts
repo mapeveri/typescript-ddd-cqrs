@@ -7,7 +7,7 @@ import WordMother from '@test/languages/domain/word/wordMother';
 import Word from '@src/languages/domain/word/word';
 import { WordCreatedEventMother } from '@test/languages/domain/word/domainEvents/wordCreatedEventMother';
 import { UserIdMother } from '@test/languages/domain/user/valueObjects/userIdMother';
-import WordAlreadyExistsException from '@src/languages/domain/word/exceptions/WordAlreadyExistsException';
+import WordAlreadyExistsException from '@src/languages/domain/word/exceptions/wordAlreadyExistsException';
 
 describe('CreateWordCommandHandler', () => {
   let eventBus: EventBusMock;
