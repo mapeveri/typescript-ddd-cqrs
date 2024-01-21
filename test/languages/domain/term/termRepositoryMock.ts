@@ -1,12 +1,12 @@
 import { jest } from '@jest/globals';
-import Term from '@src/languages/domain/term/term';
-import TermRepository from '@src/languages/domain/term/termRepository';
-import TermCriteria from '@src/languages/domain/term/termCriteria';
+import TermView from '@src/languages/application/term/projection/termView';
+import TermViewRepository from '@src/languages/application/term/projection/termViewRepository';
+import TermViewCriteria from '@src/languages/application/term/projection/termViewCriteria';
 
-export class TermRepositoryMock implements TermRepository {
+export class TermRepositoryMock implements TermViewRepository {
   private searchMock: jest.Mock;
   private saveMock: jest.Mock;
-  private terms: Term[];
+  private terms: TermView[];
 
   constructor() {
     this.searchMock = jest.fn();
@@ -14,16 +14,16 @@ export class TermRepositoryMock implements TermRepository {
     this.terms = [];
   }
 
-  add(term: Term) {
+  add(term: TermView) {
     this.terms.push(term);
   }
 
-  async search(criteria: TermCriteria): Promise<Term[]> {
+  async search(criteria: TermViewCriteria): Promise<TermView[]> {
     this.searchMock(criteria);
     return this.terms;
   }
 
-  async save(term: Term): Promise<void> {
+  async save(term: TermView): Promise<void> {
     this.saveMock(term);
   }
 }

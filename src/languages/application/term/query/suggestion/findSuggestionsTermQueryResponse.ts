@@ -1,4 +1,4 @@
-import Term from '@src/languages/domain/term/term';
+import TermView from '@src/languages/application/term/projection/termView';
 import QueryResponse from '@src/shared/domain/bus/queryBus/queryResponse';
 
 export default class FindSuggestionsTermQueryResponse extends QueryResponse {
@@ -6,7 +6,7 @@ export default class FindSuggestionsTermQueryResponse extends QueryResponse {
     super(terms);
   }
 
-  static fromTerms(terms: Term[]): FindSuggestionsTermQueryResponse {
-    return new FindSuggestionsTermQueryResponse(terms.map((term: Term) => term.toPrimitives()));
+  static fromTerms(terms: TermView[]): FindSuggestionsTermQueryResponse {
+    return new FindSuggestionsTermQueryResponse(terms.map((term: TermView) => term.toPrimitives()));
   }
 }

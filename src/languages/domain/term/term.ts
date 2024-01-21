@@ -1,43 +1,28 @@
-import TermType from './valueObjects/termType';
-import EntityProjection from '@src/shared/domain/projection/entityProjection';
+import TermType from '@src/languages/domain/term/valueObjects/termType';
+import TermId from '@src/languages/domain/term/valueObjects/termId';
+import CountryId from '@src/languages/domain/country/valueObjects/countryId';
+import UserId from '@src/languages/domain/user/valueObjects/userId';
 
-export default class Term extends EntityProjection {
+export default class Term {
   constructor(
-    readonly id: string,
-    readonly title: string,
-    readonly description: string,
-    readonly example: string,
+    readonly id: TermId,
+    readonly languageId: string,
     readonly type: TermType,
-    readonly hashtags: Array<string>,
-    readonly totalLikes: number,
-    readonly createdAt: Date,
-  ) {
-    super();
-  }
+    readonly countryId: CountryId,
+    readonly userId: UserId,
+  ) {}
 
-  static create(
-    id: string,
-    title: string,
-    description: string,
-    example: string,
-    type: TermType,
-    hashtags: Array<string>,
-    totalLikes: number,
-    createdAt: Date,
-  ): Term {
-    return new this(id, title, description, example, type, hashtags, totalLikes, createdAt);
+  static create(id: TermId, languageId: string, type: TermType, countryId: CountryId, userId: UserId): Term {
+    return new this(id, languageId, type, countryId, userId);
   }
 
   toPrimitives(): object {
     return {
-      id: this.id,
-      title: this.title,
-      description: this.description,
-      example: this.example,
+      id: this.id.value,
+      languageId: this.languageId,
       type: this.type.value,
-      hashtags: this.hashtags,
-      totalLikes: this.totalLikes,
-      createdAt: this.createdAt.toISOString(),
+      countryId: this.countryId.value,
+      userId: this.userId.value,
     };
   }
 }

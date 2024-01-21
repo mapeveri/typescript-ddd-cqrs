@@ -1,12 +1,12 @@
-import Term from '@src/languages/domain/term/term';
+import TermView from '@src/languages/application/term/projection/termView';
 import faker from 'faker';
 import TermTypeMother from './valueObjects/termTypeMother';
 
 export class TermMother {
-  static random(props?: Partial<Term>): Term {
+  static random(props?: Partial<TermView>): TermView {
     const { id, title, description, example, type, hashtags, totalLikes, createdAt } = props ?? {};
 
-    return new Term(
+    return new TermView(
       id ?? faker.datatype.uuid(),
       title ?? faker.random.word(),
       description ?? faker.random.word(),

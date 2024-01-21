@@ -2,14 +2,16 @@ import { COMMAND_BUS, CommandBus } from '@src/shared/domain/bus/commandBus/comma
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { EventsHandler, IEventHandler } from '@src/shared/domain/bus/eventBus/eventsHandler';
 import TermType from '@src/languages/domain/term/valueObjects/termType';
-import TermCreatedFailedEvent from '@src/languages/domain/term/domainEvents/termCreatedFailedEvent';
+import TermViewCreatedFailedEvent from '@src/languages/application/term/projection/termViewCreatedFailedEvent';
 import DeleteExpressionCommand from '../../command/delete/deleteExpressionCommand';
 
-@EventsHandler(TermCreatedFailedEvent)
-export default class DeleteExpressionOnTermCreatedFailedEventHandler implements IEventHandler<TermCreatedFailedEvent> {
+@EventsHandler(TermViewCreatedFailedEvent)
+export default class DeleteExpressionOnTermCreatedFailedEventHandler
+  implements IEventHandler<TermViewCreatedFailedEvent>
+{
   constructor(@Inject(COMMAND_BUS) private readonly commandBus: CommandBus) {}
 
-  async handle(event: TermCreatedFailedEvent): Promise<void> {
+  async handle(event: TermViewCreatedFailedEvent): Promise<void> {
     const termType = TermType.of(event.type);
     if (!termType.isExpression()) {
       return;

@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it } from '@jest/globals';
 import { SearchTermQueryMother } from './searchTermQueryMother';
 import SearchTermQueryHandler from '@src/languages/application/term/query/search/searchTermQueryHandler';
 import { TermMother } from '@test/languages/domain/term/termMother';
-import Term from '@src/languages/domain/term/term';
+import TermView from '@src/languages/application/term/projection/termView';
 import { TermRepositoryMock } from '@test/languages/domain/term/termRepositoryMock';
 
 describe('SearchTermQueryHandler', () => {
@@ -32,7 +32,7 @@ describe('SearchTermQueryHandler', () => {
         orderBy: 'createdAt',
         orderType: 'desc',
       });
-      const term: Term = TermMother.random({ title: termToSearch });
+      const term: TermView = TermMother.random({ title: termToSearch });
       termRepository.add(term);
 
       const foundTerms = await searchTermQueryHandler.execute(query);

@@ -6,8 +6,8 @@ import { EXPRESSION_REPOSITORY } from '@src/languages/domain/expression/expressi
 import TypeOrmExpressionRepository from '../infrastructure/persistence/typeOrm/repositories/typeOrmExpressionRepository';
 import TypeOrmWordRepository from '../infrastructure/persistence/typeOrm/repositories/typeOrmWordRepository';
 import TypeOrmUserRepository from '../infrastructure/persistence/typeOrm/repositories/typeOrmUserRepository';
-import { TERM_REPOSITORY } from '@src/languages/domain/term/termRepository';
-import MongoTermRepository from '../infrastructure/persistence/mongo/repositories/mongoTermRepository';
+import { TERM_REPOSITORY } from '@src/languages/application/term/projection/termViewRepository';
+import MongoTermViewRepository from '../infrastructure/persistence/mongo/repositories/mongoTermViewRepository';
 import { USER_REPOSITORY } from '@src/languages/domain/user/userRepository';
 import { WORD_REPOSITORY } from '@src/languages/domain/word/wordRepository';
 
@@ -26,7 +26,7 @@ export const repositories = [
   },
   {
     provide: TERM_REPOSITORY,
-    useClass: MongoTermRepository,
+    useClass: MongoTermViewRepository,
   },
   {
     provide: USER_REPOSITORY,

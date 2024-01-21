@@ -1,6 +1,6 @@
 import { DomainEvent } from '@src/shared/domain/bus/eventBus/domainEvent';
 
-export default class TermCreatedFailedEvent extends DomainEvent {
+export default class TermViewCreatedFailedEvent extends DomainEvent {
   constructor(public readonly id: string, public readonly type: string, eventId = '') {
     super(id, eventId);
   }

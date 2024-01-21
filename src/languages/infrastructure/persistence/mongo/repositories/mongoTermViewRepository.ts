@@ -1,18 +1,18 @@
 import { Injectable } from '@nestjs/common';
-import Term from '@src/languages/domain/term/term';
-import TermRepository from '@src/languages/domain/term/termRepository';
+import TermView from '@src/languages/application/term/projection/termView';
+import TermViewRepository from '@src/languages/application/term/projection/termViewRepository';
 import MongoRepository from '@src/shared/infrastructure/persistence/mongo/mongoRepository';
 import { Document } from 'mongodb';
-import TermCriteria from '@src/languages/domain/term/termCriteria';
+import TermViewCriteria from '@src/languages/application/term/projection/termViewCriteria';
 import { SortDirection } from 'typeorm';
 
 @Injectable()
-export default class MongoTermRepository extends MongoRepository<Term> implements TermRepository {
+export default class MongoTermViewRepository extends MongoRepository<TermView> implements TermViewRepository {
   constructor() {
     super('terms');
   }
 
-  async search(criteria: TermCriteria): Promise<Term[]> {
+  async search(criteria: TermViewCriteria): Promise<TermView[]> {
     let result = [];
     const searchQuery = {};
     const term = criteria.term;
@@ -46,7 +46,7 @@ export default class MongoTermRepository extends MongoRepository<Term> implement
     result = await query.toArray();
 
     return result.map((doc: Document) => {
-      return Term.create(
+      return TermView.create(
         doc.id,
         doc.title,
         doc.description,
