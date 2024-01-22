@@ -1,7 +1,7 @@
 import { expect } from '@jest/globals';
-import CreateExpressionCommand from '@src/languages/application/expression/command/create/createExpressionCommand';
-import ExpressionCreatedEvent from '@src/languages/domain/expression/domainEvents/expressionCreatedEvent';
-import { ExpressionTermPrimitives } from '@src/languages/domain/expression/valueObjects/expressionTerm';
+import CreateExpressionCommand from '@src/languages/application/term/command/create/createExpressionCommand';
+import ExpressionCreatedEvent from '@src/languages/domain/term/expression/domainEvents/expressionCreatedEvent';
+import { ExpressionTermPrimitives } from '@src/languages/domain/term/expression/valueObjects/expressionTerm';
 
 export class ExpressionCreatedEventMother {
   static createFromCreateExpressionCommand(command: CreateExpressionCommand): ExpressionCreatedEvent {
@@ -21,7 +21,7 @@ export class ExpressionCreatedEventMother {
       command.countryId,
       command.userId,
       terms,
-      eventId
+      eventId,
     );
   }
 }

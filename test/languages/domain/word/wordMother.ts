@@ -1,14 +1,14 @@
-import CreateWordCommand from '@src/languages/application/word/command/create/createWordCommand';
-import Word from '@src/languages/domain/word/word';
+import CreateWordCommand from '@src/languages/application/term/command/create/createWordCommand';
+import Word from '@src/languages/domain/term/word/word';
 import UserId from '@src/languages/domain/user/valueObjects/userId';
 import { WordIdMother } from './valueObjects/wordIdMother';
 import { CountryIdMother } from '../country/valueObjects/countryIdMother';
 import WordTermCollectionMother from './valueObjects/wordTermCollectionMother';
-import WordTerm from '@src/languages/domain/word/valueObjects/wordTerm';
+import WordTerm from '@src/languages/domain/term/word/valueObjects/wordTerm';
 import WordTermMother, { WordTermMotherProps } from './valueObjects/wordTermMother';
-import WordId from '@src/languages/domain/word/valueObjects/wordId';
+import WordId from '@src/languages/domain/term/word/valueObjects/wordId';
 import CountryId from '@src/languages/domain/country/valueObjects/countryId';
-import WordTermCollection from '@src/languages/domain/word/valueObjects/wordTermCollection';
+import WordTermCollection from '@src/languages/domain/term/word/valueObjects/wordTermCollection';
 import { UserIdMother } from '../user/valueObjects/userIdMother';
 import faker from 'faker';
 
@@ -29,7 +29,7 @@ export default class WordMother {
       languageId ?? faker.datatype.uuid(),
       countryId ?? CountryIdMother.random(),
       terms ?? WordTermCollectionMother.random([]),
-      userId ?? UserIdMother.random()
+      userId ?? UserIdMother.random(),
     );
   }
 
@@ -48,9 +48,9 @@ export default class WordMother {
       command.languageId,
       CountryIdMother.random(command.countryId),
       WordTermCollectionMother.random(
-        terms?.map((term) => term.toPrimitives()) ?? [WordTermMother.random().toPrimitives()]
+        terms?.map((term) => term.toPrimitives()) ?? [WordTermMother.random().toPrimitives()],
       ),
-      userId
+      userId,
     );
   }
 }

@@ -1,12 +1,14 @@
-import ExpressionRepository, { EXPRESSION_REPOSITORY } from '@src/languages/domain/expression/expressionRepository';
+import ExpressionRepository, {
+  EXPRESSION_REPOSITORY,
+} from '@src/languages/domain/term/expression/expressionRepository';
 import { ASYNC_EVENT_BUS, EventBus } from '@src/shared/domain/bus/eventBus/eventBus';
 import CreateExpressionCommand from './createExpressionCommand';
-import ExpressionId from '@src/languages/domain/expression/valueObjects/expressionId';
-import Expression from '@src/languages/domain/expression/expression';
+import ExpressionId from '@src/languages/domain/term/expression/valueObjects/expressionId';
+import Expression from '@src/languages/domain/term/expression/expression';
 import CountryId from '@src/languages/domain/country/valueObjects/countryId';
-import ExpressionTermCollection from '@src/languages/domain/expression/valueObjects/expressionTermCollection';
+import ExpressionTermCollection from '@src/languages/domain/term/expression/valueObjects/expressionTermCollection';
 import UserId from '@src/languages/domain/user/valueObjects/userId';
-import ExpressionAlreadyExistsException from '@src/languages/domain/expression/exceptions/expressionAlreadyExistsException';
+import ExpressionAlreadyExistsException from '@src/languages/domain/term/expression/exceptions/expressionAlreadyExistsException';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { CommandHandler, ICommandHandler } from '@src/shared/domain/bus/commandBus/commandHandler';
 

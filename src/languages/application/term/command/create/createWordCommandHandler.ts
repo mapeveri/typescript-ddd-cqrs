@@ -1,12 +1,12 @@
-import WordRepository, { WORD_REPOSITORY } from '@src/languages/domain/word/wordRepository';
+import WordRepository, { WORD_REPOSITORY } from '@src/languages/domain/term/word/wordRepository';
 import { ASYNC_EVENT_BUS, EventBus } from '@src/shared/domain/bus/eventBus/eventBus';
 import CreateWordCommand from './createWordCommand';
-import Word from '@src/languages/domain/word/word';
-import WordId from '@src/languages/domain/word/valueObjects/wordId';
+import Word from '@src/languages/domain/term/word/word';
+import WordId from '@src/languages/domain/term/word/valueObjects/wordId';
 import CountryId from '@src/languages/domain/country/valueObjects/countryId';
 import UserId from '@src/languages/domain/user/valueObjects/userId';
-import WordTermCollection from '@src/languages/domain/word/valueObjects/wordTermCollection';
-import WordAlreadyExistsException from '@src/languages/domain/word/exceptions/wordAlreadyExistsException';
+import WordTermCollection from '@src/languages/domain/term/word/valueObjects/wordTermCollection';
+import WordAlreadyExistsException from '@src/languages/domain/term/word/exceptions/wordAlreadyExistsException';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { CommandHandler, ICommandHandler } from '@src/shared/domain/bus/commandBus/commandHandler';
 

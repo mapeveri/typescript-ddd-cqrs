@@ -1,13 +1,13 @@
 import { beforeEach, describe, expect, it, jest } from '@jest/globals';
 import { EventBusMock } from '@test/shared/domain/buses/eventBus/eventBusMock';
 import { UserIdMother } from '@test/languages/domain/user/valueObjects/userIdMother';
-import CreateExpressionCommandHandler from '@src/languages/application/expression/command/create/createExpressionCommandHandler';
+import CreateExpressionCommandHandler from '@src/languages/application/term/command/create/createExpressionCommandHandler';
 import { CreateExpressionCommandMother } from './createExpressionCommandMother';
 import { ExpressionRepositoryMock } from '@test/languages/domain/expression/expressionRepositoryMock';
 import ExpressionMother from '@test/languages/domain/expression/expressionMother';
-import Expression from '@src/languages/domain/expression/expression';
+import Expression from '@src/languages/domain/term/expression/expression';
 import { ExpressionCreatedEventMother } from '@test/languages/domain/expression/domainEvents/expressionCreatedEventMother';
-import ExpressionAlreadyExistsException from '@src/languages/domain/expression/exceptions/expressionAlreadyExistsException';
+import ExpressionAlreadyExistsException from '@src/languages/domain/term/expression/exceptions/expressionAlreadyExistsException';
 
 describe('CreateExpressionCommandHandler', () => {
   let eventBus: EventBusMock;

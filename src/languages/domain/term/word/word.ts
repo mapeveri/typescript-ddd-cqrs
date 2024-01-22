@@ -1,25 +1,18 @@
-import { AggregateRoot } from '@src/shared/domain/aggregate/aggregateRoot';
-import CountryId from '../country/valueObjects/countryId';
-import UserId from '../user/valueObjects/userId';
+import CountryId from '../../country/valueObjects/countryId';
+import UserId from '../../user/valueObjects/userId';
 import WordCreatedEvent from './domainEvents/wordCreatedEvent';
 import WordTermCollection from './valueObjects/wordTermCollection';
 import WordId from './valueObjects/wordId';
+import Term from '@src/languages/domain/term/term';
+import TermType, { TermTypeEnum } from '@src/languages/domain/term/valueObjects/termType';
 
-export default class Word extends AggregateRoot {
-  id: WordId;
-  languageId: string;
-  countryId: CountryId;
+export default class Word extends Term {
   terms: WordTermCollection;
-  userId: UserId;
 
   constructor(id: WordId, languageId: string, countryId: CountryId, terms: WordTermCollection, userId: UserId) {
-    super();
+    super(id, languageId, TermType.of(TermTypeEnum.WORD), countryId, userId);
 
-    this.id = id;
-    this.languageId = languageId;
-    this.countryId = countryId;
     this.terms = terms;
-    this.userId = userId;
   }
 
   static create(id: WordId, languageId: string, countryId: CountryId, terms: WordTermCollection, userId: UserId): Word {

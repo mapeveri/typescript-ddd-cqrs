@@ -1,5 +1,5 @@
 import { beforeEach, describe, it } from '@jest/globals';
-import DeleteWordCommandHandler from '@src/languages/application/word/command/delete/deleteWordCommandHandler';
+import DeleteWordCommandHandler from '@src/languages/application/term/command/delete/deleteWordCommandHandler';
 import { WordRepositoryMock } from '@test/languages/domain/word/wordRepositoryMock';
 import WordMother from '@test/languages/domain/word/wordMother';
 import { DeleteWordCommandMother } from './deleteWordCommandMother';

@@ -1,16 +1,13 @@
-import { AggregateRoot } from '@src/shared/domain/aggregate/aggregateRoot';
-import CountryId from '../country/valueObjects/countryId';
-import UserId from '../user/valueObjects/userId';
+import CountryId from '../../country/valueObjects/countryId';
+import UserId from '../../user/valueObjects/userId';
 import ExpressionId from './valueObjects/expressionId';
 import ExpressionTermCollection from './valueObjects/expressionTermCollection';
 import ExpressionCreatedEvent from './domainEvents/expressionCreatedEvent';
+import Term from '@src/languages/domain/term/term';
+import TermType, { TermTypeEnum } from '@src/languages/domain/term/valueObjects/termType';
 
-export default class Expression extends AggregateRoot {
-  id: ExpressionId;
-  languageId: string;
-  countryId: CountryId;
+export default class Expression extends Term {
   terms: ExpressionTermCollection;
-  userId: UserId;
 
   constructor(
     id: ExpressionId,
@@ -19,13 +16,9 @@ export default class Expression extends AggregateRoot {
     terms: ExpressionTermCollection,
     userId: UserId,
   ) {
-    super();
+    super(id, languageId, TermType.of(TermTypeEnum.EXPRESSION), countryId, userId);
 
-    this.id = id;
-    this.languageId = languageId;
-    this.countryId = countryId;
     this.terms = terms;
-    this.userId = userId;
   }
 
   static create(

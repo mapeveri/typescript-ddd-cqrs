@@ -1,7 +1,7 @@
 import { beforeEach, describe, it } from '@jest/globals';
 import { ExpressionRepositoryMock } from '@test/languages/domain/expression/expressionRepositoryMock';
 import ExpressionMother from '@test/languages/domain/expression/expressionMother';
-import DeleteExpressionCommandHandler from '@src/languages/application/expression/command/delete/deleteExpressionCommandHandler';
+import DeleteExpressionCommandHandler from '@src/languages/application/term/command/delete/deleteExpressionCommandHandler';
 import { DeleteExpressionCommandMother } from './deleteExpressionCommandMother';
 
 describe('DeleteExpressionCommandHandler', () => {

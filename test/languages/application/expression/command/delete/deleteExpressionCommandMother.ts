@@ -1,4 +1,4 @@
-import DeleteExpressionCommand from '@src/languages/application/expression/command/delete/deleteExpressionCommand';
+import DeleteExpressionCommand from '@src/languages/application/term/command/delete/deleteExpressionCommand';
 import faker from 'faker';
 
 export class DeleteExpressionCommandMother {

@@ -1,4 +1,4 @@
-import WordId from '@src/languages/domain/word/valueObjects/wordId';
+import WordId from '@src/languages/domain/term/word/valueObjects/wordId';
 import faker from 'faker';
 
 export class WordIdMother {

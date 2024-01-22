@@ -2,27 +2,22 @@ import TermType from '@src/languages/domain/term/valueObjects/termType';
 import TermId from '@src/languages/domain/term/valueObjects/termId';
 import CountryId from '@src/languages/domain/country/valueObjects/countryId';
 import UserId from '@src/languages/domain/user/valueObjects/userId';
+import { AggregateRoot } from '@src/shared/domain/aggregate/aggregateRoot';
 
-export default class Term {
-  constructor(
-    readonly id: TermId,
-    readonly languageId: string,
-    readonly type: TermType,
-    readonly countryId: CountryId,
-    readonly userId: UserId,
-  ) {}
+export default abstract class Term extends AggregateRoot {
+  id: TermId;
+  languageId: string;
+  type: TermType;
+  countryId: CountryId;
+  userId: UserId;
 
-  static create(id: TermId, languageId: string, type: TermType, countryId: CountryId, userId: UserId): Term {
-    return new this(id, languageId, type, countryId, userId);
-  }
+  protected constructor(id: TermId, languageId: string, type: TermType, countryId: CountryId, userId: UserId) {
+    super();
 
-  toPrimitives(): object {
-    return {
-      id: this.id.value,
-      languageId: this.languageId,
-      type: this.type.value,
-      countryId: this.countryId.value,
-      userId: this.userId.value,
-    };
+    this.id = id;
+    this.languageId = languageId;
+    this.type = type;
+    this.countryId = countryId;
+    this.userId = userId;
   }
 }

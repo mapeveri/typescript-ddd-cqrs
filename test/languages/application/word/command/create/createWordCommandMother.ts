@@ -1,5 +1,5 @@
-import CreateWordCommand from '@src/languages/application/word/command/create/createWordCommand';
-import { WordTermPrimitives } from '@src/languages/domain/word/valueObjects/wordTerm';
+import CreateWordCommand from '@src/languages/application/term/command/create/createWordCommand';
+import { WordTermPrimitives } from '@src/languages/domain/term/word/valueObjects/wordTerm';
 import faker from 'faker';
 
 interface CreateWordCommandProps {
@@ -26,7 +26,7 @@ export class CreateWordCommandMother {
           description: faker.random.word(),
           hashtags: ['test'],
         },
-      ]
+      ],
     );
   }
 }

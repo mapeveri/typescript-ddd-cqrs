@@ -1,8 +1,8 @@
-import ExpressionId from '@src/languages/domain/expression/valueObjects/expressionId';
+import ExpressionId from '@src/languages/domain/term/expression/valueObjects/expressionId';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { CommandHandler, ICommandHandler } from '@src/shared/domain/bus/commandBus/commandHandler';
 import DeleteWordCommand from './deleteWordCommand';
-import WordRepository, { WORD_REPOSITORY } from '@src/languages/domain/word/wordRepository';
+import WordRepository, { WORD_REPOSITORY } from '@src/languages/domain/term/word/wordRepository';
 
 @CommandHandler(DeleteWordCommand)
 export default class DeleteWordCommandHandler implements ICommandHandler<DeleteWordCommand> {

@@ -1,7 +1,7 @@
 import { expect, jest } from '@jest/globals';
-import WordId from '@src/languages/domain/word/valueObjects/wordId';
-import Word from '@src/languages/domain/word/word';
-import WordRepository from '@src/languages/domain/word/wordRepository';
+import WordId from '@src/languages/domain/term/word/valueObjects/wordId';
+import Word from '@src/languages/domain/term/word/word';
+import WordRepository from '@src/languages/domain/term/word/wordRepository';
 
 export class WordRepositoryMock implements WordRepository {
   private findByIdMock: jest.Mock;

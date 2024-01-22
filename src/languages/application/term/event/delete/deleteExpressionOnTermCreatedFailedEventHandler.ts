@@ -3,7 +3,7 @@ import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { EventsHandler, IEventHandler } from '@src/shared/domain/bus/eventBus/eventsHandler';
 import TermType from '@src/languages/domain/term/valueObjects/termType';
 import TermViewCreatedFailedEvent from '@src/languages/application/term/projection/termViewCreatedFailedEvent';
-import DeleteExpressionCommand from '../../command/delete/deleteExpressionCommand';
+import DeleteExpressionCommand from '@src/languages/application/term/command/delete/deleteExpressionCommand';
 
 @EventsHandler(TermViewCreatedFailedEvent)
 export default class DeleteExpressionOnTermCreatedFailedEventHandler

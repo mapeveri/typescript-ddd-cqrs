@@ -1,7 +1,7 @@
 import { expect, jest } from '@jest/globals';
-import Expression from '@src/languages/domain/expression/expression';
-import ExpressionRepository from '@src/languages/domain/expression/expressionRepository';
-import ExpressionId from '@src/languages/domain/expression/valueObjects/expressionId';
+import Expression from '@src/languages/domain/term/expression/expression';
+import ExpressionRepository from '@src/languages/domain/term/expression/expressionRepository';
+import ExpressionId from '@src/languages/domain/term/expression/valueObjects/expressionId';
 
 export class ExpressionRepositoryMock implements ExpressionRepository {
   private findByIdMock: jest.Mock;

@@ -1,15 +1,15 @@
 import UserId from '@src/languages/domain/user/valueObjects/userId';
 import { CountryIdMother } from '../country/valueObjects/countryIdMother';
-import CreateExpressionCommand from '@src/languages/application/expression/command/create/createExpressionCommand';
-import Expression from '@src/languages/domain/expression/expression';
-import ExpressionTerm from '@src/languages/domain/expression/valueObjects/expressionTerm';
+import CreateExpressionCommand from '@src/languages/application/term/command/create/createExpressionCommand';
+import Expression from '@src/languages/domain/term/expression/expression';
+import ExpressionTerm from '@src/languages/domain/term/expression/valueObjects/expressionTerm';
 import ExpressionTermMother, { ExpressionTermMotherProps } from './valueObjects/expressionTermMother';
 import { ExpressionIdMother } from './valueObjects/expressionIdMother';
 import ExpressionTermCollectionMother from './valueObjects/expressionTermCollectionMother';
 import faker from 'faker';
-import ExpressionId from '@src/languages/domain/expression/valueObjects/expressionId';
+import ExpressionId from '@src/languages/domain/term/expression/valueObjects/expressionId';
 import CountryId from '@src/languages/domain/country/valueObjects/countryId';
-import ExpressionTermCollection from '@src/languages/domain/expression/valueObjects/expressionTermCollection';
+import ExpressionTermCollection from '@src/languages/domain/term/expression/valueObjects/expressionTermCollection';
 import { UserIdMother } from '../user/valueObjects/userIdMother';
 
 interface ExpressionMotherProps {
@@ -29,7 +29,7 @@ export default class ExpressionMother {
       languageId ?? faker.datatype.uuid(),
       countryId ?? CountryIdMother.random(),
       terms ?? ExpressionTermCollectionMother.random([]),
-      userId ?? UserIdMother.random()
+      userId ?? UserIdMother.random(),
     );
   }
 
@@ -48,9 +48,9 @@ export default class ExpressionMother {
       command.languageId,
       CountryIdMother.random(command.countryId),
       ExpressionTermCollectionMother.random(
-        terms?.map((term) => term.toPrimitives()) ?? [ExpressionTermMother.random().toPrimitives()]
+        terms?.map((term) => term.toPrimitives()) ?? [ExpressionTermMother.random().toPrimitives()],
       ),
-      userId
+      userId,
     );
   }
 }

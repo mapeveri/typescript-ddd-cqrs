@@ -1,13 +1,13 @@
 import { beforeEach, describe, expect, it, jest } from '@jest/globals';
-import CreateWordCommandHandler from '@src/languages/application/word/command/create/createWordCommandHandler';
+import CreateWordCommandHandler from '@src/languages/application/term/command/create/createWordCommandHandler';
 import { EventBusMock } from '@test/shared/domain/buses/eventBus/eventBusMock';
 import { WordRepositoryMock } from '@test/languages/domain/word/wordRepositoryMock';
 import { CreateWordCommandMother } from './createWordCommandMother';
 import WordMother from '@test/languages/domain/word/wordMother';
-import Word from '@src/languages/domain/word/word';
+import Word from '@src/languages/domain/term/word/word';
 import { WordCreatedEventMother } from '@test/languages/domain/word/domainEvents/wordCreatedEventMother';
 import { UserIdMother } from '@test/languages/domain/user/valueObjects/userIdMother';
-import WordAlreadyExistsException from '@src/languages/domain/word/exceptions/wordAlreadyExistsException';
+import WordAlreadyExistsException from '@src/languages/domain/term/word/exceptions/wordAlreadyExistsException';
 
 describe('CreateWordCommandHandler', () => {
   let eventBus: EventBusMock;

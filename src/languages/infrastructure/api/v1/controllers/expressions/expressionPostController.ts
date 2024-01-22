@@ -1,5 +1,5 @@
-import CreateExpressionCommand from '@src/languages/application/expression/command/create/createExpressionCommand';
-import { ExpressionTermPrimitives } from '@src/languages/domain/expression/valueObjects/expressionTerm';
+import CreateExpressionCommand from '@src/languages/application/term/command/create/createExpressionCommand';
+import { ExpressionTermPrimitives } from '@src/languages/domain/term/expression/valueObjects/expressionTerm';
 import { Body, Controller, HttpCode, HttpStatus, Inject, Post, UseGuards } from '@nestjs/common';
 import ExpressionPostDto from './expressionPostDto';
 import { NestJwtAuthGuard } from '@src/shared/infrastructure/api/guards/nestJwtAuthGuard';

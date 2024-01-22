@@ -1,5 +1,5 @@
 import CreateTermProjection from '@src/languages/application/term/projection/create/createTermProjection';
-import ExpressionCreatedEvent from '@src/languages/domain/expression/domainEvents/expressionCreatedEvent';
+import ExpressionCreatedEvent from '@src/languages/domain/term/expression/domainEvents/expressionCreatedEvent';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { EventsHandler, IEventHandler } from '@src/shared/domain/bus/eventBus/eventsHandler';
 import { TermTypeEnum } from '@src/languages/domain/term/valueObjects/termType';

@@ -1,5 +1,5 @@
-import CreateExpressionCommand from '@src/languages/application/expression/command/create/createExpressionCommand';
-import { ExpressionTermPrimitives } from '@src/languages/domain/expression/valueObjects/expressionTerm';
+import CreateExpressionCommand from '@src/languages/application/term/command/create/createExpressionCommand';
+import { ExpressionTermPrimitives } from '@src/languages/domain/term/expression/valueObjects/expressionTerm';
 import faker from 'faker';
 
 interface CreateExpressionCommandProps {
@@ -26,7 +26,7 @@ export class CreateExpressionCommandMother {
           description: faker.random.word(),
           hashtags: ['test'],
         },
-      ]
+      ],
     );
   }
 }

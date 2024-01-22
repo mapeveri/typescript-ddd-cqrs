@@ -1,4 +1,4 @@
-import DeleteWordCommand from '@src/languages/application/word/command/delete/deleteWordCommand';
+import DeleteWordCommand from '@src/languages/application/term/command/delete/deleteWordCommand';
 import faker from 'faker';
 
 export class DeleteWordCommandMother {

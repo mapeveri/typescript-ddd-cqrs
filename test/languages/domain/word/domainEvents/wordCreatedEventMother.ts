@@ -1,7 +1,7 @@
 import { expect } from '@jest/globals';
-import CreateWordCommand from '@src/languages/application/word/command/create/createWordCommand';
-import WordCreatedEvent from '@src/languages/domain/word/domainEvents/wordCreatedEvent';
-import { WordTermPrimitives } from '@src/languages/domain/word/valueObjects/wordTerm';
+import CreateWordCommand from '@src/languages/application/term/command/create/createWordCommand';
+import WordCreatedEvent from '@src/languages/domain/term/word/domainEvents/wordCreatedEvent';
+import { WordTermPrimitives } from '@src/languages/domain/term/word/valueObjects/wordTerm';
 
 export class WordCreatedEventMother {
   static createFromCreateWordCommand(command: CreateWordCommand): WordCreatedEvent {
