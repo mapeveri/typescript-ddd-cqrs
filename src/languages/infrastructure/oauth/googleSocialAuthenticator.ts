@@ -1,13 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { SocialAuthenticator } from '@src/languages/domain/auth/socialAuthenticator';
 import { OAuth2Client } from 'google-auth-library';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export default class GoogleSocialAuthenticator implements SocialAuthenticator {
   private client: OAuth2Client;
+  private readonly clientId: string | undefined;
 
-  constructor() {
-    this.client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+  constructor(private configService: ConfigService) {
+    this.clientId = this.configService.get<string>('GOOGLE_CLIENT_ID');
+    this.client = new OAuth2Client(this.clientId);
   }
 
   async login(token: string): Promise<boolean> {
@@ -15,7 +18,7 @@ export default class GoogleSocialAuthenticator implements SocialAuthenticator {
     try {
       await this.client.verifyIdToken({
         idToken: token,
-        audience: process.env.GOOGLE_CLIENT_ID,
+        audience: this.clientId,
       });
 
       isValid = true;
