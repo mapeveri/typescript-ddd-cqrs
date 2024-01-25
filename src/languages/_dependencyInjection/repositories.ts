@@ -2,14 +2,12 @@ import { AUTH_SESSION_REPOSITORY } from '@src/languages/domain/auth/authSessionR
 import TypeOrmAuthSessionRepository from '../infrastructure/persistence/typeOrm/repositories/typeOrmAuthSessionRepository';
 import { COUNTRY_REPOSITORY } from '@src/languages/domain/country/countryRepository';
 import TypeOrmCountryRepository from '../infrastructure/persistence/typeOrm/repositories/typeOrmCountryRepository';
-import { EXPRESSION_REPOSITORY } from '@src/languages/domain/term/expression/expressionRepository';
-import TypeOrmExpressionRepository from '../infrastructure/persistence/typeOrm/repositories/typeOrmExpressionRepository';
-import TypeOrmWordRepository from '../infrastructure/persistence/typeOrm/repositories/typeOrmWordRepository';
 import TypeOrmUserRepository from '../infrastructure/persistence/typeOrm/repositories/typeOrmUserRepository';
-import { TERM_REPOSITORY } from '@src/languages/application/term/projection/termViewRepository';
+import { TERM_REPOSITORY as READ_LAYER_TERM_REPOSITORY } from '@src/languages/application/term/projection/termViewRepository';
 import MongoTermViewRepository from '../infrastructure/persistence/mongo/repositories/mongoTermViewRepository';
 import { USER_REPOSITORY } from '@src/languages/domain/user/userRepository';
-import { WORD_REPOSITORY } from '@src/languages/domain/term/word/wordRepository';
+import { TERM_REPOSITORY } from '@src/languages/domain/term/termRepository';
+import TypeOrmTermRepository from '@src/languages/infrastructure/persistence/typeOrm/repositories/typeOrmTermRepository';
 
 export const repositories = [
   {
@@ -21,19 +19,15 @@ export const repositories = [
     useClass: TypeOrmCountryRepository,
   },
   {
-    provide: EXPRESSION_REPOSITORY,
-    useClass: TypeOrmExpressionRepository,
+    provide: READ_LAYER_TERM_REPOSITORY,
+    useClass: MongoTermViewRepository,
   },
   {
     provide: TERM_REPOSITORY,
-    useClass: MongoTermViewRepository,
+    useClass: TypeOrmTermRepository,
   },
   {
     provide: USER_REPOSITORY,
     useClass: TypeOrmUserRepository,
-  },
-  {
-    provide: WORD_REPOSITORY,
-    useClass: TypeOrmWordRepository,
   },
 ];

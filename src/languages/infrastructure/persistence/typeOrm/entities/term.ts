@@ -4,8 +4,8 @@ import UserId from '@src/languages/domain/user/valueObjects/userId';
 import { dates } from '@src/languages/infrastructure/persistence/typeOrm/entities/common/dates';
 import { EntitySchema } from 'typeorm';
 import Term from '@src/languages/domain/term/term';
-import TermId from '@src/languages/domain/term/valueObjects/termId';
-import TermType from '@src/languages/domain/term/valueObjects/termType';
+import TermId from '@src/languages/domain/term/termId';
+import TermType from '@src/languages/domain/term/termType';
 
 export const termSchema = new EntitySchema<Term>({
   name: Term.name,

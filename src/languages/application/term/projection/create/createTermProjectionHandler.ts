@@ -2,7 +2,7 @@ import TermViewRepository, { TERM_REPOSITORY } from '@src/languages/application/
 import CreateTermProjection from './createTermProjection';
 import TermView from '@src/languages/application/term/projection/termView';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
-import TermType from '@src/languages/domain/term/valueObjects/termType';
+import TermType from '@src/languages/domain/term/termType';
 import { EVENT_BUS, EventBus } from '@src/shared/domain/bus/eventBus/eventBus';
 import TermViewCreatedFailedEvent from '@src/languages/application/term/projection/termViewCreatedFailedEvent';
 import { IProjectionHandler, ProjectionHandler } from '@src/shared/domain/bus/projectionBus/projectionHandler';

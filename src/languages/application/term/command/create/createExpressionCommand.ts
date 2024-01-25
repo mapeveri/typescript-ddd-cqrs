@@ -1,4 +1,4 @@
-import { ExpressionTermPrimitives } from '@src/languages/domain/term/expression/valueObjects/expressionTerm';
+import { ExpressionTermPrimitives } from '@src/languages/domain/term/expression/expressionTerm';
 import { Command } from '@src/shared/domain/bus/commandBus/command';
 
 export default class CreateExpressionCommand implements Command {

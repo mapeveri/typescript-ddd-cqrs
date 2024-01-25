@@ -1,28 +1,22 @@
 import CountryId from '../../country/valueObjects/countryId';
 import UserId from '../../user/valueObjects/userId';
-import ExpressionId from './valueObjects/expressionId';
-import ExpressionTermCollection from './valueObjects/expressionTermCollection';
-import ExpressionCreatedEvent from './domainEvents/expressionCreatedEvent';
+import ExpressionTermCollection from './expressionTermCollection';
+import ExpressionCreatedEvent from './expressionCreatedEvent';
 import Term from '@src/languages/domain/term/term';
-import TermType, { TermTypeEnum } from '@src/languages/domain/term/valueObjects/termType';
+import TermType, { TermTypeEnum } from '@src/languages/domain/term/termType';
+import TermId from '@src/languages/domain/term/termId';
 
 export default class Expression extends Term {
   terms: ExpressionTermCollection;
 
-  constructor(
-    id: ExpressionId,
-    languageId: string,
-    countryId: CountryId,
-    terms: ExpressionTermCollection,
-    userId: UserId,
-  ) {
+  constructor(id: TermId, languageId: string, countryId: CountryId, terms: ExpressionTermCollection, userId: UserId) {
     super(id, languageId, TermType.of(TermTypeEnum.EXPRESSION), countryId, userId);
 
     this.terms = terms;
   }
 
   static create(
-    id: ExpressionId,
+    id: TermId,
     languageId: string,
     countryId: CountryId,
     terms: ExpressionTermCollection,

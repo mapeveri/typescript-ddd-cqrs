@@ -1,7 +1,5 @@
-import ExpressionTerm, {
-  ExpressionTermPrimitives,
-} from '@src/languages/domain/term/expression/valueObjects/expressionTerm';
-import ExpressionTermCollection from '@src/languages/domain/term/expression/valueObjects/expressionTermCollection';
+import ExpressionTerm, { ExpressionTermPrimitives } from '@src/languages/domain/term/expression/expressionTerm';
+import ExpressionTermCollection from '@src/languages/domain/term/expression/expressionTermCollection';
 import { ValueTransformer } from 'typeorm';
 
 export default class ExpressionTermCollectionTransformer implements ValueTransformer {

@@ -1,5 +1,5 @@
-import WordTerm, { WordTermPrimitives } from '@src/languages/domain/term/word/valueObjects/wordTerm';
-import WordTermCollection from '@src/languages/domain/term/word/valueObjects/wordTermCollection';
+import WordTerm, { WordTermPrimitives } from '@src/languages/domain/term/word/wordTerm';
+import WordTermCollection from '@src/languages/domain/term/word/wordTermCollection';
 import { ValueTransformer } from 'typeorm';
 
 export default class WordTermCollectionTransformer implements ValueTransformer {

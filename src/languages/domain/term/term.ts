@@ -1,5 +1,5 @@
-import TermType from '@src/languages/domain/term/valueObjects/termType';
-import TermId from '@src/languages/domain/term/valueObjects/termId';
+import TermType from '@src/languages/domain/term/termType';
+import TermId from '@src/languages/domain/term/termId';
 import CountryId from '@src/languages/domain/country/valueObjects/countryId';
 import UserId from '@src/languages/domain/user/valueObjects/userId';
 import { AggregateRoot } from '@src/shared/domain/aggregate/aggregateRoot';

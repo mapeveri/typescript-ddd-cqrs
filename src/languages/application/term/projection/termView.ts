@@ -1,4 +1,4 @@
-import TermType from '../../../domain/term/valueObjects/termType';
+import TermType from '../../../domain/term/termType';
 import EntityProjection from '@src/shared/domain/projection/entityProjection';
 
 export default class TermView extends EntityProjection {
