@@ -9,14 +9,21 @@ import TermId from '@src/languages/domain/term/termId';
 export default class Word extends Term {
   terms: WordTermCollection;
 
-  constructor(id: TermId, languageId: string, countryId: CountryId, terms: WordTermCollection, userId: UserId) {
-    super(id, languageId, TermType.of(TermTypeEnum.WORD), countryId, userId);
+  constructor(
+    id: TermId,
+    languageId: string,
+    type: TermType,
+    countryId: CountryId,
+    terms: WordTermCollection,
+    userId: UserId,
+  ) {
+    super(id, languageId, type, countryId, userId);
 
     this.terms = terms;
   }
 
   static create(id: TermId, languageId: string, countryId: CountryId, terms: WordTermCollection, userId: UserId): Word {
-    const word = new this(id, languageId, countryId, terms, userId);
+    const word = new this(id, languageId, TermType.of(TermTypeEnum.WORD), countryId, terms, userId);
     word.record(
       new WordCreatedEvent(id.toString(), languageId, countryId.toString(), userId.toString(), terms.toArray()),
     );

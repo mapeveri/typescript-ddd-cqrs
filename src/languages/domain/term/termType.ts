@@ -1,26 +1,26 @@
+import { ValueObject } from '@src/shared/domain/valueObjects/valueObject';
+
 export enum TermTypeEnum {
   WORD = 'word',
   EXPRESSION = 'expression',
 }
 
-export default class TermType {
-  readonly value: string;
-
-  constructor(type: string) {
-    const entry = Object.entries(TermTypeEnum).find(([, item]) => item === type);
+export default class TermType extends ValueObject<string> {
+  constructor(value: string) {
+    const entry = Object.entries(TermTypeEnum).find(([, item]) => item === value);
     if (!entry) {
       throw new Error('Invalid type');
     }
 
-    this.value = entry[1];
+    super(entry[1]);
   }
 
-  static of(type: string): TermType {
-    return new this(type);
+  static of(value: string): TermType {
+    return new this(value);
   }
 
-  static fromPrimitives(type: string): TermType {
-    return new this(type);
+  static fromPrimitives(value: string): TermType {
+    return new this(value);
   }
 
   isExpression(): boolean {

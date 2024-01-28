@@ -11,6 +11,7 @@ import { UserIdMother } from '../../user/valueObjects/userIdMother';
 import faker from 'faker';
 import TermId from '@src/languages/domain/term/termId';
 import { TermIdMother } from '@test/languages/domain/term/termIdMother';
+import TermType, { TermTypeEnum } from '@src/languages/domain/term/termType';
 
 interface WordMotherProps {
   id?: TermId;
@@ -27,6 +28,7 @@ export default class WordMother {
     return new Word(
       id ?? TermIdMother.random(),
       languageId ?? faker.datatype.uuid(),
+      TermType.of(TermTypeEnum.WORD),
       countryId ?? CountryIdMother.random(),
       terms ?? WordTermCollectionMother.random([]),
       userId ?? UserIdMother.random(),
@@ -46,6 +48,7 @@ export default class WordMother {
     return new Word(
       TermIdMother.random(command.id),
       command.languageId,
+      TermType.of(TermTypeEnum.WORD),
       CountryIdMother.random(command.countryId),
       WordTermCollectionMother.random(
         terms?.map((term) => term.toPrimitives()) ?? [WordTermMother.random().toPrimitives()],

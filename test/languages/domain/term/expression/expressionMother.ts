@@ -11,6 +11,7 @@ import ExpressionTermCollection from '@src/languages/domain/term/expression/expr
 import { UserIdMother } from '../../user/valueObjects/userIdMother';
 import TermId from '@src/languages/domain/term/termId';
 import { TermIdMother } from '@test/languages/domain/term/termIdMother';
+import TermType, { TermTypeEnum } from '@src/languages/domain/term/termType';
 
 interface ExpressionMotherProps {
   id?: TermId;
@@ -27,6 +28,7 @@ export default class ExpressionMother {
     return new Expression(
       id ?? TermIdMother.random(),
       languageId ?? faker.datatype.uuid(),
+      TermType.of(TermTypeEnum.EXPRESSION),
       countryId ?? CountryIdMother.random(),
       terms ?? ExpressionTermCollectionMother.random([]),
       userId ?? UserIdMother.random(),
@@ -46,6 +48,7 @@ export default class ExpressionMother {
     return new Expression(
       TermIdMother.random(command.id),
       command.languageId,
+      TermType.of(TermTypeEnum.EXPRESSION),
       CountryIdMother.random(command.countryId),
       ExpressionTermCollectionMother.random(
         terms?.map((term) => term.toPrimitives()) ?? [ExpressionTermMother.random().toPrimitives()],

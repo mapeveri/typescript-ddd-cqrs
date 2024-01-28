@@ -9,8 +9,15 @@ import TermId from '@src/languages/domain/term/termId';
 export default class Expression extends Term {
   terms: ExpressionTermCollection;
 
-  constructor(id: TermId, languageId: string, countryId: CountryId, terms: ExpressionTermCollection, userId: UserId) {
-    super(id, languageId, TermType.of(TermTypeEnum.EXPRESSION), countryId, userId);
+  constructor(
+    id: TermId,
+    languageId: string,
+    type: TermType,
+    countryId: CountryId,
+    terms: ExpressionTermCollection,
+    userId: UserId,
+  ) {
+    super(id, languageId, type, countryId, userId);
 
     this.terms = terms;
   }
@@ -22,7 +29,7 @@ export default class Expression extends Term {
     terms: ExpressionTermCollection,
     userId: UserId,
   ): Expression {
-    const expression = new this(id, languageId, countryId, terms, userId);
+    const expression = new this(id, languageId, TermType.of(TermTypeEnum.EXPRESSION), countryId, terms, userId);
     expression.record(
       new ExpressionCreatedEvent(id.toString(), languageId, countryId.toString(), userId.toString(), terms.toArray()),
     );
