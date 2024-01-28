@@ -5,6 +5,6 @@ export default class ProjectionHandlerNotFoundError extends DomainException {
     public message: string = 'Projection handler not found',
     public code: string = 'project_handler_not_found',
   ) {
-    super(message, 500, code);
+    super(message, code);
   }
 }

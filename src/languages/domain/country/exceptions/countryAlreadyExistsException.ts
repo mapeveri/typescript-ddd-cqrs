@@ -1,7 +1,7 @@
-import DomainException from '@src/shared/domain/exceptions/domainException';
+import ConflictException from '@src/shared/domain/exceptions/conflictException';
 
-export default class CountryAlreadyExistsException extends DomainException {
+export default class CountryAlreadyExistsException extends ConflictException {
   constructor(countryId: string) {
-    super(`Country with id ${countryId} already exists`, 500, 'country_already_exists');
+    super(`Country with id ${countryId} already exists`, 'country_already_exists');
   }
 }

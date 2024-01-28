@@ -21,7 +21,7 @@ export default class NestLogger extends NestJsLogger implements LoggerInterface 
     });
   }
 
-  error(message: string, trace: string) {
+  error(message: string, trace?: string) {
     this.logger.error(message, trace);
   }
 

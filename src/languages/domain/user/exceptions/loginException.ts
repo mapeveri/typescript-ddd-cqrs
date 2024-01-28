@@ -1,7 +1,7 @@
-import DomainException from '@src/shared/domain/exceptions/domainException';
+import UnauthorizedException from '@src/shared/domain/exceptions/unauthorizedException';
 
-export default class LoginException extends DomainException {
+export default class LoginException extends UnauthorizedException {
   constructor() {
-    super('Invalid login', 403, 'invalid_login');
+    super('Invalid login', 'invalid_login');
   }
 }

@@ -1,7 +1,7 @@
-import DomainException from '@src/shared/domain/exceptions/domainException';
+import ConflictException from '@src/shared/domain/exceptions/conflictException';
 
-export default class InvalidUserIdException extends DomainException {
+export default class InvalidUserIdException extends ConflictException {
   constructor(userId: string) {
-    super(`Invalid user id ${userId}`, 400, 'invalid_user_id');
+    super(`Invalid user id ${userId}`, 'invalid_user_id');
   }
 }

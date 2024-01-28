@@ -1,9 +1,9 @@
 import DomainException from '@src/shared/domain/exceptions/domainException';
 
 export default class ApiExceptionSerializer {
-  public static serialize(error: DomainException): Record<string, any> {
+  public static serialize(error: DomainException, status: number): Record<string, any> {
     return {
-      statusCode: error.status || 500,
+      statusCode: status,
       message: error.message,
       code: error.code,
     };

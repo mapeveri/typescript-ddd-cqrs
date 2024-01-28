@@ -1,6 +1,6 @@
 interface LoggerInterface {
   log(message: string): void;
-  error(message: string, trace: string): void;
+  error(message: string, trace?: string): void;
   warning(message: string): void;
 }
 
