@@ -20,7 +20,7 @@ export default class RefreshTokenPostController {
   async run(@Body() payload: RefreshTokenPostDto): Promise<RefreshTokenPostResponseDto> {
     const decodedRefreshToken = this.jwtService.verify(payload.refreshToken);
     if (decodedRefreshToken.revoked) {
-      throw new HttpException('Token revocado', HttpStatus.FORBIDDEN);
+      throw new HttpException('Token revoked', HttpStatus.FORBIDDEN);
     }
 
     const user = await this.queryBus.ask(new FindUserQuery(decodedRefreshToken.id));

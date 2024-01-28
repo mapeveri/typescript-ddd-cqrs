@@ -10,45 +10,36 @@ import { Inject } from '@src/shared/domain/injector/inject.decorator';
 
 @Catch(Error)
 export class NestErrorFilter implements ExceptionFilter {
+  private mappedExceptions = [
+    { exceptionType: ConflictException, status: HttpStatus.CONFLICT },
+    { exceptionType: NotFoundException, status: HttpStatus.NOT_FOUND },
+    { exceptionType: UnauthorizedException, status: HttpStatus.UNAUTHORIZED },
+    { exceptionType: DomainException, status: HttpStatus.BAD_REQUEST },
+  ];
+
   constructor(@Inject(LOGGER_INTERFACE) private readonly logger: LoggerInterface) {}
 
   catch(exception: Error, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
 
-    this.logger.error(`Exception: ${exception}`);
+    this.logger.error(`${exception.stack}`);
 
-    if (exception instanceof ConflictException) {
-      response.status(HttpStatus.CONFLICT).json(ApiExceptionSerializer.serialize(exception, HttpStatus.CONFLICT));
-      return;
-    }
-
-    if (exception instanceof NotFoundException) {
-      response.status(HttpStatus.NOT_FOUND).json(ApiExceptionSerializer.serialize(exception, HttpStatus.NOT_FOUND));
-      return;
-    }
-
-    if (exception instanceof UnauthorizedException) {
-      response
-        .status(HttpStatus.UNAUTHORIZED)
-        .json(ApiExceptionSerializer.serialize(exception, HttpStatus.UNAUTHORIZED));
-      return;
-    }
-
-    if (exception instanceof DomainException) {
-      response
-        .status(HttpStatus.INTERNAL_SERVER_ERROR)
-        .json(ApiExceptionSerializer.serialize(exception, HttpStatus.INTERNAL_SERVER_ERROR));
+    const matchedException = this.mappedExceptions.find((item) => exception instanceof item.exceptionType);
+    if (matchedException) {
+      const status = matchedException.status;
+      response.status(status).json(ApiExceptionSerializer.serialize(exception as DomainException, status));
       return;
     }
 
     if (exception instanceof HttpException) {
-      response.status(exception.getStatus()).json(exception.getResponse());
+      const status = exception.getStatus();
+      response.status(status).json({ statusCode: status, message: exception.message });
       return;
     }
 
-    response.status(500).json({
-      statusCode: 500,
+    response.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+      statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
       message: 'Internal Server Error',
       code: 'generic_error',
     });
