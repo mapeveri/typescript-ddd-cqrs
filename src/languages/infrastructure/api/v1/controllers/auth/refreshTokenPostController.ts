@@ -1,7 +1,13 @@
 import { Body, Controller, HttpCode, HttpException, HttpStatus, Inject, Post } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import LoginPostResponseDto from './loginPostResponseDto';
-import { ApiBadRequestResponse, ApiInternalServerErrorResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBadRequestResponse,
+  ApiForbiddenResponse,
+  ApiInternalServerErrorResponse,
+  ApiOkResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import RefreshTokenPostDto from './refreshTokenPostDto';
 import RefreshTokenPostResponseDto from './refreshTokenPostResponseDto';
 import { QUERY_BUS, QueryBus } from '@src/shared/domain/bus/queryBus/queryBus';
@@ -15,10 +21,18 @@ export default class RefreshTokenPostController {
   @Post('auth/refresh-token')
   @HttpCode(200)
   @ApiOkResponse({ type: LoginPostResponseDto })
+  @ApiForbiddenResponse({ description: 'Forbidden.' })
   @ApiBadRequestResponse({ description: 'Bad Request.' })
   @ApiInternalServerErrorResponse({ description: 'Internal Server Error.' })
   async run(@Body() payload: RefreshTokenPostDto): Promise<RefreshTokenPostResponseDto> {
-    const decodedRefreshToken = this.jwtService.verify(payload.refreshToken);
+    let decodedRefreshToken;
+
+    try {
+      decodedRefreshToken = this.jwtService.verify(payload.refreshToken);
+    } catch (e: any) {
+      throw new HttpException(e.message, HttpStatus.FORBIDDEN);
+    }
+
     if (decodedRefreshToken.revoked) {
       throw new HttpException('Token revoked', HttpStatus.FORBIDDEN);
     }
