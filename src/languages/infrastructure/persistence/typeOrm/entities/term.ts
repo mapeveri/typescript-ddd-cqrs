@@ -5,7 +5,6 @@ import { dates } from '@src/languages/infrastructure/persistence/typeOrm/entitie
 import { EntitySchema } from 'typeorm';
 import Term from '@src/languages/domain/term/term';
 import TermId from '@src/languages/domain/term/termId';
-import TermType from '@src/languages/domain/term/termType';
 
 export const termSchema = new EntitySchema<Term>({
   name: Term.name,
@@ -18,7 +17,6 @@ export const termSchema = new EntitySchema<Term>({
     },
     type: {
       type: String,
-      transformer: ValueObjectTransformer(TermType),
     },
     languageId: {
       type: String,
