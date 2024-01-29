@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it } from '@jest/globals';
 import { SearchTermQueryMother } from './searchTermQueryMother';
 import SearchTermQueryHandler from '@src/languages/application/term/query/search/searchTermQueryHandler';
 import { TermViewMother } from '@test/languages/domain/term/termViewMother';
-import TermView from '@src/languages/application/term/projection/termView';
+import TermView from '@src/languages/application/term/query/termView';
 import { TermViewRepositoryMock } from '@test/languages/domain/term/termViewRepositoryMock';
 
 describe('SearchTermQueryHandler', () => {

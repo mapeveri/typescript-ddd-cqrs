@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import TermView from '@src/languages/application/term/projection/termView';
-import TermViewRepository from '@src/languages/application/term/projection/termViewRepository';
+import TermView from '@src/languages/application/term/query/termView';
+import TermViewReadLayer from '@src/languages/application/term/query/termViewReadLayer';
 import MongoRepository from '@src/shared/infrastructure/persistence/mongo/mongoRepository';
 import { Document } from 'mongodb';
-import TermViewCriteria from '@src/languages/application/term/projection/termViewCriteria';
+import TermViewCriteria from '@src/languages/application/term/query/termViewCriteria';
 import { SortDirection } from 'typeorm';
 
 @Injectable()
-export default class MongoTermViewRepository extends MongoRepository<TermView> implements TermViewRepository {
+export default class MongoTermViewRepository extends MongoRepository<TermView> implements TermViewReadLayer {
   constructor() {
     super('terms');
   }

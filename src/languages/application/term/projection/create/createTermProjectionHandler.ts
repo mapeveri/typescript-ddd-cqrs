@@ -1,16 +1,16 @@
-import TermViewRepository, { TERM_REPOSITORY } from '@src/languages/application/term/projection/termViewRepository';
+import TermViewReadLayer, { TERM_VIEW_READ_LAYER } from '@src/languages/application/term/query/termViewReadLayer';
 import CreateTermProjection from './createTermProjection';
-import TermView from '@src/languages/application/term/projection/termView';
+import TermView from '@src/languages/application/term/query/termView';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import TermType from '@src/languages/domain/term/termType';
 import { EVENT_BUS, EventBus } from '@src/shared/domain/bus/eventBus/eventBus';
-import TermViewCreatedFailedEvent from '@src/languages/application/term/projection/termViewCreatedFailedEvent';
+import TermViewCreatedFailedEvent from '@src/languages/application/term/query/termViewCreatedFailedEvent';
 import { IProjectionHandler, ProjectionHandler } from '@src/shared/domain/bus/projectionBus/projectionHandler';
 
 @ProjectionHandler(CreateTermProjection)
 export default class CreateTermProjectionHandler implements IProjectionHandler<CreateTermProjection> {
   constructor(
-    @Inject(TERM_REPOSITORY) private readonly termRepository: TermViewRepository,
+    @Inject(TERM_VIEW_READ_LAYER) private readonly termRepository: TermViewReadLayer,
     @Inject(EVENT_BUS) private readonly eventBus: EventBus,
   ) {}
 

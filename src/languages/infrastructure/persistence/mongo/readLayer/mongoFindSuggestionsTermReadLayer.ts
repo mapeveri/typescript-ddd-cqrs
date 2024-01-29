@@ -1,17 +1,17 @@
 import FindSuggestionsTermReadLayer from '@src/languages/application/term/query/suggestion/findSuggestionsTermReadLayer';
 import UserId from '@src/languages/domain/user/valueObjects/userId';
-import TermView from '@src/languages/application/term/projection/termView';
+import TermView from '@src/languages/application/term/query/termView';
 import UserRepository, { USER_REPOSITORY } from '@src/languages/domain/user/userRepository';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
-import TermViewRepository, { TERM_REPOSITORY } from '@src/languages/application/term/projection/termViewRepository';
+import TermViewReadLayer, { TERM_VIEW_READ_LAYER } from '@src/languages/application/term/query/termViewReadLayer';
 import UserFinder from '@src/languages/domain/user/services/userFinder';
-import TermViewCriteria from '@src/languages/application/term/projection/termViewCriteria';
+import TermViewCriteria from '@src/languages/application/term/query/termViewCriteria';
 
 export default class MongoFindSuggestionsTermReadLayer implements FindSuggestionsTermReadLayer {
   private readonly userFinder: UserFinder;
 
   constructor(
-    @Inject(TERM_REPOSITORY) private readonly termRepository: TermViewRepository,
+    @Inject(TERM_VIEW_READ_LAYER) private readonly termRepository: TermViewReadLayer,
     @Inject(USER_REPOSITORY) userRepository: UserRepository,
   ) {
     this.userFinder = new UserFinder(userRepository);
