@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import TermView from '@src/languages/application/term/query/termView';
-import TermViewReadLayer from '@src/languages/application/term/query/termViewReadLayer';
+import SearchTermViewReadLayer from '@src/languages/application/term/query/search/searchTermViewReadLayer';
 import MongoRepository from '@src/shared/infrastructure/persistence/mongo/mongoRepository';
 import { Document } from 'mongodb';
 import TermViewCriteria from '@src/languages/application/term/query/termViewCriteria';
 import { SortDirection } from 'typeorm';
 
 @Injectable()
-export default class MongoTermViewRepository extends MongoRepository<TermView> implements TermViewReadLayer {
+export default class MongoSearchTermViewReadLayer extends MongoRepository<TermView> implements SearchTermViewReadLayer {
   constructor() {
     super('terms');
   }

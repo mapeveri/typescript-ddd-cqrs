@@ -1,4 +1,6 @@
-import TermViewReadLayer, { TERM_VIEW_READ_LAYER } from '@src/languages/application/term/query/termViewReadLayer';
+import SearchTermViewReadLayer, {
+  SEARCH_TERM_VIEW_READ_LAYER,
+} from '@src/languages/application/term/query/search/searchTermViewReadLayer';
 import CreateTermProjection from './createTermProjection';
 import TermView from '@src/languages/application/term/query/termView';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
@@ -10,7 +12,7 @@ import { IProjectionHandler, ProjectionHandler } from '@src/shared/domain/bus/pr
 @ProjectionHandler(CreateTermProjection)
 export default class CreateTermProjectionHandler implements IProjectionHandler<CreateTermProjection> {
   constructor(
-    @Inject(TERM_VIEW_READ_LAYER) private readonly termRepository: TermViewReadLayer,
+    @Inject(SEARCH_TERM_VIEW_READ_LAYER) private readonly termRepository: SearchTermViewReadLayer,
     @Inject(EVENT_BUS) private readonly eventBus: EventBus,
   ) {}
 
