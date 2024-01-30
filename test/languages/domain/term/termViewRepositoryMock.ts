@@ -1,7 +1,7 @@
 import { jest } from '@jest/globals';
-import TermView from '@src/languages/application/term/query/termView';
+import TermView from '@src/languages/domain/term/termView';
 import SearchTermViewReadLayer from '@src/languages/application/term/query/search/searchTermViewReadLayer';
-import TermViewCriteria from '@src/languages/application/term/query/termViewCriteria';
+import TermViewCriteria from '@src/languages/application/term/query/search/termViewCriteria';
 
 export class TermViewRepositoryMock implements SearchTermViewReadLayer {
   private searchMock: jest.Mock;

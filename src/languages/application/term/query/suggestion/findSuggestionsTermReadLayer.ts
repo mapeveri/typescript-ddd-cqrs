@@ -1,4 +1,4 @@
-import TermView from '@src/languages/application/term/query/termView';
+import TermView from '@src/languages/domain/term/termView';
 import UserId from '@src/languages/domain/user/valueObjects/userId';
 
 interface FindSuggestionsTermReadLayer {
