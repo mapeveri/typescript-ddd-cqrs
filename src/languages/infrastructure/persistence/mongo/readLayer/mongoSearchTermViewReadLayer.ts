@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import TermView from '@src/languages/domain/term/termView';
+import TermView from '@src/languages/application/term/viewModel/termView';
 import SearchTermViewReadLayer from '@src/languages/application/term/query/search/searchTermViewReadLayer';
 import MongoRepository from '@src/shared/infrastructure/persistence/mongo/mongoRepository';
 import { Document } from 'mongodb';

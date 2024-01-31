@@ -1,6 +1,6 @@
 import FindSuggestionsTermReadLayer from '@src/languages/application/term/query/suggestion/findSuggestionsTermReadLayer';
 import UserId from '@src/languages/domain/user/valueObjects/userId';
-import TermView from '@src/languages/domain/term/termView';
+import TermView from '@src/languages/application/term/viewModel/termView';
 import UserRepository, { USER_REPOSITORY } from '@src/languages/domain/user/userRepository';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import SearchTermViewReadLayer, {

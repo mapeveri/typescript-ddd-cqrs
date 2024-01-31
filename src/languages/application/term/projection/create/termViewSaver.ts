@@ -1,4 +1,4 @@
-import TermView from '@src/languages/domain/term/termView';
+import TermView from '@src/languages/application/term/viewModel/termView';
 
 interface TermViewSaver {
   save(term: TermView): Promise<void>;

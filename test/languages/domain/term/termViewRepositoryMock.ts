@@ -1,5 +1,5 @@
 import { jest } from '@jest/globals';
-import TermView from '@src/languages/domain/term/termView';
+import TermView from '@src/languages/application/term/viewModel/termView';
 import SearchTermViewReadLayer from '@src/languages/application/term/query/search/searchTermViewReadLayer';
 import TermViewCriteria from '@src/languages/application/term/query/search/termViewCriteria';
 

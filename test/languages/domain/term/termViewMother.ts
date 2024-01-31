@@ -1,4 +1,4 @@
-import TermView from '@src/languages/domain/term/termView';
+import TermView from '@src/languages/application/term/viewModel/termView';
 import faker from 'faker';
 import TermTypeMother from './termTypeMother';
 

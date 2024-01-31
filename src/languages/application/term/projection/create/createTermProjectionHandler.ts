@@ -1,9 +1,9 @@
 import CreateTermProjection from './createTermProjection';
-import TermView from '@src/languages/domain/term/termView';
+import TermView from '@src/languages/application/term/viewModel/termView';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import TermType from '@src/languages/domain/term/termType';
 import { EVENT_BUS, EventBus } from '@src/shared/domain/bus/eventBus/eventBus';
-import TermViewCreatedFailedEvent from '@src/languages/domain/term/termViewCreatedFailedEvent';
+import TermViewCreatedFailedEvent from '@src/languages/application/term/viewModel/termViewCreatedFailedEvent';
 import { IProjectionHandler, ProjectionHandler } from '@src/shared/domain/bus/projectionBus/projectionHandler';
 import TermViewSaver, { TERM_VIEW_SAVER } from '@src/languages/application/term/projection/create/termViewSaver';
 

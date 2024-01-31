@@ -1,4 +1,4 @@
-import TermView from '../../../../domain/term/termView';
+import TermView from '../../viewModel/termView';
 import TermViewCriteria from '@src/languages/application/term/query/search/termViewCriteria';
 
 interface SearchTermViewReadLayer {
