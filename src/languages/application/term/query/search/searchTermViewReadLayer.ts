@@ -1,8 +1,10 @@
 import TermView from '../../viewModel/termView';
-import TermViewCriteria from '@src/languages/application/term/query/search/termViewCriteria';
+import { OrderBy } from '@src/shared/domain/criteria/orderBy';
+
+export type TermCriteriaParams = { size: number; page: number; term?: string; hashtags?: string[]; orderBy?: OrderBy };
 
 interface SearchTermViewReadLayer {
-  search(criteria: TermViewCriteria): Promise<TermView[]>;
+  search(criteria: TermCriteriaParams): Promise<TermView[]>;
 }
 
 export default SearchTermViewReadLayer;

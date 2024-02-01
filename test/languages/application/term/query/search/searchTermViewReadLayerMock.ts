@@ -1,9 +1,10 @@
 import { jest } from '@jest/globals';
 import TermView from '@src/languages/application/term/viewModel/termView';
-import SearchTermViewReadLayer from '@src/languages/application/term/query/search/searchTermViewReadLayer';
-import TermViewCriteria from '@src/languages/application/term/query/search/termViewCriteria';
+import SearchTermViewReadLayer, {
+  TermCriteriaParams,
+} from '@src/languages/application/term/query/search/searchTermViewReadLayer';
 
-export class TermViewRepositoryMock implements SearchTermViewReadLayer {
+export class SearchTermViewReadLayerMock implements SearchTermViewReadLayer {
   private searchMock: jest.Mock;
   private saveMock: jest.Mock;
   private terms: TermView[];
@@ -18,7 +19,7 @@ export class TermViewRepositoryMock implements SearchTermViewReadLayer {
     this.terms.push(term);
   }
 
-  async search(criteria: TermViewCriteria): Promise<TermView[]> {
+  async search(criteria: TermCriteriaParams): Promise<TermView[]> {
     this.searchMock(criteria);
     return this.terms;
   }

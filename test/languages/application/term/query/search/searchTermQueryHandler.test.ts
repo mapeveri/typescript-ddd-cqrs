@@ -3,14 +3,14 @@ import { SearchTermQueryMother } from './searchTermQueryMother';
 import SearchTermQueryHandler from '@src/languages/application/term/query/search/searchTermQueryHandler';
 import { TermViewMother } from '@test/languages/domain/term/termViewMother';
 import TermView from '@src/languages/application/term/viewModel/termView';
-import { TermViewRepositoryMock } from '@test/languages/domain/term/termViewRepositoryMock';
+import { SearchTermViewReadLayerMock } from '@test/languages/application/term/query/search/searchTermViewReadLayerMock';
 
 describe('SearchTermQueryHandler', () => {
-  let termRepository: TermViewRepositoryMock;
+  let termRepository: SearchTermViewReadLayerMock;
   let searchTermQueryHandler: SearchTermQueryHandler;
 
   beforeEach(() => {
-    termRepository = new TermViewRepositoryMock();
+    termRepository = new SearchTermViewReadLayerMock();
     searchTermQueryHandler = new SearchTermQueryHandler(termRepository);
   });
 
