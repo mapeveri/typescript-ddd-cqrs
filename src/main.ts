@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import LoggerInterface, { LOGGER_INTERFACE } from './shared/domain/loggerInterface';
+import Logger, { LOGGER } from './shared/domain/logger';
 import { DataSourceHandler } from './shared/infrastructure/persistence/typeOrm/dataSourceHandler';
 import { ValidationPipe } from '@nestjs/common';
 import helmet from 'helmet';
@@ -40,7 +40,7 @@ async function bootstrap() {
 
   await DataSourceHandler.getInstance().initialize();
 
-  const logger: LoggerInterface = app.get(LOGGER_INTERFACE);
+  const logger: Logger = app.get(LOGGER);
 
   await app.init();
 

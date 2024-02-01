@@ -4,7 +4,7 @@ import { NestJwtAuthGuard } from '@src/shared/infrastructure/api/guards/nestJwtA
 import { JwtStrategy } from '@src/shared/infrastructure/auth/strategies/jwtStrategy';
 import { APP_FILTER } from '@nestjs/core';
 import { NestErrorFilter } from '@src/shared/infrastructure/api/filters/nestErrorFilter';
-import { LOGGER_INTERFACE } from '@src/shared/domain/loggerInterface';
+import { LOGGER } from '@src/shared/domain/logger';
 import NestLogger from '@src/shared/infrastructure/logger/nestLogger';
 import { COMMAND_BUS } from '@src/shared/domain/bus/commandBus/commandBus';
 import NestCommandBus from '@src/shared/infrastructure/bus/nestCommandBus';
@@ -28,7 +28,7 @@ export const services = [
     useClass: NestErrorFilter,
   },
   {
-    provide: LOGGER_INTERFACE,
+    provide: LOGGER,
     useClass: NestLogger,
   },
   {

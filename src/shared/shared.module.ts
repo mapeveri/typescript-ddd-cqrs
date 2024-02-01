@@ -1,6 +1,6 @@
 import { Global, Module } from '@nestjs/common';
 import { COMMAND_BUS } from '@src/shared/domain/bus/commandBus/commandBus';
-import { LOGGER_INTERFACE } from '@src/shared/domain/loggerInterface';
+import { LOGGER } from '@src/shared/domain/logger';
 import { ASYNC_EVENT_BUS, EVENT_BUS } from '@src/shared/domain/bus/eventBus/eventBus';
 import { NestJwtAuthGuard } from '@src/shared/infrastructure/api/guards/nestJwtAuthGuard';
 import { JwtStrategy } from '@src/shared/infrastructure/auth/strategies/jwtStrategy';
@@ -38,7 +38,7 @@ import Environment from '@src/shared/infrastructure/utils/environment';
     CqrsModule,
     ClientsModule,
     JwtStrategy,
-    LOGGER_INTERFACE,
+    LOGGER,
     QUERY_BUS,
     COMMAND_BUS,
     EVENT_BUS,

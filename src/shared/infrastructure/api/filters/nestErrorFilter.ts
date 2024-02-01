@@ -5,7 +5,7 @@ import DomainException from '@src/shared/domain/exceptions/domainException';
 import ConflictException from '@src/shared/domain/exceptions/conflictException';
 import NotFoundException from '@src/shared/domain/exceptions/notFoundException';
 import UnauthorizedException from '@src/shared/domain/exceptions/unauthorizedException';
-import LoggerInterface, { LOGGER_INTERFACE } from '@src/shared/domain/loggerInterface';
+import Logger, { LOGGER } from '@src/shared/domain/logger';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 
 @Catch(Error)
@@ -17,7 +17,7 @@ export class NestErrorFilter implements ExceptionFilter {
     { exceptionType: DomainException, status: HttpStatus.BAD_REQUEST },
   ];
 
-  constructor(@Inject(LOGGER_INTERFACE) private readonly logger: LoggerInterface) {}
+  constructor(@Inject(LOGGER) private readonly logger: Logger) {}
 
   catch(exception: Error, host: ArgumentsHost) {
     const ctx = host.switchToHttp();

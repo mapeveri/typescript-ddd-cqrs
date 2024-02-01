@@ -1,9 +1,9 @@
-import LoggerInterface from '../../domain/loggerInterface';
+import Logger from '../../domain/logger';
 import { Injectable, Logger as NestJsLogger } from '@nestjs/common';
 import * as winston from 'winston';
 
 @Injectable()
-export default class NestLogger extends NestJsLogger implements LoggerInterface {
+export default class NestLogger extends NestJsLogger implements Logger {
   private readonly logger: winston.Logger;
 
   constructor() {
