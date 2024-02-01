@@ -1,5 +1,5 @@
-import CountryId from '../../country/valueObjects/countryId';
-import UserId from '../../user/valueObjects/userId';
+import CountryId from '../../country/countryId';
+import UserId from '../../user/userId';
 import ExpressionTermCollection from './expressionTermCollection';
 import ExpressionCreatedEvent from './expressionCreatedEvent';
 import Term from '@src/languages/domain/term/term';

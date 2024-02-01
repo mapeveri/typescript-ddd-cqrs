@@ -1,7 +1,7 @@
 import { AggregateRoot } from '@src/shared/domain/aggregate/aggregateRoot';
-import AuthSessionId from './valueObjects/authSessionId';
-import AuthSessionCreatedEvent from './domainEvents/authSessionCreatedEvent';
-import Session from './valueObjects/session';
+import AuthSessionId from './authSessionId';
+import AuthSessionCreatedEvent from './authSessionCreatedEvent';
+import Session from './session';
 
 export default class AuthSession extends AggregateRoot {
   id: AuthSessionId;

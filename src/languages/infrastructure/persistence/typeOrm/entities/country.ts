@@ -1,9 +1,9 @@
 import { EntitySchema } from 'typeorm';
 import Country from '@src/languages/domain/country/country';
-import CountryId from '@src/languages/domain/country/valueObjects/countryId';
+import CountryId from '@src/languages/domain/country/countryId';
 import { ValueObjectTransformer } from '@src/shared/infrastructure/persistence/typeOrm/transformers/valueObjectTransformer';
 import LanguageCollectionTransformer from '../transformers/languageCollectionTransformer';
-import LanguageCollection from '@src/languages/domain/country/valueObjects/languageCollection';
+import LanguageCollection from '@src/languages/domain/country/languageCollection';
 
 export default new EntitySchema<Country>({
   name: Country.name,

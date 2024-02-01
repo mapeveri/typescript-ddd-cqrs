@@ -1,6 +1,6 @@
 import { expect } from '@jest/globals';
 import LoginUserCommand from '@src/languages/application/auth/command/loginUser/loginUserCommand';
-import AuthSessionCreatedEvent from '@src/languages/domain/auth/domainEvents/authSessionCreatedEvent';
+import AuthSessionCreatedEvent from '@src/languages/domain/auth/authSessionCreatedEvent';
 
 import faker from 'faker';
 

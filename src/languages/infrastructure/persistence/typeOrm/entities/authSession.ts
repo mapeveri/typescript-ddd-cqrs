@@ -1,7 +1,7 @@
 import { EntitySchema } from 'typeorm';
 import { ValueObjectTransformer } from '@src/shared/infrastructure/persistence/typeOrm/transformers/valueObjectTransformer';
 import AuthSession from '@src/languages/domain/auth/authSession';
-import AuthSessionId from '@src/languages/domain/auth/valueObjects/authSessionId';
+import AuthSessionId from '@src/languages/domain/auth/authSessionId';
 import SessionTransformer from '../transformers/sessionTransformer';
 
 export default new EntitySchema<AuthSession>({

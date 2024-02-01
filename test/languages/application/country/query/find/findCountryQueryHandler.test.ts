@@ -4,7 +4,7 @@ import FindCountryQueryHandler from '@src/languages/application/country/query/fi
 import { CountryRepositoryMock } from '@test/languages/domain/country/countryRepositoryMock';
 import CountryMother from '@test/languages/domain/country/countryMother';
 import Country from '@src/languages/domain/country/country';
-import { CountryIdMother } from '@test/languages/domain/country/valueObjects/countryIdMother';
+import { CountryIdMother } from '@test/languages/domain/country/countryIdMother';
 
 describe('FindCountryQueryHandler', () => {
   let countryRepository: CountryRepositoryMock;

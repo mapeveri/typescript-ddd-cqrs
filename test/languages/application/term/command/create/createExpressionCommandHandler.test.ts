@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, jest } from '@jest/globals';
 import { EventBusMock } from '@test/shared/domain/buses/eventBus/eventBusMock';
-import { UserIdMother } from '@test/languages/domain/user/valueObjects/userIdMother';
+import { UserIdMother } from '@test/languages/domain/user/userIdMother';
 import CreateExpressionCommandHandler from '@src/languages/application/term/command/create/createExpressionCommandHandler';
 import { CreateExpressionCommandMother } from './createExpressionCommandMother';
 import ExpressionMother from '@test/languages/domain/term/expression/expressionMother';

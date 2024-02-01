@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import Country from '@src/languages/domain/country/country';
 import CountryRepository from '@src/languages/domain/country/countryRepository';
-import CountryId from '@src/languages/domain/country/valueObjects/countryId';
+import CountryId from '@src/languages/domain/country/countryId';
 import TypeOrmRepository from '@src/shared/infrastructure/persistence/typeOrm/typeOrmRepository';
 
 @Injectable()

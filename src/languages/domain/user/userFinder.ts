@@ -1,7 +1,7 @@
 import UserRepository from '@src/languages/domain/user/userRepository';
-import UserId from '@src/languages/domain/user/valueObjects/userId';
+import UserId from '@src/languages/domain/user/userId';
 import User from '@src/languages/domain/user/user';
-import UserDoesNotExistsException from '@src/languages/domain/user/exceptions/userDoesNotExistsException';
+import UserDoesNotExistsException from '@src/languages/domain/user/userDoesNotExistsException';
 
 export default class UserFinder {
   constructor(private readonly userRepository: UserRepository) {}

@@ -1,7 +1,7 @@
 import User from '@src/languages/domain/user/user';
-import UserId from '@src/languages/domain/user/valueObjects/userId';
+import UserId from '@src/languages/domain/user/userId';
 import faker from 'faker';
-import { UserIdMother } from './valueObjects/userIdMother';
+import { UserIdMother } from './userIdMother';
 
 interface UserMotherProps {
   id?: UserId;

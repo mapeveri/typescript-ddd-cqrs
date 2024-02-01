@@ -4,7 +4,7 @@ import Country from '@src/languages/domain/country/country';
 import { CountryRepositoryMock } from '@test/languages/domain/country/countryRepositoryMock';
 import CountryMother from '@test/languages/domain/country/countryMother';
 import { CreateCountryCommandMother } from './createCountryCommandMother';
-import CountryAlreadyExistsException from '@src/languages/domain/country/exceptions/countryAlreadyExistsException';
+import CountryAlreadyExistsException from '@src/languages/domain/country/countryAlreadyExistsException';
 
 describe('CreateCountryCommandHandler', () => {
   let countryRepository: CountryRepositoryMock;

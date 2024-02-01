@@ -1,5 +1,5 @@
-import Language, { LanguagePrimitives } from '@src/languages/domain/country/valueObjects/language';
-import LanguageCollection from '@src/languages/domain/country/valueObjects/languageCollection';
+import Language, { LanguagePrimitives } from '@src/languages/domain/country/language';
+import LanguageCollection from '@src/languages/domain/country/languageCollection';
 import { ValueTransformer } from 'typeorm';
 
 export default class LanguageCollectionTransformer implements ValueTransformer {

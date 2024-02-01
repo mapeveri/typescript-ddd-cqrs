@@ -1,7 +1,7 @@
 import { AggregateRoot } from '@src/shared/domain/aggregate/aggregateRoot';
-import UserId from './valueObjects/userId';
+import UserId from './userId';
 import Email from '@src/shared/domain/valueObjects/email';
-import UserUpdatedEvent from '@src/languages/domain/user/domainEvents/userUpdatedEvent';
+import UserUpdatedEvent from '@src/languages/domain/user/userUpdatedEvent';
 
 export default class User extends AggregateRoot {
   id: UserId;

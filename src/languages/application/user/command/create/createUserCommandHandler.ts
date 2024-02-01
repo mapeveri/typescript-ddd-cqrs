@@ -1,6 +1,6 @@
 import UserRepository, { USER_REPOSITORY } from '@src/languages/domain/user/userRepository';
 import CreateUserCommand from './createUserCommand';
-import UserId from '@src/languages/domain/user/valueObjects/userId';
+import UserId from '@src/languages/domain/user/userId';
 import Email from '@src/shared/domain/valueObjects/email';
 import User from '@src/languages/domain/user/user';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';

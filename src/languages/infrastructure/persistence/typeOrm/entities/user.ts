@@ -1,6 +1,6 @@
 import { EntitySchema } from 'typeorm';
 import User from '@src/languages/domain/user/user';
-import UserId from '@src/languages/domain/user/valueObjects/userId';
+import UserId from '@src/languages/domain/user/userId';
 import Email from '@src/shared/domain/valueObjects/email';
 import { ValueObjectTransformer } from '@src/shared/infrastructure/persistence/typeOrm/transformers/valueObjectTransformer';
 

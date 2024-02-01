@@ -1,11 +1,11 @@
 import CreateCountryCommand from '@src/languages/application/country/command/create/createCountryCommand';
 import Country from '@src/languages/domain/country/country';
-import { CountryIdMother } from './valueObjects/countryIdMother';
+import { CountryIdMother } from './countryIdMother';
 import faker from 'faker';
-import CountryId from '@src/languages/domain/country/valueObjects/countryId';
-import LanguageCollectionMother from './valueObjects/languageCollectionMother';
-import Language, { LanguagePrimitives } from '@src/languages/domain/country/valueObjects/language';
-import LanguageMother from './valueObjects/languageMother';
+import CountryId from '@src/languages/domain/country/countryId';
+import LanguageCollectionMother from './languageCollectionMother';
+import Language, { LanguagePrimitives } from '@src/languages/domain/country/language';
+import LanguageMother from './languageMother';
 
 interface CountryMotherProps {
   id?: CountryId;
@@ -23,8 +23,8 @@ export default class CountryMother {
       name ?? faker.name.findName(),
       iso ?? faker.random.word(),
       LanguageCollectionMother.random(
-        languages?.map((language) => language.toPrimitives()) ?? [LanguageMother.random().toPrimitives()]
-      )
+        languages?.map((language) => language.toPrimitives()) ?? [LanguageMother.random().toPrimitives()],
+      ),
     );
   }
 

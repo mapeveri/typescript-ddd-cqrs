@@ -1,8 +1,8 @@
 import UserRepository, { USER_REPOSITORY } from '@src/languages/domain/user/userRepository';
-import UserId from '@src/languages/domain/user/valueObjects/userId';
+import UserId from '@src/languages/domain/user/userId';
 import { COMMAND_BUS, CommandBus } from '@src/shared/domain/bus/commandBus/commandBus';
 import CreateUserCommand from '../../command/create/createUserCommand';
-import AuthSessionCreatedEvent from '@src/languages/domain/auth/domainEvents/authSessionCreatedEvent';
+import AuthSessionCreatedEvent from '@src/languages/domain/auth/authSessionCreatedEvent';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { EventsHandler, IEventHandler } from '@src/shared/domain/bus/eventBus/eventsHandler';
 

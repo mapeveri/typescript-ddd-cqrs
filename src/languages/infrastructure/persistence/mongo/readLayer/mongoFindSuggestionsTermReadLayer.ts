@@ -1,12 +1,12 @@
 import FindSuggestionsTermReadLayer from '@src/languages/application/term/query/suggestion/findSuggestionsTermReadLayer';
-import UserId from '@src/languages/domain/user/valueObjects/userId';
+import UserId from '@src/languages/domain/user/userId';
 import TermView from '@src/languages/application/term/viewModel/termView';
 import UserRepository, { USER_REPOSITORY } from '@src/languages/domain/user/userRepository';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import SearchTermViewReadLayer, {
   SEARCH_TERM_VIEW_READ_LAYER,
 } from '@src/languages/application/term/query/search/searchTermViewReadLayer';
-import UserFinder from '@src/languages/domain/user/services/userFinder';
+import UserFinder from '@src/languages/domain/user/userFinder';
 import TermViewCriteria from '@src/languages/application/term/query/search/termViewCriteria';
 
 export default class MongoFindSuggestionsTermReadLayer implements FindSuggestionsTermReadLayer {

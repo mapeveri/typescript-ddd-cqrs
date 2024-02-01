@@ -1,4 +1,4 @@
-import UserId from '@src/languages/domain/user/valueObjects/userId';
+import UserId from '@src/languages/domain/user/userId';
 import faker from 'faker';
 
 export class UserIdMother {

@@ -1,5 +1,5 @@
 import CreateCountryCommand from '@src/languages/application/country/command/create/createCountryCommand';
-import { LanguagePrimitives } from '@src/languages/domain/country/valueObjects/language';
+import { LanguagePrimitives } from '@src/languages/domain/country/language';
 import faker from 'faker';
 
 interface CreateCountryCommandProps {
@@ -17,7 +17,7 @@ export class CreateCountryCommandMother {
       id ?? faker.datatype.uuid(),
       name ?? faker.name.findName(),
       iso ?? faker.random.word(),
-      languages ?? [{ name: faker.random.word(), languageId: faker.random.word() }]
+      languages ?? [{ name: faker.random.word(), languageId: faker.random.word() }],
     );
   }
 }

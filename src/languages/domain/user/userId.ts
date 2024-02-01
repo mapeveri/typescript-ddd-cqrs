@@ -1,5 +1,5 @@
 import { Uuid } from '@src/shared/domain/valueObjects/uuid';
-import InvalidUserIdException from '../exceptions/invalidUserIdException';
+import InvalidUserIdException from './invalidUserIdException';
 
 export default class UserId extends Uuid {
   static of(value: string): UserId {

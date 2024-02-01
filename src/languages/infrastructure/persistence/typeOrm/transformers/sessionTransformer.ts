@@ -1,4 +1,4 @@
-import Session from '@src/languages/domain/auth/valueObjects/session';
+import Session from '@src/languages/domain/auth/session';
 import { ValueTransformer } from 'typeorm';
 
 export default class SessionTransformer implements ValueTransformer {

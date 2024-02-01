@@ -1,4 +1,4 @@
-import { LanguagePrimitives } from '@src/languages/domain/country/valueObjects/language';
+import { LanguagePrimitives } from '@src/languages/domain/country/language';
 import { Command } from '@src/shared/domain/bus/commandBus/command';
 
 export default class CreateCountryCommand implements Command {

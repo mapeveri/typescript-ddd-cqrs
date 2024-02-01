@@ -1,7 +1,7 @@
 import { expect, jest } from '@jest/globals';
 import User from '@src/languages/domain/user/user';
 import UserRepository from '@src/languages/domain/user/userRepository';
-import UserId from '@src/languages/domain/user/valueObjects/userId';
+import UserId from '@src/languages/domain/user/userId';
 
 export class UserRepositoryMock implements UserRepository {
   private saveMock = jest.fn();

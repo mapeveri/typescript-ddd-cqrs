@@ -1,5 +1,5 @@
 import Country from './country';
-import CountryId from './valueObjects/countryId';
+import CountryId from './countryId';
 
 interface CountryRepository {
   findAll(): Promise<Country[]>;

@@ -1,5 +1,5 @@
 import CreateCountryCommand from '@src/languages/application/country/command/create/createCountryCommand';
-import { LanguagePrimitives } from '@src/languages/domain/country/valueObjects/language';
+import { LanguagePrimitives } from '@src/languages/domain/country/language';
 import { Body, Controller, HttpCode, HttpStatus, Inject, Post, UseGuards } from '@nestjs/common';
 import CountryPostDto from './countryPostDto';
 import { NestJwtAuthGuard } from '@src/shared/infrastructure/api/guards/nestJwtAuthGuard';

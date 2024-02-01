@@ -1,13 +1,13 @@
 import CreateWordCommand from '@src/languages/application/term/command/create/createWordCommand';
 import Word from '@src/languages/domain/term/word/word';
-import UserId from '@src/languages/domain/user/valueObjects/userId';
-import { CountryIdMother } from '../../country/valueObjects/countryIdMother';
+import UserId from '@src/languages/domain/user/userId';
+import { CountryIdMother } from '../../country/countryIdMother';
 import WordTermCollectionMother from './wordTermCollectionMother';
 import WordTerm from '@src/languages/domain/term/word/wordTerm';
 import WordTermMother, { WordTermMotherProps } from './wordTermMother';
-import CountryId from '@src/languages/domain/country/valueObjects/countryId';
+import CountryId from '@src/languages/domain/country/countryId';
 import WordTermCollection from '@src/languages/domain/term/word/wordTermCollection';
-import { UserIdMother } from '../../user/valueObjects/userIdMother';
+import { UserIdMother } from '../../user/userIdMother';
 import faker from 'faker';
 import TermId from '@src/languages/domain/term/termId';
 import { TermIdMother } from '@test/languages/domain/term/termIdMother';

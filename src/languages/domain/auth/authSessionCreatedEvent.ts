@@ -30,7 +30,7 @@ export default class AuthSessionCreatedEvent extends DomainEvent {
   }
 
   public classPathName(): string {
-    return 'languages.domain.auth.domainEvents.authSessionCreatedEvent';
+    return 'languages.domain.auth.authSessionCreatedEvent';
   }
 
   public static aggregateTypeName(): string {

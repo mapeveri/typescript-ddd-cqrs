@@ -1,4 +1,4 @@
-import AuthSessionId from '@src/languages/domain/auth/valueObjects/authSessionId';
+import AuthSessionId from '@src/languages/domain/auth/authSessionId';
 import faker from 'faker';
 
 export class AuthSessionIdMother {

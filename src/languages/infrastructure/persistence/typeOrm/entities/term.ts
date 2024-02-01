@@ -1,6 +1,6 @@
-import CountryId from '@src/languages/domain/country/valueObjects/countryId';
+import CountryId from '@src/languages/domain/country/countryId';
 import { ValueObjectTransformer } from '@src/shared/infrastructure/persistence/typeOrm/transformers/valueObjectTransformer';
-import UserId from '@src/languages/domain/user/valueObjects/userId';
+import UserId from '@src/languages/domain/user/userId';
 import { dates } from '@src/languages/infrastructure/persistence/typeOrm/entities/common/dates';
 import { EntitySchema } from 'typeorm';
 import Term from '@src/languages/domain/term/term';

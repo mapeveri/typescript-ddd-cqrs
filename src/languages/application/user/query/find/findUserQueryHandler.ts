@@ -1,7 +1,7 @@
 import UserRepository, { USER_REPOSITORY } from '@src/languages/domain/user/userRepository';
 import FindUserQuery from './findUserQuery';
 import QueryResponse from '@src/shared/domain/bus/queryBus/queryResponse';
-import UserId from '@src/languages/domain/user/valueObjects/userId';
+import UserId from '@src/languages/domain/user/userId';
 import FindUserResponse from './findUserResponse';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { IQueryHandler, QueryHandler } from '@src/shared/domain/bus/queryBus/queryHandler';

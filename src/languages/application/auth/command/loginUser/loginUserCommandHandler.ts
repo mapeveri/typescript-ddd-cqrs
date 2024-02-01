@@ -1,9 +1,9 @@
 import { EVENT_BUS, EventBus } from '@src/shared/domain/bus/eventBus/eventBus';
 import LoginUserCommand from './loginUserCommand';
-import LoginException from '@src/languages/domain/user/exceptions/loginException';
+import LoginException from '@src/languages/domain/user/loginException';
 import AuthSession from '@src/languages/domain/auth/authSession';
-import Session from '@src/languages/domain/auth/valueObjects/session';
-import AuthSessionId from '@src/languages/domain/auth/valueObjects/authSessionId';
+import Session from '@src/languages/domain/auth/session';
+import AuthSessionId from '@src/languages/domain/auth/authSessionId';
 import { AUTH_SESSION_REPOSITORY, AuthSessionRepository } from '@src/languages/domain/auth/authSessionRepository';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { CommandHandler, ICommandHandler } from '@src/shared/domain/bus/commandBus/commandHandler';

@@ -1,6 +1,6 @@
 import UserRepository from '@src/languages/domain/user/userRepository';
 import User from '@src/languages/domain/user/user';
-import UserId from '@src/languages/domain/user/valueObjects/userId';
+import UserId from '@src/languages/domain/user/userId';
 import TypeOrmRepository from '@src/shared/infrastructure/persistence/typeOrm/typeOrmRepository';
 import { Injectable } from '@nestjs/common';
 

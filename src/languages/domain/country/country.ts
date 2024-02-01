@@ -1,6 +1,6 @@
 import { AggregateRoot } from '@src/shared/domain/aggregate/aggregateRoot';
-import CountryId from './valueObjects/countryId';
-import LanguageCollection from './valueObjects/languageCollection';
+import CountryId from './countryId';
+import LanguageCollection from './languageCollection';
 
 export default class Country extends AggregateRoot {
   id: CountryId;

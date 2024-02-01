@@ -1,9 +1,9 @@
 import UserRepository, { USER_REPOSITORY } from '@src/languages/domain/user/userRepository';
 import UpdateUserCommand from './updateUserCommand';
-import UserId from '@src/languages/domain/user/valueObjects/userId';
+import UserId from '@src/languages/domain/user/userId';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { CommandHandler, ICommandHandler } from '@src/shared/domain/bus/commandBus/commandHandler';
-import UserFinder from '@src/languages/domain/user/services/userFinder';
+import UserFinder from '@src/languages/domain/user/userFinder';
 import { EVENT_BUS, EventBus } from '@src/shared/domain/bus/eventBus/eventBus';
 
 @CommandHandler(UpdateUserCommand)

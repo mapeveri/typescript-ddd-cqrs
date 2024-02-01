@@ -1,9 +1,9 @@
 import CountryRepository, { COUNTRY_REPOSITORY } from '@src/languages/domain/country/countryRepository';
 import CreateCountryCommand from './createCountryCommand';
 import Country from '@src/languages/domain/country/country';
-import CountryId from '@src/languages/domain/country/valueObjects/countryId';
-import LanguageCollection from '@src/languages/domain/country/valueObjects/languageCollection';
-import CountryAlreadyExistsException from '@src/languages/domain/country/exceptions/countryAlreadyExistsException';
+import CountryId from '@src/languages/domain/country/countryId';
+import LanguageCollection from '@src/languages/domain/country/languageCollection';
+import CountryAlreadyExistsException from '@src/languages/domain/country/countryAlreadyExistsException';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { CommandHandler, ICommandHandler } from '@src/shared/domain/bus/commandBus/commandHandler';
 

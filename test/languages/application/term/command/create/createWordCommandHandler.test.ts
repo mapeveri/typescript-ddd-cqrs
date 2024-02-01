@@ -5,7 +5,7 @@ import { CreateWordCommandMother } from './createWordCommandMother';
 import WordMother from '@test/languages/domain/term/word/wordMother';
 import Word from '@src/languages/domain/term/word/word';
 import { WordCreatedEventMother } from '@test/languages/domain/term/word/wordCreatedEventMother';
-import { UserIdMother } from '@test/languages/domain/user/valueObjects/userIdMother';
+import { UserIdMother } from '@test/languages/domain/user/userIdMother';
 import WordAlreadyExistsException from '@src/languages/domain/term/word/wordAlreadyExistsException';
 import { TermRepositoryMock } from '@test/languages/domain/term/termRepositoryMock';
 

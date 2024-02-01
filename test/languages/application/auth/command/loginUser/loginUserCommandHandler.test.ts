@@ -1,13 +1,13 @@
 import { beforeEach, describe, expect, it, jest } from '@jest/globals';
 import LoginUserCommandHandler from '@src/languages/application/auth/command/loginUser/loginUserCommandHandler';
 import { LoginUserCommandMother } from './loginUserCommandMother';
-import LoginException from '@src/languages/domain/user/exceptions/loginException';
+import LoginException from '@src/languages/domain/user/loginException';
 import { EventBusMock } from '@test/shared/domain/buses/eventBus/eventBusMock';
-import { AuthSessionCreatedEventMother } from '@test/languages/domain/auth/domainEvents/authSessionCreatedEventMother';
+import { AuthSessionCreatedEventMother } from '@test/languages/domain/auth/authSessionCreatedEventMother';
 import { AuthSessionRepositoryMock } from '@test/languages/domain/auth/authSessionRepositoryMock';
 import { AuthSessionMother } from '@test/languages/domain/auth/authSessionMother';
-import { AuthSessionIdMother } from '@test/languages/domain/auth/valueObjects/authSessionIdMother';
-import { SessionMother } from '@test/languages/domain/auth/valueObjects/sessionMother';
+import { AuthSessionIdMother } from '@test/languages/domain/auth/authSessionIdMother';
+import { SessionMother } from '@test/languages/domain/auth/sessionMother';
 import { SocialAuthenticatorMock } from '@test/languages/domain/auth/socialAuthenticatorMock';
 
 describe('LoginUserCommandHandler', () => {

@@ -1,5 +1,5 @@
 import faker from 'faker';
-import Session from '@src/languages/domain/auth/valueObjects/session';
+import Session from '@src/languages/domain/auth/session';
 
 export interface AuthSessionMotherProps {
   token?: string;
