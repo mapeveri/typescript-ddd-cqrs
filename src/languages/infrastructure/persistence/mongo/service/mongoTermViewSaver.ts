@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import TermView from '@src/languages/application/term/viewModel/termView';
 import TermViewSaver from '@src/languages/application/term/projection/create/termViewSaver';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import MongoConnection from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
+import { TermView } from '@src/languages/application/term/viewModel/termView';
 
 @Injectable()
 export default class MongoTermViewSaver implements TermViewSaver {
@@ -16,6 +16,6 @@ export default class MongoTermViewSaver implements TermViewSaver {
 
     await this.mongo.db
       .collection('terms')
-      .updateOne({ id: termView.id }, { $set: termView.toPrimitives() }, { upsert: true, session: session });
+      .updateOne({ id: termView.id }, { $set: termView }, { upsert: true, session: session });
   }
 }

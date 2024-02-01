@@ -1,7 +1,5 @@
 import CreateTermProjection from './createTermProjection';
-import TermView from '@src/languages/application/term/viewModel/termView';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
-import TermType from '@src/languages/domain/term/termType';
 import { EVENT_BUS, EventBus } from '@src/shared/domain/bus/eventBus/eventBus';
 import TermCreatedUncompletedEvent from '@src/languages/domain/term/termCreatedUncompletedEvent';
 import { IProjectionHandler, ProjectionHandler } from '@src/shared/domain/bus/projectionBus/projectionHandler';
@@ -15,25 +13,20 @@ export default class CreateTermProjectionHandler implements IProjectionHandler<C
   ) {}
 
   async execute(projection: CreateTermProjection): Promise<void> {
-    const term = this.getTerm(projection);
     try {
-      await this.termViewSaver.save(term);
+      await this.termViewSaver.save({
+        id: projection.id,
+        title: projection.title,
+        description: projection.description,
+        example: projection.example,
+        type: projection.type,
+        hashtags: projection.hashtags,
+        totalLikes: 0,
+        createdAt: projection.createdAt.toISOString(),
+      });
     } catch (e) {
-      void this.eventBus.publish([new TermCreatedUncompletedEvent(term.id, term.type.value)]);
+      void this.eventBus.publish([new TermCreatedUncompletedEvent(projection.id, projection.type)]);
       throw e;
     }
-  }
-
-  private getTerm(command: CreateTermProjection): TermView {
-    return TermView.create(
-      command.id,
-      command.title,
-      command.description,
-      command.example,
-      TermType.of(command.type),
-      command.hashtags,
-      0,
-      command.createdAt,
-    );
   }
 }

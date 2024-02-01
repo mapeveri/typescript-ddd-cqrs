@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import TermView from '@src/languages/application/term/viewModel/termView';
+import { TermView } from '@src/languages/application/term/viewModel/termView';
 import SearchTermViewReadLayer, {
   TermCriteriaParams,
 } from '@src/languages/application/term/query/search/searchTermViewReadLayer';
@@ -46,16 +46,16 @@ export default class MongoSearchTermViewReadLayer implements SearchTermViewReadL
     result = await query.toArray();
 
     return result.map((doc: Document) => {
-      return TermView.create(
-        doc.id,
-        doc.title,
-        doc.description,
-        doc.example,
-        doc.type,
-        doc.hashtags,
-        doc.totalLikes,
-        new Date(doc.createdAt),
-      );
+      return {
+        id: doc.id,
+        title: doc.title,
+        description: doc.description,
+        example: doc.example,
+        type: doc.type,
+        hashtags: doc.hashtags,
+        totalLikes: doc.totalLikes,
+        createdAt: doc.createdAt,
+      };
     });
   }
 }

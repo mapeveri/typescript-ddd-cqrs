@@ -1,6 +1,6 @@
 import FindSuggestionsTermReadLayer from '@src/languages/application/term/query/suggestion/findSuggestionsTermReadLayer';
 import UserId from '@src/languages/domain/user/userId';
-import TermView from '@src/languages/application/term/viewModel/termView';
+import { TermView } from '@src/languages/application/term/viewModel/termView';
 import UserRepository, { USER_REPOSITORY } from '@src/languages/domain/user/userRepository';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import UserFinder from '@src/languages/domain/user/userFinder';
@@ -32,16 +32,16 @@ export default class MongoFindSuggestionsTermReadLayer implements FindSuggestion
       .toArray();
 
     return result.map((doc: Document) => {
-      return TermView.create(
-        doc.id,
-        doc.title,
-        doc.description,
-        doc.example,
-        doc.type,
-        doc.hashtags,
-        doc.totalLikes,
-        new Date(doc.createdAt),
-      );
+      return {
+        id: doc.id,
+        title: doc.title,
+        description: doc.description,
+        example: doc.example,
+        type: doc.type,
+        hashtags: doc.hashtags,
+        totalLikes: doc.totalLikes,
+        createdAt: doc.createdAt,
+      };
     });
   }
 }

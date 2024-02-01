@@ -1,4 +1,4 @@
-import TermView from '../../viewModel/termView';
+import { TermView } from '../../viewModel/termView';
 import { OrderBy } from '@src/shared/domain/criteria/orderBy';
 
 export type TermCriteriaParams = { size: number; page: number; term?: string; hashtags?: string[]; orderBy?: OrderBy };

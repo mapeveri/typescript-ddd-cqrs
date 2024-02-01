@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it } from '@jest/globals';
 import { SearchTermQueryMother } from './searchTermQueryMother';
 import SearchTermQueryHandler from '@src/languages/application/term/query/search/searchTermQueryHandler';
-import { TermViewMother } from '@test/languages/domain/term/termViewMother';
-import TermView from '@src/languages/application/term/viewModel/termView';
+import { TermViewMother } from '@test/languages/application/term/query/viewModel/termViewMother';
+import { TermView } from '@src/languages/application/term/viewModel/termView';
 import { SearchTermViewReadLayerMock } from '@test/languages/application/term/query/search/searchTermViewReadLayerMock';
 
 describe('SearchTermQueryHandler', () => {
@@ -43,10 +43,10 @@ describe('SearchTermQueryHandler', () => {
           title: term.title,
           description: term.description,
           example: term.example,
-          type: term.type.value,
+          type: term.type,
           hashtags: term.hashtags,
           totalLikes: term.totalLikes,
-          createdAt: term.createdAt.toISOString(),
+          createdAt: term.createdAt,
         },
       ]);
     });
