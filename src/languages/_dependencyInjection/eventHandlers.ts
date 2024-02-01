@@ -1,13 +1,13 @@
-import DeleteExpressionOnTermCreatedFailedEventHandler from '@src/languages/application/expression/event/delete/deleteExpressionOnTermCreatedFailedEventHandler';
+import DeleteExpressionOnTermCreatedUncompletedEventHandler from '@src/languages/application/term/event/delete/deleteExpressionOnTermCreatedUncompletedEventHandler';
 import CreateTermsOnExpressionCreatedEventHandler from '@src/languages/application/term/event/create/createTermsOnExpressionCreatedEventHandler';
 import CreateTermsOnWordCreatedEventHandler from '@src/languages/application/term/event/create/createTermsOnWordCreatedEventHandler';
 import CreateUserOnAuthSessionCreatedEventHandler from '@src/languages/application/user/event/create/createUserOnAuthSessionCreatedEventHandler';
-import DeleteWordOnTermCreatedFailedEventHandler from '@src/languages/application/word/event/delete/deleteWordOnTermCreatedFailedEventHandler';
+import DeleteWordOnTermCreatedUncompletedEventHandler from '@src/languages/application/term/event/delete/deleteWordOnTermCreatedUncompletedEventHandler';
 
 export const events = [
   CreateTermsOnExpressionCreatedEventHandler,
   CreateTermsOnWordCreatedEventHandler,
   CreateUserOnAuthSessionCreatedEventHandler,
-  DeleteExpressionOnTermCreatedFailedEventHandler,
-  DeleteWordOnTermCreatedFailedEventHandler,
+  DeleteExpressionOnTermCreatedUncompletedEventHandler,
+  DeleteWordOnTermCreatedUncompletedEventHandler,
 ];

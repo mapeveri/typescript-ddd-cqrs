@@ -1,16 +1,16 @@
 import { beforeEach, describe, expect, it } from '@jest/globals';
 import { SearchTermQueryMother } from './searchTermQueryMother';
 import SearchTermQueryHandler from '@src/languages/application/term/query/search/searchTermQueryHandler';
-import { TermMother } from '@test/languages/domain/term/termMother';
-import Term from '@src/languages/domain/term/term';
-import { TermRepositoryMock } from '@test/languages/domain/term/termRepositoryMock';
+import { TermViewMother } from '@test/languages/domain/term/termViewMother';
+import TermView from '@src/languages/application/term/viewModel/termView';
+import { TermViewRepositoryMock } from '@test/languages/domain/term/termViewRepositoryMock';
 
 describe('SearchTermQueryHandler', () => {
-  let termRepository: TermRepositoryMock;
+  let termRepository: TermViewRepositoryMock;
   let searchTermQueryHandler: SearchTermQueryHandler;
 
   beforeEach(() => {
-    termRepository = new TermRepositoryMock();
+    termRepository = new TermViewRepositoryMock();
     searchTermQueryHandler = new SearchTermQueryHandler(termRepository);
   });
 
@@ -32,7 +32,7 @@ describe('SearchTermQueryHandler', () => {
         orderBy: 'createdAt',
         orderType: 'desc',
       });
-      const term: Term = TermMother.random({ title: termToSearch });
+      const term: TermView = TermViewMother.random({ title: termToSearch });
       termRepository.add(term);
 
       const foundTerms = await searchTermQueryHandler.execute(query);

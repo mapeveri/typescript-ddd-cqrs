@@ -1,8 +1,8 @@
-import Term from '@src/languages/domain/term/term';
+import TermView from '@src/languages/application/term/viewModel/termView';
 import UserId from '@src/languages/domain/user/valueObjects/userId';
 
 interface FindSuggestionsTermReadLayer {
-  find(userId: UserId): Promise<Term[]>;
+  find(userId: UserId): Promise<TermView[]>;
 }
 
 export default FindSuggestionsTermReadLayer;

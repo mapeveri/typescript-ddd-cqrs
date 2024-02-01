@@ -1,43 +1,23 @@
-import TermType from './valueObjects/termType';
-import EntityProjection from '@src/shared/domain/projection/entityProjection';
+import TermType from '@src/languages/domain/term/termType';
+import TermId from '@src/languages/domain/term/termId';
+import CountryId from '@src/languages/domain/country/valueObjects/countryId';
+import UserId from '@src/languages/domain/user/valueObjects/userId';
+import { AggregateRoot } from '@src/shared/domain/aggregate/aggregateRoot';
 
-export default class Term extends EntityProjection {
-  constructor(
-    readonly id: string,
-    readonly title: string,
-    readonly description: string,
-    readonly example: string,
-    readonly type: TermType,
-    readonly hashtags: Array<string>,
-    readonly totalLikes: number,
-    readonly createdAt: Date,
-  ) {
+export default abstract class Term extends AggregateRoot {
+  id: TermId;
+  languageId: string;
+  type: TermType;
+  countryId: CountryId;
+  userId: UserId;
+
+  protected constructor(id: TermId, languageId: string, type: TermType, countryId: CountryId, userId: UserId) {
     super();
-  }
 
-  static create(
-    id: string,
-    title: string,
-    description: string,
-    example: string,
-    type: TermType,
-    hashtags: Array<string>,
-    totalLikes: number,
-    createdAt: Date,
-  ): Term {
-    return new this(id, title, description, example, type, hashtags, totalLikes, createdAt);
-  }
-
-  toPrimitives(): object {
-    return {
-      id: this.id,
-      title: this.title,
-      description: this.description,
-      example: this.example,
-      type: this.type.value,
-      hashtags: this.hashtags,
-      totalLikes: this.totalLikes,
-      createdAt: this.createdAt.toISOString(),
-    };
+    this.id = id;
+    this.languageId = languageId;
+    this.type = type;
+    this.countryId = countryId;
+    this.userId = userId;
   }
 }

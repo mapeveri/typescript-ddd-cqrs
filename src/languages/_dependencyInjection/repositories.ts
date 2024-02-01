@@ -2,14 +2,10 @@ import { AUTH_SESSION_REPOSITORY } from '@src/languages/domain/auth/authSessionR
 import TypeOrmAuthSessionRepository from '../infrastructure/persistence/typeOrm/repositories/typeOrmAuthSessionRepository';
 import { COUNTRY_REPOSITORY } from '@src/languages/domain/country/countryRepository';
 import TypeOrmCountryRepository from '../infrastructure/persistence/typeOrm/repositories/typeOrmCountryRepository';
-import { EXPRESSION_REPOSITORY } from '@src/languages/domain/expression/expressionRepository';
-import TypeOrmExpressionRepository from '../infrastructure/persistence/typeOrm/repositories/typeOrmExpressionRepository';
-import TypeOrmWordRepository from '../infrastructure/persistence/typeOrm/repositories/typeOrmWordRepository';
 import TypeOrmUserRepository from '../infrastructure/persistence/typeOrm/repositories/typeOrmUserRepository';
-import { TERM_REPOSITORY } from '@src/languages/domain/term/termRepository';
-import MongoTermRepository from '../infrastructure/persistence/mongo/repositories/mongoTermRepository';
 import { USER_REPOSITORY } from '@src/languages/domain/user/userRepository';
-import { WORD_REPOSITORY } from '@src/languages/domain/word/wordRepository';
+import { TERM_REPOSITORY } from '@src/languages/domain/term/termRepository';
+import TypeOrmTermRepository from '@src/languages/infrastructure/persistence/typeOrm/repositories/typeOrmTermRepository';
 
 export const repositories = [
   {
@@ -21,19 +17,11 @@ export const repositories = [
     useClass: TypeOrmCountryRepository,
   },
   {
-    provide: EXPRESSION_REPOSITORY,
-    useClass: TypeOrmExpressionRepository,
-  },
-  {
     provide: TERM_REPOSITORY,
-    useClass: MongoTermRepository,
+    useClass: TypeOrmTermRepository,
   },
   {
     provide: USER_REPOSITORY,
     useClass: TypeOrmUserRepository,
-  },
-  {
-    provide: WORD_REPOSITORY,
-    useClass: TypeOrmWordRepository,
   },
 ];

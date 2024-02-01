@@ -1,8 +1,10 @@
-import Term from './term';
-import TermCriteria from '@src/languages/domain/term/termCriteria';
+import TermId from '@src/languages/domain/term/termId';
+import Term from '@src/languages/domain/term/term';
 
 interface TermRepository {
-  search(criteria: TermCriteria): Promise<Term[]>;
+  findById(id: TermId): Promise<Term | null>;
+
+  remove(term: Term): Promise<void>;
 
   save(term: Term): Promise<void>;
 }

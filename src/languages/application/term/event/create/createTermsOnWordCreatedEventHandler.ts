@@ -1,8 +1,8 @@
-import WordCreatedEvent from '@src/languages/domain/word/domainEvents/wordCreatedEvent';
+import WordCreatedEvent from '@src/languages/domain/term/word/wordCreatedEvent';
 import CreateTermProjection from '@src/languages/application/term/projection/create/createTermProjection';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { EventsHandler, IEventHandler } from '@src/shared/domain/bus/eventBus/eventsHandler';
-import { TermTypeEnum } from '@src/languages/domain/term/valueObjects/termType';
+import { TermTypeEnum } from '@src/languages/domain/term/termType';
 import { PROJECTION_BUS, ProjectionBus } from '@src/shared/domain/bus/projectionBus/projectionBus';
 
 @EventsHandler(WordCreatedEvent)
