@@ -20,7 +20,7 @@ export default class MongoEventStoreRepository implements EventStoreRepository {
         $set: {
           aggregateId: entity.aggregateId,
           type: entity.domainEventName(),
-          paylaod: entity,
+          payload: entity,
           occurredOn: entity.occurredOn,
         },
       },
