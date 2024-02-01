@@ -1,7 +1,6 @@
 import TermType from '../../../domain/term/termType';
-import EntityProjection from '@src/shared/domain/projection/entityProjection';
 
-export default class TermView extends EntityProjection {
+export default class TermView {
   constructor(
     readonly id: string,
     readonly title: string,
@@ -11,9 +10,7 @@ export default class TermView extends EntityProjection {
     readonly hashtags: Array<string>,
     readonly totalLikes: number,
     readonly createdAt: Date,
-  ) {
-    super();
-  }
+  ) {}
 
   static create(
     id: string,

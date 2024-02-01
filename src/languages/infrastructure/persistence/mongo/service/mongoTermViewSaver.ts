@@ -1,11 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import TermView from '@src/languages/application/term/viewModel/termView';
-import MongoRepository from '@src/shared/infrastructure/persistence/mongo/mongoRepository';
 import TermViewSaver from '@src/languages/application/term/projection/create/termViewSaver';
+import { Inject } from '@src/shared/domain/injector/inject.decorator';
+import MongoConnection from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
 
 @Injectable()
-export default class MongoTermViewSaver extends MongoRepository<TermView> implements TermViewSaver {
-  constructor() {
-    super('terms');
+export default class MongoTermViewSaver implements TermViewSaver {
+  constructor(@Inject('MONGO_CLIENT') private readonly mongo: MongoConnection) {}
+
+  async save(termView: TermView): Promise<void> {
+    const session = this.mongo.session;
+    if (!session) {
+      throw new Error('The session is not available');
+    }
+
+    await this.mongo.db
+      .collection('terms')
+      .updateOne({ id: termView.id }, { $set: termView.toPrimitives() }, { upsert: true, session: session });
   }
 }

@@ -18,11 +18,18 @@ import NestProjectionBus from '@src/shared/infrastructure/bus/nestProjectionBus'
 import { EVENT_STORE_REPOSITORY } from '@src/shared/domain/eventStore/eventStoreRepository';
 import MongoEventStoreRepository from '@src/shared/infrastructure/persistence/mongo/repositories/mongoEventStoreRepository';
 import { PersistDomainEventsSubscriber } from '@src/shared/infrastructure/subscribers/persistDomainEventsSubscriber';
+import MongoConnection from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
 
 export const services = [
   NestJwtAuthGuard,
   JwtStrategy,
   NestProjectionBus,
+  {
+    provide: 'MONGO_CLIENT',
+    useFactory: async () => {
+      return await MongoConnection.getInstance();
+    },
+  },
   {
     provide: APP_FILTER,
     useClass: NestErrorFilter,

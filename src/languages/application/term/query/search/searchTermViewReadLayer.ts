@@ -3,8 +3,6 @@ import TermViewCriteria from '@src/languages/application/term/query/search/termV
 
 interface SearchTermViewReadLayer {
   search(criteria: TermViewCriteria): Promise<TermView[]>;
-
-  save(term: TermView): Promise<void>;
 }
 
 export default SearchTermViewReadLayer;

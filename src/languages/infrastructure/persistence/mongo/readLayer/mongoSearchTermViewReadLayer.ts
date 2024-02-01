@@ -1,16 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import TermView from '@src/languages/application/term/viewModel/termView';
 import SearchTermViewReadLayer from '@src/languages/application/term/query/search/searchTermViewReadLayer';
-import MongoRepository from '@src/shared/infrastructure/persistence/mongo/mongoRepository';
 import { Document } from 'mongodb';
 import TermViewCriteria from '@src/languages/application/term/query/search/termViewCriteria';
 import { SortDirection } from 'typeorm';
+import { Inject } from '@src/shared/domain/injector/inject.decorator';
+import MongoConnection from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
 
 @Injectable()
-export default class MongoSearchTermViewReadLayer extends MongoRepository<TermView> implements SearchTermViewReadLayer {
-  constructor() {
-    super('terms');
-  }
+export default class MongoSearchTermViewReadLayer implements SearchTermViewReadLayer {
+  constructor(@Inject('MONGO_CLIENT') private readonly mongo: MongoConnection) {}
 
   async search(criteria: TermViewCriteria): Promise<TermView[]> {
     let result = [];
@@ -32,7 +31,7 @@ export default class MongoSearchTermViewReadLayer extends MongoRepository<TermVi
       });
     }
 
-    const queryProject = this.collection.find(searchQuery).project({ _id: 0 });
+    const queryProject = this.mongo.db.collection('terms').find(searchQuery).project({ _id: 0 });
 
     if (orderBy) {
       const sortOptions: [string, SortDirection][] = [];

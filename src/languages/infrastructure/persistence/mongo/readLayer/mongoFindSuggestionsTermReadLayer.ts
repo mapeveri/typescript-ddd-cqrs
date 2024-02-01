@@ -3,17 +3,15 @@ import UserId from '@src/languages/domain/user/userId';
 import TermView from '@src/languages/application/term/viewModel/termView';
 import UserRepository, { USER_REPOSITORY } from '@src/languages/domain/user/userRepository';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
-import SearchTermViewReadLayer, {
-  SEARCH_TERM_VIEW_READ_LAYER,
-} from '@src/languages/application/term/query/search/searchTermViewReadLayer';
 import UserFinder from '@src/languages/domain/user/userFinder';
-import TermViewCriteria from '@src/languages/application/term/query/search/termViewCriteria';
+import { Document } from 'mongodb';
+import MongoConnection from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
 
 export default class MongoFindSuggestionsTermReadLayer implements FindSuggestionsTermReadLayer {
   private readonly userFinder: UserFinder;
 
   constructor(
-    @Inject(SEARCH_TERM_VIEW_READ_LAYER) private readonly termRepository: SearchTermViewReadLayer,
+    @Inject('MONGO_CLIENT') private readonly mongo: MongoConnection,
     @Inject(USER_REPOSITORY) userRepository: UserRepository,
   ) {
     this.userFinder = new UserFinder(userRepository);
@@ -22,14 +20,28 @@ export default class MongoFindSuggestionsTermReadLayer implements FindSuggestion
   async find(userId: UserId): Promise<TermView[]> {
     const user = await this.userFinder.find(userId);
 
-    const criteria = TermViewCriteria.from({
-      hashtags: user.interests,
-      size: 5,
-      page: 1,
-      orderBy: { key: 'createdAt', orderType: 'desc' },
-    });
-    const terms = await this.termRepository.search(criteria);
+    const result = await this.mongo.db
+      .collection('terms')
+      .find({
+        $or: [{ hashtags: user.interests }],
+      })
+      .project({ _id: 0 })
+      .sort(['createdAt', -1])
+      .skip(0)
+      .limit(5)
+      .toArray();
 
-    return Promise.resolve(terms);
+    return result.map((doc: Document) => {
+      return TermView.create(
+        doc.id,
+        doc.title,
+        doc.description,
+        doc.example,
+        doc.type,
+        doc.hashtags,
+        doc.totalLikes,
+        new Date(doc.createdAt),
+      );
+    });
   }
 }
