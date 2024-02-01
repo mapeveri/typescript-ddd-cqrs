@@ -7,7 +7,7 @@ import { mongoTransactionalOperation } from '@src/shared/infrastructure/persiste
 import { Subject, takeUntil } from 'rxjs';
 
 @Injectable()
-export class PersistDomainEventsSuscriber {
+export class PersistDomainEventsSubscriber {
   private destroy$ = new Subject<void>();
 
   constructor(

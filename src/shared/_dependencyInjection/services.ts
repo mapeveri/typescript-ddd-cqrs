@@ -17,7 +17,7 @@ import { PROJECTION_BUS } from '@src/shared/domain/bus/projectionBus/projectionB
 import NestProjectionBus from '@src/shared/infrastructure/bus/nestProjectionBus';
 import { EVENT_STORE_REPOSITORY } from '@src/shared/domain/eventStore/eventStoreRepository';
 import MongoEventStoreRepository from '@src/shared/infrastructure/persistence/mongo/repositories/mongoEventStoreRepository';
-import { PersistDomainEventsSuscriber } from '@src/shared/infrastructure/subscribers/persistDomainEventsSuscriber';
+import { PersistDomainEventsSubscriber } from '@src/shared/infrastructure/subscribers/persistDomainEventsSubscriber';
 
 export const services = [
   NestJwtAuthGuard,
@@ -55,7 +55,7 @@ export const services = [
     provide: EVENT_STORE_REPOSITORY,
     useClass: MongoEventStoreRepository,
   },
-  PersistDomainEventsSuscriber,
+  PersistDomainEventsSubscriber,
   {
     provide: SOCIAL_AUTHENTICATOR,
     useClass: GoogleSocialAuthenticator,
