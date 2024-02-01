@@ -1,6 +1,6 @@
 import { DomainEvent } from '@src/shared/domain/bus/eventBus/domainEvent';
 
-export default class TermViewCreatedFailedEvent extends DomainEvent {
+export default class TermCreatedUncompletedEvent extends DomainEvent {
   constructor(public readonly id: string, public readonly type: string, eventId = '') {
     super(id, eventId);
   }
@@ -14,7 +14,7 @@ export default class TermViewCreatedFailedEvent extends DomainEvent {
   }
 
   public classPathName(): string {
-    return 'languages.domain.term.domainEvents.termCreatedFailedEvent';
+    return 'languages.domain.term.termCreatedUncompletedEvent';
   }
 
   public static aggregateTypeName(): string {
