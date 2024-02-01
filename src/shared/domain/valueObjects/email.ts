@@ -22,7 +22,7 @@ export default class Email extends ValueObject<string> {
   private validateEmail(email: string): void {
     const isValid: boolean = this.emailExpression.test(email);
 
-    if (false === isValid) {
+    if (!isValid) {
       throw new InvalidEmailException();
     }
   }
