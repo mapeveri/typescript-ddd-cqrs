@@ -3,7 +3,7 @@ import { DomainEvent } from '@src/shared/domain/bus/eventBus/domainEvent';
 export abstract class AggregateRoot {
   protected domainEvents: DomainEvent[];
 
-  constructor() {
+  protected constructor() {
     this.domainEvents = [];
   }
 
