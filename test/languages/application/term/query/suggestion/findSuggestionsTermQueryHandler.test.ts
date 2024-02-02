@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from '@jest/globals';
-import { TermViewMother } from '@test/languages/domain/term/termViewMother';
+import { TermViewMother } from '@test/languages/application/term/query/viewModel/termViewMother';
 import FindSuggestionsTermQueryHandler from '@src/languages/application/term/query/suggestion/findSuggestionsTermQueryHandler';
 import { FindSuggestionsTermQueryMother } from '@test/languages/application/term/query/suggestion/findSuggestionsTermQueryMother';
 import { FindSuggestionsTermReadLayerMock } from '@test/languages/application/term/query/suggestion/findSuggestionsTermReadLayerMock';
@@ -35,10 +35,10 @@ describe('FindSuggestionsTermQueryHandler', () => {
           title: term.title,
           description: term.description,
           example: term.example,
-          type: term.type.value,
+          type: term.type,
           hashtags: term.hashtags,
           totalLikes: term.totalLikes,
-          createdAt: term.createdAt.toISOString(),
+          createdAt: term.createdAt,
         },
       ]);
     });
