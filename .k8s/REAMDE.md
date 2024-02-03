@@ -6,13 +6,13 @@ Getting started
 
 1. Install minikube and kubectl
 
-2. Docker push imagen:
+2. Docker push image:
 
     docker login 
 
     docker tag languages:latest mapeveri/languages:latest
 
-    docker push languages:latest
+   docker push mapeveri/languages:latest
 
 3. Execute:
 
