@@ -12,7 +12,7 @@ Getting started
 
     docker tag languages:latest mapeveri/languages:latest
 
-   docker push mapeveri/languages:latest
+    docker push mapeveri/languages:latest
 
 3. Execute:
 
@@ -32,10 +32,14 @@ Kubectl utilities:
 
     kubectl get pods -n default # Get pods from default namespace
 
-    kubectl describe pod languages # Pod data
+    kubectl describe pod app # Pod data
 
     kubectl get nodes -o wide # To get the internal IP
 
     kubectl rollout restart deployment/languages # Rollout pods
 
     kubectl describe svc app
+
+    kubectl get configmap appenv -o yaml
+
+    kubectl exec -it app -- /bin/bash

@@ -12,6 +12,26 @@ metadata:
 spec:
   containers:
     - env:
+        - name: RABBITMQ_USER
+          valueFrom:
+            configMapKeyRef:
+              key: RABBITMQ_USER
+              name: appenv
+        - name: RABBITMQ_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: RABBITMQ_PASSWORD
+              name: appenv
+        - name: RABBITMQ_EVENTS_QUEUE
+          valueFrom:
+            configMapKeyRef:
+              key: RABBITMQ_EVENTS_QUEUE
+              name: appenv
+        - name: RABBITMQ_HOST
+          valueFrom:
+            configMapKeyRef:
+              key: RABBITMQ_HOST
+              name: appenv
         - name: FRONTED_URL
           valueFrom:
             configMapKeyRef:
@@ -82,9 +102,18 @@ spec:
       volumeMounts:
         - mountPath: /var/www/html/languages
           name: app-claim0
+        - mountPath: /var/www/html/languages/.env
+          subPath: .env
+          name: env-file
   restartPolicy: OnFailure
   volumes:
     - name: app-claim0
       persistentVolumeClaim:
         claimName: app-claim0
+    - name: env-file
+      configMap:
+        name: appenv
+        items:
+          - key: .env
+            path: .env
 status: {}
