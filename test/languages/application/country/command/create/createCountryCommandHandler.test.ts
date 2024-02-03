@@ -5,14 +5,19 @@ import { CountryRepositoryMock } from '@test/languages/domain/country/countryRep
 import CountryMother from '@test/languages/domain/country/countryMother';
 import { CreateCountryCommandMother } from './createCountryCommandMother';
 import CountryAlreadyExistsException from '@src/languages/domain/country/countryAlreadyExistsException';
+import { EventBusMock } from '@test/shared/domain/buses/eventBus/eventBusMock';
+import { CountryCreatedEventMother } from '@test/languages/domain/country/countryCreatedEventMother';
 
 describe('CreateCountryCommandHandler', () => {
+  let eventBus: EventBusMock;
   let countryRepository: CountryRepositoryMock;
   let createCountryCommandHandler: CreateCountryCommandHandler;
 
   beforeEach(() => {
+    eventBus = new EventBusMock();
     countryRepository = new CountryRepositoryMock();
-    createCountryCommandHandler = new CreateCountryCommandHandler(countryRepository);
+
+    createCountryCommandHandler = new CreateCountryCommandHandler(countryRepository, eventBus);
   });
 
   describe('execute', () => {
@@ -29,10 +34,12 @@ describe('CreateCountryCommandHandler', () => {
     it('should create a country', async () => {
       const command = CreateCountryCommandMother.random();
       const country: Country = CountryMother.createFromCreateCountryCommand(command);
+      const countryCreatedEvent = CountryCreatedEventMother.createFromCreateCountryCommand(command);
 
       await createCountryCommandHandler.execute(command);
 
       countryRepository.shouldStore(country);
+      eventBus.shouldPublish([countryCreatedEvent]);
     });
   });
 });

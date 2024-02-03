@@ -6,10 +6,14 @@ import LanguageCollection from '@src/languages/domain/country/languageCollection
 import CountryAlreadyExistsException from '@src/languages/domain/country/countryAlreadyExistsException';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { CommandHandler, ICommandHandler } from '@src/shared/domain/bus/commandBus/commandHandler';
+import { EVENT_BUS, EventBus } from '@src/shared/domain/bus/eventBus/eventBus';
 
 @CommandHandler(CreateCountryCommand)
 export default class CreateCountryCommandHandler implements ICommandHandler<CreateCountryCommand> {
-  constructor(@Inject(COUNTRY_REPOSITORY) private readonly countryRepository: CountryRepository) {}
+  constructor(
+    @Inject(COUNTRY_REPOSITORY) private readonly countryRepository: CountryRepository,
+    @Inject(EVENT_BUS) private readonly eventBus: EventBus,
+  ) {}
 
   async execute(command: CreateCountryCommand): Promise<void> {
     const countryId = CountryId.of(command.id);
@@ -20,6 +24,8 @@ export default class CreateCountryCommandHandler implements ICommandHandler<Crea
     const country = Country.create(countryId, command.name, command.iso, languages);
 
     await this.countryRepository.save(country);
+
+    void this.eventBus.publish(country.pullDomainEvents());
   }
 
   private async guardCountryDoesNotExists(countryId: CountryId): Promise<void> {
