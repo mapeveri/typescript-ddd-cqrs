@@ -8,6 +8,7 @@ Getting started
 
 2. Docker push image:
 
+
     docker login 
 
     docker tag languages:latest mapeveri/languages:latest
@@ -16,11 +17,15 @@ Getting started
 
 3. Execute:
 
+
     sh .k8s/apply.sh
 
 4. Serve app:
 
-    minikube service app
+
+    kubectl expose pod app --type=NodePort --name=app-service
+
+    minikube service app-service --url
 
 Commands
 --------
@@ -33,13 +38,14 @@ Kubectl utilities:
     kubectl get pods -n default # Get pods from default namespace
 
     kubectl describe pod app # Pod data
+    kubectl describe svc app
 
     kubectl get nodes -o wide # To get the internal IP
 
     kubectl rollout restart deployment/languages # Rollout pods
 
-    kubectl describe svc app
+    kubectl get configmap app-config -o yaml # Config map data
 
-    kubectl get configmap appenv -o yaml
+    kubectl exec -it app -- /bin/bash # Enter to the pod
 
-    kubectl exec -it app -- /bin/bash
+    kubectl exec -it app -- env # List env variables pod

@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: appenv
+  name: app-config
 data:
   .env: |
     NODE_ENV=development
