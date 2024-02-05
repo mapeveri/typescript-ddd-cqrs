@@ -1,19 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
-    kompose.cmd: kompose convert -f docker-compose.yaml -o .k8s
-    kompose.version: 1.31.2 (a92241f79)
-  creationTimestamp: null
-  labels:
-    io.kompose.service: app
-  name: app
+  name: languages-service
 spec:
-  ports:
-    - name: "4000"
-      port: 4000
-      targetPort: 4000
   selector:
-    io.kompose.service: app
-status:
-  loadBalancer: {}
+    app: languages
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 4000
+  type: LoadBalancer

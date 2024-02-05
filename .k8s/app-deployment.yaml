@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: languages-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: languages
+  template:
+    metadata:
+      labels:
+        app: languages
+    spec:
+      containers:
+        - name: app
+          image: mapeveri/languages:latest
+          envFrom:
+            - configMapRef:
+                name: languages-config
+          ports:
+            - containerPort: 4000
+      volumes:
+        - name: app-storage
+          persistentVolumeClaim:
+            claimName: app-pvc

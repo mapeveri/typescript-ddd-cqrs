@@ -49,3 +49,5 @@ Kubectl utilities:
     kubectl exec -it app -- /bin/bash # Enter to the pod
 
     kubectl exec -it app -- env # List env variables pod
+
+    kubectl logs app # Container logs
