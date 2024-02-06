@@ -3,20 +3,19 @@ kind: ConfigMap
 metadata:
   name: languages-config
 data:
-  .env: |
-    NODE_ENV=development
-    SERVER_PORT=4000
-    POSTGRES_USER=postgres
-    POSTGRES_PASSWORD=app123456
-    POSTGRES_DATABASE=languages
-    POSTGRES_HOST=db
-    POSTGRESQL_DB_URL="postgresql://postgres:app123456@db/languages"
-    MONGO_DB_DATABASE=languages
-    MONGO_DB_URL=mongodb://mongo1:27017/languages?replicaSet=rs0
-    GOOGLE_CLIENT_ID=""
-    JWT_SECRET="45wef4we566dwdwgv.fi)__d"
-    FRONTED_URL="http://localhost:3000"
-    RABBITMQ_USER=app
-    RABBITMQ_PASSWORD=rabbit_app
-    RABBITMQ_EVENTS_QUEUE='events_queue'
-    RABBITMQ_HOST="amqp://app:rabbit_app@rabbitmq:5672"
+  NODE_ENV: development
+  SERVER_PORT: "4000"
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: app123456
+  POSTGRES_DATABASE: languages
+  POSTGRES_HOST: db
+  POSTGRESQL_DB_URL: postgresql://postgres:app123456@db/languages
+  MONGO_DB_DATABASE: languages
+  MONGO_DB_URL: mongodb://mongo1:27017/languages?replicaSet=rs0
+  GOOGLE_CLIENT_ID: ""
+  JWT_SECRET: "45wef4we566dwdwgv.fi)__d"
+  FRONTED_URL: "http://localhost:3000"
+  RABBITMQ_USER: app
+  RABBITMQ_PASSWORD: rabbit_app
+  RABBITMQ_EVENTS_QUEUE: events_queue
+  RABBITMQ_HOST: amqp://app:rabbit_app@rabbitmq:5672
