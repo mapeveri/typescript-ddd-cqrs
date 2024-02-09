@@ -94,3 +94,8 @@ Getting started
   ```bash
   kubectl logs app # View container logs
   ```
+
+- **Create secret**:
+  ```bash
+  kubectl create secret generic languages-secret --from-literal=GOOGLE_CLIENT_ID=mi_contraseña
+  ```

@@ -12,7 +12,6 @@ data:
   POSTGRESQL_DB_URL: postgresql://postgres:app123456@db/languages
   MONGO_DB_DATABASE: languages
   MONGO_DB_URL: mongodb://mongo1:27017/languages?replicaSet=rs0&directConnection=true
-  GOOGLE_CLIENT_ID: ""
   JWT_SECRET: "45wef4we566dwdwgv.fi)__d"
   FRONTED_URL: "http://localhost:3000"
   RABBITMQ_USER: app

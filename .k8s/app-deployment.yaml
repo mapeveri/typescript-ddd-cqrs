@@ -18,9 +18,16 @@ spec:
           envFrom:
             - configMapRef:
                 name: languages-config
+          volumeMounts:
+            - name: secret-volume
+              mountPath: /etc/languages/secret
+              readOnly: true
           ports:
             - containerPort: 4000
       volumes:
+        - name: secret-volume
+          secret:
+            secretName: languages-secret
         - name: app-storage
           persistentVolumeClaim:
             claimName: app-pvc
