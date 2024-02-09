@@ -4,9 +4,9 @@ K8S configuration
 Getting started
 ---------------
 
-1. Install minikube and kubectl
+1. To run in local install minikube and kubectl
 
-2. Docker push image:
+2. Docker push image
 
 
     docker login 
@@ -15,7 +15,7 @@ Getting started
 
     docker push mapeveri/languages:latest
 
-3. Execute:
+3. Execute
 
 
     sh .k8s/apply.sh
@@ -27,27 +27,70 @@ Getting started
 
     minikube service app-service --url
 
-Commands
---------
 
-Kubectl utilities:
+# Kubernetes Commands Reference
 
-    kubectl get deployment # Status deployment
-    kubectl get service # Status service
+## Get Information
 
-    kubectl get pods -n default # Get pods from default namespace
+- **Nodes**:
+  ```bash
+  kubectl get nodes -o wide # Get internal IP
+  ```
 
-    kubectl describe pod app # Pod data
-    kubectl describe svc app
+- **Pods**:
+  ```bash
+  kubectl get pods -n default # Get pods from default namespace
+  ```
 
-    kubectl get nodes -o wide # To get the internal IP
+- **Deployments**:
+  ```bash
+  kubectl get deployment # Deployment status
+  ```
 
-    kubectl rollout restart deployment/languages # Rollout pods
+- **Services**:
+  ```bash
+  kubectl get service # Service status
+  ```
 
-    kubectl get configmap app-config -o yaml # Config map data
+## Describe Resources
 
-    kubectl exec -it app -- /bin/bash # Enter to the pod
+- **Pod**:
+  ```bash
+  kubectl describe pod app # Pod details
+  ```
 
-    kubectl exec -it app -- env # List env variables pod
+- **Service**:
+  ```bash
+  kubectl describe svc app # Service details
+  ```
 
-    kubectl logs app # Container logs
+## Operations
+
+- **Rollout Restart**:
+  ```bash
+  kubectl rollout restart deployment/languages # Restart pods
+  ```
+
+## Configuration
+
+- **Config Map**:
+  ```bash
+  kubectl get configmap app-config -o yaml # Config map details
+  ```
+
+## Interact with Pods
+
+- **Access Shell**:
+  ```bash
+  kubectl exec -it app -- /bin/bash # Enter the pod
+  ```
+
+- **List Environment Variables**:
+  ```bash
+  kubectl exec -it app -- env # List pod environment variables
+  ```
+
+- **Container Logs**:
+  ```bash
+  kubectl logs app # View container logs
+  ```
