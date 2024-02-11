@@ -15,12 +15,17 @@ Getting started
 
     docker push mapeveri/languages:latest
 
-3. Execute
+3. Create secret
+
+
+    kubectl create secret generic languages-secret --from-literal=GOOGLE_CLIENT_ID=password
+
+4. Execute
 
 
     sh .k8s/apply.sh
 
-4. Serve app:
+5. Serve app:
 
 
     kubectl expose pod app --type=NodePort --name=app-service
@@ -93,4 +98,14 @@ Getting started
 - **Container Logs**:
   ```bash
   kubectl logs app # View container logs
+  ```
+
+- **Create secret**:
+  ```bash
+  kubectl create secret generic languages-secret --from-literal=GOOGLE_CLIENT_ID=password
+  ```
+
+- **Display secret value**:
+  ```
+  kubectl get secret languages-secret -n default -o jsonpath="{.data.GOOGLE_CLIENT_ID}" | base64 --decode
   ```

@@ -18,9 +18,22 @@ spec:
           envFrom:
             - configMapRef:
                 name: languages-config
+          env:
+            - name: GOOGLE_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: languages-secret
+                  key: GOOGLE_CLIENT_ID
+          volumeMounts:
+            - name: secret-volume
+              mountPath: /etc/languages/secret
+              readOnly: true
           ports:
             - containerPort: 4000
       volumes:
+        - name: secret-volume
+          secret:
+            secretName: languages-secret
         - name: app-storage
           persistentVolumeClaim:
             claimName: app-pvc
