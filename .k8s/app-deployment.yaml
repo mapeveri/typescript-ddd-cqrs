@@ -30,6 +30,7 @@ spec:
               readOnly: true
           ports:
             - containerPort: 4000
+      restartPolicy: Always
       volumes:
         - name: secret-volume
           secret:
