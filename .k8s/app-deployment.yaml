@@ -18,6 +18,12 @@ spec:
           envFrom:
             - configMapRef:
                 name: languages-config
+          env:
+            - name: GOOGLE_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: languages-secret
+                  key: GOOGLE_CLIENT_ID
           volumeMounts:
             - name: secret-volume
               mountPath: /etc/languages/secret
