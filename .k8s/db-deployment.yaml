@@ -23,11 +23,20 @@ spec:
             - name: PGDATA
               value: /var/lib/postgresql/data/pgdata
             - name: POSTGRES_DB
-              value: languages
+              valueFrom:
+                secretKeyRef:
+                  name: languages-secret
+                  key: POSTGRES_DATABASE
             - name: POSTGRES_PASSWORD
-              value: app123456
+              valueFrom:
+                secretKeyRef:
+                  name: languages-secret
+                  key: POSTGRES_PASSWORD
             - name: POSTGRES_USER
-              value: postgres
+              valueFrom:
+                secretKeyRef:
+                  name: languages-secret
+                  key: POSTGRES_USER
           image: postgres
           name: db
           ports:
@@ -40,6 +49,9 @@ spec:
               name: db-claim0
       restartPolicy: Always
       volumes:
+        - name: secret-volume
+          secret:
+            secretName: languages-secret
         - name: db-claim0
           persistentVolumeClaim:
             claimName: db-claim0
