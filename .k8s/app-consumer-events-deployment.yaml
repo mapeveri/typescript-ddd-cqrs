@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-consume-events-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-consume-events
+  template:
+    metadata:
+      labels:
+        app: app-consume-events
+    spec:
+      containers:
+        - name: app-consume-events-deployment
+          image: mapeveri/languages:latest
+          command: ["npm", "run", "consumer:domain-events"]
+          envFrom:
+            - configMapRef:
+                name: languages-config
+          env:
+            - name: GOOGLE_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: languages-secret
+                  key: GOOGLE_CLIENT_ID
+          volumeMounts:
+            - name: secret-volume
+              mountPath: /etc/languages/secret
+              readOnly: true
+      restartPolicy: Always
+      volumes:
+        - name: secret-volume
+          secret:
+            secretName: languages-secret
