@@ -11,7 +11,9 @@ Getting started
 
     docker login 
 
-    docker tag languages:latest mapeveri/languages:latest
+    docker build -t mapeveri/languages:latest .
+
+    docker tag mapeveri/languages:latest mapeveri/languages:latest
 
     docker push mapeveri/languages:latest
 
