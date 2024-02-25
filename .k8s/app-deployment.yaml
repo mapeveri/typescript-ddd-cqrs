@@ -24,6 +24,11 @@ spec:
                 secretKeyRef:
                   name: languages-secret
                   key: GOOGLE_CLIENT_ID
+            - name: POSTGRESQL_DB_URL
+              valueFrom:
+                secretKeyRef:
+                  name: languages-secret
+                  key: POSTGRESQL_DB_URL
           volumeMounts:
             - name: secret-volume
               mountPath: /etc/languages/secret
