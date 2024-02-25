@@ -5,11 +5,6 @@ metadata:
 data:
   NODE_ENV: development
   SERVER_PORT: "4000"
-  POSTGRES_USER: postgres
-  POSTGRES_PASSWORD: app123456
-  POSTGRES_DATABASE: languages
-  POSTGRES_HOST: db
-  POSTGRESQL_DB_URL: postgresql://postgres:app123456@db/languages
   MONGO_DB_DATABASE: languages
   MONGO_DB_URL: mongodb://mongo1:27017/languages?replicaSet=rs0&directConnection=true
   JWT_SECRET: "45wef4we566dwdwgv.fi)__d"
