@@ -1,45 +1,48 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: languages-app
+  name: languages-app-deployment
+  labels:
+    app: languages-app
+    role: backend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: languages
+      app: languages-app-deployment
   template:
     metadata:
       labels:
-        app: languages
+        app: languages-app-deployment
     spec:
       containers:
         - name: app
           image: mapeveri/languages:latest
           envFrom:
             - configMapRef:
-                name: languages-config
+                name: languages-app-config-map
           env:
             - name: GOOGLE_CLIENT_ID
               valueFrom:
                 secretKeyRef:
-                  name: languages-secret
+                  name: languages-app-secret
                   key: GOOGLE_CLIENT_ID
             - name: POSTGRESQL_DB_URL
               valueFrom:
                 secretKeyRef:
-                  name: languages-secret
+                  name: languages-app-secret
                   key: POSTGRESQL_DB_URL
           volumeMounts:
-            - name: secret-volume
+            - name: languages-secret-volume
               mountPath: /etc/languages/secret
               readOnly: true
           ports:
             - containerPort: 4000
       restartPolicy: Always
       volumes:
-        - name: secret-volume
+        - name: languages-secret-volume
           secret:
-            secretName: languages-secret
+            secretName: languages-app-secret
         - name: app-storage
           persistentVolumeClaim:
-            claimName: app-pvc
+            claimName: languages-app-pvc

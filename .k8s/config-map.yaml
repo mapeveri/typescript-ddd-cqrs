@@ -1,7 +1,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: languages-config
+  name: languages-app-config-map
+  labels:
+    app: languages-app
+    role: variables
 data:
   NODE_ENV: development
   SERVER_PORT: "4000"

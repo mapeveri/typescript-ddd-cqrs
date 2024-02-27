@@ -4,6 +4,7 @@ metadata:
   creationTimestamp: null
   labels:
     app: db
+    role: database
   name: db
 spec:
   ports:

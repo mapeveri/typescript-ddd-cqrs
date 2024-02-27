@@ -4,6 +4,7 @@ metadata:
   creationTimestamp: null
   labels:
     name: rabbitmq
+    role: message-broker
   name: rabbitmq
 spec:
   replicas: 1

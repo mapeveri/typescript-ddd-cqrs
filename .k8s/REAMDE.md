@@ -20,7 +20,7 @@ Getting started
 3. Create secret
 
 
-    kubectl create secret generic languages-secret --from-literal=GOOGLE_CLIENT_ID=key  --from-literal=POSTGRES_DATABASE=database --from-literal=POSTGRES_USER=user --from-literal=POSTGRES_PASSWORD=password --from-literal=POSTGRESQL_DB_URL=dbconnectionstring
+    kubectl create secret generic languages-app-secret --from-literal=GOOGLE_CLIENT_ID=key  --from-literal=POSTGRES_DATABASE=database --from-literal=POSTGRES_USER=user --from-literal=POSTGRES_PASSWORD=password --from-literal=POSTGRESQL_DB_URL=dbconnectionstring
 
 
 4. Execute
@@ -105,12 +105,12 @@ Getting started
 
 - **Create secret**:
   ```bash
-  kubectl create secret generic languages-secret --from-literal=GOOGLE_CLIENT_ID=password
+  kubectl create secret generic languages-app-secret --from-literal=GOOGLE_CLIENT_ID=password
   ```
 
 - **Delete secret**:
   ```bash
-  kubectl delete secret languages-secret
+  kubectl delete secret languages-app-secret
   ```
 
 - **Display secret value**:

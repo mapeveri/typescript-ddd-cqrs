@@ -3,6 +3,8 @@ kind: PersistentVolumeClaim
 metadata:
   creationTimestamp: null
   name: db-claim0
+  labels:
+    role: database
 spec:
   accessModes:
     - ReadWriteOnce

@@ -1,16 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app-consume-events-deployment
+  name: languages-app-consume-events-deployment
+  labels:
+    app: languages-app
+    role: consumer
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: app-consume-events
+      app: languages-app-consume-events-deployment
   template:
     metadata:
       labels:
-        app: app-consume-events
+        app: languages-app-consume-events-deployment
     spec:
       containers:
         - name: app-consume-events-deployment
@@ -18,24 +21,24 @@ spec:
           command: ["npm", "run", "consumer:domain-events"]
           envFrom:
             - configMapRef:
-                name: languages-config
+                name: languages-app-config-map
           env:
             - name: GOOGLE_CLIENT_ID
               valueFrom:
                 secretKeyRef:
-                  name: languages-secret
+                  name: languages-app-secret
                   key: GOOGLE_CLIENT_ID
             - name: POSTGRESQL_DB_URL
               valueFrom:
                 secretKeyRef:
-                  name: languages-secret
+                  name: languages-app-secret
                   key: POSTGRESQL_DB_URL
           volumeMounts:
-            - name: secret-volume
+            - name: languages-secret-volume
               mountPath: /etc/languages/secret
               readOnly: true
       restartPolicy: Always
       volumes:
-        - name: secret-volume
+        - name: languages-secret-volume
           secret:
-            secretName: languages-secret
+            secretName: languages-app-secret

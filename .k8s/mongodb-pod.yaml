@@ -8,6 +8,7 @@ metadata:
   labels:
     io.kompose.network/typescript-ddd-cqrs-default: "true"
     io.kompose.service: mongodb
+    role: database
   name: mongodb
 spec:
   containers:

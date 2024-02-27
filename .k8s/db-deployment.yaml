@@ -4,6 +4,7 @@ metadata:
   creationTimestamp: null
   labels:
     app: db
+    role: database
   name: db
 spec:
   replicas: 1
@@ -25,17 +26,17 @@ spec:
             - name: POSTGRES_DB
               valueFrom:
                 secretKeyRef:
-                  name: languages-secret
+                  name: languages-app-secret
                   key: POSTGRES_DATABASE
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: languages-secret
+                  name: languages-app-secret
                   key: POSTGRES_PASSWORD
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: languages-secret
+                  name: languages-app-secret
                   key: POSTGRES_USER
           image: postgres
           name: db
@@ -51,7 +52,7 @@ spec:
       volumes:
         - name: secret-volume
           secret:
-            secretName: languages-secret
+            secretName: languages-app-secret
         - name: db-claim0
           persistentVolumeClaim:
             claimName: db-claim0
