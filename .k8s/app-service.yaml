@@ -7,7 +7,7 @@ metadata:
     role: backend
 spec:
   selector:
-    app: languages-app-deployment
+    app: languages-app-api
   ports:
     - protocol: TCP
       port: 80

@@ -9,11 +9,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: languages-app-deployment
+      app: languages-app-api
   template:
     metadata:
       labels:
-        app: languages-app-deployment
+        app: languages-app-api
     spec:
       containers:
         - name: app
