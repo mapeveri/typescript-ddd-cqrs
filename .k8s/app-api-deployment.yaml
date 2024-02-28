@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: languages-app-deployment
+  name: languages-app-api-deployment
   labels:
     app: languages-app
     role: backend

@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: languages-app-pvc
+  name: languages-app-api-pvc
   labels:
     app: languages-app
     role: backend
