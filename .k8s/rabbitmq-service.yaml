@@ -3,7 +3,7 @@ kind: Service
 metadata:
   creationTimestamp: null
   labels:
-    name: rabbitmq
+    name: rabbitmq-service
     role: message-broker
   name: rabbitmq
 spec:

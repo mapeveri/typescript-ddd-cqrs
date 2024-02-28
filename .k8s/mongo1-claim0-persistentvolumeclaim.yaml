@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   creationTimestamp: null
   labels:
-    io.kompose.service: mongo1-claim0
+    name: mongo1-claim0
     role: database
   name: mongo1-claim0
 spec:
