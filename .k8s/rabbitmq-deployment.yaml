@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    name: rabbitmq
+    name: rabbitmq-deployment
     role: message-broker
   name: rabbitmq
 spec:
