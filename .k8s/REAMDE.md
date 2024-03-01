@@ -31,7 +31,7 @@ Getting started
 5. Serve app:
 
 
-    kubectl expose pod portName --type=NodePort --name=app-service
+    kubectl expose pod podName --type=NodePort --name=app-service
 
     minikube service app-service --url
 
