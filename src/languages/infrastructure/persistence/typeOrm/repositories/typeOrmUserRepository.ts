@@ -6,10 +6,6 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export default class TypeOrmUserRepository extends TypeOrmRepository implements UserRepository {
-  constructor() {
-    super();
-  }
-
   async findById(id: UserId): Promise<User | null> {
     return await this.em.findOne(User, { where: { id: id } } as any);
   }

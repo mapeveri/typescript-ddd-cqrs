@@ -2,7 +2,6 @@ import { AppModule } from './app.module';
 import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { rabbitMqConfig } from './shared/infrastructure/messenger/rabbitMq/config';
-import { DataSourceHandler } from './shared/infrastructure/persistence/typeOrm/dataSourceHandler';
 import * as dotenv from 'dotenv';
 
 async function bootstrap() {
@@ -12,8 +11,6 @@ async function bootstrap() {
     transport: Transport.RMQ,
     options: rabbitMqConfig,
   });
-
-  await DataSourceHandler.getInstance().initialize();
 
   await rabbitMq.listen();
 }

@@ -9,9 +9,12 @@ import { projections } from '@src/languages/_dependencyInjection/projectionHandl
 import { readLayers } from '@src/languages/_dependencyInjection/readLayers';
 import { services as LanguageServices } from '@src/languages/_dependencyInjection/services';
 import NestProjectionBus from '@src/shared/infrastructure/bus/nestProjectionBus';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { entitySchemas } from '@src/shared/_dependencyInjection/entitySchemas';
 
 @Module({
-  imports: [],
+  imports: [TypeOrmModule.forFeature(entitySchemas)],
+  exports: [TypeOrmModule],
   controllers: [...controllers],
   providers: [
     ...services,

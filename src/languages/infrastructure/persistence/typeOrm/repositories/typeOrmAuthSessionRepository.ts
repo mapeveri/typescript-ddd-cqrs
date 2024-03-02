@@ -5,10 +5,6 @@ import TypeOrmRepository from '@src/shared/infrastructure/persistence/typeOrm/ty
 
 @Injectable()
 export default class TypeOrmAuthSessionRepository extends TypeOrmRepository implements AuthSessionRepository {
-  constructor() {
-    super();
-  }
-
   async save(authSession: AuthSession): Promise<any> {
     return await this.em.save(authSession);
   }

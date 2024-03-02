@@ -1,14 +1,13 @@
-import { CommandBus } from '@nestjs/cqrs';
-import { Command } from '@src/shared/domain/bus/commandBus/command';
-import { DataSourceHandler } from '@src/shared/infrastructure/persistence/typeOrm/dataSourceHandler';
+import { TypeOrmTransactionalEntityManager } from '@src/shared/infrastructure/persistence/typeOrm/typeOrmTransactionalEntityManager';
+import { Injectable } from '@nestjs/common';
 
+type FunctionToDecorate = () => Promise<void>;
+
+@Injectable()
 export default class TypeOrmTransactionalDecorator {
-  constructor(readonly commandBus: CommandBus) {}
+  constructor(private entityManager: TypeOrmTransactionalEntityManager) {}
 
-  async execute(command: Command): Promise<void> {
-    const dataSourceHandler = DataSourceHandler.getInstance();
-    await dataSourceHandler.transaction(async () => {
-      await this.commandBus.execute(command);
-    });
+  async execute(functionToDecorate: FunctionToDecorate): Promise<void> {
+    await this.entityManager.transaction(functionToDecorate);
   }
 }

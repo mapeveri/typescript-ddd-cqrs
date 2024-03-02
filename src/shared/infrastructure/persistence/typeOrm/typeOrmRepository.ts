@@ -1,8 +1,12 @@
 import { EntityManager } from 'typeorm';
-import { DataSourceHandler } from './dataSourceHandler';
+import { TypeOrmTransactionalEntityManager } from '@src/shared/infrastructure/persistence/typeOrm/typeOrmTransactionalEntityManager';
+import { Injectable } from '@nestjs/common';
 
+@Injectable()
 export default abstract class TypeOrmRepository {
+  constructor(private readonly transactionalEntityManager: TypeOrmTransactionalEntityManager) {}
+
   get em(): EntityManager {
-    return DataSourceHandler.getInstance().entityManager;
+    return this.transactionalEntityManager.em();
   }
 }

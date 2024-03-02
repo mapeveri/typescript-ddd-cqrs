@@ -5,7 +5,7 @@ import { ValueObjectTransformer } from '@src/shared/infrastructure/persistence/t
 import LanguageCollectionTransformer from '../transformers/languageCollectionTransformer';
 import LanguageCollection from '@src/languages/domain/country/languageCollection';
 
-export default new EntitySchema<Country>({
+export const CountrySchema = new EntitySchema<Country>({
   name: Country.name,
   tableName: 'countries',
   target: Country,

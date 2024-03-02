@@ -6,10 +6,6 @@ import Term from '@src/languages/domain/term/term';
 
 @Injectable()
 export default class TypeOrmTermRepository extends TypeOrmRepository implements TermRepository {
-  constructor() {
-    super();
-  }
-
   async findById(id: TermId): Promise<Term | null> {
     return await this.em.findOne(Term, { where: { id: id } } as any);
   }

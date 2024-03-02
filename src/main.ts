@@ -1,7 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import Logger, { LOGGER } from './shared/domain/logger';
-import { DataSourceHandler } from './shared/infrastructure/persistence/typeOrm/dataSourceHandler';
 import { ValidationPipe } from '@nestjs/common';
 import helmet from 'helmet';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
@@ -38,13 +37,11 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  await DataSourceHandler.getInstance().initialize();
-
   const logger: Logger = app.get(LOGGER);
 
   await app.init();
 
-  app.listen(port, () => {
+  await app.listen(port, () => {
     logger.log(`App is running at http://localhost:${port} in ${process.env.NODE_ENV} mode`);
     console.log('Press CTRL-C to stop\n');
   });

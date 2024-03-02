@@ -4,7 +4,7 @@ import UserId from '@src/languages/domain/user/userId';
 import Email from '@src/shared/domain/valueObjects/email';
 import { ValueObjectTransformer } from '@src/shared/infrastructure/persistence/typeOrm/transformers/valueObjectTransformer';
 
-export default new EntitySchema<User>({
+export const UserSchema = new EntitySchema<User>({
   name: User.name,
   tableName: 'users',
   target: User,

@@ -6,10 +6,6 @@ import TypeOrmRepository from '@src/shared/infrastructure/persistence/typeOrm/ty
 
 @Injectable()
 export default class TypeOrmCountryRepository extends TypeOrmRepository implements CountryRepository {
-  constructor() {
-    super();
-  }
-
   async findAll(): Promise<Country[]> {
     return await this.em.find(Country);
   }

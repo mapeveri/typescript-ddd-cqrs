@@ -6,7 +6,7 @@ import { EntitySchema } from 'typeorm';
 import Term from '@src/languages/domain/term/term';
 import TermId from '@src/languages/domain/term/termId';
 
-export const termSchema = new EntitySchema<Term>({
+export const TermSchema = new EntitySchema<Term>({
   name: Term.name,
   target: Term,
   columns: {

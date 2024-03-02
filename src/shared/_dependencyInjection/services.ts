@@ -19,11 +19,15 @@ import { EVENT_STORE_REPOSITORY } from '@src/shared/domain/eventStore/eventStore
 import MongoEventStoreRepository from '@src/shared/infrastructure/persistence/mongo/repositories/mongoEventStoreRepository';
 import { PersistDomainEventsSubscriber } from '@src/shared/infrastructure/subscribers/persistDomainEventsSubscriber';
 import MongoConnection from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
+import { TypeOrmTransactionalEntityManager } from '@src/shared/infrastructure/persistence/typeOrm/typeOrmTransactionalEntityManager';
+import TypeOrmTransactionalDecorator from '@src/shared/infrastructure/persistence/typeOrm/typeOrmTransactionalDecorator';
 
 export const services = [
   NestJwtAuthGuard,
   JwtStrategy,
   NestProjectionBus,
+  TypeOrmTransactionalEntityManager,
+  TypeOrmTransactionalDecorator,
   {
     provide: 'MONGO_CLIENT',
     useFactory: async () => {

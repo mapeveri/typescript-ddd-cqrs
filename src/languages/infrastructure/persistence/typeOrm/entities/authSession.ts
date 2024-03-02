@@ -4,7 +4,7 @@ import AuthSession from '@src/languages/domain/auth/authSession';
 import AuthSessionId from '@src/languages/domain/auth/authSessionId';
 import SessionTransformer from '../transformers/sessionTransformer';
 
-export default new EntitySchema<AuthSession>({
+export const AuthSessionSchema = new EntitySchema<AuthSession>({
   name: AuthSession.name,
   tableName: 'auth_sessions',
   target: AuthSession,

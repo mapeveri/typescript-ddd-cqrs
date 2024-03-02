@@ -6,9 +6,13 @@ import TypeOrmTransactionalDecorator from '@src/shared/infrastructure/persistenc
 
 @Injectable()
 export default class NestCommandBus implements ICommandBus {
-  constructor(private commandBus: CommandBus) {}
+  constructor(private commandBus: CommandBus, private readonly transactionalDecorator: TypeOrmTransactionalDecorator) {}
 
   async dispatch(command: Command): Promise<void> {
-    await new TypeOrmTransactionalDecorator(this.commandBus).execute(command);
+    await this.transactionalDecorator.execute(this.commandToExecute.bind(this, command));
+  }
+
+  private async commandToExecute(command: Command): Promise<void> {
+    await this.commandBus.execute(command);
   }
 }
