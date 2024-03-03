@@ -8,11 +8,11 @@ metadata:
   name: rabbitmq
 spec:
   ports:
-    - name: "5630"
-      port: 5630
+    - name: "5672"
+      port: 5672
       targetPort: 5672
-    - name: "8090"
-      port: 8090
+    - name: "15672"
+      port: 15672
       targetPort: 15672
   selector:
     name: rabbitmq
