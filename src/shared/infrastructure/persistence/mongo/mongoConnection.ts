@@ -31,3 +31,5 @@ export default class MongoConnection {
     this.db = this.client.db(process.env.MONGO_DB_DATABASE);
   }
 }
+
+export const MONGO_CLIENT = Symbol('MONGO_CLIENT');

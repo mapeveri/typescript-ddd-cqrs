@@ -5,13 +5,13 @@ import UserRepository, { USER_REPOSITORY } from '@src/languages/domain/user/user
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import UserFinder from '@src/languages/domain/user/userFinder';
 import { Document } from 'mongodb';
-import MongoConnection from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
+import MongoConnection, { MONGO_CLIENT } from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
 
 export default class MongoFindSuggestionsTermReadLayer implements FindSuggestionsTermReadLayer {
   private readonly userFinder: UserFinder;
 
   constructor(
-    @Inject('MONGO_CLIENT') private readonly mongo: MongoConnection,
+    @Inject(MONGO_CLIENT) private readonly mongo: MongoConnection,
     @Inject(USER_REPOSITORY) userRepository: UserRepository,
   ) {
     this.userFinder = new UserFinder(userRepository);
