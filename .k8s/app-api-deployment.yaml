@@ -21,17 +21,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: languages-app-config-map
-          env:
-            - name: GOOGLE_CLIENT_ID
-              valueFrom:
-                secretKeyRef:
-                  name: languages-app-secret
-                  key: GOOGLE_CLIENT_ID
-            - name: POSTGRESQL_DB_URL
-              valueFrom:
-                secretKeyRef:
-                  name: languages-app-secret
-                  key: POSTGRESQL_DB_URL
+            - secretRef:
+                name: languages-app-secret
           volumeMounts:
             - name: languages-secret-volume
               mountPath: /etc/languages/secret
