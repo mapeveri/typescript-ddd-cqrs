@@ -12,7 +12,7 @@ data:
   MONGO_DB_URL: mongodb://mongo1:27017/languages?replicaSet=rs0&directConnection=true
   JWT_SECRET: "45wef4we566dwdwgv.fi)__d"
   FRONTED_URL: "http://localhost:3000"
-  RABBITMQ_USER: app
-  RABBITMQ_PASSWORD: rabbit_app
-  RABBITMQ_EVENTS_QUEUE: events_queue
-  RABBITMQ_HOST: amqp://app:rabbit_app@rabbitmq:5672
+  RABBITMQ_DEFAULT_USER: "app"
+  RABBITMQ_DEFAULT_PASS: "rabbit_app"
+  RABBITMQ_EVENTS_QUEUE: "events_queue"
+  RABBITMQ_HOST: "amqp://app:rabbit_app@rabbitmq:5672"

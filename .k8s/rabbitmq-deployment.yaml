@@ -19,9 +19,9 @@ spec:
         name: rabbitmq
     spec:
       containers:
-        - env:
-            - name: RABBITMQ_DEFAULT_PASS
-            - name: RABBITMQ_DEFAULT_USER
+        - envFrom:
+            - configMapRef:
+                name: languages-app-config-map
           image: rabbitmq:3.12-management
           name: rabbitmq
           ports:
