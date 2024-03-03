@@ -17,10 +17,15 @@ import { SOCIAL_AUTHENTICATOR } from '@src/languages/domain/auth/socialAuthentic
 import NestProjectionBus from '@src/shared/infrastructure/bus/nestProjectionBus';
 import { TypeOrmTransactionalEntityManager } from '@src/shared/infrastructure/persistence/typeOrm/typeOrmTransactionalEntityManager';
 import { MONGO_CLIENT } from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
+import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { dataSourceConfig } from '@src/shared/infrastructure/persistence/typeOrm/dataSource';
 
 @Global()
 @Module({
   imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    TypeOrmModule.forRoot(dataSourceConfig),
     JwtModule.register({
       secret: Environment.getVariable('JWT_SECRET'),
       signOptions: { expiresIn: '2h' },
