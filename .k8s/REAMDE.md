@@ -17,11 +17,7 @@ Getting started
 
     docker push mapeveri/languages:latest
 
-3. Create secret
-
-
-    kubectl create secret generic languages-app-secret --from-literal=GOOGLE_CLIENT_ID=key  --from-literal=POSTGRES_DATABASE=database --from-literal=POSTGRES_USER=user --from-literal=POSTGRES_PASSWORD=password --from-literal=POSTGRESQL_DB_URL=dbconnectionstring
-
+3. Copy .k8s/secret.yaml.txt to .k8s/secret.yaml and configure it
 
 4. Execute
 
@@ -35,6 +31,12 @@ Getting started
 
     minikube service app-service --url
 
+
+# Encrypt secret values:
+
+  ```bash
+echo -n "my-secret" | base64
+```
 
 # Kubernetes Commands Reference
 

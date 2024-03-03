@@ -10,3 +10,6 @@
 /reports/
 stryker.log
 .idea
+
+# k8s
+.k8s/secret.yaml
