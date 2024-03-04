@@ -13,10 +13,19 @@ import { rabbitMqConfig } from '@src/shared/infrastructure/messenger/rabbitMq/co
 import { consumers } from '@src/shared/_dependencyInjection/consumers';
 import { services } from '@src/shared/_dependencyInjection/services';
 import Environment from '@src/shared/infrastructure/utils/environment';
+import { SOCIAL_AUTHENTICATOR } from '@src/languages/domain/auth/socialAuthenticator';
+import NestProjectionBus from '@src/shared/infrastructure/bus/nestProjectionBus';
+import { TypeOrmTransactionalEntityManager } from '@src/shared/infrastructure/persistence/typeOrm/typeOrmTransactionalEntityManager';
+import { MONGO_CLIENT } from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
+import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { dataSourceConfig } from '@src/shared/infrastructure/persistence/typeOrm/dataSource';
 
 @Global()
 @Module({
   imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    TypeOrmModule.forRoot(dataSourceConfig),
     JwtModule.register({
       secret: Environment.getVariable('JWT_SECRET'),
       signOptions: { expiresIn: '2h' },
@@ -38,12 +47,16 @@ import Environment from '@src/shared/infrastructure/utils/environment';
     CqrsModule,
     ClientsModule,
     JwtStrategy,
+    NestProjectionBus,
+    TypeOrmTransactionalEntityManager,
+    MONGO_CLIENT,
     LOGGER,
     QUERY_BUS,
     COMMAND_BUS,
     EVENT_BUS,
     PROJECTION_BUS,
     ASYNC_EVENT_BUS,
+    SOCIAL_AUTHENTICATOR,
   ],
 })
 export class SharedModule {}

@@ -1,6 +1,6 @@
 import { Module, OnApplicationBootstrap } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { controllers } from '@src/languages/_dependencyInjection/controllers';
-import { services } from '@src/shared/_dependencyInjection/services';
 import { repositories } from '@src/languages/_dependencyInjection/repositories';
 import { commands } from '@src/languages/_dependencyInjection/commandHandlers';
 import { queries } from '@src/languages/_dependencyInjection/queryHandlers';
@@ -9,23 +9,13 @@ import { projections } from '@src/languages/_dependencyInjection/projectionHandl
 import { readLayers } from '@src/languages/_dependencyInjection/readLayers';
 import { services as LanguageServices } from '@src/languages/_dependencyInjection/services';
 import NestProjectionBus from '@src/shared/infrastructure/bus/nestProjectionBus';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { entitySchemas } from '@src/shared/_dependencyInjection/entitySchemas';
 
 @Module({
   imports: [TypeOrmModule.forFeature(entitySchemas)],
   exports: [TypeOrmModule],
   controllers: [...controllers],
-  providers: [
-    ...services,
-    ...commands,
-    ...queries,
-    ...events,
-    ...projections,
-    ...repositories,
-    ...readLayers,
-    ...LanguageServices,
-  ],
+  providers: [...commands, ...queries, ...events, ...projections, ...repositories, ...readLayers, ...LanguageServices],
 })
 export class LanguageModule implements OnApplicationBootstrap {
   constructor(private readonly projectionBus: NestProjectionBus) {}

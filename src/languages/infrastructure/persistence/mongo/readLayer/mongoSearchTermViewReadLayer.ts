@@ -6,11 +6,11 @@ import SearchTermViewReadLayer, {
 import { Document } from 'mongodb';
 import { SortDirection } from 'typeorm';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
-import MongoConnection from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
+import MongoConnection, { MONGO_CLIENT } from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
 
 @Injectable()
 export default class MongoSearchTermViewReadLayer implements SearchTermViewReadLayer {
-  constructor(@Inject('MONGO_CLIENT') private readonly mongo: MongoConnection) {}
+  constructor(@Inject(MONGO_CLIENT) private readonly mongo: MongoConnection) {}
 
   async search(criteria: TermCriteriaParams): Promise<TermView[]> {
     let result = [];
