@@ -31,6 +31,8 @@ Getting started
 
     minikube service app-service --url
 
+    kubectl delete service app-service
+
 
 # Encrypt secret values:
 
