@@ -18,18 +18,10 @@ spec:
       containers:
         - name: app-consume-events-deployment
           image: mapeveri/languages:latest
-          command: ["npm", "run", "consumer:domain-events"]
+          command: ['npm', 'run', 'consumer:domain-events']
           envFrom:
             - configMapRef:
                 name: languages-app-config-map
             - secretRef:
                 name: languages-app-secret
-          volumeMounts:
-            - name: languages-secret-volume
-              mountPath: /etc/languages/secret
-              readOnly: true
       restartPolicy: Always
-      volumes:
-        - name: languages-secret-volume
-          secret:
-            secretName: languages-app-secret

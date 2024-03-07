@@ -23,17 +23,10 @@ spec:
                 name: languages-app-config-map
             - secretRef:
                 name: languages-app-secret
-          volumeMounts:
-            - name: languages-secret-volume
-              mountPath: /etc/languages/secret
-              readOnly: true
           ports:
             - containerPort: 4000
       restartPolicy: Always
       volumes:
-        - name: languages-secret-volume
-          secret:
-            secretName: languages-app-secret
         - name: app-storage
           persistentVolumeClaim:
             claimName: languages-app-pvc

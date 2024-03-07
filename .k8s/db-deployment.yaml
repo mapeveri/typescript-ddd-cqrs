@@ -50,9 +50,6 @@ spec:
               name: db-claim0
       restartPolicy: Always
       volumes:
-        - name: secret-volume
-          secret:
-            secretName: languages-app-secret
         - name: db-claim0
           persistentVolumeClaim:
             claimName: db-claim0
