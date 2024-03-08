@@ -22,6 +22,8 @@ spec:
         - envFrom:
             - configMapRef:
                 name: languages-app-config-map
+            - secretRef:
+                name: languages-app-secret
           image: rabbitmq:3.12-management
           name: rabbitmq
           ports:
