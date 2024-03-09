@@ -6,18 +6,12 @@ Getting started
 
 1. To run in local install minikube and kubectl
 
-2. Docker push image
+2. Copy .k8s/secret.yaml.txt to .k8s/secret.yaml and configure it
+
+3. Start minikube
 
 
-    docker login 
-
-    docker build -t mapeveri/languages:latest .
-
-    docker tag mapeveri/languages:latest mapeveri/languages:latest
-
-    docker push mapeveri/languages:latest
-
-3. Copy .k8s/secret.yaml.txt to .k8s/secret.yaml and configure it
+    minikube start
 
 4. Execute
 
@@ -33,6 +27,21 @@ Getting started
 
     kubectl delete service app-service
 
+# Docker registry
+
+When we will need to push the image to docker hub we will need this commands:
+
+  ```bash
+    docker login 
+
+    docker build -t mapeveri/languages:latest .
+
+    docker tag mapeveri/languages:latest mapeveri/languages:latest
+
+    docker push mapeveri/languages:latest
+  ```
+
+3. Copy .k8s/secret.yaml.txt to .k8s/secret.yaml and configure it
 
 # Encrypt secret values:
 

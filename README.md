@@ -48,9 +48,7 @@ To consume async domain events you need to run the next command:
   make run-consume-events
 ```
 
-## Production
+## Deployment with Kubernetes
 
-For production run the next command:
-```shell script
-    docker-compose run app npm run start:prod
-```
+Follow the readme of [.k8s/README.md](https://github.com/mapeveri/typescript-ddd-cqrs/blob/master/.k8s/README.md)
+
