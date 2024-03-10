@@ -10,23 +10,26 @@ Getting started
 
 3. Start minikube
 
-
+  ```bash
     minikube start
+  ```
 
 4. Execute
 
-
+  ```bash
     sh .k8s/apply.sh
+  ```
 
 5. Serve app:
 
-
+  ```bash
     kubectl expose pod podName --type=NodePort --name=app-service
 
     minikube service app-service --url
 
     kubectl delete service app-service
-
+  ```
+  
 # Docker registry
 
 When we will need to push the image to docker hub we will need this commands:
