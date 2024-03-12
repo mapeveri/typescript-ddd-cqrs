@@ -20,7 +20,7 @@ jobs:
         run: npm ci
       - name: Run linter check
         run: npm run linter-check
-      - name: Run format-code check
+      - name: Run format code check
         run: npm run format-code-check
-      - name: Run tests
+      - name: Run unit tests
         run: npm run test:unit
