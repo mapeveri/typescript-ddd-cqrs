@@ -8,6 +8,7 @@
 # stryker temp files
 .stryker-tmp
 /reports/
+/coverage/
 stryker.log
 .idea
 
