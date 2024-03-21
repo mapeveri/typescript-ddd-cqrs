@@ -10,7 +10,10 @@
 /reports/
 /coverage/
 stryker.log
+
+# ide
 .idea
+.vscode
 
 # k8s
 .k8s/secret.yaml
