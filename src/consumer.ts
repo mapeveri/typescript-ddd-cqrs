@@ -6,13 +6,21 @@ import * as dotenv from 'dotenv';
 
 async function bootstrap() {
   dotenv.config();
+  const port = process.env.SERVER_CONSUMER_PORT || 4001;
 
-  const rabbitMq = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
+  const app = await NestFactory.create(AppModule);
+
+  app.connectMicroservice<MicroserviceOptions>({
+    transport: Transport.TCP,
+  });
+
+  app.connectMicroservice<MicroserviceOptions>({
     transport: Transport.RMQ,
     options: rabbitMqConfig,
   });
 
-  await rabbitMq.listen();
+  await app.startAllMicroservices();
+  await app.listen(port);
 }
 
 void bootstrap();
