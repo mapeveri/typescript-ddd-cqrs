@@ -8,5 +8,6 @@ metadata:
 data:
   NODE_ENV: development
   SERVER_PORT: "4000"
+  SERVER_CONSUMER_PORT: "4001"
   FRONTED_URL: "http://localhost:3000"
   RABBITMQ_EVENTS_QUEUE: "events_queue"

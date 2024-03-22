@@ -25,6 +25,12 @@ spec:
                 name: languages-app-secret
           ports:
             - containerPort: 4000
+          readinessProbe:
+            httpGet:
+              path: /api/v1/health
+              port: 4000
+            initialDelaySeconds: 5
+            periodSeconds: 10
       restartPolicy: Always
       volumes:
         - name: app-storage
