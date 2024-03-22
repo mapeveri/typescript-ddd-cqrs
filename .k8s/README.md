@@ -23,11 +23,7 @@ Getting started
 5. Serve app:
 
   ```bash
-    kubectl expose pod podName --type=NodePort --name=app-service
-
-    minikube service app-service --url
-
-    kubectl delete service app-service
+    minikube service languages-app-api-service --url
   ```
   
 # Docker registry
