@@ -10,33 +10,39 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      name: mongo1
-  strategy:
-    type: Recreate
+      app: mongo1
   template:
     metadata:
       creationTimestamp: null
       labels:
-        name: mongo1
+        app: mongo1
     spec:
       containers:
-        - args:
-            - --bind_ip_all
-            - --replSet
-            - rs0
+        - name: mongo1
           image: mongo:6
-          name: mongo1
+          command: ["mongod", "--bind_ip_all", "--replSet", "rs0"]
           ports:
             - containerPort: 27017
-              hostPort: 27017
-              protocol: TCP
-          resources: {}
           volumeMounts:
-            - mountPath: /data/db
-              name: mongo1-claim0
-      restartPolicy: Always
+            - name: mongo1-claim0
+              mountPath: /data/db
       volumes:
         - name: mongo1-claim0
           persistentVolumeClaim:
             claimName: mongo1-claim0
-status: {}
+  strategy: {}
+  status: {}
+
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: mongodb-init
+spec:
+  template:
+    spec:
+      containers:
+        - name: mongodb-init
+          image: mongo:6
+          command: ["/bin/bash", "-c", "sleep 15 && until nc -zv mongo1 27017; do echo 'Waiting for mongo1 to be ready...'; sleep 5; done; sleep 10; mongosh --host mongo1:27017 <<EOF; cfg = { '_id': 'rs0', 'members': [ { '_id': 0, 'host': 'mongo1:27017' } ] }; rs.initiate(cfg); EOF"]
+      restartPolicy: OnFailure
