@@ -31,7 +31,6 @@ spec:
           persistentVolumeClaim:
             claimName: mongo1-claim0
   strategy: {}
-  status: {}
 
 ---
 apiVersion: batch/v1
@@ -44,5 +43,20 @@ spec:
       containers:
         - name: mongodb-init
           image: mongo:6
-          command: ["/bin/bash", "-c", "sleep 15 && until nc -zv mongo1 27017; do echo 'Waiting for mongo1 to be ready...'; sleep 5; done; sleep 10; mongosh --host mongo1:27017 <<EOF; cfg = { '_id': 'rs0', 'members': [ { '_id': 0, 'host': 'mongo1:27017' } ] }; rs.initiate(cfg); EOF"]
+          command:
+            - "/bin/bash"
+            - "-c"
+            - |
+              #!/bin/bash
+              echo "Mongo init"
+              sleep 30
+              mongosh --host mongo1:27017 <<EOF
+                cfg = {
+                  "_id": "rs0",
+                  "members": [
+                    { "_id": 0, "host": "mongo1:27017" }
+                  ]
+                };
+                rs.initiate(cfg);
+              EOF
       restartPolicy: OnFailure
