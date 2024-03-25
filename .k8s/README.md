@@ -14,13 +14,19 @@ Getting started
     minikube start
   ```
 
-4. Execute
+4. Enable ingress controller
+
+  ```
+    minikube addons enable ingress
+  ```
+
+5. Execute
 
   ```bash
     sh .k8s/apply.sh
   ```
 
-5. Serve app:
+6. Serve app:
 
   ```bash
     minikube service languages-app-api-service --url
@@ -128,4 +134,14 @@ echo -n "my-secret" | base64
 - **Display secret value**:
   ```
   kubectl get secret languages-secret -n default -o jsonpath="{.data.GOOGLE_CLIENT_ID}" | base64 --decode
+  ```
+
+- **Get ingress**:
+  ```
+  kubectl get ingress
+  ```
+
+- **Get pods ingress**:
+  ```
+  kubectl get pods -n ingress-nginx
   ```
