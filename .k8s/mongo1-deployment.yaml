@@ -1,9 +1,9 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   creationTimestamp: null
   labels:
-    name: mongo1-deployment
+    name: mongo1-statefulset
     role: database
   name: mongo1
 spec:
@@ -49,7 +49,6 @@ spec:
             - |
               #!/bin/bash
               echo "Mongo init"
-              sleep 30
               mongosh --host mongo1:27017 <<EOF
                 cfg = {
                   "_id": "rs0",
