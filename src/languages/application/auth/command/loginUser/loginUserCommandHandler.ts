@@ -29,7 +29,7 @@ export default class LoginUserCommandHandler implements ICommandHandler<LoginUse
   private async guardIsValidLogin(command: LoginUserCommand) {
     const isValid: boolean = await this.socialAuthenticator.login(command.token);
     if (!isValid) {
-      throw new LoginException();
+      throw new LoginException(command.email);
     }
   }
 
