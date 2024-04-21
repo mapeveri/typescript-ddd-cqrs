@@ -26,7 +26,7 @@ export default class LoginUserCommandHandler implements ICommandHandler<LoginUse
     void this.eventBus.publish(authSession.pullDomainEvents());
   }
 
-  private async guardIsValidLogin(command: LoginUserCommand) {
+  private async guardIsValidLogin(command: LoginUserCommand): Promise<void> {
     const isValid: boolean = await this.socialAuthenticator.login(command.token);
     if (!isValid) {
       throw new LoginException(command.email);
