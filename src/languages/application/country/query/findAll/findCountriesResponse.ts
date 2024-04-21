@@ -1,8 +1,8 @@
-import Country from '@src/languages/domain/country/country';
+import Country, { CountryPrimitives } from '@src/languages/domain/country/country';
 import QueryResponse from '@src/shared/domain/bus/queryBus/queryResponse';
 
 export default class FindCountriesResponse extends QueryResponse {
-  private constructor(countries?: object) {
+  private constructor(countries?: CountryPrimitives[]) {
     super(countries);
   }
 

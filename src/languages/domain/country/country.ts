@@ -2,6 +2,14 @@ import { AggregateRoot } from '@src/shared/domain/aggregate/aggregateRoot';
 import CountryId from './countryId';
 import LanguageCollection from './languageCollection';
 import CountryCreatedEvent from '@src/languages/domain/country/countryCreatedEvent';
+import { LanguagePrimitives } from '@src/languages/domain/country/language';
+
+export type CountryPrimitives = {
+  id: string;
+  name: string;
+  iso: string;
+  languages: LanguagePrimitives[];
+};
 
 export default class Country extends AggregateRoot {
   id: CountryId;
@@ -25,7 +33,7 @@ export default class Country extends AggregateRoot {
     return country;
   }
 
-  toPrimitives(): object {
+  toPrimitives(): CountryPrimitives {
     return {
       id: this.id.toString(),
       name: this.name,
