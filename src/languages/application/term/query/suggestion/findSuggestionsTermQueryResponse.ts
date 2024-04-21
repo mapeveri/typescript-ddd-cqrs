@@ -2,7 +2,7 @@ import { TermView } from '@src/languages/application/term/viewModel/termView';
 import QueryResponse from '@src/shared/domain/bus/queryBus/queryResponse';
 
 export default class FindSuggestionsTermQueryResponse extends QueryResponse {
-  private constructor(terms: object) {
+  private constructor(terms: TermView[]) {
     super(terms);
   }
 
