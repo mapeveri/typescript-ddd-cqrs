@@ -3,6 +3,15 @@ import UserId from './userId';
 import Email from '@src/shared/domain/valueObjects/email';
 import UserUpdatedEvent from '@src/languages/domain/user/userUpdatedEvent';
 
+export type UserPrimitives = {
+  id: string;
+  name: string;
+  provider: string;
+  email: string;
+  photo: string;
+  interests: string[];
+};
+
 export default class User extends AggregateRoot {
   id: UserId;
   name: string;
@@ -34,7 +43,7 @@ export default class User extends AggregateRoot {
     this.record(new UserUpdatedEvent(this.id.value, this.name, this.photo, this.interests));
   }
 
-  toPrimitives(): object {
+  toPrimitives(): UserPrimitives {
     return {
       id: this.id.toString(),
       name: this.name,

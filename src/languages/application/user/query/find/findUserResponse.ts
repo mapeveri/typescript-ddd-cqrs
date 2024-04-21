@@ -1,8 +1,8 @@
-import User from '@src/languages/domain/user/user';
+import User, { UserPrimitives } from '@src/languages/domain/user/user';
 import QueryResponse from '@src/shared/domain/bus/queryBus/queryResponse';
 
 export default class FindUserResponse extends QueryResponse {
-  private constructor(user?: object) {
+  private constructor(user?: UserPrimitives) {
     super(user);
   }
 
