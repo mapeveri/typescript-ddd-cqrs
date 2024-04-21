@@ -13,6 +13,7 @@ export default class CreateUserCommandHandler implements ICommandHandler<CreateU
 
   async execute(command: CreateUserCommand): Promise<void> {
     const userId = UserId.of(command.id);
+    userId.guardIsValid(command.email);
     await this.guardUserDoesNotExists(userId);
 
     const user = User.create(userId, command.name, command.provider, Email.of(command.email), command.photo);

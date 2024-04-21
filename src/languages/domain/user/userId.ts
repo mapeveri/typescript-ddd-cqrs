@@ -6,14 +6,8 @@ export default class UserId extends Uuid {
     return super.of(value) as UserId;
   }
 
-  static fromEmailWithValidation(value: string, email: string): UserId {
-    const instance = this.of(value);
-    instance.validate(email);
-    return instance;
-  }
-
-  private validate(value: string): void {
-    const userId = Uuid.fromString(value).toString();
+  guardIsValid(email: string): void {
+    const userId = Uuid.fromString(email).toString();
     if (userId !== this.value) {
       throw new InvalidUserIdException(userId);
     }
