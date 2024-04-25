@@ -45,7 +45,7 @@ To get a token for testing you should go to https://developers.google.com/oauthp
 To consume async domain events you need to run the next command:
 
 ```
-  make run-consume-events
+  make run-consume-domain-events
 ```
 
 ## Deployment with Kubernetes
