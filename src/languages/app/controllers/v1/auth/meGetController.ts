@@ -1,5 +1,4 @@
 import { Request } from 'express';
-import FindUserQuery from '@src/languages/application/user/query/find/findUserQuery';
 import { Controller, Get, HttpCode, Inject, Req, UseGuards } from '@nestjs/common';
 import { NestJwtAuthGuard } from '@src/shared/infrastructure/api/guards/nestJwtAuthGuard';
 import MeGetResponseDto from './meGetResponseDto';
@@ -11,6 +10,7 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { QUERY_BUS, QueryBus } from '@src/shared/domain/bus/queryBus/queryBus';
+import FindUserQuery from '@src/languages/application/user/query/find/findUserQuery';
 
 @ApiTags('Auth')
 @Controller()

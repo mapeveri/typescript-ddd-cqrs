@@ -3,7 +3,7 @@ import { Observable, Subscription } from 'rxjs';
 import { QUERY_BUS, QueryBus } from '@src/shared/domain/bus/queryBus/queryBus';
 import SearchTermQuery from '@src/languages/application/term/query/search/searchTermQuery';
 import { ApiTags } from '@nestjs/swagger';
-import { SearchTermsQueryParamsDto } from '@src/languages/infrastructure/api/v1/controllers/terms/searchTermsQueryParamsDto';
+import { SearchTermsQueryParamsDto } from '@src/languages/app/controllers/v1/terms/searchTermsQueryParamsDto';
 
 @ApiTags('Terms')
 @Controller('sse')

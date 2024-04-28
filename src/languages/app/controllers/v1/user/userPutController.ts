@@ -1,5 +1,4 @@
 import { Body, Controller, HttpCode, HttpStatus, Inject, Put, Req, UseGuards } from '@nestjs/common';
-import { NestJwtAuthGuard } from '@src/shared/infrastructure/api/guards/nestJwtAuthGuard';
 import {
   ApiBadRequestResponse,
   ApiInternalServerErrorResponse,
@@ -7,10 +6,11 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
-import { COMMAND_BUS, CommandBus } from '@src/shared/domain/bus/commandBus/commandBus';
 import { Request } from 'express';
+import { COMMAND_BUS, CommandBus } from '@src/shared/domain/bus/commandBus/commandBus';
+import { NestJwtAuthGuard } from '@src/shared/infrastructure/api/guards/nestJwtAuthGuard';
+import UserPutDto from '@src/languages/app/controllers/v1/user/userPutDto';
 import UpdateUserCommand from '@src/languages/application/user/command/update/updateUserCommand';
-import UserPutDto from '@src/languages/infrastructure/api/v1/controllers/user/userPutDto';
 
 @ApiTags('User')
 @Controller()
