@@ -13,7 +13,23 @@ export default class MongoSearchTermViewReadLayer implements SearchTermViewReadL
   constructor(@Inject(MONGO_CLIENT) private readonly mongo: MongoConnection) {}
 
   async search(criteria: TermCriteriaParams): Promise<TermView[]> {
-    let result = [];
+    const result = await this.getTermsFromCriteria(criteria);
+
+    return result.map((doc: Document) => {
+      return {
+        id: doc.id,
+        title: doc.title,
+        description: doc.description,
+        example: doc.example,
+        type: doc.type,
+        hashtags: doc.hashtags,
+        totalLikes: doc.totalLikes,
+        createdAt: doc.createdAt,
+      };
+    });
+  }
+
+  private async getTermsFromCriteria(criteria: TermCriteriaParams): Promise<Document[]> {
     const searchQuery = {};
     const term = criteria.term;
     const hashtags = criteria.hashtags;
@@ -43,19 +59,6 @@ export default class MongoSearchTermViewReadLayer implements SearchTermViewReadL
 
     const skip = (criteria.page - 1) * criteria.size;
     const query = queryProject.skip(skip).limit(criteria.size);
-    result = await query.toArray();
-
-    return result.map((doc: Document) => {
-      return {
-        id: doc.id,
-        title: doc.title,
-        description: doc.description,
-        example: doc.example,
-        type: doc.type,
-        hashtags: doc.hashtags,
-        totalLikes: doc.totalLikes,
-        createdAt: doc.createdAt,
-      };
-    });
+    return await query.toArray();
   }
 }
