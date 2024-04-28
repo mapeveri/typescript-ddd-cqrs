@@ -1,3 +1,3 @@
-import { DomainEventsConsumerController } from '@src/shared/infrastructure/api/consumers/domainEvents/domainEventsConsumerController';
+import { DomainEventsConsumerController } from '@src/shared/consumers/domainEvents/domainEventsConsumerController';
 
 export const consumers = [DomainEventsConsumerController];
