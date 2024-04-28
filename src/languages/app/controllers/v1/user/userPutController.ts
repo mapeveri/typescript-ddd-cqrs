@@ -8,7 +8,7 @@ import {
 } from '@nestjs/swagger';
 import { Request } from 'express';
 import { COMMAND_BUS, CommandBus } from '@src/shared/domain/bus/commandBus/commandBus';
-import { NestJwtAuthGuard } from '@src/shared/infrastructure/api/guards/nestJwtAuthGuard';
+import { NestJwtAuthGuard } from '@src/shared/guards/nestJwtAuthGuard';
 import UserPutDto from '@src/languages/app/controllers/v1/user/userPutDto';
 import UpdateUserCommand from '@src/languages/application/user/command/update/updateUserCommand';
 

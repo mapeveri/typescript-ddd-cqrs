@@ -1,6 +1,6 @@
 import { SOCIAL_AUTHENTICATOR } from '@src/languages/domain/auth/socialAuthenticator';
 import GoogleSocialAuthenticator from '@src/languages/infrastructure/oauth/googleSocialAuthenticator';
-import { NestJwtAuthGuard } from '@src/shared/infrastructure/api/guards/nestJwtAuthGuard';
+import { NestJwtAuthGuard } from '@src/shared/guards/nestJwtAuthGuard';
 import { JwtStrategy } from '@src/shared/infrastructure/auth/strategies/jwtStrategy';
 import { APP_FILTER } from '@nestjs/core';
 import { NestErrorFilter } from '@src/shared/exceptions/nestErrorFilter';
