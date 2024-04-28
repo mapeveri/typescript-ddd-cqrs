@@ -3,7 +3,7 @@ import GoogleSocialAuthenticator from '@src/languages/infrastructure/oauth/googl
 import { NestJwtAuthGuard } from '@src/shared/infrastructure/api/guards/nestJwtAuthGuard';
 import { JwtStrategy } from '@src/shared/infrastructure/auth/strategies/jwtStrategy';
 import { APP_FILTER } from '@nestjs/core';
-import { NestErrorFilter } from '@src/shared/infrastructure/api/filters/nestErrorFilter';
+import { NestErrorFilter } from '@src/shared/exceptions/nestErrorFilter';
 import { LOGGER } from '@src/shared/domain/logger';
 import NestLogger from '@src/shared/infrastructure/logger/nestLogger';
 import { COMMAND_BUS } from '@src/shared/domain/bus/commandBus/commandBus';
