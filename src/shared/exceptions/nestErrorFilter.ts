@@ -1,6 +1,6 @@
 import { ArgumentsHost, Catch, ExceptionFilter, HttpException, HttpStatus } from '@nestjs/common';
 import { Response } from 'express';
-import ApiExceptionSerializer from '@src/shared/infrastructure/api/serializers/apiExceptionSerializer';
+import ApiExceptionSerializer from '@src/shared/exceptions/serializers/apiExceptionSerializer';
 import DomainException from '@src/shared/domain/exceptions/domainException';
 import ConflictException from '@src/shared/domain/exceptions/conflictException';
 import NotFoundException from '@src/shared/domain/exceptions/notFoundException';
