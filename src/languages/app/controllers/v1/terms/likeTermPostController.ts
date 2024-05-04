@@ -11,7 +11,7 @@ import LikeTermPostDto from '@src/languages/app/controllers/v1/terms/likeTermPos
 
 @ApiTags('terms')
 @Controller()
-export default class WordPostController {
+export default class LikeTermPostController {
   @Post('terms')
   @HttpCode(HttpStatus.CREATED)
   @ApiCreatedResponse({ description: 'The record has been successfully created.' })
