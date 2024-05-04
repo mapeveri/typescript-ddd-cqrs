@@ -11,6 +11,7 @@ import CountryPostController from '@src/languages/app/controllers/v1/countries/c
 import UserPutController from '@src/languages/app/controllers/v1/user/userPutController';
 import { SearchTermsSseController } from '@src/languages/app/controllers/v1/terms/searchTermsSseController';
 import { HealthController } from '@src/languages/app/controllers/v1/health/healthGetController';
+import LikeTermPostController from '@src/languages/app/controllers/v1/terms/likeTermPostController';
 
 export const controllers = [
   LoginPostController,
@@ -26,4 +27,5 @@ export const controllers = [
   UserPutController,
   SearchTermsSseController,
   HealthController,
+  LikeTermPostController,
 ];
