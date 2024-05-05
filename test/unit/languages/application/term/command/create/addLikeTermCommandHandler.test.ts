@@ -91,7 +91,7 @@ describe('Given a AddLikeTermCommandHandler', () => {
 
     beforeEach(startScenario);
 
-    it('should add a new one', async () => {
+    it('should add a new like to the term', async () => {
       expect(await handler.execute(command)).toBeUndefined();
     });
   });

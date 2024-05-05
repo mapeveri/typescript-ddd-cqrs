@@ -12,6 +12,8 @@ import faker from 'faker';
 import TermId from '@src/languages/domain/term/termId';
 import TermType, { TermTypeEnum } from '@src/languages/domain/term/termType';
 import { TermIdMother } from '@test/unit/languages/domain/term/termIdMother';
+import TermLikeCollection from '@src/languages/domain/term/termLikeCollection';
+import TermLikeCollectionMother from '@test/unit/languages/domain/term/termLikeCollectionMother';
 
 interface WordMotherProps {
   id?: TermId;
@@ -19,11 +21,12 @@ interface WordMotherProps {
   countryId?: CountryId;
   terms: WordTermCollection;
   userId: UserId;
+  likes: TermLikeCollection;
 }
 
 export default class WordMother {
   static random(props?: WordMotherProps): Word {
-    const { id, languageId, countryId, terms, userId } = props ?? {};
+    const { id, languageId, countryId, terms, userId, likes } = props ?? {};
 
     return new Word(
       id ?? TermIdMother.random(),
@@ -32,6 +35,7 @@ export default class WordMother {
       countryId ?? CountryIdMother.random(),
       terms ?? WordTermCollectionMother.random([]),
       userId ?? UserIdMother.random(),
+      likes ?? TermLikeCollectionMother.random([]),
     );
   }
 
@@ -54,6 +58,7 @@ export default class WordMother {
         terms?.map((term) => term.toPrimitives()) ?? [WordTermMother.random().toPrimitives()],
       ),
       userId,
+      TermLikeCollectionMother.random([]),
     );
   }
 }
