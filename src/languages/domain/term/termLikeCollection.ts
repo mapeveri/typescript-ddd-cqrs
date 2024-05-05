@@ -1,10 +1,10 @@
-import TermLike, { TermLikeParams, TermLikePrimitives } from '@src/languages/domain/term/termLike';
+import TermLike, { TermLikePrimitives } from '@src/languages/domain/term/termLike';
 
 export default class TermLikeCollection {
   private constructor(private readonly termLikes: Array<TermLike>) {}
 
-  static of(paramsTermLikes: Array<TermLikeParams>): TermLikeCollection {
-    const termLikes = paramsTermLikes.map((termLike: TermLikeParams): TermLike => {
+  static of(primitiveTermLikes: Array<TermLikePrimitives>): TermLikeCollection {
+    const termLikes = primitiveTermLikes.map((termLike: TermLikePrimitives): TermLike => {
       return TermLike.of(termLike);
     });
 
