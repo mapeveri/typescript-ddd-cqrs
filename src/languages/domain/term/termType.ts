@@ -7,16 +7,16 @@ export enum TermTypeEnum {
 
 export default class TermType extends ValueObject<string> {
   constructor(value: string) {
+    super(value);
+  }
+
+  static of(value: string): TermType {
     const entry = Object.entries(TermTypeEnum).find(([, item]) => item === value);
     if (!entry) {
       throw new Error('Invalid type');
     }
 
-    super(entry[1]);
-  }
-
-  static of(value: string): TermType {
-    return new this(value);
+    return new this(entry[1]);
   }
 
   static fromPrimitives(value: string): TermType {
