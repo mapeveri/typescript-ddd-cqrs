@@ -1,5 +1,8 @@
+import * as path from 'node:path';
 import { entitySchemas } from '@src/shared/_dependencyInjection/entitySchemas';
 import { DataSource, DataSourceOptions } from 'typeorm';
+
+const migrationsPath = path.join(__dirname, '../../../../languages/app/migrations/*{.ts,.js}');
 
 export const dataSourceConfig: DataSourceOptions = {
   type: 'postgres',
@@ -10,7 +13,7 @@ export const dataSourceConfig: DataSourceOptions = {
   subscribers: [],
   migrationsRun: true,
   logger: 'advanced-console',
-  migrations: [`${__dirname}../../../../../languages/app/migrations/**/*{.ts,.js}`],
+  migrations: [migrationsPath],
   poolSize: 10,
 };
 
