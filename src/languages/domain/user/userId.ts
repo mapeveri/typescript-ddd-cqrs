@@ -6,6 +6,10 @@ export default class UserId extends Uuid {
     return super.of(value) as UserId;
   }
 
+  static fromPrimitives(value: string): UserId {
+    return super.fromPrimitives(value) as UserId;
+  }
+
   guardIsValid(email: string): void {
     const userId = Uuid.fromString(email).toString();
     if (userId !== this.value) {
