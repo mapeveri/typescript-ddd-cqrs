@@ -3,8 +3,8 @@ import TermLike, { TermLikeParams, TermLikePrimitives } from '@src/languages/dom
 export default class TermLikeCollection {
   private constructor(private readonly termLikes: Array<TermLike>) {}
 
-  static of(primitiveTermLikes: Array<TermLikeParams>): TermLikeCollection {
-    const termLikes = primitiveTermLikes.map((termLike: TermLikeParams): TermLike => {
+  static of(paramsTermLikes: Array<TermLikeParams>): TermLikeCollection {
+    const termLikes = paramsTermLikes.map((termLike: TermLikeParams): TermLike => {
       return TermLike.of(termLike);
     });
 
