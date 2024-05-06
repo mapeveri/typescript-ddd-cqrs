@@ -7,11 +7,6 @@ export default class LikeTermPostDto {
   @IsString()
   termId: string;
 
-  @ApiProperty({ type: String, enum: ['word', 'expression'] })
-  @IsNotEmpty()
-  @IsString()
-  type: string;
-
   @ApiProperty()
   @IsNotEmpty()
   @IsString()

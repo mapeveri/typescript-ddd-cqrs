@@ -30,4 +30,9 @@ export default abstract class Term extends AggregateRoot {
     this.userId = userId;
     this.likes = likes;
   }
+
+  addLike(userId: UserId, name: string, photo: string): void {
+    if (this.likes.has(userId)) return;
+    this.likes.add(userId, name, photo);
+  }
 }

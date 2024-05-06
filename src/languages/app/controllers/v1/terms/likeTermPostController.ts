@@ -24,6 +24,6 @@ export default class LikeTermPostController {
   @ApiInternalServerErrorResponse({ description: 'Internal Server Error.' })
   @UseGuards(NestJwtAuthGuard)
   async run(@Body() payload: LikeTermPostDto): Promise<any> {
-    await this.commandBus.dispatch(new AddLikeTermCommand(payload.termId, payload.type, payload.userId));
+    await this.commandBus.dispatch(new AddLikeTermCommand(payload.termId, payload.userId));
   }
 }

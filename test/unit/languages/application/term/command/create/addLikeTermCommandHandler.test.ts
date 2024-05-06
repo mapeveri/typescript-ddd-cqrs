@@ -11,11 +11,12 @@ import UserDoesNotExistsException from '@src/languages/domain/user/userDoesNotEx
 import { TermIdMother } from '@test/unit/languages/domain/term/termIdMother';
 import { UserMother } from '@test/unit/languages/domain/user/userMother';
 import { UserIdMother } from '@test/unit/languages/domain/user/userIdMother';
+import TermLikeCollectionMother from '@test/unit/languages/domain/term/termLikeCollectionMother';
+import Term from '@src/languages/domain/term/term';
 
 describe('Given a AddLikeTermCommandHandler', () => {
   const USER_ID = '0a8008d5-ab68-4c10-8476-668b5b540e0f';
   const TERM_ID = '7abe3a96-d603-4e87-b69e-e9fb372294de';
-  const TERM_TYPE = 'word';
 
   let termRepository: TermRepositoryMock;
   let userRepository: UserRepositoryMock;
@@ -41,20 +42,6 @@ describe('Given a AddLikeTermCommandHandler', () => {
 
     it('should thrown an exception', async () => {
       await expect(handler.execute(command)).rejects.toThrowError(InvalidArgumentException);
-    });
-  });
-
-  describe('When the term type is invalid ', () => {
-    let command: AddLikeTermCommand;
-
-    function startScenario() {
-      command = AddLikeTermCommandMother.random({ type: 'invalid' });
-    }
-
-    beforeEach(startScenario);
-
-    it('should thrown an exception', async () => {
-      await expect(handler.execute(command)).rejects.toThrowError(Error);
     });
   });
 
@@ -90,7 +77,7 @@ describe('Given a AddLikeTermCommandHandler', () => {
     let command: AddLikeTermCommand;
 
     function startScenario() {
-      command = AddLikeTermCommandMother.random({ termId: TERM_ID, userId: USER_ID, type: TERM_TYPE });
+      command = AddLikeTermCommandMother.random({ termId: TERM_ID, userId: USER_ID });
       const term = WordMother.random({ id: TermIdMother.random(TERM_ID) });
 
       termRepository.add(term);
@@ -103,12 +90,42 @@ describe('Given a AddLikeTermCommandHandler', () => {
     });
   });
 
-  describe('When an user add a like to a word term ', () => {
+  describe('When an user add a like to a term that already exists', () => {
     let command: AddLikeTermCommand;
+    let term: Term;
 
     function startScenario() {
-      command = AddLikeTermCommandMother.random({ termId: TERM_ID, userId: USER_ID, type: TERM_TYPE });
-      const term = WordMother.random({ id: TermIdMother.random(TERM_ID) });
+      command = AddLikeTermCommandMother.random({ termId: TERM_ID, userId: USER_ID });
+      term = WordMother.random({
+        id: TermIdMother.random(TERM_ID),
+        likes: TermLikeCollectionMother.random([{ userId: USER_ID, name: 'test', photo: '' }]),
+      });
+      const user = UserMother.random({ id: UserIdMother.random(USER_ID) });
+
+      termRepository.add(term);
+      userRepository.add(user);
+    }
+
+    beforeEach(startScenario);
+
+    it('should not add a new like to the term', async () => {
+      await handler.execute(command);
+
+      termRepository.shouldStore(term);
+      expect(term.likes.toArray().length).toEqual(1);
+    });
+  });
+
+  describe('When an user add a like to a term ', () => {
+    let command: AddLikeTermCommand;
+    let term: Term;
+
+    function startScenario() {
+      command = AddLikeTermCommandMother.random({ termId: TERM_ID, userId: USER_ID });
+      term = WordMother.random({
+        id: TermIdMother.random(TERM_ID),
+        likes: TermLikeCollectionMother.random([]),
+      });
       const user = UserMother.random({ id: UserIdMother.random(USER_ID) });
 
       termRepository.add(term);
@@ -118,7 +135,10 @@ describe('Given a AddLikeTermCommandHandler', () => {
     beforeEach(startScenario);
 
     it('should add a new like to the term', async () => {
-      expect(await handler.execute(command)).toBeUndefined();
+      await handler.execute(command);
+
+      termRepository.shouldStore(term);
+      expect(term.likes.toArray().length).toEqual(1);
     });
   });
 });

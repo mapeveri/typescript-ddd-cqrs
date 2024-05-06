@@ -17,6 +17,10 @@ export default class TermLike {
     return new TermLike(UserId.fromPrimitives(termLike.userId), termLike.name, termLike.photo);
   }
 
+  getUserId(): UserId {
+    return this.userId;
+  }
+
   toPrimitives(): TermLikePrimitives {
     return {
       userId: this.userId.toString(),
