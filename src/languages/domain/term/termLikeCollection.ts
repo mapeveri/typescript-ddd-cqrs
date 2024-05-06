@@ -8,7 +8,7 @@ export default class TermLikeCollection {
   }
 
   has(termLike: TermLike): boolean {
-    return this.termLikes.some((like: TermLike) => like.getUserId().equals(termLike.getUserId()));
+    return this.termLikes.some((like: TermLike) => like.hasSameUserIdAs(termLike));
   }
 
   static of(primitiveTermLikes: Array<TermLikePrimitives>): TermLikeCollection {
