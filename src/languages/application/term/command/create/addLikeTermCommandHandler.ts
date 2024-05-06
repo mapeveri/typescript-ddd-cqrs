@@ -9,6 +9,7 @@ import TermDoesNotExistsException from '@src/languages/domain/term/termDoesNotEx
 import UserRepository, { USER_REPOSITORY } from '@src/languages/domain/user/userRepository';
 import UserDoesNotExistsException from '@src/languages/domain/user/userDoesNotExistsException';
 import User from '@src/languages/domain/user/user';
+import TermLike from '@src/languages/domain/term/termLike';
 
 @CommandHandler(AddLikeTermCommand)
 export default class AddLikeTermCommandHandler implements ICommandHandler<AddLikeTermCommand> {
@@ -23,8 +24,9 @@ export default class AddLikeTermCommandHandler implements ICommandHandler<AddLik
 
     const term = await this.getTerm(termId);
     const user = await this.getUser(userId);
+    const termLike = TermLike.of({ userId: userId.toString(), name: user.name, photo: user.photo });
 
-    term.addLike(userId, user.name, user.photo);
+    term.addLike(termLike);
 
     await this.termRepository.save(term);
 

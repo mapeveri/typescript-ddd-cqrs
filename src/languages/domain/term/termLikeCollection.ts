@@ -1,15 +1,14 @@
 import TermLike, { TermLikePrimitives } from '@src/languages/domain/term/termLike';
-import UserId from '@src/languages/domain/user/userId';
 
 export default class TermLikeCollection {
   private constructor(private readonly termLikes: Array<TermLike>) {}
 
-  add(userId: UserId, name: string, photo: string): void {
-    this.termLikes.push(TermLike.of({ userId: userId.toString(), name, photo }));
+  add(like: TermLike): void {
+    this.termLikes.push(like);
   }
 
-  has(userId: UserId): boolean {
-    return this.termLikes.some((like: TermLike) => like.getUserId().equals(userId));
+  has(termLike: TermLike): boolean {
+    return this.termLikes.some((like: TermLike) => like.getUserId().equals(termLike.getUserId()));
   }
 
   static of(primitiveTermLikes: Array<TermLikePrimitives>): TermLikeCollection {

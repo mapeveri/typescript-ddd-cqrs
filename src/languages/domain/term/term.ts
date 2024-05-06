@@ -4,6 +4,7 @@ import CountryId from '@src/languages/domain/country/countryId';
 import UserId from '@src/languages/domain/user/userId';
 import { AggregateRoot } from '@src/shared/domain/aggregate/aggregateRoot';
 import TermLikeCollection from '@src/languages/domain/term/termLikeCollection';
+import TermLike from '@src/languages/domain/term/termLike';
 
 export default abstract class Term extends AggregateRoot {
   id: TermId;
@@ -31,8 +32,8 @@ export default abstract class Term extends AggregateRoot {
     this.likes = likes;
   }
 
-  addLike(userId: UserId, name: string, photo: string): void {
-    if (this.likes.has(userId)) return;
-    this.likes.add(userId, name, photo);
+  addLike(like: TermLike): void {
+    if (this.likes.has(like)) return;
+    this.likes.add(like);
   }
 }
