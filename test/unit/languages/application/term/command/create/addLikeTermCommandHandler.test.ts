@@ -13,6 +13,8 @@ import { UserMother } from '@test/unit/languages/domain/user/userMother';
 import { UserIdMother } from '@test/unit/languages/domain/user/userIdMother';
 import TermLikeCollectionMother from '@test/unit/languages/domain/term/termLikeCollectionMother';
 import Term from '@src/languages/domain/term/term';
+import { EventBusMock } from '@test/unit/shared/domain/buses/eventBus/eventBusMock';
+import { TermLikeAddedEventMother } from '@test/unit/languages/domain/term/termLikeAddedEventMother';
 
 describe('Given a AddLikeTermCommandHandler', () => {
   const USER_ID = '0a8008d5-ab68-4c10-8476-668b5b540e0f';
@@ -20,13 +22,15 @@ describe('Given a AddLikeTermCommandHandler', () => {
 
   let termRepository: TermRepositoryMock;
   let userRepository: UserRepositoryMock;
+  let eventBus: EventBusMock;
   let handler: AddLikeTermCommandHandler;
 
   beforeEach(() => {
     termRepository = new TermRepositoryMock();
     userRepository = new UserRepositoryMock();
+    eventBus = new EventBusMock();
 
-    handler = new AddLikeTermCommandHandler(termRepository, userRepository);
+    handler = new AddLikeTermCommandHandler(termRepository, userRepository, eventBus);
 
     jest.useFakeTimers();
   });
@@ -40,8 +44,20 @@ describe('Given a AddLikeTermCommandHandler', () => {
 
     beforeEach(startScenario);
 
-    it('should thrown an exception', async () => {
+    it('then should thrown an exception', async () => {
       await expect(handler.execute(command)).rejects.toThrowError(InvalidArgumentException);
+    });
+
+    it('then should not add the like', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError();
+
+      termRepository.shouldNotStore();
+    });
+
+    it('then should not publish the events', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError();
+
+      eventBus.shouldNotPublish();
     });
   });
 
@@ -54,8 +70,20 @@ describe('Given a AddLikeTermCommandHandler', () => {
 
     beforeEach(startScenario);
 
-    it('should thrown an exception', async () => {
+    it('then should thrown an exception', async () => {
       await expect(handler.execute(command)).rejects.toThrowError(InvalidArgumentException);
+    });
+
+    it('then should not add the like', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError();
+
+      termRepository.shouldNotStore();
+    });
+
+    it('then should not publish the events', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError();
+
+      eventBus.shouldNotPublish();
     });
   });
 
@@ -68,8 +96,20 @@ describe('Given a AddLikeTermCommandHandler', () => {
 
     beforeEach(startScenario);
 
-    it('should thrown an exception', async () => {
+    it('then should thrown an exception', async () => {
       await expect(handler.execute(command)).rejects.toThrowError(TermDoesNotExistsException);
+    });
+
+    it('then should not add the like', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError();
+
+      termRepository.shouldNotStore();
+    });
+
+    it('then should not publish the events', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError();
+
+      eventBus.shouldNotPublish();
     });
   });
 
@@ -85,8 +125,20 @@ describe('Given a AddLikeTermCommandHandler', () => {
 
     beforeEach(startScenario);
 
-    it('should thrown an exception', async () => {
+    it('then should thrown an exception', async () => {
       await expect(handler.execute(command)).rejects.toThrowError(UserDoesNotExistsException);
+    });
+
+    it('then should not add the like', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError();
+
+      termRepository.shouldNotStore();
+    });
+
+    it('then should not publish the events', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError();
+
+      eventBus.shouldNotPublish();
     });
   });
 
@@ -108,17 +160,25 @@ describe('Given a AddLikeTermCommandHandler', () => {
 
     beforeEach(startScenario);
 
-    it('should not add a new like to the term', async () => {
+    it('then should not add a new like to the term', async () => {
       await handler.execute(command);
 
       termRepository.shouldStore(term);
       expect(term.likes.toArray().length).toEqual(1);
+    });
+
+    it('then should not publish the events', async () => {
+      await handler.execute(command);
+
+      eventBus.shouldPublish([]);
     });
   });
 
   describe('When an user add a like to a term ', () => {
     let command: AddLikeTermCommand;
     let term: Term;
+    const NAME = 'Name test';
+    const PHOTO = 'http://link';
 
     function startScenario() {
       command = AddLikeTermCommandMother.random({ termId: TERM_ID, userId: USER_ID });
@@ -126,7 +186,7 @@ describe('Given a AddLikeTermCommandHandler', () => {
         id: TermIdMother.random(TERM_ID),
         likes: TermLikeCollectionMother.random([]),
       });
-      const user = UserMother.random({ id: UserIdMother.random(USER_ID) });
+      const user = UserMother.random({ id: UserIdMother.random(USER_ID), name: NAME, photo: PHOTO });
 
       termRepository.add(term);
       userRepository.add(user);
@@ -134,11 +194,19 @@ describe('Given a AddLikeTermCommandHandler', () => {
 
     beforeEach(startScenario);
 
-    it('should add a new like to the term', async () => {
+    it('then should add a new like to the term', async () => {
       await handler.execute(command);
 
       termRepository.shouldStore(term);
       expect(term.likes.toArray().length).toEqual(1);
+    });
+
+    it('then should not publish the events', async () => {
+      await handler.execute(command);
+
+      eventBus.shouldPublish([
+        TermLikeAddedEventMother.random({ termId: TERM_ID, userId: USER_ID, name: NAME, photo: PHOTO }),
+      ]);
     });
   });
 });

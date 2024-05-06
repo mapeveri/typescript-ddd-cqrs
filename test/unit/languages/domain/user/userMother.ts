@@ -8,20 +8,20 @@ interface UserMotherProps {
   name?: string;
   provider?: string;
   email?: string;
-  photos?: string;
+  photo?: string;
   interests?: string[];
 }
 
 export class UserMother {
   static random(props?: UserMotherProps): User {
-    const { id, name, provider, email, photos, interests } = props ?? {};
+    const { id, name, provider, email, photo, interests } = props ?? {};
 
     return new User(
       id ?? UserIdMother.random(),
       name ?? faker.name.findName(),
       provider ?? faker.random.word(),
       email ?? faker.internet.email(),
-      photos ?? faker.image.imageUrl(),
+      photo ?? faker.image.imageUrl(),
       interests ?? ['test'],
     );
   }

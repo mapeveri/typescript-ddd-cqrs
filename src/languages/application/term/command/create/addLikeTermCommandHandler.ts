@@ -10,12 +10,14 @@ import UserRepository, { USER_REPOSITORY } from '@src/languages/domain/user/user
 import UserDoesNotExistsException from '@src/languages/domain/user/userDoesNotExistsException';
 import User from '@src/languages/domain/user/user';
 import TermLike from '@src/languages/domain/term/termLike';
+import { ASYNC_EVENT_BUS, EventBus } from '@src/shared/domain/bus/eventBus/eventBus';
 
 @CommandHandler(AddLikeTermCommand)
 export default class AddLikeTermCommandHandler implements ICommandHandler<AddLikeTermCommand> {
   constructor(
     @Inject(TERM_REPOSITORY) private readonly termRepository: TermRepository,
     @Inject(USER_REPOSITORY) private readonly userRepository: UserRepository,
+    @Inject(ASYNC_EVENT_BUS) private readonly eventBus: EventBus,
   ) {}
 
   async execute(command: AddLikeTermCommand): Promise<any> {
@@ -30,7 +32,7 @@ export default class AddLikeTermCommandHandler implements ICommandHandler<AddLik
 
     await this.termRepository.save(term);
 
-    return Promise.resolve(undefined);
+    void this.eventBus.publish(term.pullDomainEvents());
   }
 
   private async getTerm(termId: TermId): Promise<Term> {
