@@ -19,9 +19,9 @@ interface WordMotherProps {
   id?: TermId;
   languageId?: string;
   countryId?: CountryId;
-  terms: WordTermCollection;
-  userId: UserId;
-  likes: TermLikeCollection;
+  terms?: WordTermCollection;
+  userId?: UserId;
+  likes?: TermLikeCollection;
 }
 
 export default class WordMother {

@@ -4,17 +4,23 @@ import UserRepository from '@src/languages/domain/user/userRepository';
 import UserId from '@src/languages/domain/user/userId';
 
 export class UserRepositoryMock implements UserRepository {
-  private saveMock = jest.fn();
-  private findByIdMock = jest.fn();
-  private user: User;
+  private saveMock: jest.Mock;
+  private findByIdMock: jest.Mock;
+  private users: User[];
 
-  returnOnfindById(user: User): void {
-    this.user = user;
+  constructor() {
+    this.findByIdMock = jest.fn();
+    this.saveMock = jest.fn();
+    this.users = [];
+  }
+
+  add(user: User): void {
+    this.users.push(user);
   }
 
   async findById(id: UserId): Promise<User | null> {
     this.findByIdMock(id);
-    return this.user;
+    return this.users.length > 0 ? this.users[0] : null;
   }
 
   expectFindById(id: UserId): void {
