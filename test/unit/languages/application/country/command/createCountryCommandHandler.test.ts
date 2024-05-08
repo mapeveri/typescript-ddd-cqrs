@@ -1,10 +1,10 @@
 import { beforeEach, describe, expect, it } from '@jest/globals';
-import CreateCountryCommandHandler from '@src/languages/application/country/command/create/createCountryCommandHandler';
+import CreateCountryCommandHandler from '@src/languages/application/country/command/createCountryCommandHandler';
 import Country from '@src/languages/domain/country/country';
 import { CountryRepositoryMock } from '@test/unit/languages/domain/country/countryRepositoryMock';
 import { EventBusMock } from '@test/unit/shared/domain/buses/eventBus/eventBusMock';
 import CountryMother from '@test/unit/languages/domain/country/countryMother';
-import { CreateCountryCommandMother } from '@test/unit/languages/application/country/command/create/createCountryCommandMother';
+import { CreateCountryCommandMother } from '@test/unit/languages/application/country/command/createCountryCommandMother';
 import CountryAlreadyExistsException from '@src/languages/domain/country/countryAlreadyExistsException';
 import { CountryCreatedEventMother } from '@test/unit/languages/domain/country/countryCreatedEventMother';
 

@@ -1,5 +1,5 @@
 import LoginUserCommandHandler from '@src/languages/application/auth/command/loginUserCommandHandler';
-import CreateCountryCommandHandler from '@src/languages/application/country/command/create/createCountryCommandHandler';
+import CreateCountryCommandHandler from '@src/languages/application/country/command/createCountryCommandHandler';
 import CreateExpressionCommandHandler from '@src/languages/application/term/command/expression/createExpressionCommandHandler';
 import DeleteExpressionCommandHandler from '@src/languages/application/term/command/expression/deleteExpressionCommandHandler';
 import CreateUserCommandHandler from '@src/languages/application/user/command/create/createUserCommandHandler';

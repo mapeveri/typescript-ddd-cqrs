@@ -1,4 +1,4 @@
-import CreateCountryCommand from '@src/languages/application/country/command/create/createCountryCommand';
+import CreateCountryCommand from '@src/languages/application/country/command/createCountryCommand';
 import Country from '@src/languages/domain/country/country';
 import { CountryIdMother } from './countryIdMother';
 import faker from 'faker';
