@@ -1,4 +1,4 @@
-import CreateExpressionCommand from '@src/languages/application/term/command/create/createExpressionCommand';
+import CreateExpressionCommand from '@src/languages/application/term/command/expression/createExpressionCommand';
 import { ExpressionTermPrimitives } from '@src/languages/domain/term/expression/expressionTerm';
 import { Body, Controller, HttpCode, HttpStatus, Inject, Post, UseGuards } from '@nestjs/common';
 import ExpressionPostDto from './expressionPostDto';

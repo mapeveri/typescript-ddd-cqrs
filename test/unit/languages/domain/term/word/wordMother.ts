@@ -1,4 +1,4 @@
-import CreateWordCommand from '@src/languages/application/term/command/create/createWordCommand';
+import CreateWordCommand from '@src/languages/application/term/command/word/createWordCommand';
 import Word from '@src/languages/domain/term/word/word';
 import UserId from '@src/languages/domain/user/userId';
 import { CountryIdMother } from '../../country/countryIdMother';

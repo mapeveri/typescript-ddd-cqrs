@@ -1,5 +1,5 @@
 import { expect } from '@jest/globals';
-import CreateExpressionCommand from '@src/languages/application/term/command/create/createExpressionCommand';
+import CreateExpressionCommand from '@src/languages/application/term/command/expression/createExpressionCommand';
 import ExpressionCreatedEvent from '@src/languages/domain/term/expression/expressionCreatedEvent';
 import { ExpressionTermPrimitives } from '@src/languages/domain/term/expression/expressionTerm';
 

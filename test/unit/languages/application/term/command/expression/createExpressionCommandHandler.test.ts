@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, it, jest } from '@jest/globals';
 import { EventBusMock } from '@test/unit/shared/domain/buses/eventBus/eventBusMock';
 import { TermRepositoryMock } from '@test/unit/languages/domain/term/termRepositoryMock';
-import CreateExpressionCommandHandler from '@src/languages/application/term/command/create/createExpressionCommandHandler';
+import CreateExpressionCommandHandler from '@src/languages/application/term/command/expression/createExpressionCommandHandler';
 import ExpressionMother from '@test/unit/languages/domain/term/expression/expressionMother';
-import { CreateExpressionCommandMother } from '@test/unit/languages/application/term/command/create/createExpressionCommandMother';
+import { CreateExpressionCommandMother } from '@test/unit/languages/application/term/command/expression/createExpressionCommandMother';
 import ExpressionAlreadyExistsException from '@src/languages/domain/term/expression/expressionAlreadyExistsException';
 import { UserIdMother } from '@test/unit/languages/domain/user/userIdMother';
 import Expression from '@src/languages/domain/term/expression/expression';

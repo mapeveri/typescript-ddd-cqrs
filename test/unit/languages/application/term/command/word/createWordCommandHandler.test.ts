@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, it, jest } from '@jest/globals';
-import CreateWordCommandHandler from '@src/languages/application/term/command/create/createWordCommandHandler';
+import CreateWordCommandHandler from '@src/languages/application/term/command/word/createWordCommandHandler';
 import { TermRepositoryMock } from '@test/unit/languages/domain/term/termRepositoryMock';
 import { EventBusMock } from '@test/unit/shared/domain/buses/eventBus/eventBusMock';
 import WordMother from '@test/unit/languages/domain/term/word/wordMother';
-import { CreateWordCommandMother } from '@test/unit/languages/application/term/command/create/createWordCommandMother';
+import { CreateWordCommandMother } from '@test/unit/languages/application/term/command/word/createWordCommandMother';
 import WordAlreadyExistsException from '@src/languages/domain/term/word/wordAlreadyExistsException';
 import { UserIdMother } from '@test/unit/languages/domain/user/userIdMother';
 import Word from '@src/languages/domain/term/word/word';

@@ -1,5 +1,5 @@
 import { expect } from '@jest/globals';
-import CreateWordCommand from '@src/languages/application/term/command/create/createWordCommand';
+import CreateWordCommand from '@src/languages/application/term/command/word/createWordCommand';
 import WordCreatedEvent from '@src/languages/domain/term/word/wordCreatedEvent';
 import { WordTermPrimitives } from '@src/languages/domain/term/word/wordTerm';
 

@@ -1,4 +1,4 @@
-import { TERM_VIEW_SAVER } from '@src/languages/application/term/projection/create/termViewSaver';
+import { TERM_VIEW_SAVER } from '@src/languages/application/term/projection/termViewSaver';
 import MongoTermViewSaver from '@src/languages/infrastructure/persistence/mongo/service/mongoTermViewSaver';
 
 export const services = [

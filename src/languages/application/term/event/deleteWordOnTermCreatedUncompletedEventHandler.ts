@@ -3,7 +3,7 @@ import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { EventsHandler, IEventHandler } from '@src/shared/domain/bus/eventBus/eventsHandler';
 import TermType from '@src/languages/domain/term/termType';
 import TermCreatedUncompletedEvent from '@src/languages/domain/term/termCreatedUncompletedEvent';
-import DeleteWordCommand from '../../command/delete/deleteWordCommand';
+import DeleteWordCommand from '../command/word/deleteWordCommand';
 
 @EventsHandler(TermCreatedUncompletedEvent)
 export default class DeleteWordOnTermCreatedUncompletedEventHandler

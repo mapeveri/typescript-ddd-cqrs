@@ -1,8 +1,8 @@
-import DeleteExpressionOnTermCreatedUncompletedEventHandler from '@src/languages/application/term/event/delete/deleteExpressionOnTermCreatedUncompletedEventHandler';
-import CreateTermsOnExpressionCreatedEventHandler from '@src/languages/application/term/event/create/createTermsOnExpressionCreatedEventHandler';
-import CreateTermsOnWordCreatedEventHandler from '@src/languages/application/term/event/create/createTermsOnWordCreatedEventHandler';
+import DeleteExpressionOnTermCreatedUncompletedEventHandler from '@src/languages/application/term/event/deleteExpressionOnTermCreatedUncompletedEventHandler';
+import CreateTermsOnExpressionCreatedEventHandler from '@src/languages/application/term/event/createTermsOnExpressionCreatedEventHandler';
+import CreateTermsOnWordCreatedEventHandler from '@src/languages/application/term/event/createTermsOnWordCreatedEventHandler';
 import CreateUserOnAuthSessionCreatedEventHandler from '@src/languages/application/user/event/create/createUserOnAuthSessionCreatedEventHandler';
-import DeleteWordOnTermCreatedUncompletedEventHandler from '@src/languages/application/term/event/delete/deleteWordOnTermCreatedUncompletedEventHandler';
+import DeleteWordOnTermCreatedUncompletedEventHandler from '@src/languages/application/term/event/deleteWordOnTermCreatedUncompletedEventHandler';
 
 export const events = [
   CreateTermsOnExpressionCreatedEventHandler,

@@ -1,4 +1,4 @@
-import CreateTermProjection from '@src/languages/application/term/projection/create/createTermProjection';
+import CreateTermProjection from '@src/languages/application/term/projection/createTermProjection';
 import ExpressionCreatedEvent from '@src/languages/domain/term/expression/expressionCreatedEvent';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { EventsHandler, IEventHandler } from '@src/shared/domain/bus/eventBus/eventsHandler';

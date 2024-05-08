@@ -1,5 +1,5 @@
 import faker from 'faker';
-import AddLikeTermCommand from '@src/languages/application/term/command/create/addLikeTermCommand';
+import AddLikeTermCommand from '@src/languages/application/term/command/addLikeTermCommand';
 
 interface AddLikeTermCommandProps {
   termId?: string;

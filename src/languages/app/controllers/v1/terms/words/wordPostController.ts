@@ -1,4 +1,4 @@
-import CreateWordCommand from '@src/languages/application/term/command/create/createWordCommand';
+import CreateWordCommand from '@src/languages/application/term/command/word/createWordCommand';
 import { WordTermPrimitives } from '@src/languages/domain/term/word/wordTerm';
 import { Body, Controller, HttpCode, HttpStatus, Inject, Post, UseGuards } from '@nestjs/common';
 import WordPostDto from './wordPostDto';

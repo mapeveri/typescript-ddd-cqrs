@@ -1,6 +1,6 @@
 import UserId from '@src/languages/domain/user/userId';
 import { CountryIdMother } from '../../country/countryIdMother';
-import CreateExpressionCommand from '@src/languages/application/term/command/create/createExpressionCommand';
+import CreateExpressionCommand from '@src/languages/application/term/command/expression/createExpressionCommand';
 import Expression from '@src/languages/domain/term/expression/expression';
 import ExpressionTerm from '@src/languages/domain/term/expression/expressionTerm';
 import ExpressionTermMother, { ExpressionTermMotherProps } from './expressionTermMother';

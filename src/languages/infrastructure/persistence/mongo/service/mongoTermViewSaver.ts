@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import TermViewSaver from '@src/languages/application/term/projection/create/termViewSaver';
+import TermViewSaver from '@src/languages/application/term/projection/termViewSaver';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import MongoConnection, { MONGO_CLIENT } from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
 import { TermView } from '@src/languages/application/term/viewModel/termView';

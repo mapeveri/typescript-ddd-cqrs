@@ -9,7 +9,7 @@ import {
 } from '@nestjs/swagger';
 import LikeTermPostDto from '@src/languages/app/controllers/v1/terms/likeTermPostDto';
 import { COMMAND_BUS, CommandBus } from '@src/shared/domain/bus/commandBus/commandBus';
-import AddLikeTermCommand from '@src/languages/application/term/command/create/addLikeTermCommand';
+import AddLikeTermCommand from '@src/languages/application/term/command/addLikeTermCommand';
 
 @ApiTags('terms')
 @Controller()

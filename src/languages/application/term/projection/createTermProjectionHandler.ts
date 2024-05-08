@@ -3,7 +3,7 @@ import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { EVENT_BUS, EventBus } from '@src/shared/domain/bus/eventBus/eventBus';
 import TermCreatedUncompletedEvent from '@src/languages/domain/term/termCreatedUncompletedEvent';
 import { IProjectionHandler, ProjectionHandler } from '@src/shared/domain/bus/projectionBus/projectionHandler';
-import TermViewSaver, { TERM_VIEW_SAVER } from '@src/languages/application/term/projection/create/termViewSaver';
+import TermViewSaver, { TERM_VIEW_SAVER } from '@src/languages/application/term/projection/termViewSaver';
 
 @ProjectionHandler(CreateTermProjection)
 export default class CreateTermProjectionHandler implements IProjectionHandler<CreateTermProjection> {

@@ -1,8 +1,8 @@
 import { beforeEach, describe, it } from '@jest/globals';
-import DeleteExpressionCommandHandler from '@src/languages/application/term/command/delete/deleteExpressionCommandHandler';
+import DeleteExpressionCommandHandler from '@src/languages/application/term/command/expression/deleteExpressionCommandHandler';
 import { TermRepositoryMock } from '@test/unit/languages/domain/term/termRepositoryMock';
 import ExpressionMother from '@test/unit/languages/domain/term/expression/expressionMother';
-import { DeleteExpressionCommandMother } from '@test/unit/languages/application/term/command/delete/deleteExpressionCommandMother';
+import { DeleteExpressionCommandMother } from '@test/unit/languages/application/term/command/expression/deleteExpressionCommandMother';
 
 describe('DeleteExpressionCommandHandler', () => {
   let termRepository: TermRepositoryMock;

@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, jest } from '@jest/globals';
-import AddLikeTermCommandHandler from '@src/languages/application/term/command/create/addLikeTermCommandHandler';
-import AddLikeTermCommand from '@src/languages/application/term/command/create/addLikeTermCommand';
-import { AddLikeTermCommandMother } from '@test/unit/languages/application/term/command/create/addLikeTermCommandMother';
+import AddLikeTermCommandHandler from '@src/languages/application/term/command/addLikeTermCommandHandler';
+import AddLikeTermCommand from '@src/languages/application/term/command/addLikeTermCommand';
+import { AddLikeTermCommandMother } from '@test/unit/languages/application/term/command/addLikeTermCommandMother';
 import InvalidArgumentException from '@src/shared/domain/exceptions/invalidArgumentException';
 import { TermRepositoryMock } from '@test/unit/languages/domain/term/termRepositoryMock';
 import WordMother from '@test/unit/languages/domain/term/word/wordMother';
