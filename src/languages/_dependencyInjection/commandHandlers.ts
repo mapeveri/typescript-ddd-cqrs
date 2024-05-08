@@ -1,4 +1,4 @@
-import LoginUserCommandHandler from '@src/languages/application/auth/command/loginUser/loginUserCommandHandler';
+import LoginUserCommandHandler from '@src/languages/application/auth/command/loginUserCommandHandler';
 import CreateCountryCommandHandler from '@src/languages/application/country/command/create/createCountryCommandHandler';
 import CreateExpressionCommandHandler from '@src/languages/application/term/command/expression/createExpressionCommandHandler';
 import DeleteExpressionCommandHandler from '@src/languages/application/term/command/expression/deleteExpressionCommandHandler';

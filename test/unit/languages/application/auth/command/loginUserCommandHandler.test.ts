@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, jest } from '@jest/globals';
-import LoginUserCommandHandler from '@src/languages/application/auth/command/loginUser/loginUserCommandHandler';
+import LoginUserCommandHandler from '@src/languages/application/auth/command/loginUserCommandHandler';
 import { LoginUserCommandMother } from './loginUserCommandMother';
 import LoginException from '@src/languages/domain/user/loginException';
 import { AuthSessionRepositoryMock } from '@test/unit/languages/domain/auth/authSessionRepositoryMock';

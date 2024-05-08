@@ -1,4 +1,4 @@
-import LoginUserCommand from '@src/languages/application/auth/command/loginUser/loginUserCommand';
+import LoginUserCommand from '@src/languages/application/auth/command/loginUserCommand';
 import faker from 'faker';
 
 interface LoginUserCommandProps {
@@ -20,7 +20,7 @@ export class LoginUserCommandMother {
       email ?? faker.internet.email(),
       token ?? faker.random.alphaNumeric(),
       provider ?? faker.random.word(),
-      photo ?? faker.image.imageUrl()
+      photo ?? faker.image.imageUrl(),
     );
   }
 }

@@ -1,4 +1,4 @@
-import LoginUserCommand from '@src/languages/application/auth/command/loginUser/loginUserCommand';
+import LoginUserCommand from '@src/languages/application/auth/command/loginUserCommand';
 import { Uuid } from '@src/shared/domain/valueObjects/uuid';
 import { Body, Controller, HttpCode, Inject, Post } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
