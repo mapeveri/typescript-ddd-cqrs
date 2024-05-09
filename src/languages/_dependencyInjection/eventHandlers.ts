@@ -3,6 +3,7 @@ import CreateTermsOnExpressionCreatedEventHandler from '@src/languages/applicati
 import CreateTermsOnWordCreatedEventHandler from '@src/languages/application/term/event/createTermsOnWordCreatedEventHandler';
 import CreateUserOnAuthSessionCreatedEventHandler from '@src/languages/application/user/event/createUserOnAuthSessionCreatedEventHandler';
 import DeleteWordOnTermCreatedUncompletedEventHandler from '@src/languages/application/term/event/deleteWordOnTermCreatedUncompletedEventHandler';
+import UpdateTermsOnTermLikeAddedEventHandler from '@src/languages/application/term/event/updateTermsOnTermLikeAddedEventHandler';
 
 export const events = [
   CreateTermsOnExpressionCreatedEventHandler,
@@ -10,4 +11,5 @@ export const events = [
   CreateUserOnAuthSessionCreatedEventHandler,
   DeleteExpressionOnTermCreatedUncompletedEventHandler,
   DeleteWordOnTermCreatedUncompletedEventHandler,
+  UpdateTermsOnTermLikeAddedEventHandler,
 ];
