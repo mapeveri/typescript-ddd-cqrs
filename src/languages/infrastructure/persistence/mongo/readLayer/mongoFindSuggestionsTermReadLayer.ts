@@ -40,6 +40,7 @@ export default class MongoFindSuggestionsTermReadLayer implements FindSuggestion
         type: doc.type,
         hashtags: doc.hashtags,
         totalLikes: doc.totalLikes,
+        likes: doc.likes || [],
         createdAt: doc.createdAt,
       };
     });
