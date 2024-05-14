@@ -1,4 +1,4 @@
-type TermLike = {
+export type TermLike = {
   name: string;
   photo: string;
   userId: string;
