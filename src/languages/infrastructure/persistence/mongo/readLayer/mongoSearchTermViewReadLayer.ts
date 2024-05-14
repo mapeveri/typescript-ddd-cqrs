@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { TermView } from '@src/languages/application/term/viewModel/termView';
+import { TermView } from '@src/languages/application/term/view/termView';
 import SearchTermViewReadLayer, {
   TermCriteriaParams,
 } from '@src/languages/application/term/query/search/searchTermViewReadLayer';
