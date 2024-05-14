@@ -6,7 +6,7 @@ import { TermTypeEnum } from '@src/languages/domain/term/termType';
 import { PROJECTION_BUS, ProjectionBus } from '@src/shared/domain/bus/projectionBus/projectionBus';
 
 @EventsHandler(ExpressionCreatedEvent)
-export default class CreateTermsOnExpressionCreatedEventHandler implements IEventHandler<ExpressionCreatedEvent> {
+export default class CreateTermViewsOnExpressionCreatedEventHandler implements IEventHandler<ExpressionCreatedEvent> {
   constructor(@Inject(PROJECTION_BUS) private readonly projectionBus: ProjectionBus) {}
 
   async handle(event: ExpressionCreatedEvent): Promise<void> {

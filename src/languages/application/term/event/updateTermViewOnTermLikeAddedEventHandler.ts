@@ -5,7 +5,7 @@ import { PROJECTION_BUS, ProjectionBus } from '@src/shared/domain/bus/projection
 import AddLikeToTermViewProjection from '@src/languages/application/term/projection/addLikeToTermViewProjection';
 
 @EventsHandler(TermLikeAddedEvent)
-export default class UpdateTermsOnTermLikeAddedEventHandler implements IEventHandler<TermLikeAddedEvent> {
+export default class UpdateTermViewOnTermLikeAddedEventHandler implements IEventHandler<TermLikeAddedEvent> {
   constructor(@Inject(PROJECTION_BUS) private readonly projectionBus: ProjectionBus) {}
 
   async handle(event: TermLikeAddedEvent): Promise<void> {
