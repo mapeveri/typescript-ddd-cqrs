@@ -4,7 +4,7 @@ import TermTypeMother from '@test/unit/languages/domain/term/termTypeMother';
 
 export class TermViewMother {
   static random(props?: Partial<TermView>): TermView {
-    const { id, title, description, example, type, hashtags, totalLikes, createdAt } = props ?? {};
+    const { id, title, description, example, type, hashtags, totalLikes, likes, createdAt } = props ?? {};
 
     return {
       id: id ?? faker.datatype.uuid(),
@@ -14,6 +14,7 @@ export class TermViewMother {
       type: type ?? TermTypeMother.random().value,
       hashtags: hashtags ?? [],
       totalLikes: totalLikes ?? 0,
+      likes: likes ?? [],
       createdAt: createdAt ?? faker.date.past().toString(),
     };
   }

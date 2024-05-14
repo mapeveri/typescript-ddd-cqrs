@@ -22,6 +22,7 @@ export default class CreateTermProjectionHandler implements IProjectionHandler<C
         type: projection.type,
         hashtags: projection.hashtags,
         totalLikes: 0,
+        likes: [],
         createdAt: projection.createdAt.toISOString(),
       });
     } catch (e) {

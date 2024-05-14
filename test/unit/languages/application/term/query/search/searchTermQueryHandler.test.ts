@@ -46,6 +46,7 @@ describe('SearchTermQueryHandler', () => {
           type: term.type,
           hashtags: term.hashtags,
           totalLikes: term.totalLikes,
+          likes: term.likes,
           createdAt: term.createdAt,
         },
       ]);
