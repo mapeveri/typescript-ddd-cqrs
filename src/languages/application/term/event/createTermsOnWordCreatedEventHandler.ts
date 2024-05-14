@@ -1,5 +1,5 @@
 import WordCreatedEvent from '@src/languages/domain/term/word/wordCreatedEvent';
-import CreateTermProjection from '@src/languages/application/term/projection/createTermProjection';
+import CreateTermViewProjection from '@src/languages/application/term/projection/createTermViewProjection';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { EventsHandler, IEventHandler } from '@src/shared/domain/bus/eventBus/eventsHandler';
 import { TermTypeEnum } from '@src/languages/domain/term/termType';
@@ -12,7 +12,7 @@ export default class CreateTermsOnWordCreatedEventHandler implements IEventHandl
   async handle(event: WordCreatedEvent): Promise<void> {
     for (const term of event.terms) {
       await this.projectionBus.dispatch(
-        new CreateTermProjection(
+        new CreateTermViewProjection(
           event.aggregateId,
           term['word'],
           term['description'],

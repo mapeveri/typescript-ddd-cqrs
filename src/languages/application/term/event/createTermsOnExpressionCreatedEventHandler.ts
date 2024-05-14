@@ -1,4 +1,4 @@
-import CreateTermProjection from '@src/languages/application/term/projection/createTermProjection';
+import CreateTermViewProjection from '@src/languages/application/term/projection/createTermViewProjection';
 import ExpressionCreatedEvent from '@src/languages/domain/term/expression/expressionCreatedEvent';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { EventsHandler, IEventHandler } from '@src/shared/domain/bus/eventBus/eventsHandler';
@@ -12,7 +12,7 @@ export default class CreateTermsOnExpressionCreatedEventHandler implements IEven
   async handle(event: ExpressionCreatedEvent): Promise<void> {
     for (const term of event.terms) {
       await this.projectionBus.dispatch(
-        new CreateTermProjection(
+        new CreateTermViewProjection(
           event.aggregateId,
           term['expression'],
           term['description'],

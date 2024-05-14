@@ -1,4 +1,4 @@
-import CreateTermProjectionHandler from '@src/languages/application/term/projection/createTermProjectionHandler';
-import AddLikeToTermProjectionHandler from '@src/languages/application/term/projection/addLikeToTermProjectionHandler';
+import CreateTermViewProjectionHandler from '@src/languages/application/term/projection/createTermViewProjectionHandler';
+import AddLikeToTermViewProjectionHandler from '@src/languages/application/term/projection/addLikeToTermViewProjectionHandler';
 
-export const projections = [CreateTermProjectionHandler, AddLikeToTermProjectionHandler];
+export const projections = [CreateTermViewProjectionHandler, AddLikeToTermViewProjectionHandler];

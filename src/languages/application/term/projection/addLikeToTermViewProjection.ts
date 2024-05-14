@@ -1,6 +1,6 @@
 import { Projection } from '@src/shared/domain/bus/projectionBus/projection';
 
-export default class AddLikeToTermProjection implements Projection {
+export default class AddLikeToTermViewProjection implements Projection {
   constructor(
     public readonly id: string,
     public readonly userId: string,

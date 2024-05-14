@@ -1,5 +1,5 @@
 import { IProjectionHandler, ProjectionHandler } from '@src/shared/domain/bus/projectionBus/projectionHandler';
-import AddLikeToTermProjection from '@src/languages/application/term/projection/addLikeToTermProjection';
+import AddLikeToTermViewProjection from '@src/languages/application/term/projection/addLikeToTermViewProjection';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import MongoConnection, { MONGO_CLIENT } from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
 import { TermLike, TermView } from '@src/languages/application/term/viewModel/termView';
@@ -7,11 +7,11 @@ import { Collection } from 'mongodb';
 import { Document } from 'bson/src/bson';
 import { WithId } from 'typeorm';
 
-@ProjectionHandler(AddLikeToTermProjection)
-export default class AddLikeToTermProjectionHandler implements IProjectionHandler<AddLikeToTermProjection> {
+@ProjectionHandler(AddLikeToTermViewProjection)
+export default class AddLikeToTermViewProjectionHandler implements IProjectionHandler<AddLikeToTermViewProjection> {
   constructor(@Inject(MONGO_CLIENT) private readonly mongo: MongoConnection) {}
 
-  async execute(projection: AddLikeToTermProjection): Promise<void> {
+  async execute(projection: AddLikeToTermViewProjection): Promise<void> {
     const termView = await this.getTerm(projection.id);
 
     if (termView.likes.some((like: TermLike) => like.userId === projection.userId)) return;
