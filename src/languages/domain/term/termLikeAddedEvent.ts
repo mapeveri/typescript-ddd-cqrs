@@ -20,7 +20,7 @@ export default class TermLikeAddedEvent extends DomainEvent {
   }
 
   public classPathName(): string {
-    return 'languages.domain.term.termLikeAdded';
+    return 'languages.domain.term.termLikeAddedEvent';
   }
 
   public static aggregateTypeName(): string {
