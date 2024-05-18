@@ -20,7 +20,7 @@ export default class AddLikeTermCommandHandler implements ICommandHandler<AddLik
     @Inject(ASYNC_EVENT_BUS) private readonly eventBus: EventBus,
   ) {}
 
-  async execute(command: AddLikeTermCommand): Promise<any> {
+  async execute(command: AddLikeTermCommand): Promise<void> {
     const termId = TermId.of(command.termId);
     const userId = UserId.of(command.userId);
 
