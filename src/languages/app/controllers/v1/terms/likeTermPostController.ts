@@ -17,7 +17,7 @@ export default class LikeTermPostController {
   constructor(@Inject(COMMAND_BUS) private commandBus: CommandBus) {}
 
   @Post('terms/:id/add-like')
-  @HttpCode(HttpStatus.CREATED)
+  @HttpCode(HttpStatus.OK)
   @ApiCreatedResponse({ description: 'The record has been successfully created.' })
   @ApiBadRequestResponse({ description: 'Bad Request.' })
   @ApiUnauthorizedResponse({ description: 'Unauthorized.' })
