@@ -12,6 +12,7 @@ import UserPutController from '@src/languages/app/controllers/v1/user/userPutCon
 import { SearchTermsSseController } from '@src/languages/app/controllers/v1/terms/searchTermsSseController';
 import { HealthController } from '@src/languages/app/controllers/v1/health/healthGetController';
 import LikeTermPostController from '@src/languages/app/controllers/v1/terms/likeTermPostController';
+import DislikeTermPostController from '@src/languages/app/controllers/v1/terms/dislikeTermPostController';
 
 export const controllers = [
   LoginPostController,
@@ -28,4 +29,5 @@ export const controllers = [
   SearchTermsSseController,
   HealthController,
   LikeTermPostController,
+  DislikeTermPostController,
 ];
