@@ -10,12 +10,14 @@ import TermLike from '@src/languages/domain/term/termLike';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import TermRepository, { TERM_REPOSITORY } from '@src/languages/domain/term/termRepository';
 import UserRepository, { USER_REPOSITORY } from '@src/languages/domain/user/userRepository';
+import { ASYNC_EVENT_BUS, EventBus } from '@src/shared/domain/bus/eventBus/eventBus';
 
 @CommandHandler(DislikeTermCommand)
 export default class DislikeTermCommandHandler implements ICommandHandler<DislikeTermCommand> {
   constructor(
     @Inject(TERM_REPOSITORY) private readonly termRepository: TermRepository,
     @Inject(USER_REPOSITORY) private readonly userRepository: UserRepository,
+    @Inject(ASYNC_EVENT_BUS) private readonly eventBus: EventBus,
   ) {}
 
   async execute(command: DislikeTermCommand): Promise<void> {
@@ -29,6 +31,8 @@ export default class DislikeTermCommandHandler implements ICommandHandler<Dislik
     term.dislike(termLike);
 
     await this.termRepository.save(term);
+
+    void this.eventBus.publish(term.pullDomainEvents());
   }
 
   private async getTerm(termId: TermId): Promise<Term> {
