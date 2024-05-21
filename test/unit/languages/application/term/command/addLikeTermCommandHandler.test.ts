@@ -201,7 +201,7 @@ describe('Given a AddLikeTermCommandHandler', () => {
       expect(term.likes.toArray().length).toEqual(1);
     });
 
-    it('then should not publish the events', async () => {
+    it('then should publish the events', async () => {
       await handler.execute(command);
 
       eventBus.shouldPublish([
