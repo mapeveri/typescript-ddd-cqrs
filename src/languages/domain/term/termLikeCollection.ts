@@ -1,10 +1,14 @@
 import TermLike, { TermLikePrimitives } from '@src/languages/domain/term/termLike';
 
 export default class TermLikeCollection {
-  private constructor(private readonly termLikes: Array<TermLike>) {}
+  private constructor(private termLikes: Array<TermLike>) {}
 
   add(like: TermLike): void {
     this.termLikes.push(like);
+  }
+
+  remove(termLike: TermLike): void {
+    this.termLikes = this.termLikes.filter((like: TermLike) => !like.hasSameUserIdAs(termLike));
   }
 
   has(termLike: TermLike): boolean {

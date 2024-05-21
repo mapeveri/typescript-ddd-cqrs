@@ -6,6 +6,7 @@ import { AggregateRoot } from '@src/shared/domain/aggregate/aggregateRoot';
 import TermLikeCollection from '@src/languages/domain/term/termLikeCollection';
 import TermLike from '@src/languages/domain/term/termLike';
 import TermLikeAddedEvent from '@src/languages/domain/term/termLikeAddedEvent';
+import TermDislikedEvent from '@src/languages/domain/term/termDislikedEvent';
 
 export default abstract class Term extends AggregateRoot {
   id: TermId;
@@ -39,5 +40,13 @@ export default abstract class Term extends AggregateRoot {
 
     const termLike = like.toPrimitives();
     this.record(new TermLikeAddedEvent(this.id.toString(), termLike.userId, termLike.name, termLike.photo));
+  }
+
+  dislike(like: TermLike): void {
+    if (!this.likes.has(like)) return;
+    this.likes.remove(like);
+
+    const termLike = like.toPrimitives();
+    this.record(new TermDislikedEvent(this.id.toString(), termLike.userId));
   }
 }

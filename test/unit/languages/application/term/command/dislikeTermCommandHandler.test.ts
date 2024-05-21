@@ -9,6 +9,10 @@ import TermDoesNotExistsException from '@src/languages/domain/term/termDoesNotEx
 import WordMother from '@test/unit/languages/domain/term/word/wordMother';
 import { TermIdMother } from '@test/unit/languages/domain/term/termIdMother';
 import UserDoesNotExistsException from '@src/languages/domain/user/userDoesNotExistsException';
+import Term from '@src/languages/domain/term/term';
+import TermLikeCollectionMother from '@test/unit/languages/domain/term/termLikeCollectionMother';
+import { UserMother } from '@test/unit/languages/domain/user/userMother';
+import { UserIdMother } from '@test/unit/languages/domain/user/userIdMother';
 
 describe('Given a DislikeTermCommandHandler', () => {
   const USER_ID = '0a8008d5-ab68-4c10-8476-668b5b540e0f';
@@ -82,6 +86,60 @@ describe('Given a DislikeTermCommandHandler', () => {
 
     it('then should thrown an exception', async () => {
       await expect(handler.execute(command)).rejects.toThrowError(UserDoesNotExistsException);
+    });
+  });
+
+  describe('When an user dislike a term that the like does not exist', () => {
+    let command: DislikeTermCommand;
+    let term: Term;
+
+    function startScenario() {
+      command = DislikeTermCommandMother.random({ termId: TERM_ID, userId: USER_ID });
+      term = WordMother.random({
+        id: TermIdMother.random(TERM_ID),
+        likes: TermLikeCollectionMother.random([
+          { userId: '1cee3a96-d603-4e87-b69e-e9fb372294da', name: 'test', photo: '' },
+        ]),
+      });
+      const user = UserMother.random({ id: UserIdMother.random(USER_ID) });
+
+      termRepository.add(term);
+      userRepository.add(user);
+    }
+
+    beforeEach(startScenario);
+
+    it('then should not dislike a new like to the term', async () => {
+      await handler.execute(command);
+
+      termRepository.shouldStore(term);
+      expect(term.likes.toArray().length).toEqual(1);
+    });
+  });
+
+  describe('When an user dislike a term that the like exist', () => {
+    let command: DislikeTermCommand;
+    let term: Term;
+
+    function startScenario() {
+      command = DislikeTermCommandMother.random({ termId: TERM_ID, userId: USER_ID });
+      term = WordMother.random({
+        id: TermIdMother.random(TERM_ID),
+        likes: TermLikeCollectionMother.random([{ userId: USER_ID, name: 'test', photo: '' }]),
+      });
+      const user = UserMother.random({ id: UserIdMother.random(USER_ID) });
+
+      termRepository.add(term);
+      userRepository.add(user);
+    }
+
+    beforeEach(startScenario);
+
+    it('then should dislike the term', async () => {
+      await handler.execute(command);
+
+      termRepository.shouldStore(term);
+      expect(term.likes.toArray().length).toEqual(0);
     });
   });
 });

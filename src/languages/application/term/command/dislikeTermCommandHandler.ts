@@ -22,9 +22,13 @@ export default class DislikeTermCommandHandler implements ICommandHandler<Dislik
     const termId = TermId.of(command.termId);
     const userId = UserId.of(command.userId);
 
-    await this.getTerm(termId);
+    const term = await this.getTerm(termId);
     const user = await this.getUser(userId);
-    TermLike.of({ userId: userId.toString(), name: user.name, photo: user.photo });
+    const termLike = TermLike.of({ userId: userId.toString(), name: user.name, photo: user.photo });
+
+    term.dislike(termLike);
+
+    await this.termRepository.save(term);
   }
 
   private async getTerm(termId: TermId): Promise<Term> {
