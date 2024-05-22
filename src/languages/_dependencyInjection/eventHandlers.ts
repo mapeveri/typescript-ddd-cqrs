@@ -4,6 +4,7 @@ import CreateTermViewsOnWordCreatedEventHandler from '@src/languages/application
 import CreateUserOnAuthSessionCreatedEventHandler from '@src/languages/application/user/event/createUserOnAuthSessionCreatedEventHandler';
 import DeleteWordOnTermCreatedUncompletedEventHandler from '@src/languages/application/term/event/deleteWordOnTermCreatedUncompletedEventHandler';
 import UpdateTermViewOnTermLikeAddedEventHandler from '@src/languages/application/term/event/updateTermViewOnTermLikeAddedEventHandler';
+import UpdateTermViewOnTermDislikedEventHandler from '@src/languages/application/term/event/updateTermViewOnTermDislikedEventHandler';
 
 export const events = [
   CreateTermViewsOnExpressionCreatedEventHandler,
@@ -12,4 +13,5 @@ export const events = [
   DeleteExpressionOnTermCreatedUncompletedEventHandler,
   DeleteWordOnTermCreatedUncompletedEventHandler,
   UpdateTermViewOnTermLikeAddedEventHandler,
+  UpdateTermViewOnTermDislikedEventHandler,
 ];
