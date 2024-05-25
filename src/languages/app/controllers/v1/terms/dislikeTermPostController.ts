@@ -10,25 +10,22 @@ import {
 import { Request } from 'express';
 import { COMMAND_BUS, CommandBus } from '@src/shared/domain/bus/commandBus/commandBus';
 import DislikeTermCommand from '@src/languages/application/term/command/dislikeTermCommand';
+import { Uuid } from '@src/shared/domain/valueObjects/uuid';
 
 @ApiTags('terms')
 @Controller()
 export default class DislikeTermPostController {
   constructor(@Inject(COMMAND_BUS) private commandBus: CommandBus) {}
 
-  @Post('terms/:termId/dislike/:termLikeId')
+  @Post('terms/:termId/dislike')
   @HttpCode(HttpStatus.OK)
   @ApiCreatedResponse({ description: 'The record has been successfully created.' })
   @ApiBadRequestResponse({ description: 'Bad Request.' })
   @ApiUnauthorizedResponse({ description: 'Unauthorized.' })
   @ApiInternalServerErrorResponse({ description: 'Internal Server Error.' })
   @UseGuards(NestJwtAuthGuard)
-  async run(
-    @Param('termId') termId: string,
-    @Param('termLikeId') termLikeId: string,
-    @Req() req: Request,
-  ): Promise<any> {
+  async run(@Param('termId') termId: string, @Req() req: Request): Promise<any> {
     const userId = req.user['id'];
-    await this.commandBus.dispatch(new DislikeTermCommand(termLikeId, termId, userId));
+    await this.commandBus.dispatch(new DislikeTermCommand(Uuid.random().toString(), termId, userId));
   }
 }
