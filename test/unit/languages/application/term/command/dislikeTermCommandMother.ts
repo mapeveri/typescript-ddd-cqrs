@@ -1,5 +1,6 @@
-import faker from 'faker';
 import DislikeTermCommand from '@src/languages/application/term/command/dislikeTermCommand';
+import { TermIdMother } from '@test/unit/languages/domain/term/termIdMother';
+import { UserIdMother } from '@test/unit/languages/domain/user/userIdMother';
 
 interface DislikeTermCommandProps {
   termId?: string;
@@ -10,6 +11,9 @@ export class DislikeTermCommandMother {
   static random(props?: DislikeTermCommandProps): DislikeTermCommand {
     const { termId, userId } = props ?? {};
 
-    return new DislikeTermCommand(termId ?? faker.datatype.uuid(), userId ?? faker.datatype.uuid());
+    return new DislikeTermCommand(
+      termId ?? TermIdMother.random().toString(),
+      userId ?? UserIdMother.random().toString(),
+    );
   }
 }

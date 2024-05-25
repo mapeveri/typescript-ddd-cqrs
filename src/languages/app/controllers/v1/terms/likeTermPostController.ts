@@ -16,15 +16,15 @@ import { Request } from 'express';
 export default class LikeTermPostController {
   constructor(@Inject(COMMAND_BUS) private commandBus: CommandBus) {}
 
-  @Post('terms/:id/add-like')
+  @Post('terms/:termId/add-like')
   @HttpCode(HttpStatus.OK)
   @ApiCreatedResponse({ description: 'The record has been successfully created.' })
   @ApiBadRequestResponse({ description: 'Bad Request.' })
   @ApiUnauthorizedResponse({ description: 'Unauthorized.' })
   @ApiInternalServerErrorResponse({ description: 'Internal Server Error.' })
   @UseGuards(NestJwtAuthGuard)
-  async run(@Param('id') id: string, @Req() req: Request): Promise<any> {
+  async run(@Param('termId') termId: string, @Req() req: Request): Promise<any> {
     const userId = req.user['id'];
-    await this.commandBus.dispatch(new AddLikeTermCommand(id, userId));
+    await this.commandBus.dispatch(new AddLikeTermCommand(termId, userId));
   }
 }

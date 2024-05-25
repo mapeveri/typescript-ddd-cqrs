@@ -9,16 +9,18 @@ import TermDoesNotExistsException from '@src/languages/domain/term/termDoesNotEx
 import WordMother from '@test/unit/languages/domain/term/word/wordMother';
 import { TermIdMother } from '@test/unit/languages/domain/term/termIdMother';
 import UserDoesNotExistsException from '@src/languages/domain/user/userDoesNotExistsException';
-import Term from '@src/languages/domain/term/term';
-import TermLikeCollectionMother from '@test/unit/languages/domain/term/termLikeCollectionMother';
 import { UserMother } from '@test/unit/languages/domain/user/userMother';
 import { UserIdMother } from '@test/unit/languages/domain/user/userIdMother';
 import { EventBusMock } from '@test/unit/shared/domain/buses/eventBus/eventBusMock';
 import { TermDislikedEventMother } from '@test/unit/languages/domain/term/termDislikedEventMother';
+import Word from '@src/languages/domain/term/word/word';
+import TermLikeMother from '@test/unit/languages/domain/term/termLikeMother';
+import { TermLikeIdMother } from '@test/unit/languages/domain/term/termLikeIdMother';
 
 describe('Given a DislikeTermCommandHandler', () => {
   const USER_ID = '0a8008d5-ab68-4c10-8476-668b5b540e0f';
   const TERM_ID = '7abe3a96-d603-4e87-b69e-e9fb372294de';
+  const TERM_LIKE_ID = '98d173b4-8b60-5cde-8688-8cc8dd9f07b8';
 
   let termRepository: TermRepositoryMock;
   let userRepository: UserRepositoryMock;
@@ -144,15 +146,20 @@ describe('Given a DislikeTermCommandHandler', () => {
 
   describe('When an user dislike a term that the like does not exist', () => {
     let command: DislikeTermCommand;
-    let term: Term;
+    let term: Word;
 
     function startScenario() {
       command = DislikeTermCommandMother.random({ termId: TERM_ID, userId: USER_ID });
       term = WordMother.random({
         id: TermIdMother.random(TERM_ID),
-        likes: TermLikeCollectionMother.random([
-          { userId: '1cee3a96-d603-4e88-b69e-e9fb372294da', name: 'test', photo: '' },
-        ]),
+        likes: [
+          TermLikeMother.random({
+            userId: UserIdMother.random('1cee3a96-d603-4e88-b69e-e9fb372294da'),
+            termId: TermIdMother.random(TERM_ID),
+            name: 'test',
+            photo: '',
+          }),
+        ],
       });
       const user = UserMother.random({ id: UserIdMother.random(USER_ID) });
 
@@ -166,7 +173,7 @@ describe('Given a DislikeTermCommandHandler', () => {
       await handler.execute(command);
 
       termRepository.shouldStore(term);
-      expect(term.likes.toArray().length).toEqual(1);
+      expect(term.toPrimitives().likes.length).toEqual(1);
     });
 
     it('then should not publish the events', async () => {
@@ -178,13 +185,20 @@ describe('Given a DislikeTermCommandHandler', () => {
 
   describe('When an user dislike a term that the like exist', () => {
     let command: DislikeTermCommand;
-    let term: Term;
+    let term: Word;
 
     function startScenario() {
       command = DislikeTermCommandMother.random({ termId: TERM_ID, userId: USER_ID });
       term = WordMother.random({
         id: TermIdMother.random(TERM_ID),
-        likes: TermLikeCollectionMother.random([{ userId: USER_ID, name: 'test', photo: '' }]),
+        likes: [
+          TermLikeMother.random({
+            id: TermLikeIdMother.random(TERM_LIKE_ID),
+            userId: UserIdMother.random(USER_ID),
+            termId: TermIdMother.random(TERM_ID),
+            name: 'test',
+          }),
+        ],
       });
       const user = UserMother.random({ id: UserIdMother.random(USER_ID) });
 
@@ -198,7 +212,7 @@ describe('Given a DislikeTermCommandHandler', () => {
       await handler.execute(command);
 
       termRepository.shouldStore(term);
-      expect(term.likes.toArray().length).toEqual(0);
+      expect(term.toPrimitives().likes.length).toEqual(0);
     });
 
     it('then should publish the events', async () => {

@@ -3,10 +3,11 @@ import TermId from '@src/languages/domain/term/termId';
 import CountryId from '@src/languages/domain/country/countryId';
 import UserId from '@src/languages/domain/user/userId';
 import { AggregateRoot } from '@src/shared/domain/aggregate/aggregateRoot';
-import TermLikeCollection from '@src/languages/domain/term/termLikeCollection';
 import TermLike from '@src/languages/domain/term/termLike';
 import TermLikeAddedEvent from '@src/languages/domain/term/termLikeAddedEvent';
 import TermDislikedEvent from '@src/languages/domain/term/termDislikedEvent';
+import TermLikeId from '@src/languages/domain/term/termLikeId';
+import { Uuid } from '@src/shared/domain/valueObjects/uuid';
 
 export default abstract class Term extends AggregateRoot {
   id: TermId;
@@ -14,7 +15,7 @@ export default abstract class Term extends AggregateRoot {
   type: TermType;
   countryId: CountryId;
   userId: UserId;
-  likes: TermLikeCollection;
+  likes: TermLike[];
 
   protected constructor(
     id: TermId,
@@ -22,7 +23,7 @@ export default abstract class Term extends AggregateRoot {
     type: TermType,
     countryId: CountryId,
     userId: UserId,
-    likes: TermLikeCollection,
+    likes: TermLike[],
   ) {
     super();
 
@@ -34,19 +35,33 @@ export default abstract class Term extends AggregateRoot {
     this.likes = likes;
   }
 
-  addLike(like: TermLike): void {
-    if (this.likes.has(like)) return;
-    this.likes.add(like);
+  addLike(userId: UserId, name: string, photo: string): void {
+    const termLikeId = Uuid.fromString(`${this.id.toString()}${userId.toString()}`).toString();
+    const like = new TermLike(TermLikeId.of(termLikeId), userId, this.id, name, photo);
+
+    if (this.hasLike(like)) return;
+    this.likes.push(like);
 
     const termLike = like.toPrimitives();
     this.record(new TermLikeAddedEvent(this.id.toString(), termLike.userId, termLike.name, termLike.photo));
   }
 
-  dislike(like: TermLike): void {
-    if (!this.likes.has(like)) return;
-    this.likes.remove(like);
+  dislike(userId: UserId, name: string, photo: string): void {
+    const termLikeId = Uuid.fromString(`${this.id.toString()}${userId.toString()}`).toString();
+    const like = new TermLike(TermLikeId.of(termLikeId), userId, this.id, name, photo);
+
+    if (!this.hasLike(like)) return;
+    this.removeLike(like);
 
     const termLike = like.toPrimitives();
     this.record(new TermDislikedEvent(this.id.toString(), termLike.userId));
+  }
+
+  private hasLike(like: TermLike): boolean {
+    return this.likes.some((termLike: TermLike) => termLike.hasSameId(like));
+  }
+
+  private removeLike(termLike: TermLike): void {
+    this.likes = this.likes.filter((like: TermLike) => !like.hasSameId(termLike));
   }
 }

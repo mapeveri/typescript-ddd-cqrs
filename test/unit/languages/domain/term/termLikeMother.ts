@@ -1,21 +1,30 @@
 import faker from 'faker';
 import { UserIdMother } from '@test/unit/languages/domain/user/userIdMother';
 import TermLike from '@src/languages/domain/term/termLike';
+import UserId from '@src/languages/domain/user/userId';
+import TermId from '@src/languages/domain/term/termId';
+import { TermIdMother } from '@test/unit/languages/domain/term/termIdMother';
+import TermLikeId from '@src/languages/domain/term/termLikeId';
+import { TermLikeIdMother } from '@test/unit/languages/domain/term/termLikeIdMother';
 
 interface TermLikeMotherProps {
-  userId?: string;
+  id?: TermLikeId;
+  userId?: UserId;
+  termId?: TermId;
   name?: string;
   photo?: string;
 }
 
 export default class TermLikeMother {
   static random(props?: TermLikeMotherProps): TermLike {
-    const { userId, name, photo } = props ?? {};
+    const { id, termId, userId, name, photo } = props ?? {};
 
-    return TermLike.of({
-      userId: userId ?? UserIdMother.random().toString(),
-      name: name ?? faker.name.findName(),
-      photo: photo ?? faker.image.imageUrl(),
-    });
+    return new TermLike(
+      id ?? TermLikeIdMother.random(),
+      userId ?? UserIdMother.random(),
+      termId ?? TermIdMother.random(),
+      name ?? faker.name.findName(),
+      photo ?? faker.image.imageUrl(),
+    );
   }
 }
