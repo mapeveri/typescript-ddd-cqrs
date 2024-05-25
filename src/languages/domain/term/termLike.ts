@@ -32,4 +32,14 @@ export default class TermLike {
       photo: this.photo,
     };
   }
+
+  static fromPrimitives(termLike: TermLikePrimitives): TermLike {
+    return new TermLike(
+      TermLikeId.fromPrimitives(termLike.id),
+      UserId.fromPrimitives(termLike.userId),
+      TermId.fromPrimitives(termLike.termId),
+      termLike.name,
+      termLike.photo,
+    );
+  }
 }

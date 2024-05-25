@@ -9,13 +9,13 @@ export default class TemLikeCollectionTransformer implements ValueTransformer {
   from(value: string): TermLike[] {
     const parsedValue = JSON.parse(value);
     return parsedValue.termLikes.map((item: any) => {
-      return {
+      return TermLike.fromPrimitives({
         id: item.id,
         userId: item.userId,
         termId: item.termId,
         name: item.name,
         photo: item.photo,
-      };
+      });
     });
   }
 }
