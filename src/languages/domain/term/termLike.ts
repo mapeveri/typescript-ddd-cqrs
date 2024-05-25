@@ -1,7 +1,9 @@
 import UserId from '@src/languages/domain/user/userId';
 import TermId from '@src/languages/domain/term/termId';
+import TermLikeId from '@src/languages/domain/term/termLikeId';
 
 export type TermLikePrimitives = {
+  id: string;
   userId: string;
   termId: string;
   name: string;
@@ -9,17 +11,13 @@ export type TermLikePrimitives = {
 };
 
 export default class TermLike {
-  private readonly userId: UserId;
-  private readonly termId: TermId;
-  private readonly name: string;
-  private readonly photo: string;
-
-  constructor(userId: UserId, termId: TermId, name: string, photo: string) {
-    this.userId = userId;
-    this.termId = termId;
-    this.name = name;
-    this.photo = photo;
-  }
+  constructor(
+    private readonly id: TermLikeId,
+    private readonly userId: UserId,
+    private readonly termId: TermId,
+    private readonly name: string,
+    private readonly photo: string,
+  ) {}
 
   hasSameUserIdAs(termLike: TermLike): boolean {
     return this.userId.equals(termLike.userId);
@@ -27,6 +25,7 @@ export default class TermLike {
 
   toPrimitives(): TermLikePrimitives {
     return {
+      id: this.id.toString(),
       userId: this.userId.toString(),
       termId: this.termId.toString(),
       name: this.name,

@@ -10,6 +10,7 @@ import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import TermRepository, { TERM_REPOSITORY } from '@src/languages/domain/term/termRepository';
 import UserRepository, { USER_REPOSITORY } from '@src/languages/domain/user/userRepository';
 import { ASYNC_EVENT_BUS, EventBus } from '@src/shared/domain/bus/eventBus/eventBus';
+import TermLikeId from '@src/languages/domain/term/termLikeId';
 
 @CommandHandler(DislikeTermCommand)
 export default class DislikeTermCommandHandler implements ICommandHandler<DislikeTermCommand> {
@@ -22,11 +23,12 @@ export default class DislikeTermCommandHandler implements ICommandHandler<Dislik
   async execute(command: DislikeTermCommand): Promise<void> {
     const termId = TermId.of(command.termId);
     const userId = UserId.of(command.userId);
+    const termLikeId = TermLikeId.of(command.termLikeId);
 
     const term = await this.getTerm(termId);
     const user = await this.getUser(userId);
 
-    term.dislike(userId, user.name, user.photo);
+    term.dislike(termLikeId, userId, user.name, user.photo);
 
     await this.termRepository.save(term);
 

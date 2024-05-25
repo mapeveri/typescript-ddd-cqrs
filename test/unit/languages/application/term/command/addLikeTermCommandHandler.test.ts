@@ -15,12 +15,12 @@ import { EventBusMock } from '@test/unit/shared/domain/buses/eventBus/eventBusMo
 import { TermLikeAddedEventMother } from '@test/unit/languages/domain/term/termLikeAddedEventMother';
 import TermLikeMother from '@test/unit/languages/domain/term/termLikeMother';
 import Word from '@src/languages/domain/term/word/word';
-import UserId from '@src/languages/domain/user/userId';
-import TermId from '@src/languages/domain/term/termId';
+import { TermLikeIdMother } from '@test/unit/languages/domain/term/termLikeIdMother';
 
 describe('Given a AddLikeTermCommandHandler', () => {
   const USER_ID = '0a8008d5-ab68-4c10-8476-668b5b540e0f';
   const TERM_ID = '7abe3a96-d603-4e87-b69e-e9fb372294de';
+  const TERM_LIKE_ID = '1bbe3a96-d603-4e87-b69e-e9fb372294dz';
 
   let termRepository: TermRepositoryMock;
   let userRepository: UserRepositoryMock;
@@ -68,6 +68,32 @@ describe('Given a AddLikeTermCommandHandler', () => {
 
     function startScenario() {
       command = AddLikeTermCommandMother.random({ userId: 'invalid' });
+    }
+
+    beforeEach(startScenario);
+
+    it('then should thrown an exception', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError(InvalidArgumentException);
+    });
+
+    it('then should not add the like', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError();
+
+      termRepository.shouldNotStore();
+    });
+
+    it('then should not publish the events', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError();
+
+      eventBus.shouldNotPublish();
+    });
+  });
+
+  describe('When the term like id is invalid ', () => {
+    let command: AddLikeTermCommand;
+
+    function startScenario() {
+      command = AddLikeTermCommandMother.random({ id: 'invalid' });
     }
 
     beforeEach(startScenario);
@@ -153,7 +179,13 @@ describe('Given a AddLikeTermCommandHandler', () => {
       term = WordMother.random({
         id: TermIdMother.random(TERM_ID),
         likes: [
-          TermLikeMother.random({ userId: UserId.of(USER_ID), termId: TermId.of(TERM_ID), name: 'test', photo: '' }),
+          TermLikeMother.random({
+            id: TermLikeIdMother.random(TERM_LIKE_ID),
+            userId: UserIdMother.random(USER_ID),
+            termId: TermIdMother.random(TERM_ID),
+            name: 'test',
+            photo: '',
+          }),
         ],
       });
       const user = UserMother.random({ id: UserIdMother.random(USER_ID) });

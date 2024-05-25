@@ -10,6 +10,7 @@ export default class TemLikeCollectionTransformer implements ValueTransformer {
     const parsedValue = JSON.parse(value);
     return parsedValue.termLikes.map((item: any) => {
       return {
+        id: item.id,
         userId: item.userId,
         termId: item.termId,
         name: item.name,
