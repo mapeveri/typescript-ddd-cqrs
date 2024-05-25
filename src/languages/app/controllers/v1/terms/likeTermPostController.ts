@@ -10,7 +10,6 @@ import {
 import { COMMAND_BUS, CommandBus } from '@src/shared/domain/bus/commandBus/commandBus';
 import AddLikeTermCommand from '@src/languages/application/term/command/addLikeTermCommand';
 import { Request } from 'express';
-import { Uuid } from '@src/shared/domain/valueObjects/uuid';
 
 @ApiTags('terms')
 @Controller()
@@ -26,6 +25,6 @@ export default class LikeTermPostController {
   @UseGuards(NestJwtAuthGuard)
   async run(@Param('termId') termId: string, @Req() req: Request): Promise<any> {
     const userId = req.user['id'];
-    await this.commandBus.dispatch(new AddLikeTermCommand(Uuid.random().toString(), termId, userId));
+    await this.commandBus.dispatch(new AddLikeTermCommand(termId, userId));
   }
 }
