@@ -20,7 +20,7 @@ import { TermLikeIdMother } from '@test/unit/languages/domain/term/termLikeIdMot
 describe('Given a AddLikeTermCommandHandler', () => {
   const USER_ID = '0a8008d5-ab68-4c10-8476-668b5b540e0f';
   const TERM_ID = '7abe3a96-d603-4e87-b69e-e9fb372294de';
-  const TERM_LIKE_ID = '88c3b571-55d4-4137-9b8b-34cddb116dbf';
+  const TERM_LIKE_ID = '98d173b4-8b60-5cde-8688-8cc8dd9f07b8';
 
   let termRepository: TermRepositoryMock;
   let userRepository: UserRepositoryMock;
@@ -68,32 +68,6 @@ describe('Given a AddLikeTermCommandHandler', () => {
 
     function startScenario() {
       command = AddLikeTermCommandMother.random({ userId: 'invalid' });
-    }
-
-    beforeEach(startScenario);
-
-    it('then should thrown an exception', async () => {
-      await expect(handler.execute(command)).rejects.toThrowError(InvalidArgumentException);
-    });
-
-    it('then should not add the like', async () => {
-      await expect(handler.execute(command)).rejects.toThrowError();
-
-      termRepository.shouldNotStore();
-    });
-
-    it('then should not publish the events', async () => {
-      await expect(handler.execute(command)).rejects.toThrowError();
-
-      eventBus.shouldNotPublish();
-    });
-  });
-
-  describe('When the term like id is invalid ', () => {
-    let command: AddLikeTermCommand;
-
-    function startScenario() {
-      command = AddLikeTermCommandMother.random({ id: 'invalid' });
     }
 
     beforeEach(startScenario);

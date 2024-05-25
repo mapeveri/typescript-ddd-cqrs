@@ -19,8 +19,8 @@ export default class TermLike {
     private readonly photo: string,
   ) {}
 
-  hasSameUserIdAs(termLike: TermLike): boolean {
-    return this.userId.equals(termLike.userId);
+  hasSameId(termLike: TermLike): boolean {
+    return this.id.equals(termLike.id);
   }
 
   toPrimitives(): TermLikePrimitives {

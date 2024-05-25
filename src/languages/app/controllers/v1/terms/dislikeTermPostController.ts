@@ -10,7 +10,6 @@ import {
 import { Request } from 'express';
 import { COMMAND_BUS, CommandBus } from '@src/shared/domain/bus/commandBus/commandBus';
 import DislikeTermCommand from '@src/languages/application/term/command/dislikeTermCommand';
-import { Uuid } from '@src/shared/domain/valueObjects/uuid';
 
 @ApiTags('terms')
 @Controller()
@@ -26,6 +25,6 @@ export default class DislikeTermPostController {
   @UseGuards(NestJwtAuthGuard)
   async run(@Param('termId') termId: string, @Req() req: Request): Promise<any> {
     const userId = req.user['id'];
-    await this.commandBus.dispatch(new DislikeTermCommand(Uuid.random().toString(), termId, userId));
+    await this.commandBus.dispatch(new DislikeTermCommand(termId, userId));
   }
 }
