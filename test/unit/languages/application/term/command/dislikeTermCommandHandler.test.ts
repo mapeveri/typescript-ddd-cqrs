@@ -22,7 +22,7 @@ import { AddLikeTermCommandMother } from '@test/unit/languages/application/term/
 describe('Given a DislikeTermCommandHandler', () => {
   const USER_ID = '0a8008d5-ab68-4c10-8476-668b5b540e0f';
   const TERM_ID = '7abe3a96-d603-4e87-b69e-e9fb372294de';
-  const TERM_LIKE_ID = '1bbe3a96-d603-4e87-b69e-e9fb372294dz';
+  const TERM_LIKE_ID = '88c3b571-55d4-4137-9b8b-34cddb116dbf';
 
   let termRepository: TermRepositoryMock;
   let userRepository: UserRepositoryMock;
