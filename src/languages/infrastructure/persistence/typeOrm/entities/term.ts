@@ -5,8 +5,7 @@ import { dates } from '@src/languages/infrastructure/persistence/typeOrm/entitie
 import { EntitySchema } from 'typeorm';
 import Term from '@src/languages/domain/term/term';
 import TermId from '@src/languages/domain/term/termId';
-import TermLikeCollection from '@src/languages/domain/term/termLikeCollection';
-import TermLikeCollectionTransformer from '@src/languages/infrastructure/persistence/typeOrm/transformers/termLikeCollectionTransformer';
+import TermLikeCollectionTransformer from '@src/languages/infrastructure/persistence/typeOrm/transformers/termLikesTransformer';
 
 export const TermSchema = new EntitySchema<Term>({
   name: Term.name,
@@ -34,7 +33,7 @@ export const TermSchema = new EntitySchema<Term>({
     likes: {
       type: 'json',
       transformer: new TermLikeCollectionTransformer(),
-      default: TermLikeCollection.fromPrimitives([]),
+      default: JSON.stringify([]),
     },
     ...dates,
   },

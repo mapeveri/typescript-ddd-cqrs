@@ -12,8 +12,8 @@ import { UserIdMother } from '../../user/userIdMother';
 import TermId from '@src/languages/domain/term/termId';
 import TermType, { TermTypeEnum } from '@src/languages/domain/term/termType';
 import { TermIdMother } from '@test/unit/languages/domain/term/termIdMother';
-import TermLikeCollectionMother from '@test/unit/languages/domain/term/termLikeCollectionMother';
-import TermLikeCollection from '@src/languages/domain/term/termLikeCollection';
+import TermLike from '@src/languages/domain/term/termLike';
+import TermLikeMother from '@test/unit/languages/domain/term/termLikeMother';
 
 interface ExpressionMotherProps {
   id?: TermId;
@@ -21,7 +21,7 @@ interface ExpressionMotherProps {
   countryId?: CountryId;
   terms: ExpressionTermCollection;
   userId: UserId;
-  likes: TermLikeCollection;
+  likes: TermLike[];
 }
 
 export default class ExpressionMother {
@@ -35,7 +35,7 @@ export default class ExpressionMother {
       countryId ?? CountryIdMother.random(),
       terms ?? ExpressionTermCollectionMother.random([]),
       userId ?? UserIdMother.random(),
-      likes ?? TermLikeCollectionMother.random([]),
+      likes ?? [TermLikeMother.random()],
     );
   }
 
@@ -58,7 +58,7 @@ export default class ExpressionMother {
         terms?.map((term) => term.toPrimitives()) ?? [ExpressionTermMother.random().toPrimitives()],
       ),
       userId,
-      TermLikeCollectionMother.random([]),
+      [],
     );
   }
 }

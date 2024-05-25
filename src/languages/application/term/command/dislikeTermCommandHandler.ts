@@ -6,7 +6,6 @@ import Term from '@src/languages/domain/term/term';
 import TermDoesNotExistsException from '@src/languages/domain/term/termDoesNotExistsException';
 import User from '@src/languages/domain/user/user';
 import UserDoesNotExistsException from '@src/languages/domain/user/userDoesNotExistsException';
-import TermLike from '@src/languages/domain/term/termLike';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import TermRepository, { TERM_REPOSITORY } from '@src/languages/domain/term/termRepository';
 import UserRepository, { USER_REPOSITORY } from '@src/languages/domain/user/userRepository';
@@ -26,9 +25,8 @@ export default class DislikeTermCommandHandler implements ICommandHandler<Dislik
 
     const term = await this.getTerm(termId);
     const user = await this.getUser(userId);
-    const termLike = TermLike.of({ userId: userId.toString(), name: user.name, photo: user.photo });
 
-    term.dislike(termLike);
+    term.dislike(userId, user.name, user.photo);
 
     await this.termRepository.save(term);
 
