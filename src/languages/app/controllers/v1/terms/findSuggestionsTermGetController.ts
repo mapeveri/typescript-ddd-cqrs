@@ -24,7 +24,7 @@ export default class FindSuggestionsTermGetController {
   @ApiUnauthorizedResponse({ description: 'Unauthorized.' })
   @ApiInternalServerErrorResponse({ description: 'Internal Server Error.' })
   @UseGuards(NestJwtAuthGuard)
-  async run(@Req() req: Request): Promise<any> {
+  async run(@Req() req: Request): Promise<TermsResponse> {
     const userId = req.user['id'];
 
     return await this.queryBus.ask(new FindSuggestionsTermQuery(userId));

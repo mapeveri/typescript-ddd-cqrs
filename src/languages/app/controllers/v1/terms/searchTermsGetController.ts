@@ -24,7 +24,7 @@ export default class SearchTermsGetController {
   @ApiUnauthorizedResponse({ description: 'Unauthorized.' })
   @ApiInternalServerErrorResponse({ description: 'Internal Server Error.' })
   @UseGuards(NestJwtAuthGuard)
-  async run(@Param('term') term: string, @Query() queryParams: SearchTermsQueryParamsDto): Promise<any> {
+  async run(@Param('term') term: string, @Query() queryParams: SearchTermsQueryParamsDto): Promise<TermsResponse> {
     return await this.queryBus.ask(
       new SearchTermQuery(term, queryParams.size, queryParams.page, queryParams.orderBy, queryParams.orderType),
     );

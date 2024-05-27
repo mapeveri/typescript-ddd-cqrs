@@ -24,7 +24,7 @@ export default class UserPutController {
   @ApiUnauthorizedResponse({ description: 'Unauthorized.' })
   @ApiInternalServerErrorResponse({ description: 'Internal Server Error.' })
   @UseGuards(NestJwtAuthGuard)
-  async run(@Req() req: Request, @Body() payload: UserPutDto): Promise<any> {
+  async run(@Req() req: Request, @Body() payload: UserPutDto): Promise<void> {
     const userId = req.user['id'];
     await this.commandBus.dispatch(new UpdateUserCommand(userId, payload.name, payload.photo, payload.interests));
   }

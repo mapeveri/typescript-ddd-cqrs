@@ -24,7 +24,7 @@ export default class ExpressionPostController {
   @ApiUnauthorizedResponse({ description: 'Unauthorized.' })
   @ApiInternalServerErrorResponse({ description: 'Internal Server Error.' })
   @UseGuards(NestJwtAuthGuard)
-  async run(@Body() payload: ExpressionPostDto): Promise<any> {
+  async run(@Body() payload: ExpressionPostDto): Promise<void> {
     const expressionTerms: Array<ExpressionTermPrimitives> = payload.terms;
     await this.commandBus.dispatch(
       new CreateExpressionCommand(payload.id, payload.languageId, payload.countryId, payload.userId, expressionTerms),

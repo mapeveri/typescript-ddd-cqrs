@@ -5,7 +5,7 @@ import { ApiTags } from '@nestjs/swagger';
 @Controller('health')
 export class HealthController {
   @Get()
-  checkHealth() {
+  checkHealth(): { status: string } {
     return { status: 'ok' };
   }
 }

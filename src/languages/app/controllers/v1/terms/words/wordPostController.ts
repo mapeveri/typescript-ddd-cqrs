@@ -24,7 +24,7 @@ export default class WordPostController {
   @ApiUnauthorizedResponse({ description: 'Unauthorized.' })
   @ApiInternalServerErrorResponse({ description: 'Internal Server Error.' })
   @UseGuards(NestJwtAuthGuard)
-  async run(@Body() payload: WordPostDto): Promise<any> {
+  async run(@Body() payload: WordPostDto): Promise<void> {
     const wordTerms: Array<WordTermPrimitives> = payload.terms;
     await this.commandBus.dispatch(
       new CreateWordCommand(payload.id, payload.languageId, payload.countryId, payload.userId, wordTerms),

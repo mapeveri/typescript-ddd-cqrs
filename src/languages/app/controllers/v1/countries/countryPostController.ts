@@ -24,7 +24,7 @@ export default class CountryPostController {
   @ApiUnauthorizedResponse({ description: 'Unauthorized.' })
   @ApiInternalServerErrorResponse({ description: 'Internal Server Error.' })
   @UseGuards(NestJwtAuthGuard)
-  async run(@Body() payload: CountryPostDto): Promise<any> {
+  async run(@Body() payload: CountryPostDto): Promise<void> {
     const languages: Array<LanguagePrimitives> = payload.languages;
     await this.commandBus.dispatch(new CreateCountryCommand(payload.id, payload.name, payload.iso, languages));
   }

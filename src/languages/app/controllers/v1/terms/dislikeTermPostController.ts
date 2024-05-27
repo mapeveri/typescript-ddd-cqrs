@@ -23,7 +23,7 @@ export default class DislikeTermPostController {
   @ApiUnauthorizedResponse({ description: 'Unauthorized.' })
   @ApiInternalServerErrorResponse({ description: 'Internal Server Error.' })
   @UseGuards(NestJwtAuthGuard)
-  async run(@Param('termId') termId: string, @Req() req: Request): Promise<any> {
+  async run(@Param('termId') termId: string, @Req() req: Request): Promise<void> {
     const userId = req.user['id'];
     await this.commandBus.dispatch(new DislikeTermCommand(termId, userId));
   }
