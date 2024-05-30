@@ -1,5 +1,3 @@
-import { SOCIAL_AUTHENTICATOR } from '@src/languages/domain/auth/socialAuthenticator';
-import GoogleSocialAuthenticator from '@src/languages/infrastructure/oauth/googleSocialAuthenticator';
 import { NestJwtAuthGuard } from '@src/shared/guards/nestJwtAuthGuard';
 import { JwtStrategy } from '@src/shared/infrastructure/auth/strategies/jwtStrategy';
 import { APP_FILTER } from '@nestjs/core';
@@ -21,6 +19,10 @@ import { PersistDomainEventsSubscriber } from '@src/shared/infrastructure/subscr
 import MongoConnection, { MONGO_CLIENT } from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
 import { TypeOrmTransactionalEntityManager } from '@src/shared/infrastructure/persistence/typeOrm/typeOrmTransactionalEntityManager';
 import TypeOrmTransactionalDecorator from '@src/shared/infrastructure/persistence/typeOrm/typeOrmTransactionalDecorator';
+import { SOCIAL_AUTHENTICATOR } from '@src/languages/domain/auth/socialAuthenticator';
+import GoogleSocialAuthenticator from '@src/languages/infrastructure/oauth/googleSocialAuthenticator';
+import { ConfigService } from '@nestjs/config';
+import { OAuth2Client } from 'google-auth-library';
 
 export const services = [
   NestJwtAuthGuard,
@@ -70,5 +72,13 @@ export const services = [
   {
     provide: SOCIAL_AUTHENTICATOR,
     useClass: GoogleSocialAuthenticator,
+  },
+  {
+    provide: 'GOOGLE_OAUTH_CLIENT',
+    useFactory: (configService: ConfigService) => {
+      const clientId = configService.get<string>('GOOGLE_CLIENT_ID');
+      return new OAuth2Client(clientId);
+    },
+    inject: [ConfigService],
   },
 ];
