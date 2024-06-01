@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, it, jest } from '@jest/globals';
 import LoginUserCommandHandler from '@src/languages/application/auth/command/loginUserCommandHandler';
 import { LoginUserCommandMother } from './loginUserCommandMother';
-import LoginException from '@src/languages/domain/user/loginException';
+import LoginException from '@src/shared/domain/auth/loginException';
 import { AuthSessionRepositoryMock } from '@test/unit/languages/domain/auth/authSessionRepositoryMock';
-import { SocialAuthenticatorMock } from '@test/unit/languages/domain/auth/socialAuthenticatorMock';
+import { SocialAuthenticatorMock } from '@test/unit/shared/domain/auth/socialAuthenticatorMock';
 import { EventBusMock } from '@test/unit/shared/domain/buses/eventBus/eventBusMock';
 import { AuthSessionMother } from '@test/unit/languages/domain/auth/authSessionMother';
 import { AuthSessionIdMother } from '@test/unit/languages/domain/auth/authSessionIdMother';

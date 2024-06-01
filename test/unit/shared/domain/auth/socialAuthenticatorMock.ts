@@ -1,5 +1,5 @@
 import { expect, jest } from '@jest/globals';
-import { SocialAuthenticator } from '@src/languages/domain/auth/socialAuthenticator';
+import { SocialAuthenticator } from '@src/shared/domain/auth/socialAuthenticator';
 
 export class SocialAuthenticatorMock implements SocialAuthenticator {
   private loginMock: jest.Mock;
