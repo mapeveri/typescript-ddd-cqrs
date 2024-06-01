@@ -13,7 +13,7 @@ import { rabbitMqConfig } from '@src/shared/infrastructure/messenger/rabbitMq/co
 import { consumers } from '@src/shared/_dependencyInjection/consumers';
 import { services } from '@src/shared/_dependencyInjection/services';
 import Environment from '@src/shared/infrastructure/utils/environment';
-import { SOCIAL_AUTHENTICATOR } from '@src/languages/domain/auth/socialAuthenticator';
+import { SOCIAL_AUTHENTICATOR } from '@src/shared/domain/auth/socialAuthenticator';
 import NestProjectionBus from '@src/shared/infrastructure/bus/nestProjectionBus';
 import { TypeOrmTransactionalEntityManager } from '@src/shared/infrastructure/persistence/typeOrm/typeOrmTransactionalEntityManager';
 import { MONGO_CLIENT } from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
