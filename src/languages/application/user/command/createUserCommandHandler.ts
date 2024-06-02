@@ -23,7 +23,7 @@ export default class CreateUserCommandHandler implements ICommandHandler<CreateU
 
   private async guardUserDoesNotExists(userId: UserId): Promise<void> {
     const user = await this.userRepository.findById(userId);
-    if (!user) {
+    if (user) {
       throw new UserAlreadyExistsException(userId.value);
     }
   }
