@@ -7,13 +7,12 @@ import { queries } from '@src/languages/_dependencyInjection/queryHandlers';
 import { events } from '@src/languages/_dependencyInjection/eventHandlers';
 import { projections } from '@src/languages/_dependencyInjection/projectionHandlers';
 import { readLayers } from '@src/languages/_dependencyInjection/readLayers';
-import { services as LanguageServices } from '@src/languages/_dependencyInjection/services';
 import { entitySchemas } from '@src/shared/_dependencyInjection/entitySchemas';
 
 @Module({
   imports: [TypeOrmModule.forFeature(entitySchemas)],
   exports: [TypeOrmModule],
   controllers: [...controllers],
-  providers: [...commands, ...queries, ...events, ...projections, ...repositories, ...readLayers, ...LanguageServices],
+  providers: [...commands, ...queries, ...events, ...projections, ...repositories, ...readLayers],
 })
 export class LanguageModule {}
