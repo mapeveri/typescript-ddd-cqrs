@@ -6,7 +6,9 @@ import { Document } from 'bson/src/bson';
 import { WithId } from 'typeorm';
 import { EventsHandler, IEventHandler } from '@src/shared/domain/bus/eventBus/eventsHandler';
 import TermLikeAddedEvent from '@src/languages/domain/term/termLikeAddedEvent';
+import { MongoTransactional } from '@src/shared/infrastructure/persistence/mongo/mongoTransactionalDecorator';
 
+@MongoTransactional
 @EventsHandler(TermLikeAddedEvent)
 export default class AddLikeToTermViewProjectionHandler implements IEventHandler<TermLikeAddedEvent> {
   constructor(@Inject(MONGO_CLIENT) private readonly mongo: MongoConnection) {}

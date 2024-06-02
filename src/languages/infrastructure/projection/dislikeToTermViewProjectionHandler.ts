@@ -6,7 +6,9 @@ import { Document } from 'bson/src/bson';
 import { WithId } from 'typeorm';
 import TermDislikedEvent from '@src/languages/domain/term/termDislikedEvent';
 import { EventsHandler, IEventHandler } from '@src/shared/domain/bus/eventBus/eventsHandler';
+import { MongoTransactional } from '@src/shared/infrastructure/persistence/mongo/mongoTransactionalDecorator';
 
+@MongoTransactional
 @EventsHandler(TermDislikedEvent)
 export default class DislikeToTermViewProjectionHandler implements IEventHandler<TermDislikedEvent> {
   constructor(@Inject(MONGO_CLIENT) private readonly mongo: MongoConnection) {}

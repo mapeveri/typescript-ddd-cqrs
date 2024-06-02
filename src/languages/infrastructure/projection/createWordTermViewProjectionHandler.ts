@@ -6,7 +6,9 @@ import { TermTypeEnum } from '@src/languages/domain/term/termType';
 import WordCreatedEvent from '@src/languages/domain/term/word/wordCreatedEvent';
 import MongoConnection, { MONGO_CLIENT } from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
 import { TermView } from '@src/languages/application/term/view/termView';
+import { MongoTransactional } from '@src/shared/infrastructure/persistence/mongo/mongoTransactionalDecorator';
 
+@MongoTransactional
 @EventsHandler(WordCreatedEvent)
 export default class CreateWordTermViewProjectionHandler implements IEventHandler<WordCreatedEvent> {
   constructor(
