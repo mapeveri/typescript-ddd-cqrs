@@ -25,7 +25,7 @@ export default class AddLikeToTermViewProjectionHandler implements IEventHandler
   }
 
   private async getTerm(id: string): Promise<WithId<Document>> {
-    const term = this.collection().findOne({ id });
+    const term = await this.collection().findOne({ id });
     if (!term) throw new Error('Term view not found');
 
     return term as unknown as WithId<Document>;
