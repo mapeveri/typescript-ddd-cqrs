@@ -7,14 +7,12 @@ import { JwtStrategy } from '@src/shared/infrastructure/auth/strategies/jwtStrat
 import { JwtModule } from '@nestjs/jwt';
 import { CqrsModule } from '@nestjs/cqrs';
 import { QUERY_BUS } from '@src/shared/domain/bus/queryBus/queryBus';
-import { PROJECTION_BUS } from '@src/shared/domain/bus/projectionBus/projectionBus';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { rabbitMqConfig } from '@src/shared/infrastructure/messenger/rabbitMq/config';
 import { consumers } from '@src/shared/_dependencyInjection/consumers';
 import { services } from '@src/shared/_dependencyInjection/services';
 import Environment from '@src/shared/infrastructure/utils/environment';
 import { SOCIAL_AUTHENTICATOR } from '@src/shared/domain/auth/socialAuthenticator';
-import NestProjectionBus from '@src/shared/infrastructure/bus/nestProjectionBus';
 import { TypeOrmTransactionalEntityManager } from '@src/shared/infrastructure/persistence/typeOrm/typeOrmTransactionalEntityManager';
 import { MONGO_CLIENT } from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
 import { ConfigModule } from '@nestjs/config';
@@ -47,14 +45,12 @@ import { dataSourceConfig } from '@src/shared/infrastructure/persistence/typeOrm
     CqrsModule,
     ClientsModule,
     JwtStrategy,
-    NestProjectionBus,
     TypeOrmTransactionalEntityManager,
     MONGO_CLIENT,
     LOGGER,
     QUERY_BUS,
     COMMAND_BUS,
     EVENT_BUS,
-    PROJECTION_BUS,
     ASYNC_EVENT_BUS,
     SOCIAL_AUTHENTICATOR,
   ],

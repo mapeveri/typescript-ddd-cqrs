@@ -1,6 +1,4 @@
 import MongoConnection from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
-import { IProjectionHandler } from '@src/shared/domain/bus/projectionBus/projectionHandler';
-import { Projection } from '@src/shared/domain/bus/projectionBus/projection';
 
 type Callback = (...args: any[]) => Promise<void>;
 
@@ -20,19 +18,5 @@ export async function mongoTransactionalOperation(handle: Callback, ...args: any
     throw e;
   } finally {
     await session.endSession();
-  }
-}
-
-export default class MongoTransactionalDecorator {
-  constructor() {}
-
-  async execute(handler: IProjectionHandler<Projection>, projection: Projection): Promise<void> {
-    await mongoTransactionalOperation(
-      async (handler: IProjectionHandler<Projection>, projection: Projection) => {
-        await handler.execute(projection);
-      },
-      handler,
-      projection,
-    );
   }
 }
