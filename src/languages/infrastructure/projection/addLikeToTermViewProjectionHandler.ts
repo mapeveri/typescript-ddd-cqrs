@@ -20,7 +20,6 @@ export default class AddLikeToTermViewProjectionHandler implements IEventHandler
     const termView = await this.collection.findOne({ id: event.id });
     if (!termView) throw new Error('Term view not found');
 
-    console.log(termView);
     if (termView.likes.some((like: TermLike) => like.userId === event.userId)) return;
 
     termView.totalLikes = termView.totalLikes + 1;
