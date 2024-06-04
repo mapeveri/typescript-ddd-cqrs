@@ -16,7 +16,7 @@ export default class CreateUserOnAuthSessionCreatedEventHandler implements IEven
   async handle(event: AuthSessionCreatedEvent): Promise<void> {
     const userId = UserId.of(event.id);
     const user = await this.userRepository.findById(userId);
-    if (null !== user) {
+    if (user) {
       return;
     }
 

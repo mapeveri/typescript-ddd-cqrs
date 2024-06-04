@@ -1,9 +1,11 @@
-import CreateTermViewProjectionHandler from '@src/languages/application/term/projection/createTermViewProjectionHandler';
-import AddLikeToTermViewProjectionHandler from '@src/languages/application/term/projection/addLikeToTermViewProjectionHandler';
-import DislikeToTermViewProjectionHandler from '@src/languages/application/term/projection/dislikeToTermViewProjectionHandler';
+import CreateExpressionTermViewProjectionHandler from '@src/languages/infrastructure/projection/createExpressionTermViewProjectionHandler';
+import AddLikeToTermViewProjectionHandler from '@src/languages/infrastructure/projection/addLikeToTermViewProjectionHandler';
+import DislikeToTermViewProjectionHandler from '@src/languages/infrastructure/projection/dislikeToTermViewProjectionHandler';
+import CreateWordTermViewProjectionHandler from '@src/languages/infrastructure/projection/createWordTermViewProjectionHandler';
 
 export const projections = [
-  CreateTermViewProjectionHandler,
+  CreateExpressionTermViewProjectionHandler,
+  CreateWordTermViewProjectionHandler,
   AddLikeToTermViewProjectionHandler,
   DislikeToTermViewProjectionHandler,
 ];

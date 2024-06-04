@@ -1,17 +1,9 @@
 import DeleteExpressionOnTermCreatedUncompletedEventHandler from '@src/languages/application/term/event/deleteExpressionOnTermCreatedUncompletedEventHandler';
-import CreateTermViewsOnExpressionCreatedEventHandler from '@src/languages/application/term/event/createTermViewsOnExpressionCreatedEventHandler';
-import CreateTermViewsOnWordCreatedEventHandler from '@src/languages/application/term/event/createTermViewsOnWordCreatedEventHandler';
 import CreateUserOnAuthSessionCreatedEventHandler from '@src/languages/application/user/event/createUserOnAuthSessionCreatedEventHandler';
 import DeleteWordOnTermCreatedUncompletedEventHandler from '@src/languages/application/term/event/deleteWordOnTermCreatedUncompletedEventHandler';
-import UpdateTermViewOnTermLikeAddedEventHandler from '@src/languages/application/term/event/updateTermViewOnTermLikeAddedEventHandler';
-import UpdateTermViewOnTermDislikedEventHandler from '@src/languages/application/term/event/updateTermViewOnTermDislikedEventHandler';
 
 export const events = [
-  CreateTermViewsOnExpressionCreatedEventHandler,
-  CreateTermViewsOnWordCreatedEventHandler,
   CreateUserOnAuthSessionCreatedEventHandler,
   DeleteExpressionOnTermCreatedUncompletedEventHandler,
   DeleteWordOnTermCreatedUncompletedEventHandler,
-  UpdateTermViewOnTermLikeAddedEventHandler,
-  UpdateTermViewOnTermDislikedEventHandler,
 ];

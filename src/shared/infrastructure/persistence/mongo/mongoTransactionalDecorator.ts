@@ -1,6 +1,5 @@
+import 'reflect-metadata';
 import MongoConnection from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
-import { IProjectionHandler } from '@src/shared/domain/bus/projectionBus/projectionHandler';
-import { Projection } from '@src/shared/domain/bus/projectionBus/projection';
 
 type Callback = (...args: any[]) => Promise<void>;
 
@@ -23,16 +22,22 @@ export async function mongoTransactionalOperation(handle: Callback, ...args: any
   }
 }
 
-export default class MongoTransactionalDecorator {
-  constructor() {}
+export function MongoTransactional<T extends { new (...args: any[]): NonNullable<unknown> }>(constructor: T): T {
+  return class extends constructor {
+    constructor(...args: any[]) {
+      super(...args);
+      this.wrapMethodsWithTransaction(constructor);
+    }
 
-  async execute(handler: IProjectionHandler<Projection>, projection: Projection): Promise<void> {
-    await mongoTransactionalOperation(
-      async (handler: IProjectionHandler<Projection>, projection: Projection) => {
-        await handler.execute(projection);
-      },
-      handler,
-      projection,
-    );
-  }
+    private wrapMethodsWithTransaction(constructor: T) {
+      Object.getOwnPropertyNames(constructor.prototype).forEach((methodName) => {
+        const originalMethod = (this as any)[methodName];
+        if (methodName !== 'constructor' && typeof originalMethod === 'function') {
+          (this as any)[methodName] = async (...methodArgs: any[]) => {
+            await mongoTransactionalOperation(originalMethod.bind(this), ...methodArgs);
+          };
+        }
+      });
+    }
+  };
 }

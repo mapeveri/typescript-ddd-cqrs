@@ -11,8 +11,6 @@ import NestEventBus from '@src/shared/infrastructure/bus/nestEventBus';
 import { RabbitMqEventBus } from '@src/shared/infrastructure/bus/rabbitMq/rabbitMqEventBus';
 import { QUERY_BUS } from '@src/shared/domain/bus/queryBus/queryBus';
 import NestQueryBusBus from '@src/shared/infrastructure/bus/nestQueryBus';
-import { PROJECTION_BUS } from '@src/shared/domain/bus/projectionBus/projectionBus';
-import NestProjectionBus from '@src/shared/infrastructure/bus/nestProjectionBus';
 import { EVENT_STORE_REPOSITORY } from '@src/shared/domain/eventStore/eventStoreRepository';
 import MongoEventStoreRepository from '@src/shared/infrastructure/persistence/mongo/repositories/mongoEventStoreRepository';
 import { PersistDomainEventsSubscriber } from '@src/shared/infrastructure/subscribers/persistDomainEventsSubscriber';
@@ -27,7 +25,6 @@ import { OAuth2Client } from 'google-auth-library';
 export const services = [
   NestJwtAuthGuard,
   JwtStrategy,
-  NestProjectionBus,
   TypeOrmTransactionalEntityManager,
   TypeOrmTransactionalDecorator,
   {
@@ -59,10 +56,6 @@ export const services = [
   {
     provide: QUERY_BUS,
     useClass: NestQueryBusBus,
-  },
-  {
-    provide: PROJECTION_BUS,
-    useExisting: NestProjectionBus,
   },
   {
     provide: EVENT_STORE_REPOSITORY,
