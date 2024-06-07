@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from '@jest/globals';
 import Country from '@src/languages/domain/country/country';
 import { FindCountriesQueryMother } from './findCountriesQueryMother';
-import FindCountriesQueryHandler from '@src/languages/application/country/query/findAll/findCountriesQueryHandler';
+import FindCountriesQueryHandler from '@src/languages/application/country/query/findCountriesQueryHandler';
 import { CountryRepositoryMock } from '@test/unit/languages/domain/country/countryRepositoryMock';
 import CountryMother from '@test/unit/languages/domain/country/countryMother';
 
