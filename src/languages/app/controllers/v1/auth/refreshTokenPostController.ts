@@ -11,7 +11,7 @@ import {
 import RefreshTokenPostDto from './refreshTokenPostDto';
 import RefreshTokenPostResponseDto from './refreshTokenPostResponseDto';
 import { QUERY_BUS, QueryBus } from '@src/shared/domain/bus/queryBus/queryBus';
-import FindUserQuery from '@src/languages/application/user/query/find/findUserQuery';
+import FindUserQuery from '@src/languages/application/user/query/findUserQuery';
 
 @ApiTags('Auth')
 @Controller()
