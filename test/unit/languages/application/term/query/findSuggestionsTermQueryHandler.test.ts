@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it } from '@jest/globals';
 import { FindSuggestionsTermReadLayerMock } from '@test/unit/languages/application/term/query/findSuggestionsTermReadLayerMock';
 import FindSuggestionsTermQueryHandler from '@src/languages/application/term/query/findSuggestionsTermQueryHandler';
 import { FindSuggestionsTermQueryMother } from '@test/unit/languages/application/term/query/findSuggestionsTermQueryMother';
-import { TermViewMother } from '@test/unit/languages/application/term/query/viewModel/termViewMother';
+import { TermViewMother } from '@test/unit/languages/application/term/view/termViewMother';
 
 describe('FindSuggestionsTermQueryHandler', () => {
   let findSuggestionTermReadLayerMock: FindSuggestionsTermReadLayerMock;
