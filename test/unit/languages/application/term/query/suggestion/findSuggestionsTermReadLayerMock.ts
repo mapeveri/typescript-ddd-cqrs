@@ -1,7 +1,7 @@
 import { jest } from '@jest/globals';
 import { TermView } from '@src/languages/application/term/view/termView';
 import UserId from '@src/languages/domain/user/userId';
-import FindSuggestionsTermReadLayer from '@src/languages/application/term/query/suggestion/findSuggestionsTermReadLayer';
+import FindSuggestionsTermReadLayer from '@src/languages/application/term/query/findSuggestionsTermReadLayer';
 
 export class FindSuggestionsTermReadLayerMock implements FindSuggestionsTermReadLayer {
   private readonly findMock: jest.Mock;

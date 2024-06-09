@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from '@jest/globals';
 import { FindSuggestionsTermReadLayerMock } from '@test/unit/languages/application/term/query/suggestion/findSuggestionsTermReadLayerMock';
-import FindSuggestionsTermQueryHandler from '@src/languages/application/term/query/suggestion/findSuggestionsTermQueryHandler';
+import FindSuggestionsTermQueryHandler from '@src/languages/application/term/query/findSuggestionsTermQueryHandler';
 import { FindSuggestionsTermQueryMother } from '@test/unit/languages/application/term/query/suggestion/findSuggestionsTermQueryMother';
 import { TermViewMother } from '@test/unit/languages/application/term/query/viewModel/termViewMother';
 

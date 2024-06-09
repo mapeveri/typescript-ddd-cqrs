@@ -1,4 +1,4 @@
-import SearchTermQuery from '@src/languages/application/term/query/search/searchTermQuery';
+import SearchTermQuery from '@src/languages/application/term/query/searchTermQuery';
 import faker from 'faker';
 import { OrderType } from '@src/shared/domain/criteria/orderBy';
 

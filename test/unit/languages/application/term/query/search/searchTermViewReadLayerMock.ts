@@ -2,7 +2,7 @@ import { jest } from '@jest/globals';
 import { TermView } from '@src/languages/application/term/view/termView';
 import SearchTermViewReadLayer, {
   TermCriteriaParams,
-} from '@src/languages/application/term/query/search/searchTermViewReadLayer';
+} from '@src/languages/application/term/query/searchTermViewReadLayer';
 
 export class SearchTermViewReadLayerMock implements SearchTermViewReadLayer {
   private readonly searchMock: jest.Mock;

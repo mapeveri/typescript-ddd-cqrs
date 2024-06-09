@@ -1,7 +1,7 @@
 import { Controller, Inject, Param, Query, Sse } from '@nestjs/common';
 import { Observable, Subscription } from 'rxjs';
 import { QUERY_BUS, QueryBus } from '@src/shared/domain/bus/queryBus/queryBus';
-import SearchTermQuery from '@src/languages/application/term/query/search/searchTermQuery';
+import SearchTermQuery from '@src/languages/application/term/query/searchTermQuery';
 import { ApiInternalServerErrorResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { SearchTermsQueryParamsDto } from '@src/languages/app/controllers/v1/terms/searchTermsQueryParamsDto';
 import { TermsResponse } from '@src/languages/app/controllers/v1/terms/termsResponse';

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { TermView } from '@src/languages/application/term/view/termView';
 import SearchTermViewReadLayer, {
   TermCriteriaParams,
-} from '@src/languages/application/term/query/search/searchTermViewReadLayer';
+} from '@src/languages/application/term/query/searchTermViewReadLayer';
 import { Document } from 'mongodb';
 import { SortDirection } from 'typeorm';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';

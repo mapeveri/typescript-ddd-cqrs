@@ -1,4 +1,4 @@
-import FindSuggestionsTermReadLayer from '@src/languages/application/term/query/suggestion/findSuggestionsTermReadLayer';
+import FindSuggestionsTermReadLayer from '@src/languages/application/term/query/findSuggestionsTermReadLayer';
 import UserId from '@src/languages/domain/user/userId';
 import { TermView } from '@src/languages/application/term/view/termView';
 import UserRepository, { USER_REPOSITORY } from '@src/languages/domain/user/userRepository';

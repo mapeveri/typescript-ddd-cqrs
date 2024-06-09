@@ -3,7 +3,7 @@ import SearchTermQuery from './searchTermQuery';
 import SearchTermViewReadLayer, {
   SEARCH_TERM_VIEW_READ_LAYER,
   TermCriteriaParams,
-} from '@src/languages/application/term/query/search/searchTermViewReadLayer';
+} from '@src/languages/application/term/query/searchTermViewReadLayer';
 import SearchTermResponse from './searchTermResponse';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { IQueryHandler, QueryHandler } from '@src/shared/domain/bus/queryBus/queryHandler';

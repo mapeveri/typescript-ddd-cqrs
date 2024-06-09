@@ -10,7 +10,7 @@ import {
 } from '@nestjs/swagger';
 import { TermsResponse } from './termsResponse';
 import { QUERY_BUS, QueryBus } from '@src/shared/domain/bus/queryBus/queryBus';
-import FindSuggestionsTermQuery from '@src/languages/application/term/query/suggestion/findSuggestionsTermQuery';
+import FindSuggestionsTermQuery from '@src/languages/application/term/query/findSuggestionsTermQuery';
 
 @ApiTags('Terms')
 @Controller()

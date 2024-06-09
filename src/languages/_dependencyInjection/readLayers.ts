@@ -1,6 +1,6 @@
-import { FIND_SUGGESTIONS_TERM_READ_LAYER } from '@src/languages/application/term/query/suggestion/findSuggestionsTermReadLayer';
+import { FIND_SUGGESTIONS_TERM_READ_LAYER } from '@src/languages/application/term/query/findSuggestionsTermReadLayer';
 import MongoFindSuggestionsTermReadLayer from '@src/languages/infrastructure/persistence/mongo/readLayer/mongoFindSuggestionsTermReadLayer';
-import { SEARCH_TERM_VIEW_READ_LAYER } from '@src/languages/application/term/query/search/searchTermViewReadLayer';
+import { SEARCH_TERM_VIEW_READ_LAYER } from '@src/languages/application/term/query/searchTermViewReadLayer';
 import MongoSearchTermViewReadLayer from '@src/languages/infrastructure/persistence/mongo/readLayer/mongoSearchTermViewReadLayer';
 
 export const readLayers = [

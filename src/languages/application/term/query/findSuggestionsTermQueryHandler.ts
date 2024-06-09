@@ -1,11 +1,11 @@
 import QueryResponse from '@src/shared/domain/bus/queryBus/queryResponse';
-import FindSuggestionsTermQueryResponse from '@src/languages/application/term/query/suggestion/findSuggestionsTermQueryResponse';
+import FindSuggestionsTermQueryResponse from '@src/languages/application/term/query/findSuggestionsTermQueryResponse';
 import { IQueryHandler, QueryHandler } from '@src/shared/domain/bus/queryBus/queryHandler';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
-import FindSuggestionsTermQuery from '@src/languages/application/term/query/suggestion/findSuggestionsTermQuery';
+import FindSuggestionsTermQuery from '@src/languages/application/term/query/findSuggestionsTermQuery';
 import FindSuggestionsTermReadLayer, {
   FIND_SUGGESTIONS_TERM_READ_LAYER,
-} from '@src/languages/application/term/query/suggestion/findSuggestionsTermReadLayer';
+} from '@src/languages/application/term/query/findSuggestionsTermReadLayer';
 import UserId from '@src/languages/domain/user/userId';
 
 @QueryHandler(FindSuggestionsTermQuery)
