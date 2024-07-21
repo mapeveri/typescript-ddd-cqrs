@@ -10,30 +10,30 @@ Configuration for development.
 
 1. Copy .env.example to .env and configure it.
 
-2. Execute docker-compose: 
+2. Execute docker compose: 
 ```shell script
-    docker-compose up
+    docker compose up
 ```
 4. Run migrations:
 ```shell script
-    docker-compose run app npm run typeorm migration:run
+    docker compose run app npm run typeorm migration:run
 ```
 5. Create user with google (check oauth2 section). It's to get a token from google and it allow you to use the endpoint /api/v1/auth/login to log in to the application.
 
 ### Running
 
-After running docker-compose up the application will be available at https://localhost:4000.
+After running docker compose up the application will be available at https://localhost:4000.
 
 ### Migrations
 
 To generate migrations run the next command:
 ```shell script
-  docker-compose run app npm run typeorm migration:generate migrationName
+  docker compose run app npm run typeorm migration:generate migrationName
 ```
 
 To execute migrations run the next command:
 ```shell script
-  docker-compose run app npm run typeorm migration:run
+  docker compose run app npm run typeorm migration:run
 ```
 
 ### Oauth2:
