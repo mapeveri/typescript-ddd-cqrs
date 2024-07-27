@@ -13,9 +13,11 @@ import { SearchTermsSseController } from '@src/languages/app/controllers/v1/term
 import { HealthController } from '@src/languages/app/controllers/v1/health/healthGetController';
 import LikeTermPostController from '@src/languages/app/controllers/v1/terms/likeTermPostController';
 import DislikeTermPostController from '@src/languages/app/controllers/v1/terms/dislikeTermPostController';
+import SignupPostController from '../app/controllers/v1/auth/signupPostController';
 
 export const controllers = [
   LoginPostController,
+  SignupPostController,
   RefreshTokenPostController,
   MeGetController,
   SearchTermsGetController,
