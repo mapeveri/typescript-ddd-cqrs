@@ -8,6 +8,10 @@ export class AuthSessionRepositoryMock implements AuthSessionRepository {
     this.authSessionsStored = [];
   }
 
+  clean(): void {
+    this.authSessionsStored = [];
+  }
+
   stored(): AuthSession[] {
     return this.authSessionsStored;
   }

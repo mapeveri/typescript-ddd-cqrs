@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, jest } from '@jest/globals';
+import { beforeEach, beforeAll, describe, expect, it, jest } from '@jest/globals';
 import LoginUserCommandHandler from '@src/languages/application/auth/command/loginUserCommandHandler';
 import { LoginUserCommandMother } from './loginUserCommandMother';
 import LoginException from '@src/shared/domain/auth/loginException';
@@ -12,19 +12,35 @@ import { AuthSessionCreatedEventMother } from '@test/unit/languages/domain/auth/
 import LoginUserCommand from '@src/languages/application/auth/command/loginUserCommand';
 
 describe('Given a LoginUserCommandHandler', () => {
-  let repository: AuthSessionRepositoryMock;
+  let authSessionRepository: AuthSessionRepositoryMock;
   let socialAuthenticator: SocialAuthenticatorMock;
   let eventBus: EventBusMock;
   let loginUserCommandHandler: LoginUserCommandHandler;
 
-  beforeEach(() => {
-    repository = new AuthSessionRepositoryMock();
+  const prepareDependencies = () => {
+    authSessionRepository = new AuthSessionRepositoryMock();
     socialAuthenticator = new SocialAuthenticatorMock();
     eventBus = new EventBusMock();
+  };
 
-    loginUserCommandHandler = new LoginUserCommandHandler(repository, socialAuthenticator, eventBus);
+  const initHandler = () => {
+    loginUserCommandHandler = new LoginUserCommandHandler(authSessionRepository, socialAuthenticator, eventBus);
 
     jest.useFakeTimers();
+  };
+
+  const clean = () => {
+    authSessionRepository.clean();
+    socialAuthenticator.clean();
+  };
+
+  beforeAll(() => {
+    prepareDependencies();
+    initHandler();
+  });
+
+  beforeEach(() => {
+    clean();
   });
 
   describe('When the login fail', () => {
@@ -40,7 +56,7 @@ describe('Given a LoginUserCommandHandler', () => {
     it('should not save auth session', async () => {
       await expect(loginUserCommandHandler.execute(command)).rejects.toThrowError(LoginException);
 
-      expect(repository.stored()).toHaveLength(0);
+      expect(authSessionRepository.stored()).toHaveLength(0);
     });
 
     it('should not publish any events', async () => {
@@ -67,14 +83,15 @@ describe('Given a LoginUserCommandHandler', () => {
           provider: command.provider,
           token: command.token,
           email: command.email,
+          photo: command.photo,
           name: command.name,
         }),
       });
 
       await loginUserCommandHandler.execute(command);
 
-      expect(repository.stored()).toHaveLength(1);
-      expect(repository.stored()[0].toPrimitives()).toEqual(authSession.toPrimitives());
+      expect(authSessionRepository.stored()).toHaveLength(1);
+      expect(authSessionRepository.stored()[0].toPrimitives()).toEqual(authSession.toPrimitives());
     });
 
     it('should publish an event', async () => {

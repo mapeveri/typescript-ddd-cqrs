@@ -6,18 +6,18 @@ export interface AuthSessionMotherProps {
   name?: string;
   provider?: string;
   email?: string;
-  photos?: string;
+  photo?: string;
 }
 
 export class SessionMother {
   static random(props?: AuthSessionMotherProps): Session {
-    const { token, name, provider, email, photos } = props ?? {};
+    const { token, name, provider, email, photo } = props ?? {};
 
     return Session.fromPrimitives({
       name: name ?? faker.name.findName(),
       provider: provider ?? faker.random.word(),
       email: email ?? faker.internet.email(),
-      photo: photos ?? faker.image.imageUrl(),
+      photo: photo ?? faker.image.imageUrl(),
       token: token ?? faker.random.word(),
     });
   }
