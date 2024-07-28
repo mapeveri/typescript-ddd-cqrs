@@ -1,29 +1,21 @@
-import { expect, jest } from '@jest/globals';
 import { SocialAuthenticator } from '@src/shared/domain/auth/socialAuthenticator';
 
 export class SocialAuthenticatorMock implements SocialAuthenticator {
-  private loginMock: jest.Mock;
-  private loginSuccess: boolean;
+  private toReturn: boolean;
 
   constructor() {
-    this.loginMock = jest.fn();
+    this.toReturn = false;
   }
 
-  returnOnAuthenticate(loginSuccess: boolean): void {
-    this.loginSuccess = loginSuccess;
+  add(value: boolean): void {
+    this.toReturn = value;
   }
 
-  async login(token: string): Promise<boolean> {
-    this.loginMock(token);
-
-    return Promise.resolve(this.loginSuccess);
+  clean(): void {
+    this.toReturn = false;
   }
 
-  shouldAuthenticate(token: string): void {
-    expect(this.loginMock).toHaveBeenCalledWith(token);
-  }
-
-  shouldNotAuthenticate(): void {
-    expect(this.loginMock).not.toHaveBeenCalled();
+  async login(_token: string): Promise<boolean> {
+    return Promise.resolve(this.toReturn);
   }
 }

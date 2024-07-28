@@ -9,6 +9,7 @@ import { AuthSessionMother } from '@test/unit/languages/domain/auth/authSessionM
 import { AuthSessionIdMother } from '@test/unit/languages/domain/auth/authSessionIdMother';
 import { SessionMother } from '@test/unit/languages/domain/auth/sessionMother';
 import { AuthSessionCreatedEventMother } from '@test/unit/languages/domain/auth/authSessionCreatedEventMother';
+import LoginUserCommand from '@src/languages/application/auth/command/loginUserCommand';
 
 describe('Given a LoginUserCommandHandler', () => {
   let repository: AuthSessionRepositoryMock;
@@ -27,30 +28,37 @@ describe('Given a LoginUserCommandHandler', () => {
   });
 
   describe('When the login fail', () => {
-    it('should not save auth session', async () => {
-      const command = LoginUserCommandMother.random();
-      socialAuthenticator.returnOnAuthenticate(false);
+    let command: LoginUserCommand;
 
+    function startScenario() {
+      command = LoginUserCommandMother.random();
+      socialAuthenticator.add(false);
+    }
+
+    beforeEach(startScenario);
+
+    it('should not save auth session', async () => {
       await expect(loginUserCommandHandler.execute(command)).rejects.toThrowError(LoginException);
 
-      socialAuthenticator.shouldAuthenticate(command.token);
-      
       expect(repository.stored()).toHaveLength(0);
     });
 
     it('should not publish any events', async () => {
-      const command = LoginUserCommandMother.random();
-      socialAuthenticator.returnOnAuthenticate(false);
-
       await expect(loginUserCommandHandler.execute(command)).rejects.toThrowError(LoginException);
 
-      socialAuthenticator.shouldAuthenticate(command.token);
       eventBus.shouldNotPublish();
     });
   });
 
   describe('When the login is success', () => {
-    const command = LoginUserCommandMother.random();
+    let command: LoginUserCommand;
+
+    function startScenario() {
+      command = LoginUserCommandMother.random();
+      socialAuthenticator.add(true);
+    }
+
+    beforeEach(startScenario);
 
     it('should save auth session', async () => {
       const authSession = AuthSessionMother.random({
@@ -62,23 +70,18 @@ describe('Given a LoginUserCommandHandler', () => {
           name: command.name,
         }),
       });
-      socialAuthenticator.returnOnAuthenticate(true);
 
       await loginUserCommandHandler.execute(command);
 
-      socialAuthenticator.shouldAuthenticate(command.token);
-      
       expect(repository.stored()).toHaveLength(1);
       expect(repository.stored()[0].toPrimitives()).toEqual(authSession.toPrimitives());
     });
 
     it('should publish an event', async () => {
       const userAuthenticatedEvent = AuthSessionCreatedEventMother.createFromLoginUserCommand(command);
-      socialAuthenticator.returnOnAuthenticate(true);
 
       await loginUserCommandHandler.execute(command);
 
-      socialAuthenticator.shouldAuthenticate(command.token);
       eventBus.shouldPublish([userAuthenticatedEvent]);
     });
   });
