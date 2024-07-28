@@ -29,6 +29,7 @@ describe('CreateCountryCommandHandler', () => {
       await expect(createCountryCommandHandler.execute(command)).rejects.toThrowError(CountryAlreadyExistsException);
 
       countryRepository.shouldNotStore();
+      expect(eventBus.domainEvents()).toHaveLength(0);
     });
 
     it('should create a country', async () => {
@@ -39,7 +40,10 @@ describe('CreateCountryCommandHandler', () => {
       await createCountryCommandHandler.execute(command);
 
       countryRepository.shouldStore(country);
-      eventBus.shouldPublish([countryCreatedEvent]);
+      expect(eventBus.domainEvents()).toHaveLength(1);
+      expect(eventBus.domainEvents()[0]).toEqual({
+        ...countryCreatedEvent,
+      });
     });
   });
 });

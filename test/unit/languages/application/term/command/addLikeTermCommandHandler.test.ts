@@ -59,7 +59,7 @@ describe('Given a AddLikeTermCommandHandler', () => {
     it('then should not publish the events', async () => {
       await expect(handler.execute(command)).rejects.toThrowError();
 
-      eventBus.shouldNotPublish();
+      expect(eventBus.domainEvents()).toHaveLength(0);
     });
   });
 
@@ -85,7 +85,7 @@ describe('Given a AddLikeTermCommandHandler', () => {
     it('then should not publish the events', async () => {
       await expect(handler.execute(command)).rejects.toThrowError();
 
-      eventBus.shouldNotPublish();
+      expect(eventBus.domainEvents()).toHaveLength(0);
     });
   });
 
@@ -111,7 +111,7 @@ describe('Given a AddLikeTermCommandHandler', () => {
     it('then should not publish the events', async () => {
       await expect(handler.execute(command)).rejects.toThrowError();
 
-      eventBus.shouldNotPublish();
+      expect(eventBus.domainEvents()).toHaveLength(0);
     });
   });
 
@@ -140,7 +140,7 @@ describe('Given a AddLikeTermCommandHandler', () => {
     it('then should not publish the events', async () => {
       await expect(handler.execute(command)).rejects.toThrowError();
 
-      eventBus.shouldNotPublish();
+      expect(eventBus.domainEvents()).toHaveLength(0);
     });
   });
 
@@ -180,7 +180,7 @@ describe('Given a AddLikeTermCommandHandler', () => {
     it('then should not publish the events', async () => {
       await handler.execute(command);
 
-      eventBus.shouldPublish([]);
+      expect(eventBus.domainEvents()).toHaveLength(0);
     });
   });
 
@@ -214,9 +214,10 @@ describe('Given a AddLikeTermCommandHandler', () => {
     it('then should publish the events', async () => {
       await handler.execute(command);
 
-      eventBus.shouldPublish([
-        TermLikeAddedEventMother.random({ termId: TERM_ID, userId: USER_ID, name: NAME, photo: PHOTO }),
-      ]);
+      expect(eventBus.domainEvents()).toHaveLength(1);
+      expect(eventBus.domainEvents()[0]).toEqual({
+        ...TermLikeAddedEventMother.random({ termId: TERM_ID, userId: USER_ID, name: NAME, photo: PHOTO }),
+      });
     });
   });
 });

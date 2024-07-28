@@ -32,6 +32,7 @@ describe('Given a LoginUserCommandHandler', () => {
   const clean = () => {
     authSessionRepository.clean();
     socialAuthenticator.clean();
+    eventBus.clean();
   };
 
   beforeAll(() => {
@@ -62,7 +63,7 @@ describe('Given a LoginUserCommandHandler', () => {
     it('should not publish any events', async () => {
       await expect(loginUserCommandHandler.execute(command)).rejects.toThrowError(LoginException);
 
-      eventBus.shouldNotPublish();
+      expect(eventBus.domainEvents()).toHaveLength(0);
     });
   });
 
@@ -99,7 +100,10 @@ describe('Given a LoginUserCommandHandler', () => {
 
       await loginUserCommandHandler.execute(command);
 
-      eventBus.shouldPublish([userAuthenticatedEvent]);
+      expect(eventBus.domainEvents()).toHaveLength(1);
+      expect(eventBus.domainEvents()[0]).toEqual({
+        ...userAuthenticatedEvent,
+      });
     });
   });
 });

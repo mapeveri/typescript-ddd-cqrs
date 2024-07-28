@@ -1,19 +1,18 @@
-import { expect, jest } from '@jest/globals';
 import { DomainEvent } from '@src/shared/domain/bus/eventBus/domainEvent';
 import { EventBus } from '@src/shared/domain/bus/eventBus/eventBus';
 
 export class EventBusMock implements EventBus {
-  publish: jest.MockedFunction<(events: DomainEvent[]) => Promise<void>>;
+  private storedEvents: DomainEvent[] = [];
 
-  constructor() {
-    this.publish = jest.fn();
+  async publish(events: DomainEvent[]): Promise<void> {
+    this.storedEvents.push(...events);
   }
 
-  shouldPublish(domainEvents: DomainEvent[]): void {
-    expect(this.publish).toHaveBeenCalledWith(domainEvents);
+  domainEvents(): DomainEvent[] {
+    return this.storedEvents;
   }
 
-  shouldNotPublish(): void {
-    expect(this.publish).not.toHaveBeenCalled();
+  clean(): void {
+    this.storedEvents = [];
   }
 }

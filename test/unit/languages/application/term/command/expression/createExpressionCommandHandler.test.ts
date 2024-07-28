@@ -32,6 +32,7 @@ describe('CreateExpressionCommandHandler', () => {
       await expect(createWordCommandHandler.execute(command)).rejects.toThrowError(ExpressionAlreadyExistsException);
 
       termRepository.shouldNotStore();
+      expect(eventBus.domainEvents()).toHaveLength(0);
     });
 
     it('should create an expression', async () => {
@@ -43,7 +44,10 @@ describe('CreateExpressionCommandHandler', () => {
       await createWordCommandHandler.execute(command);
 
       termRepository.shouldStore(expression);
-      eventBus.shouldPublish([expressionCreatedEvent]);
+      expect(eventBus.domainEvents()).toHaveLength(1);
+      expect(eventBus.domainEvents()[0]).toEqual({
+        ...expressionCreatedEvent,
+      });
     });
   });
 });

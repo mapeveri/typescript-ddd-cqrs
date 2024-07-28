@@ -32,6 +32,7 @@ describe('CreateWordCommandHandler', () => {
       await expect(createWordCommandHandler.execute(command)).rejects.toThrowError(WordAlreadyExistsException);
 
       termRepository.shouldNotStore();
+      expect(eventBus.domainEvents()).toHaveLength(0);
     });
 
     it('should create a word', async () => {
@@ -43,7 +44,10 @@ describe('CreateWordCommandHandler', () => {
       await createWordCommandHandler.execute(command);
 
       termRepository.shouldStore(word);
-      eventBus.shouldPublish([wordCreatedEvent]);
+      expect(eventBus.domainEvents()).toHaveLength(1);
+      expect(eventBus.domainEvents()[0]).toEqual({
+        ...wordCreatedEvent,
+      });
     });
   });
 });
