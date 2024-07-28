@@ -20,6 +20,13 @@ export class CountryRepositoryMock implements CountryRepository {
     return this.countries.push(country);
   }
 
+  clean(): void {
+    this.findByIdMock = jest.fn();
+    this.findAllMock = jest.fn();
+    this.saveMock = jest.fn();
+    this.countries = [];
+  }
+
   async findAll(): Promise<Country[]> {
     this.findAllMock();
     return this.countries;

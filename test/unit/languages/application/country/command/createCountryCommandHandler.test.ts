@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from '@jest/globals';
+import { beforeEach, beforeAll, describe, expect, it } from '@jest/globals';
 import CreateCountryCommandHandler from '@src/languages/application/country/command/createCountryCommandHandler';
 import Country from '@src/languages/domain/country/country';
 import { CountryRepositoryMock } from '@test/unit/languages/domain/country/countryRepositoryMock';
@@ -15,11 +15,27 @@ describe('Given a CreateCountryCommandHandler', () => {
   let countryRepository: CountryRepositoryMock;
   let createCountryCommandHandler: CreateCountryCommandHandler;
 
-  beforeEach(() => {
+  const prepareDependencies = () => {
     eventBus = new EventBusMock();
     countryRepository = new CountryRepositoryMock();
+  };
 
+  const initHandler = () => {
     createCountryCommandHandler = new CreateCountryCommandHandler(countryRepository, eventBus);
+  };
+
+  const clean = () => {
+    countryRepository.clean();
+    eventBus.clean();
+  };
+
+  beforeAll(() => {
+    prepareDependencies();
+    initHandler();
+  });
+
+  beforeEach(() => {
+    clean();
   });
 
   describe('When the country id is invalid', () => {
