@@ -1,7 +1,13 @@
 import { AggregateRoot } from '@src/shared/domain/aggregate/aggregateRoot';
 import AuthSessionId from './authSessionId';
 import AuthSessionCreatedEvent from './authSessionCreatedEvent';
-import Session from './session';
+import Session, { SessionPrimitives } from './session';
+
+type AuthSessionPrimitives = {
+  id: string;
+  session: SessionPrimitives;
+  createdAt: Date;
+};
 
 export default class AuthSession extends AggregateRoot {
   id: AuthSessionId;
@@ -31,5 +37,13 @@ export default class AuthSession extends AggregateRoot {
     );
 
     return authSession;
+  }
+
+  toPrimitives(): AuthSessionPrimitives {
+    return {
+      id: this.id.toString(),
+      session: this.session.toPrimitives(),
+      createdAt: this.createdAt,
+    };
   }
 }
