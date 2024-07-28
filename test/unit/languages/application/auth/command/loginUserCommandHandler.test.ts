@@ -34,7 +34,8 @@ describe('Given a LoginUserCommandHandler', () => {
       await expect(loginUserCommandHandler.execute(command)).rejects.toThrowError(LoginException);
 
       socialAuthenticator.shouldAuthenticate(command.token);
-      repository.shouldNotStore();
+      
+      expect(repository.stored()).toHaveLength(0);
     });
 
     it('should not publish any events', async () => {
@@ -49,8 +50,9 @@ describe('Given a LoginUserCommandHandler', () => {
   });
 
   describe('When the login is success', () => {
+    const command = LoginUserCommandMother.random();
+
     it('should save auth session', async () => {
-      const command = LoginUserCommandMother.random();
       const authSession = AuthSessionMother.random({
         id: AuthSessionIdMother.random(command.id),
         session: SessionMother.random({
@@ -65,11 +67,12 @@ describe('Given a LoginUserCommandHandler', () => {
       await loginUserCommandHandler.execute(command);
 
       socialAuthenticator.shouldAuthenticate(command.token);
-      repository.shouldStoreWith(authSession);
+      
+      expect(repository.stored()).toHaveLength(1);
+      expect(repository.stored()[0].toPrimitives()).toEqual(authSession.toPrimitives());
     });
 
     it('should publish an event', async () => {
-      const command = LoginUserCommandMother.random();
       const userAuthenticatedEvent = AuthSessionCreatedEventMother.createFromLoginUserCommand(command);
       socialAuthenticator.returnOnAuthenticate(true);
 
