@@ -7,8 +7,10 @@ import CountryMother from '@test/unit/languages/domain/country/countryMother';
 import { CreateCountryCommandMother } from '@test/unit/languages/application/country/command/createCountryCommandMother';
 import CountryAlreadyExistsException from '@src/languages/domain/country/countryAlreadyExistsException';
 import { CountryCreatedEventMother } from '@test/unit/languages/domain/country/countryCreatedEventMother';
+import InvalidArgumentException from '@src/shared/domain/exceptions/invalidArgumentException';
+import CreateCountryCommand from '@src/languages/application/country/command/createCountryCommand';
 
-describe('CreateCountryCommandHandler', () => {
+describe('Given a CreateCountryCommandHandler', () => {
   let eventBus: EventBusMock;
   let countryRepository: CountryRepositoryMock;
   let createCountryCommandHandler: CreateCountryCommandHandler;
@@ -20,26 +22,82 @@ describe('CreateCountryCommandHandler', () => {
     createCountryCommandHandler = new CreateCountryCommandHandler(countryRepository, eventBus);
   });
 
-  describe('execute', () => {
-    it('should raise an exception when country id already exists', async () => {
-      const country = CountryMother.random();
-      const command = CreateCountryCommandMother.random({ id: country.id.value });
-      countryRepository.add(country);
+  describe('When the country id is invalid', () => {
+    let command: CreateCountryCommand;
 
-      await expect(createCountryCommandHandler.execute(command)).rejects.toThrowError(CountryAlreadyExistsException);
+    function startScenario() {
+      command = CreateCountryCommandMother.random({ id: '' });
+    }
 
-      countryRepository.shouldNotStore();
-      expect(eventBus.domainEvents()).toHaveLength(0);
+    beforeEach(startScenario);
+
+    it('should thrown an exception', async () => {
+      await expect(createCountryCommandHandler.execute(command)).rejects.toThrowError(InvalidArgumentException);
     });
 
-    it('should create a country', async () => {
-      const command = CreateCountryCommandMother.random();
-      const country: Country = CountryMother.createFromCreateCountryCommand(command);
-      const countryCreatedEvent = CountryCreatedEventMother.createFromCreateCountryCommand(command);
+    it('should not create the country', async () => {
+      await expect(createCountryCommandHandler.execute(command)).rejects.toThrow();
 
+      countryRepository.shouldNotStore();
+    });
+
+    it('should not publish any event', async () => {
+      await expect(createCountryCommandHandler.execute(command)).rejects.toThrow();
+
+      expect(eventBus.domainEvents()).toHaveLength(0);
+    });
+  });
+
+  describe('When the country already exists', () => {
+    let command: CreateCountryCommand;
+
+    function startScenario() {
+      const country = CountryMother.random();
+      command = CreateCountryCommandMother.random({ id: country.id.value });
+      countryRepository.add(country);
+    }
+
+    beforeEach(startScenario);
+
+    it('should thrown an exception', async () => {
+      await expect(createCountryCommandHandler.execute(command)).rejects.toThrowError(CountryAlreadyExistsException);
+    });
+
+    it('should not create the country', async () => {
+      await expect(createCountryCommandHandler.execute(command)).rejects.toThrow();
+
+      countryRepository.shouldNotStore();
+    });
+
+    it('should not publish any event', async () => {
+      await expect(createCountryCommandHandler.execute(command)).rejects.toThrow();
+
+      expect(eventBus.domainEvents()).toHaveLength(0);
+    });
+  });
+
+  describe('When the parameters are valid and the country does not exists', () => {
+    let command: CreateCountryCommand;
+    let country: Country;
+
+    function startScenario() {
+      command = CreateCountryCommandMother.random();
+      country = CountryMother.createFromCreateCountryCommand(command);
+    }
+
+    beforeEach(startScenario);
+
+    it('should create a country', async () => {
       await createCountryCommandHandler.execute(command);
 
       countryRepository.shouldStore(country);
+      expect(eventBus.domainEvents()).toHaveLength(1);
+    });
+
+    it('should publish an event', async () => {
+      await createCountryCommandHandler.execute(command);
+
+      const countryCreatedEvent = CountryCreatedEventMother.createFromCreateCountryCommand(command);
       expect(eventBus.domainEvents()).toHaveLength(1);
       expect(eventBus.domainEvents()[0]).toEqual({
         ...countryCreatedEvent,
