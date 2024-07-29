@@ -1,35 +1,64 @@
-import { beforeEach, describe, expect, it } from '@jest/globals';
+import { beforeEach, beforeAll, describe, expect, it } from '@jest/globals';
 import Country from '@src/languages/domain/country/country';
 import { FindCountriesQueryMother } from './findCountriesQueryMother';
 import FindCountriesQueryHandler from '@src/languages/application/country/query/findCountriesQueryHandler';
 import { CountryRepositoryMock } from '@test/unit/languages/domain/country/countryRepositoryMock';
 import CountryMother from '@test/unit/languages/domain/country/countryMother';
+import FindCountriesQuery from '@src/languages/application/country/query/findCountriesQuery';
 
-describe('FindCountryQueryHandler', () => {
+describe('Given a FindCountryQueryHandler', () => {
   let countryRepository: CountryRepositoryMock;
   let findCountriesQueryHandler: FindCountriesQueryHandler;
 
-  beforeEach(() => {
+  const prepareDependencies = () => {
     countryRepository = new CountryRepositoryMock();
+  };
+
+  const initHandler = () => {
     findCountriesQueryHandler = new FindCountriesQueryHandler(countryRepository);
+  };
+
+  const clean = () => {
+    countryRepository.clean();
+  };
+
+  beforeAll(() => {
+    prepareDependencies();
+    initHandler();
   });
 
-  describe('execute', () => {
-    it('should get an empty result when no countries', async () => {
+  beforeEach(() => {
+    clean();
+  });
+
+  describe('When not countries', () => {
+    it('should get an empty result', async () => {
       const query = FindCountriesQueryMother.random();
 
       const expected = await findCountriesQueryHandler.execute(query);
 
       expect(expected.content).toEqual([]);
     });
+  });
 
-    it('should get a list of countries', async () => {
-      const countryOne: Country = CountryMother.random();
-      const countryTwo: Country = CountryMother.random();
-      const query = FindCountriesQueryMother.random();
+  describe('When there are countries', () => {
+    let query: FindCountriesQuery;
+    let countryOne: Country;
+    let countryTwo: Country;
+
+    function startScenario() {
+      query = FindCountriesQueryMother.random();
+
+      countryOne = CountryMother.random();
+      countryTwo = CountryMother.random();
+
       countryRepository.add(countryOne);
       countryRepository.add(countryTwo);
+    }
 
+    beforeEach(startScenario);
+
+    it('should get a list of countries', async () => {
       const expected = await findCountriesQueryHandler.execute(query);
 
       expect(expected.content).toEqual([
