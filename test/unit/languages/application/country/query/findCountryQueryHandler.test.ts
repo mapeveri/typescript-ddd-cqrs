@@ -33,10 +33,16 @@ describe('Given a FindCountryQueryHandler', () => {
   });
 
   describe('When the country does not exist', () => {
-    it('should get an empty result', async () => {
-      const countryId = CountryIdMother.random();
-      const query = FindCountryQueryMother.random(countryId.value);
+    let query: FindCountryQuery;
 
+    function startScenario() {
+      const countryId = CountryIdMother.random();
+      query = FindCountryQueryMother.random(countryId.toString());
+    }
+
+    beforeEach(startScenario);
+
+    it('should get an empty result', async () => {
       const expected = await findCountryQueryHandler.execute(query);
 
       expect(expected.content).toEqual(undefined);
