@@ -32,9 +32,15 @@ describe('Given a FindCountryQueryHandler', () => {
   });
 
   describe('When not countries', () => {
-    it('should get an empty result', async () => {
-      const query = FindCountriesQueryMother.random();
+    let query: FindCountriesQuery;
 
+    function startScenario() {
+      query = FindCountriesQueryMother.random();
+    }
+
+    beforeEach(startScenario);
+
+    it('should get an empty result', async () => {
       const expected = await findCountriesQueryHandler.execute(query);
 
       expect(expected.content).toEqual([]);
