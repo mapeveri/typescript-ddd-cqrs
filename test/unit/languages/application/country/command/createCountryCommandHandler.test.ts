@@ -54,7 +54,8 @@ describe('Given a CreateCountryCommandHandler', () => {
     it('should not create the country', async () => {
       await expect(createCountryCommandHandler.execute(command)).rejects.toThrow();
 
-      countryRepository.shouldNotStore();
+      expect(countryRepository.storedChanged()).toBeFalsy();
+      expect(countryRepository.stored()).toHaveLength(0);
     });
 
     it('should not publish any event', async () => {
@@ -82,7 +83,8 @@ describe('Given a CreateCountryCommandHandler', () => {
     it('should not create the country', async () => {
       await expect(createCountryCommandHandler.execute(command)).rejects.toThrow();
 
-      countryRepository.shouldNotStore();
+      expect(countryRepository.storedChanged()).toBeFalsy();
+      expect(countryRepository.stored()).toHaveLength(0);
     });
 
     it('should not publish any event', async () => {
@@ -106,8 +108,10 @@ describe('Given a CreateCountryCommandHandler', () => {
     it('should create a country', async () => {
       await createCountryCommandHandler.execute(command);
 
-      countryRepository.shouldStore(country);
-      expect(eventBus.domainEvents()).toHaveLength(1);
+      const countryStored = countryRepository.stored();
+      expect(countryRepository.storedChanged()).toBeTruthy();
+      expect(countryStored).toHaveLength(1);
+      expect(countryStored[0].toPrimitives()).toEqual(country.toPrimitives());
     });
 
     it('should publish an event', async () => {
