@@ -3,13 +3,20 @@ import { AuthSessionRepository } from '@src/languages/domain/auth/authSessionRep
 
 export class AuthSessionRepositoryMock implements AuthSessionRepository {
   private authSessionsStored: AuthSession[];
+  private changed: boolean = false;
 
   constructor() {
     this.authSessionsStored = [];
+    this.changed = false;
   }
 
   clean(): void {
     this.authSessionsStored = [];
+    this.changed = false;
+  }
+
+  storedChanged(): boolean {
+    return this.changed;
   }
 
   stored(): AuthSession[] {
@@ -17,6 +24,7 @@ export class AuthSessionRepositoryMock implements AuthSessionRepository {
   }
 
   async save(authSession: AuthSession): Promise<any> {
+    this.changed = true;
     this.authSessionsStored.push(authSession);
   }
 }
