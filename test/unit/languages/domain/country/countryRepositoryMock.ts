@@ -1,51 +1,46 @@
-import { expect, jest } from '@jest/globals';
 import Country from '@src/languages/domain/country/country';
 import CountryRepository from '@src/languages/domain/country/countryRepository';
 import CountryId from '@src/languages/domain/country/countryId';
 
 export class CountryRepositoryMock implements CountryRepository {
-  private findByIdMock: jest.Mock;
-  private findAllMock: jest.Mock;
-  private saveMock: jest.Mock;
-  private countries: Country[];
+  private changed: boolean = false;
+  private countriesStored: Country[] = [];
+  private toReturn: Country[] = [];
 
   constructor() {
-    this.findByIdMock = jest.fn();
-    this.findAllMock = jest.fn();
-    this.saveMock = jest.fn();
-    this.countries = [];
+    this.changed = false;
+    this.countriesStored = [];
+    this.toReturn = [];
   }
 
   add(country: Country) {
-    return this.countries.push(country);
+    return this.toReturn.push(country);
+  }
+
+  storedChanged(): boolean {
+    return this.changed;
+  }
+
+  stored(): Country[] {
+    return this.countriesStored;
   }
 
   clean(): void {
-    this.findByIdMock = jest.fn();
-    this.findAllMock = jest.fn();
-    this.saveMock = jest.fn();
-    this.countries = [];
+    this.changed = false;
+    this.countriesStored = [];
+    this.toReturn = [];
   }
 
   async findAll(): Promise<Country[]> {
-    this.findAllMock();
-    return this.countries;
+    return this.toReturn;
   }
 
-  async findById(id: CountryId): Promise<Country | null> {
-    this.findByIdMock(id);
-    return this.countries.length > 0 ? this.countries[0] : null;
+  async findById(_id: CountryId): Promise<Country | null> {
+    return this.toReturn.length > 0 ? this.toReturn[0] : null;
   }
 
   async save(country: Country): Promise<any> {
-    this.saveMock(country);
-  }
-
-  shouldStore(country: Country): void {
-    expect(this.saveMock).toHaveBeenCalledWith(country);
-  }
-
-  shouldNotStore(): void {
-    expect(this.saveMock).not.toHaveBeenCalled();
+    this.changed = true;
+    this.countriesStored.push(country);
   }
 }

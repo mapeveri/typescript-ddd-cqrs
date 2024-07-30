@@ -57,6 +57,7 @@ describe('Given a LoginUserCommandHandler', () => {
     it('should not save auth session', async () => {
       await expect(loginUserCommandHandler.execute(command)).rejects.toThrowError(LoginException);
 
+      expect(authSessionRepository.storedChanged()).toBeFalsy();
       expect(authSessionRepository.stored()).toHaveLength(0);
     });
 
@@ -91,6 +92,7 @@ describe('Given a LoginUserCommandHandler', () => {
 
       await loginUserCommandHandler.execute(command);
 
+      expect(authSessionRepository.storedChanged()).toBeTruthy();
       expect(authSessionRepository.stored()).toHaveLength(1);
       expect(authSessionRepository.stored()[0].toPrimitives()).toEqual(authSession.toPrimitives());
     });
