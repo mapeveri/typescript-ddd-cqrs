@@ -5,7 +5,7 @@ import { EventsHandler, IEventHandler } from '@src/shared/domain/bus/eventBus/ev
 import { TermTypeEnum } from '@src/languages/domain/term/termType';
 import WordCreatedEvent from '@src/languages/domain/term/word/wordCreatedEvent';
 import MongoConnection, { MONGO_CLIENT } from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
-import { TermView } from '@src/languages/application/term/view/termView';
+import { TermView } from '@src/languages/application/term/query/view/termView';
 import { MongoTransactional } from '@src/shared/infrastructure/persistence/mongo/mongoTransactionalDecorator';
 
 @MongoTransactional

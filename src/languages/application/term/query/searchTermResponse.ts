@@ -1,4 +1,4 @@
-import { TermView } from '@src/languages/application/term/view/termView';
+import { TermView } from '@src/languages/application/term/query/view/termView';
 import QueryResponse from '@src/shared/domain/bus/queryBus/queryResponse';
 
 export default class SearchTermResponse extends QueryResponse {

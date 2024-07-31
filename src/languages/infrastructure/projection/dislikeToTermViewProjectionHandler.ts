@@ -1,6 +1,6 @@
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import MongoConnection, { MONGO_CLIENT } from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
-import { TermLike, TermView } from '@src/languages/application/term/view/termView';
+import { TermLike, TermView } from '@src/languages/application/term/query/view/termView';
 import { Collection } from 'mongodb';
 import { Document } from 'bson/src/bson';
 import TermDislikedEvent from '@src/languages/domain/term/termDislikedEvent';

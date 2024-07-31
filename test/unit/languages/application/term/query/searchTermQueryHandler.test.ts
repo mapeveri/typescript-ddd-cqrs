@@ -2,8 +2,8 @@ import { beforeEach, describe, expect, it } from '@jest/globals';
 import { SearchTermQueryMother } from './searchTermQueryMother';
 import SearchTermQueryHandler from '@src/languages/application/term/query/searchTermQueryHandler';
 import { SearchTermViewReadLayerMock } from '@test/unit/languages/application/term/query/searchTermViewReadLayerMock';
-import { TermView } from '@src/languages/application/term/view/termView';
-import { TermViewMother } from '@test/unit/languages/application/term/view/termViewMother';
+import { TermView } from '@src/languages/application/term/query/view/termView';
+import { TermViewMother } from '@test/unit/languages/application/term/query/view/termViewMother';
 
 describe('SearchTermQueryHandler', () => {
   let termRepository: SearchTermViewReadLayerMock;
