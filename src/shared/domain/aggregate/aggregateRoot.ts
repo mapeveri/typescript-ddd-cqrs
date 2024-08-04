@@ -1,7 +1,7 @@
 import { DomainEvent } from '@src/shared/domain/bus/eventBus/domainEvent';
 
 export abstract class AggregateRoot {
-  protected domainEvents: DomainEvent[];
+  protected domainEvents: DomainEvent[] = [];
 
   protected constructor() {
     this.domainEvents = [];
@@ -14,6 +14,10 @@ export abstract class AggregateRoot {
   }
 
   record(domainEvent: DomainEvent): void {
+    if (!this.domainEvents) {
+      this.domainEvents = [];
+    }
+
     this.domainEvents.push(domainEvent);
   }
 }

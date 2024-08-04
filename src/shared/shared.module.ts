@@ -15,15 +15,29 @@ import Environment from '@src/shared/infrastructure/utils/environment';
 import { SOCIAL_AUTHENTICATOR } from '@src/shared/domain/auth/socialAuthenticator';
 import { TypeOrmTransactionalEntityManager } from '@src/shared/infrastructure/persistence/typeOrm/typeOrmTransactionalEntityManager';
 import { MONGO_CLIENT } from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { dataSourceConfig } from '@src/shared/infrastructure/persistence/typeOrm/dataSource';
+import { MikroOrmModule } from '@mikro-orm/nestjs';
+import { entitySchemas } from './_dependencyInjection/entitySchemas';
+import { PostgreSqlDriver } from '@mikro-orm/postgresql';
 
 @Global()
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot(dataSourceConfig),
+    MikroOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        entities: entitySchemas,
+        entitiesTs: entitySchemas,
+        driver: PostgreSqlDriver,
+        clientUrl: configService.get('POSTGRESQL_DB_URL'),
+        debug: process.env.ENV != 'production',
+      }),
+    }),
     JwtModule.register({
       secret: Environment.getVariable('JWT_SECRET'),
       signOptions: { expiresIn: '2h' },
