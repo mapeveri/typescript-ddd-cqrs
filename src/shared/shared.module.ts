@@ -19,14 +19,14 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { dataSourceConfig } from '@src/shared/infrastructure/persistence/typeOrm/dataSource';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
-import { mikroOrmConfiguration } from './infrastructure/persistence/mikroOrm/config';
+import mikroOrmConfiguration from './infrastructure/persistence/mikroOrm/config';
 
 @Global()
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot(dataSourceConfig),
-    MikroOrmModule.forRootAsync(mikroOrmConfiguration),
+    MikroOrmModule.forRoot(mikroOrmConfiguration),
     JwtModule.register({
       secret: Environment.getVariable('JWT_SECRET'),
       signOptions: { expiresIn: '2h' },
