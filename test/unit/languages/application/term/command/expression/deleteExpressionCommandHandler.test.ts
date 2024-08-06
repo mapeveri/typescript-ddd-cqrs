@@ -75,7 +75,7 @@ describe('Given a DeleteExpressionCommandHandler', () => {
     });
   });
 
-  describe('When the term exists ', () => {
+  describe('When the expression exists ', () => {
     let command: DeleteExpressionCommand;
     let expression: Expression;
 
@@ -88,7 +88,7 @@ describe('Given a DeleteExpressionCommandHandler', () => {
 
     beforeEach(startScenario);
 
-    it('then should delete the term', async () => {
+    it('then should delete the expression', async () => {
       await handler.execute(command);
 
       termRepository.shouldRemove(expression);

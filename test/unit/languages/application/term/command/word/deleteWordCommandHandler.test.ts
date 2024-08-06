@@ -1,35 +1,95 @@
-import { beforeEach, describe, it } from '@jest/globals';
+import { beforeEach, beforeAll, describe, expect, it } from '@jest/globals';
 import DeleteWordCommandHandler from '@src/languages/application/term/command/word/deleteWordCommandHandler';
 import { TermRepositoryMock } from '@test/unit/languages/domain/term/termRepositoryMock';
 import WordMother from '@test/unit/languages/domain/term/word/wordMother';
 import { DeleteWordCommandMother } from '@test/unit/languages/application/term/command/word/deleteWordCommandMother';
+import DeleteWordCommand from '@src/languages/application/term/command/word/deleteWordCommand';
+import InvalidArgumentException from '@src/shared/domain/exceptions/invalidArgumentException';
+import Word from '@src/languages/domain/term/word/word';
 
-describe('DeleteWordCommandHandler', () => {
+describe('Given a DeleteWordCommandHandler', () => {
   let termRepository: TermRepositoryMock;
-  let deleteWordCommandHandler: DeleteWordCommandHandler;
+  let handler: DeleteWordCommandHandler;
 
   beforeEach(() => {
     termRepository = new TermRepositoryMock();
 
-    deleteWordCommandHandler = new DeleteWordCommandHandler(termRepository);
+    handler = new DeleteWordCommandHandler(termRepository);
   });
 
-  describe('execute', () => {
-    it('should not remove when word id does not exists', async () => {
-      const word = WordMother.random();
-      const command = DeleteWordCommandMother.random(word.id.value);
+  const prepareDependencies = () => {
+    termRepository = new TermRepositoryMock();
+  };
 
-      await deleteWordCommandHandler.execute(command);
+  const initHandler = () => {
+    handler = new DeleteWordCommandHandler(termRepository);
+  };
+
+  const clean = () => {
+    termRepository.clean();
+  };
+
+  beforeAll(() => {
+    prepareDependencies();
+    initHandler();
+  });
+
+  beforeEach(() => {
+    clean();
+  });
+
+  describe('When the term id is invalid ', () => {
+    let command: DeleteWordCommand;
+
+    function startScenario() {
+      command = DeleteWordCommandMother.random('invalid');
+    }
+
+    beforeEach(startScenario);
+
+    it('then should thrown an exception', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError(InvalidArgumentException);
+    });
+
+    it('then should not delete', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError();
 
       termRepository.shouldNotRemove();
     });
+  });
 
-    it('should remove a word', async () => {
+  describe('When the term does not exists ', () => {
+    let command: DeleteWordCommand;
+
+    function startScenario() {
       const word = WordMother.random();
-      const command = DeleteWordCommandMother.random(word.id.value);
-      termRepository.add(word);
+      command = DeleteWordCommandMother.random(word.id.value);
+    }
 
-      await deleteWordCommandHandler.execute(command);
+    beforeEach(startScenario);
+
+    it('then should not delete', async () => {
+      await handler.execute(command);
+
+      termRepository.shouldNotRemove();
+    });
+  });
+
+  describe('When the word exists', () => {
+    let command: DeleteWordCommand;
+    let word: Word;
+
+    function startScenario() {
+      word = WordMother.random();
+      command = DeleteWordCommandMother.random(word.id.value);
+
+      termRepository.add(word);
+    }
+
+    beforeEach(startScenario);
+
+    it('then should remove the word', async () => {
+      await handler.execute(command);
 
       termRepository.shouldRemove(word);
     });
