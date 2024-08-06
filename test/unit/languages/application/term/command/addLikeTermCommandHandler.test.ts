@@ -45,7 +45,6 @@ describe('Given a AddLikeTermCommandHandler', () => {
     eventBus.clean();
   };
 
-
   beforeAll(() => {
     prepareDependencies();
     initHandler();
