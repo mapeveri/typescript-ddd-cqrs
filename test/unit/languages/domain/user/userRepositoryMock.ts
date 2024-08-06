@@ -21,6 +21,13 @@ export class UserRepositoryMock implements UserRepository {
     this.users.push(user);
   }
 
+  clean(): void {
+    this.findByIdMock = jest.fn();
+    this.findByEmailMock = jest.fn();
+    this.saveMock = jest.fn();
+    this.users = [];
+  }
+
   async findById(id: UserId): Promise<User | null> {
     this.findByIdMock(id);
     return this.users.length > 0 ? this.users[0] : null;

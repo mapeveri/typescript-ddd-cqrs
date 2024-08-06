@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, jest } from '@jest/globals';
+import { beforeEach, beforeAll, describe, expect, it, jest } from '@jest/globals';
 import AddLikeTermCommandHandler from '@src/languages/application/term/command/addLikeTermCommandHandler';
 import AddLikeTermCommand from '@src/languages/application/term/command/addLikeTermCommand';
 import { AddLikeTermCommandMother } from '@test/unit/languages/application/term/command/addLikeTermCommandMother';
@@ -18,23 +18,41 @@ import Word from '@src/languages/domain/term/word/word';
 import { TermLikeIdMother } from '@test/unit/languages/domain/term/termLikeIdMother';
 
 describe('Given a AddLikeTermCommandHandler', () => {
-  const USER_ID = '0a8008d5-ab68-4c10-8476-668b5b540e0f';
-  const TERM_ID = '7abe3a96-d603-4e87-b69e-e9fb372294de';
-  const TERM_LIKE_ID = '98d173b4-8b60-5cde-8688-8cc8dd9f07b8';
-
   let termRepository: TermRepositoryMock;
   let userRepository: UserRepositoryMock;
   let eventBus: EventBusMock;
   let handler: AddLikeTermCommandHandler;
 
-  beforeEach(() => {
+  const USER_ID = '0a8008d5-ab68-4c10-8476-668b5b540e0f';
+  const TERM_ID = '7abe3a96-d603-4e87-b69e-e9fb372294de';
+  const TERM_LIKE_ID = '98d173b4-8b60-5cde-8688-8cc8dd9f07b8';
+
+  const prepareDependencies = () => {
     termRepository = new TermRepositoryMock();
     userRepository = new UserRepositoryMock();
     eventBus = new EventBusMock();
+  };
 
+  const initHandler = () => {
     handler = new AddLikeTermCommandHandler(termRepository, userRepository, eventBus);
 
     jest.useFakeTimers();
+  };
+
+  const clean = () => {
+    termRepository.clean();
+    userRepository.clean();
+    eventBus.clean();
+  };
+
+
+  beforeAll(() => {
+    prepareDependencies();
+    initHandler();
+  });
+
+  beforeEach(() => {
+    clean();
   });
 
   describe('When the term id is invalid ', () => {

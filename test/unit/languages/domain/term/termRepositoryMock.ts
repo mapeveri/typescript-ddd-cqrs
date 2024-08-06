@@ -20,6 +20,13 @@ export class TermRepositoryMock implements TermRepository {
     this.terms.push(term);
   }
 
+  clean(): void {
+    this.findByIdMock = jest.fn();
+    this.saveMock = jest.fn();
+    this.removeMock = jest.fn();
+    this.terms = [];
+  }
+
   async findById(id: TermId): Promise<Term | null> {
     this.findByIdMock(id);
     return this.terms.length > 0 ? this.terms[0] : null;
