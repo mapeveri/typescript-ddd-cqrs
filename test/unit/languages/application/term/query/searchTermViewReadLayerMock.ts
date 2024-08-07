@@ -5,9 +5,9 @@ import SearchTermViewReadLayer, {
 } from '@src/languages/application/term/query/searchTermViewReadLayer';
 
 export class SearchTermViewReadLayerMock implements SearchTermViewReadLayer {
-  private readonly searchMock: jest.Mock;
-  private readonly saveMock: jest.Mock;
-  private readonly terms: TermView[];
+  private searchMock: jest.Mock;
+  private saveMock: jest.Mock;
+  private terms: TermView[];
 
   constructor() {
     this.searchMock = jest.fn();
@@ -15,8 +15,14 @@ export class SearchTermViewReadLayerMock implements SearchTermViewReadLayer {
     this.terms = [];
   }
 
-  add(term: TermView) {
+  add(term: TermView): void {
     this.terms.push(term);
+  }
+
+  clean(): void {
+    this.searchMock = jest.fn();
+    this.saveMock = jest.fn();
+    this.terms = [];
   }
 
   async search(criteria: TermCriteriaParams): Promise<TermView[]> {
