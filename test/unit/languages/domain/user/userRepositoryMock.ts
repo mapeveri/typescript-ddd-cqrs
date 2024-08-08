@@ -1,19 +1,16 @@
-import { expect, jest } from '@jest/globals';
 import User from '@src/languages/domain/user/user';
 import UserRepository from '@src/languages/domain/user/userRepository';
 import UserId from '@src/languages/domain/user/userId';
 import Email from '@src/shared/domain/valueObjects/email';
 
 export class UserRepositoryMock implements UserRepository {
-  private saveMock: jest.Mock;
-  private findByIdMock: jest.Mock;
-  private findByEmailMock: jest.Mock;
   private users: User[];
+  private changed: boolean = false;
+  private usersStored: User[];
 
   constructor() {
-    this.findByIdMock = jest.fn();
-    this.findByEmailMock = jest.fn();
-    this.saveMock = jest.fn();
+    this.changed = false;
+    this.usersStored = [];
     this.users = [];
   }
 
@@ -21,36 +18,36 @@ export class UserRepositoryMock implements UserRepository {
     this.users.push(user);
   }
 
+  stored(): User[] {
+    return this.usersStored;
+  }
+
+  storedChanged(): boolean {
+    return this.changed;
+  }
+
   clean(): void {
-    this.findByIdMock = jest.fn();
-    this.findByEmailMock = jest.fn();
-    this.saveMock = jest.fn();
+    this.changed = false;
+    this.usersStored = [];
     this.users = [];
   }
 
-  async findById(id: UserId): Promise<User | null> {
-    this.findByIdMock(id);
-    return this.users.length > 0 ? this.users[0] : null;
+  async findById(_id: UserId): Promise<User | null> {
+    const user = this.users.length > 0 ? this.users[0] : null;
+
+    return Promise.resolve(user);
   }
 
-  async findByEmail(email: Email): Promise<User | null> {
-    this.findByEmailMock(email);
-    return this.users.length > 0 ? this.users[0] : null;
-  }
+  async findByEmail(_email: Email): Promise<User | null> {
+    const user = this.users.length > 0 ? this.users[0] : null;
 
-  expectFindById(id: UserId): void {
-    expect(this.findByIdMock).toHaveBeenCalledWith(id);
-  }
-
-  expectFindByEmail(email: Email): void {
-    expect(this.findByEmailMock).toHaveBeenCalledWith(email);
+    return Promise.resolve(user);
   }
 
   async save(user: User): Promise<any> {
-    this.saveMock(user);
-  }
+    this.changed = true;
+    this.usersStored.push(user);
 
-  expectSaveHasBeenCalledWith(user: User): void {
-    expect(this.saveMock).toHaveBeenCalledWith(user);
+    return Promise.resolve();
   }
 }
