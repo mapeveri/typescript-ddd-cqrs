@@ -1,47 +1,173 @@
-import { beforeEach, describe, expect, it, jest } from '@jest/globals';
+import { beforeEach, beforeAll, describe, expect, it, jest } from '@jest/globals';
 import CreateWordCommandHandler from '@src/languages/application/term/command/word/createWordCommandHandler';
 import { TermRepositoryMock } from '@test/unit/languages/domain/term/termRepositoryMock';
 import { EventBusMock } from '@test/unit/shared/domain/buses/eventBus/eventBusMock';
 import WordMother from '@test/unit/languages/domain/term/word/wordMother';
 import { CreateWordCommandMother } from '@test/unit/languages/application/term/command/word/createWordCommandMother';
 import WordAlreadyExistsException from '@src/languages/domain/term/word/wordAlreadyExistsException';
-import { UserIdMother } from '@test/unit/languages/domain/user/userIdMother';
 import Word from '@src/languages/domain/term/word/word';
 import { WordCreatedEventMother } from '@test/unit/languages/domain/term/word/wordCreatedEventMother';
+import CreateWordCommand from '@src/languages/application/term/command/word/createWordCommand';
+import InvalidArgumentException from '@src/shared/domain/exceptions/invalidArgumentException';
+import WordCreatedEvent from '@src/languages/domain/term/word/wordCreatedEvent';
 
-describe('CreateWordCommandHandler', () => {
+describe('Given a CreateWordCommandHandler', () => {
   let eventBus: EventBusMock;
   let termRepository: TermRepositoryMock;
-  let createWordCommandHandler: CreateWordCommandHandler;
+  let handler: CreateWordCommandHandler;
 
-  beforeEach(() => {
+  const prepareDependencies = () => {
     eventBus = new EventBusMock();
     termRepository = new TermRepositoryMock();
+  };
 
-    createWordCommandHandler = new CreateWordCommandHandler(termRepository, eventBus);
+  const initHandler = () => {
+    handler = new CreateWordCommandHandler(termRepository, eventBus);
 
     jest.useFakeTimers();
+  };
+
+  const clean = () => {
+    termRepository.clean();
+    eventBus.clean();
+  };
+
+  beforeAll(() => {
+    prepareDependencies();
+    initHandler();
   });
 
-  describe('execute', () => {
-    it('should raise an exception when word id already exists', async () => {
-      const word = WordMother.random();
-      const command = CreateWordCommandMother.random({ id: word.id.value });
-      termRepository.add(word);
+  beforeEach(() => {
+    clean();
+  });
 
-      await expect(createWordCommandHandler.execute(command)).rejects.toThrowError(WordAlreadyExistsException);
+  describe('When term id is invalid', () => {
+    let command: CreateWordCommand;
 
-      termRepository.shouldNotStore();
-      expect(eventBus.domainEvents()).toHaveLength(0);
+    function startScenario() {
+      command = CreateWordCommandMother.random({ id: '' });
+    }
+
+    beforeEach(startScenario);
+
+    it('then should thrown an exception', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError(InvalidArgumentException);
     });
 
-    it('should create a word', async () => {
-      const command = CreateWordCommandMother.random();
-      const userId = UserIdMother.random(command.userId);
-      const word: Word = WordMother.createFromCreateWordCommand(command, userId);
-      const wordCreatedEvent = WordCreatedEventMother.createFromCreateWordCommand(command);
+    it('then should not add the word', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError();
 
-      await createWordCommandHandler.execute(command);
+      termRepository.shouldNotStore();
+    });
+
+    it('then should not publish the events', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError();
+
+      expect(eventBus.domainEvents()).toHaveLength(0);
+    });
+  });
+
+  describe('When word already exists', () => {
+    let command: CreateWordCommand;
+
+    function startScenario() {
+      command = CreateWordCommandMother.random();
+      const term = WordMother.createFromCreateWordCommand(command);
+      termRepository.add(term);
+    }
+
+    beforeEach(startScenario);
+
+    it('then should thrown an exception', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError(WordAlreadyExistsException);
+    });
+
+    it('then should not add the word', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError();
+
+      termRepository.shouldNotStore();
+    });
+
+    it('then should not publish the events', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError();
+
+      expect(eventBus.domainEvents()).toHaveLength(0);
+    });
+  });
+
+  describe('When country id is invalid', () => {
+    let command: CreateWordCommand;
+
+    function startScenario() {
+      command = CreateWordCommandMother.random({ countryId: '' });
+    }
+
+    beforeEach(startScenario);
+
+    it('then should thrown an exception', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError(InvalidArgumentException);
+    });
+
+    it('then should not add the word', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError();
+
+      termRepository.shouldNotStore();
+    });
+
+    it('then should not publish the events', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError();
+
+      expect(eventBus.domainEvents()).toHaveLength(0);
+    });
+  });
+
+  describe('When user id is invalid', () => {
+    let command: CreateWordCommand;
+
+    function startScenario() {
+      command = CreateWordCommandMother.random({ userId: '' });
+    }
+
+    beforeEach(startScenario);
+
+    it('then should thrown an exception', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError(InvalidArgumentException);
+    });
+
+    it('then should not add the word', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError();
+
+      termRepository.shouldNotStore();
+    });
+
+    it('then should not publish the events', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError();
+
+      expect(eventBus.domainEvents()).toHaveLength(0);
+    });
+  });
+
+  describe('When the command is valid and the word does not exists', () => {
+    let command: CreateWordCommand;
+    let word: Word;
+    let wordCreatedEvent: WordCreatedEvent;
+
+    function startScenario() {
+      command = CreateWordCommandMother.random();
+      word = WordMother.createFromCreateWordCommand(command);
+      wordCreatedEvent = WordCreatedEventMother.createFromCreateWordCommand(command);
+    }
+
+    beforeEach(startScenario);
+
+    it('should create the word', async () => {
+      await handler.execute(command);
+
+      termRepository.shouldStore(word);
+    });
+
+    it('should publish an event', async () => {
+      await handler.execute(command);
 
       termRepository.shouldStore(word);
       expect(eventBus.domainEvents()).toHaveLength(1);

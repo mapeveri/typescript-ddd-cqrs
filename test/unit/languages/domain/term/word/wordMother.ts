@@ -39,7 +39,7 @@ export default class WordMother {
     );
   }
 
-  static createFromCreateWordCommand(command: CreateWordCommand, userId: UserId): Word {
+  static createFromCreateWordCommand(command: CreateWordCommand): Word {
     const terms = command.terms.map((term: { [key: string]: any }): WordTerm => {
       return WordTermMother.random({
         title: term['word'],
@@ -57,7 +57,7 @@ export default class WordMother {
       WordTermCollectionMother.random(
         terms?.map((term) => term.toPrimitives()) ?? [WordTermMother.random().toPrimitives()],
       ),
-      userId,
+      UserIdMother.random(command.userId),
       [],
     );
   }
