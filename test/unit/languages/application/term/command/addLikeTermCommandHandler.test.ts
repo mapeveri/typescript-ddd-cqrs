@@ -70,7 +70,8 @@ describe('Given a AddLikeTermCommandHandler', () => {
     it('then should not add the like', async () => {
       await expect(handler.execute(command)).rejects.toThrowError();
 
-      termRepository.shouldNotStore();
+      expect(termRepository.storedChanged()).toBeFalsy();
+      expect(termRepository.stored()).toHaveLength(0);
     });
 
     it('then should not publish the events', async () => {
@@ -96,7 +97,8 @@ describe('Given a AddLikeTermCommandHandler', () => {
     it('then should not add the like', async () => {
       await expect(handler.execute(command)).rejects.toThrowError();
 
-      termRepository.shouldNotStore();
+      expect(termRepository.storedChanged()).toBeFalsy();
+      expect(termRepository.stored()).toHaveLength(0);
     });
 
     it('then should not publish the events', async () => {
@@ -122,7 +124,8 @@ describe('Given a AddLikeTermCommandHandler', () => {
     it('then should not add the like', async () => {
       await expect(handler.execute(command)).rejects.toThrowError();
 
-      termRepository.shouldNotStore();
+      expect(termRepository.storedChanged()).toBeFalsy();
+      expect(termRepository.stored()).toHaveLength(0);
     });
 
     it('then should not publish the events', async () => {
@@ -151,7 +154,8 @@ describe('Given a AddLikeTermCommandHandler', () => {
     it('then should not add the like', async () => {
       await expect(handler.execute(command)).rejects.toThrowError();
 
-      termRepository.shouldNotStore();
+      expect(termRepository.storedChanged()).toBeFalsy();
+      expect(termRepository.stored()).toHaveLength(0);
     });
 
     it('then should not publish the events', async () => {
@@ -190,7 +194,10 @@ describe('Given a AddLikeTermCommandHandler', () => {
     it('then should not add a new like to the term', async () => {
       await handler.execute(command);
 
-      termRepository.shouldStore(term);
+      const termStored = termRepository.stored();
+      expect(termRepository.storedChanged()).toBeTruthy();
+      expect(termStored).toHaveLength(1);
+      expect(termStored[0].toPrimitives()).toEqual(term.toPrimitives());
       expect(term.toPrimitives().likes.length).toEqual(1);
     });
 
@@ -224,7 +231,10 @@ describe('Given a AddLikeTermCommandHandler', () => {
     it('then should add a new like to the term', async () => {
       await handler.execute(command);
 
-      termRepository.shouldStore(term);
+      const termStored = termRepository.stored();
+      expect(termRepository.storedChanged()).toBeTruthy();
+      expect(termStored).toHaveLength(1);
+      expect(termStored[0].toPrimitives()).toEqual(term.toPrimitives());
       expect(term.toPrimitives().likes.length).toEqual(1);
     });
 
