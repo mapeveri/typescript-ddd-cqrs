@@ -10,10 +10,6 @@ describe('Given a SearchTermQueryHandler', () => {
   let searchTermViewReadLayer: SearchTermViewReadLayerMock;
   let handler: SearchTermQueryHandler;
 
-  beforeEach(() => {
-    handler = new SearchTermQueryHandler(searchTermViewReadLayer);
-  });
-
   const prepareDependencies = () => {
     searchTermViewReadLayer = new SearchTermViewReadLayerMock();
   };
