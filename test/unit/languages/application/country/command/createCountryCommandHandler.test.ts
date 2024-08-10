@@ -13,7 +13,7 @@ import CreateCountryCommand from '@src/languages/application/country/command/cre
 describe('Given a CreateCountryCommandHandler', () => {
   let eventBus: EventBusMock;
   let countryRepository: CountryRepositoryMock;
-  let createCountryCommandHandler: CreateCountryCommandHandler;
+  let handler: CreateCountryCommandHandler;
 
   const prepareDependencies = () => {
     eventBus = new EventBusMock();
@@ -21,7 +21,7 @@ describe('Given a CreateCountryCommandHandler', () => {
   };
 
   const initHandler = () => {
-    createCountryCommandHandler = new CreateCountryCommandHandler(countryRepository, eventBus);
+    handler = new CreateCountryCommandHandler(countryRepository, eventBus);
   };
 
   const clean = () => {
@@ -48,18 +48,18 @@ describe('Given a CreateCountryCommandHandler', () => {
     beforeEach(startScenario);
 
     it('should thrown an exception', async () => {
-      await expect(createCountryCommandHandler.execute(command)).rejects.toThrowError(InvalidArgumentException);
+      await expect(handler.execute(command)).rejects.toThrowError(InvalidArgumentException);
     });
 
     it('should not create the country', async () => {
-      await expect(createCountryCommandHandler.execute(command)).rejects.toThrow();
+      await expect(handler.execute(command)).rejects.toThrow();
 
       expect(countryRepository.storedChanged()).toBeFalsy();
       expect(countryRepository.stored()).toHaveLength(0);
     });
 
     it('should not publish any event', async () => {
-      await expect(createCountryCommandHandler.execute(command)).rejects.toThrow();
+      await expect(handler.execute(command)).rejects.toThrow();
 
       expect(eventBus.domainEvents()).toHaveLength(0);
     });
@@ -77,18 +77,18 @@ describe('Given a CreateCountryCommandHandler', () => {
     beforeEach(startScenario);
 
     it('should thrown an exception', async () => {
-      await expect(createCountryCommandHandler.execute(command)).rejects.toThrowError(CountryAlreadyExistsException);
+      await expect(handler.execute(command)).rejects.toThrowError(CountryAlreadyExistsException);
     });
 
     it('should not create the country', async () => {
-      await expect(createCountryCommandHandler.execute(command)).rejects.toThrow();
+      await expect(handler.execute(command)).rejects.toThrow();
 
       expect(countryRepository.storedChanged()).toBeFalsy();
       expect(countryRepository.stored()).toHaveLength(0);
     });
 
     it('should not publish any event', async () => {
-      await expect(createCountryCommandHandler.execute(command)).rejects.toThrow();
+      await expect(handler.execute(command)).rejects.toThrow();
 
       expect(eventBus.domainEvents()).toHaveLength(0);
     });
@@ -106,7 +106,7 @@ describe('Given a CreateCountryCommandHandler', () => {
     beforeEach(startScenario);
 
     it('should create a country', async () => {
-      await createCountryCommandHandler.execute(command);
+      await handler.execute(command);
 
       const countryStored = countryRepository.stored();
       expect(countryRepository.storedChanged()).toBeTruthy();
@@ -115,7 +115,7 @@ describe('Given a CreateCountryCommandHandler', () => {
     });
 
     it('should publish an event', async () => {
-      await createCountryCommandHandler.execute(command);
+      await handler.execute(command);
 
       const countryCreatedEvent = CountryCreatedEventMother.createFromCreateCountryCommand(command);
       expect(eventBus.domainEvents()).toHaveLength(1);
