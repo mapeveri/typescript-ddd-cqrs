@@ -39,7 +39,7 @@ export default class ExpressionMother {
     );
   }
 
-  static createFromCreateExpressionCommand(command: CreateExpressionCommand, userId: UserId): Expression {
+  static createFromCreateExpressionCommand(command: CreateExpressionCommand): Expression {
     const terms = command.terms.map((term: { [key: string]: any }): ExpressionTerm => {
       return ExpressionTermMother.random({
         expression: term['expression'],
@@ -57,7 +57,7 @@ export default class ExpressionMother {
       ExpressionTermCollectionMother.random(
         terms?.map((term) => term.toPrimitives()) ?? [ExpressionTermMother.random().toPrimitives()],
       ),
-      userId,
+      UserIdMother.random(command.userId),
       [],
     );
   }

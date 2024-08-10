@@ -1,47 +1,173 @@
-import { beforeEach, describe, expect, it, jest } from '@jest/globals';
+import { beforeEach, beforeAll, describe, expect, it, jest } from '@jest/globals';
 import { EventBusMock } from '@test/unit/shared/domain/buses/eventBus/eventBusMock';
 import { TermRepositoryMock } from '@test/unit/languages/domain/term/termRepositoryMock';
 import CreateExpressionCommandHandler from '@src/languages/application/term/command/expression/createExpressionCommandHandler';
 import ExpressionMother from '@test/unit/languages/domain/term/expression/expressionMother';
 import { CreateExpressionCommandMother } from '@test/unit/languages/application/term/command/expression/createExpressionCommandMother';
 import ExpressionAlreadyExistsException from '@src/languages/domain/term/expression/expressionAlreadyExistsException';
-import { UserIdMother } from '@test/unit/languages/domain/user/userIdMother';
 import Expression from '@src/languages/domain/term/expression/expression';
 import { ExpressionCreatedEventMother } from '@test/unit/languages/domain/term/expression/expressionCreatedEventMother';
+import CreateExpressionCommand from '@src/languages/application/term/command/expression/createExpressionCommand';
+import InvalidArgumentException from '@src/shared/domain/exceptions/invalidArgumentException';
+import ExpressionCreatedEvent from '@src/languages/domain/term/expression/expressionCreatedEvent';
 
-describe('CreateExpressionCommandHandler', () => {
+describe('Given a CreateExpressionCommandHandler', () => {
   let eventBus: EventBusMock;
   let termRepository: TermRepositoryMock;
-  let createWordCommandHandler: CreateExpressionCommandHandler;
+  let handler: CreateExpressionCommandHandler;
 
-  beforeEach(() => {
+  const prepareDependencies = () => {
     eventBus = new EventBusMock();
     termRepository = new TermRepositoryMock();
+  };
 
-    createWordCommandHandler = new CreateExpressionCommandHandler(termRepository, eventBus);
+  const initHandler = () => {
+    handler = new CreateExpressionCommandHandler(termRepository, eventBus);
 
     jest.useFakeTimers();
+  };
+
+  const clean = () => {
+    termRepository.clean();
+    eventBus.clean();
+  };
+
+  beforeAll(() => {
+    prepareDependencies();
+    initHandler();
   });
 
-  describe('execute', () => {
-    it('should raise an exception when expression id already exists', async () => {
-      const expression = ExpressionMother.random();
-      const command = CreateExpressionCommandMother.random({ id: expression.id.value });
-      termRepository.add(expression);
+  beforeEach(() => {
+    clean();
+  });
 
-      await expect(createWordCommandHandler.execute(command)).rejects.toThrowError(ExpressionAlreadyExistsException);
+  describe('When term id is invalid', () => {
+    let command: CreateExpressionCommand;
 
-      termRepository.shouldNotStore();
-      expect(eventBus.domainEvents()).toHaveLength(0);
+    function startScenario() {
+      command = CreateExpressionCommandMother.random({ id: '' });
+    }
+
+    beforeEach(startScenario);
+
+    it('then should thrown an exception', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError(InvalidArgumentException);
     });
 
-    it('should create an expression', async () => {
-      const command = CreateExpressionCommandMother.random();
-      const userId = UserIdMother.random(command.userId);
-      const expression: Expression = ExpressionMother.createFromCreateExpressionCommand(command, userId);
-      const expressionCreatedEvent = ExpressionCreatedEventMother.createFromCreateExpressionCommand(command);
+    it('then should not add the expression', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError();
 
-      await createWordCommandHandler.execute(command);
+      termRepository.shouldNotStore();
+    });
+
+    it('then should not publish the events', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError();
+
+      expect(eventBus.domainEvents()).toHaveLength(0);
+    });
+  });
+
+  describe('When expression already exists', () => {
+    let command: CreateExpressionCommand;
+
+    function startScenario() {
+      command = CreateExpressionCommandMother.random();
+      const term = ExpressionMother.createFromCreateExpressionCommand(command);
+      termRepository.add(term);
+    }
+
+    beforeEach(startScenario);
+
+    it('then should thrown an exception', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError(ExpressionAlreadyExistsException);
+    });
+
+    it('then should not add the expression', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError();
+
+      termRepository.shouldNotStore();
+    });
+
+    it('then should not publish the events', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError();
+
+      expect(eventBus.domainEvents()).toHaveLength(0);
+    });
+  });
+
+  describe('When country id is invalid', () => {
+    let command: CreateExpressionCommand;
+
+    function startScenario() {
+      command = CreateExpressionCommandMother.random({ countryId: '' });
+    }
+
+    beforeEach(startScenario);
+
+    it('then should thrown an exception', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError(InvalidArgumentException);
+    });
+
+    it('then should not add the expression', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError();
+
+      termRepository.shouldNotStore();
+    });
+
+    it('then should not publish the events', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError();
+
+      expect(eventBus.domainEvents()).toHaveLength(0);
+    });
+  });
+
+  describe('When user id is invalid', () => {
+    let command: CreateExpressionCommand;
+
+    function startScenario() {
+      command = CreateExpressionCommandMother.random({ userId: '' });
+    }
+
+    beforeEach(startScenario);
+
+    it('then should thrown an exception', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError(InvalidArgumentException);
+    });
+
+    it('then should not add the expression', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError();
+
+      termRepository.shouldNotStore();
+    });
+
+    it('then should not publish the events', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError();
+
+      expect(eventBus.domainEvents()).toHaveLength(0);
+    });
+  });
+
+  describe('When the command is valid and the expression does not exists', () => {
+    let command: CreateExpressionCommand;
+    let expression: Expression;
+    let expressionCreatedEvent: ExpressionCreatedEvent;
+
+    function startScenario() {
+      command = CreateExpressionCommandMother.random();
+      expression = ExpressionMother.createFromCreateExpressionCommand(command);
+      expressionCreatedEvent = ExpressionCreatedEventMother.createFromCreateExpressionCommand(command);
+    }
+
+    beforeEach(startScenario);
+
+    it('should create the expression', async () => {
+      await handler.execute(command);
+
+      termRepository.shouldStore(expression);
+    });
+
+    it('should publish an event', async () => {
+      await handler.execute(command);
 
       termRepository.shouldStore(expression);
       expect(eventBus.domainEvents()).toHaveLength(1);
