@@ -15,7 +15,7 @@ describe('Given a LoginUserCommandHandler', () => {
   let authSessionRepository: AuthSessionRepositoryMock;
   let socialAuthenticator: SocialAuthenticatorMock;
   let eventBus: EventBusMock;
-  let loginUserCommandHandler: LoginUserCommandHandler;
+  let handler: LoginUserCommandHandler;
 
   const prepareDependencies = () => {
     authSessionRepository = new AuthSessionRepositoryMock();
@@ -24,7 +24,7 @@ describe('Given a LoginUserCommandHandler', () => {
   };
 
   const initHandler = () => {
-    loginUserCommandHandler = new LoginUserCommandHandler(authSessionRepository, socialAuthenticator, eventBus);
+    handler = new LoginUserCommandHandler(authSessionRepository, socialAuthenticator, eventBus);
 
     jest.useFakeTimers();
   };
@@ -55,14 +55,14 @@ describe('Given a LoginUserCommandHandler', () => {
     beforeEach(startScenario);
 
     it('should not save auth session', async () => {
-      await expect(loginUserCommandHandler.execute(command)).rejects.toThrowError(LoginException);
+      await expect(handler.execute(command)).rejects.toThrowError(LoginException);
 
       expect(authSessionRepository.storedChanged()).toBeFalsy();
       expect(authSessionRepository.stored()).toHaveLength(0);
     });
 
     it('should not publish any events', async () => {
-      await expect(loginUserCommandHandler.execute(command)).rejects.toThrowError(LoginException);
+      await expect(handler.execute(command)).rejects.toThrowError(LoginException);
 
       expect(eventBus.domainEvents()).toHaveLength(0);
     });
@@ -90,7 +90,7 @@ describe('Given a LoginUserCommandHandler', () => {
         }),
       });
 
-      await loginUserCommandHandler.execute(command);
+      await handler.execute(command);
 
       expect(authSessionRepository.storedChanged()).toBeTruthy();
       expect(authSessionRepository.stored()).toHaveLength(1);
@@ -100,7 +100,7 @@ describe('Given a LoginUserCommandHandler', () => {
     it('should publish an event', async () => {
       const userAuthenticatedEvent = AuthSessionCreatedEventMother.createFromLoginUserCommand(command);
 
-      await loginUserCommandHandler.execute(command);
+      await handler.execute(command);
 
       expect(eventBus.domainEvents()).toHaveLength(1);
       expect(eventBus.domainEvents()[0]).toEqual({
