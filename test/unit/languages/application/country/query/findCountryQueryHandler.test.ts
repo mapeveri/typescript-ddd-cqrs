@@ -6,6 +6,7 @@ import { CountryIdMother } from '@test/unit/languages/domain/country/countryIdMo
 import Country from '@src/languages/domain/country/country';
 import CountryMother from '@test/unit/languages/domain/country/countryMother';
 import FindCountryQuery from '@src/languages/application/country/query/findCountryQuery';
+import InvalidArgumentException from '@src/shared/domain/exceptions/invalidArgumentException';
 
 describe('Given a FindCountryQueryHandler', () => {
   let countryRepository: CountryRepositoryMock;
@@ -30,6 +31,20 @@ describe('Given a FindCountryQueryHandler', () => {
 
   beforeEach(() => {
     clean();
+  });
+
+  describe('When the country id is invalid', () => {
+    let query: FindCountryQuery;
+
+    function startScenario() {
+      query = FindCountryQueryMother.random('');
+    }
+
+    beforeEach(startScenario);
+
+    it('should thrown an exception', async () => {
+      await expect(handler.execute(query)).rejects.toThrowError(InvalidArgumentException);
+    });
   });
 
   describe('When the country does not exist', () => {
