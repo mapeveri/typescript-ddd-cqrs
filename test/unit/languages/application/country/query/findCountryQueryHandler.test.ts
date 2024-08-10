@@ -9,14 +9,14 @@ import FindCountryQuery from '@src/languages/application/country/query/findCount
 
 describe('Given a FindCountryQueryHandler', () => {
   let countryRepository: CountryRepositoryMock;
-  let findCountryQueryHandler: FindCountryQueryHandler;
+  let handler: FindCountryQueryHandler;
 
   const prepareDependencies = () => {
     countryRepository = new CountryRepositoryMock();
   };
 
   const initHandler = () => {
-    findCountryQueryHandler = new FindCountryQueryHandler(countryRepository);
+    handler = new FindCountryQueryHandler(countryRepository);
   };
 
   const clean = () => {
@@ -43,7 +43,7 @@ describe('Given a FindCountryQueryHandler', () => {
     beforeEach(startScenario);
 
     it('should get an empty result', async () => {
-      const expected = await findCountryQueryHandler.execute(query);
+      const expected = await handler.execute(query);
 
       expect(expected.content).toEqual(undefined);
     });
@@ -62,7 +62,7 @@ describe('Given a FindCountryQueryHandler', () => {
     beforeEach(startScenario);
 
     it('should get the country', async () => {
-      const expected = await findCountryQueryHandler.execute(query);
+      const expected = await handler.execute(query);
 
       expect(expected.content).toEqual({
         id: country.id.toString(),
