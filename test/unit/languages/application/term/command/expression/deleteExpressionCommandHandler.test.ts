@@ -54,7 +54,8 @@ describe('Given a DeleteExpressionCommandHandler', () => {
     it('then should not delete', async () => {
       await expect(handler.execute(command)).rejects.toThrowError();
 
-      termRepository.shouldNotRemove();
+      expect(termRepository.deletedChanged()).toBeFalsy();
+      expect(termRepository.deleted()).toHaveLength(0);
     });
   });
 
@@ -63,7 +64,7 @@ describe('Given a DeleteExpressionCommandHandler', () => {
 
     function startScenario() {
       const expression = ExpressionMother.random();
-      command = DeleteExpressionCommandMother.random(expression.id.value);    
+      command = DeleteExpressionCommandMother.random(expression.id.value);
     }
 
     beforeEach(startScenario);
@@ -71,7 +72,8 @@ describe('Given a DeleteExpressionCommandHandler', () => {
     it('then should not delete', async () => {
       await handler.execute(command);
 
-      termRepository.shouldNotRemove();
+      expect(termRepository.deletedChanged()).toBeFalsy();
+      expect(termRepository.deleted()).toHaveLength(0);
     });
   });
 
@@ -82,7 +84,7 @@ describe('Given a DeleteExpressionCommandHandler', () => {
     function startScenario() {
       expression = ExpressionMother.random();
       command = DeleteExpressionCommandMother.random(expression.id.value);
-      
+
       termRepository.add(expression);
     }
 
@@ -91,7 +93,10 @@ describe('Given a DeleteExpressionCommandHandler', () => {
     it('then should delete the expression', async () => {
       await handler.execute(command);
 
-      termRepository.shouldRemove(expression);
+      const termDeleted = termRepository.deleted();
+      expect(termRepository.deletedChanged()).toBeTruthy();
+      expect(termDeleted).toHaveLength(1);
+      expect(termDeleted[0].toPrimitives()).toEqual(expression.toPrimitives());
     });
   });
 });

@@ -57,7 +57,8 @@ describe('Given a CreateExpressionCommandHandler', () => {
     it('then should not add the expression', async () => {
       await expect(handler.execute(command)).rejects.toThrowError();
 
-      termRepository.shouldNotStore();
+      expect(termRepository.storedChanged()).toBeFalsy();
+      expect(termRepository.stored()).toHaveLength(0);
     });
 
     it('then should not publish the events', async () => {
@@ -85,7 +86,8 @@ describe('Given a CreateExpressionCommandHandler', () => {
     it('then should not add the expression', async () => {
       await expect(handler.execute(command)).rejects.toThrowError();
 
-      termRepository.shouldNotStore();
+      expect(termRepository.storedChanged()).toBeFalsy();
+      expect(termRepository.stored()).toHaveLength(0);
     });
 
     it('then should not publish the events', async () => {
@@ -111,7 +113,8 @@ describe('Given a CreateExpressionCommandHandler', () => {
     it('then should not add the expression', async () => {
       await expect(handler.execute(command)).rejects.toThrowError();
 
-      termRepository.shouldNotStore();
+      expect(termRepository.storedChanged()).toBeFalsy();
+      expect(termRepository.stored()).toHaveLength(0);
     });
 
     it('then should not publish the events', async () => {
@@ -137,7 +140,8 @@ describe('Given a CreateExpressionCommandHandler', () => {
     it('then should not add the expression', async () => {
       await expect(handler.execute(command)).rejects.toThrowError();
 
-      termRepository.shouldNotStore();
+      expect(termRepository.storedChanged()).toBeFalsy();
+      expect(termRepository.stored()).toHaveLength(0);
     });
 
     it('then should not publish the events', async () => {
@@ -163,13 +167,15 @@ describe('Given a CreateExpressionCommandHandler', () => {
     it('should create the expression', async () => {
       await handler.execute(command);
 
-      termRepository.shouldStore(expression);
+      const termStored = termRepository.stored();
+      expect(termRepository.storedChanged()).toBeTruthy();
+      expect(termStored).toHaveLength(1);
+      expect(termStored[0].toPrimitives()).toEqual(expression.toPrimitives());
     });
 
     it('should publish an event', async () => {
       await handler.execute(command);
 
-      termRepository.shouldStore(expression);
       expect(eventBus.domainEvents()).toHaveLength(1);
       expect(eventBus.domainEvents()[0]).toEqual({
         ...expressionCreatedEvent,

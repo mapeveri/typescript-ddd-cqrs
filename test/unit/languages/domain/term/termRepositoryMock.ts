@@ -1,58 +1,62 @@
-import { expect, jest } from '@jest/globals';
 import TermRepository from '@src/languages/domain/term/termRepository';
 import TermId from '@src/languages/domain/term/termId';
 import Term from '@src/languages/domain/term/term';
 
 export class TermRepositoryMock implements TermRepository {
-  private findByIdMock: jest.Mock;
-  private saveMock: jest.Mock;
-  private removeMock: jest.Mock;
   private terms: Term[];
+  private storedTerms: Term[];
+  private _storedChanged = false;
+  private deletedTerms: Term[];
+  private _deletedChanged = false;
 
   constructor() {
-    this.findByIdMock = jest.fn();
-    this.saveMock = jest.fn();
-    this.removeMock = jest.fn();
     this.terms = [];
+    this._storedChanged = false;
+    this._deletedChanged = false;
+    this.storedTerms = [];
+    this.deletedTerms = [];
   }
 
-  add(term: Term) {
+  stored(): Term[] {
+    return this.storedTerms;
+  }
+
+  deleted(): Term[] {
+    return this.deletedTerms;
+  }
+
+  storedChanged(): boolean {
+    return this._storedChanged;
+  }
+
+  deletedChanged(): boolean {
+    return this._deletedChanged;
+  }
+
+  add(term: Term): void {
     this.terms.push(term);
   }
 
   clean(): void {
-    this.findByIdMock = jest.fn();
-    this.saveMock = jest.fn();
-    this.removeMock = jest.fn();
     this.terms = [];
+    this.storedTerms = [];
+    this.deletedTerms = [];
+    this._storedChanged = false;
+    this._deletedChanged = false;
   }
 
-  async findById(id: TermId): Promise<Term | null> {
-    this.findByIdMock(id);
-    return this.terms.length > 0 ? this.terms[0] : null;
+  async findById(_id: TermId): Promise<Term | null> {
+    const term = this.terms.length > 0 ? this.terms[0] : null;
+    return Promise.resolve(term);
   }
 
   async remove(term: Term): Promise<void> {
-    this.removeMock(term);
+    this._deletedChanged = true;
+    this.deletedTerms.push(term);
   }
 
   async save(term: Term): Promise<void> {
-    this.saveMock(term);
-  }
-
-  shouldStore(term: Term): void {
-    expect(this.saveMock).toHaveBeenCalledWith(term);
-  }
-
-  shouldNotStore(): void {
-    expect(this.saveMock).not.toHaveBeenCalled();
-  }
-
-  shouldRemove(term: Term): void {
-    expect(this.removeMock).toHaveBeenCalledWith(term);
-  }
-
-  shouldNotRemove(): void {
-    expect(this.removeMock).not.toHaveBeenCalled();
+    this._storedChanged = true;
+    this.storedTerms.push(term);
   }
 }

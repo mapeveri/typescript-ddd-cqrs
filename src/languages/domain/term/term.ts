@@ -35,6 +35,8 @@ export default abstract class Term extends AggregateRoot {
     this.likes = likes;
   }
 
+  abstract toPrimitives(): unknown;
+
   addLike(userId: UserId, name: string, photo: string): void {
     const termLikeId = Uuid.fromString(`${this.id.toString()}${userId.toString()}`).toString();
     const like = new TermLike(TermLikeId.of(termLikeId), userId, this.id, name, photo);

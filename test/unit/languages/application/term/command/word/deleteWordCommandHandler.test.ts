@@ -54,7 +54,8 @@ describe('Given a DeleteWordCommandHandler', () => {
     it('then should not delete', async () => {
       await expect(handler.execute(command)).rejects.toThrowError();
 
-      termRepository.shouldNotRemove();
+      expect(termRepository.deletedChanged()).toBeFalsy();
+      expect(termRepository.deleted()).toHaveLength(0);
     });
   });
 
@@ -71,7 +72,8 @@ describe('Given a DeleteWordCommandHandler', () => {
     it('then should not delete', async () => {
       await handler.execute(command);
 
-      termRepository.shouldNotRemove();
+      expect(termRepository.deletedChanged()).toBeFalsy();
+      expect(termRepository.deleted()).toHaveLength(0);
     });
   });
 
@@ -91,7 +93,10 @@ describe('Given a DeleteWordCommandHandler', () => {
     it('then should remove the word', async () => {
       await handler.execute(command);
 
-      termRepository.shouldRemove(word);
+      const termDeleted = termRepository.deleted();
+      expect(termRepository.deletedChanged()).toBeTruthy();
+      expect(termDeleted).toHaveLength(1);
+      expect(termDeleted[0].toPrimitives()).toEqual(word.toPrimitives());
     });
   });
 });
