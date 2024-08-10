@@ -5,6 +5,7 @@ import { FindSuggestionsTermQueryMother } from '@test/unit/languages/application
 import { TermViewMother } from '@test/unit/languages/application/term/query/view/termViewMother';
 import FindSuggestionsTermQuery from '@src/languages/application/term/query/findSuggestionsTermQuery';
 import { TermView } from '@src/languages/application/term/query/view/termView';
+import InvalidArgumentException from '@src/shared/domain/exceptions/invalidArgumentException';
 
 describe('Given a FindSuggestionsTermQueryHandler', () => {
   let findSuggestionTermReadLayer: FindSuggestionsTermReadLayerMock;
@@ -29,6 +30,20 @@ describe('Given a FindSuggestionsTermQueryHandler', () => {
 
   beforeEach(() => {
     clean();
+  });
+
+  describe('When user id is invalid', () => {
+    let query: FindSuggestionsTermQuery;
+
+    function startScenario() {
+      query = FindSuggestionsTermQueryMother.random('');
+    }
+
+    beforeEach(startScenario);
+
+    it('then should thrown an exception', async () => {
+      await expect(handler.execute(query)).rejects.toThrowError(InvalidArgumentException);
+    });
   });
 
   describe('When no terms', () => {
