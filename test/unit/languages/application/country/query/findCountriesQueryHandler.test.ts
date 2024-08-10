@@ -8,14 +8,14 @@ import FindCountriesQuery from '@src/languages/application/country/query/findCou
 
 describe('Given a FindCountryQueryHandler', () => {
   let countryRepository: CountryRepositoryMock;
-  let findCountriesQueryHandler: FindCountriesQueryHandler;
+  let handler: FindCountriesQueryHandler;
 
   const prepareDependencies = () => {
     countryRepository = new CountryRepositoryMock();
   };
 
   const initHandler = () => {
-    findCountriesQueryHandler = new FindCountriesQueryHandler(countryRepository);
+    handler = new FindCountriesQueryHandler(countryRepository);
   };
 
   const clean = () => {
@@ -41,7 +41,7 @@ describe('Given a FindCountryQueryHandler', () => {
     beforeEach(startScenario);
 
     it('should get an empty result', async () => {
-      const expected = await findCountriesQueryHandler.execute(query);
+      const expected = await handler.execute(query);
 
       expect(expected.content).toEqual([]);
     });
@@ -65,7 +65,7 @@ describe('Given a FindCountryQueryHandler', () => {
     beforeEach(startScenario);
 
     it('should get a list of countries', async () => {
-      const expected = await findCountriesQueryHandler.execute(query);
+      const expected = await handler.execute(query);
 
       expect(expected.content).toEqual([
         {
