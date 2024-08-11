@@ -6,7 +6,7 @@ import { CountryRepositoryMock } from '@test/unit/languages/domain/country/count
 import CountryMother from '@test/unit/languages/domain/country/countryMother';
 import FindCountriesQuery from '@src/languages/application/country/query/findCountriesQuery';
 
-describe('Given a FindCountryQueryHandler', () => {
+describe('Given a FindCountryQueryHandler to handle', () => {
   let countryRepository: CountryRepositoryMock;
   let handler: FindCountriesQueryHandler;
 

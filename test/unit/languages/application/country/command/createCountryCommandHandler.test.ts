@@ -10,7 +10,7 @@ import { CountryCreatedEventMother } from '@test/unit/languages/domain/country/c
 import InvalidArgumentException from '@src/shared/domain/exceptions/invalidArgumentException';
 import CreateCountryCommand from '@src/languages/application/country/command/createCountryCommand';
 
-describe('Given a CreateCountryCommandHandler', () => {
+describe('Given a CreateCountryCommandHandler to handle', () => {
   let eventBus: EventBusMock;
   let countryRepository: CountryRepositoryMock;
   let handler: CreateCountryCommandHandler;

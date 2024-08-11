@@ -6,7 +6,7 @@ import { TermView } from '@src/languages/application/term/query/view/termView';
 import { TermViewMother } from '@test/unit/languages/application/term/query/view/termViewMother';
 import SearchTermQuery from '@src/languages/application/term/query/searchTermQuery';
 
-describe('Given a SearchTermQueryHandler', () => {
+describe('Given a SearchTermQueryHandler to handle', () => {
   let searchTermViewReadLayer: SearchTermViewReadLayerMock;
   let handler: SearchTermQueryHandler;
 

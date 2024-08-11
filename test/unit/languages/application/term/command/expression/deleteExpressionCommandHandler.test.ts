@@ -7,7 +7,7 @@ import DeleteExpressionCommand from '@src/languages/application/term/command/exp
 import InvalidArgumentException from '@src/shared/domain/exceptions/invalidArgumentException';
 import Expression from '@src/languages/domain/term/expression/expression';
 
-describe('Given a DeleteExpressionCommandHandler', () => {
+describe('Given a DeleteExpressionCommandHandler to handle', () => {
   let termRepository: TermRepositoryMock;
   let handler: DeleteExpressionCommandHandler;
 

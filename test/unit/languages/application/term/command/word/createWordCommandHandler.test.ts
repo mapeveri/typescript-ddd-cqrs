@@ -11,7 +11,7 @@ import CreateWordCommand from '@src/languages/application/term/command/word/crea
 import InvalidArgumentException from '@src/shared/domain/exceptions/invalidArgumentException';
 import WordCreatedEvent from '@src/languages/domain/term/word/wordCreatedEvent';
 
-describe('Given a CreateWordCommandHandler', () => {
+describe('Given a CreateWordCommandHandler to handle', () => {
   let eventBus: EventBusMock;
   let termRepository: TermRepositoryMock;
   let handler: CreateWordCommandHandler;

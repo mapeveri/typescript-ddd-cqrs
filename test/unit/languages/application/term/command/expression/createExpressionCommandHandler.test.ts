@@ -11,7 +11,7 @@ import CreateExpressionCommand from '@src/languages/application/term/command/exp
 import InvalidArgumentException from '@src/shared/domain/exceptions/invalidArgumentException';
 import ExpressionCreatedEvent from '@src/languages/domain/term/expression/expressionCreatedEvent';
 
-describe('Given a CreateExpressionCommandHandler', () => {
+describe('Given a CreateExpressionCommandHandler to handle', () => {
   let eventBus: EventBusMock;
   let termRepository: TermRepositoryMock;
   let handler: CreateExpressionCommandHandler;

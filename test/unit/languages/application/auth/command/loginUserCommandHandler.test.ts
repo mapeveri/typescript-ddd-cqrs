@@ -11,7 +11,7 @@ import { SessionMother } from '@test/unit/languages/domain/auth/sessionMother';
 import { AuthSessionCreatedEventMother } from '@test/unit/languages/domain/auth/authSessionCreatedEventMother';
 import LoginUserCommand from '@src/languages/application/auth/command/loginUserCommand';
 
-describe('Given a LoginUserCommandHandler', () => {
+describe('Given a LoginUserCommandHandler to handle', () => {
   let authSessionRepository: AuthSessionRepositoryMock;
   let socialAuthenticator: SocialAuthenticatorMock;
   let eventBus: EventBusMock;

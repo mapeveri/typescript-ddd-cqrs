@@ -8,7 +8,7 @@ import CountryMother from '@test/unit/languages/domain/country/countryMother';
 import FindCountryQuery from '@src/languages/application/country/query/findCountryQuery';
 import InvalidArgumentException from '@src/shared/domain/exceptions/invalidArgumentException';
 
-describe('Given a FindCountryQueryHandler', () => {
+describe('Given a FindCountryQueryHandler to handle', () => {
   let countryRepository: CountryRepositoryMock;
   let handler: FindCountryQueryHandler;
 

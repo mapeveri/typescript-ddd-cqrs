@@ -17,7 +17,7 @@ import Word from '@src/languages/domain/term/word/word';
 import TermLikeMother from '@test/unit/languages/domain/term/termLikeMother';
 import { TermLikeIdMother } from '@test/unit/languages/domain/term/termLikeIdMother';
 
-describe('Given a DislikeTermCommandHandler', () => {
+describe('Given a DislikeTermCommandHandler to handle', () => {
   let termRepository: TermRepositoryMock;
   let userRepository: UserRepositoryMock;
   let eventBus: EventBusMock;

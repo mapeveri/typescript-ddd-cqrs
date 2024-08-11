@@ -7,7 +7,7 @@ import DeleteWordCommand from '@src/languages/application/term/command/word/dele
 import InvalidArgumentException from '@src/shared/domain/exceptions/invalidArgumentException';
 import Word from '@src/languages/domain/term/word/word';
 
-describe('Given a DeleteWordCommandHandler', () => {
+describe('Given a DeleteWordCommandHandler to handle', () => {
   let termRepository: TermRepositoryMock;
   let handler: DeleteWordCommandHandler;
 

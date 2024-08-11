@@ -7,7 +7,7 @@ import FindSuggestionsTermQuery from '@src/languages/application/term/query/find
 import { TermView } from '@src/languages/application/term/query/view/termView';
 import InvalidArgumentException from '@src/shared/domain/exceptions/invalidArgumentException';
 
-describe('Given a FindSuggestionsTermQueryHandler', () => {
+describe('Given a FindSuggestionsTermQueryHandler to handle', () => {
   let findSuggestionTermReadLayer: FindSuggestionsTermReadLayerMock;
   let handler: FindSuggestionsTermQueryHandler;
 
