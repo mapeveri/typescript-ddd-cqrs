@@ -3,7 +3,7 @@ import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { EventsHandler, IEventHandler } from '@src/shared/domain/bus/eventBus/eventsHandler';
 import TermType from '@src/languages/domain/term/termType';
 import TermCreatedUncompletedEvent from '@src/languages/domain/term/termCreatedUncompletedEvent';
-import DeleteWordCommand from '../command/word/deleteWordCommand';
+import DeleteTermCommand from '../command/deleteTermCommand';
 
 @EventsHandler(TermCreatedUncompletedEvent)
 export default class DeleteWordOnTermCreatedUncompletedEventHandler
@@ -17,6 +17,6 @@ export default class DeleteWordOnTermCreatedUncompletedEventHandler
       return;
     }
 
-    await this.commandBus.dispatch(new DeleteWordCommand(event.aggregateId));
+    await this.commandBus.dispatch(new DeleteTermCommand(event.aggregateId));
   }
 }
