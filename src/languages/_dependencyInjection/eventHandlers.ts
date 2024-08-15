@@ -1,9 +1,4 @@
-import DeleteExpressionOnTermCreatedUncompletedEventHandler from '@src/languages/application/term/event/deleteExpressionOnTermCreatedUncompletedEventHandler';
 import CreateUserOnAuthSessionCreatedEventHandler from '@src/languages/application/user/event/createUserOnAuthSessionCreatedEventHandler';
-import DeleteWordOnTermCreatedUncompletedEventHandler from '@src/languages/application/term/event/deleteWordOnTermCreatedUncompletedEventHandler';
+import DeleteTermOnTermCreatedUncompletedEventHandler from '@src/languages/application/term/event/deleteTermOnTermCreatedUncompletedEventHandler';
 
-export const events = [
-  CreateUserOnAuthSessionCreatedEventHandler,
-  DeleteExpressionOnTermCreatedUncompletedEventHandler,
-  DeleteWordOnTermCreatedUncompletedEventHandler,
-];
+export const events = [CreateUserOnAuthSessionCreatedEventHandler, DeleteTermOnTermCreatedUncompletedEventHandler];
