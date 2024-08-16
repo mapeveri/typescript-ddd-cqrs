@@ -20,7 +20,17 @@ export default class LoginUserCommandHandler implements ICommandHandler<LoginUse
   async execute(command: LoginUserCommand): Promise<void> {
     await this.guardIsValidLogin(command);
 
-    const authSession = this.getAuthSession(command);
+    const authSessionId = AuthSessionId.of(command.id);
+    const session = Session.of({
+      name: command.name,
+      email: command.email,
+      provider: command.provider,
+      token: command.token,
+      photo: command.photo,
+    });
+
+    const authSession = AuthSession.create(authSessionId, session);
+
     await this.authSessionRepository.save(authSession);
 
     void this.eventBus.publish(authSession.pullDomainEvents());
@@ -31,18 +41,5 @@ export default class LoginUserCommandHandler implements ICommandHandler<LoginUse
     if (!isValid) {
       throw new LoginException(command.email);
     }
-  }
-
-  private getAuthSession(command: LoginUserCommand) {
-    const authSessionId = AuthSessionId.of(command.id);
-    const session = Session.of({
-      name: command.name,
-      email: command.email,
-      provider: command.provider,
-      token: command.token,
-      photo: command.photo,
-    });
-
-    return AuthSession.create(authSessionId, session);
   }
 }
