@@ -2,7 +2,6 @@ import { EVENT_BUS, EventBus } from '@src/shared/domain/bus/eventBus/eventBus';
 import LoginUserCommand from './loginUserCommand';
 import LoginException from '@src/shared/domain/auth/loginException';
 import AuthSession from '@src/languages/domain/auth/authSession';
-import Session from '@src/languages/domain/auth/session';
 import AuthSessionId from '@src/languages/domain/auth/authSessionId';
 import { AUTH_SESSION_REPOSITORY, AuthSessionRepository } from '@src/languages/domain/auth/authSessionRepository';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
@@ -21,15 +20,14 @@ export default class LoginUserCommandHandler implements ICommandHandler<LoginUse
     await this.guardIsValidLogin(command);
 
     const authSessionId = AuthSessionId.of(command.id);
-    const session = Session.of({
-      name: command.name,
-      email: command.email,
-      provider: command.provider,
-      token: command.token,
-      photo: command.photo,
-    });
-
-    const authSession = AuthSession.create(authSessionId, session);
+    const authSession = AuthSession.create(
+      authSessionId,
+      command.name,
+      command.email,
+      command.provider,
+      command.token,
+      command.photo,
+    );
 
     await this.authSessionRepository.save(authSession);
 

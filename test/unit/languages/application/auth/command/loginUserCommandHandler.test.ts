@@ -7,7 +7,6 @@ import { SocialAuthenticatorMock } from '@test/unit/shared/domain/auth/socialAut
 import { EventBusMock } from '@test/unit/shared/domain/buses/eventBus/eventBusMock';
 import { AuthSessionMother } from '@test/unit/languages/domain/auth/authSessionMother';
 import { AuthSessionIdMother } from '@test/unit/languages/domain/auth/authSessionIdMother';
-import { SessionMother } from '@test/unit/languages/domain/auth/sessionMother';
 import { AuthSessionCreatedEventMother } from '@test/unit/languages/domain/auth/authSessionCreatedEventMother';
 import LoginUserCommand from '@src/languages/application/auth/command/loginUserCommand';
 
@@ -81,13 +80,13 @@ describe('Given a LoginUserCommandHandler to handle', () => {
     it('should save auth session', async () => {
       const authSession = AuthSessionMother.random({
         id: AuthSessionIdMother.random(command.id),
-        session: SessionMother.random({
+        session: {
           provider: command.provider,
           token: command.token,
           email: command.email,
           photo: command.photo,
           name: command.name,
-        }),
+        },
       });
 
       await handler.execute(command);

@@ -1,12 +1,19 @@
 import { AggregateRoot } from '@src/shared/domain/aggregate/aggregateRoot';
 import AuthSessionId from './authSessionId';
 import AuthSessionCreatedEvent from './authSessionCreatedEvent';
-import Session, { SessionPrimitives } from './session';
+
+type Session = {
+  name: string;
+  email: string;
+  provider: string;
+  token: string;
+  photo: string;
+};
 
 type AuthSessionPrimitives = {
   id: string;
-  session: SessionPrimitives;
-  createdAt: Date;
+  session: Session;
+  createdAt: string;
 };
 
 export default class AuthSession extends AggregateRoot {
@@ -21,20 +28,17 @@ export default class AuthSession extends AggregateRoot {
     this.createdAt = createdAt;
   }
 
-  static create(id: AuthSessionId, session: Session): AuthSession {
-    const authSession = new this(id, session, new Date());
-    const sessionPrimitives = session.toPrimitives();
+  static create(
+    id: AuthSessionId,
+    name: string,
+    email: string,
+    provider: string,
+    token: string,
+    photo: string,
+  ): AuthSession {
+    const authSession = new this(id, { name, email, provider, token, photo }, new Date());
 
-    authSession.record(
-      new AuthSessionCreatedEvent(
-        id.toString(),
-        sessionPrimitives.name,
-        sessionPrimitives.email,
-        sessionPrimitives.token,
-        sessionPrimitives.provider,
-        sessionPrimitives.photo,
-      ),
-    );
+    authSession.record(new AuthSessionCreatedEvent(id.toString(), name, email, token, provider, photo));
 
     return authSession;
   }
@@ -42,8 +46,8 @@ export default class AuthSession extends AggregateRoot {
   toPrimitives(): AuthSessionPrimitives {
     return {
       id: this.id.toString(),
-      session: this.session.toPrimitives(),
-      createdAt: this.createdAt,
+      session: this.session,
+      createdAt: this.createdAt.toISOString(),
     };
   }
 }

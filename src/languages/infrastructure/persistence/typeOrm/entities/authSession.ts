@@ -2,7 +2,6 @@ import { EntitySchema } from 'typeorm';
 import { ValueObjectTransformer } from '@src/shared/infrastructure/persistence/typeOrm/transformers/valueObjectTransformer';
 import AuthSession from '@src/languages/domain/auth/authSession';
 import AuthSessionId from '@src/languages/domain/auth/authSessionId';
-import SessionTransformer from '../transformers/sessionTransformer';
 
 export const AuthSessionSchema = new EntitySchema<AuthSession>({
   name: AuthSession.name,
@@ -16,7 +15,6 @@ export const AuthSessionSchema = new EntitySchema<AuthSession>({
     },
     session: {
       type: 'json',
-      transformer: new SessionTransformer(),
     },
   },
 });
