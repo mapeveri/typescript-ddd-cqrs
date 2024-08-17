@@ -20,5 +20,8 @@ export default defineConfig({
   migrations: {
     path: path.join(__dirname, `${migrationPath}`),
     pathTs: path.join(__dirname, `${migrationPath}`),
+    tableName: 'mikro_orm_migrations',
+    transactional: true,
+    allOrNothing: true,
   },
 });
