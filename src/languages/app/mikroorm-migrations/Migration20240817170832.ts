@@ -1,7 +1,6 @@
 import { Migration } from '@mikro-orm/migrations';
 
 export class Migration20240817170832 extends Migration {
-
   async up(): Promise<void> {
     this.addSql('alter table "users" alter column "id" drop default;');
     this.addSql('alter table "users" alter column "id" type uuid using ("id"::text::uuid);');
@@ -25,5 +24,4 @@ export class Migration20240817170832 extends Migration {
     this.addSql('alter table "users" alter column "interests" type text using ("interests"::text);');
     this.addSql('alter table "users" alter column "interests" set not null;');
   }
-
 }
