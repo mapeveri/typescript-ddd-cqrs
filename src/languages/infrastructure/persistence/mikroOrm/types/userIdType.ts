@@ -7,6 +7,6 @@ export class UserIdType extends ValueObjectType<string> {
   }
 
   getColumnType() {
-    return 'varchar';
+    return 'uuid';
   }
 }

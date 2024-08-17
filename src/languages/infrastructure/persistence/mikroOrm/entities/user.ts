@@ -10,19 +10,24 @@ export const UserSchema = new EntitySchema<User>({
     id: {
       type: UserIdType,
       primary: true,
+      length: 255,
     },
     name: {
       type: 'string',
+      length: 255,
     },
     provider: {
       type: 'string',
+      length: 75,
     },
     email: {
       type: EmailType,
+      length: 100,
     },
     photo: {
       type: 'string',
       nullable: true,
+      length: 500,
     },
     interests: {
       type: 'array',
