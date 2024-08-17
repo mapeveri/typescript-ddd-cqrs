@@ -14,6 +14,7 @@ export const dataSourceConfig: DataSourceOptions = {
   migrationsRun: true,
   logger: 'advanced-console',
   migrations: [migrationsPath],
+  migrationsTableName: 'typeorm_migrations',
   poolSize: 10,
 };
 
