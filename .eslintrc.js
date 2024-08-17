@@ -8,7 +8,7 @@ module.exports = {
     node: true,
   },
   plugins: ['@typescript-eslint', 'prettier'],
-  ignorePatterns: ['migrations/'],
+  ignorePatterns: ['migrations/', 'mikroorm-migrations/'],
   extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'prettier'],
   rules: {
     'no-undef': ['error', { typeof: true }],
