@@ -1,13 +1,14 @@
-import { Type } from '@mikro-orm/core';
+import { JsonType } from '@mikro-orm/core';
 import { LanguagePrimitives } from '@src/languages/domain/country/language';
 import LanguageCollection from '@src/languages/domain/country/languageCollection';
 
-export class LanguageCollectionType extends Type<LanguageCollection, LanguagePrimitives[]> {
-  convertToDatabaseValue(value: LanguageCollection | undefined): LanguagePrimitives[] {
+export class LanguageCollectionType extends JsonType {
+  convertToDatabaseValue(value: LanguageCollection): string {
     if (!value) {
-      return [];
+      return '[]';
     }
-    return value.toArray();
+
+    return JSON.stringify(value.toArray());
   }
 
   convertToJSValue(value: LanguagePrimitives[] | null): LanguageCollection {
