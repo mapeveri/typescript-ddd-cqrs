@@ -23,5 +23,6 @@ export default defineConfig({
     tableName: 'mikro_orm_migrations',
     transactional: true,
     allOrNothing: true,
+    snapshot: false
   },
 });
