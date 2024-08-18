@@ -11,18 +11,20 @@ export const CountrySchema = new EntitySchema<Country>({
   target: Country,
   columns: {
     id: {
-      type: String,
+      type: 'uuid',
       primary: true,
       transformer: ValueObjectTransformer(CountryId),
     },
     name: {
       type: String,
+      length: 255
     },
     iso: {
       type: String,
+      length: 10
     },
     languages: {
-      type: 'json',
+      type: 'jsonb',
       transformer: new LanguageCollectionTransformer(),
       default: LanguageCollection.fromPrimitives([]),
     },
