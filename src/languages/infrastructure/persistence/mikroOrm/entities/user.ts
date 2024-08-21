@@ -10,7 +10,6 @@ export const UserSchema = new EntitySchema<User>({
     id: {
       type: UserIdType,
       primary: true,
-      length: 255,
     },
     name: {
       type: 'string',
