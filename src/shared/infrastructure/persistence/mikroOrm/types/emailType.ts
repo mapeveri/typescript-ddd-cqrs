@@ -7,6 +7,6 @@ export class EmailType extends ValueObjectType<string> {
   }
 
   getColumnType(): string {
-    return 'varchar';
+    return 'varchar(100)';
   }
 }
