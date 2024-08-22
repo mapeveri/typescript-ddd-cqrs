@@ -26,7 +26,7 @@ After running docker compose up the application will be available at https://loc
 
 ### Migrations
 
-## TypeOrm
+#### TypeOrm
 
 To generate migrations run the next command:
 ```shell script
@@ -38,7 +38,7 @@ To execute migrations run the next command:
   docker compose run app npm run typeorm migration:run
 ```
 
-## MikroOrm
+#### MikroOrm
 
 To generate migrations run the next command:
 ```shell script
