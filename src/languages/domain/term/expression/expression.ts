@@ -16,8 +16,6 @@ export default class Expression extends Term {
     type: TermType,
     countryId: CountryId,
     terms: ExpressionTermCollection,
-    userId: UserId,
-    likes: TermLike[],
   ) {
     super(id, languageId, type, countryId, userId, likes);
 
