@@ -10,6 +10,7 @@ import WordTermCollection from '@src/languages/domain/term/word/wordTermCollecti
 import { UserIdMother } from '../../user/userIdMother';
 import faker from 'faker';
 import TermId from '@src/languages/domain/term/termId';
+import TermType, { TermTypeEnum } from '@src/languages/domain/term/termType';
 import { TermIdMother } from '@test/unit/languages/domain/term/termIdMother';
 import TermLikeMother from '@test/unit/languages/domain/term/termLikeMother';
 import TermLike from '@src/languages/domain/term/termLike';
@@ -30,6 +31,7 @@ export default class WordMother {
     return new Word(
       id ?? TermIdMother.random(),
       languageId ?? faker.datatype.uuid(),
+      TermType.of(TermTypeEnum.WORD),
       countryId ?? CountryIdMother.random(),
       terms ?? WordTermCollectionMother.random([]),
       userId ?? UserIdMother.random(),
@@ -50,6 +52,7 @@ export default class WordMother {
     return new Word(
       TermIdMother.random(command.id),
       command.languageId,
+      TermType.of(TermTypeEnum.WORD),
       CountryIdMother.random(command.countryId),
       WordTermCollectionMother.random(
         terms?.map((term) => term.toPrimitives()) ?? [WordTermMother.random().toPrimitives()],

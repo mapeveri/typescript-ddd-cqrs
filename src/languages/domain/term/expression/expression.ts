@@ -3,6 +3,7 @@ import UserId from '../../user/userId';
 import ExpressionTermCollection from './expressionTermCollection';
 import ExpressionCreatedEvent from './expressionCreatedEvent';
 import Term from '@src/languages/domain/term/term';
+import TermType, { TermTypeEnum } from '@src/languages/domain/term/termType';
 import TermId from '@src/languages/domain/term/termId';
 import TermLike from '@src/languages/domain/term/termLike';
 
@@ -12,12 +13,13 @@ export default class Expression extends Term {
   constructor(
     id: TermId,
     languageId: string,
+    type: TermType,
     countryId: CountryId,
     terms: ExpressionTermCollection,
     userId: UserId,
     likes: TermLike[],
   ) {
-    super(id, languageId, countryId, userId, likes);
+    super(id, languageId, type, countryId, userId, likes);
 
     this.terms = terms;
   }
@@ -29,7 +31,7 @@ export default class Expression extends Term {
     terms: ExpressionTermCollection,
     userId: UserId,
   ): Expression {
-    const expression = new this(id, languageId, countryId, terms, userId, []);
+    const expression = new this(id, languageId, TermType.of(TermTypeEnum.EXPRESSION), countryId, terms, userId, []);
     expression.record(
       new ExpressionCreatedEvent(id.toString(), languageId, countryId.toString(), userId.toString(), terms.toArray()),
     );
