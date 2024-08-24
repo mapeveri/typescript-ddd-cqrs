@@ -7,7 +7,7 @@ export class LikesCollectionType extends JsonType {
       return '[]';
     }
 
-    return JSON.stringify(value);
+    return JSON.stringify(value.map((like: TermLike) => like.toPrimitives()));
   }
 
   convertToJSValue(value: TermLikePrimitives[] | null): TermLike[] {
