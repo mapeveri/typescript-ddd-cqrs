@@ -1,14 +1,4 @@
 export const dates = {
-  createdAt: {
-    name: 'created_at',
-    type: Date,
-    createDate: true,
-    hidden: true,
-  },
-  updatedAt: {
-    name: 'updated_at',
-    type: Date,
-    updateDate: true,
-    hidden: true,
-  },
+  createdAt: { type: 'Date', onCreate: () => new Date(), nullable: true },
+  updatedAt: { type: 'Date', onCreate: () => new Date(), onUpdate: () => new Date(), nullable: true },
 };
