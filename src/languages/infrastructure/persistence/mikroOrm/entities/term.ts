@@ -5,7 +5,6 @@ import { TermIdType } from '../types/termIdType';
 import { CountryIdType } from '../types/countryIdType';
 import { UserIdType } from '../types/userIdType';
 import { LikesCollectionType } from '../types/likesCollectionType';
-import { TermTypeType } from '../types/termTypeType';
 
 export const TermSchema = new EntitySchema<Term>({
   class: Term,
@@ -14,9 +13,6 @@ export const TermSchema = new EntitySchema<Term>({
     id: {
       type: TermIdType,
       primary: true,
-    },
-    type: {
-      type: TermTypeType,
     },
     languageId: {
       type: String,

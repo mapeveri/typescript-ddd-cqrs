@@ -116,7 +116,7 @@ describe('Given a DeleteTermCommandHandler to handle', () => {
 
       expect(eventBus.domainEvents()).toHaveLength(1);
       expect(eventBus.domainEvents()[0]).toEqual({
-        ...TermDeletedEventMother.random({ termId: expression.id.toString(), termType: expression.type.toString() }),
+        ...TermDeletedEventMother.random({ termId: expression.id.toString() }),
       });
     });
   });

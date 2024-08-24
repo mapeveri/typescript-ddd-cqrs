@@ -1,4 +1,3 @@
-import TermType from '@src/languages/domain/term/termType';
 import TermId from '@src/languages/domain/term/termId';
 import CountryId from '@src/languages/domain/country/countryId';
 import UserId from '@src/languages/domain/user/userId';
@@ -13,7 +12,6 @@ import TermDeletedEvent from './termDeletedEvent';
 export default abstract class Term extends AggregateRoot {
   id: TermId;
   languageId: string;
-  type: TermType;
   countryId: CountryId;
   userId: UserId;
   likes: TermLike[];
@@ -21,7 +19,6 @@ export default abstract class Term extends AggregateRoot {
   protected constructor(
     id: TermId,
     languageId: string,
-    type: TermType,
     countryId: CountryId,
     userId: UserId,
     likes: TermLike[],
@@ -30,7 +27,6 @@ export default abstract class Term extends AggregateRoot {
 
     this.id = id;
     this.languageId = languageId;
-    this.type = type;
     this.countryId = countryId;
     this.userId = userId;
     this.likes = likes;
@@ -39,7 +35,7 @@ export default abstract class Term extends AggregateRoot {
   abstract toPrimitives(): unknown;
 
   delete(): void {
-    this.record(new TermDeletedEvent(this.id.toString(), this.type.toString()));
+    this.record(new TermDeletedEvent(this.id.toString()));
   }
 
   addLike(userId: UserId, name: string, photo: string): void {
