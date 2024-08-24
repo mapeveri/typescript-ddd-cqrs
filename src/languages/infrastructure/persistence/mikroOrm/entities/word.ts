@@ -1,7 +1,7 @@
 import { EntitySchema } from '@mikro-orm/core';
-import { WordTermCollectionType } from '../types/wordTermCollectionType';
-import Word from '@src/languages/domain/term/word/word';
 import { TermSchema } from './term';
+import Word from '@src/languages/domain/term/word/word';
+import { WordTermCollectionType } from '../types/wordTermCollectionType';
 
 export const WordSchema = new EntitySchema({
   class: Word,
