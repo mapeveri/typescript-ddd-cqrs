@@ -22,6 +22,7 @@ export default class MikroOrmTermRepository implements TermRepository {
   }
 
   async save(term: Term): Promise<any> {
-    return await this.termRepository.upsert(term);
+    const em = this.termRepository.getEntityManager();
+    await em.persistAndFlush(term);
   }
 }

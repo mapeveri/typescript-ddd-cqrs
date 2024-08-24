@@ -7,7 +7,7 @@ import { UserIdType } from '../types/userIdType';
 import { LikesCollectionType } from '../types/likesCollectionType';
 import { TermTypeType } from '../types/termTypeType';
 
-export const TermSchema = new EntitySchema<Term>({
+export const TermSchema = new EntitySchema({
   class: Term,
   abstract: true,
   properties: {
