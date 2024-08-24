@@ -17,11 +17,11 @@ export default class MikroOrmTermRepository implements TermRepository {
     return await this.termRepository.findOne(id);
   }
 
-  async remove(term: Term): Promise<any> {
-    return await this.termRepository.getEntityManager().remove(term);
+  async remove(term: Term): Promise<void> {
+    await this.termRepository.nativeDelete(term);
   }
 
-  async save(term: Term): Promise<any> {
+  async save(term: Term): Promise<void> {
     const em = this.termRepository.getEntityManager();
     await em.persistAndFlush(term);
   }
