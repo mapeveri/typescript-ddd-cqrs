@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { EntityRepository } from '@mikro-orm/core';
+import { EntityManager, EntityRepository } from '@mikro-orm/core';
 import { InjectRepository } from '@mikro-orm/nestjs';
 import TermRepository from '@src/languages/domain/term/termRepository';
 import { TermSchema } from '../entities/term';
@@ -11,6 +11,7 @@ export default class MikroOrmTermRepository implements TermRepository {
   constructor(
     @InjectRepository(TermSchema)
     private readonly termRepository: EntityRepository<Term>,
+    private readonly em: EntityManager,
   ) {}
 
   async findById(id: TermId): Promise<Term | null> {
@@ -22,7 +23,6 @@ export default class MikroOrmTermRepository implements TermRepository {
   }
 
   async save(term: Term): Promise<void> {
-    const em = this.termRepository.getEntityManager();
-    await em.persistAndFlush(term);
+    await this.em.persistAndFlush(term);
   }
 }
