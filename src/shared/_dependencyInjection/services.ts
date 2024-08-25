@@ -15,8 +15,6 @@ import { EVENT_STORE_REPOSITORY } from '@src/shared/domain/eventStore/eventStore
 import MongoEventStoreRepository from '@src/shared/infrastructure/persistence/mongo/repositories/mongoEventStoreRepository';
 import { PersistDomainEventsSubscriber } from '@src/shared/infrastructure/subscribers/persistDomainEventsSubscriber';
 import MongoConnection, { MONGO_CLIENT } from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
-import { TypeOrmTransactionalEntityManager } from '@src/shared/infrastructure/persistence/typeOrm/typeOrmTransactionalEntityManager';
-import TypeOrmTransactionalDecorator from '@src/shared/infrastructure/persistence/typeOrm/typeOrmTransactionalDecorator';
 import { SOCIAL_AUTHENTICATOR } from '@src/shared/domain/auth/socialAuthenticator';
 import GoogleSocialAuthenticator from '@src/shared/infrastructure/auth/oauth/googleSocialAuthenticator';
 import { ConfigService } from '@nestjs/config';
@@ -25,8 +23,6 @@ import { OAuth2Client } from 'google-auth-library';
 export const services = [
   NestJwtAuthGuard,
   JwtStrategy,
-  TypeOrmTransactionalEntityManager,
-  TypeOrmTransactionalDecorator,
   {
     provide: MONGO_CLIENT,
     useFactory: async () => {

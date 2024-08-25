@@ -13,11 +13,8 @@ import { consumers } from '@src/shared/_dependencyInjection/consumers';
 import { services } from '@src/shared/_dependencyInjection/services';
 import Environment from '@src/shared/infrastructure/utils/environment';
 import { SOCIAL_AUTHENTICATOR } from '@src/shared/domain/auth/socialAuthenticator';
-import { TypeOrmTransactionalEntityManager } from '@src/shared/infrastructure/persistence/typeOrm/typeOrmTransactionalEntityManager';
 import { MONGO_CLIENT } from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
 import { ConfigModule } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { dataSourceConfig } from '@src/shared/infrastructure/persistence/typeOrm/dataSource';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 import mikroOrmConfiguration from './infrastructure/persistence/mikroOrm/config';
 
@@ -25,7 +22,6 @@ import mikroOrmConfiguration from './infrastructure/persistence/mikroOrm/config'
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    TypeOrmModule.forRoot(dataSourceConfig),
     MikroOrmModule.forRoot(mikroOrmConfiguration),
     JwtModule.register({
       secret: Environment.getVariable('JWT_SECRET'),
@@ -48,7 +44,6 @@ import mikroOrmConfiguration from './infrastructure/persistence/mikroOrm/config'
     CqrsModule,
     ClientsModule,
     JwtStrategy,
-    TypeOrmTransactionalEntityManager,
     MONGO_CLIENT,
     LOGGER,
     QUERY_BUS,

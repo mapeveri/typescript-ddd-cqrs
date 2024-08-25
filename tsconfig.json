@@ -31,7 +31,6 @@
   "exclude": ["node_modules"],
   "types": [
     "node",
-    "reflect-metadata",
-    "typeorm"
+    "reflect-metadata"
   ]
 }
