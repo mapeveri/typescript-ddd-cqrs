@@ -3,8 +3,7 @@ import { TermView } from '@src/languages/application/term/query/view/termView';
 import SearchTermViewReadLayer, {
   TermCriteriaParams,
 } from '@src/languages/application/term/query/searchTermViewReadLayer';
-import { Document } from 'mongodb';
-import { SortDirection } from 'typeorm';
+import { Document, SortDirection } from 'mongodb';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import MongoConnection, { MONGO_CLIENT } from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
 

@@ -13,7 +13,6 @@
     "format-code-fix": "prettier --write ./src",
     "linter-check": "eslint 'src/**/*.ts'",
     "linter-fix": "eslint --fix 'src/**/*.ts'",
-    "typeorm": "ts-node --require tsconfig-paths/register -r dotenv/config -r ts-node/register/transpile-only ./node_modules/typeorm/cli.js -d src/shared/infrastructure/persistence/typeOrm/dataSource.ts ",
     "mikroorm": "npx mikro-orm",
     "test:unit": "jest --testPathPattern=test/unit",
     "test:watch": "jest --watch",
@@ -72,7 +71,6 @@
     "@nestjs/passport": "^10.0.3",
     "@nestjs/platform-express": "^10.3.10",
     "@nestjs/swagger": "^7.4.0",
-    "@nestjs/typeorm": "^10.0.2",
     "amqp-connection-manager": "^4.1.14",
     "amqplib": "^0.10.3",
     "axios": "^1.6.2",
@@ -89,7 +87,6 @@
     "pg": "^8.11.3",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
-    "typeorm": "^0.3.17",
     "uuid": "^9.0.1",
     "winston": "^3.11.0"
   },
