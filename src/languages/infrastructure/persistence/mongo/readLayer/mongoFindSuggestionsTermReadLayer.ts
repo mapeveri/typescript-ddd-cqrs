@@ -23,7 +23,7 @@ export default class MongoFindSuggestionsTermReadLayer implements FindSuggestion
     const result = await this.mongo.db
       .collection('terms')
       .find({
-        $or: [{ hashtags: user.interests }],
+        $or: [{ hashtags: user.getInterests() }],
       })
       .project({ _id: 0 })
       .sort(['createdAt', -1])

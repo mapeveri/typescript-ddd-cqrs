@@ -26,7 +26,7 @@ export default class DislikeTermCommandHandler implements ICommandHandler<Dislik
     const term = await this.getTerm(termId);
     const user = await this.getUser(userId);
 
-    term.dislike(userId, user.name, user.photo);
+    term.dislike(userId, user.getName(), user.getPhoto());
 
     await this.termRepository.save(term);
 

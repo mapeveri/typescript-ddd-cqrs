@@ -26,7 +26,7 @@ export default class AddLikeTermCommandHandler implements ICommandHandler<AddLik
     const term = await this.getTerm(termId);
     const user = await this.getUser(userId);
 
-    term.addLike(userId, user.name, user.photo);
+    term.addLike(userId, user.getName(), user.getPhoto());
 
     await this.termRepository.save(term);
 

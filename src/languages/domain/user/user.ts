@@ -13,22 +13,27 @@ export type UserPrimitives = {
 };
 
 export default class User extends AggregateRoot {
-  id: UserId;
-  name: string;
-  provider: string;
-  email: Email;
-  photo: string;
-  interests: string[];
-
-  constructor(id: UserId, name: string, provider: string, email: Email, photo: string, interests: string[]) {
+  constructor(
+    private id: UserId,
+    private name: string,
+    private provider: string,
+    private email: Email,
+    private photo: string,
+    private interests: string[],
+  ) {
     super();
+  }
 
-    this.id = id;
-    this.name = name;
-    this.provider = provider;
-    this.email = email;
-    this.photo = photo;
-    this.interests = interests;
+  public getName(): string {
+    return this.name;
+  }
+
+  public getPhoto(): string {
+    return this.photo;
+  }
+
+  public getInterests(): string[] {
+    return this.interests;
   }
 
   static create(id: UserId, name: string, provider: string, email: Email, photo: string): User {
