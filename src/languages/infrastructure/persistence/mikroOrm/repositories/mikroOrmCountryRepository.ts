@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { EntityRepository } from '@mikro-orm/core';
+import { EntityManager, EntityRepository } from '@mikro-orm/core';
 import { InjectRepository } from '@mikro-orm/nestjs';
 import Country from '@src/languages/domain/country/country';
 import CountryRepository from '@src/languages/domain/country/countryRepository';
@@ -11,6 +11,7 @@ export default class MikroOrmCountryRepository implements CountryRepository {
   constructor(
     @InjectRepository(CountrySchema)
     private readonly countryRepository: EntityRepository<Country>,
+    private readonly em: EntityManager,
   ) {}
 
   async findAll(): Promise<Country[]> {
@@ -22,6 +23,6 @@ export default class MikroOrmCountryRepository implements CountryRepository {
   }
 
   async save(country: Country): Promise<any> {
-    return await this.countryRepository.upsert(country);
+    await this.em.persistAndFlush(country);
   }
 }
