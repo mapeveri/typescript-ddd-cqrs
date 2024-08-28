@@ -3,7 +3,7 @@ import User from '@src/languages/domain/user/user';
 import UserId from '@src/languages/domain/user/userId';
 import { Injectable } from '@nestjs/common';
 import Email from '@src/shared/domain/valueObjects/email';
-import { EntityRepository } from '@mikro-orm/core';
+import { EntityManager, EntityRepository } from '@mikro-orm/core';
 import { InjectRepository } from '@mikro-orm/nestjs';
 import { UserSchema } from '../entities/user';
 
@@ -12,6 +12,7 @@ export default class MikroOrmUserRepository implements UserRepository {
   constructor(
     @InjectRepository(UserSchema)
     private readonly userRepository: EntityRepository<User>,
+    private readonly em: EntityManager,
   ) {}
 
   async findById(id: UserId): Promise<User | null> {
@@ -23,6 +24,6 @@ export default class MikroOrmUserRepository implements UserRepository {
   }
 
   async save(user: User): Promise<void> {
-    await this.userRepository.upsert(user);
+    await this.em.persistAndFlush(user);
   }
 }

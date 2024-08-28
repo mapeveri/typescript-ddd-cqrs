@@ -15,7 +15,7 @@ import UpdateUserCommand from '@src/languages/application/user/command/updateUse
 @ApiTags('User')
 @Controller()
 export default class UserPutController {
-  public constructor(@Inject(COMMAND_BUS) private commandBus: CommandBus) {}
+  constructor(@Inject(COMMAND_BUS) private commandBus: CommandBus) {}
 
   @Put('user')
   @HttpCode(HttpStatus.OK)
