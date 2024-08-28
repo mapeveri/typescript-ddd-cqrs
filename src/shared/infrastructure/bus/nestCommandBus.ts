@@ -8,10 +8,6 @@ export default class NestCommandBus implements ICommandBus {
   constructor(private commandBus: CommandBus) {}
 
   async dispatch(command: Command): Promise<void> {
-    await this.commandToExecute.bind(this, command);
-  }
-
-  private async commandToExecute(command: Command): Promise<void> {
     await this.commandBus.execute(command);
   }
 }
