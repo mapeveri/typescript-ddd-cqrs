@@ -68,18 +68,8 @@ describe('Given a FindCountryQueryHandler to handle', () => {
       const expected = await handler.execute(query);
 
       expect(expected.content).toEqual([
-        {
-          id: countryOne.id.toString(),
-          name: countryOne.name,
-          iso: countryOne.iso,
-          languages: countryOne.languages.toArray(),
-        },
-        {
-          id: countryTwo.id.toString(),
-          name: countryTwo.name,
-          iso: countryTwo.iso,
-          languages: countryTwo.languages.toArray(),
-        },
+        countryOne.toPrimitives(),
+        countryTwo.toPrimitives(),
       ]);
     });
   });

@@ -70,7 +70,7 @@ describe('Given a CreateCountryCommandHandler to handle', () => {
 
     function startScenario() {
       const country = CountryMother.random();
-      command = CreateCountryCommandMother.random({ id: country.id.value });
+      command = CreateCountryCommandMother.random({ id: country.getId().value });
       countryRepository.add(country);
     }
 

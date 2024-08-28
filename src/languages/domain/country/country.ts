@@ -12,18 +12,8 @@ export type CountryPrimitives = {
 };
 
 export default class Country extends AggregateRoot {
-  id: CountryId;
-  name: string;
-  iso: string;
-  languages: LanguageCollection;
-
-  constructor(id: CountryId, name: string, iso: string, languages: LanguageCollection) {
+  constructor(private id: CountryId, private name: string, private iso: string, private languages: LanguageCollection) {
     super();
-
-    this.id = id;
-    this.name = name;
-    this.iso = iso;
-    this.languages = languages;
   }
 
   static create(id: CountryId, name: string, iso: string, languages: LanguageCollection): Country {
@@ -31,6 +21,10 @@ export default class Country extends AggregateRoot {
     country.record(new CountryCreatedEvent(id.value, name, iso, languages.toArray()));
 
     return country;
+  }
+
+  public getId(): CountryId {
+    return this.id;
   }
 
   toPrimitives(): CountryPrimitives {

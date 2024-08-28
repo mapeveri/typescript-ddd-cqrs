@@ -70,7 +70,7 @@ describe('Given a FindCountryQueryHandler to handle', () => {
 
     function startScenario() {
       country = CountryMother.random();
-      query = FindCountryQueryMother.random(country.id.value);
+      query = FindCountryQueryMother.random(country.getId().toString());
       countryRepository.add(country);
     }
 
@@ -79,12 +79,7 @@ describe('Given a FindCountryQueryHandler to handle', () => {
     it('should get the country', async () => {
       const expected = await handler.execute(query);
 
-      expect(expected.content).toEqual({
-        id: country.id.toString(),
-        name: country.name,
-        iso: country.iso,
-        languages: country.languages.toArray(),
-      });
+      expect(expected.content).toEqual(country.toPrimitives());
     });
   });
 });
