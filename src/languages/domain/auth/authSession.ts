@@ -17,15 +17,8 @@ type AuthSessionPrimitives = {
 };
 
 export default class AuthSession extends AggregateRoot {
-  id: AuthSessionId;
-  session: Session;
-  createdAt: Date;
-
-  constructor(id: AuthSessionId, session: Session, createdAt: Date) {
+  constructor(private id: AuthSessionId, private session: Session, private createdAt: Date) {
     super();
-    this.id = id;
-    this.session = session;
-    this.createdAt = createdAt;
   }
 
   static create(
