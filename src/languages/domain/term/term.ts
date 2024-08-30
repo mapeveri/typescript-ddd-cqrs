@@ -11,29 +11,39 @@ import { Uuid } from '@src/shared/domain/valueObjects/uuid';
 import TermDeletedEvent from './termDeletedEvent';
 
 export default abstract class Term extends AggregateRoot {
-  id: TermId;
-  languageId: string;
-  type: TermType;
-  countryId: CountryId;
-  userId: UserId;
-  likes: TermLike[];
-
-  protected constructor(
-    id: TermId,
-    languageId: string,
-    type: TermType,
-    countryId: CountryId,
-    userId: UserId,
-    likes: TermLike[],
+  constructor(
+    private id: TermId,
+    private languageId: string,
+    private type: TermType,
+    private countryId: CountryId,
+    private userId: UserId,
+    private likes: TermLike[],
   ) {
     super();
+  }
 
-    this.id = id;
-    this.languageId = languageId;
-    this.type = type;
-    this.countryId = countryId;
-    this.userId = userId;
-    this.likes = likes;
+  public getId(): TermId {
+    return this.id;
+  }
+
+  public getType(): TermType {
+    return this.type;
+  }
+
+  public getLanguageId(): string {
+    return this.languageId;
+  }
+
+  public getCountryId(): CountryId {
+    return this.countryId;
+  }
+
+  public getUserId(): UserId {
+    return this.userId;
+  }
+
+  public getLikes(): TermLike[] {
+    return this.likes;
   }
 
   abstract toPrimitives(): unknown;

@@ -8,20 +8,16 @@ import TermId from '@src/languages/domain/term/termId';
 import TermLike from '@src/languages/domain/term/termLike';
 
 export default class Expression extends Term {
-  terms: ExpressionTermCollection;
-
   constructor(
     id: TermId,
     languageId: string,
     type: TermType,
     countryId: CountryId,
-    terms: ExpressionTermCollection,
     userId: UserId,
     likes: TermLike[],
+    private terms: ExpressionTermCollection,
   ) {
     super(id, languageId, type, countryId, userId, likes);
-
-    this.terms = terms;
   }
 
   static create(
@@ -31,7 +27,7 @@ export default class Expression extends Term {
     terms: ExpressionTermCollection,
     userId: UserId,
   ): Expression {
-    const expression = new this(id, languageId, TermType.of(TermTypeEnum.EXPRESSION), countryId, terms, userId, []);
+    const expression = new this(id, languageId, TermType.of(TermTypeEnum.EXPRESSION), countryId, userId, [], terms);
     expression.record(
       new ExpressionCreatedEvent(id.toString(), languageId, countryId.toString(), userId.toString(), terms.toArray()),
     );
@@ -41,12 +37,12 @@ export default class Expression extends Term {
 
   toPrimitives(): object {
     return {
-      id: this.id,
-      language_id: this.languageId,
-      country_id: this.countryId,
+      id: this.getId().toString(),
+      language_id: this.getLanguageId(),
+      country_id: this.getCountryId().toString(),
       terms: this.terms.toArray(),
-      user: this.userId.toString(),
-      likes: this.likes.map((like: TermLike) => like.toPrimitives()),
+      user: this.getUserId().toString(),
+      likes: this.getLikes().map((like: TermLike) => like.toPrimitives()),
     };
   }
 }
