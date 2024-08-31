@@ -70,7 +70,7 @@ describe('Given a DeleteTermCommandHandler to handle', () => {
 
     function startScenario() {
       const expression = ExpressionMother.random();
-      command = DeleteTermCommandMother.random(expression.id.value);
+      command = DeleteTermCommandMother.random(expression.getId().toString());
     }
 
     beforeEach(startScenario);
@@ -95,7 +95,7 @@ describe('Given a DeleteTermCommandHandler to handle', () => {
 
     function startScenario() {
       expression = ExpressionMother.random();
-      command = DeleteTermCommandMother.random(expression.id.value);
+      command = DeleteTermCommandMother.random(expression.getId().toString());
 
       termRepository.add(expression);
     }
@@ -116,7 +116,10 @@ describe('Given a DeleteTermCommandHandler to handle', () => {
 
       expect(eventBus.domainEvents()).toHaveLength(1);
       expect(eventBus.domainEvents()[0]).toEqual({
-        ...TermDeletedEventMother.random({ termId: expression.id.toString(), termType: expression.type.toString() }),
+        ...TermDeletedEventMother.random({
+          termId: expression.getId().toString(),
+          termType: expression.getType().toString(),
+        }),
       });
     });
   });
