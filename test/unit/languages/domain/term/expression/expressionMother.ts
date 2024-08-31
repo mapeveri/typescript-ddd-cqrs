@@ -33,9 +33,9 @@ export default class ExpressionMother {
       languageId ?? faker.datatype.uuid(),
       TermType.of(TermTypeEnum.EXPRESSION),
       countryId ?? CountryIdMother.random(),
-      terms ?? ExpressionTermCollectionMother.random([]),
       userId ?? UserIdMother.random(),
       likes ?? [TermLikeMother.random()],
+      terms ?? ExpressionTermCollectionMother.random([]),
     );
   }
 
@@ -54,11 +54,11 @@ export default class ExpressionMother {
       command.languageId,
       TermType.of(TermTypeEnum.EXPRESSION),
       CountryIdMother.random(command.countryId),
+      UserIdMother.random(command.userId),
+      [],
       ExpressionTermCollectionMother.random(
         terms?.map((term) => term.toPrimitives()) ?? [ExpressionTermMother.random().toPrimitives()],
       ),
-      UserIdMother.random(command.userId),
-      [],
     );
   }
 }

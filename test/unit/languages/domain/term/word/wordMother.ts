@@ -33,9 +33,9 @@ export default class WordMother {
       languageId ?? faker.datatype.uuid(),
       TermType.of(TermTypeEnum.WORD),
       countryId ?? CountryIdMother.random(),
-      terms ?? WordTermCollectionMother.random([]),
       userId ?? UserIdMother.random(),
       likes ?? [TermLikeMother.random()],
+      terms ?? WordTermCollectionMother.random([]),
     );
   }
 
@@ -54,11 +54,11 @@ export default class WordMother {
       command.languageId,
       TermType.of(TermTypeEnum.WORD),
       CountryIdMother.random(command.countryId),
+      UserIdMother.random(command.userId),
+      [],
       WordTermCollectionMother.random(
         terms?.map((term) => term.toPrimitives()) ?? [WordTermMother.random().toPrimitives()],
       ),
-      UserIdMother.random(command.userId),
-      [],
     );
   }
 }
