@@ -38,8 +38,8 @@ export default class Expression extends Term {
   toPrimitives(): object {
     return {
       id: this.getId().toString(),
-      language_id: this.getLanguageId(),
-      country_id: this.getCountryId().toString(),
+      languageId: this.getLanguageId(),
+      countryId: this.getCountryId().toString(),
       terms: this.terms.toArray(),
       user: this.getUserId().toString(),
       likes: this.getLikes().map((like: TermLike) => like.toPrimitives()),
