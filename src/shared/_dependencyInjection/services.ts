@@ -19,8 +19,10 @@ import { SOCIAL_AUTHENTICATOR } from '@src/shared/domain/auth/socialAuthenticato
 import GoogleSocialAuthenticator from '@src/shared/infrastructure/auth/oauth/googleSocialAuthenticator';
 import { ConfigService } from '@nestjs/config';
 import { OAuth2Client } from 'google-auth-library';
+import MikroOrmTransactionalDecorator from '../infrastructure/persistence/mikroOrm/decorators/mikroOrmTransactionalDecorator';
 
 export const services = [
+  MikroOrmTransactionalDecorator,
   NestJwtAuthGuard,
   JwtStrategy,
   {
