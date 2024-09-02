@@ -5,11 +5,11 @@ import { WordTermCollectionType } from '../types/wordTermCollectionType';
 
 export const WordSchema = new EntitySchema({
   class: Word,
-  tableName: 'words',
   extends: TermSchema,
   properties: {
     terms: {
       type: WordTermCollectionType,
     },
   },
+  discriminatorValue: 'word'
 });

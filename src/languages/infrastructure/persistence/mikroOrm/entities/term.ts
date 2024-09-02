@@ -10,6 +10,7 @@ import { TermTypeType } from '../types/termTypeType';
 export const TermSchema = new EntitySchema({
   class: Term,
   abstract: true,
+  tableName: 'terms',
   properties: {
     id: {
       type: TermIdType,

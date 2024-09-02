@@ -5,11 +5,11 @@ import { TermSchema } from './term';
 
 export const ExpressionSchema = new EntitySchema({
   class: Expression,
-  tableName: 'expressions',
   extends: TermSchema,
   properties: {
     terms: {
       type: ExpressionTermCollectionType,
     },
   },
+  discriminatorValue: 'expression'
 });
