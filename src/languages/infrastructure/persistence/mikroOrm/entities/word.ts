@@ -11,5 +11,5 @@ export const WordSchema = new EntitySchema({
       type: WordTermCollectionType,
     },
   },
-  discriminatorValue: 'word'
+  discriminatorValue: 'word',
 });

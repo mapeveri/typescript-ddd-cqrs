@@ -11,5 +11,5 @@ export const ExpressionSchema = new EntitySchema({
       type: ExpressionTermCollectionType,
     },
   },
-  discriminatorValue: 'expression'
+  discriminatorValue: 'expression',
 });
