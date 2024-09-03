@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { TermTypeEnum } from '@src/languages/domain/term/termType';
 import { IsArray, IsNotEmpty, IsString } from 'class-validator';
 
 export class TermResponse {
@@ -22,7 +23,7 @@ export class TermResponse {
   @IsString()
   example: string;
 
-  @ApiProperty({ enum: ['word', 'expression'], enumName: 'SearchTermType' })
+  @ApiProperty({ enum: TermTypeEnum, enumName: 'SearchTermType' })
   @IsNotEmpty()
   @IsString()
   type: string;
