@@ -20,6 +20,10 @@ export default class Expression extends Term {
     super(id, languageId, type, countryId, userId, likes);
   }
 
+  getTerms(): ExpressionTermCollection {
+    return this.terms;
+  }
+
   static create(
     id: TermId,
     languageId: string,

@@ -30,6 +30,10 @@ export default class Word extends Term {
     super(id, languageId, type, countryId, userId, likes);
   }
 
+  public getTerms(): WordTermCollection {
+    return this.terms;
+  }
+
   static create(id: TermId, languageId: string, countryId: CountryId, terms: WordTermCollection, userId: UserId): Word {
     const word = new this(id, languageId, TermType.of(TermTypeEnum.WORD), countryId, userId, [], terms);
     word.record(
