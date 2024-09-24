@@ -26,8 +26,6 @@ After running docker compose up the application will be available at https://loc
 
 ### Migrations
 
-#### MikroOrm
-
 To generate migrations run the next command:
 ```shell script
   docker compose run app npm run mikroorm migration:create
