@@ -8,7 +8,7 @@ import path from 'path';
 const env = loadEnv();
 dotenvExpand.expand(env);
 
-const migrationPath = '../../../../languages/app/migrations';
+const migrationPath = path.join(__dirname, '../../../../languages/app/migrations');
 
 export default defineConfig({
   entities: entitySchemas,
@@ -17,9 +17,12 @@ export default defineConfig({
   clientUrl: process.env.POSTGRESQL_DB_URL,
   debug: process.env.ENV != 'production',
   extensions: [Migrator],
+  ignoreUndefinedInQuery: true,
+  forceUndefined: false,
   migrations: {
-    path: path.join(__dirname, `${migrationPath}`),
-    pathTs: path.join(__dirname, `${migrationPath}`),
+    path: migrationPath,
+    glob: '!(*.d).{js,ts}',
+    pathTs: migrationPath,
     tableName: 'mikro_orm_migrations',
     transactional: true,
     allOrNothing: true,
