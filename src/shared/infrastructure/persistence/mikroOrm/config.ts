@@ -8,7 +8,7 @@ import path from 'path';
 const env = loadEnv();
 dotenvExpand.expand(env);
 
-const migrationPath = '../../../../languages/app/mikroorm-migrations';
+const migrationPath = '../../../../languages/app/migrations';
 
 export default defineConfig({
   entities: entitySchemas,
