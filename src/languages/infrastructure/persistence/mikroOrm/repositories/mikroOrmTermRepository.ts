@@ -24,5 +24,6 @@ export default class MikroOrmTermRepository implements TermRepository {
 
   async save(term: Term): Promise<void> {
     this.em.persist(term);
+    return Promise.resolve();
   }
 }

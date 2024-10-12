@@ -23,7 +23,7 @@ export class AuthSessionRepositoryMock implements AuthSessionRepository {
     return this.authSessionsStored;
   }
 
-  async save(authSession: AuthSession): Promise<any> {
+  save(authSession: AuthSession): void {
     this.changed = true;
     this.authSessionsStored.push(authSession);
   }

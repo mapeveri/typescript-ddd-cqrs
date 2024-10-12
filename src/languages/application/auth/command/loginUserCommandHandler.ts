@@ -29,7 +29,7 @@ export default class LoginUserCommandHandler implements ICommandHandler<LoginUse
       command.photo,
     );
 
-    await this.authSessionRepository.save(authSession);
+    this.authSessionRepository.save(authSession);
 
     void this.eventBus.publish(authSession.pullDomainEvents());
   }

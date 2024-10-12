@@ -7,7 +7,7 @@ import { EntityManager } from '@mikro-orm/core';
 export default class MikroOrmAuthSessionRepository implements AuthSessionRepository {
   constructor(private readonly em: EntityManager) {}
 
-  async save(authSession: AuthSession): Promise<any> {
+  save(authSession: AuthSession): void {
     this.em.persist(authSession);
   }
 }

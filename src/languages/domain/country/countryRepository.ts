@@ -6,7 +6,7 @@ interface CountryRepository {
 
   findById(id: CountryId): Promise<Country | null>;
 
-  save(country: Country): Promise<any>;
+  save(country: Country): Promise<void>;
 }
 
 export default CountryRepository;
