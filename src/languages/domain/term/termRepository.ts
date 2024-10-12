@@ -6,7 +6,7 @@ interface TermRepository {
 
   remove(term: Term): Promise<void>;
 
-  save(term: Term): Promise<void>;
+  save(term: Term): void;
 }
 
 export default TermRepository;

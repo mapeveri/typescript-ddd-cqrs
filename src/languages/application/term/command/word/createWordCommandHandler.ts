@@ -29,7 +29,7 @@ export default class CreateWordCommandHandler implements ICommandHandler<CreateW
       UserId.of(command.userId),
     );
 
-    await this.termRepository.save(word);
+    this.termRepository.save(word);
 
     void this.eventBus.publish(word.pullDomainEvents());
   }

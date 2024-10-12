@@ -29,7 +29,7 @@ export default class CreateExpressionCommandHandler implements ICommandHandler<C
       UserId.of(command.userId),
     );
 
-    await this.termRepository.save(expression);
+    this.termRepository.save(expression);
 
     void this.eventBus.publish(expression.pullDomainEvents());
   }

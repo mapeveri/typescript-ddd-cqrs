@@ -22,8 +22,7 @@ export default class MikroOrmTermRepository implements TermRepository {
     await this.termRepository.nativeDelete(term);
   }
 
-  async save(term: Term): Promise<void> {
+  save(term: Term): void {
     this.em.persist(term);
-    return Promise.resolve();
   }
 }

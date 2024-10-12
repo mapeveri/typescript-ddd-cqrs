@@ -28,7 +28,7 @@ export default class AddLikeTermCommandHandler implements ICommandHandler<AddLik
 
     term.addLike(userId, user.getName(), user.getPhoto());
 
-    await this.termRepository.save(term);
+    this.termRepository.save(term);
 
     void this.eventBus.publish(term.pullDomainEvents());
   }

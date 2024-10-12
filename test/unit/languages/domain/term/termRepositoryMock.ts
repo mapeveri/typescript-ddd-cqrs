@@ -55,7 +55,7 @@ export class TermRepositoryMock implements TermRepository {
     this.deletedTerms.push(term);
   }
 
-  async save(term: Term): Promise<void> {
+  save(term: Term): void {
     this._storedChanged = true;
     this.storedTerms.push(term);
   }

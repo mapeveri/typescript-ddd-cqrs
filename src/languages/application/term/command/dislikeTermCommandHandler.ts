@@ -28,7 +28,7 @@ export default class DislikeTermCommandHandler implements ICommandHandler<Dislik
 
     term.dislike(userId, user.getName(), user.getPhoto());
 
-    await this.termRepository.save(term);
+    this.termRepository.save(term);
 
     void this.eventBus.publish(term.pullDomainEvents());
   }
