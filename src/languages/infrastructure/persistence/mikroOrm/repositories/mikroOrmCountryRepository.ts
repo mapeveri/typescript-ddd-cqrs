@@ -23,6 +23,6 @@ export default class MikroOrmCountryRepository implements CountryRepository {
   }
 
   async save(country: Country): Promise<any> {
-    await this.em.persistAndFlush(country);
+    this.em.persist(country);
   }
 }

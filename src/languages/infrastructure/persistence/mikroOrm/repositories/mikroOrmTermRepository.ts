@@ -23,6 +23,6 @@ export default class MikroOrmTermRepository implements TermRepository {
   }
 
   async save(term: Term): Promise<void> {
-    await this.em.persistAndFlush(term);
+    this.em.persist(term);
   }
 }

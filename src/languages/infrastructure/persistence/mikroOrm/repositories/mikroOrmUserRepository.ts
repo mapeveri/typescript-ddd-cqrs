@@ -24,6 +24,6 @@ export default class MikroOrmUserRepository implements UserRepository {
   }
 
   async save(user: User): Promise<void> {
-    await this.em.persistAndFlush(user);
+    this.em.persist(user);
   }
 }

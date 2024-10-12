@@ -8,6 +8,6 @@ export default class MikroOrmAuthSessionRepository implements AuthSessionReposit
   constructor(private readonly em: EntityManager) {}
 
   async save(authSession: AuthSession): Promise<any> {
-    return await this.em.upsert(authSession);
+    this.em.persist(authSession);
   }
 }
