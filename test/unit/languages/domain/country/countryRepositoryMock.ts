@@ -39,7 +39,7 @@ export class CountryRepositoryMock implements CountryRepository {
     return this.toReturn.length > 0 ? this.toReturn[0] : null;
   }
 
-  async save(country: Country): Promise<any> {
+  save(country: Country): void {
     this.changed = true;
     this.countriesStored.push(country);
   }

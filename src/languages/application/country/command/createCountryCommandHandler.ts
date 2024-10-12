@@ -23,7 +23,7 @@ export default class CreateCountryCommandHandler implements ICommandHandler<Crea
 
     const country = Country.create(countryId, command.name, command.iso, languages);
 
-    await this.countryRepository.save(country);
+    this.countryRepository.save(country);
 
     void this.eventBus.publish(country.pullDomainEvents());
   }

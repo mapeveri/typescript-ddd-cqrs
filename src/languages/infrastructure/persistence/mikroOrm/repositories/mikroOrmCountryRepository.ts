@@ -22,8 +22,7 @@ export default class MikroOrmCountryRepository implements CountryRepository {
     return await this.countryRepository.findOne(id);
   }
 
-  async save(country: Country): Promise<void> {
+  save(country: Country): void {
     this.em.persist(country);
-    return Promise.resolve();
   }
 }
