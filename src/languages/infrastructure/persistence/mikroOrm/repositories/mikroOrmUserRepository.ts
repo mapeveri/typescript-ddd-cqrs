@@ -23,7 +23,7 @@ export default class MikroOrmUserRepository implements UserRepository {
     return await this.userRepository.findOne({ email: email });
   }
 
-  async save(user: User): Promise<void> {
+  save(user: User): void {
     this.em.persist(user);
   }
 }

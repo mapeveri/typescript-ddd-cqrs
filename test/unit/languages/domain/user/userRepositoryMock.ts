@@ -44,10 +44,8 @@ export class UserRepositoryMock implements UserRepository {
     return Promise.resolve(user);
   }
 
-  async save(user: User): Promise<any> {
+  save(user: User): void {
     this.changed = true;
     this.usersStored.push(user);
-
-    return Promise.resolve();
   }
 }

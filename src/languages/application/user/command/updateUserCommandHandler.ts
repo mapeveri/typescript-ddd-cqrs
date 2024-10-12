@@ -21,7 +21,7 @@ export default class UpdateUserCommandHandler implements ICommandHandler<UpdateU
     const user = await this.userFinder.find(UserId.of(command.id));
 
     user.update(command.name, command.photo, command.interests);
-    await this.userRepository.save(user);
+    this.userRepository.save(user);
 
     void this.eventBus.publish(user.pullDomainEvents());
   }

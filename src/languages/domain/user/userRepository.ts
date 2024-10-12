@@ -7,7 +7,7 @@ interface UserRepository {
 
   findByEmail(email: Email): Promise<User | null>;
 
-  save(user: User): Promise<void>;
+  save(user: User): void;
 }
 
 export default UserRepository;
