@@ -8,7 +8,7 @@ import path from 'path';
 const env = loadEnv();
 dotenvExpand.expand(env);
 
-const migrationPath = path.join(__dirname, '../../../app/migrations');
+const migrationPath = path.join(__dirname, '/migrations');
 
 export default defineConfig({
   entities: entitySchemas,
