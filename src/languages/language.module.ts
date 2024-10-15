@@ -8,9 +8,10 @@ import { projections } from '@src/languages/_dependencyInjection/projectionHandl
 import { readLayers } from '@src/languages/_dependencyInjection/readLayers';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { entitySchemas } from '@src/shared/_dependencyInjection/entitySchemas';
+import mikroOrmConfiguration from './infrastructure/persistence/mikroOrm/config';
 
 @Module({
-  imports: [MikroOrmModule.forFeature(entitySchemas)],
+  imports: [MikroOrmModule.forRoot(mikroOrmConfiguration), MikroOrmModule.forFeature(entitySchemas)],
   exports: [],
   controllers: [...controllers],
   providers: [...commands, ...queries, ...events, ...projections, ...repositories, ...readLayers],
