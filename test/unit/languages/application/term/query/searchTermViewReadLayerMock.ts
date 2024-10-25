@@ -1,4 +1,4 @@
-import { TermView } from '@src/languages/application/term/query/view/termView';
+import { TermView } from '@src/languages/application/term/query/termView';
 import SearchTermViewReadLayer, {
   TermCriteriaParams,
 } from '@src/languages/application/term/query/searchTermViewReadLayer';

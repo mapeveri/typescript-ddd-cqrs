@@ -2,9 +2,9 @@ import { beforeEach, beforeAll, describe, expect, it } from '@jest/globals';
 import { FindSuggestionsTermReadLayerMock } from '@test/unit/languages/application/term/query/findSuggestionsTermReadLayerMock';
 import FindSuggestionsTermQueryHandler from '@src/languages/application/term/query/findSuggestionsTermQueryHandler';
 import { FindSuggestionsTermQueryMother } from '@test/unit/languages/application/term/query/findSuggestionsTermQueryMother';
-import { TermViewMother } from '@test/unit/languages/application/term/query/view/termViewMother';
+import { TermViewMother } from '@test/unit/languages/application/term/query/termViewMother';
 import FindSuggestionsTermQuery from '@src/languages/application/term/query/findSuggestionsTermQuery';
-import { TermView } from '@src/languages/application/term/query/view/termView';
+import { TermView } from '@src/languages/application/term/query/termView';
 import InvalidArgumentException from '@src/shared/domain/exceptions/invalidArgumentException';
 
 describe('Given a FindSuggestionsTermQueryHandler to handle', () => {

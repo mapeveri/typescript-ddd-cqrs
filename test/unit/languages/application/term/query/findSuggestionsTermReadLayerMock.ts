@@ -1,4 +1,4 @@
-import { TermView } from '@src/languages/application/term/query/view/termView';
+import { TermView } from '@src/languages/application/term/query/termView';
 import UserId from '@src/languages/domain/user/userId';
 import FindSuggestionsTermReadLayer from '@src/languages/application/term/query/findSuggestionsTermReadLayer';
 
