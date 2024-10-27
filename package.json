@@ -93,8 +93,8 @@
   "mikro-orm": {
     "useTsNode": true,
     "configPaths": [
-      "./src/shared/infrastructure/persistence/mikroOrm/config.ts",
-      "./dist/shared/infrastructure/persistence/mikroOrm/config.ts"
+      "./src/languages/infrastructure/persistence/mikroOrm/config.ts",
+      "./dist/languages/infrastructure/persistence/mikroOrm/config.ts"
     ]
   }
 }
