@@ -20,7 +20,6 @@ import { ConfigModule } from '@nestjs/config';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-
     JwtModule.register({
       secret: Environment.getVariable('JWT_SECRET'),
       signOptions: { expiresIn: '2h' },
