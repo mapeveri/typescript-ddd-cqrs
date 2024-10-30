@@ -1,4 +1,4 @@
-import { Global, Module } from '@nestjs/common';
+import { Global, Module, OnApplicationShutdown } from '@nestjs/common';
 import { COMMAND_BUS } from '@src/shared/domain/bus/commandBus/commandBus';
 import { LOGGER } from '@src/shared/domain/logger';
 import { ASYNC_EVENT_BUS, EVENT_BUS } from '@src/shared/domain/bus/eventBus/eventBus';
@@ -13,8 +13,9 @@ import { consumers } from '@src/shared/_dependencyInjection/consumers';
 import { services } from '@src/shared/_dependencyInjection/services';
 import Environment from '@src/shared/infrastructure/utils/environment';
 import { SOCIAL_AUTHENTICATOR } from '@src/shared/domain/auth/socialAuthenticator';
-import { MONGO_CLIENT } from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
+import MongoConnection, { MONGO_CLIENT } from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
 import { ConfigModule } from '@nestjs/config';
+import { Inject } from '@src/shared/domain/injector/inject.decorator';
 
 @Global()
 @Module({
@@ -50,4 +51,10 @@ import { ConfigModule } from '@nestjs/config';
     SOCIAL_AUTHENTICATOR,
   ],
 })
-export class SharedModule {}
+export class SharedModule implements OnApplicationShutdown {
+  constructor(@Inject(MONGO_CLIENT) private mongoConnection: MongoConnection) {}
+
+  async onApplicationShutdown(): Promise<void> {
+    await this.mongoConnection.disconnect();
+  }
+}
