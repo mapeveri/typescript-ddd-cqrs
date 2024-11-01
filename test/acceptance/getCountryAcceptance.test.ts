@@ -4,7 +4,7 @@ import request = require('supertest');
 import { MikroORM } from '@mikro-orm/core';
 import { createApplication } from '@test/acceptance/createApplication';
 import CountryMother from '@test/unit/languages/domain/country/countryMother';
-import { CountryIdMother } from '@test/unit/languages/domain/country/countryIdMother';
+import { CountryPrimitives } from '@src/languages/domain/country/country';
 
 describe('Given a CountryGetController to handle', () => {
   let app: INestApplication;
@@ -30,25 +30,31 @@ describe('Given a CountryGetController to handle', () => {
   });
 
   describe('As a user I want to get a country', () => {
+    let countryData: CountryPrimitives;
+
+    async function startScenario() {
+      const country = CountryMother.random();
+
+      countryData = country.toPrimitives();
+      await request(app.getHttpServer()).post('/countries').set('Authorization', 'Bearer mock-token').send(countryData);
+    }
+
+    beforeAll(startScenario);
+
     it('should return an empty object when it does not exists', async () => {
       await request(app.getHttpServer())
-        .get('/countries/e625816c-2117-44a6-a0ba-07fe54cb0cc3')
+        .get('/countries/e625816c-2117-44a6-a0ba-07fe54cb0cc4')
         .set('Authorization', 'Bearer mock-token')
         .expect(200)
         .expect({});
     });
 
     it('should return the country when it exists', async () => {
-      const countryId = 'e625816c-2117-44a6-a0ba-07fe54cb0cc3';
-      const country = CountryMother.random({
-        id: CountryIdMother.random(countryId),
-      });
-
       await request(app.getHttpServer())
-        .get(`/countries/${countryId}`)
+        .get(`/countries/${countryData.id}`)
         .set('Authorization', 'Bearer mock-token')
         .expect(200)
-        .expect(country.toPrimitives);
+        .expect(countryData);
     });
   });
 });
