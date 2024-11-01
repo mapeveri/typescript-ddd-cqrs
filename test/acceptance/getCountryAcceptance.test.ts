@@ -1,10 +1,11 @@
-import { beforeAll, describe, afterAll, it } from '@jest/globals';
+import { beforeAll, describe, beforeEach, afterAll, it } from '@jest/globals';
 import { INestApplication } from '@nestjs/common';
 import request = require('supertest');
 import { MikroORM } from '@mikro-orm/core';
-import { createApplication } from '@test/acceptance/createApplication';
+import { createApplication, truncateTables } from '@test/acceptance/createApplication';
 import CountryMother from '@test/unit/languages/domain/country/countryMother';
 import { CountryPrimitives } from '@src/languages/domain/country/country';
+import { CountryIdMother } from '@test/unit/languages/domain/country/countryIdMother';
 
 describe('Given a CountryGetController to handle', () => {
   let app: INestApplication;
@@ -31,19 +32,22 @@ describe('Given a CountryGetController to handle', () => {
 
   describe('As a user I want to get a country', () => {
     let countryData: CountryPrimitives;
+    const countryId = 'e625816c-2117-44a6-a0ba-07fe54cb0cc4';
 
     async function startScenario() {
-      const country = CountryMother.random();
+      await truncateTables(orm);
+
+      const country = CountryMother.random({ id: CountryIdMother.random(countryId) });
 
       countryData = country.toPrimitives();
       await request(app.getHttpServer()).post('/countries').set('Authorization', 'Bearer mock-token').send(countryData);
     }
 
-    beforeAll(startScenario);
+    beforeEach(startScenario);
 
     it('should return an empty object when it does not exists', async () => {
       await request(app.getHttpServer())
-        .get('/countries/e625816c-2117-44a6-a0ba-07fe54cb0cc4')
+        .get('/countries/a625816c-2117-44a6-a0ba-07fe54cb0ca3')
         .set('Authorization', 'Bearer mock-token')
         .expect(200)
         .expect({});
@@ -51,7 +55,7 @@ describe('Given a CountryGetController to handle', () => {
 
     it('should return the country when it exists', async () => {
       await request(app.getHttpServer())
-        .get(`/countries/${countryData.id}`)
+        .get(`/countries/${countryId}`)
         .set('Authorization', 'Bearer mock-token')
         .expect(200)
         .expect(countryData);
