@@ -30,7 +30,7 @@ export default class ExpressionMother {
 
     return new Expression(
       id ?? TermIdMother.random(),
-      languageId ?? faker.datatype.uuid(),
+      languageId ?? faker.address.countryCode(),
       TermType.of(TermTypeEnum.EXPRESSION),
       countryId ?? CountryIdMother.random(),
       userId ?? UserIdMother.random(),

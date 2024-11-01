@@ -30,7 +30,7 @@ export default class WordMother {
 
     return new Word(
       id ?? TermIdMother.random(),
-      languageId ?? faker.datatype.uuid(),
+      languageId ?? faker.address.countryCode(),
       TermType.of(TermTypeEnum.WORD),
       countryId ?? CountryIdMother.random(),
       userId ?? UserIdMother.random(),
