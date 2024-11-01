@@ -4,11 +4,11 @@ import Word from '@src/languages/domain/term/word/word';
 import CountryId from '@src/languages/domain/country/countryId';
 import UserId from '@src/languages/domain/user/userId';
 import WordTermCollection from '@src/languages/domain/term/word/wordTermCollection';
-import WordAlreadyExistsException from '@src/languages/domain/term/word/wordAlreadyExistsException';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { CommandHandler, ICommandHandler } from '@src/shared/domain/bus/commandBus/commandHandler';
 import TermRepository, { TERM_REPOSITORY } from '@src/languages/domain/term/termRepository';
 import TermId from '@src/languages/domain/term/termId';
+import TermAlreadyExistsException from '@src/languages/domain/term/termAlreadyExistsException';
 
 @CommandHandler(CreateWordCommand)
 export default class CreateWordCommandHandler implements ICommandHandler<CreateWordCommand> {
@@ -37,7 +37,7 @@ export default class CreateWordCommandHandler implements ICommandHandler<CreateW
   private async guardWordDoesNotExists(id: TermId): Promise<void> {
     const word = await this.termRepository.findById(id);
     if (word) {
-      throw new WordAlreadyExistsException(id.toString());
+      throw new TermAlreadyExistsException(id.toString());
     }
   }
 }

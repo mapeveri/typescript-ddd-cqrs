@@ -4,11 +4,11 @@ import Expression from '@src/languages/domain/term/expression/expression';
 import CountryId from '@src/languages/domain/country/countryId';
 import ExpressionTermCollection from '@src/languages/domain/term/expression/expressionTermCollection';
 import UserId from '@src/languages/domain/user/userId';
-import ExpressionAlreadyExistsException from '@src/languages/domain/term/expression/expressionAlreadyExistsException';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { CommandHandler, ICommandHandler } from '@src/shared/domain/bus/commandBus/commandHandler';
 import TermRepository, { TERM_REPOSITORY } from '@src/languages/domain/term/termRepository';
 import TermId from '@src/languages/domain/term/termId';
+import TermAlreadyExistsException from '@src/languages/domain/term/termAlreadyExistsException';
 
 @CommandHandler(CreateExpressionCommand)
 export default class CreateExpressionCommandHandler implements ICommandHandler<CreateExpressionCommand> {
@@ -37,7 +37,7 @@ export default class CreateExpressionCommandHandler implements ICommandHandler<C
   private async guardExpressionDoesNotExists(id: TermId): Promise<void> {
     const expression = await this.termRepository.findById(id);
     if (expression) {
-      throw new ExpressionAlreadyExistsException(id.toString());
+      throw new TermAlreadyExistsException(id.toString());
     }
   }
 }

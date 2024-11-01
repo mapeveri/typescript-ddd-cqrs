@@ -4,12 +4,12 @@ import { TermRepositoryMock } from '@test/unit/languages/domain/term/termReposit
 import { EventBusMock } from '@test/unit/shared/domain/buses/eventBus/eventBusMock';
 import WordMother from '@test/unit/languages/domain/term/word/wordMother';
 import { CreateWordCommandMother } from '@test/unit/languages/application/term/command/word/createWordCommandMother';
-import WordAlreadyExistsException from '@src/languages/domain/term/word/wordAlreadyExistsException';
 import Word from '@src/languages/domain/term/word/word';
 import { WordCreatedEventMother } from '@test/unit/languages/domain/term/word/wordCreatedEventMother';
 import CreateWordCommand from '@src/languages/application/term/command/word/createWordCommand';
 import InvalidArgumentException from '@src/shared/domain/exceptions/invalidArgumentException';
 import WordCreatedEvent from '@src/languages/domain/term/word/wordCreatedEvent';
+import TermAlreadyExistsException from '@src/languages/domain/term/termAlreadyExistsException';
 
 describe('Given a CreateWordCommandHandler to handle', () => {
   let eventBus: EventBusMock;
@@ -80,7 +80,7 @@ describe('Given a CreateWordCommandHandler to handle', () => {
     beforeEach(startScenario);
 
     it('then should thrown an exception', async () => {
-      await expect(handler.execute(command)).rejects.toThrowError(WordAlreadyExistsException);
+      await expect(handler.execute(command)).rejects.toThrowError(TermAlreadyExistsException);
     });
 
     it('then should not add the word', async () => {

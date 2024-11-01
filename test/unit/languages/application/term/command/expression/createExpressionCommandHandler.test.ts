@@ -4,12 +4,12 @@ import { TermRepositoryMock } from '@test/unit/languages/domain/term/termReposit
 import CreateExpressionCommandHandler from '@src/languages/application/term/command/expression/createExpressionCommandHandler';
 import ExpressionMother from '@test/unit/languages/domain/term/expression/expressionMother';
 import { CreateExpressionCommandMother } from '@test/unit/languages/application/term/command/expression/createExpressionCommandMother';
-import ExpressionAlreadyExistsException from '@src/languages/domain/term/expression/expressionAlreadyExistsException';
 import Expression from '@src/languages/domain/term/expression/expression';
 import { ExpressionCreatedEventMother } from '@test/unit/languages/domain/term/expression/expressionCreatedEventMother';
 import CreateExpressionCommand from '@src/languages/application/term/command/expression/createExpressionCommand';
 import InvalidArgumentException from '@src/shared/domain/exceptions/invalidArgumentException';
 import ExpressionCreatedEvent from '@src/languages/domain/term/expression/expressionCreatedEvent';
+import TermAlreadyExistsException from '@src/languages/domain/term/termAlreadyExistsException';
 
 describe('Given a CreateExpressionCommandHandler to handle', () => {
   let eventBus: EventBusMock;
@@ -80,7 +80,7 @@ describe('Given a CreateExpressionCommandHandler to handle', () => {
     beforeEach(startScenario);
 
     it('then should thrown an exception', async () => {
-      await expect(handler.execute(command)).rejects.toThrowError(ExpressionAlreadyExistsException);
+      await expect(handler.execute(command)).rejects.toThrowError(TermAlreadyExistsException);
     });
 
     it('then should not add the expression', async () => {
