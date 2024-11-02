@@ -4,13 +4,27 @@ import { ConfigModule } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { MikroORM } from '@mikro-orm/core';
 import { AppModule } from '@src/app.module';
+import { NestJwtAuthGuard } from '@src/shared/guards/nestJwtAuthGuard';
+import { ExecutionContext } from '@nestjs/common';
+import { Request } from 'express';
 
 export async function createApplication() {
-  const user = { userId: 'test-user-id' } as never;
+  const userId = '94400f7c-9a20-464c-9951-93b404b5877e';
+  const user = { userId } as never;
+
+  const mockAuthGuard = {
+    canActivate: (context: ExecutionContext) => {
+      const req = context.switchToHttp().getRequest<Request>();
+      req.user = { id: userId };
+      return true;
+    },
+  };
 
   const moduleFixture: TestingModule = await Test.createTestingModule({
     imports: [ConfigModule.forRoot({ isGlobal: true, envFilePath: '.env.test' }), AppModule],
   })
+    .overrideGuard(NestJwtAuthGuard)
+    .useValue(mockAuthGuard)
     .overrideProvider(JwtService)
     .useValue({
       verifyAsync: jest.fn().mockResolvedValue(user),
