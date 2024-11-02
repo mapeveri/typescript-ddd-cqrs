@@ -1,27 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { ArrayNotEmpty, IsNotEmpty, IsString, ValidateNested } from 'class-validator';
-
-class WordDto {
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  word: string;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  description: string;
-
-  @ApiProperty()
-  @ArrayNotEmpty()
-  hashtags: string[];
-
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  example: string;
-}
+import { WordDto } from '@src/languages/app/controllers/v1/terms/words/wordDto';
 
 export default class WordPostDto {
   @ApiProperty()
@@ -38,11 +18,6 @@ export default class WordPostDto {
   @IsNotEmpty()
   @IsString()
   countryId: string;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  userId: string;
 
   @ApiProperty({ type: [WordDto] })
   @Type(() => WordDto)
