@@ -16,7 +16,7 @@ export class CreateWordCommandMother {
 
     return new CreateWordCommand(
       id ?? faker.datatype.uuid(),
-      languageId ?? faker.datatype.uuid(),
+      languageId ?? faker.address.countryCode(),
       countryId ?? faker.datatype.uuid(),
       userId ?? faker.datatype.uuid(),
       terms ?? [
