@@ -12,12 +12,12 @@ import TermDeletedEvent from './termDeletedEvent';
 
 export default abstract class Term extends AggregateRoot {
   constructor(
-    private id: TermId,
-    private languageId: string,
-    private type: TermType,
-    private countryId: CountryId,
-    private userId: UserId,
-    private likes: TermLike[],
+    protected id: TermId,
+    protected languageId: string,
+    protected type: TermType,
+    protected countryId: CountryId,
+    protected userId: UserId,
+    protected likes: TermLike[],
   ) {
     super();
   }
