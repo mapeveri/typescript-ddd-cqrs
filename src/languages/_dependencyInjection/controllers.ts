@@ -13,6 +13,7 @@ import { SearchTermsSseController } from '@src/languages/app/controllers/v1/term
 import { HealthController } from '@src/languages/app/controllers/v1/health/healthGetController';
 import LikeTermPostController from '@src/languages/app/controllers/v1/terms/likeTermPostController';
 import DislikeTermPostController from '@src/languages/app/controllers/v1/terms/dislikeTermPostController';
+import WordPutController from '@src/languages/app/controllers/v1/terms/words/wordPutController';
 
 export const controllers = [
   LoginPostController,
@@ -30,4 +31,5 @@ export const controllers = [
   HealthController,
   LikeTermPostController,
   DislikeTermPostController,
+  WordPutController,
 ];

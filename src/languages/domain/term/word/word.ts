@@ -7,6 +7,8 @@ import TermType, { TermTypeEnum } from '@src/languages/domain/term/termType';
 import TermId from '@src/languages/domain/term/termId';
 import TermLike, { TermLikePrimitives } from '@src/languages/domain/term/termLike';
 import { WordTermPrimitives } from '@src/languages/domain/term/word/wordTerm';
+import TermDoesNotBelongToUserException from '@src/languages/domain/term/termDoesNotBelongToUserException';
+import WordUpdatedEvent from '@src/languages/domain/term/word/wordUpdatedEvent';
 
 type WordPrimitives = {
   id: string;
@@ -40,6 +42,20 @@ export default class Word extends Term {
       new WordCreatedEvent(id.toString(), languageId, countryId.toString(), userId.toString(), terms.toArray()),
     );
     return word;
+  }
+
+  update(userId: UserId, languageId: string, countryId: CountryId, terms: WordTermCollection): void {
+    if (!this.userId.equals(userId)) {
+      throw new TermDoesNotBelongToUserException(this.id.toString());
+    }
+
+    this.languageId = languageId;
+    this.countryId = countryId;
+    this.terms = terms;
+
+    this.record(
+      new WordUpdatedEvent(this.id.toString(), languageId, countryId.toString(), userId.toString(), terms.toArray()),
+    );
   }
 
   toPrimitives(): WordPrimitives {
