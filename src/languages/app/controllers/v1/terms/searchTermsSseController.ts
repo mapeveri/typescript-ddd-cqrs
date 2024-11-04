@@ -26,7 +26,13 @@ export class SearchTermsSseController {
 
       const intervalId = setInterval(async () => {
         const data = await this.queryBus.ask(
-          new SearchTermQuery(term, queryParams.size, queryParams.page, queryParams.orderBy, queryParams.orderType),
+          new SearchTermQuery(
+            term,
+            Number(queryParams.size),
+            Number(queryParams.page),
+            queryParams.orderBy,
+            queryParams.orderType,
+          ),
         );
         const event = new MessageEvent(this.EVENT_NAME, { data: JSON.stringify(data.content) });
 
