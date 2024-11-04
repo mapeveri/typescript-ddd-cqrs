@@ -26,7 +26,13 @@ export default class SearchTermsGetController {
   @UseGuards(NestJwtAuthGuard)
   async run(@Param('term') term: string, @Query() queryParams: SearchTermsQueryParamsDto): Promise<TermsResponse> {
     return await this.queryBus.ask(
-      new SearchTermQuery(term, queryParams.size, queryParams.page, queryParams.orderBy, queryParams.orderType),
+      new SearchTermQuery(
+        term,
+        Number(queryParams.size),
+        Number(queryParams.page),
+        queryParams.orderBy,
+        queryParams.orderType,
+      ),
     );
   }
 }
