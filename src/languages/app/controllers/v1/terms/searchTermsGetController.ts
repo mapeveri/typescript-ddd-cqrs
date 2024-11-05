@@ -8,7 +8,7 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
-import { TermsResponse } from './termsResponse';
+import { TermViewsResponse } from './termViewsResponse';
 import { QUERY_BUS, QueryBus } from '@src/shared/domain/bus/queryBus/queryBus';
 import { SearchTermsQueryParamsDto } from '@src/languages/app/controllers/v1/terms/searchTermsQueryParamsDto';
 
@@ -19,12 +19,12 @@ export default class SearchTermsGetController {
 
   @Get('search/:term')
   @HttpCode(200)
-  @ApiOkResponse({ type: TermsResponse })
+  @ApiOkResponse({ type: TermViewsResponse })
   @ApiBadRequestResponse({ description: 'Bad Request.' })
   @ApiUnauthorizedResponse({ description: 'Unauthorized.' })
   @ApiInternalServerErrorResponse({ description: 'Internal Server Error.' })
   @UseGuards(NestJwtAuthGuard)
-  async run(@Param('term') term: string, @Query() queryParams: SearchTermsQueryParamsDto): Promise<TermsResponse> {
+  async run(@Param('term') term: string, @Query() queryParams: SearchTermsQueryParamsDto): Promise<TermViewsResponse> {
     return await this.queryBus.ask(
       new SearchTermQuery(
         term,

@@ -7,8 +7,7 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
-import { TermsResponse } from './termsResponse';
-import { TermResponse } from '@src/languages/app/controllers/v1/terms/termResponse';
+import { TermViewsResponse } from './termViewsResponse';
 import { QUERY_BUS, QueryBus } from '@src/shared/domain/bus/queryBus/queryBus';
 import FindTermQuery from '@src/languages/application/term/query/findTermQuery';
 
@@ -19,12 +18,12 @@ export default class TermGetController {
 
   @Get('terms/:id')
   @HttpCode(200)
-  @ApiOkResponse({ type: TermsResponse })
+  @ApiOkResponse({ type: TermViewsResponse })
   @ApiBadRequestResponse({ description: 'Bad Request.' })
   @ApiUnauthorizedResponse({ description: 'Unauthorized.' })
   @ApiInternalServerErrorResponse({ description: 'Internal Server Error.' })
   @UseGuards(NestJwtAuthGuard)
-  async run(@Param('id') id: string): Promise<TermResponse> {
+  async run(@Param('id') id: string): Promise<unknown> {
     const response = await this.queryBus.ask(new FindTermQuery(id));
     return response.content || {};
   }

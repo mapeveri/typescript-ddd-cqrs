@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { TermTypeEnum } from '@src/languages/domain/term/termType';
 import { IsArray, IsNotEmpty, IsString } from 'class-validator';
 
-export class TermResponse {
+export class TermViewResponse {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()

@@ -4,7 +4,7 @@ import { QUERY_BUS, QueryBus } from '@src/shared/domain/bus/queryBus/queryBus';
 import SearchTermQuery from '@src/languages/application/term/query/searchTermQuery';
 import { ApiInternalServerErrorResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { SearchTermsQueryParamsDto } from '@src/languages/app/controllers/v1/terms/searchTermsQueryParamsDto';
-import { TermsResponse } from '@src/languages/app/controllers/v1/terms/termsResponse';
+import { TermViewsResponse } from '@src/languages/app/controllers/v1/terms/termViewsResponse';
 
 @ApiTags('Terms')
 @Controller('sse')
@@ -14,7 +14,7 @@ export class SearchTermsSseController {
   constructor(@Inject(QUERY_BUS) private queryBus: QueryBus) {}
 
   @Sse('terms/:userId/:term')
-  @ApiOkResponse({ type: TermsResponse })
+  @ApiOkResponse({ type: TermViewsResponse })
   @ApiInternalServerErrorResponse({ description: 'Internal Server Error.' })
   async sse(
     @Param('userId') userId: string,
