@@ -2,10 +2,11 @@ import { beforeAll, describe, beforeEach, afterAll, expect, it } from '@jest/glo
 import { INestApplication } from '@nestjs/common';
 import request = require('supertest');
 import { MikroORM } from '@mikro-orm/core';
-import { createApplication, truncateTables } from '@test/acceptance/createApplication';
+import { createApplication, truncateTables, USER_ID_LOGGED } from '@test/acceptance/createApplication';
 import WordMother from '@test/unit/languages/domain/term/word/wordMother';
 import { TermIdMother } from '@test/unit/languages/domain/term/termIdMother';
 import { WordPrimitives } from '@src/languages/domain/term/word/word';
+import { UserIdMother } from '@test/unit/languages/domain/user/userIdMother';
 
 describe('Given a TermGetController to handle', () => {
   let app: INestApplication;
@@ -37,7 +38,12 @@ describe('Given a TermGetController to handle', () => {
     async function startScenario() {
       await truncateTables(orm);
 
-      word = WordMother.random({ id: TermIdMother.random(termId) }).toPrimitives();
+      word = WordMother.random({
+        id: TermIdMother.random(termId),
+        likes: [],
+        userId: UserIdMother.random(USER_ID_LOGGED),
+      }).toPrimitives();
+
       const wordData = {
         countryId: word.countryId,
         languageId: word.languageId,

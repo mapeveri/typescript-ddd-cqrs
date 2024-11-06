@@ -8,14 +8,15 @@ import { NestJwtAuthGuard } from '@src/shared/guards/nestJwtAuthGuard';
 import { ExecutionContext } from '@nestjs/common';
 import { Request } from 'express';
 
+export const USER_ID_LOGGED = '94400f7c-9a20-464c-9951-93b404b5877e';
+
 export async function createApplication() {
-  const userId = '94400f7c-9a20-464c-9951-93b404b5877e';
-  const user = { userId } as never;
+  const user = { userId: USER_ID_LOGGED } as never;
 
   const mockAuthGuard = {
     canActivate: (context: ExecutionContext) => {
       const req = context.switchToHttp().getRequest<Request>();
-      req.user = { id: userId };
+      req.user = { id: USER_ID_LOGGED };
       return true;
     },
   };
