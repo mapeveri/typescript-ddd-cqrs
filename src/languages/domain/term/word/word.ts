@@ -10,7 +10,7 @@ import { WordTermPrimitives } from '@src/languages/domain/term/word/wordTerm';
 import TermDoesNotBelongToUserException from '@src/languages/domain/term/termDoesNotBelongToUserException';
 import WordUpdatedEvent from '@src/languages/domain/term/word/wordUpdatedEvent';
 
-type WordPrimitives = {
+export type WordPrimitives = {
   id: string;
   languageId: string;
   countryId: string;

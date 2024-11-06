@@ -5,7 +5,17 @@ import ExpressionCreatedEvent from './expressionCreatedEvent';
 import Term from '@src/languages/domain/term/term';
 import TermType, { TermTypeEnum } from '@src/languages/domain/term/termType';
 import TermId from '@src/languages/domain/term/termId';
-import TermLike from '@src/languages/domain/term/termLike';
+import TermLike, { TermLikePrimitives } from '@src/languages/domain/term/termLike';
+import { ExpressionTermPrimitives } from '@src/languages/domain/term/expression/expressionTerm';
+
+export type ExpressionPrimitives = {
+  id: string;
+  languageId: string;
+  countryId: string;
+  terms: ExpressionTermPrimitives[];
+  userId: string;
+  likes: TermLikePrimitives[];
+};
 
 export default class Expression extends Term {
   constructor(
@@ -39,13 +49,13 @@ export default class Expression extends Term {
     return expression;
   }
 
-  toPrimitives(): object {
+  toPrimitives(): ExpressionPrimitives {
     return {
       id: this.getId().toString(),
       languageId: this.getLanguageId(),
       countryId: this.getCountryId().toString(),
       terms: this.terms.toArray(),
-      user: this.getUserId().toString(),
+      userId: this.getUserId().toString(),
       likes: this.getLikes().map((like: TermLike) => like.toPrimitives()),
     };
   }
