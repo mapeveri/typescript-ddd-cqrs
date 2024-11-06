@@ -25,6 +25,6 @@ export default class TermGetController {
   @UseGuards(NestJwtAuthGuard)
   async run(@Param('id') id: string): Promise<TermResponse> {
     const response = await this.queryBus.ask(new FindTermQuery(id));
-    return response.content || {};
+    return response.content;
   }
 }
