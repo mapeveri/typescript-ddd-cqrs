@@ -33,22 +33,22 @@ describe('Given a TermGetController to handle', () => {
 
   describe('As a user I want to get a term', () => {
     const termId = TermIdMother.random().toString();
-    let word: WordPrimitives;
+    let wordExpected: WordPrimitives;
 
     async function startScenario() {
       await truncateTables(orm);
 
-      word = WordMother.random({
+      wordExpected = WordMother.random({
         id: TermIdMother.random(termId),
         likes: [],
         userId: UserIdMother.random(USER_ID_LOGGED),
       }).toPrimitives();
 
       const wordData = {
-        countryId: word.countryId,
-        languageId: word.languageId,
-        terms: word.terms,
-        id: word.id,
+        countryId: wordExpected.countryId,
+        languageId: wordExpected.languageId,
+        terms: wordExpected.terms,
+        id: wordExpected.id,
       };
       await request(app.getHttpServer()).post('/words').set('Authorization', 'Bearer mock-token').send(wordData);
     }
@@ -62,7 +62,12 @@ describe('Given a TermGetController to handle', () => {
         .expect(200);
 
       expect(response.body).toEqual({
-        ...word,
+        id: wordExpected.id,
+        countryId: wordExpected.countryId,
+        userId: wordExpected.userId,
+        languageId: wordExpected.languageId,
+        likes: wordExpected.likes,
+        terms: wordExpected.terms,
       });
     });
   });
