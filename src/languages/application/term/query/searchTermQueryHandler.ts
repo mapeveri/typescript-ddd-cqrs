@@ -10,7 +10,7 @@ import { IQueryHandler, QueryHandler } from '@src/shared/domain/bus/queryBus/que
 
 @QueryHandler(SearchTermQuery)
 export default class SearchTermQueryHandler implements IQueryHandler<SearchTermQuery> {
-  constructor(@Inject(SEARCH_TERM_VIEW_READ_LAYER) private readonly termRepository: SearchTermViewReadLayer) {}
+  constructor(@Inject(SEARCH_TERM_VIEW_READ_LAYER) private readonly searchTermViewReadLayer: SearchTermViewReadLayer) {}
 
   async execute(query: SearchTermQuery): Promise<QueryResponse> {
     const criteria: TermCriteriaParams = { term: query.term, size: query.size, page: query.page };
@@ -18,7 +18,7 @@ export default class SearchTermQueryHandler implements IQueryHandler<SearchTermQ
       criteria['orderBy'] = { key: query.orderBy, orderType: query.orderType };
     }
 
-    const terms = await this.termRepository.search(criteria);
+    const terms = await this.searchTermViewReadLayer.search(criteria);
     return SearchTermResponse.fromTerms(terms);
   }
 }
