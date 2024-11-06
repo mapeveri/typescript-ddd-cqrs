@@ -3,6 +3,7 @@ import FindCountriesQueryHandler from '@src/languages/application/country/query/
 import SearchTermQueryHandler from '@src/languages/application/term/query/searchTermQueryHandler';
 import FindUserQueryHandler from '@src/languages/application/user/query/findUserQueryHandler';
 import FindSuggestionsTermQueryHandler from '@src/languages/application/term/query/findSuggestionsTermQueryHandler';
+import FindTermQueryHandler from '@src/languages/application/term/query/findTermQueryHandler';
 
 export const queries = [
   FindCountryQueryHandler,
@@ -10,4 +11,5 @@ export const queries = [
   SearchTermQueryHandler,
   FindUserQueryHandler,
   FindSuggestionsTermQueryHandler,
+  FindTermQueryHandler,
 ];
