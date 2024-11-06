@@ -14,6 +14,7 @@ import { HealthController } from '@src/languages/app/controllers/v1/health/healt
 import LikeTermPostController from '@src/languages/app/controllers/v1/terms/likeTermPostController';
 import DislikeTermPostController from '@src/languages/app/controllers/v1/terms/dislikeTermPostController';
 import WordPutController from '@src/languages/app/controllers/v1/terms/words/wordPutController';
+import TermGetController from '@src/languages/app/controllers/v1/terms/termGetController';
 
 export const controllers = [
   LoginPostController,
@@ -21,6 +22,7 @@ export const controllers = [
   MeGetController,
   SearchTermsGetController,
   FindSuggestionsTermGetController,
+  TermGetController,
   WordPostController,
   ExpressionPostController,
   CountriesGetController,

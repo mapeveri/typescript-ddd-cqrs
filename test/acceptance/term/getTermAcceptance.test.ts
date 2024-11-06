@@ -48,7 +48,7 @@ describe('Given a TermGetController to handle', () => {
     beforeEach(startScenario);
 
     it('should return the term', async () => {
-      await request(app.getHttpServer()).get(`/term/${termId}`).set('Authorization', 'Bearer mock-token').expect(200);
+      await request(app.getHttpServer()).get(`/terms/${termId}`).set('Authorization', 'Bearer mock-token').expect(200);
     });
   });
 });
