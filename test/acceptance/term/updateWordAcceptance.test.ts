@@ -1,13 +1,14 @@
-import { beforeAll, describe, beforeEach, afterAll, it } from '@jest/globals';
+import { beforeAll, describe, beforeEach, afterAll, it, expect } from '@jest/globals';
 import { INestApplication } from '@nestjs/common';
 import request = require('supertest');
 import { MikroORM } from '@mikro-orm/core';
-import { createApplication, truncateTables } from '@test/acceptance/createApplication';
+import { createApplication, truncateTables, USER_ID_LOGGED } from '@test/acceptance/createApplication';
 import WordMother from '@test/unit/languages/domain/term/word/wordMother';
 import { TermIdMother } from '@test/unit/languages/domain/term/termIdMother';
 import { CountryIdMother } from '@test/unit/languages/domain/country/countryIdMother';
 import WordTermMother from '@test/unit/languages/domain/term/word/wordTermMother';
 import WordTermCollectionMother from '@test/unit/languages/domain/term/word/wordTermCollectionMother';
+import { UserIdMother } from '@test/unit/languages/domain/user/userIdMother';
 
 describe('Given a WordPutController to handle', () => {
   let app: INestApplication;
@@ -34,26 +35,27 @@ describe('Given a WordPutController to handle', () => {
 
   describe('As a user I want to update a word', () => {
     const wordId = TermIdMother.random().toString();
-    let wordData;
 
     async function startScenario() {
       await truncateTables(orm);
 
-      const word = WordMother.random({ id: TermIdMother.random(wordId) }).toPrimitives();
+      const word = WordMother.random({
+        id: TermIdMother.random(wordId),
+        userId: UserIdMother.random(USER_ID_LOGGED),
+      }).toPrimitives();
 
-      wordData = {
+      await request(app.getHttpServer()).post('/words').set('Authorization', 'Bearer mock-token').send({
         countryId: word.countryId,
         languageId: word.languageId,
         terms: word.terms,
         id: word.id,
-      };
-      await request(app.getHttpServer()).post('/words').set('Authorization', 'Bearer mock-token').send(wordData);
+      });
     }
 
     beforeEach(startScenario);
 
     it('should update all the values', async () => {
-      wordData = {
+      const wordData = {
         countryId: CountryIdMother.random().toString(),
         languageId: 'EN',
         terms: WordTermCollectionMother.random([WordTermMother.random().toPrimitives()]).toArray(),
@@ -64,6 +66,20 @@ describe('Given a WordPutController to handle', () => {
         .set('Authorization', 'Bearer mock-token')
         .send(wordData)
         .expect(204);
+
+      const response = await request(app.getHttpServer())
+        .get(`/terms/${wordId}`)
+        .set('Authorization', 'Bearer mock-token')
+        .expect(200);
+
+      expect(response.body).toEqual({
+        id: wordId,
+        countryId: wordData.countryId,
+        userId: USER_ID_LOGGED,
+        languageId: wordData.languageId,
+        likes: [],
+        terms: wordData.terms,
+      });
     });
   });
 });
