@@ -1,25 +1,25 @@
 import { beforeEach, beforeAll, describe, expect, it } from '@jest/globals';
 import { SearchTermQueryMother } from './searchTermQueryMother';
 import SearchTermQueryHandler from '@src/languages/application/term/query/searchTermQueryHandler';
-import { SearchTermViewReadLayerMock } from '@test/unit/languages/application/term/query/searchTermViewReadLayerMock';
+import { SearchTermViewReadModelMock } from '@test/unit/languages/application/term/query/searchTermViewReadModelMock';
 import { TermView } from '@src/languages/application/term/query/termView';
 import { TermViewMother } from '@test/unit/languages/application/term/query/termViewMother';
 import SearchTermQuery from '@src/languages/application/term/query/searchTermQuery';
 
 describe('Given a SearchTermQueryHandler to handle', () => {
-  let searchTermViewReadLayer: SearchTermViewReadLayerMock;
+  let searchTermViewReadModel: SearchTermViewReadModelMock;
   let handler: SearchTermQueryHandler;
 
   const prepareDependencies = () => {
-    searchTermViewReadLayer = new SearchTermViewReadLayerMock();
+    searchTermViewReadModel = new SearchTermViewReadModelMock();
   };
 
   const initHandler = () => {
-    handler = new SearchTermQueryHandler(searchTermViewReadLayer);
+    handler = new SearchTermQueryHandler(searchTermViewReadModel);
   };
 
   const clean = () => {
-    searchTermViewReadLayer.clean();
+    searchTermViewReadModel.clean();
   };
 
   beforeAll(() => {
@@ -56,7 +56,7 @@ describe('Given a SearchTermQueryHandler to handle', () => {
       });
 
       term = TermViewMother.random({ title: termToSearch });
-      searchTermViewReadLayer.add(term);
+      searchTermViewReadModel.add(term);
     }
 
     beforeEach(startScenario);

@@ -1,9 +1,9 @@
 import { TermView } from '@src/languages/application/term/query/termView';
-import SearchTermViewReadLayer, {
+import SearchTermViewReadModel, {
   TermCriteriaParams,
-} from '@src/languages/application/term/query/searchTermViewReadLayer';
+} from '@src/languages/application/term/query/searchTermViewReadModel';
 
-export class SearchTermViewReadLayerMock implements SearchTermViewReadLayer {
+export class SearchTermViewReadModelMock implements SearchTermViewReadModel {
   private terms: TermView[];
 
   constructor() {

@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { TermView } from '@src/languages/application/term/query/termView';
-import SearchTermViewReadLayer, {
+import SearchTermViewReadModel, {
   TermCriteriaParams,
-} from '@src/languages/application/term/query/searchTermViewReadLayer';
+} from '@src/languages/application/term/query/searchTermViewReadModel';
 import { Document, SortDirection } from 'mongodb';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import MongoConnection, { MONGO_CLIENT } from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
 
 @Injectable()
-export default class MongoSearchTermViewReadLayer implements SearchTermViewReadLayer {
+export default class MongoSearchTermViewReadModel implements SearchTermViewReadModel {
   constructor(@Inject(MONGO_CLIENT) private readonly mongo: MongoConnection) {}
 
   async search(criteria: TermCriteriaParams): Promise<TermView[]> {

@@ -1,7 +1,7 @@
 import { FIND_SUGGESTIONS_TERM_READ_MODEL } from '@src/languages/application/term/query/findSuggestionsTermReadModel';
 import MongoFindSuggestionsTermReadModel from '@src/languages/infrastructure/persistence/mongo/readLayer/mongoFindSuggestionsTermReadModel';
-import { SEARCH_TERM_VIEW_READ_LAYER } from '@src/languages/application/term/query/searchTermViewReadLayer';
-import MongoSearchTermViewReadLayer from '@src/languages/infrastructure/persistence/mongo/readLayer/mongoSearchTermViewReadLayer';
+import { SEARCH_TERM_VIEW_READ_MODEL } from '@src/languages/application/term/query/searchTermViewReadModel';
+import MongoSearchTermViewReadModel from '@src/languages/infrastructure/persistence/mongo/readLayer/mongoSearchTermViewReadModel';
 
 export const readLayers = [
   {
@@ -9,7 +9,7 @@ export const readLayers = [
     useClass: MongoFindSuggestionsTermReadModel,
   },
   {
-    provide: SEARCH_TERM_VIEW_READ_LAYER,
-    useClass: MongoSearchTermViewReadLayer,
+    provide: SEARCH_TERM_VIEW_READ_MODEL,
+    useClass: MongoSearchTermViewReadModel,
   },
 ];
