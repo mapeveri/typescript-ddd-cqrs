@@ -1,5 +1,5 @@
 import { beforeEach, beforeAll, describe, expect, it } from '@jest/globals';
-import { FindSuggestionsTermReadLayerMock } from '@test/unit/languages/application/term/query/findSuggestionsTermReadLayerMock';
+import { FindSuggestionsTermReadModelMock } from '@test/unit/languages/application/term/query/findSuggestionsTermReadModelMock';
 import FindSuggestionsTermQueryHandler from '@src/languages/application/term/query/findSuggestionsTermQueryHandler';
 import { FindSuggestionsTermQueryMother } from '@test/unit/languages/application/term/query/findSuggestionsTermQueryMother';
 import { TermViewMother } from '@test/unit/languages/application/term/query/termViewMother';
@@ -8,19 +8,19 @@ import { TermView } from '@src/languages/application/term/query/termView';
 import InvalidArgumentException from '@src/shared/domain/exceptions/invalidArgumentException';
 
 describe('Given a FindSuggestionsTermQueryHandler to handle', () => {
-  let findSuggestionTermReadLayer: FindSuggestionsTermReadLayerMock;
+  let findSuggestionTermReadModel: FindSuggestionsTermReadModelMock;
   let handler: FindSuggestionsTermQueryHandler;
 
   const prepareDependencies = () => {
-    findSuggestionTermReadLayer = new FindSuggestionsTermReadLayerMock();
+    findSuggestionTermReadModel = new FindSuggestionsTermReadModelMock();
   };
 
   const initHandler = () => {
-    handler = new FindSuggestionsTermQueryHandler(findSuggestionTermReadLayer);
+    handler = new FindSuggestionsTermQueryHandler(findSuggestionTermReadModel);
   };
 
   const clean = () => {
-    findSuggestionTermReadLayer.clean();
+    findSuggestionTermReadModel.clean();
   };
 
   beforeAll(() => {
@@ -63,7 +63,7 @@ describe('Given a FindSuggestionsTermQueryHandler to handle', () => {
     function startScenario() {
       query = FindSuggestionsTermQueryMother.random();
       term = TermViewMother.random();
-      findSuggestionTermReadLayer.add(term);
+      findSuggestionTermReadModel.add(term);
     }
 
     beforeEach(startScenario);

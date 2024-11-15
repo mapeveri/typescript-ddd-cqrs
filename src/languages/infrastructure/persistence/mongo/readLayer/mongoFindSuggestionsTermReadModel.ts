@@ -1,4 +1,4 @@
-import FindSuggestionsTermReadLayer from '@src/languages/application/term/query/findSuggestionsTermReadLayer';
+import FindSuggestionsTermReadModel from '@src/languages/application/term/query/findSuggestionsTermReadModel';
 import UserId from '@src/languages/domain/user/userId';
 import { TermView } from '@src/languages/application/term/query/termView';
 import UserRepository, { USER_REPOSITORY } from '@src/languages/domain/user/userRepository';
@@ -7,7 +7,7 @@ import UserFinder from '@src/languages/domain/user/userFinder';
 import { Document } from 'mongodb';
 import MongoConnection, { MONGO_CLIENT } from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
 
-export default class MongoFindSuggestionsTermReadLayer implements FindSuggestionsTermReadLayer {
+export default class MongoFindSuggestionsTermReadModel implements FindSuggestionsTermReadModel {
   private readonly userFinder: UserFinder;
 
   constructor(

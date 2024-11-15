@@ -1,8 +1,8 @@
 import { TermView } from '@src/languages/application/term/query/termView';
 import UserId from '@src/languages/domain/user/userId';
-import FindSuggestionsTermReadLayer from '@src/languages/application/term/query/findSuggestionsTermReadLayer';
+import FindSuggestionsTermReadModel from '@src/languages/application/term/query/findSuggestionsTermReadModel';
 
-export class FindSuggestionsTermReadLayerMock implements FindSuggestionsTermReadLayer {
+export class FindSuggestionsTermReadModelMock implements FindSuggestionsTermReadModel {
   private terms: TermView[];
 
   constructor() {
