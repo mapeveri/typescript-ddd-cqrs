@@ -3,7 +3,7 @@ import MongoFindSuggestionsTermReadModel from '@src/languages/infrastructure/per
 import { SEARCH_TERM_VIEW_READ_MODEL } from '@src/languages/application/term/query/searchTermViewReadModel';
 import MongoSearchTermViewReadModel from '@src/languages/infrastructure/persistence/mongo/readLayer/mongoSearchTermViewReadModel';
 
-export const readLayers = [
+export const readModels = [
   {
     provide: FIND_SUGGESTIONS_TERM_READ_MODEL,
     useClass: MongoFindSuggestionsTermReadModel,
