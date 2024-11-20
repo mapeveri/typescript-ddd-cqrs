@@ -22,7 +22,7 @@ Configuration for development.
 
 ### Running
 
-After running docker compose up the application will be available at https://localhost:4000.
+After running *docker compose up*, the application will be available at http://localhost:4000
 
 ### Migrations
 
