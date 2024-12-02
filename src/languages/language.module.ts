@@ -7,7 +7,7 @@ import { events } from '@src/languages/_dependencyInjection/eventHandlers';
 import { projections } from '@src/languages/_dependencyInjection/projectionHandlers';
 import { readModels } from '@src/languages/_dependencyInjection/readModels';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
-import { entitySchemas } from '@src/shared/_dependencyInjection/entitySchemas';
+import { entitySchemas } from '@src/languages/_dependencyInjection/entitySchemas';
 import mikroOrmConfiguration from './infrastructure/persistence/mikroOrm/config';
 
 @Module({
