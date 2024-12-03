@@ -1,22 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { EventBus } from '@nestjs/cqrs';
 import { DomainEvent } from '@src/shared/domain/bus/eventBus/domainEvent';
-import { EVENT_STORE_REPOSITORY, EventStoreRepository } from '@src/shared/domain/eventStore/eventStoreRepository';
-import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { mongoTransactionalOperation } from '@src/shared/infrastructure/persistence/mongo/mongoTransactionalDecorator';
 import { Subject, takeUntil } from 'rxjs';
+import MongoEventStoreRepository from '@src/shared/infrastructure/persistence/mongo/repositories/mongoEventStoreRepository';
 
 @Injectable()
 export class PersistDomainEventsSubscriber {
   private destroy$ = new Subject<void>();
 
   constructor(
-    private eventBus: EventBus,
-    @Inject(EVENT_STORE_REPOSITORY) private eventStoreRepository: EventStoreRepository,
+    private readonly eventBus: EventBus,
+    private readonly mongoEventStoreRepository: MongoEventStoreRepository,
   ) {
     this.eventBus.pipe(takeUntil(this.destroy$)).subscribe((event) => {
       void mongoTransactionalOperation(async (event: DomainEvent) => {
-        void this.eventStoreRepository.save(event);
+        void this.mongoEventStoreRepository.save(event);
       }, event as DomainEvent);
     });
   }

@@ -11,7 +11,6 @@ import NestEventBus from '@src/shared/infrastructure/bus/nestEventBus';
 import { RabbitMqEventBus } from '@src/shared/infrastructure/bus/rabbitMq/rabbitMqEventBus';
 import { QUERY_BUS } from '@src/shared/domain/bus/queryBus/queryBus';
 import NestQueryBusBus from '@src/shared/infrastructure/bus/nestQueryBus';
-import { EVENT_STORE_REPOSITORY } from '@src/shared/domain/eventStore/eventStoreRepository';
 import MongoEventStoreRepository from '@src/shared/infrastructure/persistence/mongo/repositories/mongoEventStoreRepository';
 import { PersistDomainEventsSubscriber } from '@src/shared/infrastructure/subscribers/persistDomainEventsSubscriber';
 import MongoConnection, { MONGO_CLIENT } from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
@@ -55,10 +54,7 @@ export const services = [
     provide: QUERY_BUS,
     useClass: NestQueryBusBus,
   },
-  {
-    provide: EVENT_STORE_REPOSITORY,
-    useClass: MongoEventStoreRepository,
-  },
+  MongoEventStoreRepository,
   PersistDomainEventsSubscriber,
   {
     provide: SOCIAL_AUTHENTICATOR,
