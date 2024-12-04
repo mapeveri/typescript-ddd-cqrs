@@ -18,7 +18,8 @@ export default class LoginPostController {
   @ApiBadRequestResponse({ description: 'Bad Request.' })
   @ApiInternalServerErrorResponse({ description: 'Internal Server Error.' })
   async run(@Body() payload: LoginPostDto): Promise<LoginPostResponseDto> {
-    const id = Uuid.random().toString();
+    const id = Uuid.fromString(payload.email).toString();
+
     await this.commandBus.dispatch(
       new LoginUserCommand(id, payload.name, payload.email, payload.token, payload.provider, payload.photo),
     );
