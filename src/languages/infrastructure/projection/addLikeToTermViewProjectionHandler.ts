@@ -1,8 +1,7 @@
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import MongoConnection, { MONGO_CLIENT } from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
 import { TermLike, TermView } from '@src/languages/application/term/query/termView';
-import { Collection } from 'mongodb';
-import { Document } from 'bson/src/bson';
+import { Collection, Document } from 'mongodb';
 import { EventsHandler, IEventHandler } from '@src/shared/domain/bus/eventBus/eventsHandler';
 import TermLikeAddedEvent from '@src/languages/domain/term/termLikeAddedEvent';
 import { MongoTransactional } from '@src/shared/infrastructure/persistence/mongo/mongoTransactionalDecorator';
