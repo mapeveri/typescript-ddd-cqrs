@@ -17,7 +17,7 @@ export default class LoginUserCommandHandler implements ICommandHandler<LoginUse
   ) {}
 
   async execute(command: LoginUserCommand): Promise<void> {
-    await this.guardIsValidLogin(command);
+    await this.verifyLogin(command);
 
     const authSessionId = AuthSessionId.of(command.id);
     const authSession = AuthSession.create(
@@ -34,7 +34,7 @@ export default class LoginUserCommandHandler implements ICommandHandler<LoginUse
     void this.eventBus.publish(authSession.pullDomainEvents());
   }
 
-  private async guardIsValidLogin(command: LoginUserCommand): Promise<void> {
+  private async verifyLogin(command: LoginUserCommand): Promise<void> {
     const isValid: boolean = await this.socialAuthenticator.login(command.token);
     if (!isValid) {
       throw new LoginException(command.email);
