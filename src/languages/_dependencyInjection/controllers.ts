@@ -15,9 +15,11 @@ import LikeTermPostController from '@src/languages/app/controllers/v1/terms/like
 import DislikeTermPostController from '@src/languages/app/controllers/v1/terms/dislikeTermPostController';
 import WordPutController from '@src/languages/app/controllers/v1/terms/words/wordPutController';
 import TermGetController from '@src/languages/app/controllers/v1/terms/termGetController';
+import SignupPostController from '@src/languages/app/controllers/v1/auth/signupPostController';
 
 export const controllers = [
   LoginPostController,
+  SignupPostController,
   RefreshTokenPostController,
   MeGetController,
   SearchTermsGetController,
