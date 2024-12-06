@@ -16,6 +16,7 @@ import { SOCIAL_AUTHENTICATOR } from '@src/shared/domain/auth/socialAuthenticato
 import MongoConnection, { MONGO_CLIENT } from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
 import { ConfigModule } from '@nestjs/config';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
+import { USER_AUTHENTICATOR } from '@src/shared/domain/auth/userAuthenticator';
 
 @Global()
 @Module({
@@ -49,6 +50,7 @@ import { Inject } from '@src/shared/domain/injector/inject.decorator';
     EVENT_BUS,
     ASYNC_EVENT_BUS,
     SOCIAL_AUTHENTICATOR,
+    USER_AUTHENTICATOR,
   ],
 })
 export class SharedModule implements OnApplicationShutdown {

@@ -1,6 +1,6 @@
-import { Command } from '@src/shared/domain/bus/commandBus/command';
+import { Query } from '@src/shared/domain/bus/queryBus/query';
 
-export default class LoginUserCommand implements Command {
+export default class GetUserLoginQuery implements Query {
   constructor(
     public readonly id: string,
     public readonly name: string,

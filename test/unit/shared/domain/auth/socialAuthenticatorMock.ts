@@ -15,7 +15,7 @@ export class SocialAuthenticatorMock implements SocialAuthenticator {
     this.toReturn = false;
   }
 
-  async login(_token: string): Promise<boolean> {
+  async verify(_token: string): Promise<boolean> {
     return Promise.resolve(this.toReturn);
   }
 }

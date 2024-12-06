@@ -1,4 +1,3 @@
-import LoginUserCommandHandler from '@src/languages/application/auth/command/loginUserCommandHandler';
 import CreateCountryCommandHandler from '@src/languages/application/country/command/createCountryCommandHandler';
 import CreateExpressionCommandHandler from '@src/languages/application/term/command/expression/createExpressionCommandHandler';
 import DeleteTermCommandHandler from '@src/languages/application/term/command/deleteTermCommandHandler';
@@ -10,7 +9,6 @@ import UpdateWordCommandHandler from '@src/languages/application/term/command/wo
 import SignupUserCommandHandler from '@src/languages/application/auth/command/signupUserCommandHandler';
 
 export const commands = [
-  LoginUserCommandHandler,
   SignupUserCommandHandler,
   CreateCountryCommandHandler,
   CreateExpressionCommandHandler,

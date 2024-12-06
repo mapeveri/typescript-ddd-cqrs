@@ -11,7 +11,7 @@ export default class GoogleSocialAuthenticator implements SocialAuthenticator {
     @Inject(LOGGER) private readonly logger: Logger,
   ) {}
 
-  async login(token: string): Promise<boolean> {
+  async verify(token: string): Promise<boolean> {
     let isValid;
     try {
       await this.client.verifyIdToken({

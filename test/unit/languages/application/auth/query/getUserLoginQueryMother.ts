@@ -1,7 +1,7 @@
-import LoginUserCommand from '@src/languages/application/auth/command/loginUserCommand';
+import GetUserLoginQuery from '@src/languages/application/auth/query/getUserLoginQuery';
 import faker from 'faker';
 
-interface LoginUserCommandProps {
+interface GetUserLoginQueryProps {
   id?: string;
   name?: string;
   email?: string;
@@ -10,11 +10,11 @@ interface LoginUserCommandProps {
   photo?: string;
 }
 
-export class LoginUserCommandMother {
-  static random(props?: LoginUserCommandProps): LoginUserCommand {
+export class GetUserLoginQueryMother {
+  static random(props?: GetUserLoginQueryProps): GetUserLoginQuery {
     const { id, name, email, token, provider, photo } = props ?? {};
 
-    return new LoginUserCommand(
+    return new GetUserLoginQuery(
       id ?? faker.datatype.uuid(),
       name ?? faker.name.findName(),
       email ?? faker.internet.email(),
