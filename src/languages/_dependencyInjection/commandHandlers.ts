@@ -2,7 +2,6 @@ import LoginUserCommandHandler from '@src/languages/application/auth/command/log
 import CreateCountryCommandHandler from '@src/languages/application/country/command/createCountryCommandHandler';
 import CreateExpressionCommandHandler from '@src/languages/application/term/command/expression/createExpressionCommandHandler';
 import DeleteTermCommandHandler from '@src/languages/application/term/command/deleteTermCommandHandler';
-import CreateUserCommandHandler from '@src/languages/application/user/command/createUserCommandHandler';
 import UpdateUserCommandHandler from '@src/languages/application/user/command/updateUserCommandHandler';
 import CreateWordCommandHandler from '@src/languages/application/term/command/word/createWordCommandHandler';
 import AddLikeTermCommandHandler from '@src/languages/application/term/command/addLikeTermCommandHandler';
@@ -15,7 +14,6 @@ export const commands = [
   SignupUserCommandHandler,
   CreateCountryCommandHandler,
   CreateExpressionCommandHandler,
-  CreateUserCommandHandler,
   UpdateUserCommandHandler,
   CreateWordCommandHandler,
   UpdateWordCommandHandler,
