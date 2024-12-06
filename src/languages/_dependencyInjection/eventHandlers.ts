@@ -1,4 +1,3 @@
-import CreateUserOnAuthSessionCreatedEventHandler from '@src/languages/application/user/event/createUserOnAuthSessionCreatedEventHandler';
 import DeleteTermOnTermCreatedUncompletedEventHandler from '@src/languages/application/term/event/deleteTermOnTermCreatedUncompletedEventHandler';
 
-export const events = [CreateUserOnAuthSessionCreatedEventHandler, DeleteTermOnTermCreatedUncompletedEventHandler];
+export const events = [DeleteTermOnTermCreatedUncompletedEventHandler];
