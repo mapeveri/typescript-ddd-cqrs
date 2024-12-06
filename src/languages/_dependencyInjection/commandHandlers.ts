@@ -8,9 +8,11 @@ import CreateWordCommandHandler from '@src/languages/application/term/command/wo
 import AddLikeTermCommandHandler from '@src/languages/application/term/command/addLikeTermCommandHandler';
 import DislikeTermCommandHandler from '@src/languages/application/term/command/dislikeTermCommandHandler';
 import UpdateWordCommandHandler from '@src/languages/application/term/command/word/updateWordCommandHandler';
+import SignupUserCommandHandler from '@src/languages/application/auth/command/signupUserCommandHandler';
 
 export const commands = [
   LoginUserCommandHandler,
+  SignupUserCommandHandler,
   CreateCountryCommandHandler,
   CreateExpressionCommandHandler,
   CreateUserCommandHandler,

@@ -2,6 +2,7 @@ import { AggregateRoot } from '@src/shared/domain/aggregate/aggregateRoot';
 import UserId from './userId';
 import Email from '@src/shared/domain/valueObjects/email';
 import UserUpdatedEvent from '@src/languages/domain/user/userUpdatedEvent';
+import UserCreatedEvent from '@src/languages/domain/user/userCreatedEvent';
 
 export type UserPrimitives = {
   id: string;
@@ -37,7 +38,11 @@ export default class User extends AggregateRoot {
   }
 
   static create(id: UserId, name: string, provider: string, email: Email, photo: string): User {
-    return new this(id, name, provider, email, photo, []);
+    const user = new this(id, name, provider, email, photo, []);
+
+    user.record(new UserCreatedEvent(id.toString(), name, provider, email.toString(), photo));
+
+    return user;
   }
 
   update(name: string, photo: string, interests: string[]): void {
