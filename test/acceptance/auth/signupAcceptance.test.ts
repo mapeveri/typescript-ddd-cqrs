@@ -40,7 +40,6 @@ describe('Given a SignupPostController to handle', () => {
         .set('Authorization', 'Bearer mock-token')
         .send({
           email: 'test@test.com',
-          password: 'test123',
           name: 'test',
           token: '123',
           provider: 'google',
