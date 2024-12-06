@@ -2,36 +2,25 @@ import { beforeEach, beforeAll, describe, expect, it, jest } from '@jest/globals
 import LoginUserCommandHandler from '@src/languages/application/auth/command/loginUserCommandHandler';
 import { LoginUserCommandMother } from './loginUserCommandMother';
 import LoginException from '@src/shared/domain/auth/loginException';
-import { AuthSessionRepositoryMock } from '@test/unit/languages/domain/auth/authSessionRepositoryMock';
 import { SocialAuthenticatorMock } from '@test/unit/shared/domain/auth/socialAuthenticatorMock';
-import { EventBusMock } from '@test/unit/shared/domain/buses/eventBus/eventBusMock';
-import { AuthSessionMother } from '@test/unit/languages/domain/auth/authSessionMother';
-import { AuthSessionIdMother } from '@test/unit/languages/domain/auth/authSessionIdMother';
-import { AuthSessionCreatedEventMother } from '@test/unit/languages/domain/auth/authSessionCreatedEventMother';
 import LoginUserCommand from '@src/languages/application/auth/command/loginUserCommand';
 
 describe('Given a LoginUserCommandHandler to handle', () => {
-  let authSessionRepository: AuthSessionRepositoryMock;
   let socialAuthenticator: SocialAuthenticatorMock;
-  let eventBus: EventBusMock;
   let handler: LoginUserCommandHandler;
 
   const prepareDependencies = () => {
-    authSessionRepository = new AuthSessionRepositoryMock();
     socialAuthenticator = new SocialAuthenticatorMock();
-    eventBus = new EventBusMock();
   };
 
   const initHandler = () => {
-    handler = new LoginUserCommandHandler(authSessionRepository, socialAuthenticator, eventBus);
+    handler = new LoginUserCommandHandler(socialAuthenticator);
 
     jest.useFakeTimers();
   };
 
   const clean = () => {
-    authSessionRepository.clean();
     socialAuthenticator.clean();
-    eventBus.clean();
   };
 
   beforeAll(() => {
@@ -53,17 +42,8 @@ describe('Given a LoginUserCommandHandler to handle', () => {
 
     beforeEach(startScenario);
 
-    it('should not save auth session', async () => {
+    it('should raise an exception', async () => {
       await expect(handler.execute(command)).rejects.toThrowError(LoginException);
-
-      expect(authSessionRepository.storedChanged()).toBeFalsy();
-      expect(authSessionRepository.stored()).toHaveLength(0);
-    });
-
-    it('should not publish any events', async () => {
-      await expect(handler.execute(command)).rejects.toThrowError(LoginException);
-
-      expect(eventBus.domainEvents()).toHaveLength(0);
     });
   });
 
@@ -77,34 +57,8 @@ describe('Given a LoginUserCommandHandler to handle', () => {
 
     beforeEach(startScenario);
 
-    it('should save auth session', async () => {
-      const authSession = AuthSessionMother.random({
-        id: AuthSessionIdMother.random(command.id),
-        session: {
-          provider: command.provider,
-          token: command.token,
-          email: command.email,
-          photo: command.photo,
-          name: command.name,
-        },
-      });
-
+    it('should be all ok', async () => {
       await handler.execute(command);
-
-      expect(authSessionRepository.storedChanged()).toBeTruthy();
-      expect(authSessionRepository.stored()).toHaveLength(1);
-      expect(authSessionRepository.stored()[0].toPrimitives()).toEqual(authSession.toPrimitives());
-    });
-
-    it('should publish an event', async () => {
-      const userAuthenticatedEvent = AuthSessionCreatedEventMother.createFromLoginUserCommand(command);
-
-      await handler.execute(command);
-
-      expect(eventBus.domainEvents()).toHaveLength(1);
-      expect(eventBus.domainEvents()[0]).toEqual({
-        ...userAuthenticatedEvent,
-      });
     });
   });
 });
