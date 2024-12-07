@@ -14,8 +14,8 @@ import NestQueryBusBus from '@src/shared/infrastructure/bus/nestQueryBus';
 import MongoEventStoreRepository from '@src/shared/infrastructure/persistence/mongo/repositories/mongoEventStoreRepository';
 import { PersistDomainEventsSubscriber } from '@src/shared/infrastructure/subscribers/persistDomainEventsSubscriber';
 import MongoConnection, { MONGO_CLIENT } from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
-import { SOCIAL_AUTHENTICATOR } from '@src/shared/domain/auth/socialAuthenticator';
-import GoogleSocialAuthenticator from '@src/shared/infrastructure/auth/oauth/googleSocialAuthenticator';
+import { SOCIAL_AUTHENTICATION_VERIFIER } from '@src/shared/domain/auth/socialAuthenticationVerifier';
+import GoogleSocialAuthenticationVerifier from '@src/shared/infrastructure/auth/oauth/googleSocialAuthenticationVerifier';
 import { ConfigService } from '@nestjs/config';
 import { OAuth2Client } from 'google-auth-library';
 import MikroOrmTransactionalDecorator from '../infrastructure/persistence/mikroOrm/decorators/mikroOrmTransactionalDecorator';
@@ -59,8 +59,8 @@ export const services = [
   MongoEventStoreRepository,
   PersistDomainEventsSubscriber,
   {
-    provide: SOCIAL_AUTHENTICATOR,
-    useClass: GoogleSocialAuthenticator,
+    provide: SOCIAL_AUTHENTICATION_VERIFIER,
+    useClass: GoogleSocialAuthenticationVerifier,
   },
   {
     provide: USER_AUTHENTICATOR,

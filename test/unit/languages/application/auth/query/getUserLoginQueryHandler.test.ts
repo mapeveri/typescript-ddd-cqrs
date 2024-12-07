@@ -2,12 +2,12 @@ import { beforeEach, beforeAll, describe, expect, it, jest } from '@jest/globals
 import GetUserLoginQueryHandler from '@src/languages/application/auth/query/getUserLoginQueryHandler';
 import { GetUserLoginQueryMother } from './getUserLoginQueryMother';
 import LoginException from '@src/shared/domain/auth/loginException';
-import { SocialAuthenticatorMock } from '@test/unit/shared/domain/auth/socialAuthenticatorMock';
+import { SocialAuthenticationVerifierMock } from '@test/unit/shared/domain/auth/socialAuthenticationVerifierMock';
 import GetUserLoginQuery from '@src/languages/application/auth/query/getUserLoginQuery';
 import { UserAuthenticatorMock } from '@test/unit/shared/domain/auth/userAuthenticatorMock';
 
 describe('Given a GetUserLoginQueryHandler to handle', () => {
-  let socialAuthenticator: SocialAuthenticatorMock;
+  let socialAuthenticationVerifier: SocialAuthenticationVerifierMock;
   let userAuthenticator: UserAuthenticatorMock;
   let handler: GetUserLoginQueryHandler;
 
@@ -18,18 +18,18 @@ describe('Given a GetUserLoginQueryHandler to handle', () => {
   const REFRESH_TOKEN = '1234';
 
   const prepareDependencies = () => {
-    socialAuthenticator = new SocialAuthenticatorMock();
+    socialAuthenticationVerifier = new SocialAuthenticationVerifierMock();
     userAuthenticator = new UserAuthenticatorMock();
   };
 
   const initHandler = () => {
-    handler = new GetUserLoginQueryHandler(socialAuthenticator, userAuthenticator);
+    handler = new GetUserLoginQueryHandler(socialAuthenticationVerifier, userAuthenticator);
 
     jest.useFakeTimers();
   };
 
   const clean = () => {
-    socialAuthenticator.clean();
+    socialAuthenticationVerifier.clean();
     userAuthenticator.clean();
   };
 
@@ -47,7 +47,7 @@ describe('Given a GetUserLoginQueryHandler to handle', () => {
 
     function startScenario() {
       command = GetUserLoginQueryMother.random();
-      socialAuthenticator.add(false);
+      socialAuthenticationVerifier.add(false);
     }
 
     beforeEach(startScenario);
@@ -66,7 +66,7 @@ describe('Given a GetUserLoginQueryHandler to handle', () => {
         email: EMAIL,
         name: NAME,
       });
-      socialAuthenticator.add(true);
+      socialAuthenticationVerifier.add(true);
       userAuthenticator.add({ token: '123', refreshToken: '1234' });
     }
 

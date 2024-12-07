@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { SocialAuthenticator } from '@src/shared/domain/auth/socialAuthenticator';
+import { SocialAuthenticationVerifier } from '@src/shared/domain/auth/socialAuthenticationVerifier';
 import { OAuth2Client } from 'google-auth-library';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import Logger, { LOGGER } from '@src/shared/domain/logger';
 
 @Injectable()
-export default class GoogleSocialAuthenticator implements SocialAuthenticator {
+export default class GoogleSocialAuthenticationVerifier implements SocialAuthenticationVerifier {
   constructor(
     @Inject('GOOGLE_OAUTH_CLIENT') readonly client: OAuth2Client,
     @Inject(LOGGER) private readonly logger: Logger,

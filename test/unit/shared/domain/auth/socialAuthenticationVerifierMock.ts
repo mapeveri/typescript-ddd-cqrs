@@ -1,6 +1,6 @@
-import { SocialAuthenticator } from '@src/shared/domain/auth/socialAuthenticator';
+import { SocialAuthenticationVerifier } from '@src/shared/domain/auth/socialAuthenticationVerifier';
 
-export class SocialAuthenticatorMock implements SocialAuthenticator {
+export class SocialAuthenticationVerifierMock implements SocialAuthenticationVerifier {
   private toReturn: boolean;
 
   constructor() {
