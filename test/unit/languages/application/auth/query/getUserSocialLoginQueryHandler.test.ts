@@ -1,15 +1,15 @@
 import { beforeEach, beforeAll, describe, expect, it, jest } from '@jest/globals';
-import GetUserLoginQueryHandler from '@src/languages/application/auth/query/getUserLoginQueryHandler';
-import { GetUserLoginQueryMother } from './getUserLoginQueryMother';
+import GetUserSocialLoginQueryHandler from '@src/languages/application/auth/query/getUserSocialLoginQueryHandler';
+import { GetUserSocialLoginQueryMother } from './getUserSocialLoginQueryMother';
 import LoginException from '@src/shared/domain/auth/loginException';
 import { SocialAuthenticationVerifierMock } from '@test/unit/shared/domain/auth/socialAuthenticationVerifierMock';
-import GetUserLoginQuery from '@src/languages/application/auth/query/getUserLoginQuery';
+import GetUserSocialLoginQuery from '@src/languages/application/auth/query/getUserSocialLoginQuery';
 import { UserAuthenticatorMock } from '@test/unit/shared/domain/auth/userAuthenticatorMock';
 
-describe('Given a GetUserLoginQueryHandler to handle', () => {
+describe('Given a GetUserSocialLoginQueryHandler to handle', () => {
   let socialAuthenticationVerifier: SocialAuthenticationVerifierMock;
   let userAuthenticator: UserAuthenticatorMock;
-  let handler: GetUserLoginQueryHandler;
+  let handler: GetUserSocialLoginQueryHandler;
 
   const EMAIL = 'test@test.com';
   const ID = '4a4df157-8ab8-50af-bb39-88e8ce29eb16';
@@ -23,7 +23,7 @@ describe('Given a GetUserLoginQueryHandler to handle', () => {
   };
 
   const initHandler = () => {
-    handler = new GetUserLoginQueryHandler(socialAuthenticationVerifier, userAuthenticator);
+    handler = new GetUserSocialLoginQueryHandler(socialAuthenticationVerifier, userAuthenticator);
 
     jest.useFakeTimers();
   };
@@ -43,10 +43,10 @@ describe('Given a GetUserLoginQueryHandler to handle', () => {
   });
 
   describe('When the login fail', () => {
-    let command: GetUserLoginQuery;
+    let command: GetUserSocialLoginQuery;
 
     function startScenario() {
-      command = GetUserLoginQueryMother.random();
+      command = GetUserSocialLoginQueryMother.random();
       socialAuthenticationVerifier.add(false);
     }
 
@@ -58,10 +58,10 @@ describe('Given a GetUserLoginQueryHandler to handle', () => {
   });
 
   describe('When the login is success', () => {
-    let command: GetUserLoginQuery;
+    let command: GetUserSocialLoginQuery;
 
     function startScenario() {
-      command = GetUserLoginQueryMother.random({
+      command = GetUserSocialLoginQueryMother.random({
         id: ID,
         email: EMAIL,
         name: NAME,

@@ -1,6 +1,6 @@
 import { Query } from '@src/shared/domain/bus/queryBus/query';
 
-export default class GetUserLoginQuery implements Query {
+export default class GetUserSocialLoginQuery implements Query {
   constructor(
     public readonly id: string,
     public readonly name: string,

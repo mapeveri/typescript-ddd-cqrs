@@ -1,4 +1,4 @@
-import GetUserLoginQuery from '@src/languages/application/auth/query/getUserLoginQuery';
+import GetUserSocialLoginQuery from '@src/languages/application/auth/query/getUserSocialLoginQuery';
 import { Uuid } from '@src/shared/domain/valueObjects/uuid';
 import { Body, Controller, HttpCode, Inject, Post } from '@nestjs/common';
 import LoginPostDto from './loginPostDto';
@@ -20,7 +20,7 @@ export default class LoginPostController {
     const id = Uuid.fromString(payload.email).toString();
 
     const response = await this.queryBus.ask(
-      new GetUserLoginQuery(id, payload.name, payload.email, payload.token, payload.provider, payload.photo),
+      new GetUserSocialLoginQuery(id, payload.name, payload.email, payload.token, payload.provider, payload.photo),
     );
 
     console.log(response);
