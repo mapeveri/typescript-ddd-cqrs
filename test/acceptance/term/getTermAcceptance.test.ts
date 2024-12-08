@@ -8,7 +8,7 @@ import { TermIdMother } from '@test/unit/languages/domain/term/termIdMother';
 import { WordPrimitives } from '@src/languages/domain/term/word/word';
 import { UserIdMother } from '@test/unit/languages/domain/user/userIdMother';
 
-describe('Given a TermGetController to handle', () => {
+describe('Get term feature', () => {
   let app: INestApplication;
   let orm: MikroORM;
 

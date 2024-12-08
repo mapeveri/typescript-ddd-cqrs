@@ -10,7 +10,7 @@ import WordTermMother from '@test/unit/languages/domain/term/word/wordTermMother
 import WordTermCollectionMother from '@test/unit/languages/domain/term/word/wordTermCollectionMother';
 import { UserIdMother } from '@test/unit/languages/domain/user/userIdMother';
 
-describe('Given a WordPutController to handle', () => {
+describe('Update word feature', () => {
   let app: INestApplication;
   let orm: MikroORM;
 

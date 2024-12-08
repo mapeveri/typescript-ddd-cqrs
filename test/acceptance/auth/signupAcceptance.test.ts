@@ -4,7 +4,7 @@ import request = require('supertest');
 import { MikroORM } from '@mikro-orm/core';
 import { createApplication, truncateTables } from '@test/acceptance/createApplication';
 
-describe('Given a SignupPostController to handle', () => {
+describe('Signup feature', () => {
   let app: INestApplication;
   let orm: MikroORM;
 

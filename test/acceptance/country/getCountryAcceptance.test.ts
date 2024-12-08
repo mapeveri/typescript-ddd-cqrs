@@ -7,7 +7,7 @@ import CountryMother from '@test/unit/languages/domain/country/countryMother';
 import { CountryPrimitives } from '@src/languages/domain/country/country';
 import { CountryIdMother } from '@test/unit/languages/domain/country/countryIdMother';
 
-describe('Given a CountryGetController to handle', () => {
+describe('Get country feature', () => {
   let app: INestApplication;
   let orm: MikroORM;
 
