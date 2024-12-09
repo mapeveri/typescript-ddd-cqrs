@@ -16,7 +16,6 @@ export class DomainEventsConsumerController {
     try {
       const classPath = `@src/${data.classPath}`;
       const filePath = classPath.replace(/\./g, '/');
-      console.log(filePath);
 
       const domainEventClass = require(filePath).default;
       const domainEvent = domainEventClass.fromPrimitives(data.message);
