@@ -10,7 +10,7 @@ export default class TermCreatedUncompletedEvent extends DomainEvent {
   }
 
   public static eventTypeName(): string {
-    return 'term.created.failed';
+    return 'term.created.uncompleted';
   }
 
   public classPathName(): string {
