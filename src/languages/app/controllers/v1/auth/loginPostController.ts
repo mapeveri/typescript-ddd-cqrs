@@ -23,8 +23,6 @@ export default class LoginPostController {
       new GetUserSocialLoginQuery(id, payload.name, payload.email, payload.token, payload.provider, payload.photo),
     );
 
-    console.log(response);
-
     return {
       user: response.content.user,
       token: response.content.token,
