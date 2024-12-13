@@ -4,13 +4,13 @@ import DislikeTermCommandHandler from '@src/languages/application/term/command/d
 import { DislikeTermCommandMother } from '@test/unit/languages/application/term/command/dislikeTermCommandMother';
 import DislikeTermCommand from '@src/languages/application/term/command/dislikeTermCommand';
 import { TermRepositoryMock } from '@test/unit/languages/domain/term/termRepositoryMock';
-import { UserRepositoryMock } from '@test/unit/languages/domain/user/userRepositoryMock';
+import { UserRepositoryMock } from '@test/unit/account/domain/user/userRepositoryMock';
 import TermDoesNotExistsException from '@src/languages/domain/term/termDoesNotExistsException';
 import WordMother from '@test/unit/languages/domain/term/word/wordMother';
 import { TermIdMother } from '@test/unit/languages/domain/term/termIdMother';
-import UserDoesNotExistsException from '@src/languages/domain/user/userDoesNotExistsException';
-import { UserMother } from '@test/unit/languages/domain/user/userMother';
-import { UserIdMother } from '@test/unit/languages/domain/user/userIdMother';
+import UserDoesNotExistsException from '@src/account/domain/user/userDoesNotExistsException';
+import { UserMother } from '@test/unit/account/domain/user/userMother';
+import { UserIdMother } from '@test/unit/account/domain/user/userIdMother';
 import { EventBusMock } from '@test/unit/shared/domain/buses/eventBus/eventBusMock';
 import { TermDislikedEventMother } from '@test/unit/languages/domain/term/termDislikedEventMother';
 import Word from '@src/languages/domain/term/word/word';

@@ -6,11 +6,11 @@ import InvalidArgumentException from '@src/shared/domain/exceptions/invalidArgum
 import { TermRepositoryMock } from '@test/unit/languages/domain/term/termRepositoryMock';
 import WordMother from '@test/unit/languages/domain/term/word/wordMother';
 import TermDoesNotExistsException from '@src/languages/domain/term/termDoesNotExistsException';
-import { UserRepositoryMock } from '@test/unit/languages/domain/user/userRepositoryMock';
-import UserDoesNotExistsException from '@src/languages/domain/user/userDoesNotExistsException';
+import { UserRepositoryMock } from '@test/unit/account/domain/user/userRepositoryMock';
+import UserDoesNotExistsException from '@src/account/domain/user/userDoesNotExistsException';
 import { TermIdMother } from '@test/unit/languages/domain/term/termIdMother';
-import { UserMother } from '@test/unit/languages/domain/user/userMother';
-import { UserIdMother } from '@test/unit/languages/domain/user/userIdMother';
+import { UserMother } from '@test/unit/account/domain/user/userMother';
+import { UserIdMother } from '@test/unit/account/domain/user/userIdMother';
 import { EventBusMock } from '@test/unit/shared/domain/buses/eventBus/eventBusMock';
 import { TermLikeAddedEventMother } from '@test/unit/languages/domain/term/termLikeAddedEventMother';
 import TermLikeMother from '@test/unit/languages/domain/term/termLikeMother';

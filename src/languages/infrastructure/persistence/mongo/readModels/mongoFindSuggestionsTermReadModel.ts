@@ -1,12 +1,12 @@
 import FindSuggestionsTermReadModel from '@src/languages/application/term/query/findSuggestionsTermReadModel';
-import UserId from '@src/languages/domain/user/userId';
+import UserId from '@src/account/domain/user/userId';
 import { TermView } from '@src/languages/application/term/query/termView';
-import UserRepository, { USER_REPOSITORY } from '@src/languages/domain/user/userRepository';
+import UserRepository, { USER_REPOSITORY } from '@src/account/domain/user/userRepository';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { Document } from 'mongodb';
 import MongoConnection, { MONGO_CLIENT } from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
-import User from '@src/languages/domain/user/user';
-import UserDoesNotExistsException from '@src/languages/domain/user/userDoesNotExistsException';
+import User from '@src/account/domain/user/user';
+import UserDoesNotExistsException from '@src/account/domain/user/userDoesNotExistsException';
 
 export default class MongoFindSuggestionsTermReadModel implements FindSuggestionsTermReadModel {
   constructor(

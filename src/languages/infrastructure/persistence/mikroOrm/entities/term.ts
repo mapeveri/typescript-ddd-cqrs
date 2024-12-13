@@ -3,9 +3,9 @@ import { EntitySchema } from '@mikro-orm/core';
 import Term from '@src/languages/domain/term/term';
 import { TermIdType } from '../types/termIdType';
 import { CountryIdType } from '../types/countryIdType';
-import { UserIdType } from '../types/userIdType';
 import { LikesCollectionType } from '../types/likesCollectionType';
 import { TermTypeType } from '../types/termTypeType';
+import { UserIdType } from '@src/shared/infrastructure/persistence/mikroOrm/types/userIdType';
 
 export const TermSchema = new EntitySchema<Term>({
   class: Term,

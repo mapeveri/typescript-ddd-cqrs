@@ -1,7 +1,7 @@
 import TermType from '@src/languages/domain/term/termType';
 import TermId from '@src/languages/domain/term/termId';
 import CountryId from '@src/languages/domain/country/countryId';
-import UserId from '@src/languages/domain/user/userId';
+import UserId from '@src/account/domain/user/userId';
 import { AggregateRoot } from '@src/shared/domain/aggregate/aggregateRoot';
 import TermLike from '@src/languages/domain/term/termLike';
 import TermLikeAddedEvent from '@src/languages/domain/term/termLikeAddedEvent';

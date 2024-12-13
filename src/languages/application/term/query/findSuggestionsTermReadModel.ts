@@ -1,5 +1,5 @@
 import { TermView } from '@src/languages/application/term/query/termView';
-import UserId from '@src/languages/domain/user/userId';
+import UserId from '@src/account/domain/user/userId';
 
 interface FindSuggestionsTermReadModel {
   find(userId: UserId): Promise<TermView[]>;

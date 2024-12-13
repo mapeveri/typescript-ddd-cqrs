@@ -1,14 +1,14 @@
 import { CommandHandler, ICommandHandler } from '@src/shared/domain/bus/commandBus/commandHandler';
 import AddLikeTermCommand from '@src/languages/application/term/command/addLikeTermCommand';
 import TermId from '@src/languages/domain/term/termId';
-import UserId from '@src/languages/domain/user/userId';
+import UserId from '@src/account/domain/user/userId';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import TermRepository, { TERM_REPOSITORY } from '@src/languages/domain/term/termRepository';
 import Term from '@src/languages/domain/term/term';
 import TermDoesNotExistsException from '@src/languages/domain/term/termDoesNotExistsException';
-import UserRepository, { USER_REPOSITORY } from '@src/languages/domain/user/userRepository';
-import UserDoesNotExistsException from '@src/languages/domain/user/userDoesNotExistsException';
-import User from '@src/languages/domain/user/user';
+import UserRepository, { USER_REPOSITORY } from '@src/account/domain/user/userRepository';
+import UserDoesNotExistsException from '@src/account/domain/user/userDoesNotExistsException';
+import User from '@src/account/domain/user/user';
 import { ASYNC_EVENT_BUS, EventBus } from '@src/shared/domain/bus/eventBus/eventBus';
 
 @CommandHandler(AddLikeTermCommand)
