@@ -12,7 +12,7 @@ import { NestJwtAuthGuard } from '@src/shared/guards/nestJwtAuthGuard';
 import UserPutDto from '@src/languages/app/controllers/v1/user/userPutDto';
 import UpdateUserCommand from '@src/languages/application/user/command/updateUserCommand';
 
-@ApiTags('User')
+@ApiTags('Users')
 @Controller()
 export default class UserPutController {
   constructor(@Inject(COMMAND_BUS) private commandBus: CommandBus) {}
