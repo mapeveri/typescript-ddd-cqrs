@@ -59,7 +59,7 @@ describe('Get user feature', () => {
         .expect({});
     });
 
-    it('should return the country when it exists', async () => {
+    it('should return the user when it exists', async () => {
       await request(app.getHttpServer())
         .get(`/users/${userId}`)
         .set('Authorization', 'Bearer mock-token')
