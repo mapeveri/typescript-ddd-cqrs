@@ -16,6 +16,7 @@ import DislikeTermPostController from '@src/languages/app/controllers/v1/terms/d
 import WordPutController from '@src/languages/app/controllers/v1/terms/words/wordPutController';
 import TermGetController from '@src/languages/app/controllers/v1/terms/termGetController';
 import SignupPostController from '@src/languages/app/controllers/v1/auth/signupPostController';
+import UserGetController from '@src/languages/app/controllers/v1/user/userGetController';
 
 export const controllers = [
   LoginPostController,
@@ -30,6 +31,7 @@ export const controllers = [
   CountriesGetController,
   CountryGetController,
   CountryPostController,
+  UserGetController,
   UserPutController,
   SearchTermsSseController,
   HealthController,
