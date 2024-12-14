@@ -53,7 +53,7 @@ describe('Get user feature', () => {
 
     it('should return an empty object when it does not exists', async () => {
       await request(app.getHttpServer())
-        .get('/countries/a625816c-2117-44a6-a0ba-07fe54cb0ca3')
+        .get('/users/a625816c-2117-44a6-a0ba-07fe54cb0ca3')
         .set('Authorization', 'Bearer mock-token')
         .expect(200)
         .expect({});
