@@ -6,7 +6,7 @@ import FindSuggestionsTermQuery from '@src/languages/application/term/query/find
 import FindSuggestionsTermReadModel, {
   FIND_SUGGESTIONS_TERM_READ_MODEL,
 } from '@src/languages/application/term/query/findSuggestionsTermReadModel';
-import UserId from '@src/languages/domain/user/userId';
+import UserId from '@src/account/domain/user/userId';
 
 @QueryHandler(FindSuggestionsTermQuery)
 export default class FindSuggestionsTermQueryHandler implements IQueryHandler<FindSuggestionsTermQuery> {

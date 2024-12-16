@@ -1,4 +1,4 @@
-import UserId from '@src/languages/domain/user/userId';
+import UserId from '@src/account/domain/user/userId';
 import TermId from '@src/languages/domain/term/termId';
 import TermLikeId from '@src/languages/domain/term/termLikeId';
 

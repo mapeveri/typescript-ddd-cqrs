@@ -1,7 +1,7 @@
 import faker from 'faker';
-import { UserIdMother } from '@test/unit/languages/domain/user/userIdMother';
+import { UserIdMother } from '@test/unit/account/domain/user/userIdMother';
 import TermLike from '@src/languages/domain/term/termLike';
-import UserId from '@src/languages/domain/user/userId';
+import UserId from '@src/account/domain/user/userId';
 import TermId from '@src/languages/domain/term/termId';
 import { TermIdMother } from '@test/unit/languages/domain/term/termIdMother';
 import TermLikeId from '@src/languages/domain/term/termLikeId';

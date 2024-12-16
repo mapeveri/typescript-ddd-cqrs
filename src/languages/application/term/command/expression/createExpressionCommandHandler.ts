@@ -3,7 +3,7 @@ import CreateExpressionCommand from './createExpressionCommand';
 import Expression from '@src/languages/domain/term/expression/expression';
 import CountryId from '@src/languages/domain/country/countryId';
 import ExpressionTermCollection from '@src/languages/domain/term/expression/expressionTermCollection';
-import UserId from '@src/languages/domain/user/userId';
+import UserId from '@src/account/domain/user/userId';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { CommandHandler, ICommandHandler } from '@src/shared/domain/bus/commandBus/commandHandler';
 import TermRepository, { TERM_REPOSITORY } from '@src/languages/domain/term/termRepository';

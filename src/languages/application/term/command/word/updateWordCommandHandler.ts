@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@src/shared/domain/bus/commandBus/commandHandler';
 import UpdateWordCommand from '@src/languages/application/term/command/word/updateWordCommand';
 import TermId from '@src/languages/domain/term/termId';
-import UserId from '@src/languages/domain/user/userId';
+import UserId from '@src/account/domain/user/userId';
 import CountryId from '@src/languages/domain/country/countryId';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import TermRepository, { TERM_REPOSITORY } from '@src/languages/domain/term/termRepository';

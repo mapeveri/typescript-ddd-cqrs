@@ -6,7 +6,7 @@ import UpdateWordCommand from '@src/languages/application/term/command/word/upda
 import TermDoesNotExistsException from '@src/languages/domain/term/termDoesNotExistsException';
 import { TermRepositoryMock } from '@test/unit/languages/domain/term/termRepositoryMock';
 import WordMother from '@test/unit/languages/domain/term/word/wordMother';
-import { UserIdMother } from '@test/unit/languages/domain/user/userIdMother';
+import { UserIdMother } from '@test/unit/account/domain/user/userIdMother';
 import { TermIdMother } from '@test/unit/languages/domain/term/termIdMother';
 import TermDoesNotBelongToUserException from '@src/languages/domain/term/termDoesNotBelongToUserException';
 import Word from '@src/languages/domain/term/word/word';
