@@ -1,26 +1,29 @@
 import FindSuggestionsTermReadModel from '@src/languages/application/term/query/findSuggestionsTermReadModel';
 import UserId from '@src/account/domain/user/userId';
 import { TermView } from '@src/languages/application/term/query/termView';
-import UserRepository, { USER_REPOSITORY } from '@src/account/domain/user/userRepository';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { Document } from 'mongodb';
 import MongoConnection, { MONGO_CLIENT } from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
-import User from '@src/account/domain/user/user';
-import UserDoesNotExistsException from '@src/account/domain/user/userDoesNotExistsException';
+import CollaboratorRepository, {
+  COLLABORATOR_REPOSITORY,
+} from '@src/languages/domain/collaborator/collaboratorRepository';
+import Collaborator from '@src/languages/domain/collaborator/collaborator';
+import CollaboratorDoesNotExistsException from '@src/languages/domain/collaborator/collaboratorDoesNotExistsException';
+import CollaboratorId from '@src/languages/domain/collaborator/collaboratorId';
 
 export default class MongoFindSuggestionsTermReadModel implements FindSuggestionsTermReadModel {
   constructor(
     @Inject(MONGO_CLIENT) private readonly mongo: MongoConnection,
-    @Inject(USER_REPOSITORY) private readonly userRepository: UserRepository,
+    @Inject(COLLABORATOR_REPOSITORY) private readonly collaboratorRepository: CollaboratorRepository,
   ) {}
 
   async find(userId: UserId): Promise<TermView[]> {
-    const user = await this.getUser(userId);
+    const collaborator = await this.getCollaborator(userId);
 
     const result = await this.mongo.db
       .collection('terms')
       .find({
-        $or: [{ hashtags: user.getInterests() }],
+        $or: [{ hashtags: collaborator.getInterests() }],
       })
       .project({ _id: 0 })
       .sort(['createdAt', -1])
@@ -43,12 +46,12 @@ export default class MongoFindSuggestionsTermReadModel implements FindSuggestion
     });
   }
 
-  async getUser(userId: UserId): Promise<User> {
-    const user = await this.userRepository.findById(userId);
-    if (null === user) {
-      throw new UserDoesNotExistsException(userId.toString());
+  async getCollaborator(collaboratorId: CollaboratorId): Promise<Collaborator> {
+    const collaborator = await this.collaboratorRepository.findById(collaboratorId);
+    if (null === collaborator) {
+      throw new CollaboratorDoesNotExistsException(collaboratorId.toString());
     }
 
-    return user;
+    return collaborator;
   }
 }

@@ -6,42 +6,42 @@ import InvalidArgumentException from '@src/shared/domain/exceptions/invalidArgum
 import { TermRepositoryMock } from '@test/unit/languages/domain/term/termRepositoryMock';
 import WordMother from '@test/unit/languages/domain/term/word/wordMother';
 import TermDoesNotExistsException from '@src/languages/domain/term/termDoesNotExistsException';
-import { UserRepositoryMock } from '@test/unit/account/domain/user/userRepositoryMock';
-import UserDoesNotExistsException from '@src/account/domain/user/userDoesNotExistsException';
 import { TermIdMother } from '@test/unit/languages/domain/term/termIdMother';
-import { UserMother } from '@test/unit/account/domain/user/userMother';
-import { UserIdMother } from '@test/unit/account/domain/user/userIdMother';
 import { EventBusMock } from '@test/unit/shared/domain/buses/eventBus/eventBusMock';
 import { TermLikeAddedEventMother } from '@test/unit/languages/domain/term/termLikeAddedEventMother';
 import TermLikeMother from '@test/unit/languages/domain/term/termLikeMother';
 import Word from '@src/languages/domain/term/word/word';
 import { TermLikeIdMother } from '@test/unit/languages/domain/term/termLikeIdMother';
+import { CollaboratorRepositoryMock } from '@test/unit/languages/domain/collaborator/collaboratorRepositoryMock';
+import { CollaboratorMother } from '@test/unit/languages/domain/collaborator/collaboratorMother';
+import { CollaboratorIdMother } from '@test/unit/languages/domain/collaborator/collaboratorIdMother';
+import CollaboratorDoesNotExistsException from '@src/languages/domain/collaborator/collaboratorDoesNotExistsException';
 
 describe('Given a AddLikeTermCommandHandler to handle', () => {
   let termRepository: TermRepositoryMock;
-  let userRepository: UserRepositoryMock;
+  let collaboratorRepository: CollaboratorRepositoryMock;
   let eventBus: EventBusMock;
   let handler: AddLikeTermCommandHandler;
 
-  const USER_ID = '0a8008d5-ab68-4c10-8476-668b5b540e0f';
+  const COLLABORATOR_ID = '0a8008d5-ab68-4c10-8476-668b5b540e0f';
   const TERM_ID = '7abe3a96-d603-4e87-b69e-e9fb372294de';
   const TERM_LIKE_ID = '98d173b4-8b60-5cde-8688-8cc8dd9f07b8';
 
   const prepareDependencies = () => {
     termRepository = new TermRepositoryMock();
-    userRepository = new UserRepositoryMock();
+    collaboratorRepository = new CollaboratorRepositoryMock();
     eventBus = new EventBusMock();
   };
 
   const initHandler = () => {
-    handler = new AddLikeTermCommandHandler(termRepository, userRepository, eventBus);
+    handler = new AddLikeTermCommandHandler(termRepository, collaboratorRepository, eventBus);
 
     jest.useFakeTimers();
   };
 
   const clean = () => {
     termRepository.clean();
-    userRepository.clean();
+    collaboratorRepository.clean();
     eventBus.clean();
   };
 
@@ -81,7 +81,7 @@ describe('Given a AddLikeTermCommandHandler to handle', () => {
     });
   });
 
-  describe('When the user id is invalid ', () => {
+  describe('When the collaborator id is invalid ', () => {
     let command: AddLikeTermCommand;
 
     function startScenario() {
@@ -135,11 +135,11 @@ describe('Given a AddLikeTermCommandHandler to handle', () => {
     });
   });
 
-  describe('When the user does not exists ', () => {
+  describe('When the collaborator does not exists ', () => {
     let command: AddLikeTermCommand;
 
     function startScenario() {
-      command = AddLikeTermCommandMother.random({ termId: TERM_ID, userId: USER_ID });
+      command = AddLikeTermCommandMother.random({ termId: TERM_ID, userId: COLLABORATOR_ID });
       const term = WordMother.random({ id: TermIdMother.random(TERM_ID) });
 
       termRepository.add(term);
@@ -148,7 +148,7 @@ describe('Given a AddLikeTermCommandHandler to handle', () => {
     beforeEach(startScenario);
 
     it('then should thrown an exception', async () => {
-      await expect(handler.execute(command)).rejects.toThrowError(UserDoesNotExistsException);
+      await expect(handler.execute(command)).rejects.toThrowError(CollaboratorDoesNotExistsException);
     });
 
     it('then should not add the like', async () => {
@@ -165,28 +165,28 @@ describe('Given a AddLikeTermCommandHandler to handle', () => {
     });
   });
 
-  describe('When an user add a like to a term that already exists', () => {
+  describe('When an collaborator add a like to a term that already exists', () => {
     let command: AddLikeTermCommand;
     let term: Word;
 
     function startScenario() {
-      command = AddLikeTermCommandMother.random({ termId: TERM_ID, userId: USER_ID });
+      command = AddLikeTermCommandMother.random({ termId: TERM_ID, userId: COLLABORATOR_ID });
       term = WordMother.random({
         id: TermIdMother.random(TERM_ID),
         likes: [
           TermLikeMother.random({
             id: TermLikeIdMother.random(TERM_LIKE_ID),
-            userId: UserIdMother.random(USER_ID),
+            userId: CollaboratorIdMother.random(COLLABORATOR_ID),
             termId: TermIdMother.random(TERM_ID),
             name: 'test',
             photo: '',
           }),
         ],
       });
-      const user = UserMother.random({ id: UserIdMother.random(USER_ID) });
+      const collaborator = CollaboratorMother.random({ id: CollaboratorIdMother.random(COLLABORATOR_ID) });
 
       termRepository.add(term);
-      userRepository.add(user);
+      collaboratorRepository.add(collaborator);
     }
 
     beforeEach(startScenario);
@@ -208,22 +208,26 @@ describe('Given a AddLikeTermCommandHandler to handle', () => {
     });
   });
 
-  describe('When an user add a like to a term ', () => {
+  describe('When an collaborator add a like to a term ', () => {
     let command: AddLikeTermCommand;
     let term: Word;
     const NAME = 'Name test';
     const PHOTO = 'http://link';
 
     function startScenario() {
-      command = AddLikeTermCommandMother.random({ termId: TERM_ID, userId: USER_ID });
+      command = AddLikeTermCommandMother.random({ termId: TERM_ID, userId: COLLABORATOR_ID });
       term = WordMother.random({
         id: TermIdMother.random(TERM_ID),
         likes: [],
       });
-      const user = UserMother.random({ id: UserIdMother.random(USER_ID), name: NAME, photo: PHOTO });
+      const user = CollaboratorMother.random({
+        id: CollaboratorIdMother.random(COLLABORATOR_ID),
+        name: NAME,
+        photo: PHOTO,
+      });
 
       termRepository.add(term);
-      userRepository.add(user);
+      collaboratorRepository.add(user);
     }
 
     beforeEach(startScenario);
@@ -243,7 +247,7 @@ describe('Given a AddLikeTermCommandHandler to handle', () => {
 
       expect(eventBus.domainEvents()).toHaveLength(1);
       expect(eventBus.domainEvents()[0]).toEqual({
-        ...TermLikeAddedEventMother.random({ termId: TERM_ID, userId: USER_ID, name: NAME, photo: PHOTO }),
+        ...TermLikeAddedEventMother.random({ termId: TERM_ID, userId: COLLABORATOR_ID, name: NAME, photo: PHOTO }),
       });
     });
   });

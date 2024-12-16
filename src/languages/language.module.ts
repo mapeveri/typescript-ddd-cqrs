@@ -9,11 +9,26 @@ import { readModels } from '@src/languages/_dependencyInjection/readModels';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { entitySchemas } from '@src/languages/_dependencyInjection/entitySchemas';
 import mikroOrmConfiguration from './infrastructure/persistence/mikroOrm/config';
+import { HttpModule } from '@nestjs/axios';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { services } from '@src/languages/_dependencyInjection/services';
 
 @Module({
-  imports: [MikroOrmModule.forRoot(mikroOrmConfiguration), MikroOrmModule.forFeature(entitySchemas)],
+  imports: [
+    MikroOrmModule.forRoot(mikroOrmConfiguration),
+    MikroOrmModule.forFeature(entitySchemas),
+    ConfigModule.forRoot(),
+    HttpModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        baseURL: configService.get('SERVER_URL'),
+        timeout: 5000,
+      }),
+    }),
+  ],
   exports: [],
   controllers: [...controllers],
-  providers: [...commands, ...queries, ...events, ...projections, ...repositories, ...readModels],
+  providers: [...commands, ...queries, ...events, ...projections, ...services, ...repositories, ...readModels],
 })
 export class LanguageModule {}
