@@ -1,6 +1,6 @@
 import { EntitySchema } from '@mikro-orm/core';
 import User from '@src/account/domain/user/user';
-import { UserIdType } from '@src/shared/infrastructure/persistence/mikroOrm/types/userIdType';
+import { UserIdType } from '@src/account/infrastructure/persistence/mikroOrm/types/userIdType';
 import { EmailType } from '@src/shared/infrastructure/persistence/mikroOrm/types/emailType';
 
 export const UserSchema = new EntitySchema<User>({

@@ -5,7 +5,7 @@ import { TermIdType } from '../types/termIdType';
 import { CountryIdType } from '../types/countryIdType';
 import { LikesCollectionType } from '../types/likesCollectionType';
 import { TermTypeType } from '../types/termTypeType';
-import { UserIdType } from '@src/shared/infrastructure/persistence/mikroOrm/types/userIdType';
+import { CollaboratorIdType } from '@src/languages/infrastructure/persistence/mikroOrm/types/collaboratorIdType';
 
 export const TermSchema = new EntitySchema<Term>({
   class: Term,
@@ -27,7 +27,7 @@ export const TermSchema = new EntitySchema<Term>({
       type: CountryIdType,
     },
     userId: {
-      type: UserIdType,
+      type: CollaboratorIdType,
     },
     likes: {
       type: LikesCollectionType,
