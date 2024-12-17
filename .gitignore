@@ -3,6 +3,7 @@
 .env
 .env.local
 .env.production
+.env.test
 /docker/data
 
 # stryker temp files
