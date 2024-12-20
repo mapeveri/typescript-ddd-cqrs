@@ -7,11 +7,12 @@ import { CollaboratorTranslator } from '@src/languages/infrastructure/persistenc
 
 @Injectable()
 export class HttpCollaboratorAdapter {
-  URL = '/users/{id}';
+  URL = '/api/v1/users/{id}';
   constructor(private readonly httpService: HttpService) {}
 
   async toCollaborator(id: CollaboratorId): Promise<Collaborator | null> {
-    const { data } = await firstValueFrom(this.httpService.get(this.URL.replace('{id}', id.toString)));
+    const { data } = await firstValueFrom(this.httpService.get(this.URL.replace('{id}', id.toString())));
+    if (!data) return null;
 
     return CollaboratorTranslator.toCollaborator(data);
   }
