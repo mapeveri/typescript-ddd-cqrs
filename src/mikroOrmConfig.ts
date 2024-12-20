@@ -4,12 +4,14 @@ import { defineConfig, PostgreSqlDriver } from '@mikro-orm/postgresql';
 import { config as loadEnv } from 'dotenv';
 import dotenvExpand from 'dotenv-expand';
 import path from 'path';
-import { entitySchemas } from '@src/account/_dependencyInjection/entitySchemas';
+import { entitySchemas as accountEntitySchemas } from '@src/account/_dependencyInjection/entitySchemas';
+import { entitySchemas as languagesEntitySchemas } from '@src/languages/_dependencyInjection/entitySchemas';
 
 const env = loadEnv();
 dotenvExpand.expand(env);
 
-const migrationPath = path.join(__dirname, '/migrations');
+const migrationPath = path.join(__dirname, 'infrastructure/persistence/mikroOrm/migrations');
+const entitySchemas = [...accountEntitySchemas, ...languagesEntitySchemas];
 
 export default defineConfig({
   entities: entitySchemas,
@@ -22,7 +24,7 @@ export default defineConfig({
   forceUndefined: false,
   migrations: {
     path: migrationPath,
-    glob: '!(*.d).{js,ts}',
+    glob: '{account,languages}/*.{js,ts}',
     pathTs: migrationPath,
     tableName: 'mikro_orm_migrations',
     transactional: true,

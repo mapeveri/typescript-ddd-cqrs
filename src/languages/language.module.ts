@@ -6,18 +6,16 @@ import { queries } from '@src/languages/_dependencyInjection/queryHandlers';
 import { events } from '@src/languages/_dependencyInjection/eventHandlers';
 import { projections } from '@src/languages/_dependencyInjection/projectionHandlers';
 import { readModels } from '@src/languages/_dependencyInjection/readModels';
-import { MikroOrmModule } from '@mikro-orm/nestjs';
-import { entitySchemas } from '@src/languages/_dependencyInjection/entitySchemas';
-import mikroOrmConfiguration from './infrastructure/persistence/mikroOrm/config';
 import { HttpModule } from '@nestjs/axios';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { services } from '@src/languages/_dependencyInjection/services';
+import { MikroOrmModule } from '@mikro-orm/nestjs';
+import { entitySchemas as languagesEntitySchemas } from '@src/languages/_dependencyInjection/entitySchemas';
 
 @Module({
   imports: [
-    MikroOrmModule.forRoot(mikroOrmConfiguration),
-    MikroOrmModule.forFeature(entitySchemas),
     ConfigModule.forRoot(),
+    MikroOrmModule.forFeature([...languagesEntitySchemas]),
     HttpModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
