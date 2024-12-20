@@ -1,7 +1,7 @@
 import { expect } from '@jest/globals';
 import TermLikeAddedEvent from '@src/languages/domain/term/termLikeAddedEvent';
 import { TermIdMother } from '@test/unit/languages/domain/term/termIdMother';
-import { UserIdMother } from '@test/unit/languages/domain/user/userIdMother';
+import { UserIdMother } from '@test/unit/account/domain/user/userIdMother';
 import faker from 'faker';
 
 type TermLikeAddedEventProps = {

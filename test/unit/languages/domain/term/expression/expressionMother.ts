@@ -1,4 +1,4 @@
-import UserId from '@src/languages/domain/user/userId';
+import UserId from '@src/account/domain/user/userId';
 import { CountryIdMother } from '../../country/countryIdMother';
 import CreateExpressionCommand from '@src/languages/application/term/command/expression/createExpressionCommand';
 import Expression from '@src/languages/domain/term/expression/expression';
@@ -8,7 +8,7 @@ import ExpressionTermCollectionMother from './expressionTermCollectionMother';
 import faker from 'faker';
 import CountryId from '@src/languages/domain/country/countryId';
 import ExpressionTermCollection from '@src/languages/domain/term/expression/expressionTermCollection';
-import { UserIdMother } from '../../user/userIdMother';
+import { UserIdMother } from '@test/unit/account/domain/user/userIdMother';
 import TermId from '@src/languages/domain/term/termId';
 import TermType, { TermTypeEnum } from '@src/languages/domain/term/termType';
 import { TermIdMother } from '@test/unit/languages/domain/term/termIdMother';

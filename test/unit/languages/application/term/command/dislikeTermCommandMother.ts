@@ -1,6 +1,6 @@
 import DislikeTermCommand from '@src/languages/application/term/command/dislikeTermCommand';
 import { TermIdMother } from '@test/unit/languages/domain/term/termIdMother';
-import { UserIdMother } from '@test/unit/languages/domain/user/userIdMother';
+import { UserIdMother } from '@test/unit/account/domain/user/userIdMother';
 
 interface DislikeTermCommandProps {
   termId?: string;

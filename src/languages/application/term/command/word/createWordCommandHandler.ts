@@ -2,7 +2,7 @@ import { ASYNC_EVENT_BUS, EventBus } from '@src/shared/domain/bus/eventBus/event
 import CreateWordCommand from './createWordCommand';
 import Word from '@src/languages/domain/term/word/word';
 import CountryId from '@src/languages/domain/country/countryId';
-import UserId from '@src/languages/domain/user/userId';
+import UserId from '@src/account/domain/user/userId';
 import WordTermCollection from '@src/languages/domain/term/word/wordTermCollection';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { CommandHandler, ICommandHandler } from '@src/shared/domain/bus/commandBus/commandHandler';
