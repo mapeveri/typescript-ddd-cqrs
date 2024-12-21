@@ -11,3 +11,4 @@ data:
   SERVER_CONSUMER_PORT: "4001"
   FRONTED_URL: "http://localhost:3000"
   RABBITMQ_EVENTS_QUEUE: "events_queue"
+  SERVER_URL: "http://localhost:4000"
