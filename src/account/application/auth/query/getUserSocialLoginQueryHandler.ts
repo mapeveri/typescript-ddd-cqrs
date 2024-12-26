@@ -1,5 +1,5 @@
 import GetUserSocialLoginQuery from './getUserSocialLoginQuery';
-import LoginException from '@src/shared/domain/auth/loginException';
+import LoginException from '@src/account/domain/auth/loginException';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import {
   SOCIAL_AUTHENTICATION_VERIFIER,
