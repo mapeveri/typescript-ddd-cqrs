@@ -15,7 +15,7 @@ export default class UpdateUserCommandHandler implements ICommandHandler<UpdateU
   ) {}
 
   async execute(command: UpdateUserCommand): Promise<void> {
-    const user = await this.getUser(UserId.of(command.id));
+    const user = await this.getUser(command.id);
 
     user.update(command.name, command.photo, command.interests);
     this.userRepository.save(user);
@@ -23,7 +23,8 @@ export default class UpdateUserCommandHandler implements ICommandHandler<UpdateU
     void this.eventBus.publish(user.pullDomainEvents());
   }
 
-  async getUser(userId: UserId): Promise<User> {
+  async getUser(id: string): Promise<User> {
+    const userId = UserId.of(id);
     const user = await this.userRepository.findById(userId);
     if (null === user) {
       throw new UserDoesNotExistsException(userId.toString());

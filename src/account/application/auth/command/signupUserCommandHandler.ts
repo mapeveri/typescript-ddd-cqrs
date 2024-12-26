@@ -6,7 +6,6 @@ import { EVENT_BUS, EventBus } from '@src/shared/domain/bus/eventBus/eventBus';
 import UserId from '@src/account/domain/user/userId';
 import UserAlreadyExistsException from '@src/account/domain/user/userAlreadyExistsException';
 import User from '@src/account/domain/user/user';
-import Email from '@src/shared/domain/valueObjects/email';
 
 @CommandHandler(SignupUserCommand)
 export default class SignupUserCommandHandler implements ICommandHandler<SignupUserCommand> {
@@ -16,20 +15,20 @@ export default class SignupUserCommandHandler implements ICommandHandler<SignupU
   ) {}
 
   async execute(command: SignupUserCommand): Promise<void> {
-    const userId = UserId.of(command.id);
-    await this.guardUserDoesNotExists(userId);
+    await this.guardUserDoesNotExists(command.id);
 
-    const user = User.create(userId, command.name, command.provider, Email.of(command.email), command.photo);
+    const user = User.create(command.id, command.name, command.provider, command.email, command.photo);
 
     this.userRepository.save(user);
 
     void this.eventBus.publish(user.pullDomainEvents());
   }
 
-  private async guardUserDoesNotExists(userId: UserId): Promise<void> {
+  private async guardUserDoesNotExists(id: string): Promise<void> {
+    const userId = UserId.of(id);
     const user = await this.userRepository.findById(userId);
     if (user) {
-      throw new UserAlreadyExistsException(userId.value);
+      throw new UserAlreadyExistsException(userId.toString());
     }
   }
 }

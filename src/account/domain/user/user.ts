@@ -29,16 +29,8 @@ export default class User extends AggregateRoot {
     return this.name;
   }
 
-  public getPhoto(): string {
-    return this.photo;
-  }
-
-  public getInterests(): string[] {
-    return this.interests;
-  }
-
-  static create(id: UserId, name: string, provider: string, email: Email, photo: string): User {
-    const user = new this(id, name, provider, email, photo, []);
+  static create(id: string, name: string, provider: string, email: string, photo: string): User {
+    const user = new this(UserId.of(id), name, provider, Email.of(email), photo, []);
 
     user.record(new UserCreatedEvent(id.toString(), name, provider, email.toString(), photo));
 
