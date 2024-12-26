@@ -11,10 +11,6 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.connectMicroservice<MicroserviceOptions>({
-    transport: Transport.TCP,
-  });
-
-  app.connectMicroservice<MicroserviceOptions>({
     transport: Transport.RMQ,
     options: rabbitMqConfig,
   });
