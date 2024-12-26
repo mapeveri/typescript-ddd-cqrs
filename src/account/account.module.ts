@@ -6,11 +6,12 @@ import { queries } from '@src/account/_dependencyInjection/queryHandlers';
 import { repositories } from '@src/account/_dependencyInjection/repositories';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { entitySchemas as accountEntitySchemas } from '@src/account/_dependencyInjection/entitySchemas';
+import { services } from '@src/account/_dependencyInjection/services';
 
 @Module({
   imports: [MikroOrmModule.forFeature([...accountEntitySchemas])],
   exports: [],
   controllers: [...controllers],
-  providers: [...commands, ...queries, ...repositories],
+  providers: [...commands, ...queries, ...repositories, ...services],
 })
 export class AccountModule {}

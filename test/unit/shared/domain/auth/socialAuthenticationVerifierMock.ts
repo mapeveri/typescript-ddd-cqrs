@@ -1,4 +1,4 @@
-import { SocialAuthenticationVerifier } from '@src/shared/domain/auth/socialAuthenticationVerifier';
+import { SocialAuthenticationVerifier } from '@src/account/domain/auth/socialAuthenticationVerifier';
 
 export class SocialAuthenticationVerifierMock implements SocialAuthenticationVerifier {
   private toReturn: boolean;

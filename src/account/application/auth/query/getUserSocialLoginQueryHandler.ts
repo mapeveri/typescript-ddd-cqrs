@@ -4,7 +4,7 @@ import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import {
   SOCIAL_AUTHENTICATION_VERIFIER,
   SocialAuthenticationVerifier,
-} from '@src/shared/domain/auth/socialAuthenticationVerifier';
+} from '@src/account/domain/auth/socialAuthenticationVerifier';
 import { IQueryHandler, QueryHandler } from '@src/shared/domain/bus/queryBus/queryHandler';
 import { USER_AUTHENTICATOR, UserAuthenticator } from '@src/shared/domain/auth/userAuthenticator';
 import GetUserSocialLoginQueryResponse from '@src/account/application/auth/query/getUserSocialLoginQueryResponse';

@@ -14,10 +14,6 @@ import NestQueryBusBus from '@src/shared/infrastructure/bus/nestQueryBus';
 import MongoEventStoreRepository from '@src/shared/infrastructure/persistence/mongo/repositories/mongoEventStoreRepository';
 import { PersistDomainEventsSubscriber } from '@src/shared/infrastructure/subscribers/persistDomainEventsSubscriber';
 import MongoConnection, { MONGO_CLIENT } from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
-import { SOCIAL_AUTHENTICATION_VERIFIER } from '@src/shared/domain/auth/socialAuthenticationVerifier';
-import GoogleSocialAuthenticationVerifier from '@src/shared/infrastructure/auth/oauth/googleSocialAuthenticationVerifier';
-import { ConfigService } from '@nestjs/config';
-import { OAuth2Client } from 'google-auth-library';
 import MikroOrmTransactionalDecorator from '../infrastructure/persistence/mikroOrm/decorators/mikroOrmTransactionalDecorator';
 import NestJwtUserAuthenticator from '@src/shared/infrastructure/auth/jwt/nestJwtUserAuthenticator';
 import { USER_AUTHENTICATOR } from '@src/shared/domain/auth/userAuthenticator';
@@ -59,19 +55,7 @@ export const services = [
   MongoEventStoreRepository,
   PersistDomainEventsSubscriber,
   {
-    provide: SOCIAL_AUTHENTICATION_VERIFIER,
-    useClass: GoogleSocialAuthenticationVerifier,
-  },
-  {
     provide: USER_AUTHENTICATOR,
     useClass: NestJwtUserAuthenticator,
-  },
-  {
-    provide: 'GOOGLE_OAUTH_CLIENT',
-    useFactory: (configService: ConfigService) => {
-      const clientId = configService.get<string>('GOOGLE_CLIENT_ID');
-      return new OAuth2Client(clientId);
-    },
-    inject: [ConfigService],
   },
 ];

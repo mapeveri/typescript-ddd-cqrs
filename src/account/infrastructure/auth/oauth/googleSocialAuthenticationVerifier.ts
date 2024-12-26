@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { SocialAuthenticationVerifier } from '@src/shared/domain/auth/socialAuthenticationVerifier';
+import { SocialAuthenticationVerifier } from '@src/account/domain/auth/socialAuthenticationVerifier';
 import { OAuth2Client } from 'google-auth-library';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import Logger, { LOGGER } from '@src/shared/domain/logger';

@@ -12,7 +12,6 @@ import { rabbitMqConfig } from '@src/shared/infrastructure/messenger/rabbitMq/co
 import { consumers } from '@src/shared/_dependencyInjection/consumers';
 import { services } from '@src/shared/_dependencyInjection/services';
 import Environment from '@src/shared/infrastructure/utils/environment';
-import { SOCIAL_AUTHENTICATION_VERIFIER } from '@src/shared/domain/auth/socialAuthenticationVerifier';
 import MongoConnection, { MONGO_CLIENT } from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
 import { ConfigModule } from '@nestjs/config';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
@@ -49,7 +48,6 @@ import { USER_AUTHENTICATOR } from '@src/shared/domain/auth/userAuthenticator';
     COMMAND_BUS,
     EVENT_BUS,
     ASYNC_EVENT_BUS,
-    SOCIAL_AUTHENTICATION_VERIFIER,
     USER_AUTHENTICATOR,
   ],
 })
