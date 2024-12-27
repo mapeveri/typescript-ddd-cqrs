@@ -9,7 +9,8 @@ import { USER_AUTHENTICATOR, UserAuthenticator } from '@src/shared/domain/auth/u
 
 @Injectable()
 export class HttpCollaboratorAdapter {
-  URL = '/api/v1/users/{id}';
+  private URL = '/api/v1/users/{id}';
+
   constructor(
     private readonly httpService: HttpService,
     @Inject(USER_AUTHENTICATOR) private readonly userAuthenticator: UserAuthenticator,
