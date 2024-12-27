@@ -2,9 +2,9 @@ import { beforeEach, beforeAll, describe, expect, it, jest } from '@jest/globals
 import GetUserSocialLoginQueryHandler from '@src/account/application/auth/query/getUserSocialLoginQueryHandler';
 import { GetUserSocialLoginQueryMother } from './getUserSocialLoginQueryMother';
 import LoginException from '@src/account/domain/auth/loginException';
-import { SocialAuthenticationVerifierMock } from '@test/unit/shared/domain/auth/socialAuthenticationVerifierMock';
+import { SocialAuthenticationVerifierMock } from '@test/unit/account/domain/auth/socialAuthenticationVerifierMock';
 import GetUserSocialLoginQuery from '@src/account/application/auth/query/getUserSocialLoginQuery';
-import { UserAuthenticatorMock } from '@test/unit/shared/domain/auth/userAuthenticatorMock';
+import { UserAuthenticatorMock } from '@test/unit/account/domain/auth/userAuthenticatorMock';
 
 describe('Given a GetUserSocialLoginQueryHandler to handle', () => {
   let socialAuthenticationVerifier: SocialAuthenticationVerifierMock;

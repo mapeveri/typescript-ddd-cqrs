@@ -6,7 +6,7 @@ import {
   SocialAuthenticationVerifier,
 } from '@src/account/domain/auth/socialAuthenticationVerifier';
 import { IQueryHandler, QueryHandler } from '@src/shared/domain/bus/queryBus/queryHandler';
-import { USER_AUTHENTICATOR, UserAuthenticator } from '@src/shared/domain/auth/userAuthenticator';
+import { USER_AUTHENTICATOR, UserAuthenticator } from '@src/account/domain/auth/userAuthenticator';
 import GetUserSocialLoginQueryResponse from '@src/account/application/auth/query/getUserSocialLoginQueryResponse';
 
 @QueryHandler(GetUserSocialLoginQuery)

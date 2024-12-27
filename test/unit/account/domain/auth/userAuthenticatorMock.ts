@@ -1,4 +1,4 @@
-import { UserAuthenticator, UserAuthenticatorResponse } from '@src/shared/domain/auth/userAuthenticator';
+import { UserAuthenticator, UserAuthenticatorResponse } from '@src/account/domain/auth/userAuthenticator';
 
 export class UserAuthenticatorMock implements UserAuthenticator {
   private toReturn: UserAuthenticatorResponse[];

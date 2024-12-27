@@ -15,7 +15,7 @@ import Environment from '@src/shared/infrastructure/utils/environment';
 import MongoConnection, { MONGO_CLIENT } from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
 import { ConfigModule } from '@nestjs/config';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
-import { USER_AUTHENTICATOR } from '@src/shared/domain/auth/userAuthenticator';
+import NestJwtTokenGenerator from '@src/shared/infrastructure/auth/jwt/nestJwtTokenGenerator';
 
 @Global()
 @Module({
@@ -42,13 +42,13 @@ import { USER_AUTHENTICATOR } from '@src/shared/domain/auth/userAuthenticator';
     CqrsModule,
     ClientsModule,
     JwtStrategy,
+    NestJwtTokenGenerator,
     MONGO_CLIENT,
     LOGGER,
     QUERY_BUS,
     COMMAND_BUS,
     EVENT_BUS,
     ASYNC_EVENT_BUS,
-    USER_AUTHENTICATOR,
   ],
 })
 export class SharedModule implements OnApplicationShutdown {
