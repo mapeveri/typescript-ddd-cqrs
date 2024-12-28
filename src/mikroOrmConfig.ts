@@ -13,7 +13,7 @@ dotenvExpand.expand(env);
 const migrationPath = path.join(__dirname, 'infrastructure/persistence/mikroOrm/migrations');
 const entitySchemas = [...accountEntitySchemas, ...languagesEntitySchemas];
 
-export default defineConfig({
+export const mikroOrmConfiguration = {
   entities: entitySchemas,
   entitiesTs: entitySchemas,
   driver: PostgreSqlDriver,
@@ -31,4 +31,6 @@ export default defineConfig({
     allOrNothing: true,
     snapshot: false,
   },
-});
+};
+
+export default defineConfig(mikroOrmConfiguration);
