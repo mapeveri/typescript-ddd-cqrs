@@ -4,7 +4,7 @@ import request = require('supertest');
 import { MikroORM } from '@mikro-orm/core';
 import { createApplication, truncateTables } from '@test/acceptance/createApplication';
 
-describe('Signup feature', () => {
+describe('SignUp feature', () => {
   let app: INestApplication;
   let orm: MikroORM;
 
@@ -27,7 +27,7 @@ describe('Signup feature', () => {
     await closeApp();
   });
 
-  describe('As a user I want to signup in the app', () => {
+  describe('As a user I want to signUp in the app', () => {
     async function startScenario() {
       await truncateTables(orm);
     }

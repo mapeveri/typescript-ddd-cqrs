@@ -2,7 +2,7 @@ import { Body, Controller, HttpCode, Inject, Post } from '@nestjs/common';
 import { ApiBadRequestResponse, ApiInternalServerErrorResponse, ApiTags } from '@nestjs/swagger';
 import SignupPostDto from '@src/account/app/controllers/v1/auth/signupPostDto';
 import { COMMAND_BUS, CommandBus } from '@src/shared/domain/bus/commandBus/commandBus';
-import SignupUserCommand from '@src/account/application/auth/command/signupUserCommand';
+import SignUpUserCommand from '@src/account/application/auth/command/signUpUserCommand';
 import { Uuid } from '@src/shared/domain/valueObjects/uuid';
 
 @ApiTags('Auth')
@@ -18,7 +18,7 @@ export default class SignupPostController {
     const id = Uuid.fromString(payload.email).toString();
 
     await this.commandBus.dispatch(
-      new SignupUserCommand(id, payload.name, payload.email, payload.token, payload.provider, payload.photo),
+      new SignUpUserCommand(id, payload.name, payload.email, payload.token, payload.provider, payload.photo),
     );
   }
 }

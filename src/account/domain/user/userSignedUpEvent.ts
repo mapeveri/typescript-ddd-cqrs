@@ -1,6 +1,6 @@
 import { DomainEvent } from '@src/shared/domain/bus/eventBus/domainEvent';
 
-export default class UserCreatedEvent extends DomainEvent {
+export default class UserSignedUpEvent extends DomainEvent {
   constructor(
     public readonly id: string,
     public readonly name: string,
@@ -24,11 +24,11 @@ export default class UserCreatedEvent extends DomainEvent {
   }
 
   public static eventTypeName(): string {
-    return 'user.created';
+    return 'user.signedUp';
   }
 
   public classPathName(): string {
-    return 'languages.domain.user.userCreatedEvent';
+    return 'languages.domain.user.userSignedUpEvent';
   }
 
   public static aggregateTypeName(): string {

@@ -1,7 +1,7 @@
 import { beforeAll, describe, it, expect, jest } from '@jest/globals';
 import SignupPostController from '@src/account/app/controllers/v1/auth/signupPostController';
 import { CommandBus } from '@src/shared/domain/bus/commandBus/commandBus';
-import { SignupUserCommandMother } from '@test/unit/account/application/auth/command/signupUserCommandMother';
+import { SignUpUserCommandMother } from '@test/unit/account/application/auth/command/signUpUserCommandMother';
 
 describe('Given a SignupPostController to handle', () => {
   let sut: SignupPostController;
@@ -36,7 +36,7 @@ describe('Given a SignupPostController to handle', () => {
       await sut.run(data);
 
       expect(commandBusMock.dispatch).toHaveBeenCalledWith(
-        SignupUserCommandMother.random({
+        SignUpUserCommandMother.random({
           id: '4a4df157-8ab8-50af-bb39-88e8ce29eb16',
           email: data.email,
           name: data.name,

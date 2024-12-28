@@ -1,4 +1,4 @@
 import UpdateUserCommandHandler from '@src/account/application/user/command/updateUserCommandHandler';
-import SignupUserCommandHandler from '@src/account/application/auth/command/signupUserCommandHandler';
+import SignUpUserCommandHandler from '@src/account/application/auth/command/signUpUserCommandHandler';
 
-export const commands = [SignupUserCommandHandler, UpdateUserCommandHandler];
+export const commands = [SignUpUserCommandHandler, UpdateUserCommandHandler];

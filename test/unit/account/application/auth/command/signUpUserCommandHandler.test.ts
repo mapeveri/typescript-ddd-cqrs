@@ -1,19 +1,19 @@
 import { beforeEach, beforeAll, describe, expect, it, jest } from '@jest/globals';
 import { EventBusMock } from '@test/unit/shared/domain/buses/eventBus/eventBusMock';
-import SignupUserCommandHandler from '@src/account/application/auth/command/signupUserCommandHandler';
-import { SignupUserCommandMother } from '@test/unit/account/application/auth/command/signupUserCommandMother';
-import SignupUserCommand from '@src/account/application/auth/command/signupUserCommand';
+import SignUpUserCommandHandler from '@src/account/application/auth/command/signUpUserCommandHandler';
+import { SignUpUserCommandMother } from '@test/unit/account/application/auth/command/signUpUserCommandMother';
+import SignUpUserCommand from '@src/account/application/auth/command/signUpUserCommand';
 import { UserRepositoryMock } from '@test/unit/account/domain/user/userRepositoryMock';
 import { UserMother } from '@test/unit/account/domain/user/userMother';
 import UserAlreadyExistsException from '@src/account/domain/user/userAlreadyExistsException';
 import { UserIdMother } from '@test/unit/account/domain/user/userIdMother';
-import UserCreatedEvent from '@src/account/domain/user/userCreatedEvent';
-import { UserCreatedEventMother } from '@test/unit/account/domain/user/userCreatedEventMother';
+import UserSignedUpEvent from '@src/account/domain/user/userSignedUpEvent';
+import { UserSignedUpEventMother } from '@test/unit/account/domain/user/userSignedUpEventMother';
 
-describe('Given a SignupUserCommandHandler to handle', () => {
+describe('Given a SignUpUserCommandHandler to handle', () => {
   let userRepository: UserRepositoryMock;
   let eventBus: EventBusMock;
-  let handler: SignupUserCommandHandler;
+  let handler: SignUpUserCommandHandler;
 
   const prepareDependencies = () => {
     userRepository = new UserRepositoryMock();
@@ -21,7 +21,7 @@ describe('Given a SignupUserCommandHandler to handle', () => {
   };
 
   const initHandler = () => {
-    handler = new SignupUserCommandHandler(userRepository, eventBus);
+    handler = new SignUpUserCommandHandler(userRepository, eventBus);
 
     jest.useFakeTimers();
   };
@@ -41,10 +41,10 @@ describe('Given a SignupUserCommandHandler to handle', () => {
   });
 
   describe('When the user already exists', () => {
-    let command: SignupUserCommand;
+    let command: SignUpUserCommand;
 
     function startScenario() {
-      command = SignupUserCommandMother.random();
+      command = SignUpUserCommandMother.random();
       userRepository.add(UserMother.random({ id: UserIdMother.random(command.id) }));
     }
 
@@ -66,7 +66,7 @@ describe('Given a SignupUserCommandHandler to handle', () => {
 
   describe('When the user does not exists', () => {
     let data: { id: string; email: string; provider: string; photo: string; name: string };
-    let command: SignupUserCommand;
+    let command: SignUpUserCommand;
 
     function startScenario() {
       data = {
@@ -76,7 +76,7 @@ describe('Given a SignupUserCommandHandler to handle', () => {
         photo: '',
         name: 'test',
       };
-      command = SignupUserCommandMother.random(data);
+      command = SignUpUserCommandMother.random(data);
     }
 
     beforeEach(startScenario);
@@ -91,11 +91,11 @@ describe('Given a SignupUserCommandHandler to handle', () => {
     });
 
     it('should publish the events', async () => {
-      const event = UserCreatedEventMother.createFromSignupUserCommand(command);
+      const event = UserSignedUpEventMother.createFromSignUpUserCommand(command);
       await handler.execute(command);
 
       expect(eventBus.domainEvents()).toHaveLength(1);
-      expect(eventBus.domainEvents()[0]).toBeInstanceOf(UserCreatedEvent);
+      expect(eventBus.domainEvents()[0]).toBeInstanceOf(UserSignedUpEvent);
       expect(eventBus.domainEvents()[0]).toEqual({
         ...event,
       });

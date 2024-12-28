@@ -1,5 +1,5 @@
 import faker from 'faker';
-import SignupUserCommand from '@src/account/application/auth/command/signupUserCommand';
+import SignUpUserCommand from '@src/account/application/auth/command/signUpUserCommand';
 
 interface SignupUserCommandProps {
   id?: string;
@@ -10,11 +10,11 @@ interface SignupUserCommandProps {
   photo?: string;
 }
 
-export class SignupUserCommandMother {
-  static random(props?: SignupUserCommandProps): SignupUserCommand {
+export class SignUpUserCommandMother {
+  static random(props?: SignupUserCommandProps): SignUpUserCommand {
     const { id, name, email, token, provider, photo } = props ?? {};
 
-    return new SignupUserCommand(
+    return new SignUpUserCommand(
       id ?? faker.datatype.uuid(),
       name ?? faker.name.findName(),
       email ?? faker.internet.email(),

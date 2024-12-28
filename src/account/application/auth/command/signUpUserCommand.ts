@@ -1,6 +1,6 @@
 import { Command } from '@src/shared/domain/bus/commandBus/command';
 
-export default class SignupUserCommand implements Command {
+export default class SignUpUserCommand implements Command {
   constructor(
     public readonly id: string,
     public readonly name: string,
