@@ -18,17 +18,4 @@ export default class NestJwtTokenGenerator {
       refreshToken,
     };
   }
-
-  m2m(): { token: string; refreshToken: string } {
-    this.logger.log('[NestJwtTokenGenerator]: m2m token');
-
-    const data = { role: 'internal' };
-    const token: string = this.jwtService.sign(data);
-    const refreshToken: string = this.jwtService.sign(data, { expiresIn: '30d' });
-
-    return {
-      token,
-      refreshToken,
-    };
-  }
 }

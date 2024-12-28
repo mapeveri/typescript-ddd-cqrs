@@ -16,6 +16,7 @@ import MongoConnection, { MONGO_CLIENT } from '@src/shared/infrastructure/persis
 import { ConfigModule } from '@nestjs/config';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import NestJwtTokenGenerator from '@src/shared/infrastructure/auth/jwt/nestJwtTokenGenerator';
+import NestJwtM2mTokenGenerator from '@src/shared/infrastructure/auth/jwt/nestJwtM2mTokenGenerator';
 
 @Global()
 @Module({
@@ -43,6 +44,7 @@ import NestJwtTokenGenerator from '@src/shared/infrastructure/auth/jwt/nestJwtTo
     ClientsModule,
     JwtStrategy,
     NestJwtTokenGenerator,
+    NestJwtM2mTokenGenerator,
     MONGO_CLIENT,
     LOGGER,
     QUERY_BUS,

@@ -16,6 +16,7 @@ import { PersistDomainEventsSubscriber } from '@src/shared/infrastructure/subscr
 import MongoConnection, { MONGO_CLIENT } from '@src/shared/infrastructure/persistence/mongo/mongoConnection';
 import MikroOrmTransactionalDecorator from '../infrastructure/persistence/mikroOrm/decorators/mikroOrmTransactionalDecorator';
 import NestJwtTokenGenerator from '@src/shared/infrastructure/auth/jwt/nestJwtTokenGenerator';
+import NestJwtM2mTokenGenerator from '@src/shared/infrastructure/auth/jwt/nestJwtM2mTokenGenerator';
 
 export const services = [
   MikroOrmTransactionalDecorator,
@@ -54,4 +55,5 @@ export const services = [
   MongoEventStoreRepository,
   PersistDomainEventsSubscriber,
   NestJwtTokenGenerator,
+  NestJwtM2mTokenGenerator,
 ];

@@ -4,7 +4,7 @@ import { firstValueFrom } from 'rxjs';
 import CollaboratorId from '@src/languages/domain/collaborator/collaboratorId';
 import Collaborator from '@src/languages/domain/collaborator/collaborator';
 import { CollaboratorTranslator } from '@src/languages/infrastructure/persistence/http/collaboratorTranslator';
-import NestJwtTokenGenerator from '@src/shared/infrastructure/auth/jwt/nestJwtTokenGenerator';
+import NestJwtM2mTokenGenerator from '@src/shared/infrastructure/auth/jwt/nestJwtM2mTokenGenerator';
 
 @Injectable()
 export class HttpCollaboratorAdapter {
@@ -12,11 +12,11 @@ export class HttpCollaboratorAdapter {
 
   constructor(
     private readonly httpService: HttpService,
-    private readonly nestJwtTokenGenerator: NestJwtTokenGenerator,
+    private readonly nestJwtM2mTokenGenerator: NestJwtM2mTokenGenerator,
   ) {}
 
   async toCollaborator(id: CollaboratorId): Promise<Collaborator | null> {
-    const m2mToken = this.nestJwtTokenGenerator.m2m();
+    const m2mToken = this.nestJwtM2mTokenGenerator.generate();
 
     const { data } = await firstValueFrom(
       this.httpService.get(this.URL.replace('{id}', id.toString()), {

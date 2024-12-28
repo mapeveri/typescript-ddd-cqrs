@@ -13,8 +13,13 @@ export default class NestJwtUserAuthenticator implements UserAuthenticator {
   ) {}
 
   sign(user: object): UserAuthenticatorResponse {
-    this.logger.log(`User authenticator: ${JSON.stringify(user)}`);
+    const data = {
+      ...user,
+      role: 'external',
+    };
 
-    return this.nestJsTokenGenerator.generate(user);
+    this.logger.log(`User authenticator: ${JSON.stringify(data)}`);
+
+    return this.nestJsTokenGenerator.generate(data);
   }
 }
