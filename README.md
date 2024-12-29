@@ -36,11 +36,11 @@ To execute migrations run the next command:
   docker compose run app npm run mikroorm migration:up
 ```
 
-### Oauth2:
+### Oauth2
 
 To get a token for testing you should go to https://developers.google.com/oauthplayground and configure it as "Use your own OAuth credentials" after that you should use Google OAuth2 API v2.
 
-### Consume async domain events:
+### Consume async domain events
 
 To consume async domain events you need to run the next command:
 
