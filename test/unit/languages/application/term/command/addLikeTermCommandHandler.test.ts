@@ -112,7 +112,7 @@ describe('Given a AddLikeTermCommandHandler to handle', () => {
     let command: AddLikeTermCommand;
 
     function startScenario() {
-      command = AddLikeTermCommandMother.random({ userId: 'invalid' });
+      command = AddLikeTermCommandMother.random({ termId: TERM_ID, userId: 'invalid' });
 
       const term = WordMother.random({ id: TermIdMother.random(TERM_ID) });
       termRepository.add(term);
