@@ -16,9 +16,9 @@ export default class Country extends AggregateRoot {
     super();
   }
 
-  static create(id: CountryId, name: string, iso: string, languages: LanguageCollection): Country {
-    const country = new this(id, name, iso, languages);
-    country.record(new CountryCreatedEvent(id.value, name, iso, languages.toArray()));
+  static create(id: string, name: string, iso: string, languages: LanguagePrimitives[]): Country {
+    const country = new this(CountryId.of(id), name, iso, LanguageCollection.of(languages));
+    country.record(new CountryCreatedEvent(id.toString(), name, iso, languages));
 
     return country;
   }
