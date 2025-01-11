@@ -35,16 +35,23 @@ export default class Expression extends Term {
   }
 
   static create(
-    id: TermId,
+    id: string,
     languageId: string,
-    countryId: CountryId,
-    terms: ExpressionTermCollection,
-    userId: UserId,
+    countryId: string,
+    terms: ExpressionTermPrimitives[],
+    userId: string,
   ): Expression {
-    const expression = new this(id, languageId, TermType.of(TermTypeEnum.EXPRESSION), countryId, userId, [], terms);
-    expression.record(
-      new ExpressionCreatedEvent(id.toString(), languageId, countryId.toString(), userId.toString(), terms.toArray()),
+    const expression = new this(
+      TermId.of(id),
+      languageId,
+      TermType.of(TermTypeEnum.EXPRESSION),
+      CountryId.of(countryId),
+      UserId.of(userId),
+      [],
+      ExpressionTermCollection.of(terms),
     );
+
+    expression.record(new ExpressionCreatedEvent(id, languageId, countryId, userId, terms));
 
     return expression;
   }

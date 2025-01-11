@@ -1,9 +1,6 @@
 import { ASYNC_EVENT_BUS, EventBus } from '@src/shared/domain/bus/eventBus/eventBus';
 import CreateExpressionCommand from './createExpressionCommand';
 import Expression from '@src/languages/domain/term/expression/expression';
-import CountryId from '@src/languages/domain/country/countryId';
-import ExpressionTermCollection from '@src/languages/domain/term/expression/expressionTermCollection';
-import UserId from '@src/account/domain/user/userId';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { CommandHandler, ICommandHandler } from '@src/shared/domain/bus/commandBus/commandHandler';
 import TermRepository, { TERM_REPOSITORY } from '@src/languages/domain/term/termRepository';
@@ -18,15 +15,14 @@ export default class CreateExpressionCommandHandler implements ICommandHandler<C
   ) {}
 
   async execute(command: CreateExpressionCommand): Promise<void> {
-    const id = TermId.of(command.id);
-    await this.guardExpressionDoesNotExists(id);
+    await this.guardExpressionDoesNotExists(command.id);
 
     const expression = Expression.create(
-      id,
+      command.id,
       command.languageId,
-      CountryId.of(command.countryId),
-      ExpressionTermCollection.of(command.terms),
-      UserId.of(command.userId),
+      command.countryId,
+      command.terms,
+      command.userId,
     );
 
     this.termRepository.save(expression);
@@ -34,8 +30,8 @@ export default class CreateExpressionCommandHandler implements ICommandHandler<C
     void this.eventBus.publish(expression.pullDomainEvents());
   }
 
-  private async guardExpressionDoesNotExists(id: TermId): Promise<void> {
-    const expression = await this.termRepository.findById(id);
+  private async guardExpressionDoesNotExists(id: string): Promise<void> {
+    const expression = await this.termRepository.findById(TermId.of(id));
     if (expression) {
       throw new TermAlreadyExistsException(id.toString());
     }
