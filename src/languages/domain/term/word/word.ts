@@ -52,18 +52,16 @@ export default class Word extends Term {
     return word;
   }
 
-  update(userId: UserId, languageId: string, countryId: CountryId, terms: WordTermCollection): void {
-    if (!this.userId.equals(userId)) {
+  update(userId: string, languageId: string, countryId: string, terms: WordTermPrimitives[]): void {
+    if (!this.userId.equals(UserId.of(userId))) {
       throw new TermDoesNotBelongToUserException(this.id.toString());
     }
 
     this.languageId = languageId;
-    this.countryId = countryId;
-    this.terms = terms;
+    this.countryId = CountryId.of(countryId);
+    this.terms = WordTermCollection.of(terms);
 
-    this.record(
-      new WordUpdatedEvent(this.id.toString(), languageId, countryId.toString(), userId.toString(), terms.toArray()),
-    );
+    this.record(new WordUpdatedEvent(this.id.toString(), languageId, countryId, userId, terms));
   }
 
   toPrimitives(): WordPrimitives {

@@ -72,11 +72,43 @@ describe('Given a UpdateWordCommandHandler to handle', () => {
     });
   });
 
+  describe('When the term does not exists', () => {
+    let command: UpdateWordCommand;
+
+    function startScenario() {
+      command = UpdateWordCommandMother.random();
+    }
+
+    beforeEach(startScenario);
+
+    it('then should thrown an exception', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError(TermDoesNotExistsException);
+    });
+
+    it('then should not add the word', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError();
+
+      expect(termRepository.storedChanged()).toBeFalsy();
+      expect(termRepository.stored()).toHaveLength(0);
+    });
+
+    it('then should not publish the events', async () => {
+      await expect(handler.execute(command)).rejects.toThrowError();
+
+      expect(eventBus.domainEvents()).toHaveLength(0);
+    });
+  });
+
   describe('When user id is invalid', () => {
     let command: UpdateWordCommand;
 
     function startScenario() {
       command = UpdateWordCommandMother.random({ userId: '' });
+
+      const word = WordMother.random({
+        id: TermIdMother.random(command.id),
+      });
+      termRepository.add(word);
     }
 
     beforeEach(startScenario);
@@ -104,39 +136,18 @@ describe('Given a UpdateWordCommandHandler to handle', () => {
 
     function startScenario() {
       command = UpdateWordCommandMother.random({ countryId: '' });
+
+      const word = WordMother.random({
+        id: TermIdMother.random(command.id),
+        userId: UserIdMother.random(command.userId),
+      });
+      termRepository.add(word);
     }
 
     beforeEach(startScenario);
 
     it('then should thrown an exception', async () => {
       await expect(handler.execute(command)).rejects.toThrowError(InvalidArgumentException);
-    });
-
-    it('then should not add the word', async () => {
-      await expect(handler.execute(command)).rejects.toThrowError();
-
-      expect(termRepository.storedChanged()).toBeFalsy();
-      expect(termRepository.stored()).toHaveLength(0);
-    });
-
-    it('then should not publish the events', async () => {
-      await expect(handler.execute(command)).rejects.toThrowError();
-
-      expect(eventBus.domainEvents()).toHaveLength(0);
-    });
-  });
-
-  describe('When the command is valid and the term does not exists', () => {
-    let command: UpdateWordCommand;
-
-    function startScenario() {
-      command = UpdateWordCommandMother.random();
-    }
-
-    beforeEach(startScenario);
-
-    it('then should thrown an exception', async () => {
-      await expect(handler.execute(command)).rejects.toThrowError(TermDoesNotExistsException);
     });
 
     it('then should not add the word', async () => {
