@@ -15,8 +15,7 @@ export default class DeleteTermCommandHandler implements ICommandHandler<DeleteT
   ) {}
 
   async execute(command: DeleteTermCommand): Promise<void> {
-    const termId = TermId.of(command.id);
-    const term = await this.getTerm(termId);
+    const term = await this.getTerm(command.id);
 
     term.delete();
 
@@ -25,8 +24,8 @@ export default class DeleteTermCommandHandler implements ICommandHandler<DeleteT
     void this.eventBus.publish(term.pullDomainEvents());
   }
 
-  private async getTerm(termId: TermId): Promise<Term> {
-    const term = await this.termRepository.findById(termId);
+  private async getTerm(termId: string): Promise<Term> {
+    const term = await this.termRepository.findById(TermId.of(termId));
     if (!term) {
       throw new TermDoesNotExistsException(termId.toString());
     }
