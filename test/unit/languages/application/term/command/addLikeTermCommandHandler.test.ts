@@ -81,17 +81,17 @@ describe('Given a AddLikeTermCommandHandler to handle', () => {
     });
   });
 
-  describe('When the collaborator id is invalid ', () => {
+  describe('When the term does not exists ', () => {
     let command: AddLikeTermCommand;
 
     function startScenario() {
-      command = AddLikeTermCommandMother.random({ userId: 'invalid' });
+      command = AddLikeTermCommandMother.random();
     }
 
     beforeEach(startScenario);
 
     it('then should thrown an exception', async () => {
-      await expect(handler.execute(command)).rejects.toThrowError(InvalidArgumentException);
+      await expect(handler.execute(command)).rejects.toThrowError(TermDoesNotExistsException);
     });
 
     it('then should not add the like', async () => {
@@ -108,17 +108,20 @@ describe('Given a AddLikeTermCommandHandler to handle', () => {
     });
   });
 
-  describe('When the term does not exists ', () => {
+  describe('When the collaborator id is invalid ', () => {
     let command: AddLikeTermCommand;
 
     function startScenario() {
-      command = AddLikeTermCommandMother.random();
+      command = AddLikeTermCommandMother.random({ userId: 'invalid' });
+
+      const term = WordMother.random({ id: TermIdMother.random(TERM_ID) });
+      termRepository.add(term);
     }
 
     beforeEach(startScenario);
 
     it('then should thrown an exception', async () => {
-      await expect(handler.execute(command)).rejects.toThrowError(TermDoesNotExistsException);
+      await expect(handler.execute(command)).rejects.toThrowError(InvalidArgumentException);
     });
 
     it('then should not add the like', async () => {

@@ -22,21 +22,18 @@ export default class AddLikeTermCommandHandler implements ICommandHandler<AddLik
   ) {}
 
   async execute(command: AddLikeTermCommand): Promise<void> {
-    const termId = TermId.of(command.termId);
-    const collaboratorId = CollaboratorId.of(command.userId);
+    const term = await this.getTerm(command.termId);
+    const collaborator = await this.getCollaborator(command.userId);
 
-    const term = await this.getTerm(termId);
-    const collaborator = await this.getCollaborator(collaboratorId);
-
-    term.addLike(collaboratorId, collaborator.getName(), collaborator.getPhoto());
+    term.addLike(command.userId, collaborator.getName(), collaborator.getPhoto());
 
     this.termRepository.save(term);
 
     void this.eventBus.publish(term.pullDomainEvents());
   }
 
-  private async getTerm(termId: TermId): Promise<Term> {
-    const term = await this.termRepository.findById(termId);
+  private async getTerm(termId: string): Promise<Term> {
+    const term = await this.termRepository.findById(TermId.of(termId));
     if (!term) {
       throw new TermDoesNotExistsException(termId.toString());
     }
@@ -44,8 +41,8 @@ export default class AddLikeTermCommandHandler implements ICommandHandler<AddLik
     return term;
   }
 
-  private async getCollaborator(collaboratorId: CollaboratorId): Promise<Collaborator> {
-    const collaborator = await this.collaboratorRepository.findById(collaboratorId);
+  private async getCollaborator(collaboratorId: string): Promise<Collaborator> {
+    const collaborator = await this.collaboratorRepository.findById(CollaboratorId.of(collaboratorId));
     if (!collaborator) {
       throw new CollaboratorDoesNotExistsException(collaboratorId.toString());
     }
