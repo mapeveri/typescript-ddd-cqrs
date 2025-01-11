@@ -36,11 +36,19 @@ export default class Word extends Term {
     return this.terms;
   }
 
-  static create(id: TermId, languageId: string, countryId: CountryId, terms: WordTermCollection, userId: UserId): Word {
-    const word = new this(id, languageId, TermType.of(TermTypeEnum.WORD), countryId, userId, [], terms);
-    word.record(
-      new WordCreatedEvent(id.toString(), languageId, countryId.toString(), userId.toString(), terms.toArray()),
+  static create(id: string, languageId: string, countryId: string, terms: WordTermPrimitives[], userId: string): Word {
+    const word = new this(
+      TermId.of(id),
+      languageId,
+      TermType.of(TermTypeEnum.WORD),
+      CountryId.of(countryId),
+      UserId.of(userId),
+      [],
+      WordTermCollection.of(terms),
     );
+
+    word.record(new WordCreatedEvent(id, languageId, countryId, userId, terms));
+
     return word;
   }
 
