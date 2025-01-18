@@ -16,10 +16,12 @@ import { CollaboratorRepositoryMock } from '@test/unit/languages/domain/collabor
 import CollaboratorDoesNotExistsException from '@src/languages/domain/collaborator/collaboratorDoesNotExistsException';
 import { CollaboratorIdMother } from '@test/unit/languages/domain/collaborator/collaboratorIdMother';
 import { CollaboratorMother } from '@test/unit/languages/domain/collaborator/collaboratorMother';
+import { IdentityProviderMock } from '@test/unit/shared/domain/services/IdentityProviderMock';
 
 describe('Given a DislikeTermCommandHandler to handle', () => {
   let termRepository: TermRepositoryMock;
   let collaboratorRepository: CollaboratorRepositoryMock;
+  let identityProvider: IdentityProviderMock;
   let eventBus: EventBusMock;
   let handler: DislikeTermCommandHandler;
 
@@ -30,11 +32,12 @@ describe('Given a DislikeTermCommandHandler to handle', () => {
   const prepareDependencies = () => {
     termRepository = new TermRepositoryMock();
     collaboratorRepository = new CollaboratorRepositoryMock();
+    identityProvider = new IdentityProviderMock();
     eventBus = new EventBusMock();
   };
 
   const initHandler = () => {
-    handler = new DislikeTermCommandHandler(termRepository, collaboratorRepository, eventBus);
+    handler = new DislikeTermCommandHandler(termRepository, collaboratorRepository, identityProvider, eventBus);
 
     jest.useFakeTimers();
   };
@@ -42,6 +45,7 @@ describe('Given a DislikeTermCommandHandler to handle', () => {
   const clean = () => {
     termRepository.clean();
     collaboratorRepository.clean();
+    identityProvider.clean();
     eventBus.clean();
   };
 
@@ -188,6 +192,7 @@ describe('Given a DislikeTermCommandHandler to handle', () => {
       });
       const collaborator = CollaboratorMother.random({ id: CollaboratorIdMother.random(COLLABORATOR_ID) });
 
+      identityProvider.add(TERM_LIKE_ID);
       termRepository.add(term);
       collaboratorRepository.add(collaborator);
     }
@@ -230,6 +235,7 @@ describe('Given a DislikeTermCommandHandler to handle', () => {
       });
       const collaborator = CollaboratorMother.random({ id: CollaboratorIdMother.random(COLLABORATOR_ID) });
 
+      identityProvider.add(TERM_LIKE_ID);
       termRepository.add(term);
       collaboratorRepository.add(collaborator);
     }

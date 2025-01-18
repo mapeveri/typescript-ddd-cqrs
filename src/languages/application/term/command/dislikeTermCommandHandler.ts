@@ -12,12 +12,14 @@ import CollaboratorRepository, {
 import Collaborator from '@src/languages/domain/collaborator/collaborator';
 import CollaboratorId from '@src/languages/domain/collaborator/collaboratorId';
 import CollaboratorDoesNotExistsException from '@src/languages/domain/collaborator/collaboratorDoesNotExistsException';
+import { IDENTITY_PROVIDER, IdentityProvider } from '@src/shared/domain/services/IdentityProvider';
 
 @CommandHandler(DislikeTermCommand)
 export default class DislikeTermCommandHandler implements ICommandHandler<DislikeTermCommand> {
   constructor(
     @Inject(TERM_REPOSITORY) private readonly termRepository: TermRepository,
     @Inject(COLLABORATOR_REPOSITORY) private readonly collaboratorRepository: CollaboratorRepository,
+    @Inject(IDENTITY_PROVIDER) private readonly identityProvider: IdentityProvider,
     @Inject(ASYNC_EVENT_BUS) private readonly eventBus: EventBus,
   ) {}
 
@@ -25,7 +27,10 @@ export default class DislikeTermCommandHandler implements ICommandHandler<Dislik
     const term = await this.getTerm(command.termId);
     const collaborator = await this.getCollaborator(command.userId);
 
-    term.dislike(command.userId, collaborator.getName(), collaborator.getPhoto());
+    const userId = command.userId;
+    const id = this.identityProvider.generateFromValue(`${term.getId().toString()}${userId}`);
+
+    term.dislike(id, userId, collaborator.getName(), collaborator.getPhoto());
 
     this.termRepository.save(term);
 
