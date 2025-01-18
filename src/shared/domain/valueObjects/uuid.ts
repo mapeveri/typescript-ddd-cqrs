@@ -1,4 +1,4 @@
-import { v4 as uuidv4, v5 as uuidv5 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import InvalidArgumentException from '../exceptions/invalidArgumentException';
 import { ValueObject } from './valueObject';
 
@@ -20,10 +20,6 @@ export class Uuid extends ValueObject<string> {
 
   static random(): Uuid {
     return new Uuid(uuidv4());
-  }
-
-  static fromString(value: string): Uuid {
-    return new Uuid(uuidv5(value, uuidv5.DNS));
   }
 
   private validateUuid(id: string): void {
