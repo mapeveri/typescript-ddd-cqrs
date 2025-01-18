@@ -53,8 +53,7 @@ export default abstract class Term extends AggregateRoot {
     this.record(new TermDeletedEvent(this.id.toString(), this.type.toString()));
   }
 
-  addLike(userId: string, name: string, photo: string): void {
-    const termLikeId = Uuid.fromString(`${this.id.toString()}${userId}`).toString();
+  addLike(termLikeId: string, userId: string, name: string, photo: string): void {
     const like = new TermLike(TermLikeId.of(termLikeId), CollaboratorId.of(userId), this.id, name, photo);
 
     if (this.hasLike(like)) return;

@@ -16,11 +16,13 @@ import { CollaboratorRepositoryMock } from '@test/unit/languages/domain/collabor
 import { CollaboratorMother } from '@test/unit/languages/domain/collaborator/collaboratorMother';
 import { CollaboratorIdMother } from '@test/unit/languages/domain/collaborator/collaboratorIdMother';
 import CollaboratorDoesNotExistsException from '@src/languages/domain/collaborator/collaboratorDoesNotExistsException';
+import { IdentityProviderMock } from '@test/unit/shared/domain/services/IdentityProviderMock';
 
 describe('Given a AddLikeTermCommandHandler to handle', () => {
   let termRepository: TermRepositoryMock;
   let collaboratorRepository: CollaboratorRepositoryMock;
   let eventBus: EventBusMock;
+  let identityProvider: IdentityProviderMock;
   let handler: AddLikeTermCommandHandler;
 
   const COLLABORATOR_ID = '0a8008d5-ab68-4c10-8476-668b5b540e0f';
@@ -30,11 +32,12 @@ describe('Given a AddLikeTermCommandHandler to handle', () => {
   const prepareDependencies = () => {
     termRepository = new TermRepositoryMock();
     collaboratorRepository = new CollaboratorRepositoryMock();
+    identityProvider = new IdentityProviderMock();
     eventBus = new EventBusMock();
   };
 
   const initHandler = () => {
-    handler = new AddLikeTermCommandHandler(termRepository, collaboratorRepository, eventBus);
+    handler = new AddLikeTermCommandHandler(termRepository, collaboratorRepository, identityProvider, eventBus);
 
     jest.useFakeTimers();
   };
@@ -42,6 +45,7 @@ describe('Given a AddLikeTermCommandHandler to handle', () => {
   const clean = () => {
     termRepository.clean();
     collaboratorRepository.clean();
+    identityProvider.clean();
     eventBus.clean();
   };
 
@@ -174,6 +178,7 @@ describe('Given a AddLikeTermCommandHandler to handle', () => {
 
     function startScenario() {
       command = AddLikeTermCommandMother.random({ termId: TERM_ID, userId: COLLABORATOR_ID });
+
       term = WordMother.random({
         id: TermIdMother.random(TERM_ID),
         likes: [
@@ -188,6 +193,7 @@ describe('Given a AddLikeTermCommandHandler to handle', () => {
       });
       const collaborator = CollaboratorMother.random({ id: CollaboratorIdMother.random(COLLABORATOR_ID) });
 
+      identityProvider.add(TERM_LIKE_ID);
       termRepository.add(term);
       collaboratorRepository.add(collaborator);
     }
@@ -229,6 +235,7 @@ describe('Given a AddLikeTermCommandHandler to handle', () => {
         photo: PHOTO,
       });
 
+      identityProvider.add(TERM_LIKE_ID);
       termRepository.add(term);
       collaboratorRepository.add(user);
     }
