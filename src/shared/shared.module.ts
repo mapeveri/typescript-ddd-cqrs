@@ -17,6 +17,7 @@ import { ConfigModule } from '@nestjs/config';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import NestJwtTokenGenerator from '@src/shared/infrastructure/auth/jwt/nestJwtTokenGenerator';
 import NestJwtM2mTokenGenerator from '@src/shared/infrastructure/auth/jwt/nestJwtM2mTokenGenerator';
+import { IDENTITY_PROVIDER } from '@src/shared/domain/services/IdentityProvider';
 
 @Global()
 @Module({
@@ -47,6 +48,7 @@ import NestJwtM2mTokenGenerator from '@src/shared/infrastructure/auth/jwt/nestJw
     NestJwtM2mTokenGenerator,
     MONGO_CLIENT,
     LOGGER,
+    IDENTITY_PROVIDER,
     QUERY_BUS,
     COMMAND_BUS,
     EVENT_BUS,
