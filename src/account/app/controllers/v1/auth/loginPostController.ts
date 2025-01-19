@@ -4,7 +4,7 @@ import LoginPostDto from './loginPostDto';
 import LoginPostResponseDto from './loginPostResponseDto';
 import { ApiBadRequestResponse, ApiInternalServerErrorResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { QUERY_BUS, QueryBus } from '@src/shared/domain/bus/queryBus/queryBus';
-import { IDENTITY_PROVIDER, IdentityProvider } from '@src/shared/domain/services/IdentityProvider';
+import { IDENTITY_PROVIDER, IdentityProvider } from '@src/shared/domain/services/identityProvider';
 
 @ApiTags('Auth')
 @Controller()

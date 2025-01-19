@@ -3,7 +3,7 @@ import { ApiBadRequestResponse, ApiInternalServerErrorResponse, ApiTags } from '
 import SignupPostDto from '@src/account/app/controllers/v1/auth/signupPostDto';
 import { COMMAND_BUS, CommandBus } from '@src/shared/domain/bus/commandBus/commandBus';
 import SignUpUserCommand from '@src/account/application/auth/command/signUpUserCommand';
-import { IDENTITY_PROVIDER, IdentityProvider } from '@src/shared/domain/services/IdentityProvider';
+import { IDENTITY_PROVIDER, IdentityProvider } from '@src/shared/domain/services/identityProvider';
 
 @ApiTags('Auth')
 @Controller()

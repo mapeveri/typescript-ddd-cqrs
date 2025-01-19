@@ -12,7 +12,7 @@ import CollaboratorRepository, {
 import Collaborator from '@src/languages/domain/collaborator/collaborator';
 import CollaboratorId from '@src/languages/domain/collaborator/collaboratorId';
 import CollaboratorDoesNotExistsException from '@src/languages/domain/collaborator/collaboratorDoesNotExistsException';
-import { IDENTITY_PROVIDER, IdentityProvider } from '@src/shared/domain/services/IdentityProvider';
+import { IDENTITY_PROVIDER, IdentityProvider } from '@src/shared/domain/services/identityProvider';
 
 @CommandHandler(DislikeTermCommand)
 export default class DislikeTermCommandHandler implements ICommandHandler<DislikeTermCommand> {

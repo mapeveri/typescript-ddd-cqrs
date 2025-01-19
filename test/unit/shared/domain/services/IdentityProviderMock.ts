@@ -1,4 +1,4 @@
-import { IdentityProvider } from '@src/shared/domain/services/IdentityProvider';
+import { IdentityProvider } from '@src/shared/domain/services/identityProvider';
 
 export class IdentityProviderMock implements IdentityProvider {
   private value: string;

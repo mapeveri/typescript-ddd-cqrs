@@ -17,8 +17,8 @@ import MongoConnection, { MONGO_CLIENT } from '@src/shared/infrastructure/persis
 import MikroOrmTransactionalDecorator from '../infrastructure/persistence/mikroOrm/decorators/mikroOrmTransactionalDecorator';
 import NestJwtTokenGenerator from '@src/shared/infrastructure/auth/jwt/nestJwtTokenGenerator';
 import NestJwtM2mTokenGenerator from '@src/shared/infrastructure/auth/jwt/nestJwtM2mTokenGenerator';
-import { UuidIdentityProvider } from '@src/shared/infrastructure/services/UuidIdentityProvider';
-import { IDENTITY_PROVIDER } from '@src/shared/domain/services/IdentityProvider';
+import { UuidIdentityProvider } from '@src/shared/infrastructure/services/uuidIdentityProvider';
+import { IDENTITY_PROVIDER } from '@src/shared/domain/services/identityProvider';
 
 export const services = [
   MikroOrmTransactionalDecorator,

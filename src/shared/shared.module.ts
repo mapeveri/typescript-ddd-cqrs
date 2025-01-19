@@ -17,7 +17,7 @@ import { ConfigModule } from '@nestjs/config';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import NestJwtTokenGenerator from '@src/shared/infrastructure/auth/jwt/nestJwtTokenGenerator';
 import NestJwtM2mTokenGenerator from '@src/shared/infrastructure/auth/jwt/nestJwtM2mTokenGenerator';
-import { IDENTITY_PROVIDER } from '@src/shared/domain/services/IdentityProvider';
+import { IDENTITY_PROVIDER } from '@src/shared/domain/services/identityProvider';
 
 @Global()
 @Module({

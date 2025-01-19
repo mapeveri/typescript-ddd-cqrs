@@ -12,7 +12,7 @@ import CollaboratorRepository, {
 import CollaboratorId from '@src/languages/domain/collaborator/collaboratorId';
 import Collaborator from '@src/languages/domain/collaborator/collaborator';
 import CollaboratorDoesNotExistsException from '@src/languages/domain/collaborator/collaboratorDoesNotExistsException';
-import { IDENTITY_PROVIDER, IdentityProvider } from '@src/shared/domain/services/IdentityProvider';
+import { IDENTITY_PROVIDER, IdentityProvider } from '@src/shared/domain/services/identityProvider';
 
 @CommandHandler(AddLikeTermCommand)
 export default class AddLikeTermCommandHandler implements ICommandHandler<AddLikeTermCommand> {
