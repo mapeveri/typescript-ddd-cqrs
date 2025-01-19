@@ -5,7 +5,7 @@ import DomainException from '@src/shared/domain/exceptions/domainException';
 import ConflictException from '@src/shared/domain/exceptions/conflictException';
 import NotFoundException from '@src/shared/domain/exceptions/notFoundException';
 import UnauthorizedException from '@src/shared/domain/exceptions/unauthorizedException';
-import Logger, { LOGGER } from '@src/shared/domain/logger';
+import Logger, { LOGGER } from '@src/shared/domain/services/logger';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 
 @Catch(Error)

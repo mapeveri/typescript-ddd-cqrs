@@ -3,7 +3,7 @@ import { MessagePattern } from '@nestjs/microservices';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import { EVENT_BUS, EventBus } from '@src/shared/domain/bus/eventBus/eventBus';
 import { CreateRequestContext, MikroORM } from '@mikro-orm/core';
-import Logger, { LOGGER } from '@src/shared/domain/logger';
+import Logger, { LOGGER } from '@src/shared/domain/services/logger';
 
 @Controller()
 export class DomainEventsConsumerController {

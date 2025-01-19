@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
-import Logger, { LOGGER } from '@src/shared/domain/logger';
+import Logger, { LOGGER } from '@src/shared/domain/services/logger';
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()

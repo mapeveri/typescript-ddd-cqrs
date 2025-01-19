@@ -1,4 +1,4 @@
-import Logger from '../../domain/logger';
+import Logger from '../../domain/services/logger';
 import { Injectable, Logger as NestJsLogger } from '@nestjs/common';
 import * as winston from 'winston';
 

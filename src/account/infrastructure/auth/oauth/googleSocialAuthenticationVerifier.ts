@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { SocialAuthenticationVerifier } from '@src/account/domain/auth/socialAuthenticationVerifier';
 import { OAuth2Client } from 'google-auth-library';
 import { Inject } from '@src/shared/domain/injector/inject.decorator';
-import Logger, { LOGGER } from '@src/shared/domain/logger';
+import Logger, { LOGGER } from '@src/shared/domain/services/logger';
 
 @Injectable()
 export default class GoogleSocialAuthenticationVerifier implements SocialAuthenticationVerifier {
