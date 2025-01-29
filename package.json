@@ -14,7 +14,7 @@
     "linter-check": "eslint 'src/**/*.ts'",
     "linter-fix": "eslint --fix 'src/**/*.ts'",
     "mikroorm": "npx mikro-orm",
-    "test:unit": "vitest --testPathPattern=test/unit",
+    "test:unit": "vitest test/unit",
     "test:acceptance": "vitest --testPathPattern=test/acceptance",
     "test": "vitest",
     "test:watch": "vitest --watch",
