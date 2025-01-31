@@ -1,6 +1,6 @@
 import CountryCreatedEvent from '@src/languages/domain/country/countryCreatedEvent';
 import CreateCountryCommand from '@src/languages/application/country/command/createCountryCommand';
-import { expect } from '@jest/globals';
+import { expect } from 'vitest';
 
 export class CountryCreatedEventMother {
   static createFromCreateCountryCommand(command: CreateCountryCommand): CountryCreatedEvent {

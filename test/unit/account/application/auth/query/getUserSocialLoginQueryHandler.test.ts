@@ -1,4 +1,4 @@
-import { beforeEach, beforeAll, describe, expect, it, jest } from '@jest/globals';
+import { beforeEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import GetUserSocialLoginQueryHandler from '@src/account/application/auth/query/getUserSocialLoginQueryHandler';
 import { GetUserSocialLoginQueryMother } from './getUserSocialLoginQueryMother';
 import LoginException from '@src/account/domain/auth/loginException';
@@ -25,7 +25,7 @@ describe('Given a GetUserSocialLoginQueryHandler to handle', () => {
   const initHandler = () => {
     handler = new GetUserSocialLoginQueryHandler(socialAuthenticationVerifier, userAuthenticator);
 
-    jest.useFakeTimers();
+    vi.useFakeTimers();
   };
 
   const clean = () => {

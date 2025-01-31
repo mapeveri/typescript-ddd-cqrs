@@ -1,4 +1,4 @@
-import { beforeEach, beforeAll, describe, expect, it } from '@jest/globals';
+import { beforeEach, beforeAll, describe, expect, it } from 'vitest';
 import Country from '@src/languages/domain/country/country';
 import { FindCountriesQueryMother } from './findCountriesQueryMother';
 import FindCountriesQueryHandler from '@src/languages/application/country/query/findCountriesQueryHandler';
@@ -67,10 +67,7 @@ describe('Given a FindCountryQueryHandler to handle', () => {
     it('should get a list of countries', async () => {
       const expected = await handler.execute(query);
 
-      expect(expected.content).toEqual([
-        countryOne.toPrimitives(),
-        countryTwo.toPrimitives(),
-      ]);
+      expect(expected.content).toEqual([countryOne.toPrimitives(), countryTwo.toPrimitives()]);
     });
   });
 });

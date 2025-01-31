@@ -1,4 +1,4 @@
-import { beforeEach, beforeAll, describe, expect, it, jest } from '@jest/globals';
+import { beforeEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import InvalidArgumentException from '@src/shared/domain/exceptions/invalidArgumentException';
 import DislikeTermCommandHandler from '@src/languages/application/term/command/dislikeTermCommandHandler';
 import { DislikeTermCommandMother } from '@test/unit/languages/application/term/command/dislikeTermCommandMother';
@@ -39,7 +39,7 @@ describe('Given a DislikeTermCommandHandler to handle', () => {
   const initHandler = () => {
     handler = new DislikeTermCommandHandler(termRepository, collaboratorRepository, identityProvider, eventBus);
 
-    jest.useFakeTimers();
+    vi.useFakeTimers();
   };
 
   const clean = () => {

@@ -1,4 +1,4 @@
-import { beforeEach, beforeAll, describe, expect, it, jest } from '@jest/globals';
+import { beforeEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import InvalidArgumentException from '@src/shared/domain/exceptions/invalidArgumentException';
 import UpdateWordCommandHandler from '@src/languages/application/term/command/word/updateWordCommandHandler';
 import { UpdateWordCommandMother } from '@test/unit/languages/application/term/command/word/updateWordCommandMother';
@@ -28,7 +28,7 @@ describe('Given a UpdateWordCommandHandler to handle', () => {
   const initHandler = () => {
     handler = new UpdateWordCommandHandler(termRepository, eventBus);
 
-    jest.useFakeTimers();
+    vi.useFakeTimers();
   };
 
   const clean = () => {

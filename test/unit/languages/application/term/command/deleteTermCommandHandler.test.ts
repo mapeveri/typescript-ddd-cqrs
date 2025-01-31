@@ -1,4 +1,4 @@
-import { beforeEach, beforeAll, describe, expect, it } from '@jest/globals';
+import { beforeEach, beforeAll, describe, expect, it } from 'vitest';
 import DeleteTermCommandHandler from '@src/languages/application/term/command/deleteTermCommandHandler';
 import { TermRepositoryMock } from '@test/unit/languages/domain/term/termRepositoryMock';
 import ExpressionMother from '@test/unit/languages/domain/term/expression/expressionMother';

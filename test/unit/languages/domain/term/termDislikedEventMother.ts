@@ -1,4 +1,4 @@
-import { expect } from '@jest/globals';
+import { expect } from 'vitest';
 
 import { TermIdMother } from '@test/unit/languages/domain/term/termIdMother';
 import { UserIdMother } from '@test/unit/account/domain/user/userIdMother';

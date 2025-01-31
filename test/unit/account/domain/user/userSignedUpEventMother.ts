@@ -1,4 +1,4 @@
-import { expect } from '@jest/globals';
+import { expect } from 'vitest';
 import SignUpUserCommand from '@src/account/application/auth/command/signUpUserCommand';
 import UserSignedUpEvent from '@src/account/domain/user/userSignedUpEvent';
 

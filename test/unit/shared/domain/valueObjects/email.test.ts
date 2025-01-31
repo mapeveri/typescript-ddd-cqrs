@@ -1,4 +1,4 @@
-import { describe, expect, it } from '@jest/globals';
+import { describe, expect, it } from 'vitest';
 import InvalidEmailException from '@src/shared/domain/exceptions/invalidEmailException';
 import Email from '@src/shared/domain/valueObjects/email';
 

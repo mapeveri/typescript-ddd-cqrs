@@ -1,4 +1,4 @@
-import { beforeEach, beforeAll, describe, expect, it } from '@jest/globals';
+import { beforeEach, beforeAll, describe, expect, it } from 'vitest';
 import { FindCountryQueryMother } from './findCountryQueryMother';
 import FindCountryQueryHandler from '@src/languages/application/country/query/findCountryQueryHandler';
 import { CountryRepositoryMock } from '@test/unit/languages/domain/country/countryRepositoryMock';
