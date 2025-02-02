@@ -1,4 +1,4 @@
-import { beforeEach, beforeAll, describe, expect, it, jest } from '@jest/globals';
+import { beforeEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import { EventBusMock } from '@test/unit/shared/domain/buses/eventBus/eventBusMock';
 import { TermRepositoryMock } from '@test/unit/languages/domain/term/termRepositoryMock';
 import CreateExpressionCommandHandler from '@src/languages/application/term/command/expression/createExpressionCommandHandler';
@@ -24,7 +24,7 @@ describe('Given a CreateExpressionCommandHandler to handle', () => {
   const initHandler = () => {
     handler = new CreateExpressionCommandHandler(termRepository, eventBus);
 
-    jest.useFakeTimers();
+    vi.useFakeTimers();
   };
 
   const clean = () => {

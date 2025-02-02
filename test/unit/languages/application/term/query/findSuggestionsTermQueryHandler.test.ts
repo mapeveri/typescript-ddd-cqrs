@@ -1,4 +1,4 @@
-import { beforeEach, beforeAll, describe, expect, it } from '@jest/globals';
+import { beforeEach, beforeAll, describe, expect, it } from 'vitest';
 import { FindSuggestionsTermReadModelMock } from '@test/unit/languages/application/term/query/findSuggestionsTermReadModelMock';
 import FindSuggestionsTermQueryHandler from '@src/languages/application/term/query/findSuggestionsTermQueryHandler';
 import { FindSuggestionsTermQueryMother } from '@test/unit/languages/application/term/query/findSuggestionsTermQueryMother';

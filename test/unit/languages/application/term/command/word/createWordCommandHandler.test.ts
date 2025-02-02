@@ -1,4 +1,4 @@
-import { beforeEach, beforeAll, describe, expect, it, jest } from '@jest/globals';
+import { beforeEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import CreateWordCommandHandler from '@src/languages/application/term/command/word/createWordCommandHandler';
 import { TermRepositoryMock } from '@test/unit/languages/domain/term/termRepositoryMock';
 import { EventBusMock } from '@test/unit/shared/domain/buses/eventBus/eventBusMock';
@@ -24,7 +24,7 @@ describe('Given a CreateWordCommandHandler to handle', () => {
   const initHandler = () => {
     handler = new CreateWordCommandHandler(termRepository, eventBus);
 
-    jest.useFakeTimers();
+    vi.useFakeTimers();
   };
 
   const clean = () => {

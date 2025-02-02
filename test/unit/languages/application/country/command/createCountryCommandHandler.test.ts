@@ -1,4 +1,4 @@
-import { beforeEach, beforeAll, describe, expect, it } from '@jest/globals';
+import { beforeEach, beforeAll, describe, expect, it } from 'vitest';
 import CreateCountryCommandHandler from '@src/languages/application/country/command/createCountryCommandHandler';
 import Country from '@src/languages/domain/country/country';
 import { CountryRepositoryMock } from '@test/unit/languages/domain/country/countryRepositoryMock';

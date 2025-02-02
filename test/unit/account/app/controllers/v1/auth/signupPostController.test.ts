@@ -1,4 +1,4 @@
-import { beforeAll, beforeEach, describe, it, expect, jest } from '@jest/globals';
+import { beforeAll, beforeEach, describe, it, expect, vi } from 'vitest';
 import SignupPostController from '@src/account/app/controllers/v1/auth/signupPostController';
 import { CommandBus } from '@src/shared/domain/bus/commandBus/commandBus';
 import { SignUpUserCommandMother } from '@test/unit/account/application/auth/command/signUpUserCommandMother';
@@ -7,20 +7,20 @@ import { IdentityProviderMock } from '@test/unit/shared/domain/services/Identity
 describe('Given a SignupPostController to handle', () => {
   let sut: SignupPostController;
   let identityProvider: IdentityProviderMock;
-  let commandBusMock: { dispatch: jest.Mock };
+  let commandBusMock: { dispatch: ReturnType<typeof vi.fn> };
 
   const prepareDependencies = () => {
     identityProvider = new IdentityProviderMock();
 
     commandBusMock = {
-      dispatch: jest.fn(),
+      dispatch: vi.fn(),
     };
   };
 
   const initHandler = () => {
     sut = new SignupPostController(commandBusMock as CommandBus, identityProvider);
 
-    jest.useFakeTimers();
+    vi.useFakeTimers();
   };
 
   const clean = () => {

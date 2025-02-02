@@ -1,4 +1,4 @@
-import { beforeEach, beforeAll, describe, expect, it } from '@jest/globals';
+import { beforeEach, beforeAll, describe, expect, it } from 'vitest';
 import { SearchTermQueryMother } from './searchTermQueryMother';
 import SearchTermQueryHandler from '@src/languages/application/term/query/searchTermQueryHandler';
 import { SearchTermViewReadModelMock } from '@test/unit/languages/application/term/query/searchTermViewReadModelMock';

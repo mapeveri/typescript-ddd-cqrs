@@ -1,4 +1,4 @@
-import { beforeEach, beforeAll, describe, expect, it, jest } from '@jest/globals';
+import { beforeEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import AddLikeTermCommandHandler from '@src/languages/application/term/command/addLikeTermCommandHandler';
 import AddLikeTermCommand from '@src/languages/application/term/command/addLikeTermCommand';
 import { AddLikeTermCommandMother } from '@test/unit/languages/application/term/command/addLikeTermCommandMother';
@@ -39,7 +39,7 @@ describe('Given a AddLikeTermCommandHandler to handle', () => {
   const initHandler = () => {
     handler = new AddLikeTermCommandHandler(termRepository, collaboratorRepository, identityProvider, eventBus);
 
-    jest.useFakeTimers();
+    vi.useFakeTimers();
   };
 
   const clean = () => {

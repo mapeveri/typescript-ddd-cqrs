@@ -1,4 +1,4 @@
-import { beforeEach, beforeAll, describe, expect, it, jest } from '@jest/globals';
+import { beforeEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import { EventBusMock } from '@test/unit/shared/domain/buses/eventBus/eventBusMock';
 import SignUpUserCommandHandler from '@src/account/application/auth/command/signUpUserCommandHandler';
 import { SignUpUserCommandMother } from '@test/unit/account/application/auth/command/signUpUserCommandMother';
@@ -23,7 +23,7 @@ describe('Given a SignUpUserCommandHandler to handle', () => {
   const initHandler = () => {
     handler = new SignUpUserCommandHandler(userRepository, eventBus);
 
-    jest.useFakeTimers();
+    vi.useFakeTimers();
   };
 
   const clean = () => {
