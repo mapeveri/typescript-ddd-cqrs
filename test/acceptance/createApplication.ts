@@ -1,4 +1,4 @@
-import { jest } from '@jest/globals';
+import { vi } from 'vitest';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
@@ -28,7 +28,7 @@ export async function createApplication() {
     .useValue(mockAuthGuard)
     .overrideProvider(JwtService)
     .useValue({
-      verifyAsync: jest.fn().mockResolvedValue(user),
+      verifyAsync: vi.fn().mockResolvedValue(user),
     })
     .compile();
 
