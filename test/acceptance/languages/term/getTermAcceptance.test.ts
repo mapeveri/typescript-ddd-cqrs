@@ -1,6 +1,6 @@
 import { beforeAll, describe, beforeEach, afterAll, expect, it } from 'vitest';
 import { INestApplication } from '@nestjs/common';
-import request = require('supertest');
+import request from 'supertest';
 import { MikroORM } from '@mikro-orm/core';
 import { createApplication, truncateTables, USER_ID_LOGGED } from '@test/acceptance/createApplication';
 import WordMother from '@test/unit/languages/domain/term/word/wordMother';
