@@ -1,4 +1,4 @@
-import { beforeAll, describe, beforeEach, afterAll, it, expect } from '@jest/globals';
+import { beforeAll, describe, beforeEach, afterAll, it, expect } from 'vitest';
 import { INestApplication } from '@nestjs/common';
 import request = require('supertest');
 import { MikroORM } from '@mikro-orm/core';
