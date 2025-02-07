@@ -1,3 +1,4 @@
+import swc from 'unplugin-swc';
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
@@ -5,7 +6,7 @@ export default defineConfig({
     globals: true,
     environment: 'node',
     setupFiles: './test/setup.ts',
-    include: ['test/unit/**/*.test.ts', 'test/acceptance/**/*.test.ts'],
+    include: ['test/**/*.test.ts'],
     alias: {
       '@src': '/src',
       '@test': '/test',
@@ -15,4 +16,9 @@ export default defineConfig({
       reportsDirectory: './coverage',
     },
   },
+  plugins: [
+    swc.vite({
+      module: { type: 'es6' },
+    }),
+  ],
 });

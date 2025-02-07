@@ -1,6 +1,6 @@
-import { beforeAll, describe, beforeEach, afterAll, it } from '@jest/globals';
+import { beforeAll, describe, beforeEach, afterAll, it } from 'vitest';
 import { INestApplication } from '@nestjs/common';
-import request = require('supertest');
+import request from 'supertest';
 import { MikroORM } from '@mikro-orm/core';
 import { createApplication, truncateTables } from '@test/acceptance/createApplication';
 import { UserPrimitives } from '@src/account/domain/user/user';
