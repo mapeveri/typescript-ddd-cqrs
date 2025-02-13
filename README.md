@@ -38,7 +38,7 @@ To execute migrations run the next command:
 
 ### Oauth2
 
-To get a token for testing you should go to https://developers.google.com/oauthplayground and configure it as "Use your own OAuth credentials" after that you should use Google OAuth2 API v2.
+To obtain a test token, go to Google OAuth Playground (https://developers.google.com/oauthplayground) and select 'Use your own OAuth credentials'. Then, use the Google OAuth2 API v2.
 
 ### Consume async domain events
 
