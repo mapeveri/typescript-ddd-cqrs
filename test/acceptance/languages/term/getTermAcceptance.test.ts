@@ -2,7 +2,7 @@ import { beforeAll, describe, beforeEach, afterAll, expect, it } from 'vitest';
 import { INestApplication } from '@nestjs/common';
 import request from 'supertest';
 import { MikroORM } from '@mikro-orm/core';
-import { createApplication, truncateTables, USER_ID_LOGGED } from '@test/acceptance/createApplication';
+import { createApplication, USER_ID_LOGGED } from '@test/acceptance/createApplication';
 import WordMother from '@test/unit/languages/domain/term/word/wordMother';
 import { TermIdMother } from '@test/unit/languages/domain/term/termIdMother';
 import { WordPrimitives } from '@src/languages/domain/term/word/word';
@@ -11,6 +11,7 @@ import { UserIdMother } from '@test/unit/account/domain/user/userIdMother';
 describe('Get term feature', () => {
   let app: INestApplication;
   let orm: MikroORM;
+  const TERM_ID = 'aa1d4185-7bc4-4b8a-8c70-6d16408fa1e4';
 
   const prepareApp = async () => {
     const setup = await createApplication();
@@ -32,14 +33,11 @@ describe('Get term feature', () => {
   });
 
   describe('As a user I want to get a term', () => {
-    const termId = TermIdMother.random().toString();
     let wordExpected: WordPrimitives;
 
     async function startScenario() {
-      await truncateTables(orm);
-
       wordExpected = WordMother.random({
-        id: TermIdMother.random(termId),
+        id: TermIdMother.random(TERM_ID),
         likes: [],
         userId: UserIdMother.random(USER_ID_LOGGED),
       }).toPrimitives();
@@ -57,7 +55,7 @@ describe('Get term feature', () => {
 
     it('should return the term', async () => {
       const response = await request(app.getHttpServer())
-        .get(`/terms/${termId}`)
+        .get(`/terms/${TERM_ID}`)
         .set('Authorization', 'Bearer mock-token')
         .expect(200);
 
