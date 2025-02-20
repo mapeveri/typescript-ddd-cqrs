@@ -35,9 +35,15 @@ export async function createApplication() {
   const app = moduleFixture.createNestApplication();
   const orm = moduleFixture.get(MikroORM);
 
-  await orm.getSchemaGenerator().dropDatabase();
-  await orm.getSchemaGenerator().createDatabase();
-  await orm.getSchemaGenerator().createSchema();
+  const schemaGenerator = orm.getSchemaGenerator();
+  try {
+    await schemaGenerator.createDatabase();
+  } catch (e) {
+    console.log('Updating database...');
+  }
+
+  await schemaGenerator.updateSchema();
+  await schemaGenerator.clearDatabase();
   await app.init();
 
   return { app, orm };
