@@ -45,11 +45,13 @@ describe('Update word feature', () => {
         countryId: word.countryId,
         languageId: word.languageId,
         terms: word.terms,
-        id: word.id,
+        id: TERM_ID,
       });
     }
 
-    beforeEach(startScenario);
+    beforeEach(async () => {
+      await startScenario();
+    });
 
     it('should update all the values', async () => {
       const wordData = {
