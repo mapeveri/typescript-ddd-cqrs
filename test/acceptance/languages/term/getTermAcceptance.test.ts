@@ -48,10 +48,13 @@ describe('Get term feature', () => {
         terms: wordExpected.terms,
         id: wordExpected.id,
       };
+
       await request(app.getHttpServer()).post('/words').set('Authorization', 'Bearer mock-token').send(wordData);
     }
 
-    beforeEach(startScenario);
+    beforeEach(async () => {
+      await startScenario();
+    });
 
     it('should return the term', async () => {
       const response = await request(app.getHttpServer())
