@@ -2,7 +2,7 @@ import { beforeAll, describe, beforeEach, afterAll, expect, it } from 'vitest';
 import { INestApplication } from '@nestjs/common';
 import request from 'supertest';
 import { MikroORM } from '@mikro-orm/core';
-import { createApplication, USER_ID_LOGGED } from '@test/acceptance/createApplication';
+import { createApplication, truncateTables, USER_ID_LOGGED } from '@test/acceptance/createApplication';
 import WordMother from '@test/unit/languages/domain/term/word/wordMother';
 import { TermIdMother } from '@test/unit/languages/domain/term/termIdMother';
 import { WordPrimitives } from '@src/languages/domain/term/word/word';
@@ -36,6 +36,8 @@ describe('Get term feature', () => {
     let wordExpected: WordPrimitives;
 
     async function startScenario() {
+      await truncateTables(orm);
+
       wordExpected = WordMother.random({
         id: TermIdMother.random(TERM_ID),
         likes: [],
