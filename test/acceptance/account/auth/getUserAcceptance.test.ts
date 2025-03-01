@@ -10,6 +10,7 @@ import { UserIdMother } from '@test/unit/account/domain/user/userIdMother';
 describe('Get user feature', () => {
   let app: INestApplication;
   let orm: MikroORM;
+  const USER_ID = '4a4df157-8ab8-50af-bb39-88e8ce29eb16';
 
   const prepareApp = async () => {
     const setup = await createApplication();
@@ -32,12 +33,11 @@ describe('Get user feature', () => {
 
   describe('As a user I want to get a user', () => {
     let userData: UserPrimitives;
-    const userId = '4a4df157-8ab8-50af-bb39-88e8ce29eb16';
 
     async function startScenario() {
       await truncateTables(orm);
 
-      const user = UserMother.random({ id: UserIdMother.random(userId), interests: [], email: 'test@test.com' });
+      const user = UserMother.random({ id: UserIdMother.random(USER_ID), interests: [], email: 'test@test.com' });
 
       userData = user.toPrimitives();
       await request(app.getHttpServer()).post('/auth/signup').set('Authorization', 'Bearer mock-token').send({
@@ -61,7 +61,7 @@ describe('Get user feature', () => {
 
     it('should return the user when it exists', async () => {
       await request(app.getHttpServer())
-        .get(`/users/${userId}`)
+        .get(`/users/${USER_ID}`)
         .set('Authorization', 'Bearer mock-token')
         .expect(200)
         .expect(userData);
