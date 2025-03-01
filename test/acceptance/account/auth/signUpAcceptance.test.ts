@@ -1,8 +1,8 @@
-import { beforeAll, describe, beforeEach, afterAll, it } from 'vitest';
+import { beforeAll, describe, afterAll, it } from 'vitest';
 import { INestApplication } from '@nestjs/common';
 import request from 'supertest';
 import { MikroORM } from '@mikro-orm/core';
-import { createApplication, truncateTables } from '@test/acceptance/createApplication';
+import { createApplication } from '@test/acceptance/createApplication';
 
 describe('SignUp feature', () => {
   let app: INestApplication;
@@ -28,12 +28,6 @@ describe('SignUp feature', () => {
   });
 
   describe('As a user I want to signUp in the app', () => {
-    async function startScenario() {
-      await truncateTables(orm);
-    }
-
-    beforeEach(startScenario);
-
     it('should create the user', async () => {
       await request(app.getHttpServer())
         .post('/auth/signup')
