@@ -34,16 +34,11 @@ export async function createApplication() {
 
   const app = moduleFixture.createNestApplication();
   const orm = moduleFixture.get(MikroORM);
-
   const schemaGenerator = orm.getSchemaGenerator();
-  try {
-    await schemaGenerator.createDatabase();
-  } catch (e) {
-    console.log('Updating database...');
-  }
 
-  await schemaGenerator.updateSchema();
-  await schemaGenerator.clearDatabase();
+  await schemaGenerator.ensureDatabase();
+  await schemaGenerator.updateSchema({ dropDb: false });
+  await schemaGenerator.clearDatabase({ truncate: true });
   await app.init();
 
   return { app, orm };
@@ -51,5 +46,5 @@ export async function createApplication() {
 
 export async function truncateTables(orm: MikroORM) {
   const generator = orm.getSchemaGenerator();
-  await generator.clearDatabase();
+  await generator.clearDatabase({ truncate: true });
 }
