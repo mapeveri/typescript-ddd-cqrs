@@ -15,7 +15,7 @@
     "linter-fix": "eslint --fix 'src/**/*.ts'",
     "mikroorm": "npx mikro-orm",
     "test:unit": "vitest --run test/unit",
-    "test:acceptance": "vitest --run test/acceptance --maxConcurrency=1",
+    "test:acceptance": "vitest --run test/acceptance",
     "test": "vitest",
     "test:watch": "vitest --watch",
     "test:cov": "vitest --coverage",
