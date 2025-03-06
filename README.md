@@ -50,5 +50,5 @@ To consume async domain events you need to run the next command:
 
 ## Deployment with Kubernetes
 
-Follow the readme in [.k8s/README.md](https://github.com/mapeveri/typescript-ddd-cqrs/blob/master/.k8s/README.md)
+To deploy in K8S follow the readme in [.k8s/README.md](https://github.com/mapeveri/typescript-ddd-cqrs/blob/master/.k8s/README.md)
 
