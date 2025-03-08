@@ -11,6 +11,10 @@ export default defineConfig({
       '@src': '/src',
       '@test': '/test',
     },
+    sequence: {
+      shuffle: false,
+      concurrent: false,
+    },
     coverage: {
       provider: 'v8',
       reportsDirectory: './coverage',
