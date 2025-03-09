@@ -3,7 +3,6 @@ import { INestApplication } from '@nestjs/common';
 import request from 'supertest';
 import { MikroORM } from '@mikro-orm/core';
 import { createApplication } from '@test/acceptance/createApplication';
-import { UserPrimitives } from '@src/account/domain/user/user';
 import { UserMother } from '@test/unit/account/domain/user/userMother';
 import { UserIdMother } from '@test/unit/account/domain/user/userIdMother';
 
@@ -39,8 +38,6 @@ describe('Get user feature', () => {
   });
 
   describe('As a user I want to get a user', () => {
-    let userExpected: UserPrimitives;
-
     async function startScenario() {
       const user = UserMother.random({
         id: UserIdMother.random(USER_ID),
@@ -51,7 +48,7 @@ describe('Get user feature', () => {
         provider: PROVIDER,
       });
 
-      userExpected = user.toPrimitives();
+      const userExpected = user.toPrimitives();
       await request(app.getHttpServer()).post('/auth/signup').set('Authorization', 'Bearer mock-token').send({
         name: userExpected.name,
         email: userExpected.email,
