@@ -5,13 +5,20 @@ import { MikroORM } from '@mikro-orm/core';
 import { createApplication, USER_ID_LOGGED } from '@test/acceptance/createApplication';
 import WordMother from '@test/unit/languages/domain/term/word/wordMother';
 import { TermIdMother } from '@test/unit/languages/domain/term/termIdMother';
-import { WordPrimitives } from '@src/languages/domain/term/word/word';
 import { UserIdMother } from '@test/unit/account/domain/user/userIdMother';
+import { CountryIdMother } from '@test/unit/languages/domain/country/countryIdMother';
+import TermLike from '@src/languages/domain/term/termLike';
+import WordTermCollectionMother from '@test/unit/languages/domain/term/word/wordTermCollectionMother';
+import { WordTermPrimitives } from '@src/languages/domain/term/word/wordTerm';
 
 describe('Get term feature', () => {
   let app: INestApplication;
   let orm: MikroORM;
   const TERM_ID = 'aa1d4185-7bc4-4b8a-8c70-6d16408fa1e4';
+  const COUNTRY_ID = 'e625816c-2117-44a6-a0ba-07fe54cb0cc4';
+  const LANGUAGE_ID = 'ES';
+  const LIKES: TermLike[] = [];
+  const TERMS: Array<WordTermPrimitives> = [];
 
   const prepareApp = async () => {
     const setup = await createApplication();
@@ -33,13 +40,14 @@ describe('Get term feature', () => {
   });
 
   describe('As a user I want to get a term', () => {
-    let wordExpected: WordPrimitives;
-
     async function startScenario() {
-      wordExpected = WordMother.random({
+      const wordExpected = WordMother.random({
         id: TermIdMother.random(TERM_ID),
-        likes: [],
+        likes: LIKES,
+        countryId: CountryIdMother.random(COUNTRY_ID),
         userId: UserIdMother.random(USER_ID_LOGGED),
+        languageId: LANGUAGE_ID,
+        terms: WordTermCollectionMother.random(TERMS),
       }).toPrimitives();
 
       const wordData = {
@@ -63,12 +71,12 @@ describe('Get term feature', () => {
         .expect(200);
 
       expect(response.body).toEqual({
-        id: wordExpected.id,
-        countryId: wordExpected.countryId,
-        userId: wordExpected.userId,
-        languageId: wordExpected.languageId,
-        likes: wordExpected.likes,
-        terms: wordExpected.terms,
+        id: TERM_ID,
+        countryId: COUNTRY_ID,
+        userId: USER_ID_LOGGED,
+        languageId: LANGUAGE_ID,
+        likes: LIKES,
+        terms: TERMS,
       });
     });
   });
