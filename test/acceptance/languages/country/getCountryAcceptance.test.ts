@@ -4,7 +4,6 @@ import request from 'supertest';
 import { MikroORM } from '@mikro-orm/core';
 import { createApplication } from '@test/acceptance/createApplication';
 import CountryMother from '@test/unit/languages/domain/country/countryMother';
-import { CountryPrimitives } from '@src/languages/domain/country/country';
 import { CountryIdMother } from '@test/unit/languages/domain/country/countryIdMother';
 import LanguageMother from '@test/unit/languages/domain/country/languageMother';
 
@@ -40,8 +39,6 @@ describe('Get country feature', () => {
   });
 
   describe('As a user I want to get a country', () => {
-    let countryData: CountryPrimitives;
-
     async function startScenario() {
       const country = CountryMother.random({
         id: CountryIdMother.random(COUNTRY_ID),
@@ -50,7 +47,7 @@ describe('Get country feature', () => {
         languages: [LanguageMother.random(LANGUAGE)],
       });
 
-      countryData = country.toPrimitives();
+      const countryData = country.toPrimitives();
       await request(app.getHttpServer()).post('/countries').set('Authorization', 'Bearer mock-token').send(countryData);
     }
 
@@ -73,10 +70,10 @@ describe('Get country feature', () => {
         .expect(200);
 
       expect(response.body).toEqual({
-        id: countryData.id,
-        name: countryData.name,
-        languages: countryData.languages,
-        iso: countryData.iso,
+        id: COUNTRY_ID,
+        name: NAME,
+        languages: [LANGUAGE],
+        iso: ISO,
       });
     });
   });
