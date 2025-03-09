@@ -2,7 +2,7 @@ import { beforeAll, describe, beforeEach, afterAll, it, expect } from 'vitest';
 import { INestApplication } from '@nestjs/common';
 import request from 'supertest';
 import { MikroORM } from '@mikro-orm/core';
-import { createApplication, truncateTables } from '@test/acceptance/createApplication';
+import { createApplication } from '@test/acceptance/createApplication';
 import { UserPrimitives } from '@src/account/domain/user/user';
 import { UserMother } from '@test/unit/account/domain/user/userMother';
 import { UserIdMother } from '@test/unit/account/domain/user/userIdMother';
@@ -42,8 +42,6 @@ describe('Get user feature', () => {
     let userExpected: UserPrimitives;
 
     async function startScenario() {
-      await truncateTables(orm);
-
       const user = UserMother.random({
         id: UserIdMother.random(USER_ID),
         name: NAME,

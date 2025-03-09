@@ -2,7 +2,7 @@ import { beforeAll, describe, beforeEach, afterAll, it, expect } from 'vitest';
 import { INestApplication } from '@nestjs/common';
 import request from 'supertest';
 import { MikroORM } from '@mikro-orm/core';
-import { createApplication, truncateTables, USER_ID_LOGGED } from '@test/acceptance/createApplication';
+import { createApplication, USER_ID_LOGGED } from '@test/acceptance/createApplication';
 import WordMother from '@test/unit/languages/domain/term/word/wordMother';
 import { TermIdMother } from '@test/unit/languages/domain/term/termIdMother';
 import { CountryIdMother } from '@test/unit/languages/domain/country/countryIdMother';
@@ -36,8 +36,6 @@ describe('Update word feature', () => {
 
   describe('As a user I want to update a word', () => {
     async function startScenario() {
-      await truncateTables(orm);
-
       const word = WordMother.random({
         id: TermIdMother.random(TERM_ID),
         userId: UserIdMother.random(USER_ID_LOGGED),

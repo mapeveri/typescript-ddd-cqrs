@@ -43,8 +43,3 @@ export async function createApplication() {
 
   return { app, orm };
 }
-
-export async function truncateTables(orm: MikroORM) {
-  const generator = orm.getSchemaGenerator();
-  await generator.clearDatabase({ truncate: true });
-}
