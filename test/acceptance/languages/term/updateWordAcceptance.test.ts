@@ -6,14 +6,30 @@ import { createApplication, USER_ID_LOGGED } from '@test/acceptance/createApplic
 import WordMother from '@test/unit/languages/domain/term/word/wordMother';
 import { TermIdMother } from '@test/unit/languages/domain/term/termIdMother';
 import { CountryIdMother } from '@test/unit/languages/domain/country/countryIdMother';
-import WordTermMother from '@test/unit/languages/domain/term/word/wordTermMother';
 import WordTermCollectionMother from '@test/unit/languages/domain/term/word/wordTermCollectionMother';
 import { UserIdMother } from '@test/unit/account/domain/user/userIdMother';
+import TermLike from '@src/languages/domain/term/termLike';
+import { WordTermPrimitives } from '@src/languages/domain/term/word/wordTerm';
 
 describe('Update word feature', () => {
   let app: INestApplication;
   let orm: MikroORM;
+
   const TERM_ID = '744112be-3b9d-4d70-a242-9b275a1ce041';
+  const OLD_LANGUAGE_ID = 'ES';
+  const NEW_LANGUAGE_ID = 'EN';
+  const LIKES: TermLike[] = [];
+  const OLD_TERMS: Array<WordTermPrimitives> = [];
+  const NEW_TERMS = [
+    {
+      word: 'Word test',
+      description: 'Description test',
+      example: 'test',
+      hashtags: [],
+    },
+  ];
+  const OLD_COUNTRY_ID = 'a625816c-2117-44a6-a0ba-07fe54cb0cc3';
+  const NEW_COUNTRY_ID = 'a625816c-2117-44a6-a0ba-07fe54cb0cc4';
 
   const prepareApp = async () => {
     const setup = await createApplication();
@@ -39,6 +55,10 @@ describe('Update word feature', () => {
       const word = WordMother.random({
         id: TermIdMother.random(TERM_ID),
         userId: UserIdMother.random(USER_ID_LOGGED),
+        likes: LIKES,
+        languageId: OLD_LANGUAGE_ID,
+        terms: WordTermCollectionMother.random(OLD_TERMS),
+        countryId: CountryIdMother.random(OLD_COUNTRY_ID),
       }).toPrimitives();
 
       await request(app.getHttpServer()).post('/words').set('Authorization', 'Bearer mock-token').send({
@@ -55,9 +75,9 @@ describe('Update word feature', () => {
 
     it('should update all the values', async () => {
       const wordData = {
-        countryId: CountryIdMother.random().toString(),
-        languageId: 'EN',
-        terms: WordTermCollectionMother.random([WordTermMother.random().toPrimitives()]).toArray(),
+        countryId: NEW_COUNTRY_ID,
+        languageId: NEW_LANGUAGE_ID,
+        terms: WordTermCollectionMother.random(NEW_TERMS).toArray(),
       };
 
       await request(app.getHttpServer())
@@ -73,11 +93,11 @@ describe('Update word feature', () => {
 
       expect(response.body).toEqual({
         id: TERM_ID,
-        countryId: wordData.countryId,
+        countryId: NEW_COUNTRY_ID,
         userId: USER_ID_LOGGED,
-        languageId: wordData.languageId,
-        likes: [],
-        terms: wordData.terms,
+        languageId: NEW_LANGUAGE_ID,
+        likes: LIKES,
+        terms: NEW_TERMS,
       });
     });
   });
