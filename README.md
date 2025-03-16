@@ -4,7 +4,7 @@ Api Rest with Nest + Hexagonal Architecture + DDD & CQRS.
 
 ## Development
 
-Configuration for development.
+Configuration to work locally using docker.
 
 ### Configuration
 
