@@ -1,4 +1,4 @@
-import { UserAuthenticator, UserAuthenticatorResponse } from '@src/account/domain/auth/userAuthenticator';
+import { SignUser, UserAuthenticator, UserAuthenticatorResponse } from '@src/account/domain/auth/userAuthenticator';
 
 export class UserAuthenticatorMock implements UserAuthenticator {
   private toReturn: UserAuthenticatorResponse[];
@@ -15,7 +15,7 @@ export class UserAuthenticatorMock implements UserAuthenticator {
     this.toReturn = [];
   }
 
-  sign(_user: object): UserAuthenticatorResponse {
+  sign(_user: SignUser): UserAuthenticatorResponse {
     return this.toReturn[0];
   }
 }
