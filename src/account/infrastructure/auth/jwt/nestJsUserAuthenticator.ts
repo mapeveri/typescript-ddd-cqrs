@@ -7,6 +7,8 @@ import NestJwtTokenGenerator from '@src/shared/infrastructure/auth/jwt/nestJwtTo
 
 @Injectable()
 export default class NestJwtUserAuthenticator implements UserAuthenticator {
+  private static CLIENT_USER_ROLE = 'external';
+
   constructor(
     private readonly nestJsTokenGenerator: NestJwtTokenGenerator,
     @Inject(LOGGER) private readonly logger: Logger,
@@ -15,7 +17,7 @@ export default class NestJwtUserAuthenticator implements UserAuthenticator {
   sign(user: SignUser): UserAuthenticatorResponse {
     const data = {
       ...user,
-      role: 'external',
+      role: NestJwtUserAuthenticator.CLIENT_USER_ROLE,
     };
 
     this.logger.log(`User authenticator: ${JSON.stringify(data)}`);
