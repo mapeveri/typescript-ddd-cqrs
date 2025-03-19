@@ -7,7 +7,7 @@ import NestJwtTokenGenerator from '@src/shared/infrastructure/auth/jwt/nestJwtTo
 
 @Injectable()
 export default class NestJwtUserAuthenticator implements UserAuthenticator {
-  private static CLIENT_USER_ROLE = 'external';
+  private static CLIENT_USER_ROLE = 'client';
 
   constructor(
     private readonly nestJsTokenGenerator: NestJwtTokenGenerator,
