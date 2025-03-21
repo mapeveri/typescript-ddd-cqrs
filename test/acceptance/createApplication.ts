@@ -4,7 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { MikroORM } from '@mikro-orm/core';
 import { AppModule } from '@src/app.module';
-import { NestJwtAuthGuard } from '@src/shared/guards/nestJwtAuthGuard';
+import { NestJwtAuthGuard } from '@src/shared/infrastructure/auth/guards/nestJwtAuthGuard';
 import { ExecutionContext } from '@nestjs/common';
 import { Request } from 'express';
 

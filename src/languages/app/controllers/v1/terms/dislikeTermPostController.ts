@@ -1,5 +1,5 @@
 import { Controller, HttpCode, HttpStatus, Inject, Param, Post, Req, UseGuards } from '@nestjs/common';
-import { NestJwtAuthGuard } from '@src/shared/guards/nestJwtAuthGuard';
+import { NestJwtAuthGuard } from '@src/shared/infrastructure/auth/guards/nestJwtAuthGuard';
 import {
   ApiCreatedResponse,
   ApiBadRequestResponse,

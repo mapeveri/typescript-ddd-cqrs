@@ -6,7 +6,7 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { Controller, Get, HttpCode, Inject, Param, UseGuards } from '@nestjs/common';
-import { NestJwtAuthGuard } from '@src/shared/guards/nestJwtAuthGuard';
+import { NestJwtAuthGuard } from '@src/shared/infrastructure/auth/guards/nestJwtAuthGuard';
 import { QUERY_BUS, QueryBus } from '@src/shared/domain/bus/queryBus/queryBus';
 import FindUserQuery from '@src/account/application/user/query/findUserQuery';
 import UserGetResponse from '@src/account/app/controllers/v1/user/userGetResponse';
