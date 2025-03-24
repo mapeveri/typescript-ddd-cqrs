@@ -3,7 +3,7 @@ import { COMMAND_BUS } from '@src/shared/domain/bus/commandBus/commandBus';
 import { LOGGER } from '@src/shared/domain/services/logger';
 import { ASYNC_EVENT_BUS, EVENT_BUS } from '@src/shared/domain/bus/eventBus/eventBus';
 import { NestJwtAuthGuard } from '@src/shared/infrastructure/auth/jwt/nestJwtAuthGuard';
-import { JwtStrategy } from '@src/shared/infrastructure/auth/strategies/jwtStrategy';
+import { JwtStrategy } from '@src/shared/infrastructure/auth/jwt/jwtStrategy';
 import { JwtModule } from '@nestjs/jwt';
 import { CqrsModule } from '@nestjs/cqrs';
 import { QUERY_BUS } from '@src/shared/domain/bus/queryBus/queryBus';
