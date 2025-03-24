@@ -1,4 +1,4 @@
-import { NestJwtAuthGuard } from '@src/shared/infrastructure/auth/guards/nestJwtAuthGuard';
+import { NestJwtAuthGuard } from '@src/shared/infrastructure/auth/jwt/nestJwtAuthGuard';
 import { JwtStrategy } from '@src/shared/infrastructure/auth/strategies/jwtStrategy';
 import { APP_FILTER } from '@nestjs/core';
 import { NestErrorFilter } from '@src/shared/infrastructure/exceptions/nestErrorFilter';

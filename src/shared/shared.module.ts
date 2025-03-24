@@ -2,7 +2,7 @@ import { Global, Module, OnApplicationShutdown } from '@nestjs/common';
 import { COMMAND_BUS } from '@src/shared/domain/bus/commandBus/commandBus';
 import { LOGGER } from '@src/shared/domain/services/logger';
 import { ASYNC_EVENT_BUS, EVENT_BUS } from '@src/shared/domain/bus/eventBus/eventBus';
-import { NestJwtAuthGuard } from '@src/shared/infrastructure/auth/guards/nestJwtAuthGuard';
+import { NestJwtAuthGuard } from '@src/shared/infrastructure/auth/jwt/nestJwtAuthGuard';
 import { JwtStrategy } from '@src/shared/infrastructure/auth/strategies/jwtStrategy';
 import { JwtModule } from '@nestjs/jwt';
 import { CqrsModule } from '@nestjs/cqrs';
