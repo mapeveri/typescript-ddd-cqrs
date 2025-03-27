@@ -10,7 +10,7 @@ import { UserSchema } from '../entities/user';
 @Injectable()
 export default class MikroOrmUserRepository implements UserRepository {
   constructor(
-    @InjectRepository(UserSchema)
+    @InjectRepository(UserSchema, 'account')
     private readonly userRepository: EntityRepository<User>,
     private readonly em: EntityManager,
   ) {}
