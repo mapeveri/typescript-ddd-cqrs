@@ -10,12 +10,11 @@ const env = loadEnv();
 dotenvExpand.expand(env);
 
 const migrationPath = path.join(__dirname, 'infrastructure/persistence/mikroOrm/migrations');
-const entitySchemas = [...accountEntitySchemas];
 
 export const mikroOrmConfiguration = {
   contextName: 'account',
-  entities: entitySchemas,
-  entitiesTs: entitySchemas,
+  entities: accountEntitySchemas,
+  entitiesTs: accountEntitySchemas,
   driver: PostgreSqlDriver,
   clientUrl: process.env.POSTGRESQL_DB_URL,
   debug: process.env.ENV != 'production',
