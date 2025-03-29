@@ -22,6 +22,7 @@ export const mikroOrmConfiguration = {
   extensions: [Migrator],
   ignoreUndefinedInQuery: true,
   forceUndefined: false,
+  registerRequestContext: false,
   migrations: {
     path: migrationPath,
     glob: '{account}/*.{js,ts}',
