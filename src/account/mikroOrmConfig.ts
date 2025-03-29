@@ -13,7 +13,7 @@ const migrationPath = path.join(__dirname, 'infrastructure/persistence/mikroOrm/
 const entitySchemas = [...accountEntitySchemas];
 
 export const mikroOrmConfiguration = {
-  name: 'account',
+  contextName: 'account',
   entities: entitySchemas,
   entitiesTs: entitySchemas,
   driver: PostgreSqlDriver,

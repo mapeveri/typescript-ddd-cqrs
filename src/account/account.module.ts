@@ -10,7 +10,7 @@ import { services } from '@src/account/_dependencyInjection/services';
 import { mikroOrmConfiguration } from '@src/account/mikroOrmConfig';
 
 @Module({
-  imports: [MikroOrmModule.forRoot(mikroOrmConfiguration), MikroOrmModule.forFeature([...accountEntitySchemas])],
+  imports: [MikroOrmModule.forRoot(mikroOrmConfiguration), MikroOrmModule.forFeature(accountEntitySchemas, 'account')],
   exports: [],
   controllers: [...controllers],
   providers: [...commands, ...queries, ...repositories, ...services],
