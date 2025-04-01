@@ -2,3 +2,5 @@
 /.k8s/
 /reports/
 /.github/
+/node_modules/
+/dist/
