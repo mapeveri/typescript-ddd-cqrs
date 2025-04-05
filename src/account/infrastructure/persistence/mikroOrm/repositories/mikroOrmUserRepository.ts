@@ -9,11 +9,14 @@ import { UserSchema } from '../entities/user';
 
 @Injectable()
 export default class MikroOrmUserRepository implements UserRepository {
+  private readonly em: EntityManager;
+
   constructor(
-    @InjectRepository(UserSchema)
+    @InjectRepository(UserSchema, 'account')
     private readonly userRepository: EntityRepository<User>,
-    private readonly em: EntityManager,
-  ) {}
+  ) {
+    this.em = userRepository.getEntityManager();
+  }
 
   async findById(id: UserId): Promise<User | null> {
     return await this.userRepository.findOne(id);

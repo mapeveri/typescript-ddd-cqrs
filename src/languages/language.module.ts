@@ -11,11 +11,13 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { services } from '@src/languages/_dependencyInjection/services';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { entitySchemas as languagesEntitySchemas } from '@src/languages/_dependencyInjection/entitySchemas';
+import { mikroOrmConfiguration } from '@src/languages/mikroOrmConfig';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    MikroOrmModule.forFeature([...languagesEntitySchemas]),
+    MikroOrmModule.forRoot(mikroOrmConfiguration),
+    MikroOrmModule.forFeature(languagesEntitySchemas),
     HttpModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
