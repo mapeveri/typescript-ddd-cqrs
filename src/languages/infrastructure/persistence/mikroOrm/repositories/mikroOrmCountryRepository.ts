@@ -8,11 +8,14 @@ import { CountrySchema } from '../entities/country';
 
 @Injectable()
 export default class MikroOrmCountryRepository implements CountryRepository {
+  private readonly em: EntityManager;
+
   constructor(
-    @InjectRepository(CountrySchema)
+    @InjectRepository(CountrySchema, 'language')
     private readonly countryRepository: EntityRepository<Country>,
-    private readonly em: EntityManager,
-  ) {}
+  ) {
+    this.em = countryRepository.getEntityManager();
+  }
 
   async findAll(): Promise<Country[]> {
     return await this.countryRepository.findAll();

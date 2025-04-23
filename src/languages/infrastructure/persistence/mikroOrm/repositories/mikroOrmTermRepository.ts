@@ -8,11 +8,14 @@ import TermId from '@src/languages/domain/term/termId';
 
 @Injectable()
 export default class MikroOrmTermRepository implements TermRepository {
+  private readonly em: EntityManager;
+
   constructor(
-    @InjectRepository(TermSchema)
+    @InjectRepository(TermSchema, 'language')
     private readonly termRepository: EntityRepository<Term>,
-    private readonly em: EntityManager,
-  ) {}
+  ) {
+    this.em = termRepository.getEntityManager();
+  }
 
   async findById(id: TermId): Promise<Term | null> {
     return await this.termRepository.findOne(id);
