@@ -11,7 +11,7 @@ export default class MikroOrmCountryRepository implements CountryRepository {
   private readonly em: EntityManager;
 
   constructor(
-    @InjectRepository(CountrySchema)
+    @InjectRepository(CountrySchema, 'language')
     private readonly countryRepository: EntityRepository<Country>,
   ) {
     this.em = countryRepository.getEntityManager();

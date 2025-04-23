@@ -17,7 +17,7 @@ import { mikroOrmConfiguration } from '@src/languages/mikroOrmConfig';
   imports: [
     ConfigModule.forRoot(),
     MikroOrmModule.forRoot(mikroOrmConfiguration),
-    MikroOrmModule.forFeature(languagesEntitySchemas),
+    MikroOrmModule.forFeature(languagesEntitySchemas, 'language'),
     HttpModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],

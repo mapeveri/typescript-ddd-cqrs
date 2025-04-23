@@ -12,6 +12,7 @@ dotenvExpand.expand(env);
 const migrationPath = path.join(__dirname, 'infrastructure/persistence/mikroOrm/migrations');
 
 export const mikroOrmConfiguration = {
+  contextName: 'language',
   entities: languagesEntitySchemas,
   entitiesTs: languagesEntitySchemas,
   driver: PostgreSqlDriver,

@@ -18,6 +18,7 @@ import { Inject } from '@src/shared/domain/injector/inject.decorator';
 import NestJwtTokenGenerator from '@src/shared/infrastructure/auth/jwt/nestJwtTokenGenerator';
 import NestJwtM2mTokenGenerator from '@src/shared/infrastructure/auth/jwt/nestJwtM2mTokenGenerator';
 import { IDENTITY_PROVIDER } from '@src/shared/domain/services/identityProvider';
+import { DiscoveryModule } from '@nestjs/core';
 
 @Global()
 @Module({
@@ -35,10 +36,12 @@ import { IDENTITY_PROVIDER } from '@src/shared/domain/services/identityProvider'
       },
     ]),
     CqrsModule,
+    DiscoveryModule,
   ],
   controllers: [...consumers],
   providers: [...services],
   exports: [
+    DiscoveryModule,
     NestJwtAuthGuard,
     JwtModule,
     CqrsModule,

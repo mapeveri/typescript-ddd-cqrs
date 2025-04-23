@@ -11,7 +11,7 @@ export default class MikroOrmTermRepository implements TermRepository {
   private readonly em: EntityManager;
 
   constructor(
-    @InjectRepository(TermSchema)
+    @InjectRepository(TermSchema, 'language')
     private readonly termRepository: EntityRepository<Term>,
   ) {
     this.em = termRepository.getEntityManager();
