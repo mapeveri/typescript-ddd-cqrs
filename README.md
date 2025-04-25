@@ -28,12 +28,16 @@ After running *docker compose up*, the application will be available at http://l
 
 To generate migrations run the next command:
 ```shell script
-  docker compose run app npm run mikroorm migration:create
+  docker compose run app npm run migration account create
+  docker compose run app npm run migration languages create
+# 
+
 ```
 
 To execute migrations run the next command:
 ```shell script
-  docker compose run app npm run mikroorm migration:up
+  docker compose run app npm run migration account up
+  docker compose run app npm run migration languages up
 ```
 
 ### Oauth2
