@@ -7,7 +7,7 @@ import { repositories } from '@src/account/_dependencyInjection/repositories';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { entitySchemas as accountEntitySchemas } from '@src/account/_dependencyInjection/entitySchemas';
 import { services } from '@src/account/_dependencyInjection/services';
-import { mikroOrmConfiguration } from '@src/account/mikroOrmConfig';
+import { MIKRO_ORM_CONTEXT_NAME, mikroOrmConfiguration } from '@src/account/mikroOrmConfig';
 
 @Module({
   imports: [MikroOrmModule.forRoot(mikroOrmConfiguration), MikroOrmModule.forFeature(accountEntitySchemas, 'account')],
@@ -15,4 +15,6 @@ import { mikroOrmConfiguration } from '@src/account/mikroOrmConfig';
   controllers: [...controllers],
   providers: [...commands, ...queries, ...repositories, ...services],
 })
-export class AccountModule {}
+export class AccountModule {
+  static mikroOrmContext = MIKRO_ORM_CONTEXT_NAME;
+}

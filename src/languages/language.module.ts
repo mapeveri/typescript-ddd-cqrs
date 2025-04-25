@@ -11,7 +11,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { services } from '@src/languages/_dependencyInjection/services';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { entitySchemas as languagesEntitySchemas } from '@src/languages/_dependencyInjection/entitySchemas';
-import { mikroOrmConfiguration } from '@src/languages/mikroOrmConfig';
+import { MIKRO_ORM_CONTEXT_NAME, mikroOrmConfiguration } from '@src/languages/mikroOrmConfig';
 
 @Module({
   imports: [
@@ -31,4 +31,6 @@ import { mikroOrmConfiguration } from '@src/languages/mikroOrmConfig';
   controllers: [...controllers],
   providers: [...commands, ...queries, ...events, ...projections, ...services, ...repositories, ...readModels],
 })
-export class LanguageModule {}
+export class LanguageModule {
+  static mikroOrmContext = MIKRO_ORM_CONTEXT_NAME;
+}

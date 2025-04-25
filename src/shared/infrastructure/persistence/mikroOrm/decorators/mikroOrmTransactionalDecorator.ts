@@ -1,20 +1,18 @@
 import { MikroORM } from '@mikro-orm/core';
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { InjectMikroORMs } from '@mikro-orm/nestjs';
 
 type FunctionToDecorate = () => Promise<void>;
 
 @Injectable()
 export default class MikroOrmTransactionalDecorator {
-  private readonly moduleConnectionMap = new Map<string, string>([
-    ['AccountModule', 'account'],
-    ['LanguageModule', 'language'],
-  ]);
-
-  constructor(@InjectMikroORMs() private readonly orms: MikroORM[]) {}
+  constructor(
+    @InjectMikroORMs() private readonly orms: MikroORM[],
+    @Inject('MODULE_CONNECTIONS_NAME') private readonly moduleConnectionsNameMap: Map<string, string>,
+  ) {}
 
   async execute(module: string, functionToDecorate: FunctionToDecorate): Promise<void> {
-    const ormName = this.moduleConnectionMap.get(module);
+    const ormName = this.moduleConnectionsNameMap.get(module);
 
     if (!ormName) {
       throw new Error(`No ORM connection configured for module: ${module}`);

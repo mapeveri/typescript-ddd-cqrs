@@ -4,7 +4,14 @@ import { SharedModule } from './shared/shared.module';
 import { AccountModule } from '@src/account/account.module';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 
+export const MODULE_CONNECTIONS_NAME = 'MODULE_CONNECTIONS_NAME';
+
 @Module({
-  imports: [SharedModule, MikroOrmModule.forMiddleware(), AccountModule, LanguageModule],
+  imports: [
+    SharedModule.register([AccountModule, LanguageModule]),
+    MikroOrmModule.forMiddleware(),
+    AccountModule,
+    LanguageModule,
+  ],
 })
 export class AppModule {}

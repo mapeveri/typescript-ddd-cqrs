@@ -1,4 +1,4 @@
-import { Global, Module, OnApplicationShutdown } from '@nestjs/common';
+import { DynamicModule, Global, Module, OnApplicationShutdown, Type } from '@nestjs/common';
 import { COMMAND_BUS } from '@src/shared/domain/bus/commandBus/commandBus';
 import { LOGGER } from '@src/shared/domain/services/logger';
 import { ASYNC_EVENT_BUS, EVENT_BUS } from '@src/shared/domain/bus/eventBus/eventBus';
@@ -63,5 +63,20 @@ export class SharedModule implements OnApplicationShutdown {
 
   async onApplicationShutdown(): Promise<void> {
     await this.mongoConnection.disconnect();
+  }
+
+  static register(modules: Type<any>[]): DynamicModule {
+    const moduleMap = new Map(modules.map((module: any) => [module.name, module.mikroOrmContext]));
+
+    return {
+      module: SharedModule,
+      providers: [
+        {
+          provide: 'MODULE_CONNECTIONS_NAME',
+          useValue: moduleMap,
+        },
+      ],
+      exports: ['MODULE_CONNECTIONS_NAME'],
+    };
   }
 }
