@@ -3,12 +3,12 @@ import { INestApplication } from '@nestjs/common';
 import request from 'supertest';
 import { MikroORM } from '@mikro-orm/core';
 import { createApplication, USER_ID_LOGGED } from '@test/acceptance/createApplication';
-import WordMother from '@test/unit/languages/domain/term/word/wordMother';
-import { TermIdMother } from '@test/unit/languages/domain/term/termIdMother';
+import WordMother from '@test/unit/language/domain/term/word/wordMother';
+import { TermIdMother } from '@test/unit/language/domain/term/termIdMother';
 import { UserIdMother } from '@test/unit/account/domain/user/userIdMother';
-import { CountryIdMother } from '@test/unit/languages/domain/country/countryIdMother';
+import { CountryIdMother } from '@test/unit/language/domain/country/countryIdMother';
 import TermLike from '@src/language/domain/term/termLike';
-import WordTermCollectionMother from '@test/unit/languages/domain/term/word/wordTermCollectionMother';
+import WordTermCollectionMother from '@test/unit/language/domain/term/word/wordTermCollectionMother';
 import { WordTermPrimitives } from '@src/language/domain/term/word/wordTerm';
 
 describe('Get term feature', () => {

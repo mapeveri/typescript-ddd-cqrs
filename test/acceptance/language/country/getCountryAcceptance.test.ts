@@ -3,9 +3,9 @@ import { INestApplication } from '@nestjs/common';
 import request from 'supertest';
 import { MikroORM } from '@mikro-orm/core';
 import { createApplication } from '@test/acceptance/createApplication';
-import CountryMother from '@test/unit/languages/domain/country/countryMother';
-import { CountryIdMother } from '@test/unit/languages/domain/country/countryIdMother';
-import LanguageMother from '@test/unit/languages/domain/country/languageMother';
+import CountryMother from '@test/unit/language/domain/country/countryMother';
+import { CountryIdMother } from '@test/unit/language/domain/country/countryIdMother';
+import LanguageMother from '@test/unit/language/domain/country/languageMother';
 
 describe('Get country feature', () => {
   let app: INestApplication;
