@@ -39,11 +39,6 @@ export default class ExpressionPostDto {
   @IsString()
   countryId: string;
 
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  userId: string;
-
   @ApiProperty({ type: [ExpressionDto] })
   @Type(() => ExpressionDto)
   @ValidateNested({ each: true })

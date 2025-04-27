@@ -1,6 +1,6 @@
 import CreateExpressionCommand from '@src/language/application/term/command/expression/createExpressionCommand';
 import { ExpressionTermPrimitives } from '@src/language/domain/term/expression/expressionTerm';
-import { Body, Controller, HttpCode, HttpStatus, Inject, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Inject, Post, Req, UseGuards } from '@nestjs/common';
 import ExpressionPostDto from './expressionPostDto';
 import { NestJwtAuthGuard } from '@src/shared/infrastructure/auth/jwt/nestJwtAuthGuard';
 import {
@@ -11,6 +11,7 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { COMMAND_BUS, CommandBus } from '@src/shared/domain/bus/commandBus/commandBus';
+import { Request } from 'express';
 
 @ApiTags('Expressions')
 @Controller()
@@ -24,10 +25,11 @@ export default class ExpressionPostController {
   @ApiUnauthorizedResponse({ description: 'Unauthorized.' })
   @ApiInternalServerErrorResponse({ description: 'Internal Server Error.' })
   @UseGuards(NestJwtAuthGuard)
-  async run(@Body() payload: ExpressionPostDto): Promise<void> {
+  async run(@Req() req: Request, @Body() payload: ExpressionPostDto): Promise<void> {
+    const userId = req.user['id'];
     const expressionTerms: Array<ExpressionTermPrimitives> = payload.terms;
     await this.commandBus.dispatch(
-      new CreateExpressionCommand(payload.id, payload.languageId, payload.countryId, payload.userId, expressionTerms),
+      new CreateExpressionCommand(payload.id, payload.languageId, payload.countryId, userId, expressionTerms),
     );
   }
 }
