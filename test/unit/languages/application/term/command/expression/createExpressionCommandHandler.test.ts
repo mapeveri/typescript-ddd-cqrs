@@ -1,15 +1,15 @@
 import { beforeEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import { EventBusMock } from '@test/unit/shared/domain/buses/eventBus/eventBusMock';
 import { TermRepositoryMock } from '@test/unit/languages/domain/term/termRepositoryMock';
-import CreateExpressionCommandHandler from '@src/languages/application/term/command/expression/createExpressionCommandHandler';
+import CreateExpressionCommandHandler from '@src/language/application/term/command/expression/createExpressionCommandHandler';
 import ExpressionMother from '@test/unit/languages/domain/term/expression/expressionMother';
 import { CreateExpressionCommandMother } from '@test/unit/languages/application/term/command/expression/createExpressionCommandMother';
-import Expression from '@src/languages/domain/term/expression/expression';
+import Expression from '@src/language/domain/term/expression/expression';
 import { ExpressionCreatedEventMother } from '@test/unit/languages/domain/term/expression/expressionCreatedEventMother';
-import CreateExpressionCommand from '@src/languages/application/term/command/expression/createExpressionCommand';
+import CreateExpressionCommand from '@src/language/application/term/command/expression/createExpressionCommand';
 import InvalidArgumentException from '@src/shared/domain/exceptions/invalidArgumentException';
-import ExpressionCreatedEvent from '@src/languages/domain/term/expression/expressionCreatedEvent';
-import TermAlreadyExistsException from '@src/languages/domain/term/termAlreadyExistsException';
+import ExpressionCreatedEvent from '@src/language/domain/term/expression/expressionCreatedEvent';
+import TermAlreadyExistsException from '@src/language/domain/term/termAlreadyExistsException';
 
 describe('Given a CreateExpressionCommandHandler to handle', () => {
   let eventBus: EventBusMock;

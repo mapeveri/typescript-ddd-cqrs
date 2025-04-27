@@ -1,10 +1,10 @@
-import CreateCountryCommand from '@src/languages/application/country/command/createCountryCommand';
-import Country from '@src/languages/domain/country/country';
+import CreateCountryCommand from '@src/language/application/country/command/createCountryCommand';
+import Country from '@src/language/domain/country/country';
 import { CountryIdMother } from './countryIdMother';
 import faker from 'faker';
-import CountryId from '@src/languages/domain/country/countryId';
+import CountryId from '@src/language/domain/country/countryId';
 import LanguageCollectionMother from './languageCollectionMother';
-import Language, { LanguagePrimitives } from '@src/languages/domain/country/language';
+import Language, { LanguagePrimitives } from '@src/language/domain/country/language';
 import LanguageMother from './languageMother';
 
 interface CountryMotherProps {

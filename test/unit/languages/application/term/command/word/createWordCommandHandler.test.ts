@@ -1,15 +1,15 @@
 import { beforeEach, beforeAll, describe, expect, it, vi } from 'vitest';
-import CreateWordCommandHandler from '@src/languages/application/term/command/word/createWordCommandHandler';
+import CreateWordCommandHandler from '@src/language/application/term/command/word/createWordCommandHandler';
 import { TermRepositoryMock } from '@test/unit/languages/domain/term/termRepositoryMock';
 import { EventBusMock } from '@test/unit/shared/domain/buses/eventBus/eventBusMock';
 import WordMother from '@test/unit/languages/domain/term/word/wordMother';
 import { CreateWordCommandMother } from '@test/unit/languages/application/term/command/word/createWordCommandMother';
-import Word from '@src/languages/domain/term/word/word';
+import Word from '@src/language/domain/term/word/word';
 import { WordCreatedEventMother } from '@test/unit/languages/domain/term/word/wordCreatedEventMother';
-import CreateWordCommand from '@src/languages/application/term/command/word/createWordCommand';
+import CreateWordCommand from '@src/language/application/term/command/word/createWordCommand';
 import InvalidArgumentException from '@src/shared/domain/exceptions/invalidArgumentException';
-import WordCreatedEvent from '@src/languages/domain/term/word/wordCreatedEvent';
-import TermAlreadyExistsException from '@src/languages/domain/term/termAlreadyExistsException';
+import WordCreatedEvent from '@src/language/domain/term/word/wordCreatedEvent';
+import TermAlreadyExistsException from '@src/language/domain/term/termAlreadyExistsException';
 
 describe('Given a CreateWordCommandHandler to handle', () => {
   let eventBus: EventBusMock;

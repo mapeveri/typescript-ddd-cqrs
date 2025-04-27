@@ -1,6 +1,6 @@
-import { TermView } from '@src/languages/application/term/query/termView';
+import { TermView } from '@src/language/application/term/query/termView';
 import UserId from '@src/account/domain/user/userId';
-import FindSuggestionsTermReadModel from '@src/languages/application/term/query/findSuggestionsTermReadModel';
+import FindSuggestionsTermReadModel from '@src/language/application/term/query/findSuggestionsTermReadModel';
 
 export class FindSuggestionsTermReadModelMock implements FindSuggestionsTermReadModel {
   private terms: TermView[];

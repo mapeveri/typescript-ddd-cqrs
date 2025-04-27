@@ -1,10 +1,10 @@
 import { beforeEach, beforeAll, describe, expect, it } from 'vitest';
-import Country from '@src/languages/domain/country/country';
+import Country from '@src/language/domain/country/country';
 import { FindCountriesQueryMother } from './findCountriesQueryMother';
-import FindCountriesQueryHandler from '@src/languages/application/country/query/findCountriesQueryHandler';
+import FindCountriesQueryHandler from '@src/language/application/country/query/findCountriesQueryHandler';
 import { CountryRepositoryMock } from '@test/unit/languages/domain/country/countryRepositoryMock';
 import CountryMother from '@test/unit/languages/domain/country/countryMother';
-import FindCountriesQuery from '@src/languages/application/country/query/findCountriesQuery';
+import FindCountriesQuery from '@src/language/application/country/query/findCountriesQuery';
 
 describe('Given a FindCountryQueryHandler to handle', () => {
   let countryRepository: CountryRepositoryMock;

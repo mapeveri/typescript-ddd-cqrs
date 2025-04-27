@@ -1,5 +1,5 @@
-import CreateCountryCommand from '@src/languages/application/country/command/createCountryCommand';
-import { LanguagePrimitives } from '@src/languages/domain/country/language';
+import CreateCountryCommand from '@src/language/application/country/command/createCountryCommand';
+import { LanguagePrimitives } from '@src/language/domain/country/language';
 import faker from 'faker';
 
 interface CreateCountryCommandProps {

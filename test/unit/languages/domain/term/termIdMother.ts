@@ -1,5 +1,5 @@
 import faker from 'faker';
-import TermId from '@src/languages/domain/term/termId';
+import TermId from '@src/language/domain/term/termId';
 
 export class TermIdMother {
   static random(id?: string): TermId {

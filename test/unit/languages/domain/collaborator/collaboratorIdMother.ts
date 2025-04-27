@@ -1,5 +1,5 @@
 import faker from 'faker';
-import CollaboratorId from '@src/languages/domain/collaborator/collaboratorId';
+import CollaboratorId from '@src/language/domain/collaborator/collaboratorId';
 
 export class CollaboratorIdMother {
   static random(id?: string): CollaboratorId {

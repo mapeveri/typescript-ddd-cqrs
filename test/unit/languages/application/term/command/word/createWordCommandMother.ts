@@ -1,5 +1,5 @@
-import CreateWordCommand from '@src/languages/application/term/command/word/createWordCommand';
-import { WordTermPrimitives } from '@src/languages/domain/term/word/wordTerm';
+import CreateWordCommand from '@src/language/application/term/command/word/createWordCommand';
+import { WordTermPrimitives } from '@src/language/domain/term/word/wordTerm';
 import faker from 'faker';
 
 interface CreateWordCommandProps {

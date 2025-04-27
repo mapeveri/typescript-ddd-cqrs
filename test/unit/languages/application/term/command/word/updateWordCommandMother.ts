@@ -1,6 +1,6 @@
 import faker from 'faker';
-import UpdateWordCommand from '@src/languages/application/term/command/word/updateWordCommand';
-import { WordTermPrimitives } from '@src/languages/domain/term/word/wordTerm';
+import UpdateWordCommand from '@src/language/application/term/command/word/updateWordCommand';
+import { WordTermPrimitives } from '@src/language/domain/term/word/wordTerm';
 
 interface UpdateWordCommandProps {
   id?: string;

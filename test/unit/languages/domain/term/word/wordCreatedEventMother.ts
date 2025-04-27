@@ -1,7 +1,7 @@
 import { expect } from 'vitest';
-import CreateWordCommand from '@src/languages/application/term/command/word/createWordCommand';
-import WordCreatedEvent from '@src/languages/domain/term/word/wordCreatedEvent';
-import { WordTermPrimitives } from '@src/languages/domain/term/word/wordTerm';
+import CreateWordCommand from '@src/language/application/term/command/word/createWordCommand';
+import WordCreatedEvent from '@src/language/domain/term/word/wordCreatedEvent';
+import { WordTermPrimitives } from '@src/language/domain/term/word/wordTerm';
 
 export class WordCreatedEventMother {
   static createFromCreateWordCommand(command: CreateWordCommand): WordCreatedEvent {

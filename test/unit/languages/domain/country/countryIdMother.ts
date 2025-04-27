@@ -1,4 +1,4 @@
-import CountryId from '@src/languages/domain/country/countryId';
+import CountryId from '@src/language/domain/country/countryId';
 import faker from 'faker';
 
 export class CountryIdMother {

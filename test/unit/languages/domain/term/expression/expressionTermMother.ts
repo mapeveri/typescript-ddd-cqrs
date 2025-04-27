@@ -1,5 +1,5 @@
 import faker from 'faker';
-import ExpressionTerm from '@src/languages/domain/term/expression/expressionTerm';
+import ExpressionTerm from '@src/language/domain/term/expression/expressionTerm';
 
 export interface ExpressionTermMotherProps {
   expression?: string;

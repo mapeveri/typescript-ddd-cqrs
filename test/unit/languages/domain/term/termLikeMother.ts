@@ -1,10 +1,10 @@
 import faker from 'faker';
 import { UserIdMother } from '@test/unit/account/domain/user/userIdMother';
-import TermLike from '@src/languages/domain/term/termLike';
+import TermLike from '@src/language/domain/term/termLike';
 import UserId from '@src/account/domain/user/userId';
-import TermId from '@src/languages/domain/term/termId';
+import TermId from '@src/language/domain/term/termId';
 import { TermIdMother } from '@test/unit/languages/domain/term/termIdMother';
-import TermLikeId from '@src/languages/domain/term/termLikeId';
+import TermLikeId from '@src/language/domain/term/termLikeId';
 import { TermLikeIdMother } from '@test/unit/languages/domain/term/termLikeIdMother';
 
 interface TermLikeMotherProps {

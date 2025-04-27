@@ -7,9 +7,9 @@ import WordMother from '@test/unit/languages/domain/term/word/wordMother';
 import { TermIdMother } from '@test/unit/languages/domain/term/termIdMother';
 import { UserIdMother } from '@test/unit/account/domain/user/userIdMother';
 import { CountryIdMother } from '@test/unit/languages/domain/country/countryIdMother';
-import TermLike from '@src/languages/domain/term/termLike';
+import TermLike from '@src/language/domain/term/termLike';
 import WordTermCollectionMother from '@test/unit/languages/domain/term/word/wordTermCollectionMother';
-import { WordTermPrimitives } from '@src/languages/domain/term/word/wordTerm';
+import { WordTermPrimitives } from '@src/language/domain/term/word/wordTerm';
 
 describe('Get term feature', () => {
   let app: INestApplication;

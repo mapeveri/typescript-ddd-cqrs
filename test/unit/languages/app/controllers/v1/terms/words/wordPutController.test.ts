@@ -1,5 +1,5 @@
 import { beforeAll, describe, expect, it, vi } from 'vitest';
-import WordPutController from '@src/languages/app/controllers/v1/terms/words/wordPutController';
+import WordPutController from '@src/language/app/controllers/v1/terms/words/wordPutController';
 import { TermIdMother } from '@test/unit/languages/domain/term/termIdMother';
 import { CommandBus } from '@src/shared/domain/bus/commandBus/commandBus';
 import { UpdateWordCommandMother } from '@test/unit/languages/application/term/command/word/updateWordCommandMother';

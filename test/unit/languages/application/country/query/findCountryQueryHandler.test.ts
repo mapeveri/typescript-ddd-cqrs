@@ -1,11 +1,11 @@
 import { beforeEach, beforeAll, describe, expect, it } from 'vitest';
 import { FindCountryQueryMother } from './findCountryQueryMother';
-import FindCountryQueryHandler from '@src/languages/application/country/query/findCountryQueryHandler';
+import FindCountryQueryHandler from '@src/language/application/country/query/findCountryQueryHandler';
 import { CountryRepositoryMock } from '@test/unit/languages/domain/country/countryRepositoryMock';
 import { CountryIdMother } from '@test/unit/languages/domain/country/countryIdMother';
-import Country from '@src/languages/domain/country/country';
+import Country from '@src/language/domain/country/country';
 import CountryMother from '@test/unit/languages/domain/country/countryMother';
-import FindCountryQuery from '@src/languages/application/country/query/findCountryQuery';
+import FindCountryQuery from '@src/language/application/country/query/findCountryQuery';
 import InvalidArgumentException from '@src/shared/domain/exceptions/invalidArgumentException';
 
 describe('Given a FindCountryQueryHandler to handle', () => {

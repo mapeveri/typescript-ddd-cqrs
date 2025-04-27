@@ -1,18 +1,18 @@
 import UserId from '@src/account/domain/user/userId';
 import { CountryIdMother } from '../../country/countryIdMother';
-import CreateExpressionCommand from '@src/languages/application/term/command/expression/createExpressionCommand';
-import Expression from '@src/languages/domain/term/expression/expression';
-import ExpressionTerm from '@src/languages/domain/term/expression/expressionTerm';
+import CreateExpressionCommand from '@src/language/application/term/command/expression/createExpressionCommand';
+import Expression from '@src/language/domain/term/expression/expression';
+import ExpressionTerm from '@src/language/domain/term/expression/expressionTerm';
 import ExpressionTermMother, { ExpressionTermMotherProps } from './expressionTermMother';
 import ExpressionTermCollectionMother from './expressionTermCollectionMother';
 import faker from 'faker';
-import CountryId from '@src/languages/domain/country/countryId';
-import ExpressionTermCollection from '@src/languages/domain/term/expression/expressionTermCollection';
+import CountryId from '@src/language/domain/country/countryId';
+import ExpressionTermCollection from '@src/language/domain/term/expression/expressionTermCollection';
 import { UserIdMother } from '@test/unit/account/domain/user/userIdMother';
-import TermId from '@src/languages/domain/term/termId';
-import TermType, { TermTypeEnum } from '@src/languages/domain/term/termType';
+import TermId from '@src/language/domain/term/termId';
+import TermType, { TermTypeEnum } from '@src/language/domain/term/termType';
 import { TermIdMother } from '@test/unit/languages/domain/term/termIdMother';
-import TermLike from '@src/languages/domain/term/termLike';
+import TermLike from '@src/language/domain/term/termLike';
 import TermLikeMother from '@test/unit/languages/domain/term/termLikeMother';
 
 interface ExpressionMotherProps {

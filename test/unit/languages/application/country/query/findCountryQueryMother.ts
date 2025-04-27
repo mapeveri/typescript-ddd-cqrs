@@ -1,4 +1,4 @@
-import FindCountryQuery from '@src/languages/application/country/query/findCountryQuery';
+import FindCountryQuery from '@src/language/application/country/query/findCountryQuery';
 import faker from 'faker';
 
 export class FindCountryQueryMother {

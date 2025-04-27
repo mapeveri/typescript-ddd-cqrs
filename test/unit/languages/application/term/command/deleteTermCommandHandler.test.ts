@@ -1,13 +1,13 @@
 import { beforeEach, beforeAll, describe, expect, it } from 'vitest';
-import DeleteTermCommandHandler from '@src/languages/application/term/command/deleteTermCommandHandler';
+import DeleteTermCommandHandler from '@src/language/application/term/command/deleteTermCommandHandler';
 import { TermRepositoryMock } from '@test/unit/languages/domain/term/termRepositoryMock';
 import ExpressionMother from '@test/unit/languages/domain/term/expression/expressionMother';
 import InvalidArgumentException from '@src/shared/domain/exceptions/invalidArgumentException';
-import Expression from '@src/languages/domain/term/expression/expression';
+import Expression from '@src/language/domain/term/expression/expression';
 import { EventBusMock } from '@test/unit/shared/domain/buses/eventBus/eventBusMock';
 import { DeleteTermCommandMother } from './deleteTermCommandMother';
-import DeleteTermCommand from '@src/languages/application/term/command/deleteTermCommand';
-import TermDoesNotExistsException from '@src/languages/domain/term/termDoesNotExistsException';
+import DeleteTermCommand from '@src/language/application/term/command/deleteTermCommand';
+import TermDoesNotExistsException from '@src/language/domain/term/termDoesNotExistsException';
 import { TermDeletedEventMother } from '@test/unit/languages/domain/term/termDeletedEventMother';
 
 describe('Given a DeleteTermCommandHandler to handle', () => {

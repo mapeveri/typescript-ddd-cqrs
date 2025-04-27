@@ -1,14 +1,14 @@
 import { beforeEach, beforeAll, describe, expect, it } from 'vitest';
-import CreateCountryCommandHandler from '@src/languages/application/country/command/createCountryCommandHandler';
-import Country from '@src/languages/domain/country/country';
+import CreateCountryCommandHandler from '@src/language/application/country/command/createCountryCommandHandler';
+import Country from '@src/language/domain/country/country';
 import { CountryRepositoryMock } from '@test/unit/languages/domain/country/countryRepositoryMock';
 import { EventBusMock } from '@test/unit/shared/domain/buses/eventBus/eventBusMock';
 import CountryMother from '@test/unit/languages/domain/country/countryMother';
 import { CreateCountryCommandMother } from '@test/unit/languages/application/country/command/createCountryCommandMother';
-import CountryAlreadyExistsException from '@src/languages/domain/country/countryAlreadyExistsException';
+import CountryAlreadyExistsException from '@src/language/domain/country/countryAlreadyExistsException';
 import { CountryCreatedEventMother } from '@test/unit/languages/domain/country/countryCreatedEventMother';
 import InvalidArgumentException from '@src/shared/domain/exceptions/invalidArgumentException';
-import CreateCountryCommand from '@src/languages/application/country/command/createCountryCommand';
+import CreateCountryCommand from '@src/language/application/country/command/createCountryCommand';
 
 describe('Given a CreateCountryCommandHandler to handle', () => {
   let eventBus: EventBusMock;

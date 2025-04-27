@@ -1,5 +1,5 @@
 import faker from 'faker';
-import WordTerm from '@src/languages/domain/term/word/wordTerm';
+import WordTerm from '@src/language/domain/term/word/wordTerm';
 
 export interface WordTermMotherProps {
   title?: string;

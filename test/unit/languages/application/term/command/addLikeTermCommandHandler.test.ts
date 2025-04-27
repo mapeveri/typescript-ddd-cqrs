@@ -1,21 +1,21 @@
 import { beforeEach, beforeAll, describe, expect, it, vi } from 'vitest';
-import AddLikeTermCommandHandler from '@src/languages/application/term/command/addLikeTermCommandHandler';
-import AddLikeTermCommand from '@src/languages/application/term/command/addLikeTermCommand';
+import AddLikeTermCommandHandler from '@src/language/application/term/command/addLikeTermCommandHandler';
+import AddLikeTermCommand from '@src/language/application/term/command/addLikeTermCommand';
 import { AddLikeTermCommandMother } from '@test/unit/languages/application/term/command/addLikeTermCommandMother';
 import InvalidArgumentException from '@src/shared/domain/exceptions/invalidArgumentException';
 import { TermRepositoryMock } from '@test/unit/languages/domain/term/termRepositoryMock';
 import WordMother from '@test/unit/languages/domain/term/word/wordMother';
-import TermDoesNotExistsException from '@src/languages/domain/term/termDoesNotExistsException';
+import TermDoesNotExistsException from '@src/language/domain/term/termDoesNotExistsException';
 import { TermIdMother } from '@test/unit/languages/domain/term/termIdMother';
 import { EventBusMock } from '@test/unit/shared/domain/buses/eventBus/eventBusMock';
 import { TermLikeAddedEventMother } from '@test/unit/languages/domain/term/termLikeAddedEventMother';
 import TermLikeMother from '@test/unit/languages/domain/term/termLikeMother';
-import Word from '@src/languages/domain/term/word/word';
+import Word from '@src/language/domain/term/word/word';
 import { TermLikeIdMother } from '@test/unit/languages/domain/term/termLikeIdMother';
 import { CollaboratorRepositoryMock } from '@test/unit/languages/domain/collaborator/collaboratorRepositoryMock';
 import { CollaboratorMother } from '@test/unit/languages/domain/collaborator/collaboratorMother';
 import { CollaboratorIdMother } from '@test/unit/languages/domain/collaborator/collaboratorIdMother';
-import CollaboratorDoesNotExistsException from '@src/languages/domain/collaborator/collaboratorDoesNotExistsException';
+import CollaboratorDoesNotExistsException from '@src/language/domain/collaborator/collaboratorDoesNotExistsException';
 import { IdentityProviderMock } from '@test/unit/shared/domain/services/IdentityProviderMock';
 
 describe('Given a AddLikeTermCommandHandler to handle', () => {

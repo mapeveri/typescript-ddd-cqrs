@@ -1,5 +1,5 @@
 import { beforeAll, describe, it, expect, vi } from 'vitest';
-import TermGetController from '@src/languages/app/controllers/v1/terms/termGetController';
+import TermGetController from '@src/language/app/controllers/v1/terms/termGetController';
 import WordMother from '@test/unit/languages/domain/term/word/wordMother';
 import { QueryBus } from '@src/shared/domain/bus/queryBus/queryBus';
 

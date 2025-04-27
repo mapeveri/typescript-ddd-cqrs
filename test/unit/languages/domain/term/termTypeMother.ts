@@ -1,4 +1,4 @@
-import TermType, { TermTypeEnum } from '@src/languages/domain/term/termType';
+import TermType, { TermTypeEnum } from '@src/language/domain/term/termType';
 
 export default class TermTypeMother {
   static random(value?: string): TermType {

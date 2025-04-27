@@ -1,5 +1,5 @@
-import { ExpressionTermPrimitives } from '@src/languages/domain/term/expression/expressionTerm';
-import ExpressionTermCollection from '@src/languages/domain/term/expression/expressionTermCollection';
+import { ExpressionTermPrimitives } from '@src/language/domain/term/expression/expressionTerm';
+import ExpressionTermCollection from '@src/language/domain/term/expression/expressionTermCollection';
 import ExpressionTermMother from './expressionTermMother';
 
 export default class ExpressionTermCollectionMother {

@@ -1,10 +1,10 @@
 import { beforeEach, beforeAll, describe, expect, it } from 'vitest';
 import { FindSuggestionsTermReadModelMock } from '@test/unit/languages/application/term/query/findSuggestionsTermReadModelMock';
-import FindSuggestionsTermQueryHandler from '@src/languages/application/term/query/findSuggestionsTermQueryHandler';
+import FindSuggestionsTermQueryHandler from '@src/language/application/term/query/findSuggestionsTermQueryHandler';
 import { FindSuggestionsTermQueryMother } from '@test/unit/languages/application/term/query/findSuggestionsTermQueryMother';
 import { TermViewMother } from '@test/unit/languages/application/term/query/termViewMother';
-import FindSuggestionsTermQuery from '@src/languages/application/term/query/findSuggestionsTermQuery';
-import { TermView } from '@src/languages/application/term/query/termView';
+import FindSuggestionsTermQuery from '@src/language/application/term/query/findSuggestionsTermQuery';
+import { TermView } from '@src/language/application/term/query/termView';
 import InvalidArgumentException from '@src/shared/domain/exceptions/invalidArgumentException';
 
 describe('Given a FindSuggestionsTermQueryHandler to handle', () => {

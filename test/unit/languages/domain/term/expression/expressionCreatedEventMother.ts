@@ -1,7 +1,7 @@
 import { expect } from 'vitest';
-import CreateExpressionCommand from '@src/languages/application/term/command/expression/createExpressionCommand';
-import ExpressionCreatedEvent from '@src/languages/domain/term/expression/expressionCreatedEvent';
-import { ExpressionTermPrimitives } from '@src/languages/domain/term/expression/expressionTerm';
+import CreateExpressionCommand from '@src/language/application/term/command/expression/createExpressionCommand';
+import ExpressionCreatedEvent from '@src/language/domain/term/expression/expressionCreatedEvent';
+import { ExpressionTermPrimitives } from '@src/language/domain/term/expression/expressionTerm';
 
 export class ExpressionCreatedEventMother {
   static createFromCreateExpressionCommand(command: CreateExpressionCommand): ExpressionCreatedEvent {

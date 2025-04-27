@@ -1,10 +1,10 @@
 import { beforeEach, beforeAll, describe, expect, it } from 'vitest';
 import { SearchTermQueryMother } from './searchTermQueryMother';
-import SearchTermQueryHandler from '@src/languages/application/term/query/searchTermQueryHandler';
+import SearchTermQueryHandler from '@src/language/application/term/query/searchTermQueryHandler';
 import { SearchTermViewReadModelMock } from '@test/unit/languages/application/term/query/searchTermViewReadModelMock';
-import { TermView } from '@src/languages/application/term/query/termView';
+import { TermView } from '@src/language/application/term/query/termView';
 import { TermViewMother } from '@test/unit/languages/application/term/query/termViewMother';
-import SearchTermQuery from '@src/languages/application/term/query/searchTermQuery';
+import SearchTermQuery from '@src/language/application/term/query/searchTermQuery';
 
 describe('Given a SearchTermQueryHandler to handle', () => {
   let searchTermViewReadModel: SearchTermViewReadModelMock;

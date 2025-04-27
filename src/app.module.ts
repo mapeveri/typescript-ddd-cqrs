@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { LanguageModule } from './languages/language.module';
+import { LanguageModule } from '@src/language/language.module';
 import { SharedModule } from './shared/shared.module';
 import { AccountModule } from '@src/account/account.module';
 import { MikroOrmModule } from '@mikro-orm/nestjs';

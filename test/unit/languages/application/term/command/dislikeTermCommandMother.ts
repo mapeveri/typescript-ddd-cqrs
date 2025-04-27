@@ -1,4 +1,4 @@
-import DislikeTermCommand from '@src/languages/application/term/command/dislikeTermCommand';
+import DislikeTermCommand from '@src/language/application/term/command/dislikeTermCommand';
 import { TermIdMother } from '@test/unit/languages/domain/term/termIdMother';
 import { UserIdMother } from '@test/unit/account/domain/user/userIdMother';
 

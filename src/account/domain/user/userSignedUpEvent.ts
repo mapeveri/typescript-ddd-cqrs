@@ -28,7 +28,7 @@ export default class UserSignedUpEvent extends DomainEvent {
   }
 
   public classPathName(): string {
-    return 'languages.domain.user.userSignedUpEvent';
+    return 'language.domain.user.userSignedUpEvent';
   }
 
   public static aggregateTypeName(): string {

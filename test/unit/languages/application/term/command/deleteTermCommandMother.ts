@@ -1,4 +1,4 @@
-import DeleteTermCommand from '@src/languages/application/term/command/deleteTermCommand';
+import DeleteTermCommand from '@src/language/application/term/command/deleteTermCommand';
 import faker from 'faker';
 
 export class DeleteTermCommandMother {

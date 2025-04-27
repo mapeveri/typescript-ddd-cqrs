@@ -1,5 +1,5 @@
-import CreateExpressionCommand from '@src/languages/application/term/command/expression/createExpressionCommand';
-import { ExpressionTermPrimitives } from '@src/languages/domain/term/expression/expressionTerm';
+import CreateExpressionCommand from '@src/language/application/term/command/expression/createExpressionCommand';
+import { ExpressionTermPrimitives } from '@src/language/domain/term/expression/expressionTerm';
 import faker from 'faker';
 
 interface CreateExpressionCommandProps {

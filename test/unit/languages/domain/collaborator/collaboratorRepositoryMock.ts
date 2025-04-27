@@ -1,6 +1,6 @@
-import CollaboratorRepository from '@src/languages/domain/collaborator/collaboratorRepository';
-import Collaborator from '@src/languages/domain/collaborator/collaborator';
-import CollaboratorId from '@src/languages/domain/collaborator/collaboratorId';
+import CollaboratorRepository from '@src/language/domain/collaborator/collaboratorRepository';
+import Collaborator from '@src/language/domain/collaborator/collaborator';
+import CollaboratorId from '@src/language/domain/collaborator/collaboratorId';
 
 export class CollaboratorRepositoryMock implements CollaboratorRepository {
   private collaborators: Collaborator[];

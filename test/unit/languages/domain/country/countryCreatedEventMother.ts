@@ -1,5 +1,5 @@
-import CountryCreatedEvent from '@src/languages/domain/country/countryCreatedEvent';
-import CreateCountryCommand from '@src/languages/application/country/command/createCountryCommand';
+import CountryCreatedEvent from '@src/language/domain/country/countryCreatedEvent';
+import CreateCountryCommand from '@src/language/application/country/command/createCountryCommand';
 import { expect } from 'vitest';
 
 export class CountryCreatedEventMother {

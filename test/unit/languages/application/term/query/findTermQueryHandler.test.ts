@@ -1,11 +1,11 @@
 import { beforeEach, beforeAll, describe, expect, it } from 'vitest';
-import FindTermQueryHandler from '@src/languages/application/term/query/findTermQueryHandler';
-import FindTermQuery from '@src/languages/application/term/query/findTermQuery';
+import FindTermQueryHandler from '@src/language/application/term/query/findTermQueryHandler';
+import FindTermQuery from '@src/language/application/term/query/findTermQuery';
 import { FindTermQueryMother } from '@test/unit/languages/application/term/query/findTermQueryMother';
 import InvalidArgumentException from '@src/shared/domain/exceptions/invalidArgumentException';
-import TermDoesNotExistsException from '@src/languages/domain/term/termDoesNotExistsException';
+import TermDoesNotExistsException from '@src/language/domain/term/termDoesNotExistsException';
 import { TermRepositoryMock } from '@test/unit/languages/domain/term/termRepositoryMock';
-import { WordPrimitives } from '@src/languages/domain/term/word/word';
+import { WordPrimitives } from '@src/language/domain/term/word/word';
 import WordMother from '@test/unit/languages/domain/term/word/wordMother';
 
 describe('Given a FindTermQueryHandler to handle', () => {

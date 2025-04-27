@@ -1,6 +1,6 @@
-import TermRepository from '@src/languages/domain/term/termRepository';
-import TermId from '@src/languages/domain/term/termId';
-import Term from '@src/languages/domain/term/term';
+import TermRepository from '@src/language/domain/term/termRepository';
+import TermId from '@src/language/domain/term/termId';
+import Term from '@src/language/domain/term/term';
 
 export class TermRepositoryMock implements TermRepository {
   private terms: Term[];

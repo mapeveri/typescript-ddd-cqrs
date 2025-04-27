@@ -1,5 +1,5 @@
-import WordTermCollection from '@src/languages/domain/term/word/wordTermCollection';
-import { WordTermPrimitives } from '@src/languages/domain/term/word/wordTerm';
+import WordTermCollection from '@src/language/domain/term/word/wordTermCollection';
+import { WordTermPrimitives } from '@src/language/domain/term/word/wordTerm';
 import WordTermMother from './wordTermMother';
 
 export default class WordTermCollectionMother {

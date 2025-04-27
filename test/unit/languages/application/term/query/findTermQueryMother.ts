@@ -1,4 +1,4 @@
-import FindTermQuery from '@src/languages/application/term/query/findTermQuery';
+import FindTermQuery from '@src/language/application/term/query/findTermQuery';
 import faker from 'faker';
 
 export class FindTermQueryMother {

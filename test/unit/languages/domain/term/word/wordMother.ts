@@ -1,19 +1,19 @@
-import CreateWordCommand from '@src/languages/application/term/command/word/createWordCommand';
-import Word from '@src/languages/domain/term/word/word';
+import CreateWordCommand from '@src/language/application/term/command/word/createWordCommand';
+import Word from '@src/language/domain/term/word/word';
 import UserId from '@src/account/domain/user/userId';
 import { CountryIdMother } from '../../country/countryIdMother';
 import WordTermCollectionMother from './wordTermCollectionMother';
-import WordTerm from '@src/languages/domain/term/word/wordTerm';
+import WordTerm from '@src/language/domain/term/word/wordTerm';
 import WordTermMother, { WordTermMotherProps } from './wordTermMother';
-import CountryId from '@src/languages/domain/country/countryId';
-import WordTermCollection from '@src/languages/domain/term/word/wordTermCollection';
+import CountryId from '@src/language/domain/country/countryId';
+import WordTermCollection from '@src/language/domain/term/word/wordTermCollection';
 import { UserIdMother } from '@test/unit/account/domain/user/userIdMother';
 import faker from 'faker';
-import TermId from '@src/languages/domain/term/termId';
-import TermType, { TermTypeEnum } from '@src/languages/domain/term/termType';
+import TermId from '@src/language/domain/term/termId';
+import TermType, { TermTypeEnum } from '@src/language/domain/term/termType';
 import { TermIdMother } from '@test/unit/languages/domain/term/termIdMother';
 import TermLikeMother from '@test/unit/languages/domain/term/termLikeMother';
-import TermLike from '@src/languages/domain/term/termLike';
+import TermLike from '@src/language/domain/term/termLike';
 
 interface WordMotherProps {
   id?: TermId;

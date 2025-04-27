@@ -1,5 +1,5 @@
 import faker from 'faker';
-import Language from '@src/languages/domain/country/language';
+import Language from '@src/language/domain/country/language';
 
 export interface LanguageMotherProps {
   name?: string;

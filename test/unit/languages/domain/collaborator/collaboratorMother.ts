@@ -1,6 +1,6 @@
 import faker from 'faker';
-import CollaboratorId from '@src/languages/domain/collaborator/collaboratorId';
-import Collaborator from '@src/languages/domain/collaborator/collaborator';
+import CollaboratorId from '@src/language/domain/collaborator/collaboratorId';
+import Collaborator from '@src/language/domain/collaborator/collaborator';
 import { CollaboratorIdMother } from '@test/unit/languages/domain/collaborator/collaboratorIdMother';
 
 interface CollaboratorMotherProps {

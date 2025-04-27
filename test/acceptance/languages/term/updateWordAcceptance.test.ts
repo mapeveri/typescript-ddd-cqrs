@@ -8,8 +8,8 @@ import { TermIdMother } from '@test/unit/languages/domain/term/termIdMother';
 import { CountryIdMother } from '@test/unit/languages/domain/country/countryIdMother';
 import WordTermCollectionMother from '@test/unit/languages/domain/term/word/wordTermCollectionMother';
 import { UserIdMother } from '@test/unit/account/domain/user/userIdMother';
-import TermLike from '@src/languages/domain/term/termLike';
-import { WordTermPrimitives } from '@src/languages/domain/term/word/wordTerm';
+import TermLike from '@src/language/domain/term/termLike';
+import { WordTermPrimitives } from '@src/language/domain/term/word/wordTerm';
 
 describe('Update word feature', () => {
   let app: INestApplication;

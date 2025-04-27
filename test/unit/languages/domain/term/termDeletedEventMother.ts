@@ -1,7 +1,7 @@
 import { expect } from 'vitest';
 
 import { TermIdMother } from '@test/unit/languages/domain/term/termIdMother';
-import TermDeletedEvent from '@src/languages/domain/term/termDeletedEvent';
+import TermDeletedEvent from '@src/language/domain/term/termDeletedEvent';
 import TermTypeMother from './termTypeMother';
 
 type TermDeletedEventProps = {
