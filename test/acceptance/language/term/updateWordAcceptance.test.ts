@@ -10,6 +10,7 @@ import WordTermCollectionMother from '@test/unit/language/domain/term/word/wordT
 import { UserIdMother } from '@test/unit/account/domain/user/userIdMother';
 import TermLike from '@src/language/domain/term/termLike';
 import { WordTermPrimitives } from '@src/language/domain/term/word/wordTerm';
+import { MIKRO_ORM_CONTEXT_NAME } from '@src/language/mikroOrmConfig';
 
 describe('Update word feature', () => {
   let app: INestApplication;
@@ -32,7 +33,7 @@ describe('Update word feature', () => {
   const NEW_COUNTRY_ID = 'a625816c-2117-44a6-a0ba-07fe54cb0cc4';
 
   const prepareApp = async () => {
-    const setup = await createApplication();
+    const setup = await createApplication(MIKRO_ORM_CONTEXT_NAME);
     app = setup.app;
     orm = setup.orm;
   };

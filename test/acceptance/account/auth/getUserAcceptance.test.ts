@@ -5,6 +5,7 @@ import { MikroORM } from '@mikro-orm/core';
 import { createApplication } from '@test/acceptance/createApplication';
 import { UserMother } from '@test/unit/account/domain/user/userMother';
 import { UserIdMother } from '@test/unit/account/domain/user/userIdMother';
+import { MIKRO_ORM_CONTEXT_NAME } from '@src/account/mikroOrmConfig';
 
 describe('Get user feature', () => {
   let app: INestApplication;
@@ -19,7 +20,7 @@ describe('Get user feature', () => {
   const INTERESTS: string[] = [];
 
   const prepareApp = async () => {
-    const setup = await createApplication();
+    const setup = await createApplication(MIKRO_ORM_CONTEXT_NAME);
     app = setup.app;
     orm = setup.orm;
   };
