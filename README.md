@@ -16,7 +16,8 @@ Configuration to work locally using docker.
 ```
 4. Run migrations:
 ```shell script
-    docker compose run app npm run mikroorm migration:up
+  docker compose run app npm run migration account up
+  docker compose run app npm run migration language up
 ```
 5. Create user with google (check oauth2 section). It's to get a token from google and it allow you to use the endpoint /api/v1/auth/login to log in to the application.
 
