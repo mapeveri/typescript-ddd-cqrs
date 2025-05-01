@@ -29,7 +29,7 @@ After running *docker compose up*, the application will be available at http://l
 To generate migrations run the next command:
 ```shell script
   docker compose run app npm run migration account create
-  docker compose run app npm run migration languages create
+  docker compose run app npm run migration language create
 # 
 
 ```
@@ -37,7 +37,7 @@ To generate migrations run the next command:
 To execute migrations run the next command:
 ```shell script
   docker compose run app npm run migration account up
-  docker compose run app npm run migration languages up
+  docker compose run app npm run migration language up
 ```
 
 ### Oauth2
