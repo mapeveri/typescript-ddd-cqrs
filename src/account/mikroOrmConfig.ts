@@ -26,7 +26,7 @@ export const mikroOrmConfiguration = {
   registerRequestContext: false,
   migrations: {
     path: migrationPath,
-    glob: '{account}/*.{js,ts}',
+    glob: '*.{js,ts}',
     pathTs: migrationPath,
     tableName: 'mikro_orm_migrations',
     transactional: true,
