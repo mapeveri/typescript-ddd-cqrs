@@ -16,11 +16,6 @@ export const USER_ID_LOGGED = '94400f7c-9a20-464c-9951-93b404b5877e';
 async function clearDatabase(orm: MikroORM): Promise<void> {
   const schemaGenerator = orm.getSchemaGenerator();
   await schemaGenerator.ensureDatabase();
-
-  const connection = orm.em.getConnection();
-  await connection.execute('CREATE SCHEMA IF NOT EXISTS account');
-  await connection.execute('CREATE SCHEMA IF NOT EXISTS language');
-
   await schemaGenerator.updateSchema({ dropDb: false });
   await schemaGenerator.clearDatabase({ truncate: true });
 }
