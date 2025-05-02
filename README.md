@@ -31,8 +31,6 @@ To generate migrations run the next command:
 ```shell script
   docker compose run app npm run migration account create
   docker compose run app npm run migration language create
-# 
-
 ```
 
 To execute migrations run the next command:
