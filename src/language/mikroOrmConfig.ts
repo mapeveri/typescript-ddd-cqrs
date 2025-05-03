@@ -17,6 +17,7 @@ export const mikroOrmConfiguration = {
   contextName: MIKRO_ORM_CONTEXT_NAME,
   entities: languageEntitySchemas,
   entitiesTs: languageEntitySchemas,
+  schema: MIKRO_ORM_CONTEXT_NAME,
   driver: PostgreSqlDriver,
   clientUrl: process.env.POSTGRESQL_DB_URL,
   debug: process.env.ENV != 'production',
@@ -31,7 +32,7 @@ export const mikroOrmConfiguration = {
     tableName: 'mikro_orm_migrations',
     transactional: true,
     allOrNothing: true,
-    snapshot: false,
+    snapshot: true,
   },
 };
 
