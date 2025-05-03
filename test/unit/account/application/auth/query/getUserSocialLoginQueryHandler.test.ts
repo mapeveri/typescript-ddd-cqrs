@@ -5,8 +5,13 @@ import LoginException from '@src/account/domain/auth/loginException';
 import { SocialAuthenticationVerifierMock } from '@test/unit/account/domain/auth/socialAuthenticationVerifierMock';
 import GetUserSocialLoginQuery from '@src/account/application/auth/query/getUserSocialLoginQuery';
 import { UserAuthenticatorMock } from '@test/unit/account/domain/auth/userAuthenticatorMock';
+import UserDoesNotExistsException from '@src/account/domain/user/userDoesNotExistsException';
+import { UserRepositoryMock } from '@test/unit/account/domain/user/userRepositoryMock';
+import { UserMother } from '@test/unit/account/domain/user/userMother';
+import { UserIdMother } from '@test/unit/account/domain/user/userIdMother';
 
 describe('Given a GetUserSocialLoginQueryHandler to handle', () => {
+  let userRepository: UserRepositoryMock;
   let socialAuthenticationVerifier: SocialAuthenticationVerifierMock;
   let userAuthenticator: UserAuthenticatorMock;
   let handler: GetUserSocialLoginQueryHandler;
@@ -18,12 +23,13 @@ describe('Given a GetUserSocialLoginQueryHandler to handle', () => {
   const REFRESH_TOKEN = '1234';
 
   const prepareDependencies = () => {
+    userRepository = new UserRepositoryMock();
     socialAuthenticationVerifier = new SocialAuthenticationVerifierMock();
     userAuthenticator = new UserAuthenticatorMock();
   };
 
   const initHandler = () => {
-    handler = new GetUserSocialLoginQueryHandler(socialAuthenticationVerifier, userAuthenticator);
+    handler = new GetUserSocialLoginQueryHandler(userRepository, socialAuthenticationVerifier, userAuthenticator);
 
     vi.useFakeTimers();
   };
@@ -42,30 +48,49 @@ describe('Given a GetUserSocialLoginQueryHandler to handle', () => {
     clean();
   });
 
-  describe('When the login fail', () => {
-    let command: GetUserSocialLoginQuery;
+  describe('When the user does not exists', () => {
+    let query: GetUserSocialLoginQuery;
 
     function startScenario() {
-      command = GetUserSocialLoginQueryMother.random();
+      query = GetUserSocialLoginQueryMother.random();
       socialAuthenticationVerifier.add(false);
     }
 
     beforeEach(startScenario);
 
     it('should raise an exception', async () => {
-      await expect(handler.execute(command)).rejects.toThrowError(LoginException);
+      await expect(handler.execute(query)).rejects.toThrowError(UserDoesNotExistsException);
+    });
+  });
+
+  describe('When the login fail', () => {
+    let query: GetUserSocialLoginQuery;
+
+    function startScenario() {
+      query = GetUserSocialLoginQueryMother.random();
+      const user = UserMother.random({ id: UserIdMother.random(query.id), email: query.email });
+      userRepository.add(user);
+      socialAuthenticationVerifier.add(false);
+    }
+
+    beforeEach(startScenario);
+
+    it('should raise an exception', async () => {
+      await expect(handler.execute(query)).rejects.toThrowError(LoginException);
     });
   });
 
   describe('When the login is success', () => {
-    let command: GetUserSocialLoginQuery;
+    let query: GetUserSocialLoginQuery;
 
     function startScenario() {
-      command = GetUserSocialLoginQueryMother.random({
+      query = GetUserSocialLoginQueryMother.random({
         id: ID,
         email: EMAIL,
         name: NAME,
       });
+      const user = UserMother.random({ id: UserIdMother.random(query.id), email: query.email });
+      userRepository.add(user);
       socialAuthenticationVerifier.add(true);
       userAuthenticator.add({ token: '123', refreshToken: '1234' });
     }
@@ -73,7 +98,7 @@ describe('Given a GetUserSocialLoginQueryHandler to handle', () => {
     beforeEach(startScenario);
 
     it('should be all ok', async () => {
-      const response = await handler.execute(command);
+      const response = await handler.execute(query);
       expect(response.content).toEqual({
         user: { name: NAME, email: EMAIL, id: ID },
         token: TOKEN,
