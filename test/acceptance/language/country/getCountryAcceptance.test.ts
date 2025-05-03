@@ -6,6 +6,7 @@ import { createApplication } from '@test/acceptance/createApplication';
 import CountryMother from '@test/unit/language/domain/country/countryMother';
 import { CountryIdMother } from '@test/unit/language/domain/country/countryIdMother';
 import LanguageMother from '@test/unit/language/domain/country/languageMother';
+import { MIKRO_ORM_CONTEXT_NAME } from '@src/language/mikroOrmConfig';
 
 describe('Get country feature', () => {
   let app: INestApplication;
@@ -20,7 +21,7 @@ describe('Get country feature', () => {
   };
 
   const prepareApp = async () => {
-    const setup = await createApplication();
+    const setup = await createApplication(MIKRO_ORM_CONTEXT_NAME);
     app = setup.app;
     orm = setup.orm;
   };
