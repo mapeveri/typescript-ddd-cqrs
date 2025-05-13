@@ -3,7 +3,7 @@ const { execSync } = require('child_process');
 const [, , schema, command] = process.argv;
 
 if (!schema || !command) {
-  console.error('❌ Uso: npm run migration <schema> <command>');
+  console.error('❌ Use: npm run migration <schema> <command>');
   console.error('Example: npm run migration account up');
   process.exit(1);
 }
