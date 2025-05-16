@@ -3,13 +3,14 @@ import { INestApplication } from '@nestjs/common';
 import request from 'supertest';
 import { MikroORM } from '@mikro-orm/core';
 import { createApplication } from '@test/acceptance/createApplication';
+import { MIKRO_ORM_CONTEXT_NAME } from '@src/account/mikroOrmConfig';
 
 describe('Sign up feature', () => {
   let app: INestApplication;
   let orm: MikroORM;
 
   const prepareApp = async () => {
-    const setup = await createApplication();
+    const setup = await createApplication(MIKRO_ORM_CONTEXT_NAME);
     app = setup.app;
     orm = setup.orm;
   };
