@@ -1,4 +1,4 @@
-import { beforeAll, describe, beforeEach, afterAll, it, expect } from 'vitest';
+import { beforeAll, describe, beforeEach, it, expect, afterEach } from 'vitest';
 import { INestApplication } from '@nestjs/common';
 import request from 'supertest';
 import { MikroORM } from '@mikro-orm/core';
@@ -10,6 +10,7 @@ import WordTermCollectionMother from '@test/unit/language/domain/term/word/wordT
 import { UserIdMother } from '@test/unit/account/domain/user/userIdMother';
 import TermLike from '@src/language/domain/term/termLike';
 import { WordTermPrimitives } from '@src/language/domain/term/word/wordTerm';
+import Word from '@src/language/domain/term/word/word';
 
 describe('Update word feature', () => {
   let app: INestApplication;
@@ -34,43 +35,42 @@ describe('Update word feature', () => {
   const prepareApp = async () => {
     const setup = await createApplication();
     app = setup.app;
-    orm = setup.orm;
-  };
-
-  const closeApp = async () => {
-    await orm.close(true);
-    await app.close();
+    orm = setup.ormLanguage;
   };
 
   beforeAll(async () => {
     await prepareApp();
   });
 
-  afterAll(async () => {
-    await closeApp();
-  });
-
   describe('As a user I want to update a word', () => {
+    let word: Word;
+
     async function startScenario() {
-      const word = WordMother.random({
+      word = WordMother.random({
         id: TermIdMother.random(TERM_ID),
         userId: UserIdMother.random(USER_ID_LOGGED),
         likes: LIKES,
         languageId: OLD_LANGUAGE_ID,
         terms: WordTermCollectionMother.random(OLD_TERMS),
         countryId: CountryIdMother.random(OLD_COUNTRY_ID),
-      }).toPrimitives();
+      });
+
+      const wordPrimitives = word.toPrimitives();
 
       await request(app.getHttpServer()).post('/words').set('Authorization', 'Bearer mock-token').send({
-        countryId: word.countryId,
-        languageId: word.languageId,
-        terms: word.terms,
+        countryId: wordPrimitives.countryId,
+        languageId: wordPrimitives.languageId,
+        terms: wordPrimitives.terms,
         id: TERM_ID,
       });
     }
 
     beforeEach(async () => {
       await startScenario();
+    });
+
+    afterEach(() => {
+      orm.em.nativeDelete(Word, word);
     });
 
     it('should update all the values', async () => {

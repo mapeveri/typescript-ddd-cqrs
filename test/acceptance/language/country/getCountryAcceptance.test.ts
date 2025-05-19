@@ -1,4 +1,4 @@
-import { beforeAll, describe, beforeEach, afterAll, it, expect } from 'vitest';
+import { beforeAll, describe, beforeEach, it, expect, afterEach } from 'vitest';
 import { INestApplication } from '@nestjs/common';
 import request from 'supertest';
 import { MikroORM } from '@mikro-orm/core';
@@ -6,6 +6,7 @@ import { createApplication } from '@test/acceptance/createApplication';
 import CountryMother from '@test/unit/language/domain/country/countryMother';
 import { CountryIdMother } from '@test/unit/language/domain/country/countryIdMother';
 import LanguageMother from '@test/unit/language/domain/country/languageMother';
+import Country from '@src/language/domain/country/country';
 
 describe('Get country feature', () => {
   let app: INestApplication;
@@ -22,25 +23,18 @@ describe('Get country feature', () => {
   const prepareApp = async () => {
     const setup = await createApplication();
     app = setup.app;
-    orm = setup.orm;
-  };
-
-  const closeApp = async () => {
-    await orm.close(true);
-    await app.close();
+    orm = setup.ormLanguage;
   };
 
   beforeAll(async () => {
     await prepareApp();
   });
 
-  afterAll(async () => {
-    await closeApp();
-  });
-
   describe('As a user I want to get a country', () => {
+    let country: Country;
+
     async function startScenario() {
-      const country = CountryMother.random({
+      country = CountryMother.random({
         id: CountryIdMother.random(COUNTRY_ID),
         name: NAME,
         iso: ISO,
@@ -53,6 +47,10 @@ describe('Get country feature', () => {
 
     beforeEach(async () => {
       await startScenario();
+    });
+
+    afterEach(() => {
+      orm.em.nativeDelete(Country, country);
     });
 
     it('should return an empty object when it does not exists', async () => {

@@ -1,30 +1,18 @@
-import { beforeAll, describe, afterAll, it } from 'vitest';
+import { beforeAll, describe, it } from 'vitest';
 import { INestApplication } from '@nestjs/common';
 import request from 'supertest';
-import { MikroORM } from '@mikro-orm/core';
 import { createApplication } from '@test/acceptance/createApplication';
 
 describe('Sign up feature', () => {
   let app: INestApplication;
-  let orm: MikroORM;
 
   const prepareApp = async () => {
     const setup = await createApplication();
     app = setup.app;
-    orm = setup.orm;
-  };
-
-  const closeApp = async () => {
-    await orm.close(true);
-    await app.close();
   };
 
   beforeAll(async () => {
     await prepareApp();
-  });
-
-  afterAll(async () => {
-    await closeApp();
   });
 
   describe('As a user I want to signUp in the app', () => {
