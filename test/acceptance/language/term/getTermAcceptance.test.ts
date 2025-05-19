@@ -1,4 +1,4 @@
-import { beforeAll, describe, beforeEach, afterAll, expect, it } from 'vitest';
+import { beforeAll, describe, beforeEach, expect, it, afterEach } from 'vitest';
 import { INestApplication } from '@nestjs/common';
 import request from 'supertest';
 import { MikroORM } from '@mikro-orm/core';
@@ -10,6 +10,7 @@ import { CountryIdMother } from '@test/unit/language/domain/country/countryIdMot
 import TermLike from '@src/language/domain/term/termLike';
 import WordTermCollectionMother from '@test/unit/language/domain/term/word/wordTermCollectionMother';
 import { WordTermPrimitives } from '@src/language/domain/term/word/wordTerm';
+import Word from '@src/language/domain/term/word/word';
 
 describe('Get term feature', () => {
   let app: INestApplication;
@@ -23,32 +24,27 @@ describe('Get term feature', () => {
   const prepareApp = async () => {
     const setup = await createApplication();
     app = setup.app;
-    orm = setup.orm;
-  };
-
-  const closeApp = async () => {
-    await orm.close(true);
-    await app.close();
+    orm = setup.ormLanguage;
   };
 
   beforeAll(async () => {
     await prepareApp();
   });
 
-  afterAll(async () => {
-    await closeApp();
-  });
-
   describe('As a user I want to get a term', () => {
+    let word: Word;
+
     async function startScenario() {
-      const wordExpected = WordMother.random({
+      word = WordMother.random({
         id: TermIdMother.random(TERM_ID),
         likes: LIKES,
         countryId: CountryIdMother.random(COUNTRY_ID),
         userId: UserIdMother.random(USER_ID_LOGGED),
         languageId: LANGUAGE_ID,
         terms: WordTermCollectionMother.random(TERMS),
-      }).toPrimitives();
+      });
+
+      const wordExpected = word.toPrimitives();
 
       const wordData = {
         countryId: wordExpected.countryId,
@@ -62,6 +58,10 @@ describe('Get term feature', () => {
 
     beforeEach(async () => {
       await startScenario();
+    });
+
+    afterEach(() => {
+      orm.em.nativeDelete(Word, word);
     });
 
     it('should return the term', async () => {
