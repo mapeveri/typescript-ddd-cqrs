@@ -13,32 +13,6 @@ import { MikroORM } from '@mikro-orm/core';
 
 export const USER_ID_LOGGED = '94400f7c-9a20-464c-9951-93b404b5877e';
 
-async function runMigrations(orm: MikroORM, schema: string) {
-  const generator = orm.getSchemaGenerator();
-  const connection = orm.em.getConnection();
-
-  const result = await connection.execute('SELECT schema_name FROM information_schema.schemata WHERE schema_name = ?', [
-    schema,
-  ]);
-
-  const schemaExists = result.length > 0;
-
-  if (!schemaExists) {
-    console.log(`[Schema: ${schema}] Creating schema...`);
-    await generator.createSchema();
-  }
-
-  const migrator = orm.getMigrator();
-  const pendingMigrations = await migrator.getPendingMigrations();
-
-  if (pendingMigrations.length > 0) {
-    console.log(`[Schema: ${schema}] Running ${pendingMigrations.length} pending migrations...`);
-    await migrator.up();
-  } else {
-    console.log(`[Schema: ${schema}] No pending migrations`);
-  }
-}
-
 export async function createApplication() {
   const user = { userId: USER_ID_LOGGED } as never;
 
@@ -64,9 +38,6 @@ export async function createApplication() {
   const app = moduleFixture.createNestApplication();
   const ormAccount: MikroORM = moduleFixture.get(getMikroORMToken(AccountOrmContextName));
   const ormLanguage: MikroORM = moduleFixture.get(getMikroORMToken(LanguageOrmContextName));
-
-  await runMigrations(ormAccount, 'account');
-  await runMigrations(ormLanguage, 'language');
 
   await app.init();
 
