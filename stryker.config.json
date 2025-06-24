@@ -8,6 +8,9 @@
     "progress"
   ],
   "testRunner": "vitest",
+  "vitest": {
+    "configFile": "vitest.unit.config.ts"
+  },
   "mutate": [
     "src/*/domain/**/*.ts",
     "src/*/application/**/*.ts"

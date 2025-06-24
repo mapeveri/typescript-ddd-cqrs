@@ -5,8 +5,6 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'node',
-    setupFiles: './test/setup.ts',
-    globalSetup: './test/acceptance/setupDatabaseTest.ts',
     include: ['test/**/*.test.ts'],
     alias: {
       '@src': '/src',
@@ -18,7 +16,7 @@ export default defineConfig({
     },
     coverage: {
       provider: 'v8',
-      reportsDirectory: './coverage',
+      reportsDirectory: './coverage/unit',
     },
   },
   plugins: [
