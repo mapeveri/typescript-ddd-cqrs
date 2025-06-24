@@ -9,18 +9,33 @@ import { Request } from 'express';
 import { getMikroORMToken } from '@mikro-orm/nestjs';
 import { MIKRO_ORM_CONTEXT_NAME as AccountOrmContextName } from '@src/account/mikroOrmConfig';
 import { MIKRO_ORM_CONTEXT_NAME as LanguageOrmContextName } from '@src/language/mikroOrmConfig';
-import { ISchemaGenerator, MikroORM } from '@mikro-orm/core';
+import { MikroORM } from '@mikro-orm/core';
 
 export const USER_ID_LOGGED = '94400f7c-9a20-464c-9951-93b404b5877e';
 
-async function resetSchema(generator: ISchemaGenerator, schemaName: string) {
-  try {
-    await generator.execute(`DROP SCHEMA IF EXISTS "${schemaName}" CASCADE`);
-    await generator.ensureDatabase();
+async function runMigrations(orm: MikroORM, schema: string) {
+  const generator = orm.getSchemaGenerator();
+  const connection = orm.em.getConnection();
+
+  const result = await connection.execute('SELECT schema_name FROM information_schema.schemata WHERE schema_name = ?', [
+    schema,
+  ]);
+
+  const schemaExists = result.length > 0;
+
+  if (!schemaExists) {
+    console.log(`[Schema: ${schema}] Creating schema...`);
     await generator.createSchema();
-  } catch (err) {
-    console.error(`[Schema: ${schemaName}] Error while resetting schema`, err);
-    throw err;
+  }
+
+  const migrator = orm.getMigrator();
+  const pendingMigrations = await migrator.getPendingMigrations();
+
+  if (pendingMigrations.length > 0) {
+    console.log(`[Schema: ${schema}] Running ${pendingMigrations.length} pending migrations...`);
+    await migrator.up();
+  } else {
+    console.log(`[Schema: ${schema}] No pending migrations`);
   }
 }
 
@@ -50,15 +65,14 @@ export async function createApplication() {
   const ormAccount: MikroORM = moduleFixture.get(getMikroORMToken(AccountOrmContextName));
   const ormLanguage: MikroORM = moduleFixture.get(getMikroORMToken(LanguageOrmContextName));
 
-  const accountSchemaGenerator = ormAccount.getSchemaGenerator();
-  const languageSchemaGenerator = ormLanguage.getSchemaGenerator();
-
-  await Promise.all([accountSchemaGenerator.ensureDatabase(), languageSchemaGenerator.ensureDatabase()]);
-
-  await resetSchema(accountSchemaGenerator, 'account');
-  await resetSchema(languageSchemaGenerator, 'language');
+  await runMigrations(ormAccount, 'account');
+  await runMigrations(ormLanguage, 'language');
 
   await app.init();
 
-  return { app, ormAccount: ormAccount, ormLanguage: ormLanguage };
+  return {
+    app,
+    ormAccount,
+    ormLanguage,
+  };
 }
