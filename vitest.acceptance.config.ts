@@ -7,7 +7,7 @@ export default defineConfig({
     environment: 'node',
     setupFiles: './test/acceptance/setup.ts',
     globalSetup: './test/acceptance/setupDatabaseTest.ts',
-    include: ['test/**/*.test.ts'],
+    include: ['test/acceptance/**/*.test.ts'],
     alias: {
       '@src': '/src',
       '@test': '/test',

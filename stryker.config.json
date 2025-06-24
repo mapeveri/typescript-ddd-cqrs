@@ -20,5 +20,11 @@
       "BlockStatement"
     ]
   },
-  "coverageAnalysis": "perTest"
+  "coverageAnalysis": "perTest",
+  "ignorePatterns": [
+    "docker/**",
+    "node_modules/**",
+    ".git/**",
+    ".stryker-tmp/**"
+  ]
 }
