@@ -1,10 +1,11 @@
-import { beforeAll, describe, beforeEach, afterAll, it, expect } from 'vitest';
+import { beforeAll, describe, beforeEach, afterEach, it, expect } from 'vitest';
 import { INestApplication } from '@nestjs/common';
 import request from 'supertest';
 import { MikroORM } from '@mikro-orm/core';
 import { createApplication } from '@test/acceptance/createApplication';
 import { UserMother } from '@test/unit/account/domain/user/userMother';
 import { UserIdMother } from '@test/unit/account/domain/user/userIdMother';
+import User from '@src/account/domain/user/user';
 
 describe('Get user feature', () => {
   let app: INestApplication;
@@ -21,25 +22,18 @@ describe('Get user feature', () => {
   const prepareApp = async () => {
     const setup = await createApplication();
     app = setup.app;
-    orm = setup.orm;
-  };
-
-  const closeApp = async () => {
-    await orm.close(true);
-    await app.close();
+    orm = setup.ormAccount;
   };
 
   beforeAll(async () => {
     await prepareApp();
   });
 
-  afterAll(async () => {
-    await closeApp();
-  });
-
   describe('As a user I want to get a user', () => {
+    let user: User;
+
     async function startScenario() {
-      const user = UserMother.random({
+      user = UserMother.random({
         id: UserIdMother.random(USER_ID),
         name: NAME,
         interests: INTERESTS,
@@ -59,6 +53,10 @@ describe('Get user feature', () => {
     }
 
     beforeEach(startScenario);
+
+    afterEach(() => {
+      orm.em.nativeDelete(User, user);
+    });
 
     it('should return an empty object when it does not exists', async () => {
       await request(app.getHttpServer())

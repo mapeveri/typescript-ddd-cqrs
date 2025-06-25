@@ -4,7 +4,7 @@ export class Migration20250503174556 extends Migration {
   override async up(): Promise<void> {
     this.addSql('create schema if not exists "account";');
     this.addSql(
-      'create table "account"."users" ("id" uuid not null, "name" varchar(255) not null, "provider" varchar(75) not null, "email" varchar(100) not null, "photo" varchar(500) null, "interests" text[] null, constraint "users_pkey" primary key ("id"));',
+      'create table if not exists "account"."users" ("id" uuid not null, "name" varchar(255) not null, "provider" varchar(75) not null, "email" varchar(100) not null, "photo" varchar(500) null, "interests" text[] null, constraint "users_pkey" primary key ("id"));',
     );
   }
 

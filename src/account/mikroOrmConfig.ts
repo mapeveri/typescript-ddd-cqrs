@@ -6,7 +6,9 @@ import dotenvExpand from 'dotenv-expand';
 import path from 'path';
 import { entitySchemas as accountEntitySchemas } from '@src/account/_dependencyInjection/entitySchemas';
 
-const env = loadEnv();
+const envFile = process.env.NODE_ENV === 'test' ? '.env.test' : '.env';
+
+const env = loadEnv({ path: path.resolve(process.cwd(), envFile) });
 dotenvExpand.expand(env);
 
 const migrationPath = path.join(__dirname, 'infrastructure/persistence/mikroOrm/migrations');
